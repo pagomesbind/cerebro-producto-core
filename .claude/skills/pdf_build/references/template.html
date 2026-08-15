@@ -1,0 +1,227 @@
+<!--
+  Master template — pdf_build
+
+  This is a starting point, not a fill-in-the-blanks form. Copy it, then:
+    1. Replace every {{PLACEHOLDER}} token.
+    2. Delete the component examples you don't need; duplicate the ones you do.
+    3. Wrap every top-level section in <section class="doc-section" data-toc-title="...">
+       — the build script reads that attribute to generate the table of contents.
+       Number the titles yourself if you want numbered sections ("1. Overview"),
+       the script doesn't do it for you.
+    4. Leave the <!--TOC_ROWS--> marker exactly where it is — build_pdf.py replaces
+       it with the real table of contents in a second pass.
+    5. See ../references/design-system.md for the full component catalogue,
+       color/typography guidance, and known pitfalls before you improvise new CSS.
+-->
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="UTF-8">
+<title>{{DOC_TITLE}}</title>
+<style>
+  /* ============ 1. BRAND TOKENS — set these per document, nothing else in
+     this stylesheet should need to change for a re-skin. ============ */
+  :root {
+    --brand-primary: {{COLOR_PRIMARY}};        /* e.g. #2563a8 — accent, links, section rules, primary buttons */
+    --brand-primary-dark: {{COLOR_PRIMARY_DARK}}; /* darker shade of primary, for small text on tinted bg */
+    --brand-primary-tint: {{COLOR_PRIMARY_TINT}}; /* primary at ~8-12% opacity over white, for card/table headers */
+    --brand-ink: {{COLOR_INK}};                /* e.g. #1f2328 — headings and body text */
+    --brand-ink-soft: {{COLOR_INK_SOFT}};       /* e.g. #55534f — secondary text, captions */
+    --brand-highlight: {{COLOR_HIGHLIGHT}};     /* second accent for callouts/attention — omit if brand has only one accent */
+    --brand-highlight-tint: {{COLOR_HIGHLIGHT_TINT}};
+    --brand-highlight-border: {{COLOR_HIGHLIGHT_BORDER}};
+    --brand-line: {{COLOR_LINE}};               /* e.g. #e1e1df — hairlines, table borders */
+    --brand-surface: {{COLOR_SURFACE}};          /* e.g. #f4f4f3 — neutral card/step background */
+    --brand-bg: #ffffff;
+    --font-heading: {{FONT_HEADING}}, 'Segoe UI', Arial, sans-serif; /* geometric/display font if the brand has one, else drop to the fallback */
+    --font-body: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* Optional: embed a real brand font. Only do this if the font file exists
+     locally — see design-system.md "Fonts" before using @font-face. Delete
+     this block entirely if you're using only system fonts. */
+  /*
+  @font-face {
+    font-family: '{{FONT_HEADING}}';
+    src: url('{{FONT_HEADING_FILE_URI}}') format('truetype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: '{{FONT_HEADING}}';
+    src: url('{{FONT_HEADING_BOLD_FILE_URI}}') format('truetype');
+    font-weight: 700;
+  }
+  */
+
+  /* ============ 2. PAGE GEOMETRY ============ */
+  @page {
+    size: A4;
+    margin: 10mm 10mm 10mm 20mm; /* top right bottom left — wide left gutter reads better for dense text; adjust if the user asks */
+    @bottom-center {
+      content: "{{FOOTER_TEXT}}";
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 8.5px;
+      color: #9a9a99;
+    }
+    @bottom-right {
+      content: counter(page);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 8.5px;
+      color: #9a9a99;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body { font-family: var(--font-body); color: var(--brand-ink); font-size: 11px; line-height: 1.55; }
+  h1, h2, h3, .eyebrow, .card-head, .step-list li::before, .toc-title { font-family: var(--font-heading); }
+
+  /* ============ 3. COVER ============
+     Full-height, own page, page-break-after so body content starts fresh.
+     Only bleed the cover to the physical page edge (negative margin/padding
+     trick) if its background differs from the page background — see
+     design-system.md "Cover bleed" for why doing this unconditionally breaks
+     the page count math the TOC script depends on. */
+  .cover { page-break-after: always; height: 270mm; position: relative; }
+  .cover .logo { position: absolute; top: 0; right: 0; height: 24mm; width: auto; }
+  .cover .title-block { position: absolute; left: 0; right: 0; bottom: 0; }
+  .cover .eyebrow { color: var(--brand-primary); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; margin-bottom: 16px; }
+  .cover h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin: 0 0 14px 0; color: var(--brand-ink); }
+  .cover .subtitle { font-size: 15px; color: var(--brand-ink-soft); margin-bottom: 40px; max-width: 400px; }
+  .cover .meta { border-top: 1px solid var(--brand-line); padding-top: 16px; font-size: 11px; color: var(--brand-ink-soft); }
+  .cover .meta div { margin-bottom: 4px; }
+  .cover .meta b { color: var(--brand-ink); font-weight: 700; }
+
+  /* ============ 4. TABLE OF CONTENTS ============
+     Own page, right after the cover. Keep entries to what fits one page —
+     the two-pass build assumes the TOC page count doesn't change between
+     passes. If you have 15+ sections, shrink font-size or accept 2 pages
+     and adjust build_pdf.py's page math accordingly. */
+  .toc-page { page-break-after: always; padding-top: 4mm; }
+  .toc-page h2 { font-size: 20px; margin-bottom: 20px; }
+  .toc-row { display: flex; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--brand-line); font-size: 11.5px; }
+  .toc-title { color: var(--brand-ink); }
+  .toc-dots { flex: 1; }
+  .toc-page-num { color: var(--brand-ink-soft); font-weight: 700; }
+
+  /* ============ 5. SECTION HEADERS ============ */
+  h2 { font-size: 17px; font-weight: 700; color: var(--brand-ink); border-bottom: 3px solid var(--brand-primary); padding-bottom: 6px; margin-top: 30px; margin-bottom: 14px; }
+  h2 .num { color: var(--brand-primary); font-weight: 700; margin-right: 6px; }
+  h3 { font-size: 13px; font-weight: 700; color: var(--brand-primary-dark); margin-top: 18px; margin-bottom: 8px; }
+  p { margin: 8px 0; }
+  .doc-section { page-break-before: always; } /* remove on sections that should flow continuously after the previous one */
+
+  /* ============ 6. TABLES ============ */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px 0; font-size: 10.3px; }
+  th { background: var(--brand-primary-tint); color: var(--brand-primary-dark); text-align: left; padding: 7px 9px; border: 1px solid var(--brand-line); font-weight: 700; font-family: var(--font-heading); }
+  td { padding: 7px 9px; border: 1px solid var(--brand-line); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--brand-surface); }
+
+  /* ============ 7. NUMBERED STEP LIST — for sequential processes/flows ============ */
+  ol.step-list { margin: 10px 0; padding-left: 0; list-style: none; counter-reset: step; }
+  ol.step-list li { counter-increment: step; position: relative; padding: 10px 12px 10px 42px; margin-bottom: 8px; background: var(--brand-surface); border: 1px solid var(--brand-line); border-left: 3px solid var(--brand-primary); border-radius: 4px; page-break-inside: avoid; }
+  ol.step-list li::before { content: counter(step); position: absolute; left: 10px; top: 9px; width: 20px; height: 20px; background: var(--brand-primary); color: #fff; border-radius: 50%; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ol.step-list li .sub-note { display: block; margin-top: 6px; font-size: 10px; color: var(--brand-ink-soft); }
+
+  /* ============ 8. CALLOUTS — info (primary accent) and attention (highlight accent) ============ */
+  .callout { background: var(--brand-primary-tint); border: 1px solid var(--brand-primary); border-left: 4px solid var(--brand-primary); border-radius: 4px; padding: 10px 13px; margin: 12px 0; font-size: 10.3px; }
+  .callout.attention { background: var(--brand-highlight-tint); border-color: var(--brand-highlight-border); border-left-color: var(--brand-highlight-border); }
+
+  /* ============ 9. ENTITY / ROLE CARDS — 3-up grid for actors, options, features ============ */
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+  .card { border: 1px solid var(--brand-line); border-radius: 6px; overflow: hidden; page-break-inside: avoid; }
+  .card-head { background: var(--brand-primary); color: #fff; font-weight: 700; font-size: 11px; padding: 8px 10px; }
+  .card-body { padding: 9px 10px; font-size: 10px; color: var(--brand-ink-soft); }
+
+  /* ============ 10. LABELED LIST — item + short rationale line, e.g. "what + why" ============ */
+  .labeled-list .item { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--brand-line); page-break-inside: avoid; }
+  .labeled-list .item:last-child { border-bottom: none; }
+  .labeled-list .item .bullet { flex: 0 0 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-primary); margin-top: 5px; }
+  .labeled-list .item .why { display: block; color: var(--brand-ink-soft); margin-top: 2px; }
+
+  /* ============ 11. TIMELINE — milestone dots + stage cards ============ */
+  .timeline { display: flex; align-items: flex-start; margin: 16px 0 22px 0; }
+  .timeline .point { flex: 1; text-align: center; position: relative; }
+  .timeline .point .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--brand-primary); margin: 0 auto 8px auto; }
+  .timeline .point .date { font-weight: 700; font-size: 11px; color: var(--brand-ink); font-family: var(--font-heading); }
+  .timeline .point .label { font-size: 9.5px; color: var(--brand-ink-soft); max-width: 150px; margin: 4px auto 0 auto; }
+  .timeline .line { flex: 0 0 40px; height: 2px; background: var(--brand-line); margin-top: 6px; }
+  .stage-card { border: 1px solid var(--brand-line); border-radius: 6px; overflow: hidden; margin: 14px 0; page-break-inside: avoid; }
+  .stage-card .head { background: var(--brand-primary); color: #fff; font-weight: 700; font-size: 11px; padding: 9px 12px; font-family: var(--font-heading); }
+  .stage-card .head .sub { font-weight: 400; font-size: 9.5px; display: block; margin-top: 2px; opacity: 0.9; font-family: var(--font-body); }
+  .stage-card ul { margin: 0; padding: 10px 12px 10px 28px; font-size: 10.3px; }
+
+  /* ============ 12. ILLUSTRATIVE-ONLY MOCKUPS — tag anything that's a
+     placeholder/wireframe rather than the real, final UI ============ */
+  .mock-tag { display: inline-block; font-size: 8.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--brand-ink-soft); border: 1px solid var(--brand-line); border-radius: 10px; padding: 1px 8px; margin-bottom: 6px; }
+
+  .figure { margin: 14px 0 20px 0; text-align: center; page-break-inside: avoid; }
+  .figure .caption { font-size: 9.5px; color: var(--brand-ink-soft); margin-top: 6px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <img class="logo" src="{{LOGO_DATA_URI}}" alt="{{ORG_NAME}}">
+  <div class="title-block">
+    <div class="eyebrow">{{EYEBROW_LABEL}}</div>
+    <h1>{{DOC_TITLE}}</h1>
+    <div class="subtitle">{{DOC_SUBTITLE}}</div>
+    <div class="meta">
+      <div><b>Version:</b> {{VERSION}} — {{DATE}}</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============
+     Do not edit toc-row markup by hand — build_pdf.py generates it from the
+     data-toc-title attributes below and injects it at the TOC_ROWS marker. -->
+<div class="toc-page">
+  <h2>{{TOC_HEADING}}</h2>
+  <!--TOC_ROWS-->
+</div>
+
+<!-- ============ BODY — one <section class="doc-section" data-toc-title="..."> per TOC entry ============ -->
+
+<section class="doc-section" data-toc-title="1. {{SECTION_1_TITLE}}">
+  <h2><span class="num">1.</span>{{SECTION_1_TITLE}}</h2>
+  <p>{{SECTION_1_BODY}}</p>
+</section>
+
+<section class="doc-section" data-toc-title="2. {{SECTION_2_TITLE}}">
+  <h2><span class="num">2.</span>{{SECTION_2_TITLE}}</h2>
+
+  <!-- Example: role/entity cards -->
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-head">{{CARD_1_TITLE}}</div>
+      <div class="card-body">{{CARD_1_BODY}}</div>
+    </div>
+    <div class="card">
+      <div class="card-head">{{CARD_2_TITLE}}</div>
+      <div class="card-body">{{CARD_2_BODY}}</div>
+    </div>
+    <div class="card">
+      <div class="card-head">{{CARD_3_TITLE}}</div>
+      <div class="card-body">{{CARD_3_BODY}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="doc-section" data-toc-title="3. {{SECTION_3_TITLE}}">
+  <h2><span class="num">3.</span>{{SECTION_3_TITLE}}</h2>
+
+  <!-- Example: numbered process steps -->
+  <ol class="step-list">
+    <li><b>{{STEP_1_TITLE}}.</b> {{STEP_1_BODY}}</li>
+    <li><b>{{STEP_2_TITLE}}.</b> {{STEP_2_BODY}}
+      <span class="sub-note">{{STEP_2_NOTE}}</span>
+    </li>
+  </ol>
+
+  <div class="callout">{{CALLOUT_INFO_TEXT}}</div>
+  <div class="callout attention">{{CALLOUT_ATTENTION_TEXT}}</div>
+</section>
+
+</body>
+</html>

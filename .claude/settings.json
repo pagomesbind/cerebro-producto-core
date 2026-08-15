@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \".claude/scripts/pretooluse_guard.ps1\"",
+            "shell": "powershell",
+            "timeout": 15,
+            "statusMessage": "Verificando si la ruta es espejo read-only de CEREBRO_CORE..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \".claude/scripts/session_sync.ps1\"",
+            "shell": "powershell",
+            "timeout": 60,
+            "statusMessage": "Sincronizando con CEREBRO_CORE..."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+# Normaliza saltos de línea para que git no marque el repo entero como modificado
+# entre máquinas de distintos PM/PO.
+* text=auto eol=lf
+
+*.md text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.csv text eol=lf
+
+# Binarios: nunca tocar, nunca diff de texto.
+*.pdf -text
+*.pptx -text
+*.potx -text
+*.docx -text
+*.dotx -text
+*.xlsx -text
+*.xlsm -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.ttf -text
+*.otf -text

@@ -1,0 +1,59 @@
+# Pedidos de Clientes y Hallazgos Operativos Históricos — Adquirencia
+
+> Estado: mezcla de en producción y pendientes (marcado por ítem). Consolidado en la reestructuración PARA en cascada (2026-08-12) desde 5 archivos-cola de `detalle_productos/transversal/` (`pedidos_puntuales_de_clientes.md`, `dolores_soporte_y_administracion.md`, `defectos_encontrados_en_qa.md`, `mejoras_e_iniciativas_tecnicas.md`, `reporteria_operativa.md`) que mezclaban pedidos de varios productos en un solo archivo. Fuente original: Epics de Notion "Dolores de clientes", "Dolores de Soporte y administración", "Defectos encontrados en QA" y "Mejoras e Iniciativas Técnicas", ingesta 2026-07-06.
+
+## Pedidos puntuales por cliente
+
+- **Spena** (comercio con múltiples cajas POS, perfil "cadena con muchos POS"): que el ticket impreso muestre el nombre de la caja (no el código — confirmado también como bug en QA, ver §Hallazgos de QA), cambiar un ícono de cerrar sesión que confundía a los cajeros, que el resumen de transacciones impreso no filtre por comercio, validar un monto mínimo en la app para evitar errores de tipeo, y cierre de caja (quedó Pendiente).
+- **DESA** (mismo cliente RIPSA/Grupo DESA — ver [servicios/pago_facil.md](../servicios/pago_facil.md) y [boton_simple_2_0.md §9](boton_simple_2_0.md)): pidió arreglar la **idempotencia en Deuda QR** — hay dos tickets casi idénticos, uno marcado "(Arreglo: Performante)" y otro "(No Performante)", señal de que un primer intento de arreglo no dio el rendimiento esperado y se rehizo. También pidió reportes de consolidaciones y un timer de expiración en el checkout de Botón Simple (implementado después, ver `boton_simple_2_0.md`).
+- **ProvinciaNET**: bug de que el nombre mostrado en el QR de deuda cambiaba según cada deuda individual (debía ser fijo), y bug de que el sistema seguía permitiendo pagar una deuda después de su último vencimiento (quedó Pendiente).
+- **Mopagos**: webhook de asignación de POS (En Staging).
+- **Pagos Digitales**: imprimir el CUIT del comercio (y de un "sub-comercio"), que el CFT quede a cargo del comercio en vez del cliente final, y agregar tipo/marca/campaña/cantidad de cuotas a los archivos batch de liquidación (en producción) — mismo dominio que [cuotas_y_campanias.md](cuotas_y_campanias.md).
+
+## Hallazgos de QA antes de producción
+
+- **Ticket impreso en el POS mostraba el código de la caja en vez de su nombre** — mismo pedido que Spena arriba, detectado como regresión antes de salir (quedó "No aplica", posiblemente resuelto por el ticket funcional equivalente).
+
+## Estabilidad de la APK POS (mantenimiento)
+
+- "Crashea la Aplicación" documentado en 2 partes — bug de crasheos recurrentes con esfuerzo suficiente para dividirse en múltiples tickets.
+- Sospecha de problema de caché: la app dejaba de cobrar/imprimir y se resolvía borrando la caché del dispositivo — sin causa raíz definitiva documentada (el fix fue el workaround operativo, no una corrección de código).
+- Aviso tipo "toast" en la app POS cuando el dispositivo no tiene internet.
+- Resetear un POS y dejarlo "virgen" (Pendiente, sin desarrollar — herramienta de soporte que nunca se construyó).
+
+## Idempotencia (patrón recurrente, ver también nota transversal)
+
+Dos pedidos independientes de idempotencia sobre Adquirencia: no insertar una transacción de **Botón Simple** con el mismo `identificadorOrden` (motivado porque hubo casos reales de una transacción `ACREDITADA` y otra `RECHAZADA` para el mismo pago), y la Deuda QR de DESA arriba. Confirma que la capa de Pago Externo no tenía idempotencia centralizada por canal — ver [3_recursos/arquitectura_sistema/idempotencia_de_plataforma.md](../../arquitectura_sistema/idempotencia_de_plataforma.md) para la lectura transversal completa.
+
+## Devoluciones parciales — bugs de propagación
+
+Dos bugs sobre el mismo evento: la devolución parcial no enviaba webhook al cliente, y no se informaba en el archivo `BOTONLIQ` de liquidación — patrón de "el evento principal funciona pero sus efectos secundarios no se propagan", visto también en otras partes de la plataforma.
+
+## Hallazgos operativos recientes (agosto 2026)
+
+> Fusionado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` en la reestructuración PARA en cascada (2026-08-12).
+
+**Bug de código postal en alta de comercio, cliente GP (2026-08-03):** el onboarding de comercios de GP falla porque el sistema espera códigos postales de 4-5 dígitos, mientras GP envía códigos de **8 dígitos**. Propuesta técnica (Fintexa): reconvertir el código en la validación de alta en vez de rechazarlo. Considerado urgente — ver [2_areas/tareas.md](../../../2_areas/tareas.md) T-075.
+
+**Error de jerarquía de procesadores (GP/Decidir) en despliegue AD 71 (2026-08-03):** durante la regresión previa al despliegue AD 71 (release general, postergada desde 07-29 para no arriesgar la demo de Coca-Cola Andina), se detectaron errores al aplicar la jerarquía de reglas de pago de GP y problemas de mapeo entidad↔comercio con procesadores como "decidir" — causa: una modificación de query en el ticket 1970. Se corrigieron los casos detectados pero faltan más pruebas. **Mitigación:** despliegue con **feature flag apagada** (mantiene el comportamiento vigente sin la jerarquía nueva) mientras se completan regresiones exhaustivas (14 casos de prueba) al día siguiente.
+
+**Metodología de prueba para habilitar Prisma como procesador, post-v71 (2026-08-05):** confirma el bug de **acumulación de reglas entidad↔comercio** de arriba — en producción, si entidad y comercio tienen cada uno un procesador configurado, el sistema acumula ambas reglas en vez de reemplazar por canal (toma la primera en orden de prioridad, no la más específica). La v71 corrigió el error de alta con Prisma, pero la acumulación sigue vigente — workaround: eliminar el procesador GP del comercio para que cobre efectivamente con Prisma. **Precondición:** el comercio debe tener un rubro habilitado por Prisma (no acepta todos, a diferencia de GP). 3 escenarios de prueba definidos (comercio existente en entidad GP → habilitar Prisma solo ahí; entidad con GP por defecto → agregar Prisma con más prioridad y crear comercio nuevo; entidad nueva con Prisma+GP por defecto) — ver [2_areas/tareas.md](../../../2_areas/tareas.md) T-087.
+
+**Bug de asignación automática de CBU corta en Botón Simple 2.0 sin filtro por `pago_unico`, cliente FAVACARD (2026-08-06):** FAVACARD opera RxT y Botón Simple 2.0 sobre la misma entidad/collector. Al crear cajas con CBU corta para RxT, las transacciones llegan con canal "botón simple 2.0" en el webhook, como si el CBU estuviera asociado a un link de pago que el cliente nunca creó. **Causa raíz:** el motor de asignación de CBU corta de Botón Simple 2.0 toma cualquier CBU corta disponible del pool del collector sin filtrar por el flag `pago_unico` (0/1) — las CBU de RxT quedan con `pago_unico=0`, las de Botón 2.0 deberían ser `pago_unico=1`. **Alternativa descartada:** separar RxT y Botón 2.0 en collectors distintos (rechazada — el producto busca que convivan). Ver [2_areas/tareas.md](../../../2_areas/tareas.md) T-091.
+
+> **Actualización (2026-08-13, reunión "Análisis COBRO"):** análisis técnico completo del atributo `pago_unico` en `Facart`. **`pago_unico` sirve hoy para dos cosas a la vez** — distinguir RxT de Botón 2.0 (el problema de FAVACARD) **y** disparar la baja automática del CBU/identificador al recibir un pago (lógica exclusiva de Botón 2.0; RxT usa identificadores fijos/estáticos que nunca deben eliminarse). Daniela Collia (Fintexa) advirtió que usar este mismo atributo como marca de pertenencia es riesgoso: si una deuda se paga parcialmente, el identificador podría darse de baja antes de cobrar el saldo restante — relevado un universo de **159 cajas de comercio afectadas, 51 desviando cobros activamente**. Nicolás Colón probó en vivo transferir a un identificador con `pago_unico=1`: no se le asignó fecha de baja; Cristian Medina confirmó con Infraestructura que **el secreto que habilitaba la baja automática está deshabilitado** — la función lleva tiempo inactiva en producción, lo que explica por qué no se observaban bajas. **Decisión (requiere más debate en el detalle, acordada en el fondo):** no usar `pago_unico` como filtro de pertenencia dado el riesgo con pagos parciales; sacar la lógica de baja automática del módulo financiero y trasladarla exclusivamente al **módulo de deuda**. En paralelo: comunicar a Soporte que solo envíe `pago_unico=1` cuando corresponda realmente a Botón 2.0, y Nicolás Colón analiza los **17 colectores mixtos** identificados para validar su configuración real. Ver `tareas.md` T-091 (actualizada).
+
+**Gap relacionado:** no está confirmado si la generación automática de lotes de CBU realmente funciona hoy (se generan manualmente) — ver `../../../2_areas/gaps_y_preguntas.md` (2026-08-06).
+
+**Inconsistencias de localidades — validación de código postal único bloquea correcciones de Soporte (cliente Coto, ticket 789, 2026-08-13):** el endpoint de alta/modificación de localidades valida que el código postal sea único, lo que impide registrar una localidad cuando el CP se repite — Soporte de nivel 1 queda bloqueado para resolver casos reales. Solución acordada (documentada en AD789): eliminar esa línea de validación en los handlers de alta y modificación de localidad. Julieta Gimenez (Fintexa) arma el ticket de desarrollo correspondiente.
+
+**Creación errónea de localidades vía geocoding, habilitaciones de POS:** algunas altas de POS envían la dirección completa como texto libre al servicio de geocoding, que la interpreta mal y termina creando localidades basadas en nombres de calles (registros sucios/duplicados). Solución acordada: enviar únicamente localidad y código postal ya asignados al comercio, sin forzar la creación de coordenadas de latitud/longitud si no son precisas (Pablo Gomes: latitud/longitud son opcionales en Global Processing). Julieta Gimenez documenta la solución en un ticket nuevo.
+
+**Saneamiento de canales de pago pendiente — reglas de Prisma/POS mal aplicadas:** los datos de canal en base de datos no distinguen bien entre "canal presente" (POS físico) y "canal no presente" (Prisma, botón simple), lo que hace que el sistema ignore filtros de reglas por canal. Cristian Medina (Fintexa) lo atribuye a datos sucios, no a lógica rota — requiere un saneamiento de datos + ajuste de la lógica de procesamiento/descuento. Sin ticket formal todavía.
+
+**Estado de Prisma en producción (2026-08-13):** los pagos con Prisma ya funcionan en producción tras una corrección de Prisma de su lado; las **devoluciones (transacción 433) siguen en desarrollo**, dependientes de una resolución técnica pendiente de Prisma. Habilitar un comercio solo con canal Prisma (sin pasar por GP) queda como segunda etapa, sujeta a configuración adicional del área de Administración.
+
+---
+*Fuente: Epics Notion "Dolores de clientes" (38 tickets), "Dolores de Soporte y administración" (~93 tickets, muestra relevante), "Defectos encontrados en QA" (139 tickets, triage agresivo), "Mejoras e Iniciativas Técnicas" (~208 tickets, muestra de 45) — ingesta cola final 2026-07-06.*
+*Última actualización: 2026-08-14 — `/sync_meetings`: actualización del bug `pago_unico`/FAVACARD (secreto de baja automática deshabilitado, decisión de mover la lógica al módulo de deuda) + 3 hallazgos nuevos de configuración (validación de CP único en localidades, geocoding generando localidades sucias, saneamiento de canales Prisma/POS pendiente) + estado de Prisma en Producción. Ver reunión "Análisis COBRO" (2026-08-13) en `wiki/2_areas/control/log_reuniones.md`.*
+*Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Adquirencia de 5 archivos-cola de `detalle_productos/transversal/`.*

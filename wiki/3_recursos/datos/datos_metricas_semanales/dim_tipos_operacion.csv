@@ -1,0 +1,17 @@
+Id;Nombre;Codigo
+1;Transferencia Saliente;1
+2;Transferencia Entrante;2
+3;Pago con QR;3
+4;Transferencia interna saliente;4
+5;Transferencia interna entrante;5
+6;Transferencia Pull Crédito;6
+7;Viaje QR;7
+8;Transferencia Pull Débito;8
+9;Compra Dolar CCL;9
+10;Venta Dolar CCL;10
+11;Compra Cripto;11
+12;Venta Cripto;12
+13;Ingreso de dinero con tarjeta;13
+14;Debin Recurrente Crédito;14
+15;Pago QR Pix;15
+16;Pago FX;PAGOFX

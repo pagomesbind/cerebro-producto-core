@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance de QA</title>
+<style>
+  :root {
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --chip-hover: rgba(11,11,11,0.05);
+    --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-1: #1a1a19;
+      --page: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --chip-hover: rgba(255,255,255,0.07);
+      --accent: #3987e5;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 48px; }
+  header h1 { font-size: 24px; font-weight: 700; margin: 0 0 4px; }
+  header .sub { color: var(--text-secondary); margin: 0 0 20px; font-size: 13px; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    justify-content: space-between; margin-bottom: 10px;
+  }
+  .controls.secondary { margin-bottom: 16px; }
+  .tabs, .spaces { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tabs {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 3px;
+  }
+  .tabs button {
+    border: none; background: transparent; color: var(--text-secondary);
+    font: inherit; font-size: 13px; font-weight: 600;
+    padding: 6px 14px; border-radius: 7px; cursor: pointer;
+  }
+  .tabs button:hover { background: var(--chip-hover); }
+  .tabs button.active { background: var(--accent); color: #fff; }
+  .spaces { align-items: center; }
+  .spaces .lbl { color: var(--muted); font-size: 12px; margin-right: 2px; }
+  .spaces button {
+    border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--text-secondary); font: inherit; font-size: 13px; font-weight: 600;
+    padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .spaces button:hover { background: var(--chip-hover); }
+  .spaces button.active { background: var(--text-primary); color: var(--page); border-color: var(--text-primary); }
+  .spaces button:disabled { opacity: .4; cursor: not-allowed; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .kpi {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 16px;
+  }
+  .kpi .v { font-size: 26px; font-weight: 700; line-height: 1.15; }
+  .kpi .l { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 18px 12px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+  .card .yunit { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+  #chartWrap { position: relative; }
+  #chart { display: block; width: 100%; height: auto; }
+  .axis text { fill: var(--muted); font-size: 11px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .axis text.incomplete { fill: var(--muted); font-style: italic; }
+  .axis .tick-num { font-variant-numeric: tabular-nums; }
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .baseline { stroke: var(--baseline); stroke-width: 1; }
+  .crosshair { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .empty-msg {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px; pointer-events: none; text-align: center; padding: 0 24px;
+  }
+
+  #tooltip {
+    position: absolute; pointer-events: none; z-index: 5; display: none;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px; min-width: 210px; max-width: 320px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.16); font-size: 12px;
+  }
+  #tooltip .t-mes { font-weight: 700; margin-bottom: 6px; }
+  #tooltip .t-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+  #tooltip .t-row .sw { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  #tooltip .t-row .nm { flex: 1; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #tooltip .t-row .vl { font-variant-numeric: tabular-nums; font-weight: 600; }
+  #tooltip .t-n { color: var(--muted); font-size: 10px; margin-left: 2px; }
+  #tooltip .t-more { color: var(--muted); margin-top: 3px; }
+  #tooltip .t-total { border-top: 1px solid var(--grid); margin-top: 6px; padding-top: 5px; display: flex; justify-content: space-between; font-weight: 700; }
+  #tooltip .t-sub { margin: 4px 0 2px 15px; padding-top: 3px; border-top: 1px dashed var(--grid); }
+  #tooltip .t-sub .t-row { font-size: 11px; }
+  #tooltip .t-warn { color: var(--muted); font-size: 11px; margin-top: 4px; font-style: italic; }
+
+  #legend { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 10px 2px 4px; }
+  #legend .lg-group { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; width: 100%; margin-top: 6px; }
+  #legend .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 3px 10px; font-size: 12px; color: var(--text-secondary); cursor: default;
+  }
+  #legend .chip:hover { background: var(--chip-hover); }
+  #legend .chip .sw { width: 9px; height: 9px; border-radius: 2px; }
+
+  details { margin-bottom: 16px; }
+  details summary { cursor: pointer; color: var(--text-secondary); font-weight: 600; font-size: 13px; }
+  .tbl-wrap { overflow-x: auto; margin-top: 10px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface-1); max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+  thead th { color: var(--muted); font-weight: 600; }
+  td { font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.total td { font-weight: 700; border-top: 2px solid var(--baseline); }
+
+  footer { color: var(--muted); font-size: 12px; }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Performance de QA</h1>
+    <p class="sub">__SUBTITLE__</p>
+  </header>
+
+  <div class="controls">
+    <div class="spaces" id="proyectos"><span class="lbl">Proyecto:</span></div>
+    <div class="spaces" id="personas"><span class="lbl">Analista:</span></div>
+  </div>
+  <div class="controls secondary">
+    <div class="spaces" id="statToggle"></div>
+    <div class="spaces" id="xmodeToggle"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="card">
+    <div class="tabs" role="tablist" id="tabs" style="margin-bottom: 14px;"></div>
+    <h2 id="chartTitle"></h2>
+    <p class="yunit" id="yUnit"></p>
+    <div id="chartWrap">
+      <svg id="chart" viewBox="0 0 1040 420" role="img" aria-label="Gráfico de performance de QA por mes"></svg>
+      <div id="tooltip"></div>
+    </div>
+    <div id="legend"></div>
+  </section>
+
+  <details>
+    <summary>Ver datos en tabla</summary>
+    <div class="tbl-wrap" id="tableWrap"></div>
+  </details>
+
+  <footer>
+    <p><strong>Analista — default "Equipo QA":</strong> agrega Andrea Orsini + Bethania Tornari + Ana Moreno (área IT) en una sola serie, SIN mezclar con <strong>Otros</strong> (Producto, PM de desarrollo, Unassigned). El filtro deja elegir en cambio una persona puntual (incluido "Otros") para ver solo su propia performance. Se aplica tanto sobre "Persona asignada" (pestañas Tiempo en QA / Tiempo por SP) como sobre "Creador" (pestaña Observaciones). Cuando ves "Equipo QA", pasá el mouse por el gráfico: el tooltip desglosa el aporte de cada analista.</p>
+    <p><strong>Tiempo en QA:</strong> tiempo <strong>calendario</strong> (24h/día), no horas hábiles — el export no trae las fechas de transición para descontar fines de semana. Universo: tickets con tiempo en QA &gt; 0 y estado ≠ <code>EN QA</code> (su reloj ya paró). Los tickets hoy en <code>EN QA</code> quedan fuera de las métricas de tiempo y se muestran aparte en los KPIs.</p>
+    <p><strong>Eje X — "Por asignación a QA" (default, decisión del usuario, 2026-07-27):</strong> ubica cada ticket en el mes en que <strong>entró por primera vez a <code>EN QA</code></strong> = <code>Creada</code> + tiempo acumulado en todos los estados previos (Backlog/Asignado/Listo para desarrollo/En curso) — es la ancla que mejor representa "qué estaba testeando el equipo ese mes", porque el desfasaje entre creación y entrada a QA suele ser mucho más largo que el desfasaje entre entrada a QA y cierre (agrupar por creación arrastra ese desfasaje largo al gráfico; agrupar por asignación a QA, casi no). Validado antes de construir: Σ(todas las columnas de tiempo del export) ≈ (fecha de export − <code>Creada</code>) en 839/853 tickets — confirma que el estado terminal sigue corriendo hasta el export y que cada columna es una duración real y aditiva. <strong>⚠️ Caveat sin resolver:</strong> el export no trae la secuencia de transiciones, solo totales acumulados — para los tickets que alguna vez pasaron por <code>Con defecto</code> (rebote QA→desarrollo, KPI "Con rebote"), no se puede distinguir si el tiempo extra en "En curso" ocurrió antes o después de la primera llegada a QA; para esos, el ticket podría estar ubicado en un mes posterior al real.</p>
+    <p><strong>⚠️ Toggles "Por creación" / "Por resolución" (alternativas):</strong> como el tiempo en QA solo se mide sobre tickets ya cerrados, agrupar por mes de <strong>creación</strong> hace que los meses recientes muestren nada más los tickets que cerraron rápido — los lentos siguen abiertos — y los últimos meses se ven sistemáticamente más veloces de lo que son en realidad (censura estadística fuerte, porque acá el desfasaje es largo). Agrupar por mes de <strong>resolución</strong> mezcla tickets creados en distintos momentos que cerraron el mismo mes. Ambos sirven como cruce independiente para contrastar contra la vista default. Los meses marcados <em>en cursiva</em> en el eje X (bajo "creación" o "asignación a QA") tienen cohorte incompleta (tickets que caerían en ese mes pero siguen en <code>EN QA</code>) — pasá el mouse sobre la etiqueta para el detalle.</p>
+    <p><strong>Observaciones:</strong> tickets con prefijo <code>[OBS]</code>/<code>[DEF]</code>/<code>[REQ]</code> en el resumen (hallazgos de QA en staging), no todo ticket tipo Error — los Error sin prefijo son bugs reportados directo en producción. Si filtrás por "Otros", el tooltip además desglosa qué persona puntual (Producto/PM) creó cada observación.</p>
+    <p><strong>Tiempo por Story Point:</strong> por defecto Σ horas en QA / Σ SP del mes (pondera por tamaño real del ticket, sobre el universo del filtro Analista vigente); el toggle "Mediana por ticket" muestra en cambio la mediana del ratio horas/SP ticket a ticket (menos sensible a un solo ticket grande, pero le da igual peso a un 0,25 SP que a un 15 SP). Tickets sin Story Points quedan fuera de esta métrica.</p>
+    <p>Base de datos acumulada: <code>wiki/3_recursos/datos/log_performance_qa.md</code> (una fila por ticket, upsert por Clave). El dashboard se regenera con cada ingesta.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const DATA = __DATA_JSON__;
+
+const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const MES_ABBR = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+
+const PROYECTO_ORDER = ["ADQUIRENCIA","EMISIÓN","ONBOARDING","SERVICIOS","ARDID"];
+const PROYECTOS = [...new Set([...PROYECTO_ORDER, ...DATA.map(t => t.proyecto)])].filter(p => DATA.some(t => t.proyecto === p) || PROYECTO_ORDER.includes(p));
+
+const darkMq = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => darkMq.matches;
+darkMq.addEventListener("change", () => render());
+
+const QA_MEMBERS = ["Andrea ORSINI", "Bethania", "Ana"];
+const GROUP_ORDER = [...QA_MEMBERS, "Otros"];
+const PERSONA_ORDER = ["EQUIPO", ...GROUP_ORDER];
+const DISPLAY_NAME = {
+  EQUIPO: "Equipo QA", "Andrea ORSINI": "Andrea Orsini", "Bethania": "Bethania Tornari",
+  "Ana": "Ana Moreno", "Otros": "Otros",
+};
+const QA_COLORS = {
+  EQUIPO:           { light: "#6a4fc4", dark: "#a98ae8" },
+  "Andrea ORSINI":  { light: "#2a78d6", dark: "#3987e5" },
+  "Bethania":       { light: "#1baf7a", dark: "#199e70" },
+  "Ana":            { light: "#eda100", dark: "#c98500" },
+  "Otros":          { light: "#807e78", dark: "#a3a29b" },
+};
+const groupColor = n => isDark() ? QA_COLORS[n].dark : QA_COLORS[n].light;
+
+// El toggle Promedio/Mediana es GLOBAL (state.median): un solo control que afecta
+// tanto al gráfico activo (tiempo_qa: promedio/mediana de días; horas_sp: Σ/Σ vs
+// mediana del ratio por ticket) como a las tarjetas KPI de "días en QA" y "horas/SP"
+// en TODAS las pestañas — no queda aislado a la que esté abierta en cada momento.
+const TABS = [
+  { id: "tiempo_qa", label: "Tiempo en QA",  unit: "Días calendario" },
+  { id: "obs",       label: "Observaciones", unit: "Tickets" },
+  { id: "horas_sp",  label: "Tiempo por SP", unit: "Horas por SP" },
+];
+
+// xmode "asignacion" (mes en que el ticket entró por primera vez a EN QA) es el
+// default (decisión del usuario, 2026-07-27): mucho menos sesgado que agrupar por
+// creación, porque el desfasaje creación→QA suele ser largo y el de QA→cierre corto.
+const state = { tab: TABS[0], proyecto: "ALL", persona: "EQUIPO", median: false, xmode: "asignacion" };
+function groupField() { return state.tab.id === "obs" ? "creador_grupo" : "asignado_grupo"; }
+function personaMatch(g) { return state.persona === "EQUIPO" ? g !== "Otros" : g === state.persona; }
+function personaColor() { return groupColor(state.persona); }
+function personaLabel() { return DISPLAY_NAME[state.persona]; }
+
+// --- Dominio X: cronológico, desde el mes más viejo hasta el más nuevo con datos,
+// tomando en cuenta tanto "Creada" como "Resuelta" (así el eje no salta al togglear).
+const periodKeyStr = s => { const [y, m] = s.split("-").map(Number); return y * 12 + (m - 1); };
+const PERIODS_ALL = DATA.flatMap(t => [t.mes_creada, t.mes_asignacion_qa, t.mes_resuelta].filter(Boolean)).map(periodKeyStr);
+const AXIS_LO = Math.min(...PERIODS_ALL);
+const AXIS_HI = Math.max(...PERIODS_ALL);
+const N_MONTHS = AXIS_HI - AXIS_LO + 1;
+const axisIndex = s => periodKeyStr(s) - AXIS_LO;
+const axisMeta = i => { const k = AXIS_LO + i; const anio = Math.floor(k / 12); return { anio, mesIdx: k - anio * 12 }; };
+const xLabelShort = i => { const m = axisMeta(i); return MES_ABBR[m.mesIdx] + "'" + String(m.anio).slice(-2); };
+const xLabelFull = i => { const m = axisMeta(i); return MESES[m.mesIdx] + " " + m.anio; };
+
+const fmt = v => v == null ? "·" : (Number.isInteger(v) ? String(v) : String(Math.round(v * 100) / 100));
+const median = arr => { if (!arr.length) return null; const s = [...arr].sort((a, b) => a - b); const mid = Math.floor(s.length / 2); return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2; };
+const mean = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+
+const XFIELD = { creada: "mes_creada", asignacion: "mes_asignacion_qa", resuelta: "mes_resuelta" };
+function xField() { return XFIELD[state.xmode]; }
+function baseFiltered() { return state.proyecto === "ALL" ? DATA : DATA.filter(t => t.proyecto === state.proyecto); }
+
+// --- Series ------------------------------------------------------------------
+// Construye UNA serie (values[i] = estadístico del mes i, null = sin tickets ese
+// mes → la línea/área se corta en vez de mostrar un falso 0) a partir de un array
+// de tickets ya filtrado. Reutilizada tanto para la serie principal (según el
+// filtro Analista vigente) como para los desgloses del tooltip/tabla (por
+// analista individual, o por creador puntual dentro de "Otros").
+function seriesFromRows(rows, tabId) {
+  const xf = xField();
+  if (tabId === "obs") {
+    const values = new Array(N_MONTHS).fill(0);
+    const counts = new Array(N_MONTHS).fill(0);
+    rows.forEach(t => { if (t.obs && t[xf]) { const i = axisIndex(t[xf]); values[i] += 1; counts[i] += 1; } });
+    return { values, counts };
+  }
+  const isTiempo = tabId === "tiempo_qa";
+  const univ = rows.filter(t => t.estado !== "EN QA" && t.horas_qa > 0 && t[xf]
+    && (isTiempo || (t.sp != null && t.sp > 0)));
+  const buckets = new Map(); // idx -> {n, dias:[], ratios:[], sumH, sumSP}
+  univ.forEach(t => {
+    const idx = axisIndex(t[xf]);
+    if (!buckets.has(idx)) buckets.set(idx, { n: 0, dias: [], ratios: [], sumH: 0, sumSP: 0 });
+    const b = buckets.get(idx);
+    b.n += 1;
+    if (isTiempo) b.dias.push(t.horas_qa / 24);
+    else { b.sumH += t.horas_qa; b.sumSP += t.sp; b.ratios.push(t.horas_qa / t.sp); }
+  });
+  const values = new Array(N_MONTHS).fill(null);
+  const counts = new Array(N_MONTHS).fill(0);
+  for (let i = 0; i < N_MONTHS; i++) {
+    const b = buckets.get(i);
+    if (!b) continue;
+    counts[i] = b.n;
+    values[i] = isTiempo ? (state.median ? median(b.dias) : mean(b.dias))
+                         : (state.median ? median(b.ratios) : (b.sumSP > 0 ? b.sumH / b.sumSP : null));
+  }
+  return { values, counts };
+}
+
+// Serie principal según el filtro Analista vigente (agregado "Equipo QA" = Andrea +
+// Bethania + Ana pooled, o una persona puntual) + desgloses para el tooltip/tabla:
+// por analista cuando persona=EQUIPO, por creador real cuando persona=Otros.
+function buildSeries() {
+  const gf = groupField();
+  const proyRows = baseFiltered();
+  const rows = proyRows.filter(t => personaMatch(t[gf]));
+  const main = seriesFromRows(rows, state.tab.id);
+
+  let breakdown = null;
+  if (state.persona === "EQUIPO") {
+    breakdown = QA_MEMBERS.map(m => ({
+      name: m, color: groupColor(m),
+      ...seriesFromRows(proyRows.filter(t => t[gf] === m), state.tab.id),
+    }));
+  } else if (state.persona === "Otros" && state.tab.id === "obs") {
+    const byC = new Map();
+    rows.forEach(t => { if (t.obs) byC.set(t.creador, (byC.get(t.creador) || 0) + 1); });
+    breakdown = [...byC.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
+      .map(([nm]) => ({ name: nm, color: "var(--muted)", ...seriesFromRows(rows.filter(t => t.creador === nm), state.tab.id) }));
+  }
+  return { name: personaLabel(), color: personaColor(), ...main, breakdown };
+}
+
+// Meses con cohorte incompleta: tickets que caerían en ese mes (bajo el xmode activo,
+// "creada" o "asignacion") pero siguen en EN QA — su reloj de testing no paró, así que
+// omitirlos sesga el mes hacia los tickets que sí cerraron rápido. No aplica bajo
+// "resuelta" (un ticket abierto no tiene mes de resolución, no hay nada que marcar) ni
+// en Observaciones (no mide tiempo).
+function incompleteMonths() {
+  if (state.xmode === "resuelta" || state.tab.id === "obs") return new Map();
+  const rows = baseFiltered().filter(t => personaMatch(t.asignado_grupo));
+  const xf = xField();
+  const m = new Map();
+  rows.forEach(t => {
+    if (t.en_qa_now && t[xf]) { const i = axisIndex(t[xf]); m.set(i, (m.get(i) || 0) + 1); }
+  });
+  return m;
+}
+
+// --- Render --------------------------------------------------------------
+const svg = document.getElementById("chart");
+const tooltip = document.getElementById("tooltip");
+const VB = { w: 1040, h: 420 };
+const PAD = { l: 52, r: 16, t: 14, b: 34 };
+let current = { series: [], xs: [], yPos: null };
+
+function xPos(i) {
+  const iw = VB.w - PAD.l - PAD.r;
+  return N_MONTHS === 1 ? PAD.l + iw / 2 : PAD.l + (iw * i) / (N_MONTHS - 1);
+}
+
+function niceScale(maxVal) {
+  if (maxVal <= 0) return { max: 10, step: 2 };
+  const target = maxVal / 4.5;
+  const pow = Math.pow(10, Math.floor(Math.log10(target)));
+  let step = pow;
+  for (const m of [1, 2, 2.5, 5, 10]) { if (pow * m >= target) { step = pow * m; break; } }
+  return { max: Math.ceil(maxVal / step) * step, step };
+}
+
+function drawXAxis() {
+  const incomplete = incompleteMonths();
+  const cohortNoun = state.xmode === "asignacion" ? "que entraron a EN QA ese mes" : "creado(s) ese mes";
+  let g = "";
+  for (let i = 0; i < N_MONTHS; i++) {
+    const x = xPos(i);
+    const cls = incomplete.has(i) ? ' class="incomplete"' : "";
+    const title = incomplete.has(i) ? `<title>Cohorte incompleta: ${incomplete.get(i)} ticket(s) ${cohortNoun} siguen en EN QA</title>` : "";
+    g += `<text${cls} x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle">${xLabelShort(i)}${title}</text>`;
+  }
+  return g;
+}
+
+const XMODE_LABEL = { creada: "mes de creación", asignacion: "mes de asignación a QA", resuelta: "mes de resolución" };
+
+function render() {
+  const scopeTxt = (state.proyecto === "ALL" ? "todos los proyectos" : state.proyecto) + " · " + personaLabel();
+  document.getElementById("chartTitle").textContent = state.tab.label + " — " + scopeTxt;
+  const xModeTxt = XMODE_LABEL[state.xmode];
+  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " · Eje X: " + xModeTxt + " (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
+
+  renderArea();
+  renderKpis();
+  renderStatToggle();
+}
+
+// Recorta un array de valores (con huecos null) en tramos contiguos [[idx,val],...],
+// para que el área/línea se corte donde no hay datos en vez de simular un cero falso.
+function segments(values) {
+  const segs = [];
+  let cur = [];
+  values.forEach((v, i) => {
+    if (v == null) { if (cur.length) segs.push(cur); cur = []; }
+    else cur.push([i, v]);
+  });
+  if (cur.length) segs.push(cur);
+  return segs;
+}
+
+function renderArea() {
+  const s = buildSeries();
+  current = { s };
+  const allVals = s.values.filter(v => v != null);
+  const scale = niceScale(Math.max(0, ...allVals));
+  const plotH = VB.h - PAD.t - PAD.b;
+  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
+  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
+  current.xs = xs; current.yPos = yPos;
+
+  let g = "";
+  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
+    const y = yPos(v);
+    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
+    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
+  }
+  segments(s.values).forEach(seg => {
+    if (seg.length === 1) {
+      const [i, v] = seg[0];
+      g += `<circle cx="${xs[i]}" cy="${yPos(v)}" r="3.25" fill="${s.color}"></circle>`;
+      return;
+    }
+    const top = seg.map(([i, v]) => `${xs[i]},${yPos(v)}`).join(" L");
+    const bot = seg.slice().reverse().map(([i]) => `${xs[i]},${yPos(0)}`).join(" L");
+    g += `<path d="M${top} L${bot} Z" fill="${s.color}" fill-opacity="0.25" stroke="none"></path>`;
+    g += `<path d="M${top}" fill="none" stroke="${s.color}" stroke-width="2.25"></path>`;
+    seg.forEach(([i, v]) => { g += `<circle cx="${xs[i]}" cy="${yPos(v)}" r="2.75" fill="${s.color}"></circle>`; });
+  });
+  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
+  g += drawXAxis();
+  g += `<g id="hoverLayer"></g>`;
+  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
+  svg.innerHTML = `<g class="axis">${g}</g>`;
+  bindHoverArea();
+
+  const empty = document.querySelector(".empty-msg");
+  if (empty) empty.remove();
+  if (allVals.length === 0 || Math.max(...allVals, 0) === 0) {
+    const d = document.createElement("div");
+    d.className = "empty-msg";
+    d.textContent = state.xmode === "resuelta"
+      ? "Sin tickets con fecha de Resolución para este filtro (el export puede no traer la columna 'Resuelta', o los tickets siguen abiertos)."
+      : "Sin datos para " + (state.proyecto === "ALL" ? "ningún proyecto" : state.proyecto) + " · " + personaLabel() + " en esta pestaña (aún).";
+    document.getElementById("chartWrap").appendChild(d);
+  }
+  renderLegend(s);
+  renderTable(s);
+}
+
+// --- Tooltip / hover -------------------------------------------------------
+function tooltipPos(x, e, wrap) {
+  const wrect = wrap.getBoundingClientRect();
+  const px = (x / VB.w) * wrect.width;
+  tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
+  tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
+}
+
+function nearestIndex(e) {
+  const rect = svg.getBoundingClientRect();
+  const sx = (e.clientX - rect.left) * (VB.w / rect.width);
+  let mi = 0, best = Infinity;
+  current.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
+  return mi;
+}
+
+function bindHoverArea() {
+  const zone = document.getElementById("hoverZone");
+  const layer = document.getElementById("hoverLayer");
+  const wrap = document.getElementById("chartWrap");
+  const unit = state.tab.id === "horas_sp" ? " h/SP" : (state.tab.id === "obs" ? "" : " d");
+  zone.addEventListener("mousemove", e => {
+    const mi = nearestIndex(e);
+    const x = current.xs[mi];
+    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
+    const s = current.s;
+    const v = s.values[mi];
+    const n = s.counts ? s.counts[mi] : null;
+    let html = `<div class="t-mes">${xLabelFull(mi)}${state.proyecto === "ALL" ? "" : " · " + state.proyecto}</div>`;
+    if (v == null) {
+      html += `<div class="t-more">Sin tickets ese mes para ${s.name}.</div>`;
+    } else {
+      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm">${s.name}</span><span class="vl">${fmt(v)}${unit}</span>${n ? `<span class="t-n">n=${n}</span>` : ""}</div>`;
+    }
+    if (s.breakdown) {
+      html += `<div class="t-sub">`;
+      s.breakdown.forEach(b => {
+        const bv = b.values[mi];
+        if (bv == null && state.tab.id !== "obs") return;
+        const bn = b.counts ? b.counts[mi] : null;
+        html += `<div class="t-row"><span class="sw" style="background:${b.color}"></span><span class="nm">${b.name}</span><span class="vl">${fmt(bv)}${bv != null ? unit : ""}</span>${bn ? `<span class="t-n">n=${bn}</span>` : ""}</div>`;
+      });
+      html += `</div>`;
+    }
+    tooltip.innerHTML = html;
+    tooltip.style.display = "block";
+    tooltipPos(x, e, wrap);
+  });
+  zone.addEventListener("mouseleave", () => { layer.innerHTML = ""; tooltip.style.display = "none"; });
+}
+
+function renderLegend(s) {
+  const lg = document.getElementById("legend");
+  lg.innerHTML = "";
+  const mk = (name, color) => {
+    const el = document.createElement("span");
+    el.className = "chip";
+    el.innerHTML = `<span class="sw" style="background:${color}"></span>${name}`;
+    return el;
+  };
+  lg.appendChild(mk(s.name, s.color));
+  if (s.breakdown) s.breakdown.forEach(b => lg.appendChild(mk(b.name, b.color)));
+}
+
+function renderTable(s) {
+  const unit = state.tab.id === "horas_sp" ? " h/SP" : (state.tab.id === "obs" ? "" : " d");
+  const rows = [s, ...(s.breakdown || [])];
+  let html = "<table><thead><tr><th>Analista</th>";
+  for (let i = 0; i < N_MONTHS; i++) html += `<th>${xLabelShort(i)}</th>`;
+  html += "</tr></thead><tbody>";
+  rows.forEach((r, i) => {
+    html += `<tr${i === 0 && s.breakdown ? ' class="total"' : ""}><td>${r.name}</td>`;
+    r.values.forEach(v => html += `<td>${v == null ? "·" : fmt(v) + unit}</td>`);
+    html += `</tr>`;
+  });
+  html += "</tbody></table>";
+  document.getElementById("tableWrap").innerHTML = html;
+}
+
+function renderKpis() {
+  const proyRows = baseFiltered();
+  const byAsignado = proyRows.filter(t => personaMatch(t.asignado_grupo));
+  const byCreador = proyRows.filter(t => personaMatch(t.creador_grupo));
+  const cerrados = byAsignado.filter(t => t.estado !== "EN QA" && t.horas_qa > 0);
+  const enQaNow = byAsignado.filter(t => t.en_qa_now);
+  const sinQa = byAsignado.filter(t => t.estado !== "EN QA" && t.horas_qa === 0);
+  const obsRows = byCreador.filter(t => t.obs);
+  const conSp = cerrados.filter(t => t.sp != null && t.sp > 0);
+  const dias = cerrados.map(t => t.horas_qa / 24);
+  // El toggle global Promedio/Mediana (state.median) pisa el estadístico de AMBAS
+  // tarjetas, no solo el del gráfico activo — así el toggle es realmente general.
+  const diasStat = dias.length ? (state.median ? median(dias) : mean(dias)) : null;
+  const diasLabel = state.median ? "Mediana días en QA" : "Promedio días en QA";
+  const ratios = conSp.map(t => t.horas_qa / t.sp);
+  const sumH = conSp.reduce((a, t) => a + t.horas_qa, 0);
+  const sumSP = conSp.reduce((a, t) => a + t.sp, 0);
+  const hsp = state.median ? (ratios.length ? median(ratios) : null) : (sumSP > 0 ? sumH / sumSP : null);
+  const hspLabel = state.median ? "Mediana horas/SP (por ticket)" : "Horas/SP (ΣH/ΣSP)";
+
+  const alcanzoQa = byAsignado.filter(t => t.horas_qa > 0);
+  const diasPre = alcanzoQa.map(t => t.horas_pre_qa / 24);
+  const preStat = diasPre.length ? (state.median ? median(diasPre) : mean(diasPre)) : null;
+  const preLabel = state.median ? "Mediana días hasta EN QA" : "Promedio días hasta EN QA";
+  const bounce = alcanzoQa.filter(t => t.bounce);
+
+  const scope = (state.proyecto === "ALL" ? "todos los proyectos" : state.proyecto) + " · " + personaLabel();
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><div class="v">${cerrados.length}</div><div class="l">Tickets testeados (QA cerrado) · ${scope}</div></div>
+    <div class="kpi"><div class="v">${diasStat != null ? fmt(diasStat) + " d" : "—"}</div><div class="l">${diasLabel} · ${scope}</div></div>
+    <div class="kpi"><div class="v">${preStat != null ? fmt(preStat) + " d" : "—"}</div><div class="l">${preLabel} · ${scope}</div></div>
+    <div class="kpi"><div class="v">${obsRows.length}</div><div class="l">Observaciones [OBS]/[DEF]/[REQ] · ${scope}</div></div>
+    <div class="kpi"><div class="v">${hsp != null ? fmt(hsp) + " h" : "—"}</div><div class="l">${hspLabel} · ${scope}</div></div>
+    <div class="kpi"><div class="v">${enQaNow.length}</div><div class="l">Tickets aún en EN QA (cohorte abierta) · ${scope}</div></div>
+    <div class="kpi"><div class="v">${sinQa.length}</div><div class="l">Tickets sin paso por QA · ${scope}</div></div>
+    <div class="kpi"><div class="v">${bounce.length}</div><div class="l">Con rebote a Con Defecto (dato de "hasta EN QA" menos confiable) · ${scope}</div></div>`;
+}
+
+// --- Controles --------------------------------------------------------------
+const tabsEl = document.getElementById("tabs");
+TABS.forEach(t => {
+  const b = document.createElement("button");
+  b.textContent = t.label;
+  b.setAttribute("role", "tab");
+  b.addEventListener("click", () => {
+    state.tab = t;
+    // state.median NO se resetea: es un toggle global (afecta KPIs en toda pestaña).
+    tabsEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    render();
+  });
+  if (t === state.tab) b.classList.add("active");
+  tabsEl.appendChild(b);
+});
+
+const proyEl = document.getElementById("proyectos");
+["ALL", ...PROYECTOS].forEach(p => {
+  const b = document.createElement("button");
+  b.textContent = p === "ALL" ? "Todos" : p;
+  b.addEventListener("click", () => {
+    state.proyecto = p;
+    proyEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    render();
+  });
+  if (p === state.proyecto) b.classList.add("active");
+  proyEl.appendChild(b);
+});
+
+const personasEl = document.getElementById("personas");
+PERSONA_ORDER.forEach(p => {
+  const b = document.createElement("button");
+  b.textContent = DISPLAY_NAME[p];
+  b.addEventListener("click", () => {
+    state.persona = p;
+    personasEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    render();
+  });
+  if (p === state.persona) b.classList.add("active");
+  personasEl.appendChild(b);
+});
+
+// Toggle global (no depende de la pestaña activa): pisa tanto la serie del gráfico
+// (en tiempo_qa/horas_sp) como las tarjetas KPI de "días en QA" y "horas/SP", visible
+// y activo en TODAS las pestañas — por eso ya no se oculta en Observaciones.
+function renderStatToggle() {
+  const el = document.getElementById("statToggle");
+  el.innerHTML = "";
+  const lbl = document.createElement("span"); lbl.className = "lbl"; lbl.textContent = "Estadístico:";
+  el.appendChild(lbl);
+  ["Promedio", "Mediana"].forEach((label, i) => {
+    const b = document.createElement("button");
+    b.textContent = label;
+    if ((i === 1) === state.median) b.classList.add("active");
+    b.addEventListener("click", () => { state.median = (i === 1); render(); });
+    el.appendChild(b);
+  });
+}
+
+const xmodeEl = document.getElementById("xmodeToggle");
+const xLbl = document.createElement("span"); xLbl.className = "lbl"; xLbl.textContent = "Eje X:";
+xmodeEl.appendChild(xLbl);
+[["creada", "Por creación"], ["asignacion", "Por asignación a QA"], ["resuelta", "Por resolución"]].forEach(([id, label]) => {
+  const b = document.createElement("button");
+  b.textContent = label;
+  if (id === state.xmode) b.classList.add("active");
+  b.addEventListener("click", () => {
+    state.xmode = id;
+    xmodeEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x.textContent === label));
+    render();
+  });
+  xmodeEl.appendChild(b);
+});
+
+render();
+</script>
+</body>
+</html>

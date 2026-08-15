@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance de desarrollo</title>
+<style>
+  :root {
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --chip-hover: rgba(11,11,11,0.05);
+    --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-1: #1a1a19;
+      --page: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --chip-hover: rgba(255,255,255,0.07);
+      --accent: #3987e5;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 48px; }
+  header h1 { font-size: 24px; font-weight: 700; margin: 0 0 4px; }
+  header .sub { color: var(--text-secondary); margin: 0 0 20px; font-size: 13px; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    justify-content: space-between; margin-bottom: 16px;
+  }
+  .tabs, .spaces { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tabs {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 3px;
+  }
+  .tabs button {
+    border: none; background: transparent; color: var(--text-secondary);
+    font: inherit; font-size: 13px; font-weight: 600;
+    padding: 6px 14px; border-radius: 7px; cursor: pointer;
+  }
+  .tabs button:hover { background: var(--chip-hover); }
+  .tabs button.active { background: var(--accent); color: #fff; }
+  .spaces { align-items: center; }
+  .spaces .lbl { color: var(--muted); font-size: 12px; margin-right: 2px; }
+  .spaces button {
+    border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--text-secondary); font: inherit; font-size: 13px; font-weight: 600;
+    padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .spaces button:hover { background: var(--chip-hover); }
+  .spaces button.active { background: var(--text-primary); color: var(--page); border-color: var(--text-primary); }
+
+  .sla-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .sla-toggle .lbl { color: var(--muted); font-size: 12px; }
+  .sla-toggle .grp { display: flex; gap: 4px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+  .sla-toggle button {
+    border: none; background: transparent; color: var(--text-secondary);
+    font: inherit; font-size: 12px; font-weight: 600;
+    padding: 4px 12px; border-radius: 7px; cursor: pointer;
+  }
+  .sla-toggle button:hover { background: var(--chip-hover); }
+  .sla-toggle button.active { background: var(--accent); color: #fff; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .kpi {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 16px;
+  }
+  .kpi .v { font-size: 26px; font-weight: 700; line-height: 1.15; }
+  .kpi .l { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 18px 12px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+  .card .yunit { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+  #chartWrap { position: relative; }
+  #chart { display: block; width: 100%; height: auto; }
+  .axis text { fill: var(--muted); font-size: 11px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .axis .tick-num { font-variant-numeric: tabular-nums; }
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .baseline { stroke: var(--baseline); stroke-width: 1; }
+  .band { transition: opacity .12s ease; }
+  .dimmed .band { opacity: .18; }
+  .dimmed .band.hl { opacity: 1; }
+  .crosshair { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .empty-msg {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px; pointer-events: none;
+  }
+
+  #tooltip {
+    position: absolute; pointer-events: none; z-index: 5; display: none;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px; min-width: 210px; max-width: 320px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.16); font-size: 12px;
+  }
+  #tooltip .t-mes { font-weight: 700; margin-bottom: 6px; }
+  #tooltip .t-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+  #tooltip .t-row .sw { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  #tooltip .t-row .nm { flex: 1; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #tooltip .t-row .vl { font-variant-numeric: tabular-nums; font-weight: 600; }
+  #tooltip .t-more { color: var(--muted); margin-top: 3px; }
+  #tooltip .t-total { border-top: 1px solid var(--grid); margin-top: 6px; padding-top: 5px; display: flex; justify-content: space-between; font-weight: 700; }
+
+  #legend { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 10px 2px 4px; }
+  #legend .lg-group { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; width: 100%; margin-top: 6px; }
+  #legend .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 3px 10px; font-size: 12px; color: var(--text-secondary); cursor: default;
+  }
+  #legend .chip:hover { background: var(--chip-hover); }
+  #legend .chip .sw { width: 9px; height: 9px; border-radius: 2px; }
+  #legend .more { color: var(--muted); font-size: 12px; padding: 3px 4px; }
+
+  details { margin-bottom: 16px; }
+  details summary { cursor: pointer; color: var(--text-secondary); font-weight: 600; font-size: 13px; }
+  .tbl-wrap { overflow-x: auto; margin-top: 10px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface-1); max-width: 340px; overflow: hidden; text-overflow: ellipsis; }
+  thead th { color: var(--muted); font-weight: 600; }
+  td { font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.total td { font-weight: 700; border-top: 2px solid var(--baseline); }
+
+  footer { color: var(--muted); font-size: 12px; }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Performance de desarrollo</h1>
+    <p class="sub">__SUBTITLE__</p>
+  </header>
+
+  <div class="controls">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="spaces" id="spaces"><span class="lbl">Espacio:</span></div>
+  </div>
+
+  <div class="sla-toggle">
+    <span class="lbl">KPIs de SLA Highest, ver como:</span>
+    <div class="grp" id="slaToggle"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="card">
+    <h2 id="chartTitle"></h2>
+    <p class="yunit" id="yUnit"></p>
+    <div id="chartWrap">
+      <svg id="chart" viewBox="0 0 1040 420" role="img" aria-label="Gráfico de áreas apiladas por mes"></svg>
+      <div id="tooltip"></div>
+    </div>
+    <div id="legend"></div>
+  </section>
+
+  <details>
+    <summary>Ver datos en tabla</summary>
+    <div class="tbl-wrap" id="tableWrap"></div>
+  </details>
+
+  <footer>
+    <p><strong>Metodología:</strong> se cuenta todo ticket/versión del reporte de publicaciones del PM (incluye estado «No aplica»); tickets sin story points computan 0 SP. Epic = «Parent summary» de Jira.</p>
+    <p><strong>Meses sin desglose por Epic:</strong> los backfills históricos que llegan en formato agregado por versión no traen Epic — esos meses no muestran datos en las vistas "por Epic" (sí en "por tipo"). No es un error, es una limitación conocida de la fuente.</p>
+    <p><strong>Colores:</strong> las epics BAU fijas mantienen color constante todos los meses — <span style="color:#e34948;font-weight:700">SOPORTE en rojo</span>, más REGRESIONES WS/AD/OB/SER, COE e INICIATIVAS TÉCNICAS. Las epics nuevas/particulares van en escala de grises (identificarlas con el tooltip o la tabla).</p>
+    <p><strong>USD por SP:</strong> costo de desarrollo (stock de horas facturado por Fintexa, sin Soporte ni IT) dividido los SP publicados ese mes/espacio, fila por fila a la tarifa de cada perfil — nunca un valor hora promedio. Si un espacio no tiene SP publicados ese mes (hoy: OB y SER), la métrica da <strong>0</strong> — no se oculta ni contamina a otros espacios. Cuando el Excel de un mes no trae su propia tabla de precios, se hereda la tarifa del mes conocido más cercano (detalle en <code>wiki/2_areas/control/log_costos_desarrollo.md</code>).</p>
+    <p><strong>SLA Highest:</strong> tiempo de resolución de tickets Prioridad=Highest (reclamos, bugs, incendios), agrupado por <strong>mes de creación</strong> del ticket (no de resolución) — "las urgencias creadas en el mes X tardaron Y días". <em>Días hasta Finalizada</em> = tiempo hasta que el ticket entra a estado Finalizada (reloj de desarrollo/QA); <em>Días hasta Publicación</em> = tiempo hasta la fecha real de release de la versión que lo resolvió (Jira `fixVersions`/`releaseDate`; degrada a la fecha de Finalizada si esa versión no tiene fecha). Ambas series muestran la <strong>mediana</strong> (más robusta a outliers que el promedio para este tipo de medición). Los tickets que <strong>todavía no fueron resueltos</strong> quedan fuera de esas medianas (su reloj no paró), pero no se ocultan: los meses con urgencias sin resolver se marcan en <em>itálica</em> en el eje X (cohorte incompleta — su mediana real es peor que la mostrada, porque los lentos todavía no entraron a la cuenta), y las 2 KPI globales (con toggle mediana/promedio) declaran cuántos quedan afuera. Base de datos: <code>wiki/2_areas/control/log_sla_highest.md</code>.</p>
+    <p>Bases de datos acumuladas: <code>wiki/3_recursos/datos/log_performance_desarrollo.md</code> (SP/tickets), <code>wiki/3_recursos/datos/log_costos_desarrollo.md</code> (costo) y <code>wiki/3_recursos/datos/log_sla_highest.md</code> (SLA de urgencias). El dashboard se regenera con cada ingesta.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const DATA = __DATA_JSON__;
+const COSTOS = __COSTOS_JSON__;
+const SLA_DATA = __SLA_JSON__;
+
+const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const MES_ABBR = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const ESPACIOS = [...new Set(["AD","WS","OB","SER", ...DATA.map(r => r.espacio), ...COSTOS.map(r => r.espacio), ...SLA_DATA.map(r => r.espacio)])];
+
+const darkMq = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => darkMq.matches;
+darkMq.addEventListener("change", () => render());
+
+// Epics BAU fijas: color constante todos los meses (SOPORTE = rojo, pedido explícito).
+const BAU = [
+  { name: "SOPORTE",              light: "#e34948", dark: "#e66767" },
+  { name: "REGRESIONES WS",       light: "#2a78d6", dark: "#3987e5" },
+  { name: "REGRESIONES AD",       light: "#1baf7a", dark: "#199e70" },
+  { name: "REGRESIONES OB",       light: "#eda100", dark: "#c98500" },
+  { name: "REGRESIONES SER",      light: "#4a3aa7", dark: "#9085e9" },
+  { name: "COE",                  light: "#e87ba4", dark: "#d55181" },
+  { name: "INICIATIVAS TECNICAS", light: "#eb6834", dark: "#d95926" },
+];
+const BAU_NAMES = BAU.map(b => b.name);
+const bauColor = n => { const b = BAU.find(x => x.name === n); return isDark() ? b.dark : b.light; };
+
+// Escala de grises para epics particulares (orden alternado para separar bandas contiguas).
+const GRAYS_LIGHT = ["#c9c8c2","#807e78","#adaca6","#5c5b56","#98968f","#6e6d67"];
+const GRAYS_DARK  = ["#4a4a47","#a3a29b","#5e5e5a","#8b8a84","#6f6f6a","#b9b8b0"];
+const grays = () => isDark() ? GRAYS_DARK : GRAYS_LIGHT;
+
+const TIPO_COLORS = {
+  "Historia": { light: "#2a78d6", dark: "#3987e5" },
+  "Error":    { light: "#e34948", dark: "#e66767" },
+};
+
+const TABS = [
+  { id: "sp_tipo",  label: "SP por tipo",      metric: "sp",      group: "tipo", title: "Story points publicados por tipo de incidencia", unit: "Story points" },
+  { id: "sp_epic",  label: "SP por Epic",      metric: "sp",      group: "epic", title: "Story points publicados por Epic",               unit: "Story points" },
+  { id: "tk_tipo",  label: "Tickets por tipo", metric: "tickets", group: "tipo", title: "Tickets publicados por tipo de incidencia",      unit: "Tickets" },
+  { id: "tk_epic",  label: "Tickets por Epic", metric: "tickets", group: "epic", title: "Tickets publicados por Epic",                    unit: "Tickets" },
+  { id: "usd_sp",   label: "USD por SP",       mode: "line",      title: "Costo de desarrollo por story point publicado",                 unit: "USD por SP" },
+  { id: "sla_highest", label: "SLA Highest",   mode: "line-sla",  title: "Tiempo de resolución de tickets Highest (mediana, por mes de creación)", unit: "Días" },
+];
+
+const state = { tab: TABS[0], space: "ALL", slaStat: "mediana" };
+
+// Dominio X: cronológico, desde el primer año×mes con datos hasta el último (multi-año,
+// crece con cada ingesta — un backfill puede extenderlo hacia atrás en el tiempo).
+// Se calcula sobre delivery (DATA) + costos (COSTOS) + SLA (SLA_DATA, por mes de Creada)
+// juntos: cada pestaña puede en teoría cubrir un rango que las otras todavía no tienen.
+const periodKey = r => r.anio * 12 + MESES.indexOf(r.mes);
+const PERIODS_ALL = [...DATA.map(periodKey), ...COSTOS.map(periodKey), ...SLA_DATA.map(periodKey)];
+const AXIS_LO = Math.min(...PERIODS_ALL);
+const AXIS_HI = Math.max(...PERIODS_ALL);
+const N_MONTHS = AXIS_HI - AXIS_LO + 1;
+const axisIndex = r => periodKey(r) - AXIS_LO;
+const axisMeta = i => { const k = AXIS_LO + i; const anio = Math.floor(k / 12); return { anio, mesIdx: k - anio * 12 }; };
+const xLabelShort = i => { const m = axisMeta(i); return MES_ABBR[m.mesIdx] + "'" + String(m.anio).slice(-2); };
+const xLabelFull = i => { const m = axisMeta(i); return MESES[m.mesIdx] + " " + m.anio; };
+
+const fmt = v => Number.isInteger(v) ? String(v) : String(Math.round(v * 100) / 100);
+
+function filtered() {
+  return state.space === "ALL" ? DATA : DATA.filter(r => r.espacio === state.space);
+}
+
+function slaFiltered() {
+  return state.space === "ALL" ? SLA_DATA : SLA_DATA.filter(r => r.espacio === state.space);
+}
+
+function median(values) {
+  if (!values.length) return null;
+  const s = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
+function mean(values) {
+  return values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
+}
+
+function slaStat(values) {
+  return state.slaStat === "mediana" ? median(values) : mean(values);
+}
+
+// Series de la vista actual: [{name, color, values[meses], total}]
+function computeSeries() {
+  // La vista "por Epic" excluye registros sin dato de Epic (backfills históricos):
+  // esos meses quedan genuinamente vacíos en esta métrica, no se inventa un bucket.
+  const rows = state.tab.group === "epic" ? filtered().filter(r => r.epic) : filtered();
+  const metric = state.tab.metric;
+  const keyOf = state.tab.group === "tipo" ? (r => r.tipo) : (r => r.epic);
+  const map = new Map();
+  for (const r of rows) {
+    const k = keyOf(r);
+    if (!map.has(k)) map.set(k, new Array(N_MONTHS).fill(0));
+    map.get(k)[axisIndex(r)] += r[metric];
+  }
+  let series = [...map.entries()].map(([name, values]) => ({
+    name, values, total: values.reduce((a, b) => a + b, 0),
+  }));
+
+  if (state.tab.group === "tipo") {
+    const order = ["Historia", "Error"];
+    series.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+    series.forEach(s => s.color = isDark() ? TIPO_COLORS[s.name].dark : TIPO_COLORS[s.name].light);
+  } else {
+    const bau = BAU_NAMES.filter(n => map.has(n)).map(n => series.find(s => s.name === n));
+    const rest = series.filter(s => !BAU_NAMES.includes(s.name)).sort((a, b) => b.total - a.total);
+    bau.forEach(s => { s.color = bauColor(s.name); s.isBau = true; });
+    const G = grays();
+    rest.forEach((s, i) => { s.color = G[i % G.length]; s.isBau = false; });
+    series = [...bau, ...rest]; // BAU fijo en la base del apilado
+  }
+  return series;
+}
+
+function niceScale(maxVal) {
+  if (maxVal <= 0) return { max: 10, step: 2 };
+  const target = maxVal / 4.5;
+  const pow = Math.pow(10, Math.floor(Math.log10(target)));
+  let step = pow;
+  for (const m of [1, 2, 2.5, 5, 10]) { if (pow * m >= target) { step = pow * m; break; } }
+  return { max: Math.ceil(maxVal / step) * step, step };
+}
+
+// --- Render ---------------------------------------------------------------
+
+const svg = document.getElementById("chart");
+const tooltip = document.getElementById("tooltip");
+const VB = { w: 1040, h: 420 };
+const PAD = { l: 52, r: 16, t: 14, b: 34 };
+let current = { series: [], stacked: [], scale: null, xs: [] };
+
+function xPos(i) {
+  const iw = VB.w - PAD.l - PAD.r;
+  return N_MONTHS === 1 ? PAD.l + iw / 2 : PAD.l + (iw * i) / (N_MONTHS - 1);
+}
+
+function render() {
+  if (state.tab.mode === "line") { renderLine(); return; }
+  if (state.tab.mode === "line-sla") { renderLineSla(); return; }
+  const series = computeSeries();
+  const totals = new Array(N_MONTHS).fill(0);
+  series.forEach(s => s.values.forEach((v, i) => totals[i] += v));
+  const scale = niceScale(Math.max(...totals, 0));
+  const plotH = VB.h - PAD.t - PAD.b;
+  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
+  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
+
+  // Apilado acumulado
+  let base = new Array(N_MONTHS).fill(0);
+  const stacked = series.map(s => {
+    const y0 = base.slice();
+    const y1 = base.map((b, i) => b + s.values[i]);
+    base = y1;
+    return { ...s, y0, y1 };
+  });
+  current = { series, stacked, scale, xs, yPos };
+
+  let g = "";
+  // Grid + eje Y
+  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
+    const y = yPos(v);
+    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
+    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
+  }
+  // Áreas (borde color superficie = separador entre bandas apiladas)
+  stacked.forEach((s, si) => {
+    if (s.total <= 0) return;
+    const top = s.y1.map((v, i) => `${xs[i]},${yPos(v)}`).join(" L");
+    const bot = s.y0.map((v, i) => `${xs[i]},${yPos(v)}`).reverse().join(" L");
+    g += `<path class="band" data-si="${si}" d="M${top} L${bot} Z" fill="${s.color}" stroke="var(--surface-1)" stroke-width="1.5"></path>`;
+  });
+  // Baseline + eje X
+  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
+  xs.forEach((x, i) => {
+    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle">${xLabelShort(i)}</text>`;
+  });
+  // Capa de hover
+  g += `<g id="hoverLayer"></g>`;
+  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
+
+  svg.innerHTML = `<g class="axis">${g}</g>`;
+  bindHover();
+
+  document.getElementById("chartTitle").textContent =
+    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
+  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " · Eje X: mes de publicación (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
+
+  const empty = document.querySelector(".empty-msg");
+  if (empty) empty.remove();
+  if (series.length === 0 || Math.max(...totals, 0) === 0) {
+    const d = document.createElement("div");
+    d.className = "empty-msg";
+    d.textContent = "Sin publicaciones registradas para el espacio " + state.space + " (aún).";
+    document.getElementById("chartWrap").appendChild(d);
+  }
+
+  renderKpis();
+  renderLegend(series);
+  renderTable(series);
+}
+
+// --- Pestaña USD por SP (líneas, no áreas) ---------------------------------
+// SP por (período, espacio), sumado sin importar tipo/epic — la métrica de costo
+// no discrimina por Epic, solo necesita el total de SP publicados ese mes/espacio.
+function spByPeriodEspacio() {
+  const m = new Map();
+  DATA.forEach(r => {
+    const k = periodKey(r) + "|" + r.espacio;
+    m.set(k, (m.get(k) || 0) + r.sp);
+  });
+  return m;
+}
+function usdByPeriodEspacio() {
+  const m = new Map();
+  COSTOS.forEach(c => {
+    const k = periodKey(c) + "|" + c.espacio;
+    m.set(k, (m.get(k) || 0) + c.usd);
+  });
+  return m;
+}
+
+// USD/SP histórico para un conjunto de espacios: Σusd / Σsp, contando SOLO los pares
+// período×espacio con SP > 0 (si no, el costo de un espacio sin SP registrado -hoy OB
+// y SER- inflaría el numerador sin aportar denominador y desvirtuaría la métrica).
+function usdPerSpGlobal(espacios) {
+  const spM = spByPeriodEspacio(), usdM = usdByPeriodEspacio();
+  let usdSum = 0, spSum = 0;
+  for (let i = 0; i < N_MONTHS; i++) {
+    const period = AXIS_LO + i;
+    espacios.forEach(e => {
+      const sp = spM.get(period + "|" + e) || 0;
+      if (sp > 0) { spSum += sp; usdSum += (usdM.get(period + "|" + e) || 0); }
+    });
+  }
+  return spSum > 0 ? usdSum / spSum : null;
+}
+
+function espacioColor(e) {
+  return BAU_NAMES.includes("REGRESIONES " + e) ? bauColor("REGRESIONES " + e) : (isDark() ? "#a3a29b" : "#807e78");
+}
+
+function computeCostSeries() {
+  const spM = spByPeriodEspacio(), usdM = usdByPeriodEspacio();
+  const espacios = state.space === "ALL" ? ESPACIOS : [state.space];
+  const series = espacios.map(e => {
+    const values = new Array(N_MONTHS).fill(0);
+    for (let i = 0; i < N_MONTHS; i++) {
+      const period = AXIS_LO + i;
+      const sp = spM.get(period + "|" + e) || 0;
+      const usd = usdM.get(period + "|" + e) || 0;
+      values[i] = sp > 0 ? usd / sp : 0;
+    }
+    return { name: e, values, color: espacioColor(e) };
+  });
+  if (state.space === "ALL") {
+    const values = new Array(N_MONTHS).fill(0);
+    for (let i = 0; i < N_MONTHS; i++) {
+      const period = AXIS_LO + i;
+      let usdSum = 0, spSum = 0;
+      ESPACIOS.forEach(e => {
+        const sp = spM.get(period + "|" + e) || 0;
+        if (sp > 0) { spSum += sp; usdSum += (usdM.get(period + "|" + e) || 0); }
+      });
+      values[i] = spSum > 0 ? usdSum / spSum : 0;
+    }
+    series.push({ name: "Global", values, color: "var(--text-secondary)", isGlobal: true });
+  }
+  return series;
+}
+
+let currentLine = { series: [], xs: [], yPos: null };
+
+function renderLine() {
+  const series = computeCostSeries();
+  const maxVal = Math.max(0, ...series.map(s => Math.max(...s.values)));
+  const scale = niceScale(maxVal);
+  const plotH = VB.h - PAD.t - PAD.b;
+  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
+  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
+  currentLine = { series, xs, yPos };
+
+  let g = "";
+  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
+    const y = yPos(v);
+    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
+    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
+  }
+  series.forEach((s, si) => {
+    const pts = s.values.map((v, i) => `${xs[i]},${yPos(v)}`).join(" ");
+    const dash = s.isGlobal ? ` stroke-dasharray="5 4"` : "";
+    g += `<polyline class="band" data-si="${si}" points="${pts}" fill="none" stroke="${s.color}" stroke-width="${s.isGlobal ? 2 : 2.25}"${dash}></polyline>`;
+    s.values.forEach((v, i) => {
+      if (v <= 0) return;
+      g += `<circle data-si="${si}" cx="${xs[i]}" cy="${yPos(v)}" r="2.75" fill="${s.color}"></circle>`;
+    });
+  });
+  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
+  xs.forEach((x, i) => {
+    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle">${xLabelShort(i)}</text>`;
+  });
+  g += `<g id="hoverLayer"></g>`;
+  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
+
+  svg.innerHTML = `<g class="axis">${g}</g>`;
+  bindHoverLine();
+
+  document.getElementById("chartTitle").textContent =
+    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
+  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " (0 = sin SP publicados ese mes) · Eje X: mes de publicación (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
+
+  const empty = document.querySelector(".empty-msg");
+  if (empty) empty.remove();
+  if (COSTOS.length === 0) {
+    const d = document.createElement("div");
+    d.className = "empty-msg";
+    d.textContent = "Sin datos de costo de desarrollo ingeridos todavía.";
+    document.getElementById("chartWrap").appendChild(d);
+  }
+
+  renderKpis();
+  renderCostLegend(series);
+  renderCostTable(series);
+}
+
+function costChip(s) {
+  const el = document.createElement("span");
+  el.className = "chip";
+  const dashHint = s.isGlobal ? " (promedio ponderado)" : "";
+  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}${dashHint}`;
+  const si = currentLine.series.findIndex(x => x.name === s.name);
+  el.addEventListener("mouseenter", () => highlight(si));
+  el.addEventListener("mouseleave", () => highlight(-1));
+  return el;
+}
+
+function renderCostLegend(series) {
+  const lg = document.getElementById("legend");
+  lg.innerHTML = "";
+  series.forEach(s => lg.appendChild(costChip(s)));
+}
+
+function bindHoverLine() {
+  const zone = document.getElementById("hoverZone");
+  const layer = document.getElementById("hoverLayer");
+  const wrap = document.getElementById("chartWrap");
+
+  zone.addEventListener("mousemove", e => {
+    const rect = svg.getBoundingClientRect();
+    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
+    let mi = 0, best = Infinity;
+    currentLine.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
+
+    const x = currentLine.xs[mi];
+    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
+
+    const vals = currentLine.series
+      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
+      .filter(s => s.v > 0)
+      .sort((a, b) => b.v - a.v);
+    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
+    if (vals.length === 0) {
+      html += `<div class="t-more">Sin SP publicados ese mes en los espacios visibles.</div>`;
+    }
+    vals.forEach(s => {
+      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">$${fmt(Math.round(s.v))}</span></div>`;
+    });
+    tooltip.innerHTML = html;
+    tooltip.style.display = "block";
+
+    const wrect = wrap.getBoundingClientRect();
+    const px = (x / VB.w) * wrect.width;
+    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
+    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
+  });
+  zone.addEventListener("mouseleave", () => {
+    layer.innerHTML = "";
+    tooltip.style.display = "none";
+  });
+}
+
+function renderCostTable(series) {
+  let html = "<table><thead><tr><th>Espacio</th>";
+  for (let i = 0; i < N_MONTHS; i++) html += `<th>${xLabelShort(i)}</th>`;
+  html += "</tr></thead><tbody>";
+  for (const s of series) {
+    html += `<tr><td title="${s.name}">${s.name}</td>`;
+    s.values.forEach(v => html += `<td>${v > 0 ? "$" + fmt(Math.round(v)) : "·"}</td>`);
+    html += `</tr>`;
+  }
+  html += "</tbody></table>";
+  document.getElementById("tableWrap").innerHTML = html;
+}
+
+// --- Pestaña SLA Highest (líneas, mediana, eje X = mes de Creada) -----------
+function computeSlaSeries() {
+  const rows = slaFiltered();
+  const finByMonth = new Map(), pubByMonth = new Map(), openByMonth = new Map();
+  for (const r of rows) {
+    const i = axisIndex(r);
+    if (r.dias_finalizada != null) {
+      if (!finByMonth.has(i)) finByMonth.set(i, []);
+      finByMonth.get(i).push(r.dias_finalizada);
+    }
+    if (r.dias_publicacion != null) {
+      if (!pubByMonth.has(i)) pubByMonth.set(i, []);
+      pubByMonth.get(i).push(r.dias_publicacion);
+    }
+    if (r.estado !== "Finalizada") openByMonth.set(i, (openByMonth.get(i) || 0) + 1);
+  }
+  const finValues = Array.from({ length: N_MONTHS }, (_, i) => median(finByMonth.get(i) || []));
+  const pubValues = Array.from({ length: N_MONTHS }, (_, i) => median(pubByMonth.get(i) || []));
+  return {
+    series: [
+      { name: "Días hasta Finalizada",  values: finValues, color: isDark() ? "#3987e5" : "#2a78d6" },
+      { name: "Días hasta Publicación", values: pubValues, color: isDark() ? "#199e70" : "#1baf7a" },
+    ],
+    incomplete: new Set(openByMonth.keys()),
+  };
+}
+
+let currentSla = { series: [], xs: [], yPos: null, incomplete: new Set() };
+
+function renderLineSla() {
+  const { series, incomplete } = computeSlaSeries();
+  const allVals = series.flatMap(s => s.values.filter(v => v != null));
+  const scale = niceScale(allVals.length ? Math.max(...allVals) : 0);
+  const plotH = VB.h - PAD.t - PAD.b;
+  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
+  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
+  currentSla = { series, xs, yPos, incomplete };
+
+  let g = "";
+  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
+    const y = yPos(v);
+    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
+    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
+  }
+  series.forEach((s, si) => {
+    // segmentos contiguos: cortar la línea en los huecos (mes sin ningún ticket resuelto)
+    let segs = [], cur = [];
+    s.values.forEach((v, i) => {
+      if (v == null) { if (cur.length) segs.push(cur); cur = []; return; }
+      cur.push(`${xs[i]},${yPos(v)}`);
+    });
+    if (cur.length) segs.push(cur);
+    segs.forEach(seg => {
+      g += `<polyline class="band" data-si="${si}" points="${seg.join(" ")}" fill="none" stroke="${s.color}" stroke-width="2.25"></polyline>`;
+    });
+    s.values.forEach((v, i) => {
+      if (v == null) return;
+      g += `<circle data-si="${si}" cx="${xs[i]}" cy="${yPos(v)}" r="2.75" fill="${s.color}"></circle>`;
+    });
+  });
+  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
+  xs.forEach((x, i) => {
+    const italic = incomplete.has(i) ? ` font-style="italic"` : "";
+    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle"${italic}>${xLabelShort(i)}</text>`;
+  });
+  g += `<g id="hoverLayer"></g>`;
+  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
+
+  svg.innerHTML = `<g class="axis">${g}</g>`;
+  bindHoverSla();
+
+  document.getElementById("chartTitle").textContent =
+    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
+  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " (mediana) · Eje X: mes de creación del ticket — en itálica, meses con urgencias aún sin resolver (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
+
+  const empty = document.querySelector(".empty-msg");
+  if (empty) empty.remove();
+  if (SLA_DATA.length === 0) {
+    const d = document.createElement("div");
+    d.className = "empty-msg";
+    d.textContent = "Sin tickets Highest ingeridos todavía.";
+    document.getElementById("chartWrap").appendChild(d);
+  }
+
+  renderKpis();
+  renderSlaLegend(series);
+  renderSlaTable();
+}
+
+function slaChip(s) {
+  const el = document.createElement("span");
+  el.className = "chip";
+  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}`;
+  const si = currentSla.series.findIndex(x => x.name === s.name);
+  el.addEventListener("mouseenter", () => highlight(si));
+  el.addEventListener("mouseleave", () => highlight(-1));
+  return el;
+}
+
+function renderSlaLegend(series) {
+  const lg = document.getElementById("legend");
+  lg.innerHTML = "";
+  series.forEach(s => lg.appendChild(slaChip(s)));
+}
+
+function bindHoverSla() {
+  const zone = document.getElementById("hoverZone");
+  const layer = document.getElementById("hoverLayer");
+  const wrap = document.getElementById("chartWrap");
+
+  zone.addEventListener("mousemove", e => {
+    const rect = svg.getBoundingClientRect();
+    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
+    let mi = 0, best = Infinity;
+    currentSla.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
+
+    const x = currentSla.xs[mi];
+    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
+
+    const vals = currentSla.series
+      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
+      .filter(s => s.v != null);
+    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
+    if (currentSla.incomplete.has(mi)) {
+      html += `<div class="t-more">Cohorte incompleta: quedan urgencias de este mes sin resolver — la mediana real es peor.</div>`;
+    }
+    if (vals.length === 0) {
+      html += `<div class="t-more">Sin tickets resueltos ese mes.</div>`;
+    }
+    vals.forEach(s => {
+      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">${fmt(Math.round(s.v * 10) / 10)}d</span></div>`;
+    });
+    tooltip.innerHTML = html;
+    tooltip.style.display = "block";
+
+    const wrect = wrap.getBoundingClientRect();
+    const px = (x / VB.w) * wrect.width;
+    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
+    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
+  });
+  zone.addEventListener("mouseleave", () => {
+    layer.innerHTML = "";
+    tooltip.style.display = "none";
+  });
+}
+
+function renderSlaTable() {
+  const rows = slaFiltered();
+  let html = "<table><thead><tr><th>Mes (creación)</th><th>Creados</th><th>Finalizados</th><th>Abiertos</th><th>Mediana días hasta Finalizada</th><th>Mediana días hasta Publicación</th></tr></thead><tbody>";
+  let any = false;
+  for (let i = 0; i < N_MONTHS; i++) {
+    const period = AXIS_LO + i;
+    const inMonth = rows.filter(r => periodKey(r) === period);
+    if (!inMonth.length) continue;
+    any = true;
+    const fin = inMonth.filter(r => r.estado === "Finalizada");
+    const mFin = median(fin.map(r => r.dias_finalizada).filter(v => v != null));
+    const mPub = median(fin.map(r => r.dias_publicacion).filter(v => v != null));
+    html += `<tr><td>${xLabelFull(i)}</td><td>${inMonth.length}</td><td>${fin.length}</td><td>${inMonth.length - fin.length}</td>` +
+            `<td>${mFin != null ? fmt(Math.round(mFin * 10) / 10) : "·"}</td><td>${mPub != null ? fmt(Math.round(mPub * 10) / 10) : "·"}</td></tr>`;
+  }
+  html += "</tbody></table>";
+  document.getElementById("tableWrap").innerHTML = any ? html : "<p style='padding:12px;color:var(--muted)'>Sin tickets Highest ingeridos todavía.</p>";
+}
+
+function renderKpis() {
+  const rows = filtered();
+  const sp = rows.reduce((a, r) => a + r.sp, 0);
+  const tk = rows.reduce((a, r) => a + r.tickets, 0);
+  // % BAU y % SOPORTE se calculan sobre el subconjunto con Epic conocida: los meses de
+  // backfill sin Epic no pueden clasificarse como BAU/no-BAU, e incluirlos en el
+  // denominador subestimaría artificialmente el porcentaje (desvirtúa la métrica).
+  const rowsWithEpic = rows.filter(r => r.epic);
+  const spWithEpic = rowsWithEpic.reduce((a, r) => a + r.sp, 0);
+  const spBau = rowsWithEpic.filter(r => BAU_NAMES.includes(r.epic)).reduce((a, r) => a + r.sp, 0);
+  const spSop = rowsWithEpic.filter(r => r.epic === "SOPORTE").reduce((a, r) => a + r.sp, 0);
+  const spErr = rows.filter(r => r.tipo === "Error").reduce((a, r) => a + r.sp, 0);
+  const pct = (v, base) => base > 0 ? Math.round((v / base) * 100) + "%" : "—";
+  const avgSpMes = fmt(Math.round((sp / N_MONTHS) * 10) / 10);
+  const scope = state.space === "ALL" ? "todos los espacios" : "espacio " + state.space;
+  const epicNote = rowsWithEpic.length < rows.length ? " (sobre SP con Epic conocida)" : "";
+  const usdSp = usdPerSpGlobal(state.space === "ALL" ? ESPACIOS : [state.space]);
+  const usdSpTxt = usdSp != null ? "$" + fmt(Math.round(usdSp)) : "—";
+
+  // SLA Highest — global (toggle mediana/promedio), respeta el filtro de espacio como
+  // el resto de KPIs. Los tickets aún no resueltos quedan afuera del cálculo (su reloj
+  // no paró) pero se declaran en la etiqueta, nunca se ocultan del todo (ver pestaña).
+  const slaRows = slaFiltered();
+  const slaFin = slaRows.filter(r => r.estado === "Finalizada");
+  const slaAbiertos = slaRows.length - slaFin.length;
+  const finVals = slaFin.map(r => r.dias_finalizada).filter(v => v != null);
+  const pubVals = slaFin.map(r => r.dias_publicacion).filter(v => v != null);
+  const finStat = slaStat(finVals);
+  const pubStat = slaStat(pubVals);
+  const statLabel = state.slaStat === "mediana" ? "Mediana" : "Promedio";
+  const finTxt = finStat != null ? fmt(Math.round(finStat * 10) / 10) + "d" : "—";
+  const pubTxt = pubStat != null ? fmt(Math.round(pubStat * 10) / 10) + "d" : "—";
+  const abiertosNote = slaAbiertos > 0 ? ` · ${slaAbiertos} sin resolver excluidos` : "";
+
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><div class="v">${fmt(sp)}</div><div class="l">SP publicados · ${scope}</div></div>
+    <div class="kpi"><div class="v">${tk}</div><div class="l">Tickets publicados · ${scope}</div></div>
+    <div class="kpi"><div class="v">${avgSpMes}</div><div class="l">Promedio SP/mes · histórico (${N_MONTHS} meses)</div></div>
+    <div class="kpi"><div class="v">${pct(spBau, spWithEpic)}</div><div class="l">% SP en BAU fijo (SOPORTE, regresiones, COE, inic. técnicas)${epicNote}</div></div>
+    <div class="kpi"><div class="v" style="color:#e34948">${pct(spSop, spWithEpic)}</div><div class="l">% SP en SOPORTE${epicNote}</div></div>
+    <div class="kpi"><div class="v" style="color:#e34948">${pct(spErr, sp)}</div><div class="l">% SP en Error (bugs)</div></div>
+    <div class="kpi"><div class="v">${usdSpTxt}</div><div class="l">USD/SP histórico · ${scope} (solo meses con SP publicados)</div></div>
+    <div class="kpi"><div class="v">${finTxt}</div><div class="l">${statLabel} días hasta Finalizada · Highest, ${scope} (N=${finVals.length}${abiertosNote})</div></div>
+    <div class="kpi"><div class="v">${pubTxt}</div><div class="l">${statLabel} días hasta Publicación · Highest, ${scope} (N=${pubVals.length}${abiertosNote})</div></div>`;
+}
+
+function chip(s) {
+  const el = document.createElement("span");
+  el.className = "chip";
+  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}`;
+  const si = current.stacked.findIndex(x => x.name === s.name);
+  el.addEventListener("mouseenter", () => highlight(si));
+  el.addEventListener("mouseleave", () => highlight(-1));
+  return el;
+}
+
+function renderLegend(series) {
+  const lg = document.getElementById("legend");
+  lg.innerHTML = "";
+  if (state.tab.group === "tipo") {
+    series.forEach(s => lg.appendChild(chip(s)));
+    return;
+  }
+  const bau = series.filter(s => s.isBau);
+  const rest = series.filter(s => !s.isBau);
+  if (bau.length) {
+    const t = document.createElement("div"); t.className = "lg-group"; t.textContent = "BAU fijo (color constante)";
+    lg.appendChild(t);
+    bau.forEach(s => lg.appendChild(chip(s)));
+  }
+  if (rest.length) {
+    const t = document.createElement("div"); t.className = "lg-group"; t.textContent = "Epics particulares (escala de grises)";
+    lg.appendChild(t);
+    rest.slice(0, 8).forEach(s => lg.appendChild(chip(s)));
+    if (rest.length > 8) {
+      const m = document.createElement("span"); m.className = "more";
+      m.textContent = `+${rest.length - 8} epics más — ver tooltip o tabla`;
+      lg.appendChild(m);
+    }
+  }
+}
+
+function highlight(si) {
+  const root = svg;
+  root.classList.toggle("dimmed", si >= 0);
+  root.querySelectorAll(".band").forEach(p => p.classList.toggle("hl", p.dataset.si == si));
+}
+
+function bindHover() {
+  const zone = document.getElementById("hoverZone");
+  const layer = document.getElementById("hoverLayer");
+  const wrap = document.getElementById("chartWrap");
+
+  zone.addEventListener("mousemove", e => {
+    const rect = svg.getBoundingClientRect();
+    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
+    let mi = 0, best = Infinity;
+    current.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
+
+    const x = current.xs[mi];
+    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
+
+    const vals = current.stacked
+      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
+      .filter(s => s.v > 0)
+      .sort((a, b) => b.v - a.v);
+    const total = vals.reduce((a, s) => a + s.v, 0);
+    const MAXROWS = 12;
+    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
+    vals.slice(0, MAXROWS).forEach(s => {
+      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">${fmt(s.v)}</span></div>`;
+    });
+    if (vals.length > MAXROWS) html += `<div class="t-more">+${vals.length - MAXROWS} epics más (ver tabla)</div>`;
+    html += `<div class="t-total"><span>Total ${state.tab.unit.toLowerCase()}</span><span>${fmt(total)}</span></div>`;
+    tooltip.innerHTML = html;
+    tooltip.style.display = "block";
+
+    const wrect = wrap.getBoundingClientRect();
+    const px = (x / VB.w) * wrect.width;
+    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
+    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
+  });
+  zone.addEventListener("mouseleave", () => {
+    layer.innerHTML = "";
+    tooltip.style.display = "none";
+  });
+}
+
+function renderTable(series) {
+  const isSP = state.tab.metric === "sp";
+  let html = "<table><thead><tr><th>" + (state.tab.group === "tipo" ? "Tipo" : "Epic") + "</th>";
+  for (let i = 0; i < N_MONTHS; i++) html += `<th>${xLabelShort(i)}</th>`;
+  html += "<th>Total</th></tr></thead><tbody>";
+  for (const s of series) {
+    html += `<tr><td title="${s.name}">${s.name}</td>`;
+    s.values.forEach(v => html += `<td>${v > 0 ? fmt(v) : "·"}</td>`);
+    html += `<td><strong>${fmt(s.total)}</strong></td></tr>`;
+  }
+  const tot = new Array(N_MONTHS).fill(0);
+  series.forEach(s => s.values.forEach((v, i) => tot[i] += v));
+  html += `<tr class="total"><td>Total ${isSP ? "SP" : "tickets"}</td>`;
+  tot.forEach(v => html += `<td>${fmt(v)}</td>`);
+  html += `<td>${fmt(tot.reduce((a, b) => a + b, 0))}</td></tr>`;
+  html += "</tbody></table>";
+  document.getElementById("tableWrap").innerHTML = html;
+}
+
+// --- Controles --------------------------------------------------------------
+
+const tabsEl = document.getElementById("tabs");
+TABS.forEach(t => {
+  const b = document.createElement("button");
+  b.textContent = t.label;
+  b.setAttribute("role", "tab");
+  b.addEventListener("click", () => {
+    state.tab = t;
+    tabsEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    render();
+  });
+  if (t === state.tab) b.classList.add("active");
+  tabsEl.appendChild(b);
+});
+
+const spacesEl = document.getElementById("spaces");
+["ALL", ...ESPACIOS].forEach(sp => {
+  const b = document.createElement("button");
+  b.textContent = sp === "ALL" ? "Todos" : sp;
+  b.addEventListener("click", () => {
+    state.space = sp;
+    spacesEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    render();
+  });
+  if (sp === state.space) b.classList.add("active");
+  spacesEl.appendChild(b);
+});
+
+const slaToggleEl = document.getElementById("slaToggle");
+["mediana", "promedio"].forEach(opt => {
+  const b = document.createElement("button");
+  b.textContent = opt === "mediana" ? "Mediana" : "Promedio";
+  b.addEventListener("click", () => {
+    state.slaStat = opt;
+    slaToggleEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
+    renderKpis();
+  });
+  if (opt === state.slaStat) b.classList.add("active");
+  slaToggleEl.appendChild(b);
+});
+
+render();
+</script>
+</body>
+</html>
