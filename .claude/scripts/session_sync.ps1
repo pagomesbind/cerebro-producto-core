@@ -78,24 +78,37 @@ function Get-RutaClonCore {
 
 function Invoke-SnapshotPersonal {
     Write-Log "Snapshot personal: arrancando en $repoRoot"
+    # OJO: nunca redirigir stderr de un comando nativo (2>&1, *>, etc.) bajo
+    # $ErrorActionPreference='Stop' -- PowerShell 5.1 envuelve cada linea de stderr
+    # (incluso un warning benigno de git, ej. CRLF) en un ErrorRecord que SI corta
+    # la ejecucion bajo Stop, aunque el proceso haya salido con code 0. Por eso acá
+    # adentro bajamos a 'Continue' y confiamos en $LASTEXITCODE, no en try/catch.
+    $prevEAP = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
     try {
         Push-Location $repoRoot
-        # OJO: nunca redirigir stderr de un comando nativo con 2>&1 en PS 5.1 -- cada
-        # linea de stderr (incluso un warning benigno de git, ej. CRLF) se envuelve en
-        # un NativeCommandError y dispara el catch aunque el comando haya salido 0.
-        git add -A *> $null
+        git add -A | Out-Null
         $staged = git diff --cached --name-only
         if ($staged -and ($staged | Measure-Object).Count -gt 0) {
             $msg = "Cerebro -- snapshot {0:yyyy-MM-dd}" -f (Get-Date)
-            git commit -m $msg *> $null
-            git push origin main *> $null
-            Write-Log "Snapshot commiteado y pusheado: $msg"
+            git commit -m $msg | Out-Null
+            if ($LASTEXITCODE -ne 0) {
+                Write-Log "git commit devolvio codigo $LASTEXITCODE (no bloqueante)"
+            } else {
+                git push origin main | Out-Null
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Log "git push devolvio codigo $LASTEXITCODE (no bloqueante)"
+                } else {
+                    Write-Log "Snapshot commiteado y pusheado: $msg"
+                }
+            }
         } else {
             Write-Log "Snapshot: sin cambios, nada para commitear."
         }
     } catch {
         Write-Log "Error en snapshot personal (no bloqueante): $_"
     } finally {
+        $ErrorActionPreference = $prevEAP
         Pop-Location
     }
 }
@@ -115,15 +128,19 @@ function Invoke-PullYEspejoCore {
             Select-Object -ExpandProperty Name
     }
 
+    $prevEAP = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
     try {
         Push-Location $CoreDir
         $pullOut = git pull --ff-only
         Write-Log "git pull en CEREBRO_CORE: $pullOut"
     } catch {
         Write-Log "Error haciendo git pull en CEREBRO_CORE (no bloqueante): $_"
+        $ErrorActionPreference = $prevEAP
         Pop-Location
         return
     } finally {
+        $ErrorActionPreference = $prevEAP
         if ((Get-Location).Path -ne $repoRoot) { Pop-Location -ErrorAction SilentlyContinue }
     }
 
