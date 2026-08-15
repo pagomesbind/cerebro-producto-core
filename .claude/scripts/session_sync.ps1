@@ -7,21 +7,29 @@
   ruta_clon_core, o carpeta no encontrada) -- en ese caso solo hace el snapshot
   personal y saltea el resto en silencio.
 
-  Cualquier error se loguea a .claude/scripts/session_sync.log y NUNCA rompe el
-  arranque de la sesion (siempre exit 0).
+  Cualquier error se loguea a wiki/1_proyectos/logs_sync/session_sync.log y
+  NUNCA rompe el arranque de la sesion (siempre exit 0).
 #>
 
 $ErrorActionPreference = 'Stop'
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot  = Split-Path -Parent (Split-Path -Parent $scriptDir)   # .claude/scripts -> .claude -> repo root
-$logFile   = Join-Path $scriptDir 'session_sync.log'
-$marker    = Join-Path $repoRoot 'wiki\1_proyectos\logs_sync\.ultimo_pull'
+# El log NO puede vivir dentro de .claude/scripts/: esa carpeta esta espejada
+# (robocopy /MIR) desde CEREBRO_CORE, que no tiene este archivo -- cada corrida
+# se borraria su propio historial al mirrorearse a si misma. Vive junto al resto
+# del estado personal de sync, fuera de toda zona espejada.
+$logsSyncDir = Join-Path $repoRoot 'wiki\1_proyectos\logs_sync'
+$logFile   = Join-Path $logsSyncDir 'session_sync.log'
+$marker    = Join-Path $logsSyncDir '.ultimo_pull'
 
 function Write-Log {
     param([string]$Message)
     $line = "[{0:yyyy-MM-dd HH:mm:ss}] {1}" -f (Get-Date), $Message
-    try { Add-Content -Path $logFile -Value $line -Encoding utf8 } catch {}
+    try {
+        if (-not (Test-Path $logsSyncDir)) { New-Item -ItemType Directory -Force -Path $logsSyncDir | Out-Null }
+        Add-Content -Path $logFile -Value $line -Encoding utf8
+    } catch {}
 }
 
 function Test-ShouldRun {
@@ -72,12 +80,15 @@ function Invoke-SnapshotPersonal {
     Write-Log "Snapshot personal: arrancando en $repoRoot"
     try {
         Push-Location $repoRoot
-        git add -A 2>&1 | Out-Null
-        $staged = git diff --cached --name-only 2>&1
-        if ($staged -and $staged.Trim().Length -gt 0) {
+        # OJO: nunca redirigir stderr de un comando nativo con 2>&1 en PS 5.1 -- cada
+        # linea de stderr (incluso un warning benigno de git, ej. CRLF) se envuelve en
+        # un NativeCommandError y dispara el catch aunque el comando haya salido 0.
+        git add -A *> $null
+        $staged = git diff --cached --name-only
+        if ($staged -and ($staged | Measure-Object).Count -gt 0) {
             $msg = "Cerebro -- snapshot {0:yyyy-MM-dd}" -f (Get-Date)
-            git commit -m $msg 2>&1 | Out-Null
-            $pushOut = git push origin main 2>&1
+            git commit -m $msg *> $null
+            git push origin main *> $null
             Write-Log "Snapshot commiteado y pusheado: $msg"
         } else {
             Write-Log "Snapshot: sin cambios, nada para commitear."
@@ -106,7 +117,7 @@ function Invoke-PullYEspejoCore {
 
     try {
         Push-Location $CoreDir
-        $pullOut = git pull --ff-only 2>&1
+        $pullOut = git pull --ff-only
         Write-Log "git pull en CEREBRO_CORE: $pullOut"
     } catch {
         Write-Log "Error haciendo git pull en CEREBRO_CORE (no bloqueante): $_"
