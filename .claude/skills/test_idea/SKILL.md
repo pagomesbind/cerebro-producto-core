@@ -32,7 +32,7 @@ Durante toda la ejecución de esta skill, actuá como un **Analista de QA manual
 
 1. Resolvé el proyecto: si hay argumento (`PRD-XXX` o nombre), usalo; si no, preguntá o inferilo del contexto de la conversación.
 2. Resolvé la ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2. Si existe, leé su `proyecto.md` completo (PRD destilado en §3, alcance en §4, entrega/US en §5, decisiones en §6) — es la base del contrato a testear. Si es miembro de un proyecto general, leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre.
-3. Si el proyecto no está trackeado en la wiki todavía, ofrecé correr primero [`/sync_jira_ideas PRD-XXX`](../sync_jira_ideas/SKILL.md) para traer el contexto completo (PRD + US + criterios de aceptación), o traé la IDEA puntual con `getJiraIssue` si el PM prefiere no trackearla como proyecto vivo.
+3. Si el proyecto no está trackeado en la wiki todavía, traé la IDEA puntual con `getJiraIssue` si el PM prefiere no trackearla como proyecto vivo, o sugerile [`/idea_start`](../idea_start/SKILL.md) si vale la pena abrirle carpeta propia.
 4. Revisá `artefactos/` del proyecto: documentación técnica ya ingerida (OpenAPI/Swagger, manuales de handoff, datos de prueba de sesiones previas) y, si existe, `artefactos/test_execution/` con runs anteriores — un `/test_idea` sobre una IDEA ya testeada antes es una **regresión**, no una corrida nueva (ver Paso 4.1).
 
 ### Paso 1 — Reunir el contrato y los datos de prueba

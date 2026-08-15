@@ -12,7 +12,7 @@ argument-hint: "[opcional: backfill [días] | YYYY-MM-DD | URL de Doc de Gemini]
 
 El PM participa a diario en reuniones de Meet y Gemini genera minuta + transcripción de cada una — pero ese conocimiento muere en el correo y en Drive. Las conversaciones son la fuente más fresca del Cerebro: ahí se toman decisiones antes de que lleguen a Jira, se detectan urgencias de clientes, nacen ideas de backlog y queda claro quién debe hacer qué. `/sync_meetings` es el flujo de captura diario: corre cada mañana temprano, lee las reuniones del día anterior (o el delta acumulado) y las convierte en activos del Cerebro.
 
-**Qué aporta que las otras skills no ven:** `/sync_jira_ideas` mira el estado de las IDEAs, `/sync_releases` el delivery por versión, `/debrief` las sesiones del PM con el Cerebro. Esta skill captura **lo que pasa en las conversaciones humanas** — es además la **única skill autorizada a escribir en Jira** (comentarios en IDEAs, decisión del usuario 2026-07-14).
+**Qué aporta que las otras skills no ven:** `/sync_releases` mira el delivery por versión, `/debrief` las sesiones del PM con el Cerebro. Esta skill captura **lo que pasa en las conversaciones humanas** — es además la **única skill autorizada a escribir en Jira** (comentarios en IDEAs, decisión del usuario 2026-07-14).
 
 ## 🔌 Conexión técnica
 
@@ -39,7 +39,7 @@ El PM participa a diario en reuniones de Meet y Gemini genera minuta + transcrip
 2. **Un solo comentario por PRD por corrida**, consolidando todas las novedades del día sobre esa IDEA. Nunca N comentarios por N reuniones.
 3. **Delta, no volcado:** antes de escribir en la wiki, leé lo que el destino ya dice; solo agregá lo nuevo. Nunca guardes la minuta entera — se destila.
 4. **IDEAs nuevas: solo proponer.** Una idea que amerite backlog va al reporte con título sugerido, problema y evidencia. NUNCA crear el ticket en Jira.
-5. **No pisar a las otras skills:** no toques el estado/entrega de las IDEAs (eso es de `/sync_jira_ideas`), ni el changelog de releases (`/sync_releases`), ni la carga/baja de clientes en `log_clientes.md` (eso es de `/sync_customers` desde Notion — esta skill solo complementa fichas ya existentes, ver Paso 3a-bis). Esta skill agrega contexto conversacional.
+5. **No pisar a las otras skills:** no toques el changelog de releases (`/sync_releases`), ni la carga/baja de clientes en `log_clientes.md` (eso es de `/sync_customers` desde Notion — esta skill solo complementa fichas ya existentes, ver Paso 3a-bis). Esta skill agrega contexto conversacional.
 6. **Nunca escribir en `<producto>/apis_expuestas/`** (dominio exclusivo de `/sync_web`).
 7. **Privacidad:** las minutas pueden contener temas personales/RRHH ajenos al negocio — se ignoran por completo; ni a la wiki ni al log de temas.
 

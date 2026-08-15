@@ -15,7 +15,7 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 ## Cuándo NO usarla
 
 - Las historias de usuario todavía no existen o no fueron confirmadas por el PM → corré primero [`/deliver_user_stories`](../deliver_user_stories/SKILL.md) y cerrá su Paso 5bis (revisión iterativa con el PM) antes de estimar.
-- Lo que se necesita es el sizing técnico real de Ingeniería → esta skill no lo reemplaza ni lo anticipa; solo carga la referencia preliminar de Producto. El sizing real se registra en Jira por el propio equipo técnico cuando refina cada historia en su espacio (`customfield_10041` a nivel ticket, ver [`sync_jira_ideas`](../sync_jira_ideas/SKILL.md)).
+- Lo que se necesita es el sizing técnico real de Ingeniería → esta skill no lo reemplaza ni lo anticipa; solo carga la referencia preliminar de Producto. El sizing real se registra en Jira por el propio equipo técnico cuando refina cada historia en su espacio (`customfield_10041` a nivel ticket).
 - La IDEA ya tiene un sizing técnico real cargado y confirmado por Ingeniería → no sobrescribas ese número con una estimación de analogía; si el PM igual quiere una referencia de Producto en paralelo, aclarálo explícitamente en el registro para no confundir ambas fuentes.
 
 ## ⚖️ Reglas duras

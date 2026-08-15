@@ -26,7 +26,7 @@ El PM de Bind PSP arma y coordina las publicaciones de versiones, y actualiza en
 
 - **Instancia:** `bindpsp.atlassian.net`, cloudId `d07593ee-e5cd-4b6c-a371-d360063c167b`.
 - **Espacios a barrer:** `AD` (Adquirencia), `WS` (Emisión/Wallet), `OB` (Onboarding), `ARD` (Ardid), `SER` (Pago Fácil → producto **Servicios**).
-- **Fuera de alcance:** `PRD` (sin versiones; lo cubre `/sync_jira_ideas`), `QA` y `PQ` (test).
+- **Fuera de alcance:** `PRD` (sin versiones), `QA` y `PQ` (test).
 - **Tipos de ticket:** solo `Error` e `Historia`. Excluidos Test/Test Plan/Test Set/Test Execution/Sub Test Execution/Precondition/Subtarea (la JQL ya los filtra).
 - **⚠️ Nombres de issuetype en JQL (costó 6 llamadas descubrirlo, 2026-07-08):** la JQL NO reconoce los nombres localizados al español que muestra la UI/API (`Error`, `Historia`) — devuelve 0 resultados sin error. Filtrá siempre con los nombres estándar en inglés: `issuetype in (Bug, Story)`.
 - **⚠️ Sin filtro de estado del ticket:** a veces se publican tickets que no llegaron a Finalizado (sin riesgo, se acepta pasar a prod sin testear — confirmado: AD-1103 `EN QA` y AD-578 `Con defecto` en la versión publicada AD 70.1). El criterio de publicación es **de la versión, no del ticket**.
