@@ -25,7 +25,8 @@ Un lanzamiento significativo toca a más equipos de los que un PM tiene en la ca
 2. **Distinguí bloqueadores de nice-to-haves** explícitamente — mezclar ambos diluye la señal de qué realmente frena el lanzamiento.
 3. **El plan de rollback no es opcional.** Todo lanzamiento tiene que poder revertirse si algo sale mal.
 4. **Áreas regulatorias (BCRA/UIF/PCI DSS) se relevan siempre**, aunque el lanzamiento parezca puramente técnico — un cambio en un flujo de pagos o KYC casi nunca es "solo" ingeniería.
-5. Todo output en español.
+5. **El checklist es siempre autocontenido.** Es la previa a un documento que se comparte con stakeholders de varias áreas, algunos sin acceso a este sistema — sin links a la wiki, sin nombres de archivo o de skill, sin jerga de proceso interno. Todo lo que el checklist da por sabido (qué se lanza, por qué) se explica en el propio "Overview del lanzamiento", no se linkea al PRD o a `proyecto.md`.
+6. Todo output en español.
 
 ## 🏃 Pipeline
 
@@ -33,6 +34,7 @@ Un lanzamiento significativo toca a más equipos de los que un PM tiene en la ca
 
 1. Resolvé la ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2. Leé `proyecto.md` y el PRD asociado en `artefactos/` si existen — el checklist parte de lo que ya se especificó, no lo redefine. Si es miembro de un proyecto general, leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre.
 2. Si el lanzamiento involucra un proveedor externo (Fintexa u otro), revisá `wiki/3_recursos/arquitectura_sistema/` por dependencias conocidas.
+3. **Si ya existe `artefactos/launch_checklist_<tema>.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Definir el contexto del lanzamiento
 
@@ -76,10 +78,11 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 - [ ] Los criterios de go/no-go son específicos y medibles
 - [ ] El plan de rollback está documentado
 - [ ] La cadencia de check-ins está programada
+- [ ] El documento es autocontenido: sin links a wiki, sin nombres de archivo/skill, sin jerga de proceso interno
 
 ## Paso 8 — Cierre estándar
 
-1. **Persistir el entregable** en `artefactos/YYYY-MM-DD_launch_checklist_<tema>.md` dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md` (sección de entrega y seguimiento PM).
+1. **Persistir el entregable** en `artefactos/launch_checklist_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md` (sección de entrega y seguimiento PM). **Si el archivo ya existía**, esta corrida lo actualiza: reescribí limpio el estado vigente y sumá una entrada al historial de revisiones — no crear un archivo nuevo en paralelo.
 2. **Riesgos/bloqueadores detectados** que no tienen dueño claro → `gaps.md` de la IDEA/proyecto; item `tipo: gap` en `contexto_vivo/` solo si son de contexto fijo, no del proyecto.
 3. **Acciones del checklist con responsable de Producto** → `wiki/1_proyectos/tareas.md` (personal, directo, dedupe primero). Si alguna es de interés de todo el equipo, sumá además un item `tipo: tarea_equipo` en `contexto_vivo/`.
 4. **Índices:** `wiki/1_proyectos/index.md`.

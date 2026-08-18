@@ -29,7 +29,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 5. Legible en menos de 15 minutos. Si no entra, es señal de que el alcance es demasiado grande para un solo PRD.
 6. Todo output en español.
 7. **Nombrá la solución por lo que efectivamente se construye**, no por una abstracción ambigua que suene a un proceso o servicio ya existente (ej. "nuevas funcionalidades por API para favorecer X", no "el proceso de X"). Aplica sobre todo en el Resumen de la solución planteada y en Funcionalidades.
-8. **Si el PRD es para audiencia externa** (un stakeholder fuera de Bind PSP, o interno sin contexto de este sistema — porque el pedido lo pide explícitamente, o porque preguntaste y así te lo confirmaron), el documento tiene que ser autocontenido: sin links a la wiki, sin nombres de archivo o de skill, sin códigos de ticket (PRD-XXX), sin jerga de proceso interno ("gap registrado en...", "según el artefacto..."). Toda afirmación se explica en el propio texto, en prosa que alguien sin contexto de este sistema pueda leer de punta a punta. Si no está claro si es para audiencia interna o externa, preguntá antes de escribir — cambia cómo se redacta cada sección, no es un ajuste de formato al final. El PRD interno por default sí mantiene links (a problem statement, a `proyecto.md`, a decisiones) porque sirven de trazabilidad para quien ya tiene acceso a la wiki.
+8. **El PRD siempre es autocontenido, sin excepción.** Es la previa a un documento formal que el PM va a revisar, iterar y en algún momento entregar a alguien sin acceso a este sistema (ingeniería, un stakeholder externo a Bind PSP, otra área sin contexto del Cerebro) — nunca se sabe de antemano si esa instancia llega hoy o en la próxima vuelta, así que el cuerpo del documento se escribe siempre para ese lector. Eso significa: sin links a la wiki, sin nombres de archivo o de skill, sin códigos de ticket (PRD-XXX) usados como si el lector los reconociera, sin jerga de proceso interno ("gap registrado en...", "según el artefacto..."). Toda afirmación se explica en el propio texto, en prosa que alguien sin contexto de este sistema pueda leer de punta a punta. (La trazabilidad hacia la wiki — problem statement, `proyecto.md`, decisiones — vive en el proceso de armado del Paso 0 y en cómo `proyecto.md` referencia al PRD, no en el cuerpo del artefacto.)
 
 ## 🏃 Pipeline
 
@@ -40,11 +40,11 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 3. Si existe un problem statement o una hipótesis en `artefactos/`, leelos — el PRD recapitula el problema, no lo redefine.
 4. Contexto de producto y estratégico: `wiki/2_areas/overview_productos/overview_<producto>.md`, `wiki/3_recursos/detalle_productos/<producto>/`, `wiki/2_areas/direccion/north_star.md`.
 5. Contexto de arquitectura si la iniciativa toca proveedores externos: `wiki/3_recursos/arquitectura_sistema/`.
-6. **Definí la audiencia antes de redactar:** ¿el PRD es para uso interno (ingeniería/QA/stakeholders con acceso a esta wiki) o para entregar a alguien externo al sistema (otra área sin contexto del Cerebro, un cliente, un proveedor)? Si el pedido del usuario no lo deja claro (ej. "generá el PRD para enviarlo" sugiere externo, "generá el PRD de la IDEA" sugiere interno), preguntá antes de escribir — condiciona regla dura #8 y cambia cómo se redacta cada sección, no es un ajuste de estilo al final.
+6. **Si ya existe un PRD para este tema en `artefactos/`** (de una corrida anterior de esta skill), leelo completo antes de escribir — esta corrida lo actualiza in place (ver regla dura #8 y Paso 11), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Problema
 
-Recapitulación breve del problema que se resuelve u oportunidad que se aprovecha, con link al problem statement si existe. El lector tiene que entender el *por qué* antes de llegar al *qué*.
+Recapitulación breve del problema que se resuelve u oportunidad que se aprovecha, en prosa propia — si existe un problem statement, no lo linkees, resumí acá lo que el lector necesita saber. El lector tiene que entender el *por qué* antes de llegar al *qué*.
 
 ### Paso 2 — Contexto
 
@@ -72,7 +72,7 @@ Todas las funcionalidades del proyecto, priorizadas con un framework explícito 
 
 ### Paso 8 — Flujos clave y referencias clave
 
-Va **inmediatamente después de Funcionalidades y roadmap** — el lector entiende primero qué se construye y en qué orden, y recién después cómo se materializa en un flujo. El contenido es específico de cada proyecto: diagramas AS-IS/TO-BE, flujos de secuencia, user journey maps, casos de uso paso a paso, taxonomías o conceptos que el lector necesita para entender el resto del documento (ej. tipos de cliente, modalidades de integración) — o links a donde vivan si ya existen. **No hay una subestructura fija que aplique a todos los PRDs**: armá la que corresponda a lo que este proyecto necesita mostrar, no reuses la estructura de un PRD anterior por costumbre.
+Va **inmediatamente después de Funcionalidades y roadmap** — el lector entiende primero qué se construye y en qué orden, y recién después cómo se materializa en un flujo. El contenido es específico de cada proyecto: diagramas AS-IS/TO-BE, flujos de secuencia, user journey maps, casos de uso paso a paso, taxonomías o conceptos que el lector necesita para entender el resto del documento (ej. tipos de cliente, modalidades de integración) — resumido en prosa acá, no linkeado a donde viva el original. **No hay una subestructura fija que aplique a todos los PRDs**: armá la que corresponda a lo que este proyecto necesita mostrar, no reuses la estructura de un PRD anterior por costumbre.
 
 ### Paso 9 — Análisis de impacto en las distintas áreas
 
@@ -98,12 +98,12 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 - [ ] Flujos clave va inmediatamente después de Funcionalidades y roadmap
 - [ ] El análisis de impacto solo incluye áreas con impacto real, y cada una dice si puede actuar o si hay un gap (alcance o contingencia)
 - [ ] Los riesgos tienen probabilidad, impacto y mitigación
-- [ ] Si es para audiencia externa: sin links a wiki, sin nombres de archivo/skill, sin códigos de ticket, sin jerga de proceso interno
+- [ ] El documento es autocontenido: sin links a wiki, sin nombres de archivo/skill, sin códigos de ticket, sin jerga de proceso interno
 - [ ] El documento se lee en menos de 15 minutos
 
 ## Paso 11 — Cierre estándar
 
-1. **Persistir el entregable** en `artefactos/YYYY-MM-DD_prd_<tema>.md` dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde la sección de entrega de `proyecto.md`.
+1. **Persistir el entregable** en `artefactos/prd_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde la sección de entrega de `proyecto.md`. **Si el archivo ya existe** (corrida anterior de esta skill sobre el mismo tema), esta corrida lo actualiza: reescribí limpio el cuerpo con el estado vigente — nunca dejes texto "actualizado"/"superado" incrustado en el medio — y sumá una entrada al historial de revisiones al pie con qué cambió. No crear un archivo nuevo en paralelo.
 2. **Decisiones de alcance confirmadas** → `decisiones.md` del proyecto (directo). Si es una decisión de contexto fijo (no específica de esta IDEA), capturala como item `tipo: decision` en `contexto_vivo/` en vez de escribir directo.
 3. **Preguntas abiertas** → `gaps.md` de la IDEA/proyecto; `../../../wiki/2_areas/gaps_y_preguntas.md` solo si son de contexto fijo, no del proyecto.
 4. **Índices:** tabla maestra de `wiki/1_proyectos/index.md` §2; `wiki/index.md` solo si cambió una sección de nivel PARA.

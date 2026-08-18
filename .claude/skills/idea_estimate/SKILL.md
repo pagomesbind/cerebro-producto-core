@@ -25,7 +25,8 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 3. **Usá la escala vigente de Bind PSP:** `S = 1 SP · M = 3 SP · L = 7 SP · XL = 15 SP` (confirmada en [`gestion_jira.md` §1.4](../../wiki/2_areas/procesos/gestion_jira.md#14-prioridad-versión-y-story-points)). No inventes otra escala ni mezcles Story Points directos con talles de camiseta sin convertir.
 4. **Nunca sobrescribas un sizing técnico real ya cargado** sin que el usuario lo pida explícitamente — si `customfield_10041` (SP real) ya tiene valores en los tickets de desarrollo de la IDEA, avisá y preguntá antes de tocar el campo de la IDEA.
 5. **Historial de revisiones, no texto superpuesto** — si se re-estima una historia ya estimada antes, reescribí la fila limpia y sumá una entrada al historial de revisiones del artefacto de historias (regla general de artefactos).
-6. Todo output en español.
+6. **Lo que se escribe en el artefacto de historias y en el PRD es siempre autocontenido** — la tabla y el racional de cada estimación se leen sin necesitar acceso a este sistema: sin links a la wiki, sin nombres de archivo/skill, sin jerga de proceso interno. `referencia_estimaciones.md` es un insumo de trabajo para vos, no algo que el artefacto final linkee o mencione por nombre.
+7. Todo output en español.
 
 ## 🏃 Pipeline
 
@@ -33,7 +34,7 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../wiki/1_proyectos/index.md) §2.
 2. Abrí el artefacto de historias (`artefactos/historias_<tema>.md`, generado por `/idea_us`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
-3. Leé también el PRD (`artefactos/YYYY-MM-DD_prd_<tema>.md`) y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva).
+3. Leé también el PRD (`artefactos/prd_<tema>.md`) y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva).
 4. Verificá en Jira si la IDEA ya tiene sizing técnico real acumulado en sus tickets de desarrollo (`customfield_10041` a nivel ticket) — si lo tiene, aplicá la Regla dura 4 antes de continuar.
 
 ### Paso 1 — Estimar cada historia por analogía
@@ -70,7 +71,7 @@ Tabla markdown: `Historia | Talle | SP | Racional`, más una fila de Total con e
 ## Paso 4 — Cierre estándar
 
 1. **Artefacto de historias:** agregá (o reescribí, si ya existía de una corrida anterior) la sección "Estimación preliminar de Producto (SP)" con la tabla completa, el total y el rango de riesgo si aplica — inmediatamente después de la tabla de "Resumen de priorización". Completá también el campo "Estimación" de la cabecera de cada historia individual. Sumá una entrada al historial de revisiones al pie con el detalle de la estimación y, si corrigió un número inicial, qué cambió y por qué. Subí la versión del frontmatter.
-2. **PRD:** agregá `sp_estimado: <total>` al frontmatter y completá la línea de "Costo de construir" en la sección Caso de negocio con el total y un link a la tabla detallada del artefacto de historias — dejando explícito que es preliminar de Producto, no sizing técnico. Sumá entrada al historial de revisiones, subí versión.
+2. **PRD:** agregá `sp_estimado: <total>` al frontmatter y completá la línea de "Costo de construir" en la sección Caso de negocio con el total y el rango de riesgo si aplica (sin linkear al artefacto de historias — el PRD tiene que leerse solo) — dejando explícito que es preliminar de Producto, no sizing técnico. Sumá entrada al historial de revisiones, subí versión.
 3. **Jira:** actualizá el campo `customfield_10389` ("SP estimado") de la IDEA con `editJiraIssue` al total calculado. Si el campo ya tenía un valor distinto cargado por una corrida anterior de esta skill, sobrescribilo sin pedir confirmación (es el mismo tipo de dato); si tenía un valor que no vino de esta skill (ej. cargado a mano por otra persona), avisá al usuario antes de sobrescribir.
 4. **Índices:** no suele hacer falta tocar `wiki/1_proyectos/index.md` (no cambia la ruta ni la existencia del artefacto) — verificá igual la regla general de integridad de índices por si el cambio de versión amerita una actualización de descripción.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.

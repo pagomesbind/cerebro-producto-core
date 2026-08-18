@@ -25,7 +25,8 @@ Los criterios de aceptación definen el comportamiento observable que tiene que 
 2. **Happy path primero, después excepciones.** Empezá por el flujo principal de éxito, y sumá casos borde y estados de error que sean probables o costosos si se pasan por alto.
 3. **Todo estado de falla describe recuperación.** Qué ve o puede hacer el usuario cuando una validación falla, una dependencia no está disponible, o una acción no se puede completar.
 4. **Un criterio, un resultado.** Si dos criterios describen el mismo comportamiento, fusionalos o separalos hasta que la intención sea clara.
-5. Todo output en español.
+5. **El documento es siempre autocontenido.** Es la previa a un entregable que ingeniería, QA o un tercero van a leer sin acceso a este sistema — nunca links a la wiki, nombres de archivo o de skill, códigos de ticket usados como si el lector los reconociera, ni jerga de proceso interno. Toda referencia a la historia o feature de origen se recapitula en prosa en "Contexto de la historia", no se linkea.
+6. Todo output en español.
 
 ## 🏃 Pipeline
 
@@ -80,6 +81,6 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 
 ## Paso 7 — Cierre estándar
 
-1. **Persistir el entregable**: si profundiza una historia ya guardada en `artefactos/`, actualizá ese mismo archivo (no dupliques); si es nuevo, resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 y guardalo en `artefactos/YYYY-MM-DD_criterios_aceptacion_<tema>.md` dentro de su carpeta.
+1. **Persistir el entregable**: si profundiza una historia ya guardada en `artefactos/`, actualizá ese mismo archivo (no dupliques). Si es un documento nuevo, resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 y guardalo en `artefactos/criterios_aceptacion_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie) dentro de su carpeta. **Si ya existe un archivo de criterios para este mismo tema de una corrida anterior**, esta corrida lo actualiza in place: reescribí limpio y sumá una entrada al historial de revisiones — nunca crear un duplicado.
 2. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 4. Siguiente paso sugerido: [`/idea_golive`](../idea_golive/SKILL.md) cuando la feature esté lista para coordinar el lanzamiento.

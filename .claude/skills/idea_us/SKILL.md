@@ -25,7 +25,8 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
 2. **Nunca "usuarios" a secas.** Cada historia es para una persona o rol específico.
 3. **Sin detalles de implementación** en el enunciado de la historia — eso es del "cómo", no del "qué".
 4. **Aplicá INVEST:** cada historia tiene que ser Independiente, Negociable, Valiosa, Estimable, Chica, Testeable. Si una historia no cumple, revisala antes de darla por terminada.
-5. Todo output en español.
+5. **El documento es siempre autocontenido.** Es la previa a un entregable que ingeniería, QA o un tercero van a leer sin acceso a este sistema — nunca links a la wiki, nombres de archivo o de skill, códigos de ticket usados como si el lector los reconociera, ni jerga de proceso interno ("según el gap...", "ver decisiones.md"). "Contexto y antecedentes" recapitula en prosa lo que el PRD u otro artefacto ya estableció, no lo linkea.
+6. Todo output en español.
 
 ## 🏃 Pipeline
 
@@ -39,6 +40,7 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
    - Si es miembro de un proyecto general, el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — las historias no deberían re-litigar una decisión de arquitectura ya cerrada a nivel proyecto.
    - Cualquier otro artefacto de la carpeta (`artefactos/`) que el PM haya referenciado en la sesión — diagramas, docs de validaciones de un proveedor externo, historial de bugs de un endpoint existente, etc. Estos suelen ser la fuente real del detalle fino que hace falta en el Paso 5.
 3. Si no hay PRD asociado, confirmá con el usuario cuál es el alcance antes de escribir historias.
+4. **Si ya existe `artefactos/historias_<tema>.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Entender el contexto de la feature
 

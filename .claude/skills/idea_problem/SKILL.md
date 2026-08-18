@@ -29,13 +29,14 @@ Es fácil saltar directo a "cómo lo resolvemos" sin haber acordado primero "qu�
 2. **Nada de "usuarios" genérico.** El segmento afectado tiene que ser específico y accionable: "comercios adherentes dando de alta una cuenta", no "usuarios".
 3. **Todo impacto y toda métrica llevan número o estimación razonable**, nunca una afirmación sin sustento. Si no hay dato, marcalo como pregunta abierta en vez de inventarlo.
 4. **No inventes conclusiones de negocio ni cifras** — si el usuario no las tiene a mano, dejalas como `[pendiente]` y anotá el gap.
-5. Todo output en español.
+5. **El documento es siempre autocontenido.** Es la previa a un documento que puede terminar en manos de alguien sin acceso a este sistema (liderazgo, otra área, un tercero) — sin links a la wiki, sin nombres de archivo o de skill, sin códigos de ticket (PRD-XXX) usados como si el lector los reconociera, sin jerga de proceso interno. Toda afirmación se explica en el propio texto.
+6. Todo output en español.
 
 ## 🏃 Pipeline
 
 ### Paso 0 — Contexto antes de escribir
 
-1. **Resolver la asociación a proyecto:** si el argumento o la conversación mencionan una IDEA (`PRD-XXX`) o un proyecto trackeado, resolvé su ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 (nunca asumas `1_proyectos/prd-XXX_<slug>/` directo) y leé su `proyecto.md` completo antes de empezar. Si es miembro de un proyecto general, leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre.
+1. **Resolver la asociación a proyecto:** si el argumento o la conversación mencionan una IDEA (`PRD-XXX`) o un proyecto trackeado, resolvé su ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 (nunca asumas `1_proyectos/prd-XXX_<slug>/` directo) y leé su `proyecto.md` completo antes de empezar. Si es miembro de un proyecto general, leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre. **Si ya existe `artefactos/problem_statement_<tema>.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 7), no genera un documento nuevo en paralelo.
 2. Si el problema **no** está asociado a ningún proyecto trackeado, preguntá si esto arranca un discovery propio nuevo (en ese caso seguí el Paso 1.b de [`/debrief`](../debrief/SKILL.md) para crear la carpeta) o si es exploración suelta sin proyecto → el destino final es `outputs/`.
 3. **Contexto de producto:** leé el overview del producto afectado en `wiki/2_areas/overview_productos/overview_<producto>.md` y, si hace falta profundidad, navegá desde `wiki/index.md` hacia `wiki/3_recursos/detalle_productos/<producto>/` (progressive disclosure — nunca cargar toda la wiki).
 4. **Contexto de clientes:** si el problema involucra clientes concretos, leé sus fichas en `wiki/2_areas/clientes/`.
@@ -82,12 +83,13 @@ Antes de dar el problem statement por terminado, verificá:
 - [ ] El problema describe el "qué" sin prescribir el "cómo"
 - [ ] El contexto de negocio explica por qué esto importa ahora
 - [ ] Las preguntas abiertas quedaron registradas para seguimiento
+- [ ] El documento es autocontenido: sin links a wiki, sin nombres de archivo/skill, sin códigos de ticket, sin jerga de proceso interno
 
 ## Paso 7 — Cierre estándar
 
 1. **Persistir el entregable:**
-   - Si está asociado a una IDEA/proyecto trackeado → `artefactos/YYYY-MM-DD_problem_statement_<tema>.md` dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md` (secciones "Problema y contexto" y "Seguimiento PM").
-   - Si no está asociado a ningún proyecto → `outputs/`.
+   - Si está asociado a una IDEA/proyecto trackeado → `artefactos/problem_statement_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md` (secciones "Problema y contexto" y "Seguimiento PM"). **Si el archivo ya existía**, esta corrida lo actualiza: reescribí limpio el estado vigente y sumá una entrada al historial de revisiones — no crear un archivo nuevo en paralelo.
+   - Si no está asociado a ningún proyecto → `outputs/`, con el mismo criterio de actualizar in place si ya existe uno sobre el mismo tema.
 2. **Decisiones confirmadas por el usuario durante la sesión** → `decisiones.md` del proyecto si son específicas de él (directo); item `tipo: decision` en `contexto_vivo/` si son de contexto fijo.
 3. **Preguntas abiertas del Paso 6** → `gaps.md` de la IDEA/proyecto (severidad según impacto) si son específicas de él (directo); item `tipo: gap` en `contexto_vivo/` si son de contexto fijo.
 4. **Índices:** actualizá `wiki/1_proyectos/index.md` (última actividad) si hay proyecto; `wiki/index.md` solo si cambió una sección de nivel PARA.
