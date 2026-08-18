@@ -40,7 +40,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 3. Si existe un problem statement o una hipótesis en `artefactos/`, leelos — el PRD recapitula el problema, no lo redefine.
 4. Contexto de producto y estratégico: `wiki/2_areas/overview_productos/overview_<producto>.md`, `wiki/3_recursos/detalle_productos/<producto>/`, `wiki/2_areas/direccion/north_star.md`.
 5. Contexto de arquitectura si la iniciativa toca proveedores externos: `wiki/3_recursos/arquitectura_sistema/`.
-6. **Si ya existe un PRD para este tema en `artefactos/`** (de una corrida anterior de esta skill), leelo completo antes de escribir — esta corrida lo actualiza in place (ver regla dura #8 y Paso 11), no genera un documento nuevo en paralelo.
+6. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-prd.md`** (de una corrida anterior de esta skill), leelo completo antes de escribir — esta corrida lo actualiza in place (ver regla dura #8 y Paso 11), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Problema
 
@@ -103,7 +103,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 
 ## Paso 11 — Cierre estándar
 
-1. **Persistir el entregable** en `artefactos/prd_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde la sección de entrega de `proyecto.md`. **Si el archivo ya existe** (corrida anterior de esta skill sobre el mismo tema), esta corrida lo actualiza: reescribí limpio el cuerpo con el estado vigente — nunca dejes texto "actualizado"/"superado" incrustado en el medio — y sumá una entrada al historial de revisiones al pie con qué cambió. No crear un archivo nuevo en paralelo.
+1. **Persistir el entregable** en `artefactos/{{nombre_corto_proyecto}}-prd.md` — `{{nombre_corto_proyecto}}` es el nombre corto del proyecto: la carpeta misma si nació de `/idea_start` (sin prefijo `prd-XXX`), o el `<slug>` después de `prd-XXX_` en carpetas legacy (sin fecha en el nombre del archivo — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde la sección de entrega de `proyecto.md`. **Si el archivo ya existe** (corrida anterior de esta skill sobre el mismo tema), esta corrida lo actualiza: reescribí limpio el cuerpo con el estado vigente — nunca dejes texto "actualizado"/"superado" incrustado en el medio — y sumá una entrada al historial de revisiones al pie con qué cambió. No crear un archivo nuevo en paralelo.
 2. **Decisiones de alcance confirmadas** → `decisiones.md` del proyecto (directo). Si es una decisión de contexto fijo (no específica de esta IDEA), capturala como item `tipo: decision` en `contexto_vivo/` en vez de escribir directo.
 3. **Preguntas abiertas** → `gaps.md` de la IDEA/proyecto; `../../../wiki/2_areas/gaps_y_preguntas.md` solo si son de contexto fijo, no del proyecto.
 4. **Índices:** tabla maestra de `wiki/1_proyectos/index.md` §2; `wiki/index.md` solo si cambió una sección de nivel PARA.

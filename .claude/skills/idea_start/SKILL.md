@@ -61,7 +61,7 @@ wiki/1_proyectos/monitoreo_transaccional/
 ├─ decisiones.md                                        # on-demand
 ├─ artefactos/                                          # SOLO artefactos oficiales de producto
 │  ├─ monitoreo_transaccional-prd.md
-│  └─ monitoreo_transaccional-user_stories.md
+│  └─ monitoreo_transaccional-us.md
 └─ referencias/                                         # material original que aportó el PM
    ├─ index.md                                          # qué es cada doc y QUÉ SE EXTRAJO YA
    └─ monitoreo_transaccional-spec_funcional_mnadalin.md

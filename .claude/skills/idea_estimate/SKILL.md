@@ -33,8 +33,8 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 ### Paso 0 — Contexto y precondición
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../wiki/1_proyectos/index.md) §2.
-2. Abrí el artefacto de historias (`artefactos/historias_<tema>.md`, generado por `/idea_us`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
-3. Leé también el PRD (`artefactos/prd_<tema>.md`) y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva).
+2. Abrí el artefacto de historias (`artefactos/{{nombre_corto_proyecto}}-us.md`, generado por `/idea_us`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
+3. Leé también el PRD (`artefactos/{{nombre_corto_proyecto}}-prd.md`) y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva).
 4. Verificá en Jira si la IDEA ya tiene sizing técnico real acumulado en sus tickets de desarrollo (`customfield_10041` a nivel ticket) — si lo tiene, aplicá la Regla dura 4 antes de continuar.
 
 ### Paso 1 — Estimar cada historia por analogía

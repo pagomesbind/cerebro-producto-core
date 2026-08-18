@@ -40,7 +40,7 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
    - Si es miembro de un proyecto general, el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — las historias no deberían re-litigar una decisión de arquitectura ya cerrada a nivel proyecto.
    - Cualquier otro artefacto de la carpeta (`artefactos/`) que el PM haya referenciado en la sesión — diagramas, docs de validaciones de un proveedor externo, historial de bugs de un endpoint existente, etc. Estos suelen ser la fuente real del detalle fino que hace falta en el Paso 5.
 3. Si no hay PRD asociado, confirmá con el usuario cuál es el alcance antes de escribir historias.
-4. **Si ya existe `artefactos/historias_<tema>.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
+4. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-us.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Entender el contexto de la feature
 
@@ -108,7 +108,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 
 ## Paso 8 — Cierre estándar
 
-1. **Persistir el entregable** en `artefactos/historias_<tema>.md` (sin fecha en el nombre — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md`.
+1. **Persistir el entregable** en `artefactos/{{nombre_corto_proyecto}}-us.md` — `{{nombre_corto_proyecto}}` es el nombre corto del proyecto: la carpeta misma si nació de `/idea_start` (sin prefijo `prd-XXX`), o el `<slug>` después de `prd-XXX_` en carpetas legacy (sin fecha en el nombre del archivo — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md`.
 2. **Índices:** `wiki/1_proyectos/index.md`; `wiki/index.md` solo si aplica.
 3. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 5. **Jira:** nunca crear tickets a partir de estas historias sin confirmación explícita del usuario, aunque el Paso 5bis ya haya cerrado con el OK del PM sobre el contenido — la creación en Jira es una decisión aparte que el PM tiene que pedir explícitamente. Si el alcance cruza más de un sistema/equipo (ej. dos proyectos Jira distintos), evaluá si corresponde partir una historia en dos — una por sistema — en vez de una sola historia con dependencias cruzadas de dueño ambiguo. Si el PM pide crear en Jira y no hay un Epic que agrupe las historias todavía, creá también el Epic (o un Epic por proyecto Jira involucrado) y asociá tanto el Epic como las historias a la IDEA, replicando el patrón de enlace ya usado por otras IDEAs del mismo Jira (revisar con `getJiraIssue` cómo está linkeada una IDEA hermana antes de asumir el tipo de enlace).
