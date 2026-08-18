@@ -18,8 +18,8 @@ El usuario solicita procesar el lote de archivos en bruto que residen en la carp
 - Utiliza las herramientas CLI de la consola (`pandoc`, `pdftotext`, etc.) para volcar de forma limpia el texto plano de los archivos. Si un archivo es un `.docx`, prioriza `pandoc` para conservar tablas y sangrías de payloads JSON.
 
 ### Paso 2: Análisis de Deltas e Idempotencia (Delta Check)
-- Contrasta la información extraída con el estado actual de la carpeta `wiki/`.
-- **Ley de Hierro:** Si el conocimiento, endpoints o parámetros extraídos coinciden al 100% con los documentos ya curados en tu base local, detén el proceso de sobreescritura de esos archivos específicos para proteger la integridad de los metadatos y optimizar tokens.
+- Contrasta la información extraída con el estado actual de la carpeta `wiki/` **y** con `wiki/1_proyectos/contexto_vivo/index.md` (items `capturado`/`en_cola`, todavía sin mergear). Esta skill la puede correr cualquier PM/PO sobre su propio `raw/`, así que un aporte ya capturado por otra sesión — propia o de otro PM — y pendiente de `/context_merge` cuenta como duplicado igual que si ya estuviera en el canon.
+- **Ley de Hierro:** Si el conocimiento, endpoints o parámetros extraídos coinciden al 100% con los documentos ya curados en tu base local, o con un item ya capturado en `contexto_vivo/` en_cola, detén el proceso de sobreescritura/recaptura de esos elementos específicos para proteger la integridad de los metadatos y optimizar tokens.
 
 ### Paso 3: Clasificación Taxonómica Estricta (Framework PARA)
 Rutea el conocimiento nuevo bajo estos criterios de negocio — pero **`2_areas/` y `3_recursos/` nunca se escriben directo**: nace todo como item en `wiki/1_proyectos/contexto_vivo/` (ver plantilla ahí), con `destino_propuesto` apuntando a la ruta real. Solo `/context_merge` escribe esas dos capas.

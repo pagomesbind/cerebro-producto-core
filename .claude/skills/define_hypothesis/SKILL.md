@@ -12,12 +12,12 @@ argument-hint: "[PRD-XXX o nombre del supuesto a testear]"
 
 ## Por qué existe esta skill
 
-Muchas features se construyen sobre creencias nunca puestas a prueba ("los usuarios van a preferir X"). Una hipótesis convierte esa creencia en un enunciado falseable — algo que se puede validar o invalidar con evidencia — y deja explícito qué significa "éxito" antes de que el equipo invierta tiempo. Sirve de puente entre [`/define_problem_statement`](../define_problem_statement/SKILL.md) (qué problema hay) y el diseño de la solución o el experimento que lo prueba.
+Muchas features se construyen sobre creencias nunca puestas a prueba ("los usuarios van a preferir X"). Una hipótesis convierte esa creencia en un enunciado falseable — algo que se puede validar o invalidar con evidencia — y deja explícito qué significa "éxito" antes de que el equipo invierta tiempo. Sirve de puente entre [`/idea_problem`](../idea_problem/SKILL.md) (qué problema hay) y el diseño de la solución o el experimento que lo prueba.
 
 ## Cuándo NO usarla
 
 - Ya tenés la hipótesis clara y lo que falta es diseñar el A/B test en sí (variantes, tamaño de muestra, duración) — esta skill enmarca *qué* testear, no *cómo* instrumentarlo.
-- El problema todavía no está enmarcado → usá primero [`/define_problem_statement`](../define_problem_statement/SKILL.md).
+- El problema todavía no está enmarcado → usá primero [`/idea_problem`](../idea_problem/SKILL.md).
 - Lo que necesitás es organizar muchos supuestos e ideas en una estructura de discovery más amplia, no un único enunciado testeable.
 
 ## ⚖️ Reglas duras

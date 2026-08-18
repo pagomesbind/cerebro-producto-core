@@ -22,7 +22,7 @@ context: Ejemplo ilustrativo — cifras ficticias, no son datos reales de Bind P
 
 ### Contexto del problema
 
-Ver [problem statement de ejemplo](../../define_problem_statement/references/EXAMPLE.md): 58% de abandono en el paso de carga de KYB, con feedback de soporte apuntando a que los comercios "no saben qué les van a pedir" antes de empezar.
+Ver [problem statement de ejemplo](../../idea_problem/references/EXAMPLE.md): 58% de abandono en el paso de carga de KYB, con feedback de soporte apuntando a que los comercios "no saben qué les van a pedir" antes de empezar.
 
 ### Evidencia de respaldo
 

@@ -10,13 +10,13 @@ argument-hint: "[tema o idea en una línea, o nombre de proyecto existente para 
 
 ## 🎯 Por qué existe esta skill
 
-El vicio más común de un PO es llegar con la solución ya cocinada y sin haber definido el problema — a veces ni siquiera dice el problema, dice directamente "hay que hacer X". Ninguna skill de la casa frena eso hoy: `/define_problem_statement` ya asume un problema acordado, y `/debrief` cierra conversación libre sin interrogar.
+El vicio más común de un PO es llegar con la solución ya cocinada y sin haber definido el problema — a veces ni siquiera dice el problema, dice directamente "hay que hacer X". Ninguna skill de la casa frena eso hoy: `/idea_problem` ya asume un problema acordado, y `/debrief` cierra conversación libre sin interrogar.
 
 `/idea_start` es la puerta de entrada que falta. Interroga al PM en rondas (técnica de [`/grilling`](../grilling/SKILL.md): design tree, frontera, rondas numeradas con recomendación) hasta acordar **el problema → si vale la pena (o si es obligatorio igual) → el foco → recién ahí la solución**. Se diferencia de `/grilling` puro en que parte del contexto del Cerebro entero — no solo del producto en cuestión — y en que su salida es persistente: la carpeta se crea al inicio, así el discovery queda resguardado aunque el proyecto no prospere. Un "no vale la pena" bien razonado es tan buen resultado como un PRD.
 
 ## Cuándo NO usarla
 
-- El problema ya está acordado y lo que falta es el documento formal → eso es [`/define_problem_statement`](../define_problem_statement/SKILL.md), que asume el problema como insumo, no lo interroga.
+- El problema ya está acordado y lo que falta es el documento formal → eso es [`/idea_problem`](../idea_problem/SKILL.md), que asume el problema como insumo, no lo interroga.
 - Ya hay foco y solución acordados y lo que falta es especificar para ingeniería → `/idea_prd`.
 - Es solo una sesión de trabajo libre sobre un proyecto que ya pasó su discovery inicial → `/debrief`.
 - Es puro estimador de tamaño sobre una IDEA que ya tiene PRD → `/idea_estimate`.
@@ -26,7 +26,7 @@ El vicio más común de un PO es llegar con la solución ya cocinada y sin haber
 1. **La carpeta se crea al inicio, siempre, sin preguntar.** Nunca se borra una carpeta; si se abandona, queda con Estado explícito.
 2. **La solución del PM se estaciona y no se discute hasta la Fase 3.** Si insiste: *"Lo anoté como S3, no se pierde, volvemos en la Fase 3. Ahora: `<pregunta pendiente>`"*. Nunca se debate su mérito antes del Gate 2 — el estacionamiento es una promesa, no un rechazo, y por eso la tabla se le muestra cada vez que se agrega un ítem.
 3. **No se cruza un gate sin confirmación literal.** Ni la recomendación de Claude ni el silencio del PM equivalen a un sí.
-4. **Los hechos los busca Claude; las decisiones son del PM.** Nunca preguntes lo que la wiki ya responde; nunca decidas lo que le toca al PM.
+4. **Los hechos los busca Claude; las decisiones son del PM.** Nunca preguntes lo que la wiki ya responde; nunca decidas lo que le toca al PM. Esto incluye material técnico ya cargado en `referencias/` (Swagger, specs, manuales): si la respuesta a una duda técnica está en un documento que ya tenés, es un hecho a buscar, no una pregunta a escalar.
 5. **El índice de cada carpeta decide qué leer, no una lista fija.** Abrí el `index.md` y elegí desde su tabla; los archivos que nombra esta skill son el piso conocido, nunca el techo — si el índice lista algo que la skill no menciona y pinta relevante, abrilo.
 6. **Abrí el índice antes de descartar un módulo.** `2_areas/` completa y las tres vías de `3_recursos/`, no solo `direccion/` y la carpeta del producto. Triage rápido sí, descarte a ciegas no. Dejá registrado qué descartaste y por qué, en una línea.
 7. **Preguntá siempre a quién más le sirve.** Un pedido de un cliente se clasifica por el producto al que le pega, no por el cliente — y si lo que se va a construir resuelve el mismo dolor en otros, eso cambia el veredicto del Gate 2 y a veces el foco entero.
@@ -134,7 +134,16 @@ Un proyecto puede no cerrar ni económicamente ni por valor de producto y aun as
 
 ### Paso 5 — Fase 3: desestacionar la SOLUCIÓN
 
-Releé la tabla del estacionamiento ítem por ítem contra el problema y el foco ya acordados: *"¿S1 resuelve el problema en el foco acordado? ¿Hay algo más barato que lo logre?"* Obligatorio evaluar al menos una alternativa además de la que trajo el PM — si hay una sola opción, no hubo decisión. Restricciones a chequear: regulatorias, terceros (Fintexa, Payway/Prisma, Worldsys), capacidad. **Gate 3** = cada ítem estacionado con veredicto ✅ Adoptado / 🔧 Adaptado (cómo) / ❌ Descartado (motivo) / 🟡 Diferido.
+Releé la tabla del estacionamiento ítem por ítem contra el problema y el foco ya acordados: *"¿S1 resuelve el problema en el foco acordado? ¿Hay algo más barato que lo logre?"* Obligatorio evaluar al menos una alternativa además de la que trajo el PM — si hay una sola opción, no hubo decisión. Restricciones a chequear: regulatorias, terceros (Fintexa, Payway/Prisma, Worldsys), capacidad.
+
+**De dónde salen las alternativas — dos fuentes, no una.** (a) Contexto fijo de `2_areas/`/`3_recursos/` (ya cubierto en el Paso 1). (b) **Todo lo que ya existe dentro de `1_proyectos/` que pueda servir** — y esto es más amplio de lo que suena: no es solo releer la carpeta de este proyecto. Antes de armar la tabla de alternativas, barré:
+- `gaps.md`/`decisiones.md`/`proyecto.md` **del proyecto en curso y de su proyecto padre si es miembro** (ya cubierto en 1.d) — pero también de **cualquier otro proyecto o IDEA de `1_proyectos/index.md`** que toque el mismo dominio técnico o el mismo proveedor, aunque no tenga relación de parentesco formal: un componente, wrapper o patrón ya decidido/construido en una IDEA hermana (ej. un BFF que ya está en desarrollo por otro motivo) es candidato directo a reutilizar, y si no se busca activamente ahí, la alternativa nunca aparece — sale del PM en vez de salir del barrido.
+- Los **ledgers generales**: `1_proyectos/tareas.md` (personal) y, si el tema lo amerita, `2_areas/tareas.md`/`2_areas/gaps_y_preguntas.md`/`2_areas/direccion/decisiones.md` — una tarea o decisión ya registrada ahí puede ser exactamente la pieza que resuelve o descarta una alternativa.
+- **`1_proyectos/contexto_vivo/index.md`** — puede haber conocimiento ya capturado por una skill de sync (`/sync_mails`, `/sync_meetings`, etc.) todavía sin mergear al canon, pero ya relevante para esta decisión. Citalo marcando que no es canon todavía (mismo criterio que en Paso 1).
+
+Si el material en `referencias/` incluye documentación técnica (Swagger, specs de API, manuales de integración), **agotala antes de convertir una duda técnica en gap o en pregunta al PM** — si la respuesta está en un documento que ya tenés (un endpoint, un código de error, un flujo documentado), buscala ahí primero. Preguntale al PM lo que el documento no responde, no lo que no leíste todavía.
+
+**Gate 3** = cada ítem estacionado con veredicto ✅ Adoptado / 🔧 Adaptado (cómo) / ❌ Descartado (motivo) / 🟡 Diferido.
 
 ### Paso 6 — Encaje en proyecto padre (condicional)
 
@@ -158,7 +167,8 @@ Usá [`references/TEMPLATE_proyecto.md`](references/TEMPLATE_proyecto.md) para e
 - [ ] Se leyó la Restricción de capacidad y se dijo qué se desplaza
 - [ ] Si el camino fue ⚠️, la fila "qué pasa si no se hace" tiene respuesta o quedó como gap 🔴
 - [ ] Cada ítem estacionado tiene veredicto explícito en Gate 3
-- [ ] Se evaluó al menos una alternativa a lo que trajo el PM
+- [ ] Se evaluó al menos una alternativa a lo que trajo el PM, buscada tanto en `2_areas/`/`3_recursos/` como en otras IDEAs/proyectos de `1_proyectos/`, sus ledgers generales y `contexto_vivo/`
+- [ ] Toda duda técnica se buscó primero en los documentos ya disponibles en `referencias/` antes de convertirla en pregunta al PM
 - [ ] Ningún `Sin dato` quedó sin su entrada en `gaps.md`
 - [ ] `referencias/index.md` no tiene ningún `⬜ No` sin explicación
 - [ ] Los 3 gates tienen confirmación literal del PM en el anexo
@@ -172,7 +182,7 @@ Usá [`references/TEMPLATE_proyecto.md`](references/TEMPLATE_proyecto.md) para e
 4. **`wiki/1_proyectos/tareas.md`** (personal, directo) — próximos pasos que salieron del discovery, `T-XXX` correlativo. Si algún paso es de interés de todo el equipo, sumá además un item `tipo: tarea_equipo` en `contexto_vivo/`.
 5. **`1_proyectos/index.md`** — alta en §2 tabla maestra: Ubicación `<nombre_corto>/`, PM, Estado Jira `—`, `Origen = discovery propio`, Última actividad; y en §1 si es proyecto general. Emití además un item `tipo: iniciativa` en `contexto_vivo/` (proyecto nuevo = novedad para la cartera compartida).
 6. Regenerá `contexto_vivo/index.md` si capturaste items nuevos. **Sin git** — lo hace el hook `SessionStart` una vez al día.
-7. Cerrá sugiriendo el paso lógico siguiente: `/define_problem_statement` para formalizar §2, o `/idea_prd` si el foco y la solución ya alcanzan para especificar.
+7. Cerrá sugiriendo el paso lógico siguiente: `/idea_problem` para formalizar §2, o `/idea_prd` si el foco y la solución ya alcanzan para especificar.
 
 ## Paso 9 — Cierre por parada (abandono / no vale la pena / diferido)
 

@@ -16,7 +16,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 
 ## Cuándo NO usarla
 
-- El problema todavía no está enmarcado o está en discusión → usá primero [`/define_problem_statement`](../define_problem_statement/SKILL.md); un PRD asume un problema ya acordado.
+- El problema todavía no está enmarcado o está en discusión → usá primero [`/idea_problem`](../idea_problem/SKILL.md); un PRD asume un problema ya acordado.
 - Solo hace falta bajar el trabajo a historias de usuario para un sprint, sin necesidad de un documento de especificación completo → usá directamente [`/idea_us`](../idea_us/SKILL.md).
 - Lo que se necesita es registrar una decisión técnica o arquitectónica puntual, no especificar una iniciativa de producto completa.
 

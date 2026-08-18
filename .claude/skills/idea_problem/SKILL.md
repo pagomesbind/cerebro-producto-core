@@ -1,14 +1,14 @@
 ---
-name: define_problem_statement
-description: Genera un problem statement — documento breve que enmarca un problema (quién lo sufre, impacto de negocio, criterios de éxito) antes de proponer una solución. Se activa con /define_problem_statement.
-when_to_use: Se activa cuando el usuario ejecuta el comando de barra /define_problem_statement, típicamente al arrancar una IDEA/iniciativa nueva, cuando un proyecto se desvió de su intención original, o para comunicar prioridades a liderazgo antes de saltar a "cómo" resolver algo.
+name: idea_problem
+description: Genera un problem statement — documento breve que enmarca un problema (quién lo sufre, impacto de negocio, criterios de éxito) antes de proponer una solución. Se activa con /idea_problem.
+when_to_use: Se activa cuando el usuario ejecuta el comando de barra /idea_problem, típicamente al arrancar una IDEA/iniciativa nueva, cuando un proyecto se desvió de su intención original, o para comunicar prioridades a liderazgo antes de saltar a "cómo" resolver algo.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX o nombre del problema a enmarcar]"
 ---
 
 <!-- Adaptado de product-on-purpose/pm-skills (define-problem-statement), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 
-# 🎯 PROBLEM STATEMENT: /define_problem_statement
+# 🎯 PROBLEM STATEMENT: /idea_problem
 
 ## Por qué existe esta skill
 
