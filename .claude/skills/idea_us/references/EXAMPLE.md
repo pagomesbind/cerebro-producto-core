@@ -3,7 +3,7 @@ artifact: user-story
 version: "1.0"
 created: 2026-07-20
 status: complete
-context: Ejemplo ilustrativo — continúa el caso de ejemplo del preview de documentación KYB (ver /deliver_prd).
+context: Ejemplo ilustrativo — continúa el caso de ejemplo del preview de documentación KYB (ver /idea_prd).
 ---
 
 # Historias de usuario: Preview de documentación KYB

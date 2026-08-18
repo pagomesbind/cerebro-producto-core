@@ -1,14 +1,14 @@
 ---
-name: deliver_launch_checklist
-description: Genera un checklist de pre-lanzamiento cross-funcional (ingeniería, diseño, soporte, legal, cumplimiento, operaciones) con responsables, fechas y criterios de go/no-go. Se activa con /deliver_launch_checklist.
-when_to_use: Se activa cuando el usuario ejecuta /deliver_launch_checklist, típicamente 1-2 semanas antes de un lanzamiento significativo o cross-funcional. No usar para un cambio chico de un solo equipo — ahí el checklist agrega ceremonia sin valor.
+name: idea_golive
+description: Genera un checklist de pre-lanzamiento cross-funcional (ingeniería, diseño, soporte, legal, cumplimiento, operaciones) con responsables, fechas y criterios de go/no-go. Se activa con /idea_golive.
+when_to_use: Se activa cuando el usuario ejecuta /idea_golive, típicamente 1-2 semanas antes de un lanzamiento significativo o cross-funcional. No usar para un cambio chico de un solo equipo — ahí el checklist agrega ceremonia sin valor.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX o nombre del lanzamiento]"
 ---
 
 <!-- Adaptado de product-on-purpose/pm-skills (deliver-launch-checklist), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 
-# 🚀 CHECKLIST DE LANZAMIENTO: /deliver_launch_checklist
+# 🚀 CHECKLIST DE LANZAMIENTO: /idea_golive
 
 ## Por qué existe esta skill
 

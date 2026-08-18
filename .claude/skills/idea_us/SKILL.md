@@ -1,14 +1,14 @@
 ---
-name: deliver_user_stories
-description: Genera historias de usuario en formato persona/acción/beneficio a partir de un PRD o descripción de feature, con criterios de aceptación. Se activa con /deliver_user_stories.
-when_to_use: Se activa cuando el usuario ejecuta /deliver_user_stories, típicamente después de aprobar un PRD, al armar el backlog de un sprint, o cuando hace falta comunicar alcance a ingeniería en formato de ticket.
+name: idea_us
+description: Genera historias de usuario en formato persona/acción/beneficio a partir de un PRD o descripción de feature, con criterios de aceptación. Se activa con /idea_us.
+when_to_use: Se activa cuando el usuario ejecuta /idea_us, típicamente después de aprobar un PRD, al armar el backlog de un sprint, o cuando hace falta comunicar alcance a ingeniería en formato de ticket.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX o feature a descomponer en historias]"
 ---
 
 <!-- Adaptado de product-on-purpose/pm-skills (deliver-user-stories), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 
-# 📝 HISTORIAS DE USUARIO: /deliver_user_stories
+# 📝 HISTORIAS DE USUARIO: /idea_us
 
 ## Por qué existe esta skill
 
@@ -16,8 +16,8 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
 
 ## Cuándo NO usarla
 
-- Necesitás cobertura de criterios de aceptación mucho más profunda (Given/When/Then exhaustivo) para una sola historia o slice → usá [`/deliver_acceptance_criteria`](../deliver_acceptance_criteria/SKILL.md) sobre esa historia puntual.
-- La feature todavía no está especificada → usá primero [`/deliver_prd`](../deliver_prd/SKILL.md); las historias tienen que trazar a requisitos ya documentados.
+- Necesitás cobertura de criterios de aceptación mucho más profunda (Given/When/Then exhaustivo) para una sola historia o slice → usá [`/idea_ac`](../idea_ac/SKILL.md) sobre esa historia puntual.
+- La feature todavía no está especificada → usá primero [`/idea_prd`](../idea_prd/SKILL.md); las historias tienen que trazar a requisitos ya documentados.
 
 ## ⚖️ Reglas duras
 
@@ -34,7 +34,7 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2.
 2. **Leé todo lo que ya existe antes de escribir una sola historia** — no alcanza con el PRD solo:
    - El PRD formal completo en `artefactos/` (todas las secciones: Problema, Solución, Definiciones, Funcionalidades, Riesgos, Flujos).
-   - Cualquier documento de acceptance criteria ya redactado (`/deliver_acceptance_criteria` previo) o análisis de arquitectura/alternativas asociado.
+   - Cualquier documento de acceptance criteria ya redactado (`/idea_ac` previo) o análisis de arquitectura/alternativas asociado.
    - El `proyecto.md` del miembro completo (no solo el resumen ejecutivo) — Definiciones, Diseño técnico, Seguimiento PM, Historial de sync suelen tener detalle que el PRD todavía no absorbió.
    - Si es miembro de un proyecto general, el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — las historias no deberían re-litigar una decisión de arquitectura ya cerrada a nivel proyecto.
    - Cualquier otro artefacto de la carpeta (`artefactos/`) que el PM haya referenciado en la sesión — diagramas, docs de validaciones de un proveedor externo, historial de bugs de un endpoint existente, etc. Estos suelen ser la fuente real del detalle fino que hace falta en el Paso 5.
@@ -58,7 +58,7 @@ Formato: "Como [persona], quiero [acción] para [beneficio]."
 
 ### Paso 5 — Definir criterios de aceptación
 
-Criterios específicos y testeables en formato Given/When/Then. Los criterios de aceptación definen "terminado" — si todos pasan, la historia está completa. (Para cobertura más profunda por historia, ver [`/deliver_acceptance_criteria`](../deliver_acceptance_criteria/SKILL.md).)
+Criterios específicos y testeables en formato Given/When/Then. Los criterios de aceptación definen "terminado" — si todos pasan, la historia está completa. (Para cobertura más profunda por historia, ver [`/idea_ac`](../idea_ac/SKILL.md).)
 
 **Historias que describen un endpoint o contrato de API — nivel de detalle obligatorio.** Si la historia implica construir, modificar o consumir un endpoint, los criterios de aceptación tienen que llegar al nivel de detalle que necesitan QA e Ingeniería para no tener que volver a preguntar, cubriendo explícitamente:
 
@@ -110,4 +110,4 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 2. **Índices:** `wiki/1_proyectos/index.md`; `wiki/index.md` solo si aplica.
 3. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 5. **Jira:** nunca crear tickets a partir de estas historias sin confirmación explícita del usuario, aunque el Paso 5bis ya haya cerrado con el OK del PM sobre el contenido — la creación en Jira es una decisión aparte que el PM tiene que pedir explícitamente. Si el alcance cruza más de un sistema/equipo (ej. dos proyectos Jira distintos), evaluá si corresponde partir una historia en dos — una por sistema — en vez de una sola historia con dependencias cruzadas de dueño ambiguo. Si el PM pide crear en Jira y no hay un Epic que agrupe las historias todavía, creá también el Epic (o un Epic por proyecto Jira involucrado) y asociá tanto el Epic como las historias a la IDEA, replicando el patrón de enlace ya usado por otras IDEAs del mismo Jira (revisar con `getJiraIssue` cómo está linkeada una IDEA hermana antes de asumir el tipo de enlace).
-6. Siguiente paso sugerido: [`/deliver_acceptance_criteria`](../deliver_acceptance_criteria/SKILL.md) para profundizar criterios de una historia puntual, [`/deliver_estimate_prd`](../deliver_estimate_prd/SKILL.md) para cargar una estimación preliminar de SP por analogía histórica una vez que el PM dio su OK sobre las historias (Paso 5bis ya cerrado), o [`/deliver_launch_checklist`](../deliver_launch_checklist/SKILL.md) cuando el conjunto de historias esté listo para lanzar. Si alguna historia quedó fuera de alcance de desarrollo (ej. una carga de datos puntual/backfill), no la fuerces dentro del documento de historias — anotala como ítem del checklist de lanzamiento en vez de como historia de sprint.
+6. Siguiente paso sugerido: [`/idea_ac`](../idea_ac/SKILL.md) para profundizar criterios de una historia puntual, [`/idea_estimate`](../idea_estimate/SKILL.md) para cargar una estimación preliminar de SP por analogía histórica una vez que el PM dio su OK sobre las historias (Paso 5bis ya cerrado), o [`/idea_golive`](../idea_golive/SKILL.md) cuando el conjunto de historias esté listo para lanzar. Si alguna historia quedó fuera de alcance de desarrollo (ej. una carga de datos puntual/backfill), no la fuerces dentro del documento de historias — anotala como ítem del checklist de lanzamiento en vez de como historia de sprint.

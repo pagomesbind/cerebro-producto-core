@@ -3,14 +3,14 @@ artifact: acceptance-criteria
 version: "1.0"
 created: 2026-07-20
 status: complete
-context: Ejemplo ilustrativo — continúa el caso de US-1 (preview de documentos requeridos) de /deliver_user_stories.
+context: Ejemplo ilustrativo — continúa el caso de US-1 (preview de documentos requeridos) de /idea_us.
 ---
 
 # Criterios de aceptación: Preview de documentos requeridos (US-1)
 
 ## Contexto de la historia
 
-Antes del formulario de carga de KYB en el alta de Adquirencia, se agrega una pantalla de preview con la lista de documentos requeridos según el tipo de entidad del comercio. Ver historia US-1 en `/deliver_user_stories`.
+Antes del formulario de carga de KYB en el alta de Adquirencia, se agrega una pantalla de preview con la lista de documentos requeridos según el tipo de entidad del comercio. Ver historia US-1 en `/idea_us`.
 
 ## Happy path
 

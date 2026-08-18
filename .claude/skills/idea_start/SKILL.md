@@ -17,9 +17,9 @@ El vicio más común de un PO es llegar con la solución ya cocinada y sin haber
 ## Cuándo NO usarla
 
 - El problema ya está acordado y lo que falta es el documento formal → eso es [`/define_problem_statement`](../define_problem_statement/SKILL.md), que asume el problema como insumo, no lo interroga.
-- Ya hay foco y solución acordados y lo que falta es especificar para ingeniería → `/deliver_prd`.
+- Ya hay foco y solución acordados y lo que falta es especificar para ingeniería → `/idea_prd`.
 - Es solo una sesión de trabajo libre sobre un proyecto que ya pasó su discovery inicial → `/debrief`.
-- Es puro estimador de tamaño sobre una IDEA que ya tiene PRD → `/deliver_estimate_prd`.
+- Es puro estimador de tamaño sobre una IDEA que ya tiene PRD → `/idea_estimate`.
 
 ## ⚖️ Reglas duras
 
@@ -172,7 +172,7 @@ Usá [`references/TEMPLATE_proyecto.md`](references/TEMPLATE_proyecto.md) para e
 4. **`wiki/1_proyectos/tareas.md`** (personal, directo) — próximos pasos que salieron del discovery, `T-XXX` correlativo. Si algún paso es de interés de todo el equipo, sumá además un item `tipo: tarea_equipo` en `contexto_vivo/`.
 5. **`1_proyectos/index.md`** — alta en §2 tabla maestra: Ubicación `<nombre_corto>/`, PM, Estado Jira `—`, `Origen = discovery propio`, Última actividad; y en §1 si es proyecto general. Emití además un item `tipo: iniciativa` en `contexto_vivo/` (proyecto nuevo = novedad para la cartera compartida).
 6. Regenerá `contexto_vivo/index.md` si capturaste items nuevos. **Sin git** — lo hace el hook `SessionStart` una vez al día.
-7. Cerrá sugiriendo el paso lógico siguiente: `/define_problem_statement` para formalizar §2, o `/deliver_prd` si el foco y la solución ya alcanzan para especificar.
+7. Cerrá sugiriendo el paso lógico siguiente: `/define_problem_statement` para formalizar §2, o `/idea_prd` si el foco y la solución ya alcanzan para especificar.
 
 ## Paso 9 — Cierre por parada (abandono / no vale la pena / diferido)
 

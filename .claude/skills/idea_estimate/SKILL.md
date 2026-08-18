@@ -1,12 +1,12 @@
 ---
-name: deliver_estimate_prd
-description: Carga una estimación preliminar de Story Points (por analogía con desarrollos históricos similares) sobre las historias de usuario ya confirmadas de una IDEA, y la registra como atributo de referencia en el artefacto de historias, en el PRD y en el campo "SP estimado" de la IDEA en Jira. Se activa con /deliver_estimate_prd.
-when_to_use: Se activa cuando el usuario ejecuta /deliver_estimate_prd, siempre después de que el PM haya confirmado y esté de acuerdo con las historias de usuario creadas por /deliver_user_stories (Paso 5bis de esa skill ya cerrado) — nunca antes.
+name: idea_estimate
+description: Carga una estimación preliminar de Story Points (por analogía con desarrollos históricos similares) sobre las historias de usuario ya confirmadas de una IDEA, y la registra como atributo de referencia en el artefacto de historias, en el PRD y en el campo "SP estimado" de la IDEA en Jira. Se activa con /idea_estimate.
+when_to_use: Se activa cuando el usuario ejecuta /idea_estimate, siempre después de que el PM haya confirmado y esté de acuerdo con las historias de usuario creadas por /idea_us (Paso 5bis de esa skill ya cerrado) — nunca antes.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX]"
 ---
 
-# 📐 ESTIMACIÓN PRELIMINAR DE PRODUCTO (SP): /deliver_estimate_prd
+# 📐 ESTIMACIÓN PRELIMINAR DE PRODUCTO (SP): /idea_estimate
 
 ## Por qué existe esta skill
 
@@ -14,7 +14,7 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 
 ## Cuándo NO usarla
 
-- Las historias de usuario todavía no existen o no fueron confirmadas por el PM → corré primero [`/deliver_user_stories`](../deliver_user_stories/SKILL.md) y cerrá su Paso 5bis (revisión iterativa con el PM) antes de estimar.
+- Las historias de usuario todavía no existen o no fueron confirmadas por el PM → corré primero [`/idea_us`](../idea_us/SKILL.md) y cerrá su Paso 5bis (revisión iterativa con el PM) antes de estimar.
 - Lo que se necesita es el sizing técnico real de Ingeniería → esta skill no lo reemplaza ni lo anticipa; solo carga la referencia preliminar de Producto. El sizing real se registra en Jira por el propio equipo técnico cuando refina cada historia en su espacio (`customfield_10041` a nivel ticket).
 - La IDEA ya tiene un sizing técnico real cargado y confirmado por Ingeniería → no sobrescribas ese número con una estimación de analogía; si el PM igual quiere una referencia de Producto en paralelo, aclarálo explícitamente en el registro para no confundir ambas fuentes.
 
@@ -32,7 +32,7 @@ Antes de que Ingeniería refine y sizee cada historia en su propio espacio de Ji
 ### Paso 0 — Contexto y precondición
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../wiki/1_proyectos/index.md) §2.
-2. Abrí el artefacto de historias (`artefactos/historias_<tema>.md`, generado por `/deliver_user_stories`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
+2. Abrí el artefacto de historias (`artefactos/historias_<tema>.md`, generado por `/idea_us`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
 3. Leé también el PRD (`artefactos/YYYY-MM-DD_prd_<tema>.md`) y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva).
 4. Verificá en Jira si la IDEA ya tiene sizing técnico real acumulado en sus tickets de desarrollo (`customfield_10041` a nivel ticket) — si lo tiene, aplicá la Regla dura 4 antes de continuar.
 
@@ -60,7 +60,7 @@ Tabla markdown: `Historia | Talle | SP | Racional`, más una fila de Total con e
 
 ## ✅ Checklist de calidad
 
-- [ ] El artefacto de historias tenía el Paso 5bis de `/deliver_user_stories` ya cerrado antes de estimar
+- [ ] El artefacto de historias tenía el Paso 5bis de `/idea_us` ya cerrado antes de estimar
 - [ ] Cada historia tiene una analogía histórica concreta citada en el racional (no un número sin justificar)
 - [ ] La escala de conversión talle→SP es la vigente (`S=1·M=3·L=7·XL=15`)
 - [ ] Las historias con riesgo de bugs/cola de estabilización lo señalan explícitamente, no solo en el número

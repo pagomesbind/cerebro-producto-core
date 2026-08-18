@@ -1,14 +1,14 @@
 ---
-name: deliver_prd
-description: Genera un Product Requirements Document (PRD) completo — qué se va a construir, por qué, y cómo se mide el éxito — para handoff formal a ingeniería. Se activa con /deliver_prd.
-when_to_use: Se activa cuando el usuario ejecuta /deliver_prd, típicamente cuando el problema y la solución ya están alineados y hace falta un documento de especificación formal para coordinar múltiples equipos o para que stakeholders aprueben alcance antes de invertir.
+name: idea_prd
+description: Genera un Product Requirements Document (PRD) completo — qué se va a construir, por qué, y cómo se mide el éxito — para handoff formal a ingeniería. Se activa con /idea_prd.
+when_to_use: Se activa cuando el usuario ejecuta /idea_prd, típicamente cuando el problema y la solución ya están alineados y hace falta un documento de especificación formal para coordinar múltiples equipos o para que stakeholders aprueben alcance antes de invertir.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 ---
 
 <!-- Adaptado de product-on-purpose/pm-skills (deliver-prd), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 
-# 📋 PRD FORMAL: /deliver_prd
+# 📋 PRD FORMAL: /idea_prd
 
 ## Por qué existe esta skill
 
@@ -17,7 +17,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 ## Cuándo NO usarla
 
 - El problema todavía no está enmarcado o está en discusión → usá primero [`/define_problem_statement`](../define_problem_statement/SKILL.md); un PRD asume un problema ya acordado.
-- Solo hace falta bajar el trabajo a historias de usuario para un sprint, sin necesidad de un documento de especificación completo → usá directamente [`/deliver_user_stories`](../deliver_user_stories/SKILL.md).
+- Solo hace falta bajar el trabajo a historias de usuario para un sprint, sin necesidad de un documento de especificación completo → usá directamente [`/idea_us`](../idea_us/SKILL.md).
 - Lo que se necesita es registrar una decisión técnica o arquitectónica puntual, no especificar una iniciativa de producto completa.
 
 ## ⚖️ Reglas duras
@@ -109,4 +109,4 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 4. **Índices:** tabla maestra de `wiki/1_proyectos/index.md` §2; `wiki/index.md` solo si cambió una sección de nivel PARA.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 7. **Jira:** nunca crear ni editar tickets a partir de este PRD sin confirmación explícita del usuario.
-8. Siguiente paso sugerido: [`/deliver_user_stories`](../deliver_user_stories/SKILL.md) para bajar el PRD a historias de sprint.
+8. Siguiente paso sugerido: [`/idea_us`](../idea_us/SKILL.md) para bajar el PRD a historias de sprint.

@@ -1,22 +1,22 @@
 ---
-name: deliver_acceptance_criteria
-description: Genera criterios de aceptación Given/When/Then estructurados para una historia de usuario o slice de feature, cubriendo happy path, escenarios de falla y expectativas no funcionales. Se activa con /deliver_acceptance_criteria.
-when_to_use: Se activa cuando el usuario ejecuta /deliver_acceptance_criteria, típicamente cuando una historia de usuario o sección de PRD ya existe y hace falta profundizar en condiciones de pass/fail verificables para handoff a ingeniería y sign-off de QA.
+name: idea_ac
+description: Genera criterios de aceptación Given/When/Then estructurados para una historia de usuario o slice de feature, cubriendo happy path, escenarios de falla y expectativas no funcionales. Se activa con /idea_ac.
+when_to_use: Se activa cuando el usuario ejecuta /idea_ac, típicamente cuando una historia de usuario o sección de PRD ya existe y hace falta profundizar en condiciones de pass/fail verificables para handoff a ingeniería y sign-off de QA.
 disable-model-invocation: true
 argument-hint: "[historia o slice de feature a detallar]"
 ---
 
 <!-- Adaptado de product-on-purpose/pm-skills (deliver-acceptance-criteria), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 
-# ✅ CRITERIOS DE ACEPTACIÓN: /deliver_acceptance_criteria
+# ✅ CRITERIOS DE ACEPTACIÓN: /idea_ac
 
 ## Por qué existe esta skill
 
-Los criterios de aceptación definen el comportamiento observable que tiene que cumplirse para dar una historia por terminada. [`/deliver_user_stories`](../deliver_user_stories/SKILL.md) ya incluye algunos criterios básicos por historia; esta skill profundiza uno puntual — happy path, casos borde, estados de error y expectativas no funcionales — en escenarios Given/When/Then que ingeniería y QA pueden verificar sin adivinar la intención.
+Los criterios de aceptación definen el comportamiento observable que tiene que cumplirse para dar una historia por terminada. [`/idea_us`](../idea_us/SKILL.md) ya incluye algunos criterios básicos por historia; esta skill profundiza uno puntual — happy path, casos borde, estados de error y expectativas no funcionales — en escenarios Given/When/Then que ingeniería y QA pueden verificar sin adivinar la intención.
 
 ## Cuándo NO usarla
 
-- Necesitás las historias de usuario en sí, no profundizar criterios de una que ya existe → usá [`/deliver_user_stories`](../deliver_user_stories/SKILL.md).
+- Necesitás las historias de usuario en sí, no profundizar criterios de una que ya existe → usá [`/idea_us`](../idea_us/SKILL.md).
 - Todavía no hay ninguna historia o slice a la cual atar los criterios → escribí primero la historia o el PRD correspondiente.
 
 ## ⚖️ Reglas duras
@@ -82,4 +82,4 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 
 1. **Persistir el entregable**: si profundiza una historia ya guardada en `artefactos/`, actualizá ese mismo archivo (no dupliques); si es nuevo, resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 y guardalo en `artefactos/YYYY-MM-DD_criterios_aceptacion_<tema>.md` dentro de su carpeta.
 2. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
-4. Siguiente paso sugerido: [`/deliver_launch_checklist`](../deliver_launch_checklist/SKILL.md) cuando la feature esté lista para coordinar el lanzamiento.
+4. Siguiente paso sugerido: [`/idea_golive`](../idea_golive/SKILL.md) cuando la feature esté lista para coordinar el lanzamiento.

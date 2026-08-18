@@ -82,4 +82,4 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 3. **Riesgos/supuestos sin validar** → `gaps.md` de la IDEA (o del proyecto padre) si son relevantes más allá de este documento (directo); item `tipo: gap` en `contexto_vivo/` si son de contexto fijo.
 4. **Índices:** `wiki/1_proyectos/index.md` si hay proyecto; `wiki/index.md` solo si cambió una sección de nivel PARA.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
-7. Siguiente paso sugerido: si la hipótesis se valida con una solución concreta, [`/deliver_prd`](../deliver_prd/SKILL.md).
+7. Siguiente paso sugerido: si la hipótesis se valida con una solución concreta, [`/idea_prd`](../idea_prd/SKILL.md).

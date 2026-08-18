@@ -74,7 +74,7 @@ Los stores de `3_recursos/datos/` (una fila por ticket, miles de filas de CSV) n
 
 ## Skills de sync: fuente personal vs. fuente compartida
 
-- **Fuente personal** (`/sync_meetings`, `/sync_mails`, `/ingest`, `/debrief`, `/idea_start`): las corre cada PM sobre su propia bandeja/calendario. Todo aporte al canon nace en `contexto_vivo/`; el trabajo de proyecto va directo a `1_proyectos/`.
+- **Fuente personal** (`/sync_meetings`, `/sync_mails`, `/ingest`, `/debrief`, `/idea_start`, `/gaps`): las corre cada PM sobre su propia bandeja/calendario. Todo aporte al canon nace en `contexto_vivo/`; el trabajo de proyecto va directo a `1_proyectos/`. `/gaps` es la excepción de propósito: no ingiere nada nuevo, resuelve interactivamente con el PO los gaps ya abiertos en los `gaps.md` de sus propios proyectos (nunca `2_areas/gaps_y_preguntas.md` ni `contexto_vivo/`) — apta para scheduled action diaria, antes de `/sync_mails`/`/sync_meetings`.
 - **Fuente objetiva compartida** (`/sync_releases`, `/sync_customers`, `/sync_notion_docs`, `/sync_web`, `/sync_metrics`, `/dashboard_delivery`, `/dashboard_qa`): leen la misma fuente para los tres PM, así que correrlas de a uno sería triplicar trabajo. **Las corre solo el runner designado** (ver `identidad.local.md`) — la skill aborta si `identidad.local.md` dice que no sos vos. Correr la skill no da privilegio de escritura: su salida va igual a `contexto_vivo/` (prosa como `tipo: conocimiento`, stores como `tipo: dato`).
 
 ## Reglas de Mantenimiento y Contexto Progresivo
