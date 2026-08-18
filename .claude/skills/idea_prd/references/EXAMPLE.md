@@ -77,7 +77,7 @@ Solo se incluyen las áreas con impacto real — Administración y Legales no ti
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
-| El preview alarga la percepción de esfuerzo y empeora el abandono en vez de mejorarlo | Media | Alto | Validar primero con un A/B test (ver `/define_hypothesis`) antes de lanzar a 100% del tráfico. |
+| El preview alarga la percepción de esfuerzo y empeora el abandono en vez de mejorarlo | Media | Alto | Validar primero con un A/B test antes de lanzar a 100% del tráfico. |
 | Fintexa no expone la metadata de documentos requeridos por tipo de entidad | Media | Medio | Definir la lógica de lista por tipo de entidad del lado de Bind como plan B. |
 | El cambio impacta componentes de UI compartidos con el alta de Wallet sin coordinación previa | Baja | Medio | Confirmar con el equipo de Wallet antes de tocar componentes compartidos. |
 | Soporte no llega a tener el aviso/manual de ayuda listo para el lanzamiento (gap detectado en el análisis de impacto) | Media | Bajo | Coordinar con Soporte la fecha del aviso antes de fijar la fecha de lanzamiento. |
