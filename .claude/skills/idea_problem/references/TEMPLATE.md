@@ -7,65 +7,50 @@ status: draft
 
 # Problem Statement: [Título del problema]
 
-## Resumen del problema
-<!-- 2-3 oraciones que capturan la esencia del problema. Entendibles por cualquiera en la organización, sin jerga técnica. -->
+## Enunciado del problema
+<!-- Una sola frase: qué, quién y por qué. Si prescribe una solución o el afectado es genérico, todavía no está acotado. -->
 
-[Describí el problema en lenguaje claro. Foco en la experiencia del usuario y la brecha entre el estado actual y el deseado.]
+> **[Afectado específico]** necesita **[necesidad u outcome, nunca una solución]** porque **[razón: el dolor o la oportunidad que lo explica]**.
 
-## Impacto en usuarios
+[Si hace falta una línea más de contexto para que la frase se entienda sola, agregala acá — sin extenderse.]
 
-### ¿Quién está afectado?
-<!-- Segmento, persona o rol específico -->
+<!-- Opcional: solo si el job story agrega claridad que la frase de arriba no capta. -->
+*Job story: Cuando [situación/disparador], quiero [motivación], para poder [resultado esperado].*
+
+## Afectado
+<!-- Segmento, persona o rol específico. Nunca "usuarios" a secas. -->
 
 [Descripción del segmento]
 
-### ¿Cómo está afectado?
-<!-- Fricción, frustración o necesidad insatisfecha -->
+<!-- Opcional: solo si aporta algo que el resto de la sección no explica. -->
+*Alternativa actual: cómo resuelve esto hoy el afectado (workaround manual, planilla, proceso tercerizado, competidor, o directamente nada).*
 
-[Descripción del punto de dolor]
+## Medida del problema
+<!-- El número de hoy: qué tan grave es el problema ahora mismo. Volumen, frecuencia, tasa, horas, costo directo. -->
 
-### Escala del impacto
-<!-- ¿Cuántos usuarios? ¿Con qué frecuencia ocurre? -->
+[Cuantificá el estado actual con datos o estimaciones razonables y su fuente. Si falta el dato, dejalo como pregunta abierta con a quién pedírselo — nunca una suposición sin marcar.]
 
-[Cuantificá el alcance y la frecuencia]
+## Impacto del problema
+<!-- Qué provoca ese número si no se resuelve — o qué se gana si se resuelve. En negocio (ingresos, retención, cumplimiento) y/o en áreas internas (horas, capacidad operativa, reputación). -->
 
-## Contexto de negocio
+[Impacto cuantificado, con la conexión a foco/OKR vigente si aplica]
 
-### Alineación estratégica
-<!-- ¿Cómo conecta con los objetivos de la empresa, OKRs o foco estratégico vigente? -->
+<!-- Opcional: solo si el afectado podría resolverlo por su cuenta y no lo hizo, o si la urgencia necesita explicarse. -->
+*Fuerzas del cambio: qué lo empuja a resolverlo ahora (push) y qué lo atrae de lograrlo (pull), frente a qué lo frena — hábito o ansiedad al cambio.*
 
-[Conexión con prioridades de negocio]
-
-### Impacto de negocio
-<!-- Ingresos, retención, crecimiento, cumplimiento regulatorio, costos -->
-
-[Impacto cuantificado]
-
-### ¿Por qué ahora?
-<!-- ¿Qué hace esto urgente o oportuno? -->
-
-[Justificación del timing]
-
-## Criterios de éxito
+## Meta / criterio de éxito
 
 | Métrica | Baseline actual | Target | Plazo |
 |---------|-----------------|--------|-------|
-| [Métrica primaria] | [Valor actual] | [Valor objetivo] | [Para cuándo] |
-| [Métrica secundaria] | [Valor actual] | [Valor objetivo] | [Para cuándo] |
-| [Métrica guardrail] | [Valor actual] | [Mantener] | [Continuo] |
+| [Métrica primaria — la misma de "Medida del problema"] | [Valor actual] | [Valor objetivo] | [Para cuándo] |
+| [Métrica guardrail, si aplica] | [Valor actual] | [Mantener] | [Continuo] |
 
-## Restricciones y consideraciones
-
-<!-- Limitaciones técnicas, dependencias de proveedores, requisitos regulatorios (BCRA/UIF/PCI DSS), capacidad de equipo -->
+## Restricciones y preguntas abiertas
+<!-- Limitaciones técnicas, dependencias de proveedores, requisitos regulatorios (BCRA/UIF/PCI DSS), capacidad de equipo — y lo que todavía no se sabe -->
 
 - [Restricción 1]
 - [Restricción 2]
-- [Consideración 1]
 
-## Preguntas abiertas
-
-<!-- ¿Qué no sabemos todavía? ¿Qué supuestos necesitan validación? -->
-
-- [ ] [Pregunta 1]
-- [ ] [Pregunta 2]
-- [ ] [Pregunta 3]
+**Abierto:**
+- [ ] [Pregunta o dato pendiente 1]
+- [ ] [Pregunta o dato pendiente 2]

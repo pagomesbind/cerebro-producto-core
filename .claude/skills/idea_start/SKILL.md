@@ -10,13 +10,13 @@ argument-hint: "[tema o idea en una línea, o nombre de proyecto existente para 
 
 ## 🎯 Por qué existe esta skill
 
-El vicio más común de un PO es llegar con la solución ya cocinada y sin haber definido el problema — a veces ni siquiera dice el problema, dice directamente "hay que hacer X". Ninguna skill de la casa frena eso hoy: `/idea_problem` ya asume un problema acordado, y `/debrief` cierra conversación libre sin interrogar.
+El vicio más común de un PO es llegar con la solución ya cocinada y sin haber definido el problema — a veces ni siquiera dice el problema, dice directamente "hay que hacer X". Ninguna skill de la casa frena eso hoy: `/idea_problem` interroga y cuantifica el problema, pero no decide si vale la pena atacarlo ni con qué foco — asume que eso ya está resuelto. Y `/debrief` cierra conversación libre sin interrogar.
 
 `/idea_start` es la puerta de entrada que falta. Interroga al PM en rondas (técnica de [`/grilling`](../grilling/SKILL.md): design tree, frontera, rondas numeradas con recomendación) hasta acordar **el problema → si vale la pena (o si es obligatorio igual) → el foco → recién ahí la solución**. Se diferencia de `/grilling` puro en que parte del contexto del Cerebro entero — no solo del producto en cuestión — y en que su salida es persistente: la carpeta se crea al inicio, así el discovery queda resguardado aunque el proyecto no prospere. Un "no vale la pena" bien razonado es tan buen resultado como un PRD.
 
 ## Cuándo NO usarla
 
-- El problema ya está acordado y lo que falta es el documento formal → eso es [`/idea_problem`](../idea_problem/SKILL.md), que asume el problema como insumo, no lo interroga.
+- Ya se decidió que vale la pena atacar el problema y con qué foco, y lo que falta es documentarlo con foco y números → eso es [`/idea_problem`](../idea_problem/SKILL.md), que profundiza medida e impacto pero no vuelve a evaluar si vale la pena — eso ya se resolvió acá.
 - Ya hay foco y solución acordados y lo que falta es especificar para ingeniería → `/idea_prd`.
 - Es solo una sesión de trabajo libre sobre un proyecto que ya pasó su discovery inicial → `/debrief`.
 - Es puro estimador de tamaño sobre una IDEA que ya tiene PRD → `/idea_estimate`.
