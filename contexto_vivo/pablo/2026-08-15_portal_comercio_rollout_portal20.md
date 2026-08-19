@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Contexto general:** "Portal 2.0" es el rediseño del Portal Comercio (autogestión) que se estaba migrando cliente por cliente en STG/PROD en mayo 2026, con una variante adicional "Mayorista" (`MayoristaBS`) para comercios agrupadores. Estas 20 tickets son observaciones de QA levantadas durante ese rollout — no se encontró documentación previa de "Portal 2.0" en la wiki, así que esto es la primera cobertura del tema. La skill `/sync_releases` no cruza contra `1_proyectos/` — si alguna de estas observaciones toca un PRD vivo de Portal 2.0, el PM debe verificarlo aparte.

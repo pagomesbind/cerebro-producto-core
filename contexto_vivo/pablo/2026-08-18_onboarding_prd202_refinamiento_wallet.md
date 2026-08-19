@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Sesión de refinamiento técnico entre el equipo de Wallet (Juan Pablo Carubelli, Keep IT Simple) y el equipo de Onboarding (Cristian Bonafede, Tecfinanciera/Fintexa), con el PM (Pablo Gomes), explícitamente orientada a dar claridad de cómo bajar PRD-202 a historias de usuario. Se repasó endpoint por endpoint y caso por caso el contrato de API ya diseñado en `flujos_consolidado_tecnico.md`.

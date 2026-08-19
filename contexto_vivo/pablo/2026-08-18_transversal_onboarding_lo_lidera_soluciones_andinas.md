@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Decisión (2026-08-18, "Repaso Semanal líderes"):** cambia la dinámica de gestión del proyecto de Onboarding — **Soluciones Andinas** (= Fintexa/Tecfin, mismo proveedor bajo distintos nombres) pasa a liderar la **gestión de proyecto** (project management) del desarrollo de Onboarding, mientras el equipo actual (Bind PSP/Fintexa técnico) **acompaña el despliegue y las dependencias**.

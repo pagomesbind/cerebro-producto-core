@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Fuente:** mail de Franco Gimenez (Analista de Implementaciones y Soporte, BIND PSP) a Poincenot (mariano.zanier@poincenot.com, martin.brambilla@poincenot.com), con copia a Producto, 14/08/2026. Sin respuesta de Poincenot todavía al momento de este barrido — queda como pregunta abierta, no como hallazgo cerrado.

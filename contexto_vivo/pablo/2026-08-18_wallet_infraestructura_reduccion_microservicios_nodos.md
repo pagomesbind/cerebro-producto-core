@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Actualización de infraestructura (semana previa al 2026-08-18):** Pablo Vargas (Fintexa) informó en "Repaso Semanal líderes" que el equipo **redujo la cantidad de microservicios de "Webhook sender" y de operaciones**, además de **disminuir la cantidad de nodos del clúster**, durante la semana previa a esta reunión.

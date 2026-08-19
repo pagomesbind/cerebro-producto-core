@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/datos/log_versiones_publicadas.md — fila 'AD | ✅ COMPLETO' de la tabla de estado del backfill, que afirma cierre de punta a punta del espacio"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Severidad: Media.** El backfill histórico de versiones publicadas del espacio AD (cerrado 2026-07-13 vía export XML, documentado como "✅ COMPLETO" en `log_versiones_publicadas.md`) no capturó 2 versiones: **"Portal 2.0 V1"** y **"Portal 2.0 V2"**, ambas publicadas el 2026-05-21 (detectado recién en el barrido incremental del 2026-08-15, vía JQL directa contra Jira).

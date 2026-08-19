@@ -11,7 +11,7 @@ tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Contenido final y completo del archivo `3_recursos/datos/metricas_semanales.md`, con la entrada de la

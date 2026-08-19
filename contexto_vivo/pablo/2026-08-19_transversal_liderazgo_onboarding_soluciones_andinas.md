@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 En la minuta de "Repaso Semanal líderes" del 18/08/2026 (reunión semanal del equipo técnico Fintexa/Tecfinanciera + PSP), bajo "Decisiones Estratégicas y Equipo", se registra textualmente: **"Decisión: El liderazgo en la gestión de proyectos de onboarding se transfiere a Soluciones Andinas. El equipo actual dará soporte técnico en despliegues y dependencias."**

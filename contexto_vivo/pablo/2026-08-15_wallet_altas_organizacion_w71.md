@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Nueva sección "7. Historial de altas de organización y migraciones — tramo W71" (continúa el patrón de §1-2 con casos reales):

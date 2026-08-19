@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Fuente:** mail enviado a Pablo Gomes y Nicolás Colón con el diseño formal de los archivos de cuadratura, para publicar en la Web (mismo criterio que los archivos de movimientos/saldos ya documentados en `conciliacion_y_totalizadores.md`).

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Solo atribución — sin contenido nuevo.** ARD-32 ("Solicitamos aplicar fix de Ardid para resolver problemas de ejecución de los Stored Procedures en PROD... base de datos de SQL correspondiente a los servicios de Pagos y Transferencias") es el ticket Jira del **mismo hotfix ya documentado en `integracion_con_productos_bind.md` §11** ("Incidente de reinicio de límites diarios (2-3 julio) y hotfix de reintentos de Pentass"): coincide la fecha de despliegue (releaseDate de la versión Jira **ARDID V 1.18.2.1 HF** = 2026-07-22, exactamente el miércoles 7:30am mencionado en la minuta de la reunión del 2026-07-17) y el objeto del fix (reintentos automáticos en los SP de Pagos y Transferencias, sin modificar tablas/columnas/SPs existentes).

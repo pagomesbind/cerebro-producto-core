@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 En la reunión de PRE-Despliegue de Emisión V72 (18/08/2026, 14:30), dentro de "Configuraciones Técnicas y Endpoints", se definió: **la validación de Totalizadores (CBU, CVU larga y CVU corta) se habilita en producción con un límite estricto de 30 iteraciones** como parte del despliegue de la V72 (desplegado 19/08/2026 06:30-07:30 según la minuta previa del 12/08 del mismo hilo).

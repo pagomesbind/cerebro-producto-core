@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Nota para agregar al final de §4 "Documentación — Consulta totalizadores CBU/CVU": el endpoint `GET /walletentidad-cuenta/v1/api/v1.201/GetTotalizadoresCoelsa?cuit={cuit}&formaConsulta={formaConsulta}` (documentado ahí) ahora también se expone en el **BFF que consume el onboarding** (WS-1277, W 71), autenticando con el header `x-entidad` = Id de organización — permite que el flujo de onboarding consulte totalizadores sin pasar por el BFF de Wallet estándar.

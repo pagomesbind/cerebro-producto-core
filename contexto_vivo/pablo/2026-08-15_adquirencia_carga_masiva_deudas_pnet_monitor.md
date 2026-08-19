@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Ampliación de la sección **"Carga masiva de deudas — cliente ProvinciaNET"** (hoy solo cubre AD-496 y AD-660): 4 tickets de ajuste al **Monitor de API Deuda** que procesa los archivos de carga masiva, todos "Desarrollo para PNET, no requiere testing" (comentario de Andrea Orsini, 2026-08-12).

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Contenido nuevo:** bug de condición de carrera en FCI (WS-1284, estado "EN QA" al momento del release — igual publicado en W 71, criterio de versión no de ticket): dos PODs del microservicio `Shared.Remunera` consumen el mismo mensaje de cola y ambos insertan un registro en la tabla `FCICuentasRemuneradas` para el mismo `IdCuenta`, generando duplicados. Objetivo del fix: evitar la duplicación (constraint o lock a nivel de `IdCuenta`).

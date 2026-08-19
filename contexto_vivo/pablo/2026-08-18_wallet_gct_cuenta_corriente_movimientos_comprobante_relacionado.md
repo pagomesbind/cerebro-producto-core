@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Pedido de GST (Hipódromo), en aprobación al 2026-08-18** — dos mejoras sobre consultas existentes de Wallet, cada una estimada en ~1 MD (jornada) de desarrollo:

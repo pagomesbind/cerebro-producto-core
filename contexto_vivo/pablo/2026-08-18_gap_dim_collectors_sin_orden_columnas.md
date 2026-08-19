@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Severidad:** Media.

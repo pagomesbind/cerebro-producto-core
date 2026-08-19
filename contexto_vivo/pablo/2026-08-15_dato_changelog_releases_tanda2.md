@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Prepend (orden cronológico inverso, van ANTES de las entradas de la tanda 1 por ser de versiones más viejas — insertar en la posición cronológica correcta según fecha, no todas al principio):

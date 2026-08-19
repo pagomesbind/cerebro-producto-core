@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Contexto/Problema:** El usuario planteó si convenía llevar simetría total entre proyecto y nivel global para los cuatro ledgers de proyecto (`gaps.md`, `tareas.md`, `decisiones.md`, `riesgos.md`) — es decir, que cada proyecto/subproyecto tuviera los cuatro, y que además hubiera un cuarto nivel "global" de los cuatro dentro de `1_proyectos/` (además del canon en `2_areas/`).

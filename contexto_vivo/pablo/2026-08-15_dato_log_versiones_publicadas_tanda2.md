@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Append a la tabla "Versiones ingestadas" (tras las filas de la tanda 1). Actualizar también la cabecera: "Último barrido: 2026-08-15 — barrido incremental completo vía API, todo el delta detectado desde el backfill de 2026-07-13 quedó ingerido (12 versiones nuevas: 3 AD, 8 WS, 1 ARD)." Y en la tabla "Estado del backfill histórico", la fila de AD pasa de "✅ COMPLETO" a **"✅ COMPLETO (corregido 2026-08-15)"** con nota: "backfill original de 2026-07-13 saltó 2 versiones con nomenclatura no secuencial ('Portal 2.0 V1'/'Portal 2.0 V2', ambas 2026-05-21) — cerradas en este barrido incremental. Ver gap `2026-08-15_gap_backfill_ad_incompleto_portal20` (ya resuelto)."

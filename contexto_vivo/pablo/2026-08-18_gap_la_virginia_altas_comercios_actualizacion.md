@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Actualización al gap abierto **"[2026-08-04] — /sync_metrics: altas de comercios de la 202631 (+238,2%

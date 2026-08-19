@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Ampliar §3.6 "Bugs y aprendizajes reales (llegaron a producción)" con 3 correcciones nuevas sobre el flujo de Dólar CCL, dos de ellas específicas a **venta** (hasta ahora la sección documenta sobre todo bugs de compra):

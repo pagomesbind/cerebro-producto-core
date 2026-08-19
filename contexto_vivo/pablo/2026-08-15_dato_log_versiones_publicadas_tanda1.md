@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Append a la tabla "Versiones ingestadas" (insertar como filas nuevas, orden sugerido por espacio/fecha como el resto de la tabla). También actualizar la cabecera del archivo: "Último barrido: 2026-08-15 — barrido incremental vía API (tanda 1 de N; quedan pendientes 8 versiones WS + 2 versiones AD "Portal 2.0 V1/V2" detectadas como gap del backfill anterior — ver reporte `outputs/reportes_sync/2026-08-15_reporte_releases.md`)".

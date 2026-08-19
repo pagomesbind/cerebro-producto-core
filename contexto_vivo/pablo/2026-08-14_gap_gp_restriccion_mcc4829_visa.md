@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Gap:** Global Processing envió una comunicación oficial cuyo asunto indica una **restricción de uso del MCC 4829 (Money Transfer) en la red VISA** — un cambio de categoría de comercio que podría afectar operatoria de adquirencia/transferencia de dinero. El cuerpo del mail viene **enteramente como imágenes embebidas** (dos adjuntos `image.png` sin texto extraíble), sin texto plano legible por este pipeline.

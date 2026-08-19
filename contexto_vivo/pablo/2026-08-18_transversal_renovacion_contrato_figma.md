@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 Figma asignó una nueva Account Executive LATAM para la cuenta de Bind (Jéssica Costa, reemplaza al contacto anterior). En el mismo mail avisa que **el contrato de Figma con Bind vence el próximo mes** (~septiembre 2026) y pide coordinar la renovación con anticipación: agenda una llamada de 20-30 min para (1) entender el uso actual de Figma por los equipos, (2) confirmar interés en continuar, (3) revisar los próximos pasos para formalizar la renovación a tiempo.

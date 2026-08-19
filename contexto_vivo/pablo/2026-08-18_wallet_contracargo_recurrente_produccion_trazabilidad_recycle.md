@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Contracargo de débito recurrente — pruebas finalizadas, pasa a producción la semana del 2026-08-18** (según "Productos - Weekly Seguimiento"). Se decide el criterio de cuándo pasar una funcionalidad a "shipping": recién cuando esté **enteramente en producción** (no cuando solo falte el propio pase), a diferencia del criterio anterior que la marcaba shipping con trabajo pendiente del lado de Bind PSP.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Contexto:** informe semanal recurrente de Fintexa sobre el proyecto Wallet — esta semana no hubo despliegue de versión (se planifica W 72 a PROD el miércoles 19/08 por la mañana, ver el ítem separado sobre el mail de pre-despliegue del mismo día).

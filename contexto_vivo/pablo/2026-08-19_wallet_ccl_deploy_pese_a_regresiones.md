@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 En la reunión de PRE-Despliegue de Emisión V72 (18/08/2026, 14:30) se aprobó avanzar con el despliegue de los cambios de **Dólar CCL** pese a no poder finalizar las pruebas de regresión en ambiente de homologación, por errores persistentes originados en **Apibank** (ambiente de homologación, no productivo). Se confirmó que el impacto de este bloqueo es mínimo — afecta solo a un ticket de compra de dólar fallida detectado desde visión interna. Para no desenfocar al equipo de QA (Ana), se dispuso centralizar toda la comunicación técnica sobre este tema exclusivamente a través de Andrea Orsini.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 En la minuta de "Repaso Semanal líderes" del 18/08/2026 se presentó oficialmente a **Mariana Nadalin** como nueva **Gerente de Operaciones**, ingresada el 3 de agosto de 2026, para asistir a los equipos Fintexa y PSP. Nota: Mariana Nadalin ya participaba de reuniones técnicas previas (ej. minutas de Análisis de riesgo de Emisión V72) bajo su mail `mnadalin@bind.com.ar` — este mail formaliza el rol de Gerente de Operaciones para quien ya venía siendo parte del equipo.

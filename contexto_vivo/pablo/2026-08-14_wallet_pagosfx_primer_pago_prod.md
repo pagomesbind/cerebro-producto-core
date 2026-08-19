@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9306bc6b7cffeb57db264f132b0e0e6a1ec53d8e
 ---
 
 **Fuente:** informe semanal recurrente de Fintexa sobre el proyecto Wallet (Nicolás Pomponio), 14/08/2026. Épica "Mastercard Move (Pagos Crossborder)" — destino natural es `dolar_fx.md` §2, que ya documenta el wrapper de Mastercard Move y las APIs publicadas hasta W70 (PRD-10, iniciativa de Luciana Rudaz).
