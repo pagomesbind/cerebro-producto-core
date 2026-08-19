@@ -41,9 +41,9 @@ Por cada item en `capturado`, verificá que el frontmatter esté completo:
 
 ### Paso 3 — Copiar al core
 
-Para cada item válido:
-1. Copiá el archivo tal cual (sin modificar contenido) a `<ruta_clon_core>/contexto_vivo/<pm>/<id>.md`.
-2. En el archivo **local** (el de `wiki/1_proyectos/contexto_vivo/`), actualizá el frontmatter: `estado: en_cola`. **El archivo sigue en su lugar** — no se mueve, no se borra. Sigue leyéndose como contexto vivo hasta que el merge lo ingiera.
+Para cada item válido, en este orden (no al revés — `/context_merge` lee `estado: en_cola` en la copia del core, así que la copia tiene que salir ya con ese valor, nunca con `capturado`):
+1. En el archivo **local** (el de `wiki/1_proyectos/contexto_vivo/`), actualizá el frontmatter: `estado: en_cola`. **El archivo sigue en su lugar** — no se mueve, no se borra. Sigue leyéndose como contexto vivo hasta que el merge lo ingiera.
+2. Copiá ese mismo archivo — ya actualizado, sin ningún otro cambio de contenido — a `<ruta_clon_core>/contexto_vivo/<pm>/<id>.md`. Local y core quedan idénticos byte a byte, ambos en `en_cola`.
 
 ### Paso 4 — Commit y push en el core
 
