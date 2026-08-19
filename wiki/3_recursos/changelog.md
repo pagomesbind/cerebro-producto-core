@@ -24,3 +24,4 @@
 - `datos/log_versiones_publicadas.md` — actualizado: header, estado del backfill de AD corregido, 12 filas nuevas de versiones ingestadas.
 - `datos/metricas_semanales.md` — reemplazado byte a byte (semana 202633).
 - `datos/datos_metricas_semanales/` — reemplazado byte a byte (semana 202633; `dim_collectors` sin refresh, ver gap en `2_areas/gaps_y_preguntas.md`).
+- `detalle_productos/onboarding/integracion_worldsys_complianceone.md` — creado: contrato técnico de la API Worldsys/ComplianceOne (auth, personas, documentos, catálogo de tipos, import masivo), desde Swagger público v1.0.0 + hilo de mail con el proveedor (discovery PRD-147).

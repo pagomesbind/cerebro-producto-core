@@ -9,7 +9,7 @@
 ### 2026-08-19 (pablo)
 
 - `gaps_y_preguntas.md` — creado 3 gaps (MCC4829 VISA, backfill AD Portal 2.0, dim_collectors sin orden de columnas), actualizados 2 (La Virginia, Terra Blockchain — tercera semana consecutiva de cada patrón).
-- `direccion/iniciativas.md` — creado, primeras 2 filas (PRD-147, PRD-202).
+- `direccion/iniciativas.md` — creado, primeras 2 filas (PRD-147, PRD-202); PRD-147 actualizada con la novedad del 2026-08-19 (problem statement v2.0, sin decisiones/gaps nuevos).
 - `direccion/decisiones.md` — creada 1 decisión (liderazgo de gestión de proyecto de Onboarding pasa a Soluciones Andinas — item duplicado de 2 fuentes, fusionado en una sola entrada).
 - `tareas.md` — creada 1 tarea (T-107, renovación de contrato de Figma).
 - `overview_empresa/overview_equipo.md` — actualizado (nueva Gerente de Operaciones Mariana Nadalin + cronograma presencial Fintexa).
