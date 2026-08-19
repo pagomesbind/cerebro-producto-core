@@ -50,6 +50,11 @@ _// Todas las funcionalidades del proyecto, priorizadas con un framework explíc
 _// Va inmediatamente después de Funcionalidades y roadmap — ayuda a que el lector entienda cómo se materializa el roadmap antes de leer impacto/riesgos. El contenido es específico de cada proyecto: diagramas AS-IS/TO-BE, flujos de secuencia, user journey maps, casos de uso paso a paso, taxonomías o conceptos que el lector necesita para entender el resto del documento (ej. tipos de cliente, modalidades de integración), o links a donde vivan si ya existen. No hay una subestructura fija que aplique a todos los PRDs — armá la que corresponda al proyecto._
 * Texto.
 
+_// Cierre obligatorio de la sección — no omitir. Resumen de cómo se propone resolver el problema: quiénes participan, en qué orden ocurren las cosas, y qué pasa cuando algo falla (a nivel de consecuencia de negocio, no de manejo técnico del error). Es un resumen destilado del análisis técnico completo si existe, no el detalle — sin contrato de endpoints, sin tablas de reintentos/backoff, sin mapa de procedencia campo por campo._
+
+### Cómo se propone resolver el problema
+Texto.
+
 ## Análisis de impacto en las distintas áreas
 _// Solo incluí áreas con impacto real identificado — no completes las 6 de forma automática. Para cada área que sí incluyas, analizá dos cosas: (1) cómo la afecta el proyecto; (2) si esa área ya tiene lo que necesita para actuar sobre ese impacto. Si no lo tiene, marcalo explícitamente como gap — y determiná si hay que incorporar una funcionalidad al alcance del proyecto para resolverlo, o si alcanza con una contingencia operativa explícita. La columna de análisis no puede quedar como una descripción pasiva del impacto: tiene que dejar claro si el área puede actuar o no, y qué falta si no puede._
 

@@ -17,13 +17,14 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 ## Cuándo NO usarla
 
 - El problema todavía no está enmarcado o está en discusión → usá primero [`/idea_problem`](../idea_problem/SKILL.md); un PRD asume un problema ya acordado.
+- El diseño de la solución todavía no existe → usá primero [`/idea_solution`](../idea_solution/SKILL.md); el PRD destila ese análisis en un resumen (Paso 8), no lo inventa desde cero.
 - Solo hace falta bajar el trabajo a historias de usuario para un sprint, sin necesidad de un documento de especificación completo → usá directamente [`/idea_us`](../idea_us/SKILL.md).
 - Lo que se necesita es registrar una decisión técnica o arquitectónica puntual, no especificar una iniciativa de producto completa.
 
 ## ⚖️ Reglas duras
 
 1. **Protocolo de contexto:** aplicá el Paso 0 antes de escribir una sola línea del PRD.
-2. **No prescribas implementación.** El PRD define qué debe hacer el sistema y por qué, no el detalle de cómo construirlo — eso lo define ingeniería.
+2. **No prescribas implementación de bajo nivel.** El PRD no elige lenguaje, framework, esquema de base de datos ni topología de despliegue — eso lo define ingeniería. Explicar cómo funciona la solución de cara al negocio (quiénes participan, en qué orden pasan las cosas, qué ocurre cuando algo falla) **no es prescribir implementación** — es justo lo que exige el resumen del Paso 8, y es lo que distingue un PRD legible de uno que enumera funcionalidades sin decir cómo se resuelven.
 3. **Todo objetivo tiene que ser SMART y medible.** Alguien debería poder verificar en el futuro si se cumplió o no, sin ambigüedad.
 4. **Alcance explícito**: qué entra, qué no entra, y qué queda diferido — nunca lo dejes implícito.
 5. Legible en menos de 15 minutos. Si no entra, es señal de que el alcance es demasiado grande para un solo PRD.
@@ -38,9 +39,10 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 — nunca asumas `wiki/1_proyectos/prd-XXX_<slug>/` directo. Leé su `proyecto.md` completo — problema, alcance, decisiones y gaps ya registrados son la base del PRD, no se reinventan acá.
 2. **Si es miembro de un proyecto general** (tiene cabecera `> **Proyecto:** [<Nombre>](../proyecto.md)`), leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — son decisiones ya cerradas a nivel proyecto que el PRD no debe re-litigar ni contradecir sin señalarlo explícitamente.
 3. Si existe un problem statement o una hipótesis en `artefactos/`, leelos — el PRD recapitula el problema, no lo redefine.
-4. Contexto de producto y estratégico: `wiki/2_areas/overview_productos/overview_<producto>.md`, `wiki/3_recursos/detalle_productos/<producto>/`, `wiki/2_areas/direccion/north_star.md`.
-5. Contexto de arquitectura si la iniciativa toca proveedores externos: `wiki/3_recursos/arquitectura_sistema/`.
-6. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-prd.md`** (de una corrida anterior de esta skill), leelo completo antes de escribir — esta corrida lo actualiza in place (ver regla dura #8 y Paso 11), no genera un documento nuevo en paralelo.
+4. **Leé `artefactos/{{nombre_corto_proyecto}}-solution.md` completo si existe** — es el insumo del resumen del Paso 8: el PRD destila ese análisis, no lo reinventa. Si no existe todavía, avisá al PM antes de escribir el Paso 8 a ciegas (ver "Cuándo NO usarla").
+5. Contexto de producto y estratégico: `wiki/2_areas/overview_productos/overview_<producto>.md`, `wiki/3_recursos/detalle_productos/<producto>/`, `wiki/2_areas/direccion/north_star.md`.
+6. Contexto de arquitectura si la iniciativa toca proveedores externos: `wiki/3_recursos/arquitectura_sistema/`.
+7. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-prd.md`** (de una corrida anterior de esta skill), leelo completo antes de escribir — esta corrida lo actualiza in place (ver regla dura #8 y Paso 11), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Problema
 
@@ -64,7 +66,7 @@ Justificación del beneficio monetizado esperado (o link a un archivo de busines
 
 ### Paso 6 — Definiciones, suposiciones y límites
 
-Decisiones, limitantes, restricciones, riesgos o situaciones que condicionaron y llevaron a preferir este camino para resolver el problema — incluye restricciones técnicas, regulatorias (BCRA/UIF/PCI DSS) y dependencias de proveedores (Fintexa u otros) cuando corresponda.
+Decisiones, limitantes, restricciones, riesgos o situaciones que condicionaron y llevaron a preferir este camino para resolver el problema — incluye restricciones técnicas, regulatorias (BCRA/UIF/PCI DSS) y dependencias de proveedores (Fintexa u otros) cuando corresponda. Si existe `{{nombre_corto_proyecto}}-solution.md`, las decisiones de diseño de su sección 11 son una fuente directa acá — resumidas en prosa, no linkeadas.
 
 ### Paso 7 — Funcionalidades y roadmap
 
@@ -74,13 +76,15 @@ Todas las funcionalidades del proyecto, priorizadas con un framework explícito 
 
 Va **inmediatamente después de Funcionalidades y roadmap** — el lector entiende primero qué se construye y en qué orden, y recién después cómo se materializa en un flujo. El contenido es específico de cada proyecto: diagramas AS-IS/TO-BE, flujos de secuencia, user journey maps, casos de uso paso a paso, taxonomías o conceptos que el lector necesita para entender el resto del documento (ej. tipos de cliente, modalidades de integración) — resumido en prosa acá, no linkeado a donde viva el original. **No hay una subestructura fija que aplique a todos los PRDs**: armá la que corresponda a lo que este proyecto necesita mostrar, no reuses la estructura de un PRD anterior por costumbre.
 
+**Cierre obligatorio de la sección — resumen de cómo se propone resolver el problema.** Todo PRD termina esta sección explicando, en pocos párrafos o una lista numerada de pasos, cómo funciona la solución: quiénes participan, en qué orden ocurren las cosas, y qué pasa cuando algo falla (a nivel de consecuencia de negocio, no de manejo técnico del error). Es un resumen, no el análisis completo — si existe `{{nombre_corto_proyecto}}-solution.md`, destilalo desde ahí sin mencionarlo ni linkearlo (regla dura #8) y sin bajar al detalle que le corresponde a ese documento: nada de contrato de endpoints, tablas de reintentos/backoff, ni mapa de procedencia campo por campo — eso es lo que hace que el lector entienda el enfoque, no que pueda construirlo. Si el lector, después de leer este cierre, no puede explicar con sus palabras cómo se resuelve el problema, la sección quedó incompleta aunque tenga diagramas.
+
 ### Paso 9 — Análisis de impacto en las distintas áreas
 
 Para cada área interesada de Bind PSP (Comercial, Soporte e integraciones, Administración, Fraude, Legales, Clientes externos ya en producción) — **solo incluí las que tengan un impacto real identificado**, no completes las 6 de forma automática. Para cada área que sí incluyas, analizá dos cosas: (1) cómo la afecta el proyecto (impacto Bajo/Medio/Alto y un análisis breve); (2) **si esa área ya tiene lo que necesita para actuar** sobre ese impacto. Si no lo tiene, marcalo explícitamente como gap — y determiná si hay que incorporar una funcionalidad al alcance del proyecto para resolverlo, o si alcanza con una contingencia operativa explícita. La columna de análisis no puede quedar como una descripción pasiva del impacto: tiene que dejar claro si el área puede actuar o no, y qué falta si no puede. Si no tenés información para evaluar alguna área, preguntale al usuario en vez de asumir — no completes "Nulo" por default.
 
 ### Paso 10 — Riesgos
 
-Identificá y clasificá los riesgos del proyecto: probabilidad, impacto y mitigación para cada uno. Incluí acá los gaps de capacidad detectados en el Paso 9 que todavía no tengan resolución.
+Identificá y clasificá los riesgos del proyecto: probabilidad, impacto y mitigación para cada uno. Incluí acá los gaps de capacidad detectados en el Paso 9 que todavía no tengan resolución, y los gaps técnicos bloqueantes de la sección 12 de `{{nombre_corto_proyecto}}-solution.md` si existe.
 
 ## 📄 Formato de salida
 
@@ -96,6 +100,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 - [ ] El caso de negocio contempla tanto el beneficio esperado como el costo de construir
 - [ ] El alcance es explícito (dentro/fuera/futuro) y prioriza con el mismo framework que ya usa el roadmap real del proyecto
 - [ ] Flujos clave va inmediatamente después de Funcionalidades y roadmap
+- [ ] La sección de flujos cierra con un resumen de cómo se propone resolver el problema — quiénes participan, en qué orden, y qué pasa cuando algo falla — sin caer en el contrato de endpoints ni en el detalle que le corresponde al análisis de solución
 - [ ] El análisis de impacto solo incluye áreas con impacto real, y cada una dice si puede actuar o si hay un gap (alcance o contingencia)
 - [ ] Los riesgos tienen probabilidad, impacto y mitigación
 - [ ] El documento es autocontenido: sin links a wiki, sin nombres de archivo/skill, sin códigos de ticket, sin jerga de proceso interno
@@ -108,5 +113,5 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 3. **Preguntas abiertas** → `gaps.md` de la IDEA/proyecto; `../../../wiki/2_areas/gaps_y_preguntas.md` solo si son de contexto fijo, no del proyecto.
 4. **Índices:** tabla maestra de `wiki/1_proyectos/index.md` §2; `wiki/index.md` solo si cambió una sección de nivel PARA.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
-7. **Jira:** nunca crear ni editar tickets a partir de este PRD sin confirmación explícita del usuario.
-8. Siguiente paso sugerido: [`/idea_us`](../idea_us/SKILL.md) para bajar el PRD a historias de sprint.
+6. **Jira:** nunca crear ni editar tickets a partir de este PRD sin confirmación explícita del usuario.
+7. Siguiente paso sugerido: [`/idea_us`](../idea_us/SKILL.md) para bajar el PRD a historias de sprint.

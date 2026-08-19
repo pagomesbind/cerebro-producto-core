@@ -94,4 +94,4 @@ Antes de dar el problem statement por terminado, verificá:
 3. **Preguntas abiertas del Paso 6** → `gaps.md` de la IDEA/proyecto (severidad según impacto) si son específicas de él (directo); item `tipo: gap` en `contexto_vivo/` si son de contexto fijo.
 4. **Índices:** actualizá `wiki/1_proyectos/index.md` (última actividad) si hay proyecto; `wiki/index.md` solo si cambió una sección de nivel PARA.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
-7. Cerrá sugiriendo el paso lógico siguiente: llevar este problem statement a discovery/PRD (con las skills correspondientes cuando existan) o a `/debrief` si el trabajo de esta sesión excede el alcance del documento.
+7. Siguiente paso sugerido: [`/idea_solution`](../idea_solution/SKILL.md) para diseñar cómo funciona la solución antes de redactar el PRD, o `/debrief` si el trabajo de esta sesión excede el alcance del documento.

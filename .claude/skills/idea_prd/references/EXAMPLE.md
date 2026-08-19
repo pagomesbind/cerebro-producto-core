@@ -57,10 +57,12 @@ Priorizado con MoSCoW, sobre el roadmap ya acordado con Ingeniería para este tr
 
 ## Flujos clave y referencias clave
 
-* Flujo actual de alta de comercios (paso de carga de KYB) — [pendiente: link a diagrama/Figma existente].
-* Mockup de la nueva pantalla de preview — [pendiente de Diseño].
-* Problem statement de origen — `wiki/1_proyectos/.../artefactos/problem_statement_kyb.md`.
-* Hipótesis validada — `wiki/1_proyectos/.../artefactos/hipotesis_preview_kyb.md`.
+* Flujo actual de alta de comercios (paso de carga de KYB) — diagrama de referencia disponible internamente.
+* Mockup de la nueva pantalla de preview, todavía en definición con Diseño.
+
+### Cómo se propone resolver el problema
+
+Cuando el comercio termina de cargar su documentación de KYB, el sistema arma una vista previa con los datos ya extraídos (razón social, CUIT, tipo de documento) antes de que el comercio confirme el envío. El comercio revisa esa vista, corrige lo que esté mal directamente ahí, y recién entonces confirma — el envío al validador solo ocurre después de esa confirmación explícita. Si el comercio cierra la sesión sin confirmar, la carga queda guardada como borrador y puede retomarla más tarde sin perder lo ya ingresado.
 
 ## Análisis de impacto en las distintas áreas
 
