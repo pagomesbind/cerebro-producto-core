@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/botones_de_pago_y_qr
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

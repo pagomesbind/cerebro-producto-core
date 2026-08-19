@@ -197,6 +197,18 @@ Ejemplo — HTTP 422 (error de negocio):
 
 HTTP 500 — Error desconocido: mismo formato de body que el 422.
 
+### 4.1 El endpoint también se expone en el BFF de Onboarding (W 71)
+
+> Fuente: Jira bindpsp.atlassian.net, versión W 71 (publicada 2026-07-15), ticket [WS-1277](https://bindpsp.atlassian.net/browse/WS-1277).
+
+El endpoint `GET /walletentidad-cuenta/v1/api/v1.201/GetTotalizadoresCoelsa?cuit={cuit}&formaConsulta={formaConsulta}` documentado arriba ahora también se expone en el **BFF que consume el onboarding**, autenticando con el header `x-entidad` = Id de organización — permite que el flujo de onboarding consulte totalizadores sin pasar por el BFF de Wallet estándar.
+
+### 4.2 Límite de 30 iteraciones en producción y exclusión de CUITs (V72)
+
+> Fuente: reunión de PRE-Despliegue de Emisión V72 (2026-08-18, 14:30), minuta Gemini.
+
+Dentro de "Configuraciones Técnicas y Endpoints" del despliegue V72 (desplegado 2026-08-19 06:30-07:30), se definió: la validación de Totalizadores (CBU, CVU larga y CVU corta) se habilita en producción con un **límite estricto de 30 iteraciones**. En la misma sección se registró una decisión relacionada: se descartó incorporar CUITs a la lista blanca (whitelist) de esta validación — la regla aplica exclusivamente a personas físicas, no a personas jurídicas.
+
 ---
 
 ## 5. Documentación — Conciliar transferencias entrantes directo a Coelsa por CVU
@@ -391,3 +403,25 @@ Ejemplo de response:
 - **Cache para `GET comisiones` (ticket 1444):** aprobado para la próxima versión — mejora de rendimiento para entidades de alta frecuencia (caso Tienda Nube, ver [3_recursos/arquitectura_sistema/incidentes_de_plataforma.md §4](../../arquitectura_sistema/incidentes_de_plataforma.md)). Clave compuesta por forma de pago + canal + código de comercio, TTL de 10 minutos.
 - **Mapeo de errores de pago externos:** muchos errores se reportaban como código 500 (falla de servidor) cuando en realidad eran 422 (validación) — genera alertas falsas y complica el diagnóstico. Fix aprobado y reclasificado como bugfix.
 - **Hotfix descartado:** eliminación de una regla de convenio en el panel de administración que afecta incorrectamente a otras entidades — el problema persiste desde marzo, sin riesgo crítico inmediato. Se descarta el hotfix, se investiga en Staging para corrección en versión futura estándar.
+
+---
+
+## 6. Archivos de Cuadratura (resumen de saldos y comprobantes) — diseño para publicar en la Web
+
+> Fuente: mail "Diseño de Cuadratura en prod - Wallet" (Mariana Nadalín, 2026-08-14) — diseño formal de los archivos de cuadratura para publicar en la Web, mismo criterio que los archivos de movimientos/saldos ya documentados en §1.
+
+**Dos archivos nuevos:**
+- `CUADRATURA-RESUMENSALDOS-{{codigoOrganizacion}}-AAAAMMDD`
+- `CUADRATURA-RESUMENCOMP-{{codigoOrganizacion}}-AAAAMMDD`
+
+**Formato:** delimitado por punto y coma (`;`). Se genera un archivo diario, agrupado y zipeado por fecha de proceso, con la misma lógica de generación que los archivos de movimientos ya existentes — solo se generan en días hábiles.
+
+**`CUADRATURA-RESUMENSALDOS` — campos:** Fecha, Saldo CVU, Saldo S/extracto, Diferencia, Consumos.
+- **Saldo CVUs**: sumarización (suma/resta) de los saldos de todos los CVU de la organización al cierre del día.
+- **Mov Extracto**: sumarización (suma/resta) de todos los movimientos registrados en el extracto bancario en esa fecha.
+- **Saldo S/Extracto**: saldo al cierre del día — se toma el valor del último movimiento del día en el extracto.
+- **Diferencia**: cálculo entre Saldo CVUs y Saldo S/Extracto. **Si es negativo, es observado por el BCRA** — los saldos de las CVU deben ser iguales o menores a los saldos de la cuenta recaudadora (CBU).
+- **Consumos**: sumarización (considerando el signo) de los comprobantes de la organización.
+- Ejemplo de fila: `11/12/2024;22302808.70;19051866.42;22369580.41;66771.71;19060113.41`
+
+**`CUADRATURA-RESUMENCOMP`:** contiene el consumo del saldo del día, desagregado por tipo de comprobante.

@@ -435,6 +435,17 @@ curl -v -X GET "https://gw-staging-qrbind.epays.services/bindentidad-deuda-v2/v2
 
 > Fuente: Jira, Epic **"Carga masiva de deudas para ProvinciaNET"** — [AD-496](https://bindpsp.atlassian.net/browse/AD-496) (15 SP, generación manual masiva de QRs, AD 67.X 2026-02-09) y [AD-660](https://bindpsp.atlassian.net/browse/AD-660) (3 SP, automatización del proceso vía **SFTP**, AD 69 2026-04-29). Cliente que necesita generar en lote un gran volumen de QRs de cobro (deudas/facturas provinciales) — primero como proceso manual, luego automatizado por transferencia de archivos.
 
+### Mejoras al Monitor de API Deuda (AD 71.2 FIX, 2026-08-12)
+
+> Fuente: Jira, versión AD 71.2 FIX (PNET), tickets AD-1515/AD-1516/AD-1517/AD-1518 (todos "Desarrollo para PNET, no requiere testing", Andrea Orsini). Referencian internamente el Jira de Fintexa (DAD-2045, DAD-2001, DAD-2000, DAD-1778) — sin Epic Link de Bind PSP, sin SP cargados.
+
+- **Manejo de archivos fallidos** ([AD-1518](https://bindpsp.atlassian.net/browse/AD-1518)): si un archivo está bien nombrado pero mal generado (ej. falta un dato obligatorio en alguna fila), hoy queda indefinidamente en la carpeta `En_Proceso` con estado `ERROR` en `dbo.EjecucionFlujo`, bloqueando el procesamiento del resto de los archivos en `A_Procesar`. Fix: se crea una carpeta `Fallidos` en el Storage; el Monitor mueve ahí los archivos con estado `ERROR`. El archivo queda comprimido (se elimina el `.csv` suelto si existe) y descargable desde el endpoint de la API `FileManager`.
+- **Salida comprimida** ([AD-1517](https://bindpsp.atlassian.net/browse/AD-1517)): los archivos de salida del proceso ahora se generan en `.zip`, para evitar problemas de descarga por tamaño.
+- **Entrada comprimida** ([AD-1516](https://bindpsp.atlassian.net/browse/AD-1516)): el Monitor ahora descomprime los `.zip` de entrada para poder procesar el `.csv` (contraparte del anterior, del lado de ingesta).
+- **Archivado histórico** ([AD-1515](https://bindpsp.atlassian.net/browse/AD-1515)): se deja copia del archivo histórico procesado (`{nombre-archivo}_{fecha-proceso}.csv`) en `rendiciones/entidades/A026/QrMasivo/Historico`, se deja de copiar a `rendiciones/entidades/A026/QrMasivo/Procesados`, y una vez que el proceso del archivo actual queda `NOTIFICADO`, se mueven a `Historico` los archivos del procesamiento anterior que no correspondan al nombre recién generado.
+
+> **Nota — no cruza con `1_proyectos/`:** esta misma versión (AD 71.2 FIX (PNET)) también publicó AD-861, AD-860 y AD-1140, ya documentados vía `/sync_meetings` (release v71.2 2026-08-10, ver abajo) y en `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md` y `1_proyectos/proyecto-ministerio/prd-134_ministerio_productos_bs20_pos/proyecto.md` — esta ingesta solo confirma la versión de publicación de esos tres.
+
 ## Cobro con tarjeta al leer un QR — billetera Modo (PRD-7, AD V71)
 
 > Fuente: Reunión "AD V 71 - Análisis de riesgo" (2026-07-29), minuta Gemini. IDEA trackeada: PRD-7 — Cobrar QR con tarjetas (MODO) (Nicolás Colón, EN CURSO — proyecto en su propio Cerebro desde 2026-08-13) — Epic [AD-336](https://bindpsp.atlassian.net/browse/AD-336). Release en camino a producción, pospuesto al lunes por la demo Coca-Cola Andina (esta sección cubre solo la mecánica de producto).

@@ -428,3 +428,14 @@ Los endpoints de alta de cuenta Wallet (cuenta+CVU, cuenta+CVU+cuenta comitente,
 **Bugs encontrados en la propia estandarización**: el formato de `motivoError` en el endpoint de alta de cuenta comitente no coincidía con el usado en alta de cuenta Wallet (corregido, debían unificarse); el mensaje aparecía en inglés en vez de español para fallas de alta CVU+Lirium; y se detectó un caso de alta "exitosa" (HTTP 2xx) con `cvu=null`, `id=0` pero `cvuCreado=true` — bug de validación (no solo de mensaje): debía tratarse como error reintentable, igual que un timeout, no como éxito. *(Atribución de release: `motivoError` salió en W 67/WS-211+WS-212, 2026-01-27 — naming "Error en alta cvu (...)"/"Error en alta Comitente (...)" definido por el PM; el fix del CVU fantasma en el hotfix W 67.2 HF/WS-472.)*
 
 > Ver también [wallet/cuenta_remunerada_fci.md §4.4](cuenta_remunerada_fci.md) — mismo endpoint de alta de cuenta comitente, cluster de bugs de validación de datos (distinto ángulo: formato de campos vs. mensaje de error).
+
+---
+
+## 7. Historial de altas de organización y migraciones — tramo W71
+
+> Fuente: Jira bindpsp.atlassian.net, tickets WS-1432+WS-1431 (W 71.3 FIX), WS-1470 (W 71.7 FIX), WS-1429 (W 71.4 FIX), WS-1444 (W 71.6 FIX). Continúa el patrón de §1-2 con casos reales.
+
+- **HAPSA (org 62, [WS-1432](https://bindpsp.atlassian.net/browse/WS-1432), W 71.3 FIX):** configuración de app setting `x-entidad` para que el onboarding exitoso de HAPSA cree CVU directamente en la organización 62.
+- **App Android de demo en PROD (org 64, [WS-1431](https://bindpsp.atlassian.net/browse/WS-1431), W 71.3 FIX):** se crea una app "DEMO" en producción para que Bind PSP haga demos/pruebas productivas — apunta a una organización creada solo para ese fin, nunca se publica en las app stores. Alcance funcional: todo excepto viaje QR e ingresar dinero con TIN en puestos físicos; sí incluye lo más nuevo (DEBIN recurrente, ingresar dinero con tarjetas).
+- **Organización 66 — PAFX ([WS-1470](https://bindpsp.atlassian.net/browse/WS-1470), W 71.7 FIX):** alta de app setting del WalletBFF en PRODUCCIÓN para la organización PAFX (`AltaUsuarioWallet: false`, `UsuarioMail: false`, versiones `APIPAFX`/`APKPAFX`/`IPAPAFX`) — nueva organización habilitada en prod, sin más contexto de negocio en el ticket.
+- **Pasaje a PROD de AuthExternal V2, por etapas ([WS-1429](https://bindpsp.atlassian.net/browse/WS-1429) relevamiento/soporte técnico W 71.4 FIX; [WS-1444](https://bindpsp.atlassian.net/browse/WS-1444) etapa 2/3 W 71.6 FIX):** migración de autenticación externa en curso, por microservicios. La etapa cubierta en esta ingesta migra **Wallet.BIND** y **SharedDebin**. Sin detalle de qué etapas ya pasaron ni cuántas faltan — gap de visibilidad del roadmap completo de esta migración.

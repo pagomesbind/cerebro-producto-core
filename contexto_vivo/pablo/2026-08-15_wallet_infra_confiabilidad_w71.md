@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/historial_confiabilidad_t
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

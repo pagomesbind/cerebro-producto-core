@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "3_recursos/datos/log_versiones_publicadas.md — fila 'AD | ✅ COMPLETO' de la tabla de estado del backfill, que afirma cierre de punta a punta del espacio"
 confianza: alta
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ tipo: conocimiento
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

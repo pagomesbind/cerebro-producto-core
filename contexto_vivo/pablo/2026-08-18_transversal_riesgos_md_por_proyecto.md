@@ -10,7 +10,7 @@ destino_propuesto: CLAUDE.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

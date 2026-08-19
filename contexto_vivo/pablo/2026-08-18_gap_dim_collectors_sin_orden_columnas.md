@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: capturado
+estado: ingestado
 ---
 
 **Severidad:** Media.

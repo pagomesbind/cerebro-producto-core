@@ -74,9 +74,20 @@ Cuando Recycle V2 logra crear un comprobante de cobro, se envía un webhook a la
 
 Nota aparte (mismo lote de regresión, no específico de Recycle): un bug de la API de Comprobantes exponía un atributo `detalle` (incluso en `null`) en la respuesta de creación exitosa de cualquier comprobante — atributo que solo debería aparecer cuando el comprobante entra al circuito de Recycle V1 por falta de saldo.
 
+### Contracargo de débito recurrente pasa a producción + fix de trazabilidad (semana del 2026-08-18)
+
+> Fuente: minuta de Gemini de "Productos - Weekly Seguimiento" (2026-08-18).
+
+**Contracargo de débito recurrente — pruebas finalizadas, pasa a producción la semana del 2026-08-18.** En la misma reunión se decidió el criterio de cuándo pasar una funcionalidad a "shipping": recién cuando esté **enteramente en producción** (no cuando solo falte el propio pase), a diferencia del criterio anterior que la marcaba shipping con trabajo pendiente del lado de Bind PSP.
+
+**Hallazgo de trazabilidad (encontrado durante las pruebas):** existe una especificación de Wallet que habilita el aviso de "reciclado" (Recycle) en operaciones — Recycle se usa normalmente para impuestos, cuyas operaciones no tienen una operación relacionada. Con el contracargo de débito recurrente, en cambio, sí existe una operación original relacionada al momento del cobro. Sin esta especificación habilitada, cuando Recycle cobraba el contracargo, **no le avisaba a la operación original que debía cambiar de estado** — se perdía la trazabilidad entre el contracargo y la operación que lo originó. Ya se dio de alta esa especificación en **todas las organizaciones en producción** (no solo la nueva) para resolverlo de forma retroactiva.
+
+**Decisión de comunicación:** no hace falta avisar a los clientes del contracargo en sí — el aviso relevante es interno (Comercial/todo el equipo), para que sepan que ya se le puede ofrecer a cualquier organización, con el riesgo estándar de contracargo ya conocido.
+
 ## Ver también
 
 - [tin_tarjetero.md](tin_tarjetero.md) — TIN es el cliente de origen de Recycle V1 (Viajes QR); Recycle V2 generaliza el mecanismo para cualquier comprobante Wallet.
+- [debin_y_fondeo.md](debin_y_fondeo.md) — contracargos de DEBIN recurrente, mecanismo de origen del contracargo que dispara el cobro vía Recycle documentado arriba.
 
 ---
 *Fuente: Notion histórico, Epics "Motor general de recycle" (75 SP, 19 tickets) y "Parche de recycles de viajes" (13 tickets) — ingesta 2026-07-06.*

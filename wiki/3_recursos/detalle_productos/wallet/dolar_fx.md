@@ -61,6 +61,20 @@ La versión W 69 contiene el corazón funcional de Pagos FX, ya en producción:
 - **Consultas**: pagos FX por `idOperacion`/`idRed`/`idExterno` sobre los endpoints estándar de consulta de operaciones ([WS-373](https://bindpsp.atlassian.net/browse/WS-373)); lista de movimientos FX con filtros y paginado ([WS-717](https://bindpsp.atlassian.net/browse/WS-717)); beneficiario puntual por `idBeneficiario`/`idExterno` ([WS-707](https://bindpsp.atlassian.net/browse/WS-707)); lista de beneficiarios por cuenta ([WS-371](https://bindpsp.atlassian.net/browse/WS-371)); corredores habilitados ahora devuelven también `tipoPago` e `instrumentoPago` ([WS-585](https://bindpsp.atlassian.net/browse/WS-585)).
 - **Beneficiarios**: `idExterno` opcional en el alta para conciliación del lado de la organización — **sin validación de unicidad, responsabilidad del cliente** ([WS-627](https://bindpsp.atlassian.net/browse/WS-627)). Décimo wrapper MC Move: **Account Validation Push Notification** ([WS-817](https://bindpsp.atlassian.net/browse/WS-817)).
 
+### 2.6bis Primer PagoFX productivo real (2026-08-14) — sin webhooks de estado del lado de Mastercard
+
+> Fuente: informe semanal de Fintexa "Informe Estado Proyectos Emisión al 14/08/2026" (Nicolás Pomponio). Épica "Mastercard Move (Pagos Crossborder)" — iniciativa de Luciana Rudaz (PRD-10).
+
+**Hito:** se realizó la **primera transacción crossborder de Pagos FX en ambiente PROD**.
+
+**Hallazgo operativo:** no se observó la llegada de webhooks por cambios de estado de pago del lado de Mastercard — se solicitó información al proveedor. El pago terminó resolviéndose por **consulta de estado vía BGS**, no por webhook. Se sigue dando soporte al negocio y analizando resultados del ambiente productivo, detectando ambigüedades y levantando nuevos tickets para el MVP2.
+
+**Avance en STG (MVP2):** se detectaron ajustes al flujo de alta de beneficiario a partir de diferencias observadas en PROD. Fixes en curso: contemplar campos opcionales con obligatoriedad condicional (special notes) en la consulta del Endpoint Guide; obtener datos del sender para asociarlos al alta de beneficiario; excluir `purpose_of_payment` de la validación y persistencia en el alta de beneficiario; validar `purpose_of_payment` en la ejecución de un pago FX.
+
+**Alerta de alcance:** se agregaron 4 nuevas historias de usuario al MVP2 no contempladas en el alcance inicial de la versión W 72.1 — riesgo sobre los plazos comprometidos, señalado explícitamente por el equipo.
+
+**Próximos pasos:** esperar respuesta de Mastercard sobre los webhooks faltantes; colaborar con el front del portal en soporte de configuraciones.
+
 ### 2.7 Portal Web de Pagos FX — el perfil (b) del §2.2 se construyó (vía `/sync_releases`, Adquirencia)
 
 > Tickets [AD-966](https://bindpsp.atlassian.net/browse/AD-966) (15 SP, Módulo Operaciones), [AD-965](https://bindpsp.atlassian.net/browse/AD-965) (7 SP, Módulo Gestión Destinatarios) y [AD-703](https://bindpsp.atlassian.net/browse/AD-703) (15 SP, Módulo Pagos al Exterior y Dashboard resumen), Epic **"Pagos FX - Portal Web"**, publicados en **AD 70.1** (2026-06-24) — encontrados en el backfill del espacio **AD** (Adquirencia), no WS. Confirma el perfil (b) descripto en §2.2 ("el que quiere una plataforma web/app lista para cargar beneficiarios, fondear y pagar sin integrarse"): efectivamente se construyó como un portal propio (`commerce-staging.epays.services/fxpagoqa`, login por organización tipo Física), con wizard de "Hacer un pago" (selección de beneficiario → confirmación → pantalla "Transferencia en proceso"), módulo de gestión de destinatarios/beneficiarios, módulo de "Mis Operaciones" (histórico, con opción de "repetir operación") y un dashboard resumen. Bugs de UX menores publicados en la misma tanda ([AD-1251](https://bindpsp.atlassian.net/browse/AD-1251)/[AD-1239](https://bindpsp.atlassian.net/browse/AD-1239)): doble spinner de carga simultáneo, y el cartel de "operación en proceso" desaparecía demasiado rápido (se corrigió consultando el estado real de la operación antes de navegar, en vez de asumir éxito apenas responde la cotización).

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/datos/changelog_releases.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: capturado
+estado: ingestado
 merge_commit:
 ---
 

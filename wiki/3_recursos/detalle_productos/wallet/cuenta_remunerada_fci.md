@@ -252,6 +252,20 @@ Historia [WS-730](https://bindpsp.atlassian.net/browse/WS-730) (7 SP, estado "Co
 
 > Nota: este cluster de bugs de contrato (nomenclatura, formato de fecha, validación de tipos) repite el mismo patrón ya visto en el endpoint de totalizadores CBU/CVU de Coelsa (ver [conciliacion_y_totalizadores.md §3.1](conciliacion_y_totalizadores.md#31), IDEA PRD-56) — parece un punto ciego recurrente de QA de contrato en endpoints nuevos de Wallet, no exclusivo de FCI.
 
+### 4.6 Estado operativo agosto 2026 — MVP2, webhook faltante y duplicados (W 71)
+
+> Fuente: informe semanal de Fintexa "Informe Estado Proyectos Emisión al 14/08/2026" (Nicolás Pomponio) + mail "Consultas sobre webhook de FCI y finalización de procesamiento de paquetes" (Franco Gimenez, Soporte BIND, 2026-08-14) + Jira WS-1284 (release W 71, 2026-07-15).
+
+**Avance del MVP2:** en curso, con entrega en PROD estimada para fines de agosto 2026 (MVP1 se publicó el 10/12/25). Se repitieron problemas productivos por cambio de IP de los servicios de Poincenot (mismo patrón de incidente ya documentado en este archivo) — se lograron salvar sin impacto. Desarrollo en curso: orquestador para alta de nuevos clientes desde Soporte, nueva forma de iniciar los procesos de FCI para todas las organizaciones con remuneración de cuentas, mejoras complementarias de configuración de organizaciones por API, y análisis de alertas ante fallas de los procesos.
+
+**Webhook de FCI nunca recibido en PROD (pregunta abierta, sin resolver al cierre de esta ingesta):** BIND nunca recibió de parte de Poincenot el webhook de FCI en ambiente productivo — pendiente que indiquen qué hay que configurar del lado de BIND o qué coordinar para recibirlo correctamente.
+
+**Finalización de procesamiento desalineada entre organizaciones:** para **La Virginia**, el proceso de FCI siempre queda en estado "Pendiente" salvo que Soporte avise por Telegram a Poincenot para que lo finalicen manualmente. **Coppel** suele finalizar correctamente solo (alrededor de las 17:00/17:30), mientras que La Virginia normalmente termina 1-2 horas después. Se pidió ajustar el proceso para que todas las organizaciones finalicen aproximadamente al mismo horario — el problema va a crecer porque se sigue sumando entidades (próxima: **HIPO**), y sin alineación la brecha de horarios se agranda con cada organización nueva. BIND ofreció coordinar una reunión con Infra si hace falta. Bloqueo/alerta activa reportada en el mismo informe semanal: hay que controlar diariamente el proceso de Coppel y La Virginia en PROD.
+
+**Registros duplicados en `FCICuentasRemuneradas` por condición de carrera** ([WS-1284](https://bindpsp.atlassian.net/browse/WS-1284), estado "EN QA" al momento del release, publicado igual en W 71): dos PODs del microservicio `Shared.Remunera` consumen el mismo mensaje de cola y ambos insertan un registro en `FCICuentasRemuneradas` para el mismo `IdCuenta`, generando duplicados. Objetivo del fix: evitar la duplicación (constraint o lock a nivel de `IdCuenta`).
+
+> Atribución de versión: [WS-730](https://bindpsp.atlassian.net/browse/WS-730) (§4.5), [WS-1306](https://bindpsp.atlassian.net/browse/WS-1306)/[WS-1305](https://bindpsp.atlassian.net/browse/WS-1305)/[WS-1304](https://bindpsp.atlassian.net/browse/WS-1304)/[WS-1303](https://bindpsp.atlassian.net/browse/WS-1303) (defectos de contrato del endpoint de Liquidaciones, §4.5) confirman `releaseDate` **2026-07-15** (W 71) — ya documentados acá vía `/sync_meetings`, sin contenido nuevo.
+
 ## 5. Validaciones del dato Cuenta Comitente (referencia de integración)
 
 > Estado: en producción. Fusionado desde `detalle_productos/wallet/otros_manuales.md §4` en la reestructuración PARA en cascada (2026-08-12).

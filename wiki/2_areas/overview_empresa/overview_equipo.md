@@ -12,6 +12,14 @@
 - Nómina: 29 posiciones + 4 externos; se pidieron 9 posiciones nuevas, con expectativa de aprobación de solo 3 (foco en Auditoría Interna, Riesgo Integral y el rol de CTO) para cubrir brechas de prevención de fraude y cumplimiento.
 - **Decisión de producto:** estandarizar el onboarding — se eliminan las excepciones de proceso propio para clientes como Arcos Dorados o Tienda Nube; toda excepción futura debe debatirse en el CCU. Reconfirmado en la reunión "Join Soporte Clientes" del 2026-07-01: directriz de que todo onboarding pasa por BM PSP, migración de clientes en procesos externos a largo plazo.
 
+## Nueva Gerencia de Operaciones (2026-08-18)
+
+> Fuente: minuta de Gemini de "Repaso Semanal líderes" (2026-08-18, malzogaray@bind.com.ar).
+
+Se presentó oficialmente a **Mariana Nadalin** como nueva **Gerente de Operaciones**, ingresada el 3 de agosto de 2026, para asistir a los equipos Fintexa y PSP. Ya participaba de reuniones técnicas previas (ej. minutas de Análisis de riesgo de Emisión V72) bajo su mail `mnadalin@bind.com.ar` — este mail formaliza el rol de Gerente de Operaciones para quien ya venía siendo parte del equipo.
+
+**Cronograma presencial en Buenos Aires del equipo Fintexa** (coordinado en la misma reunión): Melisa Belpassi y Nicolás Pico asisten a partir del 19/08; Matías Alzogaray de miércoles a viernes.
+
 ## Áreas internas
 
 | Área                               | Responsabilidad core                                                                                                                                                                                                                                                             | Líder / Responsable                 | Notas operativas                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -34,5 +42,6 @@
 | **Pentass** | Software factory que desarrolla el producto **Ardid**. |
 
 ---
-*Última actualización: 2026-07-14 — `/sync_meetings` (backfill 30 días): reestructuración organizacional del 2026-06-25 (Comité Directivo Reducido, Hernán Clarich CTO, estandarización de onboarding). Ver `log_decisiones.md`.*
+*Última actualización: 2026-08-18 — `/sync_mails`: nueva Gerente de Operaciones (Mariana Nadalin) y cronograma presencial del equipo Fintexa en Buenos Aires.*
+*Última actualización anterior: 2026-07-14 — `/sync_meetings` (backfill 30 días): reestructuración organizacional del 2026-06-25 (Comité Directivo Reducido, Hernán Clarich CTO, estandarización de onboarding). Ver `log_decisiones.md`.*
 *Última actualización anterior: 2026-07-04 — Completado el Equipo de QA (IT) con Bethania Tornari y Ana Moreno, Analistas de QA (confirmado por el usuario, cerraba un gap de iniciales sin identificar en el diagrama de responsables de Jira).*
