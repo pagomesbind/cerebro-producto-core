@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: a333917
 ---
 
 PRD-147 (Guardar documentación en el producto legajo de Worldsys, proyecto Onboarding Estratégico, KR2) actualizó su problem statement a v2.0 el 2026-08-19. El cambio de fondo: el riesgo crítico que bloqueaba el diseño (Legajo Digital de Fintexa vs. Worldsys como repositorio) ya estaba resuelto desde el 2026-08-18 a favor de Worldsys como único repositorio activo — esta sesión consolidó esa resolución en el documento de problem statement, que había quedado desactualizado desde su v1.0 (2026-07-21), previa a que se cerrara esa pregunta.

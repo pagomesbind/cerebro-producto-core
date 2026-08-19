@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: a333917
 ---
 
 Conocimiento técnico reusable sobre la API pública de Worldsys (producto **ComplianceOne**), el sistema de control documental/legajo que Bind PSP integra por mandato de Compliance (ver PRD-147). Destilado del Swagger público v1.0.0 (servidor único `https://api.complianceone.worldsys.io/BIND_PSP`, 518 endpoints, capturado 2026-07-20 — es un reporte HTML estático, no una especificación interactiva) y del hilo de mail histórico con el proveedor.
