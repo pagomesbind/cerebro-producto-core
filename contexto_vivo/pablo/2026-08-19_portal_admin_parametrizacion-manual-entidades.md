@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Nota de fuente:** esta reunión llegó solo por el detector de Gmail — la búsqueda en Drive devolvió el archivo como un `shortcut` (`application/vnd.google-apps.shortcut`) sin contenido resoluble por las tools disponibles, así que el detalle completo (incluyendo hora exacta de fin y posibles matices de la transcripción) no pudo verificarse contra la minuta original. El contenido de este item viene íntegro del cuerpo del mail de Gemini.

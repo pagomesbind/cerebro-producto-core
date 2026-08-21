@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 PRD-214 ("Carga masiva de legajos de cuentas de wallet existentes", vehículo de KR2 del foco Onboarding) corrió su primer discovery formal el 2026-08-20 (`/idea_start`, Modo D — la carpeta ya existía desde 2026-07-17 con contexto acumulado pero sin gates corridos).

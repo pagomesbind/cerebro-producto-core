@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2026-08-19_decision_api-configuracion-requisito-productos (mismo tema, versión previa sin esta corrección)"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Corrección aportada por Pablo Gomes (PM líder de Producto), 2026-08-20:** el item `2026-08-19_decision_api-configuracion-requisito-productos` (todavía sin `/context_merge`) capturó que el equipo "priorizó" desarrollar un orquestador de configuración de entidades vía API en lugar de invertir en el panel Admin. Al correr `/idea_start` sobre el proyecto `convenios_configuracion` (mismo dominio — configuración de entidades/comercios), Pablo Gomes aclaró explícitamente: **esa decisión se tomó sin involucrar formalmente a Producto** — no pasó por el criterio de priorización del equipo (`2_areas/procesos/criterios_de_priorizacion.md`) ni por una evaluación de capacidad real contra el resto de la cartera.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Decisión acordada (2026-08-19, reunión "Parámetros de entidades"):** frente a los incidentes recurrentes por configuraciones manuales y fragmentadas de entidades entre productos, el equipo priorizó desarrollar un **orquestador de configuración vía APIs** (con ~50 parámetros estandarizados) para automatizar el alta/configuración de entidades, en lugar de invertir en modificar directamente el panel de administración actual. Mientras el orquestador no exista, se documentarán plantillas JSON puntuales para productos de alto volumen que hoy se configuran a mano (ej. Mastercard).

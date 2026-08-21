@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Patrón de riesgo (no exclusivo de convenios):** si una configuración de comisión queda mal cargada en el sistema interno de Bind PSP y Soporte no lo detecta a tiempo, Bind PSP puede seguir facturando a una entidad/comercio con un arancel más bajo del real (ej. "arancel reducido") mientras el procesador (Coelsa u otro) le está cobrando a Bind PSP el arancel completo por cada transacción — la diferencia es **pérdida neta directa**, no solo un problema de UX/proceso.

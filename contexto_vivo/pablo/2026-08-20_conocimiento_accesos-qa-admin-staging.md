@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Acceso de prueba al Admin (Centralizador de Cobro) en STAGING**, aportado por el PM para que futuras sesiones de QA/discovery puedan navegar el portal e inspeccionar pantallas sin depender de que el usuario esté presente.

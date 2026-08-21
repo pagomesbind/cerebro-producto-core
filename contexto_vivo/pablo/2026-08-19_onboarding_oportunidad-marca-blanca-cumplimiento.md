@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Oportunidad:** ofrecer el onboarding propio de Bind (flujo de alta PJ con validación ARCA, carga de documentos con IA, beneficiarios finales, verificación biométrica vía Neurotecnology/Renaper, y la consola de cumplimiento con matriz de riesgo, screening de sanciones OFAC/ONU/UIF/Repet/PEP y auditoría completa) como **producto modular de marca blanca** para clientes externos que necesiten su propio flujo de compliance de onboarding, más allá del uso interno actual de Bind.

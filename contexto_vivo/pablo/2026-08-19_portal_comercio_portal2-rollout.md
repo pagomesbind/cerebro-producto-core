@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Contexto:** el Portal 2.0 (nueva versión del portal de comercios, migrado a una versión más reciente de Next.js) había completado pruebas hace tiempo pero quedó frenado. Reunión de retomada entre Bind (Matías Alzogaray, Andrea Orsini, Gonzalo Rivera, Pablo Gomes) y el proveedor Fintexa (Emiliano Santi, Agustín Grau, Mariela Marin, Melisa Belpassi).

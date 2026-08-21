@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Cliente:** OCTAGON (log_clientes.md: "En producción + Evolutivo en Intg" — QRI, Wallet, Onboarding).

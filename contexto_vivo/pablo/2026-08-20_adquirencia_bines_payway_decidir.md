@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 Investigación técnica abierta de Fintexa (Agustín Grau, CTO) sobre rechazos de transacciones con tarjeta relacionados a la identificación de BINES, cruzando tres fuentes: la configuración/identificación de BINES propia de Bind PSP, la base de datos de BINES de Payway (provista por Gonzalo Rivera) y lo que responde Decidir cuando rechaza una transacción.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 5f0974a
 ---
 
 **Contexto:** Luciano Dufain (Bind) hace una demo end-to-end del onboarding propio de persona jurídica a Octagon (cliente ya en producción, en integración evolutiva) y al equipo de Compliance de Banco Industrial (María Mercedes Carrasco), con Luciana Rudaz, Emma Vignoles, Adriana Endzeliz, Diego Weledniger y Pablo Gomes de Bind. Complementa lo ya documentado en `onboarding_personas_juridicas.md` (MVP OB PJ) y `propuesta_fintexa_onboarding_juridico.md` (base funcional del proveedor) con el detalle de cómo se ve/vende el flujo hoy en una demo real a un cliente.
