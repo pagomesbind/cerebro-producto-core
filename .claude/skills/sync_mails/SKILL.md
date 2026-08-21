@@ -23,7 +23,7 @@ El PM recibe a diario mails con conocimiento que muere en la bandeja: tickets co
   - **Verificado 2026-07-14 (smoke test):** la query base completa (con `-category:` y múltiples `-from:`) es aceptada por el conector. Usar `view: "THREAD_VIEW_MINIMAL"` — devuelve remitente, asunto, snippet, labels y destinatarios por mensaje: suficiente para el triage sin abrir cuerpos. `pageSize` máximo 50; paginar por `nextPageToken`.
   - ⚠️ **El match es a nivel thread:** un hilo viejo con un mensaje nuevo en la ventana vuelve COMPLETO (todos sus mensajes, incluso los `SENT` propios). Para el dedupe, comparar las fechas/ids de los mensajes contra el último barrido y analizar solo los nuevos.
 - **Cero escrituras en Gmail:** el tracking de procesados es por archivo de control (threadId), NUNCA por labels ni marcando leídos.
-- **Cuenta:** pagomes@bind.com.ar.
+- **Cuenta:** la del campo `email` en `identidad.local.md` (raíz del repo de cada instalación) — nunca hardcodeada, cada PM/PO tiene la suya.
 
 ### 💰 Estrategia de eficiencia de tokens — pipeline en 3 capas (núcleo del diseño)
 
@@ -80,6 +80,7 @@ in:inbox after:YYYY/MM/DD before:YYYY/MM/DD -category:promotions -category:socia
 
 ### Paso 0 — Estado y modo
 
+0. Leé `identidad.local.md` (raíz del repo) para resolver el campo `email` — es la cuenta de Gmail sobre la que corre toda la skill (query, dedupe de remitente propio, etc.). Nunca asumas ni hardcodees un mail.
 1. Leé [`wiki/1_proyectos/logs_sync/log_mails.md`](../../../wiki/1_proyectos/logs_sync/log_mails.md): fecha/hora del último barrido, threadIds ya analizados, pendientes. Leé también [`contexto_vivo/index.md`](../../../wiki/1_proyectos/contexto_vivo/index.md) para no duplicar un item ya capturado.
 2. **Modo incremental (sin argumento — el de la scheduled action):** ventana = desde la fecha del último barrido (inclusive) hasta hoy. Cubre fines de semana y días salteados — nunca asumas "solo ayer". No interactivo: procesá todo el delta sin preguntas.
 3. **Modo `backfill [N]`:** hasta N días atrás (default 30, tope 31). Cronológico viejo→nuevo. Sin comentarios Jira (regla dura 1). Interactivo: tandas de ~10 threads con checkpoint al usuario; commit por tanda.
