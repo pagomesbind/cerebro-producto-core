@@ -69,6 +69,18 @@ Bugs y mejoras puntuales de la APK POS y su BFF, todos ya resueltos ("En Producc
 
 **Versiones de publicación** (vía `/sync_releases`, backfill XML): tanda de UX menores de POS en **AD 65** (2025-11-17, lanzamiento del tracking Jira) — [AD-14](https://bindpsp.atlassian.net/browse/AD-14) (falta tilde en logout), [AD-15](https://bindpsp.atlassian.net/browse/AD-15) (círculo del calendario desplazado), [AD-17](https://bindpsp.atlassian.net/browse/AD-17) (QR queda cargando sin mostrar resultado), [AD-31](https://bindpsp.atlassian.net/browse/AD-31)/[AD-32](https://bindpsp.atlassian.net/browse/AD-32) (filtros de movimientos), [AD-33](https://bindpsp.atlassian.net/browse/AD-33) (comprobante por email ilegible). Bugs de **Reporting del Admin** (Epic "Reporting", **AD 66** 2025-12-16): [AD-85](https://bindpsp.atlassian.net/browse/AD-85) (reporte de comercios con caracteres rotos), [AD-86](https://bindpsp.atlassian.net/browse/AD-86) (CSV con fechas ordenadas ascendente, debían ser descendente), [AD-93](https://bindpsp.atlassian.net/browse/AD-93) (columnas de importe sin formato consistente), [AD-136](https://bindpsp.atlassian.net/browse/AD-136) (importe con punto en vez de coma decimal).
 
+## 6. Desalineación entre la base de BINES de Payway y lo que responde Decidir al rechazar — investigación abierta
+
+> Fuente: hilo de mail "Análisis BINES Payway/Decidir", Fintexa (Agustín Grau, CTO), mensajes 2026-05-20 a 2026-08-19. Ticket de soporte Fintexa [AD-681](https://fintexa.atlassian.net) asociado.
+
+Investigación técnica de Fintexa sobre rechazos de transacciones con tarjeta relacionados a la identificación de BINES, cruzando tres fuentes: la configuración/identificación de BINES propia de Bind PSP, la base de datos de BINES de **Payway** (provista por Gonzalo Rivera) y lo que responde **Decidir** cuando rechaza una transacción (Decidir/Payway/Prisma son el mismo gateway, ver [`2_areas/direccion/decisiones.md`](../../../2_areas/direccion/decisiones.md) 2026-07-17).
+
+**Primer análisis (2026-05-20, muestra de un día):** no se pudo concluir que los rechazos se expliquen por las diferencias entre bases — hay transacciones con los mismos atributos que sí están aprobadas. Hace falta ajustar la base de BINES propia, pero no está claro qué cambiar: lo que dice Decidir no coincide con la BD de BINES de Payway, y además hay BINES obtenidos de Global Processing (GP) que sí coinciden con los de Payway.
+
+**Segundo análisis (2026-08-19, muestra completa de aprobadas y rechazadas de un día completo, 18/08):** a diferencia del primero (muestra parcial), este análisis concluye que **hay acciones concretas que se pueden tomar ya y que darían mejoras instantáneas** — pendiente de una reunión para definirlas e implementarlas.
+
+**Estado:** sin cierre — pendiente que Bind PSP acepte la reunión propuesta por Fintexa. El informe interactivo con el detalle de "qué BINES corregir" está en un adjunto HTML no leído en el flujo de ingesta.
+
 ## Ver también
 
 - [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) — mecánica de Centralizador y multiPSP en el canal QR (mismo concepto de orquestación multi-procesador).

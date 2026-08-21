@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/portal_admin/pedidos_de_clientes
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

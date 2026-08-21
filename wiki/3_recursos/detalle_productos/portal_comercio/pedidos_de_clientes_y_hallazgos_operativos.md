@@ -33,6 +33,16 @@
 
 **CITYGAS — pedido de UX** ([AD-593](https://bindpsp.atlassian.net/browse/AD-593), Portal 2.0 V1, estado "Con defecto"): el cliente City Gas, con gran volumen de sucursales/cajas configuradas, pidió que el desplegable de filtro "Sucursales" en Transacciones se muestre ordenado alfabéticamente (A-Z) en vez de sin orden — ver también el pedido ya documentado de CITYGAS sobre totalizador y datos del pagador en el canal QR, abajo.
 
+## Retomada del rollout de Portal 2.0 — despliegue piloto por entidad (reunión "Portal 2.0", 2026-08-19)
+
+> Estado: discovery/pendiente de desplegar — el Portal 2.0 había completado pruebas hace tiempo (ver sección de bugs de QA arriba) pero quedó frenado; esta reunión lo retoma.
+
+**Estado técnico encontrado:** tras la actualización de Next.js del portal, se detectó que el portal no muestra correctamente los mensajes de error esperados — la validación y el bloqueo de acciones no autorizadas funcionan bien, pero el mensaje que se le muestra al usuario está mal mapeado (mismo problema al acceder a una página inexistente, debería dar un 404 informativo). Durante una demo reciente a Coca-Cola (Andina) se encontraron detalles menores adicionales: una fecha con formato erróneo y un filtro que no funcionaba. Estos hallazgos están trackeados en el tablero de Fintexa/Querencia, pero al momento de la reunión todavía no estaban desplegados en staging. Mejora de UX de soporte planteada: hoy los mensajes de error silenciosos obligan al usuario a mandar una captura sin contexto (sin trace ID, sin hora, sin saber qué página/botón) — se pidió que el sistema entregue siempre un mensaje claro, un trace ID o una redirección adecuada en vez de fallar en silencio.
+
+**Decisión de despliegue:** en lugar de esperar a resolver todos los detalles menores, se aprobó un despliegue controlado/piloto — habilitar el Portal 2.0 primero para 1-2 entidades específicas (sin impacto en el resto), evaluando ahí las mejoras de UX antes de una migración masiva. Al no haber ningún cliente operando hoy en Portal 2.0, el pasaje es flexible en fecha/horario mientras no haya clientes habilitados; una vez habilitado el primero, sí requerirá ventana controlada fuera de horario transaccional.
+
+**Logística de la migración:** transparente para el usuario final — mismas credenciales, mismas URLs, y las rutas viejas redirigen automáticamente a las nuevas (mapeo completo ruta vieja → ruta nueva ya armado). El rollback a Portal 1.0 es técnicamente posible.
+
 ## Pedidos puntuales por cliente
 
 - **CITYGAS**: mejora de visualización del totalizador y agregar datos del pagador en el portal Comercio del canal QR (Pendiente).
@@ -60,5 +70,6 @@ Extracto de movimientos con formato HTML (no solo CSV) para Portal Comercio:
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración" y "Reporting" — ingesta 2026-07-06.*
-*Última actualización: 2026-08-15 — `/sync_releases`: nueva sección "Rollout Portal 2.0 (mayo 2026) — bugs de QA" (20 tickets, ingesta retroactiva por gap del backfill anterior).*
+*Última actualización: 2026-08-19 — nueva sección "Retomada del rollout de Portal 2.0 — despliegue piloto por entidad" (reunión "Portal 2.0").*
+*Última actualización anterior: 2026-08-15 — `/sync_releases`: nueva sección "Rollout Portal 2.0 (mayo 2026) — bugs de QA" (20 tickets, ingesta retroactiva por gap del backfill anterior).*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Comercio de 3 archivos-cola de `detalle_productos/transversal/`.*

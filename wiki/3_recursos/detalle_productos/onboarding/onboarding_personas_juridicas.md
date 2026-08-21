@@ -98,6 +98,31 @@ Cada Representante Legal/Apoderado cargado en el paso 9 completa su propio flujo
 
 Confirma la mecánica ya documentada en `manuales_operativos.md §1` (misma forma de solicitud que el ejemplo de PF individual) — el payload trae el **CUIT/razón social de la persona jurídica** (`nombres`, `cuil`) junto con los datos de cuenta creados (`Cuenta.IdCuenta`, `Cuenta.Cvu`), no los datos personales del representante que completó el OB — el representante es quien dispara la aprobación, pero la cuenta que se crea es la de la PJ.
 
+## 8. Demo end-to-end a un cliente: consola del oficial de cumplimiento y potencial de marca blanca
+
+> Fuente: reunión "Demo ON BOARDING propio - Octagon" (2026-08-19) — demo completa del flujo a Octagon (cliente en producción/integración evolutiva) y al equipo de Compliance de Banco Industrial (banco vinculado a la operatoria de Octagon).
+
+**Flujo de alta demostrado (front, persona jurídica):**
+1. Registro con CUIT/CUIL, validado automáticamente contra los servicios web de ARCA (inscripto y activo).
+2. Carga de documentación societaria (estatutos, DNI del representante legal, acta de designación de autoridades) — la plataforma usa IA para extraer automáticamente los datos de estos archivos; el cliente puede revisar y reemplazar un documento si la carga fue incorrecta.
+3. Alta de beneficiarios finales, con documento de identidad vía IA y validación de que la suma de porcentajes de participación cierre en 100%.
+4. Verificación biométrica de los firmantes: escaneo de DNI (frente/dorso) + prueba de vida (liveness), con tecnología de **Neurotecnology**, validando identidad contra Renaper.
+
+**Consola del oficial de cumplimiento (admin), demostrada en esta sesión:**
+- Cola de casos con resumen de la estructura societaria.
+- Barrido automático inicial contra listas de sanciones: **OFAC, ONU, UIF, Repet, PEP**.
+- Revisión documento por documento, con aprobación/rechazo individual y posibilidad de pedir aclaraciones/documentación adicional al cliente (ida y vuelta con notificación).
+- KYC completado por el oficial con tipo de cliente, volúmenes anuales y origen de fondos — el sistema calcula una matriz de riesgo/alertas en base a reglas de negocio configuradas, ajustable según la operación.
+- Configuración de políticas internas por entidad: reglas de negocio parametrizables (ej. prohibir industrias específicas o estructuras societarias complejas) que aprueban, rechazan o alertan automáticamente según los criterios definidos.
+- Trazabilidad/auditoría completa desde el inicio de la solicitud hasta el veredicto final (todo cambio, aprobación, rechazo u observación queda registrado).
+
+**Pedido de acceso de Compliance de Banco Industrial:** el equipo de Compliance de Banco Industrial pidió acceso directo a la plataforma para auditar el legajo digital sin tener que solicitar documentos manualmente — Bind acordó otorgarlo.
+
+**Integración técnica pendiente de definir:** se acordó definir un "paquete de datos" para automatizar, una vez aprobada la solicitud de onboarding, la creación de la CBU y el alta del comercio en los sistemas de Bind (hoy manual). Aunque hoy pueden usarse los endpoints actuales para el alta directa, en los próximos meses habrá que migrar a nuevos endpoints por requerimientos normativos internos — descrito como un cambio administrativo, no traumático para el cliente (sin mayor detalle técnico todavía).
+
+**Potencial como producto externo (marca blanca):** se discutió explícitamente que el núcleo de esta solución de onboarding es modular y podría configurarse como producto adaptable para clientes externos, no solo para uso interno de Bind — ver oportunidad OP-009 en [`2_areas/direccion/oportunidades.md`](../../../2_areas/direccion/oportunidades.md). Consistente con la propuesta ya documentada del proveedor Fintexa/Soluciones Andinas en [`propuesta_fintexa_onboarding_juridico.md`](propuesta_fintexa_onboarding_juridico.md) (plantilla genérica ya nombrada para otros clientes, ej. "Banco Julio"/"Banco Coinag").
+
 ---
-*Última actualización: 2026-08-06 — nueva §7 (flujo AS-IS paso a paso Front+BO, desde la página Notion "Onboarding Jurídico") a pedido del proyecto [La Virginia — OB PJ](../../../1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md).*
+*Última actualización: 2026-08-19 — nueva §8 (demo end-to-end a Octagon/Banco Industrial: consola de cumplimiento y potencial de marca blanca).*
+*Última actualización anterior: 2026-08-06 — nueva §7 (flujo AS-IS paso a paso Front+BO, desde la página Notion "Onboarding Jurídico") a pedido del proyecto [La Virginia — OB PJ](../../../1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md).*
 *Última actualización anterior: Fuente: Notion histórico, Epic "OB Personas Jurídicas MVP" (91 tickets) — ingesta 2026-07-06. §6: backfill `/sync_releases` vía export XML, 2026-07-13.*

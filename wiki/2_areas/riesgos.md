@@ -18,9 +18,14 @@ Conflicto de diseño abierto hace ~2 meses (a la fecha del hallazgo) sobre si la
 
 La única mención de PCI DSS v4.0 Level 1 en el documento de arquitectura del proveedor es un diagrama; el texto narrativo y el resumen ejecutivo no lo listan entre los estándares de compliance. Ver [3_recursos/arquitectura_sistema/modelo_de_seguridad.md](../3_recursos/arquitectura_sistema/modelo_de_seguridad.md) y [gaps_y_preguntas.md](gaps_y_preguntas.md).
 
+## Desalineación entre comisión facturada a la entidad y comisión real cobrada por el procesador
+
+Si una configuración de comisión queda mal cargada en el sistema interno de Bind PSP y Soporte no lo detecta a tiempo, Bind PSP puede seguir facturando a una entidad/comercio con un arancel más bajo del real mientras el procesador (Coelsa u otro) le cobra a Bind PSP el arancel completo por cada transacción — la diferencia es pérdida neta directa, no solo un problema de UX/proceso. Precedente cuantificado (causa distinta, mismo patrón): pérdida de **$15.000.000 ARS en un solo mes**, sin fecha exacta ni detalle técnico registrado — solo como referencia de magnitud. Cualquier mecanismo de configuración de comisiones (convenios, arancel reducido/Coelsa, futuros orquestadores) debería incluir una forma de detectar automáticamente esta divergencia, no depender de que Soporte la note manualmente. Capturado 2026-08-20, sin ticket ni dueño de mitigación general asignado todavía.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-08-12 — Creación del archivo en la reestructuración PARA en cascada, consolidando 4 riesgos ya documentados en la wiki pero sin un lugar propio.*
+*Última actualización: 2026-08-20 — nuevo riesgo "Desalineación entre comisión facturada a la entidad y comisión real cobrada por el procesador".*
+*Última actualización anterior: 2026-08-12 — Creación del archivo en la reestructuración PARA en cascada, consolidando 4 riesgos ya documentados en la wiki pero sin un lugar propio.*

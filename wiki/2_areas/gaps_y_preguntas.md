@@ -24,6 +24,12 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 
 ---
 
+## [2026-08-20] — Contradicción sin resolver: ¿el orquestador de configuración de entidades vía API es decisión de roadmap vigente?
+- **Severidad:** Media
+- **Descripción:** Detectada por `/context_merge` al procesar dos items de `contexto_vivo/` del mismo PM líder. El item del 2026-08-19 (reunión "Parámetros de entidades") registra que el equipo "priorizó" un orquestador de configuración de entidades vía API sobre modificar el panel Admin. El item del 2026-08-20 (Pablo Gomes, directo en chat) corrige explícitamente: esa priorización nunca pasó por el criterio formal de priorización de Producto ni por una evaluación de capacidad real. Ver ambas versiones documentadas en [`direccion/decisiones.md`](direccion/decisiones.md) [2026-08-19 / 2026-08-20].
+- **Pregunta para el usuario:** ¿Corresponde que Producto evalúe formalmente el orquestador de API como candidata de cartera (con el mismo criterio que cualquier otra iniciativa), o se descarta la referencia a "decisión ya tomada" sin más trámite? Mientras no se resuelva, ningún discovery debería apoyarse en que el orquestador ya es dirección aprobada.
+- **Estado:** Pendiente
+
 ## [2026-08-12] — Entidad "REI" / contacto llyasoc.com sin identificar — demo de onboarding a Victoria Farías (Banco Industrial en copia)
 - **Severidad:** Baja
 - **Descripción:** Detectado en la reunión "BIND PSP - REI - Onboarding Digital" (2026-08-12, minuta Gemini). Pablo Gomes hizo una demo del backoffice de Onboarding y armó un ambiente de prueba ("TIN") para Victoria Farías (dominios `vfarias@llyasoc.com`/personal), con María Victoria Simonetti (`msimonetti@bancoindustrial.com.ar`) también en la reunión. El pedido es concreto (validar cruce contra Renaper y listas PEP/terroristas, porcentaje de aceptabilidad de la selfie) pero no queda claro en la minuta si "REI" es un cliente/prospecto nuevo, una auditoría de Banco Industrial sobre la plataforma, o una consultora/estudio (`llyasoc.com`) actuando en nombre de otro. No aparece en `log_clientes.md`.

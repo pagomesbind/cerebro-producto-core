@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-08-21 (pablo)
+
+- `direccion/decisiones.md` — creada 1 entrada con contradicción sin resolver (orquestador de configuración de entidades vía API: ¿decisión de roadmap vigente o no? — dos versiones del mismo PM, escaladas).
+- `gaps_y_preguntas.md` — creado 1 gap (contradicción del orquestador de API, ver arriba).
+- `direccion/oportunidades.md` — creada 1 fila (OP-009, onboarding propio como producto de marca blanca).
+- `direccion/iniciativas.md` — creada 1 fila (PRD-214, primer discovery formal — dimensionamiento de stock actualizado y bifurcación de arquitectura SharedKYC vs. integración directa).
+- `riesgos.md` — creado 1 riesgo (desalineación entre comisión facturada a la entidad y comisión real cobrada por el procesador).
+- `clientes/casos_de_uso_clientes.md` — actualizada ficha de OCTAGON (cronología: demo de onboarding propio a Octagon y Compliance de Banco Industrial, con permiso explícito del usuario).
+
 ### 2026-08-19 (pablo)
 
 - `gaps_y_preguntas.md` — creado 3 gaps (MCC4829 VISA, backfill AD Portal 2.0, dim_collectors sin orden de columnas), actualizados 2 (La Virginia, Terra Blockchain — tercera semana consecutiva de cada patrón).

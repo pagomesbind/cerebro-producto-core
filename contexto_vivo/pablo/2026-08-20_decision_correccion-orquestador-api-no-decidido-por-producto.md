@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "2026-08-19_decision_api-configuracion-requisito-productos (mismo tema, versión previa sin esta corrección)"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

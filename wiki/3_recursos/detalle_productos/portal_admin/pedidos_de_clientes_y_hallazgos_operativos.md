@@ -46,10 +46,28 @@ Un usuario logueado como Entidad no ve sus reportes de Comercios/Movimientos fil
 
 Ticket XL de refactorización de permisos del Portal, el más grande de la muestra relevada de la Epic de mejoras técnicas — quedó "Listo para desarrollo" al cierre del relevamiento.
 
+## Parametrización manual y fragmentada de entidades (reunión "Parámetros de entidades", 2026-08-19)
+
+> Estado: en producción / discovery — el problema es operativo hoy, la solución (orquestador vía API) todavía no está construida ni priorizada formalmente por Producto (ver nota más abajo).
+
+**Problema identificado:** los incidentes frecuentes en producción derivan de configuraciones manuales y fragmentadas entre entidades — no hay documentación clara y centralizada de qué parámetros hace falta configurar por producto/entidad, lo que complica la gestión operativa y compromete el aseguramiento de calidad (QA).
+
+**Caso concreto:** Mastercard (integración cross-border/pagos al exterior) es de los productos de alto volumen que hoy se configuran manualmente sin plantilla documentada — mientras no exista una API de configuración, se van a elaborar plantillas documentadas con los parámetros necesarios para su configuración manual, como paliativo.
+
+**Dirección técnica discutida en la reunión:** desarrollar un orquestador vía APIs para automatizar la configuración de entidades, usando ~50 parámetros estandarizados, en lugar de invertir en modificar directamente el panel de administración actual. **Nota (2026-08-20):** esta dirección se discutió en una reunión técnica sin participación formal de Producto — no corresponde leerla como decisión de roadmap vigente; ver la entrada del 2026-08-19/2026-08-20 en [`2_areas/direccion/decisiones.md`](../../../2_areas/direccion/decisiones.md) para el detalle de la corrección.
+
+**Próximos pasos acordados en la reunión:**
+- Unificar toda la documentación de configuración de entidades en un repositorio centralizado.
+- Relevar los pasos necesarios para parametrizar cada producto con los referentes de cada área.
+- Definir una rutina estándar de alta de entidades ejecutable por API o interfaz.
+- Recopilar los requerimientos operativos por canal y convenio para reducir la complejidad actual.
+- Investigar qué falta en el panel de administración actual para poder crear y configurar entidades correctamente en producción.
+
 ## Ver también
 - [portal_comercio/pedidos_de_clientes_y_hallazgos_operativos.md](../portal_comercio/pedidos_de_clientes_y_hallazgos_operativos.md) — mismo tipo de contenido, para el Portal de Comercios.
 - [3_recursos/arquitectura_sistema/hardening_y_remediacion_de_pentests.md](../../arquitectura_sistema/hardening_y_remediacion_de_pentests.md) — remediaciones de seguridad sobre Access Management derivadas de pentests.
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración", "Defectos encontrados en QA" y "Reporting" (111 SP, 39 tickets) — ingesta 2026-07-06.*
-*Última actualización: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Admin de 4 archivos-cola de `detalle_productos/transversal/`.*
+*Última actualización: 2026-08-19 — nueva sección "Parametrización manual y fragmentada de entidades" (reunión "Parámetros de entidades").*
+*Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Admin de 4 archivos-cola de `detalle_productos/transversal/`.*

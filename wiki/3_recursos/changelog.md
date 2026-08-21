@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-08-21 (pablo)
+
+- `detalle_productos/onboarding/onboarding_personas_juridicas.md` — actualizado: nueva §8 (demo end-to-end a Octagon/Banco Industrial — consola de cumplimiento y potencial de marca blanca).
+- `detalle_productos/portal_admin/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: nueva sección de parametrización manual y fragmentada de entidades (reunión "Parámetros de entidades").
+- `detalle_productos/portal_admin/accesos_qa_staging.md` — creado: credenciales de acceso de prueba al Admin en STAGING para sesiones de QA/discovery.
+- `detalle_productos/portal_admin/index.md` — actualizado: referencia al archivo nuevo.
+- `detalle_productos/portal_comercio/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: nueva sección sobre la retomada del rollout de Portal 2.0 (despliegue piloto por entidad).
+- `detalle_productos/adquirencia/pos_multiadquirencia.md` — actualizado: nueva §6 (investigación abierta de desalineación de BINES Payway/Decidir).
+
 ### 2026-08-19 (pablo)
 
 - `detalle_productos/wallet/conciliacion_y_totalizadores.md` — actualizado: archivos de Cuadratura (nuevo §6), totalizadores expuestos en BFF de onboarding, límite de 30 iteraciones V72.

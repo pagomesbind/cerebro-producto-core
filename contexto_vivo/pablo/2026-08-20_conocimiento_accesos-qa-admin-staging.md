@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/portal_admin/accesos_qa_staging.
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 
