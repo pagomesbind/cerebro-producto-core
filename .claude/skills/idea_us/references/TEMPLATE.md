@@ -34,8 +34,19 @@ status: draft
 
 ## Contrato de API
 
-<!-- Solo si la historia construye, modifica o consume un endpoint. Si no aplica, borrar toda la sección.
-Completar cada campo con un valor concreto — nunca dejar "a definir" salvo que se mueva
+<!-- Solo si esta historia CREA un endpoint nuevo o MODIFICA el contrato de uno existente (campo
+nuevo, código nuevo, cualquier cambio visible en el request/response). Es el caso clásico: un
+endpoint que antes no existía en esa forma, ahora sí — documentalo acá completo, en su propia
+sección, como siempre se hizo.
+
+Si en cambio la historia REUTILIZA uno o más endpoints ya existentes SIN cambiarles el contrato
+(un fix interno, una mejora de resiliencia, cualquier historia donde cambia el comportamiento del
+backend pero no la interfaz pública) — BORRÁ esta sección entera. El detalle relevante (qué
+endpoint, qué caso, qué código y cuerpo exacto) va igual documentado, pero dentro de Criterios de
+aceptación, con la misma exigencia de ejemplos concretos que pediría esta sección. Ver referencia
+real de ese caso: 1_proyectos/asignacion_alias_cvu/artefactos/asignacion_alias_cvu-us.md.
+
+Completá cada campo con un valor concreto — nunca dejar "a definir" salvo que se mueva
 explícitamente a Preguntas abiertas. -->
 
 | Campo | Valor |
@@ -83,20 +94,38 @@ explícitamente a Preguntas abiertas. -->
 ## Criterios de aceptación
 
 <!-- Formato Given/When/Then. Cada criterio debe ser testeable de forma independiente.
-Si la historia describe un endpoint/API, cada AC relevante debería poder responder:
-¿qué código de respuesta HTTP? ¿qué valida exactamente (formato, catálogo, existencia
-del recurso)? ¿qué ejemplo de request/response ilustra este caso? No hace falta un
-ejemplo completo en cada AC — alcanza con uno por desenlace distinto (éxito, error de
-validación, error de negocio, recurso no encontrado). Ver referencia real completa:
-1_proyectos/proyecto-remediar-onboarding/prd-208_alta_comitente_id_cuenta/artefactos/historias_alta_comitente_id_cuenta.md -->
 
-### AC-1: [Título del criterio]
+Sin excepción: cada desenlace distinto (éxito, error de validación, error de negocio, recurso no
+encontrado) tiene en algún lugar del documento un ejemplo concreto de request/response como bloque
+de código JSON — nunca alcanza con una descripción en prosa tipo "responde con éxito" o "devuelve
+un error" sin mostrar el cuerpo real esperado en ningún lado.
+
+- Si existe la sección "Contrato de API" arriba y ya muestra el ejemplo de ese desenlace, el AC no
+  necesita repetirlo — referencialo en prosa ("ver ejemplo de response arriba") y listo.
+- Si el AC ilustra un desenlace que el Contrato de API no mostró (un error de negocio puntual, un
+  caso límite), o si no existe sección de Contrato de API porque la historia reutiliza un endpoint
+  ya existente sin cambios, el ejemplo va embebido en el propio AC como bloque de código JSON — acá
+  no hay de dónde más sacarlo.
+
+Cuando no hay sección de "Contrato de API" (endpoint ya existente sin cambios) y la historia toca
+más de un endpoint o hay varios desenlaces relevantes por caso (ej. qué percibe quien integra en
+cada escenario), abrí esta sección con una tabla resumen antes de AC-1 en vez de repetirlo en cada
+criterio — ver referencia real completa de ese caso:
+1_proyectos/asignacion_alias_cvu/artefactos/asignacion_alias_cvu-us.md -->
+
+### AC-1: [Título del happy path]
 
 **Dado** [contexto inicial o precondición]
 
 **Cuando** [acción tomada por el usuario]
 
-**Entonces** [resultado esperado]
+**Entonces** [resultado esperado — con ejemplo de response si ilustra el caso]
+```json
+{
+  "id": "cta_123",
+  "campo": "valor"
+}
+```
 
 ### AC-2: [Título del criterio]
 
@@ -124,7 +153,16 @@ un AC de idempotencia (mismo Idempotency-Key + mismo body en un reintento no dup
 
 **Cuando** intenta leer/modificar un recurso cuyo `id` pertenece al usuario B (vía path o body)
 
-**Entonces** el sistema responde `403 Forbidden` sin exponer si el recurso existe o no
+**Entonces** el sistema responde `403 Forbidden` sin exponer si el recurso existe o no, en formato `problem+json` (RFC 9457):
+```json
+{
+  "type": "https://bindpsp.com/errors/autorizacion",
+  "title": "Forbidden",
+  "status": 403,
+  "detail": "No tiene permiso para acceder a este recurso",
+  "instance": "/comitentes/cta_456"
+}
+```
 
 ## Diagrama de flujo
 

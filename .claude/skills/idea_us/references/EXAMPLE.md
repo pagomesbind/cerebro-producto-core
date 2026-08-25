@@ -163,6 +163,8 @@ Continúa US-1/US-2: una vez que el comercio ve el preview y sube un archivo des
 
 ### Contrato de API
 
+Este endpoint es nuevo — se lo crea de punta a punta como parte de esta historia, así que su contrato va en su propia sección:
+
 | Campo | Valor |
 |-------|-------|
 | Estilo | REST |
@@ -217,7 +219,7 @@ Continúa US-1/US-2: una vez que el comercio ve el preview y sube un archivo des
 
 **Cuando** llama a `POST /v1/solicitudes/sol_4821/documentos` con un `tipoDocumento` del catálogo cerrado aplicable a su tipo de entidad y un archivo PDF menor a 10MB
 
-**Entonces** el sistema responde `201 Created` con el documento persistido en estado `en_revision`
+**Entonces** el sistema responde `201 Created` con el documento persistido en estado `en_revision` (ver ejemplo de response arriba)
 
 #### AC-2: Tipo de documento no aplica al tipo de entidad (error de negocio)
 
@@ -225,7 +227,19 @@ Continúa US-1/US-2: una vez que el comercio ve el preview y sube un archivo des
 
 **Cuando** llama al endpoint con `tipoDocumento: "acta_designacion_autoridades"` (documento societario)
 
-**Entonces** el sistema responde `422 Unprocessable Content` en formato `problem+json` indicando que ese tipo de documento no aplica a su tipo de entidad, sin persistir nada
+**Entonces** el sistema responde `422 Unprocessable Content` en formato `problem+json`, sin persistir nada:
+```json
+{
+  "type": "https://bindpsp.com/errors/validacion",
+  "title": "Error de validación",
+  "status": 422,
+  "detail": "El tipo de documento no corresponde al tipo de entidad declarado",
+  "instance": "/v1/solicitudes/sol_4821/documentos",
+  "errors": [
+    { "field": "tipoDocumento", "reason": "no aplica para entidad unipersonal" }
+  ]
+}
+```
 
 #### AC-3: Solicitud inexistente
 

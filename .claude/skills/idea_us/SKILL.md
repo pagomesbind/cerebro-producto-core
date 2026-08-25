@@ -67,7 +67,14 @@ Formato: "Como [persona], quiero [acción] para [beneficio]."
 
 Criterios específicos y testeables en formato Given/When/Then. Los criterios de aceptación definen "terminado" — si todos pasan, la historia está completa. (Para cobertura más profunda por historia, ver [`/idea_ac`](../idea_ac/SKILL.md).)
 
-**Historias que describen un endpoint o contrato de API — nivel de detalle obligatorio.** Si la historia implica construir, modificar o consumir un endpoint, la sección "Contrato de API" del template (ver más abajo) y los criterios de aceptación tienen que llegar al nivel de detalle que necesitan QA e Ingeniería para no tener que volver a preguntar. Cubrí explícitamente los siguientes bloques — no todos aplican a toda historia, pero la ausencia de uno debe ser una decisión consciente, no un olvido:
+**Historias que describen un endpoint o contrato de API — nivel de detalle obligatorio.** Cómo se documenta el contrato depende de si esta historia lo define o lo cambia:
+
+- **La historia crea un endpoint nuevo, o modifica el contrato de uno existente** (campo nuevo, código nuevo, cualquier cambio visible en el request/response) — documentá el contrato completo en su propia sección "Contrato de API" (ver template): estilo, método y recurso, autenticación, headers obligatorios, versionado, paginación/filtrado, estrategia de borrado, y los ejemplos de request/response de éxito y de error. Es el caso clásico — un endpoint que antes no existía en esa forma, ahora sí.
+- **La historia reutiliza uno o más endpoints ya existentes sin cambiarles el contrato** (el caso típico de un fix interno, una mejora de resiliencia, o cualquier historia donde lo que cambia es el comportamiento del backend, nunca la interfaz pública) — no repitas una sección de contrato aparte. Documentá igual el detalle relevante (qué endpoint, qué caso, qué código y cuerpo exacto) directamente dentro de los criterios de aceptación, arrancando con un resumen breve de qué endpoint(s) están en juego si hay más de uno o más de un desenlace por caso (ej. una tabla de "qué percibe quien integra" antes del primer AC).
+
+**En los dos casos, sin excepción:** los criterios de aceptación siempre llevan ejemplos concretos de request/response como bloque de código JSON en los AC relevantes — nunca alcanza con una descripción en prosa tipo "responde con éxito" o "devuelve un error" sin mostrar el cuerpo real esperado. Es lo que le permite a QA e Ingeniería verificar sin ambigüedad, exista o no una sección de contrato separada arriba.
+
+Cubrí explícitamente los siguientes bloques — vayan en la sección de Contrato de API o repartidos en los AC según el caso de arriba — no todos aplican a toda historia, pero la ausencia de uno debe ser una decisión consciente, no un olvido:
 
 **a) Contrato de interfaz**
 - **Estilo:** REST, GraphQL, gRPC, Webhook o WebSocket — explícito, no asumido.
@@ -134,7 +141,7 @@ Sumá referencias de diseño relevantes, consideraciones técnicas y dependencia
 
 ## 📄 Formato de salida
 
-Usá el template de [`references/TEMPLATE.md`](references/TEMPLATE.md). Por cada historia: Encabezado; Enunciado; Contexto y antecedentes; Contrato de API (solo si la historia describe un endpoint — ver Paso 5); Criterios de aceptación; Diagrama de flujo (solo si aplica — ver Paso 5bis); Notas de diseño; Notas técnicas; Dependencias; Fuera de alcance; Preguntas abiertas. En documentos multi-historia, cada historia anida estas secciones bajo su propio título (ver ejemplo).
+Usá el template de [`references/TEMPLATE.md`](references/TEMPLATE.md). Por cada historia: Encabezado; Enunciado; Contexto y antecedentes; Contrato de API (solo si la historia crea o modifica un endpoint — ver Paso 5; si reutiliza uno existente sin cambios, esta sección se borra y su detalle va embebido en los AC); Criterios de aceptación (siempre con ejemplos concretos de request/response en los AC relevantes); Diagrama de flujo (solo si aplica — ver Paso 5bis); Notas de diseño; Notas técnicas; Dependencias; Fuera de alcance; Preguntas abiertas. En documentos multi-historia, cada historia anida estas secciones bajo su propio título (ver ejemplo).
 
 Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 
@@ -147,7 +154,8 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 - [ ] Las historias son lo bastante chicas para completarse en un sprint
 - [ ] No hay detalles de implementación en el enunciado
 - [ ] La cláusula de beneficio explica por qué le importa al usuario
-- [ ] Si la historia describe un endpoint/API: tiene sección "Contrato de API" completa (estilo, método, URL, headers, naming) y los AC cubren validaciones por dato, ejemplos de request/response, códigos de respuesta explícitos, anti-BOLA/BOPLA, formato de error RFC 9457 e idempotencia si crea/mueve dinero
+- [ ] Si la historia crea o modifica un endpoint: tiene sección "Contrato de API" completa (estilo, método, URL, headers, naming). Si reutiliza uno existente sin cambios, esa sección no está — el detalle equivalente vive en los AC
+- [ ] En cualquiera de los dos casos, los AC cubren validaciones por dato, ejemplos concretos de request/response (bloque JSON, nunca solo en prosa), códigos de respuesta explícitos, anti-BOLA/BOPLA, formato de error RFC 9457 e idempotencia si crea/mueve dinero
 - [ ] Si el flujo de la historia tiene ramas, reintentos o más de un sistema involucrado: hay diagrama Mermaid en "Diagrama de flujo" (Paso 5bis)
 - [ ] El PM revisó el documento completo y dio su OK explícito a las redacciones (Paso 5ter) antes de darlo por terminado
 
