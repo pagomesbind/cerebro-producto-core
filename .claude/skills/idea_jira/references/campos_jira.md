@@ -60,7 +60,17 @@ Si la IDEA nace por pedido de un cliente externo concreto, buscá primero si ya 
 
 Payload: `{"priority": {"id": "<n>"}}`.
 
-### 1.6 Transiciones del workflow de la IDEA
+### 1.6 Asignado (`assignee`, campo de sistema — mismo mecanismo en IDEA, Epic e Historia)
+
+No hay una tool para "quién soy" fiable entre las 3 instalaciones del Cerebro (cada PM/PO tiene su propia sesión y su propio `identidad.local.md`) — hay que resolver el `accountId` de Jira a partir del email de esa persona, no asumirlo.
+
+1. Leé `pm`/`email` de `identidad.local.md` (raíz del repo personal, ej. `email: pagomes@bind.com.ar`).
+2. Resolvé el `accountId` real con `lookupJiraAccountId` (o `atlassianUserInfo` si el conector no tiene ese lookup por email disponible) contra ese email.
+3. Payload de asignación, igual para `createJiraIssue` (dentro de `additional_fields`) y `editJiraIssue`: `{"assignee": {"id": "<accountId>"}}`.
+
+Resolvelo una sola vez al principio de la corrida (no hace falta repetir el lookup por cada ticket que crees en la misma sesión).
+
+### 1.7 Transiciones del workflow de la IDEA
 
 Confirmadas contra una IDEA real (transiciones `isGlobal: true` — disponibles casi desde cualquier estado, no dependen de un estado previo puntual):
 
