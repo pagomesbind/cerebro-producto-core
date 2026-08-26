@@ -28,7 +28,7 @@ Buena parte del negocio de Bind PSP pasa por construir, exponer o consumir APIs 
 1. **Formato fijo:** "Como [persona], quiero [acción] para [beneficio]." La cláusula de beneficio no es opcional — explica por qué importa y ayuda a priorizar.
 2. **Nunca "usuarios" a secas.** Cada historia es para una persona o rol específico — para historias de API, la persona puede ser un rol técnico ("Sistema externo integrador", "Backend de Wallet", "Desarrollador integrador") si no hay un usuario final directo.
 3. **Sin detalles de implementación** en el enunciado de la historia — eso es del "cómo", no del "qué". El contrato de API (Paso 5) no es "detalle de implementación": es la interfaz que el consumidor ve, así que sí va explícito y completo.
-4. **Aplicá INVEST:** cada historia tiene que ser Independiente, Negociable, Valiosa, Estimable, Chica, Testeable. Si una historia no cumple, revisala antes de darla por terminada.
+4. **Aplicá INVEST:** cada historia tiene que ser Independiente, Negociable, Valiosa, Estimable, Chica, Testeable. "Chica" significa acotada a un entregable técnico completo (o a un entregable parcial de ese componente si no entra en un sprint, ver Paso 3) — nunca partir una historia en varias solo porque cubre más de un camino o escenario de uso; eso son AC de una misma historia, no historias distintas. Si una historia no cumple, revisala antes de darla por terminada.
 5. **El documento es siempre autocontenido.** Es la previa a un entregable que ingeniería, QA o un tercero van a leer sin acceso a este sistema — nunca links a la wiki, nombres de archivo o de skill, códigos de ticket usados como si el lector los reconociera, ni jerga de proceso interno ("según el gap...", "ver decisiones.md"). "Contexto y antecedentes" recapitula en prosa lo que el PRD u otro artefacto ya estableció, no lo linkea.
 6. **No dejar puertas abiertas al desarrollador en una historia de API.** Ante cada decisión de contrato (naming, paginación, estrategia de borrado, código de error, versionado) elegí una opción concreta y documentala — nunca "a definir por el equipo técnico" salvo que sea una Pregunta abierta explícita y consciente.
 7. Todo output en español.
@@ -55,9 +55,11 @@ Revisá el PRD o la descripción de la feature. Entendé el objetivo general, lo
 
 Determiná qué usuarios interactúan con esta feature. Cada historia se escribe para una persona específica, no para "usuarios" genéricos — features distintas pueden necesitar historias distintas para la misma feature.
 
-### Paso 3 — Descomponer por objetivo de usuario
+### Paso 3 — Descomponer por entregable técnico completo
 
-Descomponé la feature en objetivos de usuario distintos. Cada historia debe entregar una capacidad completa y valiosa — algo que el usuario puede efectivamente hacer cuando la historia está terminada. Si existe `{{nombre_corto_proyecto}}-solution.md`, el corte de historias sigue los caminos ya identificados ahí (camino feliz, caminos alternativos) en vez de inventar una descomposición nueva.
+El eje de corte es el **componente técnico completo** que hay que construir — un endpoint entero (con todos sus casos y validaciones), una pantalla entera (con todos sus estados), un job o una integración completa — no el objetivo o camino de usuario. Una sola historia puede resolver más de una funcionalidad del PRD si todas dependen del mismo componente: no fragmentes en una historia por camino feliz y otra por camino alternativo si ambos son parte del mismo endpoint o pantalla — eso va todo en los AC de una misma historia (ver Paso 5). El enunciado (Paso 4) sigue describiendo lo que el usuario logra, no el componente en sí — pero el alcance real de "terminado" en esa historia es el entregable técnico completo que lo resuelve, así el requerimiento que le llega a Ingeniería queda lo más compactado posible.
+
+Partí una historia en más de una únicamente cuando el componente en sí es demasiado grande para completarse en un sprint. Ahí el corte sigue siendo por **entregable parcial pero igual de completo en su propio recorte** — ej. "endpoint de alta y consulta" separado de "endpoint de baja" del mismo recurso, nunca "endpoint — caso feliz" separado de "endpoint — casos de error" del mismo endpoint. Si existe `{{nombre_corto_proyecto}}-solution.md`, usalo para identificar qué componentes técnicos hacen falta (qué endpoints, qué pantallas), no para cortar una historia por cada camino que documenta — los caminos alternativos son AC dentro de la historia del componente, no historias aparte.
 
 ### Paso 4 — Escribir los enunciados
 
@@ -151,7 +153,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 - [ ] Las historias son independientes (se pueden construir en cualquier orden)
 - [ ] Los criterios de aceptación usan formato Given/When/Then
 - [ ] Cada criterio es testeable (se puede verificar pass/fail)
-- [ ] Las historias son lo bastante chicas para completarse en un sprint
+- [ ] Las historias son lo bastante chicas para completarse en un sprint — por entregable técnico completo o parcial (Paso 3), no partidas por camino o escenario de uso
 - [ ] No hay detalles de implementación en el enunciado
 - [ ] La cláusula de beneficio explica por qué le importa al usuario
 - [ ] Si la historia crea o modifica un endpoint: tiene sección "Contrato de API" completa (estilo, método, URL, headers, naming). Si reutiliza uno existente sin cambios, esa sección no está — el detalle equivalente vive en los AC

@@ -3,33 +3,33 @@ artifact: user-story
 version: "1.0"
 created: 2026-07-20
 status: complete
-context: Ejemplo ilustrativo — continúa el caso de ejemplo del preview de documentación KYB (ver /idea_prd). US-1/US-2 son historias de UI; US-3 ejemplifica una historia de endpoint con contrato de API completo.
+context: Ejemplo ilustrativo — continúa el caso de ejemplo del preview de documentación KYB (ver /idea_prd). US-1 es una historia de UI que entrega el componente de pantalla completo (lista + filtrado por tipo de entidad en una sola historia, no partida por escenario); US-2 ejemplifica una historia de endpoint con contrato de API completo.
 ---
 
 # Historias de usuario: Preview de documentación KYB
 
-## US-1: Ver documentos requeridos antes de cargar
+## US-1: Preview de documentos requeridos según tipo de entidad
 
 | Campo | Valor |
 |-------|-------|
 | ID | US-1 |
-| Título | Preview de documentos requeridos |
+| Título | Preview de documentos requeridos según tipo de entidad |
 | Persona | Comercio dando de alta su cuenta de Adquirencia |
 | Prioridad | P0 |
 | Epic/Feature | Preview de documentación KYB |
-| Estimación | [Ejemplo] 5 puntos |
+| Estimación | [Ejemplo] 8 puntos |
 
 ### Enunciado
 
 **Como** comercio dando de alta mi cuenta,
 
-**quiero** ver qué documentos me van a pedir antes de empezar a cargarlos,
+**quiero** ver, antes de empezar a cargar archivos, la lista completa de documentos que me van a pedir ya ajustada a mi tipo de entidad,
 
-**para** poder juntarlos con anticipación y no abandonar el trámite a mitad de camino.
+**para** poder juntar exactamente lo que necesito con anticipación, sin abandonar el trámite a mitad de camino ni confundirme con requisitos que no me aplican.
 
 ### Contexto y antecedentes
 
-Ver PRD de ejemplo — el 58% de abandono en el paso de KYB se atribuye en parte a que el comercio no sabe qué le van a pedir hasta que ya está en el formulario de carga.
+Ver PRD de ejemplo — el 58% de abandono en el paso de KYB se atribuye en parte a que el comercio no sabe qué le van a pedir hasta que ya está en el formulario de carga. El tipo de entidad (unipersonal vs. sociedad) ya se declara en un paso anterior del alta. Mostrar la lista y filtrarla por tipo de entidad es el mismo componente de pantalla — no se parte en una historia por escenario, ambos casos son AC de esta misma historia.
 
 ### Criterios de aceptación
 
@@ -49,9 +49,25 @@ Ver PRD de ejemplo — el 58% de abandono en el paso de KYB se atribuye en parte
 
 **Entonces** el sistema lo lleva al formulario de carga de documentos
 
+#### AC-3: Lista filtrada para unipersonal
+
+**Dado** que el comercio declaró ser unipersonal
+
+**Cuando** ve la pantalla de preview
+
+**Entonces** la lista muestra solo los documentos requeridos para ese tipo de entidad
+
+#### AC-4: Lista filtrada para sociedad
+
+**Dado** que el comercio declaró ser una sociedad
+
+**Cuando** ve la pantalla de preview
+
+**Entonces** la lista incluye los documentos societarios adicionales requeridos (ej. estatuto, acta de designación de autoridades)
+
 ### Notas de diseño
 
-- Pendiente: mockup de la pantalla de preview (Diseño)
+- Pendiente: mockup de la pantalla de preview, con sus dos variantes (unipersonal/sociedad) (Diseño)
 
 ### Notas técnicas
 
@@ -66,6 +82,7 @@ Ver PRD de ejemplo — el 58% de abandono en el paso de KYB se atribuye en parte
 ### Fuera de alcance
 
 - Cambios al formato de archivo aceptado en la carga (sigue siendo PDF)
+- Tipos de entidad fuera de unipersonal/sociedad (si existieran, quedan para una iteración futura)
 
 ### Preguntas abiertas
 
@@ -73,76 +90,11 @@ Ver PRD de ejemplo — el 58% de abandono en el paso de KYB se atribuye en parte
 
 ---
 
-## US-2: Lista ajustada según tipo de entidad
+## US-2: Endpoint para subir un documento de KYB
 
 | Campo | Valor |
 |-------|-------|
 | ID | US-2 |
-| Título | Lista de documentos según tipo de entidad |
-| Persona | Comercio con estructura societaria |
-| Prioridad | P0 |
-| Epic/Feature | Preview de documentación KYB |
-| Estimación | [Ejemplo] 3 puntos |
-
-### Enunciado
-
-**Como** comercio con estructura societaria (no unipersonal),
-
-**quiero** que la lista de documentos se ajuste a mi tipo de entidad,
-
-**para** no ver requisitos que no me aplican y confundirme sobre qué necesito.
-
-### Contexto y antecedentes
-
-El tipo de entidad (unipersonal vs. sociedad) ya se declara en un paso anterior del alta; esta historia usa ese dato para filtrar la lista.
-
-### Criterios de aceptación
-
-#### AC-1: Lista filtrada para unipersonal
-
-**Dado** que el comercio declaró ser unipersonal
-
-**Cuando** ve la pantalla de preview
-
-**Entonces** la lista muestra solo los documentos requeridos para ese tipo de entidad
-
-#### AC-2: Lista filtrada para sociedad
-
-**Dado** que el comercio declaró ser una sociedad
-
-**Cuando** ve la pantalla de preview
-
-**Entonces** la lista incluye los documentos societarios adicionales requeridos (ej. estatuto, acta de designación de autoridades)
-
-### Notas de diseño
-
-- Reutiliza el mismo componente de lista que US-1, con lógica de filtrado condicional
-
-### Notas técnicas
-
-- Depende de la misma resolución de metadata que US-1
-
-### Dependencias
-
-| Dependencia | Tipo | Estado |
-|-------------|------|--------|
-| US-1 (pantalla de preview base) | Historia | [Ejemplo] En curso |
-
-### Fuera de alcance
-
-- Tipos de entidad fuera de unipersonal/sociedad (si existieran, quedan para una iteración futura)
-
-### Preguntas abiertas
-
-Ninguna abierta al momento de escribir esta historia.
-
----
-
-## US-3: Endpoint para subir un documento de KYB
-
-| Campo | Valor |
-|-------|-------|
-| ID | US-3 |
 | Título | Alta de documento KYB vía API |
 | Persona | Backend de Onboarding (consumidor interno del endpoint) |
 | Prioridad | P0 |
@@ -159,7 +111,7 @@ Ninguna abierta al momento de escribir esta historia.
 
 ### Contexto y antecedentes
 
-Continúa US-1/US-2: una vez que el comercio ve el preview y sube un archivo desde el formulario de carga, el frontend necesita un endpoint que reciba ese archivo, lo valide y lo asocie a la solicitud de alta en curso.
+Continúa US-1: una vez que el comercio ve el preview (ya filtrado por su tipo de entidad) y sube un archivo desde el formulario de carga, el frontend necesita un endpoint que reciba ese archivo, lo valide y lo asocie a la solicitud de alta en curso.
 
 ### Contrato de API
 
@@ -295,7 +247,7 @@ sequenceDiagram
 
 ### Notas de diseño
 
-- N/A — este endpoint es consumido por el frontend de carga ya cubierto en US-1/US-2, no introduce UI nueva.
+- N/A — este endpoint es consumido por el frontend de carga ya cubierto en US-1, no introduce UI nueva.
 
 ### Notas técnicas
 
