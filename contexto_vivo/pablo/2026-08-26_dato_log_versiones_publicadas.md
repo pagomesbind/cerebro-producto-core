@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Aplicar byte a byte (append a la tabla "Versiones ingestadas", y actualizar la cabecera de "Último barrido"):

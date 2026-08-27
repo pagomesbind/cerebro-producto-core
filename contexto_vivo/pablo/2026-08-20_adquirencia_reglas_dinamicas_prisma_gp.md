@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Deuda técnica confirmada:** el sistema convive con dos procesadores de pago (Prisma y GP) usando grupos de reglas de procesador mal estructurados para la coexistencia — genera problemas operativos al intentar operar con ambos simultáneamente (Daniela Collia, Fintexa). Este hallazgo complementa lo ya documentado en `pos_multiadquirencia.md` sobre el modelo de 2 etapas (Etapa 1: GP por defecto conviviendo obligatoriamente con PRISMA, deuda técnica reconocida) — ahora se define **cómo** resolver esa deuda.

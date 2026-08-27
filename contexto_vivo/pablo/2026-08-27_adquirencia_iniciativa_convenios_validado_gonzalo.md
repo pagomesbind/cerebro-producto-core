@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Novedad puntual:** el proyecto `convenios_configuracion` (rediseño del modelo de herencia de convenios entidad→comercio, en discovery desde el 2026-08-21) pasó su primera validación real de usuario. El PM le mostró un prototipo interactivo completo (Admin mockeado, navegable, con la lógica de cascada funcionando en vivo) a Gonzalo Rivera — el referente de Integraciones/Soporte de Cobro que originalmente reportó el dolor que dio origen al proyecto. Gonzalo confirmó explícitamente que el modelo resuelve el problema y dio luz verde para avanzar con el desarrollo, y validó también la decisión de reusar la infraestructura actual de convenios en vez de reconstruirla desde cero.

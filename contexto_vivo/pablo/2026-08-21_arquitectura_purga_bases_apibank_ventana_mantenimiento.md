@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Fintexa (equipo de infraestructura) ejecuta periódicamente, aprovechando las ventanas de mantenimiento que abre el proveedor **Apibank**, un proceso de depuración de registros historificados (no vivos, no cambia estructura) en tres bases: **Comprobantes**, **Operaciones** y **Notificaciones**. El objetivo declarado es reducir el tamaño de las bases para mejorar performance y reducir costos operativos. Ticket de seguimiento del proveedor: `INF-1578` (Fintexa/Jira interno).

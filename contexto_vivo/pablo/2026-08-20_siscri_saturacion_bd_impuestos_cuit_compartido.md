@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Problema reportado (Julieta Giménez, Fintexa):** saturación en la base de datos de impuestos (SISCRI) — múltiples entidades comerciales comparten el mismo CUIT, lo que hace que las consultas sean ineficientes (no pueden discriminar por CUIT solo).

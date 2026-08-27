@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Novedad de `asignacion_alias_cvu/` (Pablo Gomes): se creó la jerarquía completa en Jira — IDEA PRD-224 (Categoría BAU, Producto Wallet, Cliente SOPORTE, SP estimado 3, prioridad Highest por ser bug productivo urgente, estado `EN APROBACION`), Epic WS-1555 y Historia WS-1556 (US-001, prioridad Highest, contenido completo incluyendo AC-1 a AC-13 y diagrama de flujo). Queda pendiente que el PM mueva la Historia a `Asignado` en Jira tras revisarla.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Esquema operativo para exponer BPG (pago de servicios) a integradores externos vía subagentes

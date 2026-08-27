@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 > **Estado: diseño en discovery — nada de esto está construido ni desplegado todavía.** Es la revisión técnica de un diseño que Nicolás Colón todavía va a ajustar antes de pasarlo a desarrollo (ver cierre de la reunión, al final de este documento). Al mergear: filar como subsección delimitada y explícitamente marcada como discovery (mismo patrón que el §13 ya existente en el destino), nunca mezclado con la prosa que describe la integración ya vigente en producción — el banner `Estado: en producción` del archivo destino describe el estado general del documento, no valida automáticamente el contenido de esta sección.

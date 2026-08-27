@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Durante la reunión de análisis de riesgos de la versión AD V72 (pase a producción programado 27/08/2026, 21:00hs, ventana de 3hs), Nicolás Colón detectó un bug asociado al ticket **AD-1020/DAD-1673** ("Lógica de devolución/anulación POS GP — Guardar detalle en contracargo"), que forma parte de esa misma versión:

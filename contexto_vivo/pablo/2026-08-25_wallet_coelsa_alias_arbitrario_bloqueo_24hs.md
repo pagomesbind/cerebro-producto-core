@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Mecánica de Coelsa cuando el alias no se asigna a tiempo tras crear un CVU

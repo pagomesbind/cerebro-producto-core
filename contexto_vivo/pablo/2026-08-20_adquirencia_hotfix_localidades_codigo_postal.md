@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Problema:** inconsistencias en las validaciones de localidad y código postal durante la creación y edición de comercios/entidades, que causan errores de validación (Daniela Collia, Fintexa, presentó el análisis).

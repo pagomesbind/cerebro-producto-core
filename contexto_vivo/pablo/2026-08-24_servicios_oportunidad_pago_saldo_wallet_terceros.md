@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Oportunidad: pago de servicios con saldo de wallet para integradores externos

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ⚠️ **Ambos tickets están bajo el Epic [WS-810](https://bindpsp.atlassian.net/browse/WS-810), el mismo que alimenta el proyecto vivo `1_proyectos/.../prd-140_contracargos_debin_recurrente/`.** Por alcance de esta skill no se cruza contra ese proyecto ni se edita su `proyecto.md` — queda señalado en el reporte del barrido para que el PM lo refresque si corresponde.

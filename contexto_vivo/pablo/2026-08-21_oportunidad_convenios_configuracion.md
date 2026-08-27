@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Candidata a IDEA nueva, con discovery formal ya completo** (a diferencia de la mayoría de las filas de `oportunidades.md`, que son señales tempranas sin trabajar): ver `1_proyectos/convenios_configuracion/proyecto.md` para el detalle completo — problema, tabla de evidencia y solución ya acordados con el PM.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 [WS-1374](https://bindpsp.atlassian.net/browse/WS-1374), W 72, 3 SP, Epic WS-54. Se detectaron en producción errores `502 BadGateway` de PCNT al generar los paquetes (Suscripciones y Rescates) en el **paso 6** del proceso diario de FCI. Dos problemas de fondo, distintos del cluster de bugs de fórmula/robustez ya documentado en §4.1/§4.2:

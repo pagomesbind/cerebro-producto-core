@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/organizaciones_y_configuracion.md §7 — el párrafo vigente (ingerido de WS-1429/WS-1444, W 71.4 FIX/W 71.6 FIX) dice explícitamente 'Sin detalle de qué etapas ya pasaron ni cuántas faltan — gap de visibilidad del roadmap completo de esta migración'. Este ticket resuelve ese gap: la migración tiene 3 etapas en total y esta es la última (3/3), publicada del lado Adquirencia."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Se cierra la migración de AuthExternal V2** (autenticación externa por microservicios) con la etapa 3 de 3, publicada en **AD 71.3** (2026-08-24, ticket [AD-1528](https://bindpsp.atlassian.net/browse/AD-1528)).

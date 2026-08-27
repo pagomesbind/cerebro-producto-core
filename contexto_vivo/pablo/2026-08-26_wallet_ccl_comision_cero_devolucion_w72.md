@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/dolar_ccl.md §3.6bis — el mail del 2026-08-18 dice 'el impacto de este bloqueo es mínimo, afecta solo a un ticket de compra de dólar fallida detectado desde visión interna' sin nombrarlo. Es WS-1351."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 §3.6bis documenta que el despliegue de Emisión V72 se aprobó pese a no poder cerrar las pruebas de regresión en homologación (bloqueadas por errores de Apibank en ese ambiente), señalando que el impacto real era acotado a "un ticket de compra de dólar fallida detectado desde visión interna" — sin identificarlo. Ese ticket es **[WS-1351](https://bindpsp.atlassian.net/browse/WS-1351)**, W 72, 3 SP, Epic WS-79, y quedó publicado (Finalizada) en la misma versión.

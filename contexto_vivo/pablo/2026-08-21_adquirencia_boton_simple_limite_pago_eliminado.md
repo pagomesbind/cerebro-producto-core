@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 En la reunión de riesgo de AD V72 (despliegue 27/08/2026) se aprobó eliminar la validación que hoy limita la creación de links de pago de Botón Simple 2.0 a un monto máximo de **$9.000.000**. Matias Alzogaray lo presentó como un ticket de soporte, sin motivo de negocio específico documentado en la minuta — se retira directamente la restricción, sin reemplazo por un tope configurable. Clasificado con semáforo verde (bajo riesgo).

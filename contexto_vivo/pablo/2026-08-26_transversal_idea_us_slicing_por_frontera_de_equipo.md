@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — refina/precisa el Paso 3 actual de la skill, no lo contradice: sigue siendo corte por entregable técnico completo, pero ancla explícitamente qué cuenta como 'un' entregable"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Contexto

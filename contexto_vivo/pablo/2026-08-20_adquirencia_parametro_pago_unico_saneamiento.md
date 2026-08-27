@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Decisión acordada (2026-08-20):** el parámetro **"pago único"** se definió para diferenciar el producto asociado a una cuenta con CBU — **valor 1 = botón de pago**, **valor 0 = RXT**. Objetivo: poder identificar qué colecciones/cuentas corresponden a cada categoría.

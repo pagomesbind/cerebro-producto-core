@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Aplicar byte a byte (prepend al changelog, orden cronológico inverso por `releaseDate` — el orden final queda AD 71.3 (08-24) → W 72 (08-18) → W 71.8 (08-10) → W 71.7 FIX ya existente):

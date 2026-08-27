@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Iniciativa de hardening publicada en un solo release (W 72), en 3 tickets simultáneos, uno por microservicio — Epic WS-7.** Hasta esta versión, ningún microservicio de Wallet validaba que un CVU/CBU tuviera exactamente 22 caracteres numéricos (norma BCRA Com. A 2622 para CBU / Com. A 6510 para CVU); un valor inválido podía propagarse sin control hasta BIND, Dispatcher y COELSA.

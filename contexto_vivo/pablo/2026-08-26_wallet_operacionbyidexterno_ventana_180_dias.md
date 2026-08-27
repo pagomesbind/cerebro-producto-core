@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 [WS-1287](https://bindpsp.atlassian.net/browse/WS-1287), W 72, Epic WS-518. Pedido de negocio: `GET /api/v1/OperacionByIdExterno/{IdExterno}` solo encontraba operaciones de hasta **3 días** de antigüedad — insuficiente para que una organización conozca el estado real de una operación más vieja.

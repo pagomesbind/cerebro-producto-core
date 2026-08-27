@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 En el lote de despliegue de AD V72 (27/08/2026) se corrige la catalogación de las transferencias entrantes desde un **CBU externo hacia un CBU corto** en CBU Collect: hoy se registran/notifican como si fueran de CBU largo, y a partir de este cambio se van a registrar (y notificar por webhook) como `transfer.cortau` (`cortau receipt`).

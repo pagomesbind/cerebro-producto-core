@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Novedad puntual sobre PRD-216 (Arcos Dorados — mapeo de productos de la orden de venta en items del `/resolve`), EN CURSO:** en la reunión de riesgo de AD V72 (2026-08-21) se confirmó que el ticket AD-1434 forma parte del lote de despliegue de la versión 72, programado para el jueves 27/08/2026 a las 21hs (ventana de 3hs sin afectación de servicio, 20 microservicios) — consistente con la fecha ya comunicada al cliente el 08-18. Se suma una advertencia de testing: al tratarse de un cambio en una estructura estándar de API, hay que revisar y probar el ecosistema cerrado en las reglas de negocio para evitar errores del lado de las billeteras.

@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Nuevo proyecto en la cartera de Pablo Gomes: `comercios_mayoristas` ("MayoristaPay") — retoma un discovery hecho fuera del Cerebro entre 2025-12 y 2026-03, nunca llevado a desarrollo (las IDEAs de Jira asociadas se eliminaron para arrancar de cero). Es una propuesta de ecosistema financiero cerrado (cobro + wallet) para una cámara de supermercados mayoristas (Diarco, Yaguar, Maxiconsumo y otros) y los comerciantes que le compran.

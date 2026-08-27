@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 En la reunión de riesgo de AD V72 (27/08/2026), al revisar el cambio de categorización de transferencias entrantes de CBU externo→CBU corto en CBU Collect (pasan a notificarse como `transfer.cortau` en vez de CBU largo — ver item de producto asociado), Matias Alzogaray mencionó específicamente a **Jugadón** (marca de Grupo Slots, RxT fondea el saldo virtual del jugador) como cliente que podría verse afectado si filtra/valida por ese campo de tipo en el webhook. Se acordó evaluar el impacto puntual y avisarle con anticipación antes del pase a producción del 27/08.

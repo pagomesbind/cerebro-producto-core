@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Alcance inicial de pagos de servicios (BPG): solo botón de pago, sin saldo de wallet

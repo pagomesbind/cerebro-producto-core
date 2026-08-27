@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/cuenta_remunerada_fci.md §4.5 — lista a WS-1317 explícitamente como uno de los 'Defectos de contrato abiertos... ninguno con fix confirmado'. Este ticket lo cierra."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 §4.5 ya documenta el endpoint `GET /api/v1/Settlement/Info` (Historia WS-730, "en desarrollo, con defectos abiertos") y lista a **WS-1317 explícitamente** como uno de los defectos de contrato pendientes ("No valida que la cuenta esté habilitada para FCI antes de responder"). Esta ingesta cierra ese defecto y suma uno más que no estaba en la lista original:

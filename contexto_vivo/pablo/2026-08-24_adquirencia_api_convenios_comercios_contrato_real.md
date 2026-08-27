@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "3_recursos/detalle_productos/adquirencia/configuracion_de_entidades.md §4 y mejoras_admin_backoffice_prd88.md §2 — ambos describían el mecanismo de herencia de convenios sin conocer el contrato real; este item lo reemplaza con el modelo de datos confirmado"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 ## Qué es

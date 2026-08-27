@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/mejoras_admin_backoffice_prd88.md §2 — el documento caracteriza el patrón canal_entidad/canal_comercio del Epic AD-8 como ya construido y validado en producción (76 tickets, desde AD 67.5)"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 Durante el discovery de `/idea_problem` sobre el proyecto `convenios_configuracion` (rediseño de la herencia de convenios entre entidad y comercio), el PM (Pablo Gomes) aportó una corrección directa sobre el estado real del Epic AD-8 (canales de cobro, patrón `canal_entidad`/`canal_comercio`), que el discovery original de ese proyecto (`/idea_start`, 2026-08-21) había tomado como referencia arquitectónica probada para espejar en el nuevo diseño de convenios.

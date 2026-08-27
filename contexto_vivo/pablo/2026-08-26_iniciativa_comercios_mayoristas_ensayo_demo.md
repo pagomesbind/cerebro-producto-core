@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 El proyecto `comercios_mayoristas` (MayoristaPay), cerrado en Gate 2 como 🟡 Diferido el 2026-08-25 (sin desarrollo hasta que cierre el acuerdo comercial con la cámara), tuvo actividad real el 2026-08-26: un ensayo interno ("Previa demo mayoristas") de la demo comprometida a la cámara de supermercados mayoristas (T-031), mostrando capacidades **ya existentes** de Bind (onboarding, portal, POS, wallet, backoffice, reglas Ardid) — consistente con la decisión de no invertir esfuerzo de desarrollo nuevo mientras el contrato no cierre.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Contexto de la fuente:** ensayo interno ("previa"/dry-run) de la demo a la cámara de supermercados mayoristas, con Pablo Gomes, Luciana Rudaz, Gonzalo Rivera, Nicolás Colón, Adriana Endzeliz y Rocio Revelli (bancoindustrial.com.ar, presenta el módulo de reglas de fraude de Ardid en la demo). Durante el ensayo de pagos con enlace/QR surgió un problema real de plataforma, no simulado.

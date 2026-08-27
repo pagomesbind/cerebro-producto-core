@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 El archivo ya documenta (tramo W71) el cluster "eliminar cuenta debe deshabilitar" (WS-1077/WS-1078): los endpoints de eliminar cuenta/cuenta+CVU **no** deshabilitaban la cuenta, dejándola con `habilitado = 1`. [WS-1437](https://bindpsp.atlassian.net/browse/WS-1437) (W 72) es el bug espejo, del lado opuesto: el endpoint `DELETE /api/v1/CVU/{id}` (eliminar **solo** el CVU, sin tocar la cuenta) estaba deshabilitando la cuenta como efecto colateral no deseado — solo `DELETE Cuenta` y `DELETE CuentaYCVU` deben deshabilitar la cuenta.

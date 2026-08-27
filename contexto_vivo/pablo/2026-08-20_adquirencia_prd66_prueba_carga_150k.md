@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 **Novedad puntual sobre PRD-66 (Provincia Net — Creación masiva de QR), ya ✅ pasado a producción el 2026-08-13:** en la reunión "Análisis COBRO" del 2026-08-20 surgió una prueba de carga concreta con meta de 150.000 registros (Daniela Collia, Fintexa, consultó el volumen). El equipo reconoció la necesidad de escalar los recursos de base de datos para soportar ese volumen y se comprometió a generar el ticket antes del lunes 24/08. No queda claro si es la primera carga real productiva que se esperaba desde el pase a producción, o una prueba de stress adicional.

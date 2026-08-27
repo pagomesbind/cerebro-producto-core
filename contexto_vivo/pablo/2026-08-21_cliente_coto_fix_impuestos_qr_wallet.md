@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75959e2
 ---
 
 En el lote de despliegue de AD V72 (27/08/2026), el ticket 1458 corrige un caso donde no se debitaban correctamente en las cuentas de cliente los impuestos QR, por configuraciones previas en los comprobantes de Wallet. Matias Alzogaray y Maria Eugenia Vila lo clasificaron con **semáforo amarillo** (no verde, pese a ser un fix acotado) explícitamente por la **criticidad del impacto en clientes como Coto** — requiere controles postimplementación dedicados. Maria Eugenia queda a cargo de controlar el cálculo de impuestos QR/Wallet en base de datos tras el despliegue (ver próximos pasos de la reunión).
