@@ -1,18 +1,12 @@
----
-id: 2026-08-24_adquirencia_api_convenios_comercios_contrato_real
-pm: pablo
-fecha_captura: 2026-08-24
-fuente: "/idea_solution — discovery técnico del proyecto convenios_configuracion; spec OpenAPI 3.0.1 \"Api Comercios\" (Shared.Comercio.Api, release 30/7/2026) aportado por el PM, destilado vía subagente"
-producto: adquirencia
-tema: Contrato real de la API de Convenios/Comisiones (Convenio maestro + ComercioConvenio con override y flag FromCommerce)
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/adquirencia/gestion_convenios_comisiones.md
-tipo_destino: crear
-contradice: "3_recursos/detalle_productos/adquirencia/configuracion_de_entidades.md §4 y mejoras_admin_backoffice_prd88.md §2 — ambos describían el mecanismo de herencia de convenios sin conocer el contrato real; este item lo reemplaza con el modelo de datos confirmado"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# Gestión de Convenios y Comisiones — Contrato Real de la API (Convenio + ComercioConvenio)
+
+> Estado: documentación desactualizada / en disputa — ver nota de contradicción abajo. El contrato de API en sí está en producción (es lo que hoy usa el Admin/Centralizador de Cobro); lo que está en disputa es la caracterización previa e informal del mecanismo de herencia de convenios en otros dos documentos de este módulo.
+>
+> Fuente: `/idea_solution` — discovery técnico del proyecto `convenios_configuracion`; spec OpenAPI 3.0.1 "Api Comercios" (`Shared.Comercio.Api`, release 30/7/2026) aportado por el PM (Pablo Gomes), destilado vía subagente. Item capturado 2026-08-24.
+
+## ⚠️ Contradicción con otros documentos de este módulo — leer antes de usar
+
+Este archivo **reemplaza** la descripción informal que tenían [`configuracion_de_entidades.md §4`](configuracion_de_entidades.md) y [`mejoras_admin_backoffice_prd88.md §2`](mejoras_admin_backoffice_prd88.md) sobre el mecanismo de herencia de convenios entidad→comercio — ambos documentos describían el mecanismo **sin conocer el contrato real** de la API. Ver la nota de contradicción espejada en cada uno de esos dos archivos. **Gap escalado a `gaps_y_preguntas.md` — pendiente de decisión del usuario**, acá no se elige una versión "ganadora".
 
 ## Qué es
 
@@ -63,4 +57,12 @@ Lectura con herencia expuesta (GET /comercio/{id}/convenios/{codEntidad}):
 
 ## Por qué importa
 
-Es la fuente primaria para diseñar cualquier rediseño de la herencia de convenios (`1_proyectos/convenios_configuracion/`, en discovery de `/idea_solution` al momento de esta captura) — reemplaza la descripción informal que tenían `configuracion_de_entidades.md §4` y `mejoras_admin_backoffice_prd88.md §2` sobre el mecanismo de convenios. El PM subió el spec completo (`entidad-comercio-v1.json`, OpenAPI 3.0.1) el 2026-08-24; el archivo fuente completo queda en `1_proyectos/convenios_configuracion/referencias/convenios_configuracion-openapi_comercios_v1.json` para cualquier sesión futura que necesite volver al detalle línea por línea (parámetros de query completos, schemas de error, etc. — este item resume lo esencial, no lo reemplaza).
+Es la fuente primaria para diseñar cualquier rediseño de la herencia de convenios (`1_proyectos/convenios_configuracion/`, en discovery de `/idea_solution` al momento de esta captura). El PM subió el spec completo (`entidad-comercio-v1.json`, OpenAPI 3.0.1) el 2026-08-24; el archivo fuente completo queda en `1_proyectos/convenios_configuracion/referencias/convenios_configuracion-openapi_comercios_v1.json` para cualquier sesión futura que necesite volver al detalle línea por línea (parámetros de query completos, schemas de error, etc. — este item resume lo esencial, no lo reemplaza).
+
+## Ver también
+
+- [configuracion_de_entidades.md §4](configuracion_de_entidades.md) — descripción previa (informal, en disputa) del mecanismo de herencia de convenios.
+- [mejoras_admin_backoffice_prd88.md §2](mejoras_admin_backoffice_prd88.md) — Epic AD-8 (`canal_entidad`/`canal_comercio`), también en disputa como referencia de patrón reusable para convenios.
+
+---
+*Última actualización: 2026-08-27 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (spec OpenAPI, 2026-08-24). Contradice la caracterización previa de `configuracion_de_entidades.md §4` y `mejoras_admin_backoffice_prd88.md §2` — gap escalado, ver `gaps_y_preguntas.md`.*

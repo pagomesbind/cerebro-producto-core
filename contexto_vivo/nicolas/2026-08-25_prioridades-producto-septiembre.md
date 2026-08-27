@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Análisis COBRO" (2026-08-24), Pablo Gomes detalló los objetivos definidos desde Producto para la versión de septiembre 2026 (lanzamiento apuntado a la semana del 17-20 de septiembre): **Power Effects**, el **portal web en su segundo MVP**, el **tratamiento de contracargos de tarjeta**, y la **mejora de los tiempos de liquidación en cobros online** — acordando además impulsar el desarrollo de **tarjeta QR** junto con Nicolás Colón y Daniela Collia (Fintexa). Pablo Gomes aclaró explícitamente que Power Effects y contracargos de tarjeta son las prioridades principales frente a otras mejoras de menor urgencia.

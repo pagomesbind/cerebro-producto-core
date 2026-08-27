@@ -237,6 +237,20 @@ De manera de poder dar respuesta rápida a cualquier consulta o duda en la integ
 
 **Lectura:** este Epic es evidencia de que el motor de Link de Pago (Pago Fácil / ThirdPartyStore, ver también `detalle_productos/adquirencia/boton_simple_2_0.md §7`) es reutilizado por múltiples clientes con branding propio — los pedidos de reportería/liquidaciones exportables tienden a repetirse cliente a cliente.
 
+## Esquema propuesto para disponibilizar el API a integradores externos vía subagentes (discovery, 2026-08-24)
+
+> Estado: discovery — no construido (esquema operativo en validación comercial, sin definición cerrada).
+>
+> Fuente: Reunión "Proyecto BPG" (2026-08-24), minuta Gemini — Adriana Endzeliz (Comercial) y Pablo Gomes.
+
+Adriana Endzeliz (Comercial) planteó al PM que varios clientes externos están consultando activamente por integrarse al cobro de servicios de BPG (Pago Fácil) — el caso concreto en discusión es **Octagon**, que quiere ofrecer pago de servicios (ej. factura de electricidad) dentro de su propia app/wallet.
+
+**Estado técnico confirmado:** cuando se construyó BPG, se lo pensó **todo por API** para que cualquier cliente con capacidad de desarrollo pudiera integrarse — esas APIs (documentadas arriba en este mismo archivo) ya están en producción, no están ocultas ni deshabilitadas, simplemente **no están activamente disponibilizadas/promocionadas** como oferta comercial estándar hacia afuera.
+
+**Esquema operativo propuesto (a validar):** Bind PSP actúa como **agente** del acuerdo con Pago Fácil (Bin PCP / BPG) — el acuerdo comercial de fondo ya existe: Bind PSP puede actuar como subagente de Pago Fácil. La propuesta en discusión es crear una **entidad relacionada al producto** donde clientes externos como Octagon funcionen como **comercios/subagentes** dentro de esa entidad — análogo al modelo ya usado en Adquirencia, donde cada comercio de Pago Fácil es formalmente "Pago Fácil" independientemente de su rubro real (escuela, municipio, etc.). Quedó abierta la pregunta de si conviene que la titularidad del "agente" recaiga en Bind PSP (como entidad) con Octagon como comercio dentro de ella, o si correspondería un convenio directo Octagon↔Pago Fácil — Adriana Endzeliz se lleva a validar con su equipo cuál esquema conviene más, considerando que las liquidaciones se calculan por comercio.
+
+**Caso de uso descripto para Octagon:** usuario de la wallet de Octagon entra a pago de servicios dentro de la app de Octagon, busca la empresa/deuda a pagar, paga con tarjeta o QR (vía botón de pago externo, no con saldo), la transacción impacta la deuda en BPG, se registra para evitar doble pago, y se emite comprobante.
+
 ## Ver también
 
 - `detalle_productos/adquirencia/boton_simple_2_0.md §6-9` — búsqueda de deuda BPG, modalidad ThirdPartyStore, y los pedidos de PRD-87 del mismo cliente RIPSA.

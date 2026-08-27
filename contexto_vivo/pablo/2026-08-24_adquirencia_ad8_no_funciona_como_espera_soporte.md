@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/mejoras_admin_backof
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/mejoras_admin_backoffice_prd88.md §2 — el documento caracteriza el patrón canal_entidad/canal_comercio del Epic AD-8 como ya construido y validado en producción (76 tickets, desde AD 67.5)"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

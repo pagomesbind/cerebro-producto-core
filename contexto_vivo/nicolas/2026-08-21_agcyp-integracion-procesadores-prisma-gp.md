@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/agente_cobros_y_pagos/integracio
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión recurrente "Análisis COBRO" (2026-08-20, con Daniela Collia y equipo de Fintexa) se destiló la siguiente mecánica/estado de la integración de procesadores de pago del Agente de Cobros y Pagos:

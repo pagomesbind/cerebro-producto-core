@@ -48,6 +48,14 @@ Se genera un JMeter para procesar el alta de CVU de manera masiva, en reemplazo 
 - En **Header Manager** debe aclararse `x-entidad` con el id del collector correspondiente.
 - El archivo de salida devuelve el CVU creado para cada `clientId`; si dio error, devuelve `0`.
 
+### Actualización (AD V72, 27/08/2026) — retiro del método de carga masiva de CBU Corto por CSV (ticket 1139)
+
+> Fuente: Reunión "Análisis de riesgos AD V72" (2026-08-21), minuta Gemini — sección Decisiones, "Eliminación de carga masiva por CSV" y Detalles ([00:37:40]-[00:38:56]).
+
+En el lote de despliegue de AD V72 (27/08/2026) se retira el método obsoleto de carga masiva de CBU/CBU Corta U mediante archivos CSV (ticket 1139). A partir de este release, la **única vía activa para generar stock de CBU Corto en lote es el pedido "por cantidad"** (ver §3, "Stock de CVU para Botón 2.0" — el endpoint que recibe la cantidad a crear en la URL). Cualquier integración o proceso operativo (Soporte, scripts) que todavía dependa del formato CSV deja de funcionar tras el pase — a confirmar si esto afecta también al flujo de alta masiva por JMeter de §4 (que toma un CSV de entrada `AltaCvuBS.csv`), dato no precisado en la fuente.
+
+Clasificado con semáforo verde por el equipo (bajo riesgo, sin clientes activos identificados usando el método CSV al momento de la reunión).
+
 ## 5. Alta Masiva de Cajas con CVU (PROD)
 
 JMeter (`CVU_Alta_masiva_de_cajas_-_Swagger_(1).jmx`) que crea una caja en Comercio con su CVU y luego le asigna un Alias.
@@ -65,4 +73,5 @@ APIs afectadas: `MiddlewareAggregatorDB`, `SharedComercioDB`. Endpoints: `http:/
 - [detalle_productos/adquirencia/carga_masiva_cajas_rxt.md](carga_masiva_cajas_rxt.md) — carga masiva equivalente para RxT (endpoint dedicado, no JMeter).
 
 ---
-*Última actualización: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*
+*Última actualización: 2026-08-27 — `/context_merge`: nueva nota tras §4 (retiro del método de carga masiva de CBU Corto por CSV, ticket 1139, AD V72).*
+*Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

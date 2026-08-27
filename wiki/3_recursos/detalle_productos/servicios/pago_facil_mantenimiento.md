@@ -38,6 +38,17 @@ Todos publicados en SER 1 (2026-06-04), sin PRD/IDEA propio relevado — parecen
 - **No validar duplicidad de `codigoEntidad` en el alta** ([SER-44](https://bindpsp.atlassian.net/browse/SER-44)): corregido — todos los entes de Pago Fácil comparten el mismo `codigoEntidad` (el de la Entidad Pago Fácil de Cobro), así que validar duplicados rompía el alta de entes nuevos legítimamente.
 - **ReCaptcha — errores en producción** ([SER-64](https://bindpsp.atlassian.net/browse/SER-64)): dos bugs de token de reCaptcha detectados ya en producción — la acción del token generada en la pantalla de vencimiento del link no coincidía con la esperada por el backend ("HOMEPAGE" vs. "procesar_error_pago"), y el polling automático de estado de un pago que queda `INICIADO` no renovaba el token antes de cada consulta, causando fallos de validación.
 
+## 4. Gestión del proyecto — renombre a "Proyecto Servicios" e incorporación al pipeline de Wallet (2026-08-24)
+
+> Estado: en producción (gestión de proyecto en curso, sin cambio de alcance funcional).
+>
+> Fuente: Reunión "Sincro - Implementación / Proyecto Deuda" (2026-08-24, equipo Fintexa: Pablo Serra, Mariela Marín, Mauricio Campos, Nicolás Pomponio, Pablo Vargas; equipo Bind: Matías Alzogaray, Andrea Orsini, Adriana Endzeliz, Gonzalo Rivera, Nicolás Colón), minuta Gemini.
+
+- **Nombre oficial:** el proyecto (flujo de pago de servicios vinculado a Pago Fácil, documentado en este módulo) pasa a llamarse de forma unificada **"Proyecto Servicios"** — se abandona el nombre histórico "Proyecto Deuda" tanto del lado de Fintexa como de Bind, para evitar confusión con otras iniciativas.
+- **Incorporación al pipeline de Wallet:** el proyecto se integra formalmente a la gestión y planificación del equipo de Wallet, a pedido de EMA (12-14 de agosto), para poder disponer de QA y soporte técnico L2/L3. Se advirtió riesgo de superposición de plazos con las prioridades ya vigentes de Wallet.
+- **Estado del backlog (2026-08-24):** el tablero tiene ~65 tickets en total, de los cuales menos de 10 quedan pendientes de integrar a producción. El desarrollo data de diciembre 2025 aprox., por lo que se acordó hacer una revisión ("actualización", no auditoría) de arquitectura y seguridad para ponerse al día con lo agregado en los últimos 7-8 meses, más una solicitud de pentest (a cargo de Pablo Vargas, Fintexa).
+- Nicolás Colón quedó con la acción de compartir con el equipo el listado de épicas y tickets actuales del proyecto.
+
 ## Ver también
 
 - PRD-57 — Pago Fácil MVP — historia de build del MVP, PM y decisiones de alcance. Proyecto de Nicolás Colón, en su propio Cerebro desde 2026-08-13.

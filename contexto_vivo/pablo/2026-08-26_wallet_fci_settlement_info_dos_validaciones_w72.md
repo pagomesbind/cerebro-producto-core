@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/cuenta_remunerada_fci.md
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/cuenta_remunerada_fci.md §4.5 — lista a WS-1317 explícitamente como uno de los 'Defectos de contrato abiertos... ninguno con fix confirmado'. Este ticket lo cierra."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -13,6 +13,7 @@
 | [criterios_de_estimacion.md](criterios_de_estimacion.md) | *(pendiente de crear — ver gap)* Criterio explícito de cómo estimar esfuerzo, complementario a la referencia por analogía. |
 | [referencia_estimaciones.md](referencia_estimaciones.md) | Historial de esfuerzo por iniciativa histórica (Notion + Jira Producto), organizado por producto, para estimar desarrollos nuevos por analogía. |
 | [criterios_de_priorizacion.md](criterios_de_priorizacion.md) | Criterio de priorización que el equipo usa de hecho (compliance primero, las NSM como marco, capacidad real, simplicidad de OKR). |
+| [comunicacion_de_lanzamientos.md](comunicacion_de_lanzamientos.md) | Acuerdo (2026-08-18) de usar un hilo de mail interno tipo "avisos de producto" para anunciar lanzamientos — sin owner ni fecha límite confirmados todavía. |
 
 ## Ver también
 

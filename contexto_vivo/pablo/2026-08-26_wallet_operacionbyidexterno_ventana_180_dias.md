@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/pedidos_de_clientes_y_hal
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "wiki/3_recursos/detalle_productos/wallet/apis_expuestas/conciliaciones/endpoint_get_consultar_movimientos_cuenta_corriente.md (y la página pública equivalente), que documentan fechaCreacion, fechaActualización y comprobanteDevolucionId como campos de datosOperacion"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Descripción de la contradicción

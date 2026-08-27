@@ -10,7 +10,7 @@ destino_propuesto: wiki/3_recursos/detalle_productos/siscri/calculo_impuesto_onl
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

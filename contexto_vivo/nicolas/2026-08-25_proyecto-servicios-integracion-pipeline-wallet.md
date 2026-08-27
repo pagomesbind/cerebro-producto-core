@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/servicios/pago_facil_mantenimien
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Sincro - Implementación / Proyecto Deuda" (2026-08-24, con equipo Fintexa: Pablo Serra, Mariela Marín, Mauricio Campos, Nicolás Pomponio, Pablo Vargas, y Bind: Matías Alzogaray, Andrea Orsini, Adriana Endzeliz, Gonzalo Rivera, Nicolás Colón) se definieron dos puntos formales sobre este proyecto, que es el flujo de pago de servicios vinculado a Pago Fácil (mismo producto documentado en este módulo):

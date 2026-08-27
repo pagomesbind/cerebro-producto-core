@@ -1,18 +1,8 @@
----
-id: 2026-08-21_adquirencia_bug_vista_iibb_liquidacion_lote
-pm: pablo
-fecha_captura: 2026-08-21
-fuente: "/sync_mails — mail 'VISTA - RET_IIBB_REC_ACUM_LOTE - Impuestos Adquirencia', Ariel Profitti (Fintexa) a Sergio Pavetto/mvila@bind.com.ar, hilo `1a01fd096e45f889` (2026-08-20)"
-producto: adquirencia
-tema: Bug de performance (fan-out JOIN) y de NULL constraint en la vista de cálculo de percepción de IIBB para liquidación por lote
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/adquirencia/impuestos_iibb_liquidacion_lote.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# Impuestos — Bug de Performance y NULL en Vista de Liquidación por Lote de IIBB
+
+> Estado: en producción (bug real, sin confirmación de resolución al momento de esta ingesta).
+>
+> Fuente: Mail "VISTA - RET_IIBB_REC_ACUM_LOTE - Impuestos Adquirencia", Ariel Profitti (Fintexa) a Sergio Pavetto/mvila@bind.com.ar, hilo `1a01fd096e45f889` (2026-08-20).
 
 ## Contexto
 
@@ -62,4 +52,10 @@ ISNULL(PERC_IIBB, 0) AS PERC_IIBB
 
 Ambos hallazgos quedaron reportados por Fintexa a `sergio.pavetto@siane.com.ar` y `mvila@bind.com.ar` el 2026-08-20, sin confirmación de resolución al momento de este barrido (2026-08-21). No se identificó una IDEA de Jira asociada en este mail.
 
-> Fuente: Mail "VISTA - RET_IIBB_REC_ACUM_LOTE - Impuestos Adquirencia" — Ariel Profitti (Fintexa), 2026-08-20.
+## Ver también
+
+- [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) — liquidación de comercio (distinto proceso, no de impuestos).
+- [detalle_productos/siscri/](../siscri/) — motor de cálculo de impuestos que también usa Adquirencia para liquidaciones.
+
+---
+*Última actualización: 2026-08-27 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (mail Fintexa, 2026-08-20).*

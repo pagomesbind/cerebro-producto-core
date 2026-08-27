@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 Dos riesgos detectados sobre el "Proyecto Servicios" (ver ítem hermano `2026-08-25_proyecto-servicios-integracion-pipeline-wallet` para el contexto general del proyecto):

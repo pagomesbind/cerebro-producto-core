@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/dolar_ccl.md
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/dolar_ccl.md §3.6bis — el mail del 2026-08-18 dice 'el impacto de este bloqueo es mínimo, afecta solo a un ticket de compra de dólar fallida detectado desde visión interna' sin nombrarlo. Es WS-1351."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

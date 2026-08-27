@@ -27,6 +27,16 @@ El Epic más grande del barrido de Jira de este proyecto (más grande incluso qu
 - **Nota de volumen**: ~30 de los 76 tickets son Tests/Test Plans de regresión de QA sin contenido de aprendizaje adicional.
 - **Versiones de publicación**: el grueso (21 tickets) salió en **AD 67.5** (2026-03-03). Fixes puntuales: AD 66 (2025-12-16), AD 67.2 (2026-02-10, split en entidad mayorista), AD 67.3 (2026-02-19, no permite editar BS con error), AD 68 (2026-03-30, alta POS con datos null), **AD 69.2 HF** (2026-05-11, hotfix dedicado — arancel reducido pide teléfono/fecha indebidamente, alta POS reducido no figura en GP, reproceso con error no habilita el canal).
 
+> ⚠️ **Contradicción registrada (2026-08-24) — dos hallazgos independientes cuestionan la caracterización de arriba como "patrón ya validado y reusable en producción". Ver antes de usar esta sección como referencia para otra iniciativa.**
+>
+> **1. El propio equipo operativo dice que no funciona como se espera.** Durante el discovery de `/idea_problem` sobre el proyecto `convenios_configuracion` (rediseño de la herencia de convenios entre entidad y comercio), el PM (Pablo Gomes) aportó una corrección directa: el discovery original de ese proyecto (`/idea_start`, 2026-08-21) había tomado el Epic AD-8 de arriba como referencia arquitectónica probada para espejar en el nuevo diseño de convenios, pero ese mismo mecanismo (`canal_entidad`/`canal_comercio`) se intentó usar para resolver un problema análogo y quedó **mal definido y mal ejecutado** — no funciona como lo espera el equipo operativo de Soporte de Cobro (referente Gonzalo Rivera, el mismo que reporta el dolor de convenios). No se precisó si el problema es de diseño, de ejecución (bugs), o de ambos. **Por qué importa:** si AD-8 no funciona como documenta esta sección, cualquier otra iniciativa de Adquirencia que lo tome como "patrón ya validado" puede estar partiendo de una premisa falsa. Quien mantiene este archivo debería confirmar con el propio Gonzalo Rivera (o relevar tickets de soporte sobre canales de cobro) si el "no funciona como se espera" es puntual, generalizado, o ya conocido y en backlog — y ajustar la caracterización de §2 en consecuencia (de "validado en producción" a "construido pero con problemas conocidos", si corresponde). Impacto directo: el Gate 3 de `convenios_configuracion` (que adoptó la analogía con AD-8) quedó parcialmente reabierto — ver `1_proyectos/convenios_configuracion/decisiones.md` (2026-08-24); el nuevo diseño de convenios debe partir del mecanismo real de herencia (copia puntual al crear el comercio, no vínculo vivo), no asumir que basta con replicar `canal_entidad`/`canal_comercio`.
+> Fuente: `/idea_problem` — sesión de problem statement del proyecto `convenios_configuracion`, corrección aportada en vivo por el PM (2026-08-24).
+>
+> **2. El contrato real de la API de Convenios no coincide con esta descripción informal.** El mismo discovery relevó el spec OpenAPI real de la "Api Comercios" — ver [gestion_convenios_comisiones.md](gestion_convenios_comisiones.md), que documenta el modelo real (Convenio maestro + ComercioConvenio con override/`FromCommerce`) y reemplaza cualquier descripción informal de convenios que se apoyara en esta sección.
+> Fuente: `/idea_solution` — spec OpenAPI 3.0.1 "Api Comercios", aportado por el PM (2026-08-24).
+>
+> Se mantiene el texto original de §2 arriba por trazabilidad (fue el resultado documentado del barrido de Jira de PRD-88). Gaps escalados — pendiente de decisión del usuario, ver `gaps_y_preguntas.md`.
+
 ## 3. ABM de Roles y Usuarios (Epic AD-7)
 
 La mayor parte ya está documentada en [agrupador_mayorista.md §3](agrupador_mayorista.md) (migración a **AccessManagement 2.0**, `RolTemplate`/`PermisoTemplate`) — esta IDEA confirma que la migración se completó preservando compatibilidad con Portal Comercio, TIN/WICO y MPOS. Delta nuevo: bug de login que no validaba si un miembro estaba dado de baja — solo validaba bloqueo por intentos fallidos (`bloqueadoHasta`), permitiendo el ingreso de usuarios ya dados de baja.
@@ -39,6 +49,8 @@ La mayor parte ya está documentada en [agrupador_mayorista.md §3](agrupador_ma
 ## Ver también
 - [configuracion_de_entidades.md](configuracion_de_entidades.md) — flujo de alta de entidad que este PRD mejora.
 - [agrupador_mayorista.md](agrupador_mayorista.md) — AccessManagement 2.0 en detalle.
+- [gestion_convenios_comisiones.md](gestion_convenios_comisiones.md) — contrato real de la API de Convenios (2026-08-24), en disputa con §2 — ver nota de contradicción arriba.
 
 ---
-*Última actualización: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*
+*Última actualización: 2026-08-27 — `/context_merge`: §2 suma nota de contradicción (doble hallazgo: AD-8 no funciona como espera el equipo operativo de Soporte de Cobro, y el contrato real de la API de Convenios difiere de esta descripción informal — ver `gestion_convenios_comisiones.md`).*
+*Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

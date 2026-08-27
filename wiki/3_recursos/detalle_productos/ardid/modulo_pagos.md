@@ -245,5 +245,38 @@ Analizan la conducta del usuario en la **Aplicación móvil** de la entidad; se 
 
 El texto fuente no contiene una sección dedicada explícitamente titulada "Auditoría de reglas". Lo más cercano documentado es el mecanismo transversal de **"modificaciones pendientes"**: toda alta, edición o eliminación de reglas Reputacionales, IA, Machine Learning y Comportamentales genera una modificación pendiente que debe ser aprobada o rechazada por un usuario con permisos distintos/adicionales, mostrando en el modal el valor anterior vs. el valor tras la modificación. El módulo formal de "Reporte de Auditoría" (ver [reporteria_alertas.md](reporteria_alertas.md#2-reporte-de-auditoría)) es donde este flujo queda finalmente registrado y consultable.
 
+## 14. Identificación de tarjetas por hash — mecánica real y hallazgos operativos
+
+> Este apartado proviene de reuniones operativas (no del manual del proveedor) — aclara y extiende lo documentado en §3 (columna HASH del listado de pagos).
+
+### 14.1 Criterio real de identificación — hash de los 16 dígitos completos (2026-08-24)
+
+> Fuente: Reunión "ARDID" (2026-08-24), minuta + transcripción Gemini.
+
+En esta reunión, Nicolás Colón le aclaró a Rocío Revelli (Soporte) el criterio real de identificación de tarjetas que usa Ardid, a raíz de una consulta de un cliente (Maru, vía Payway) sobre una tasa alta de rechazos que atribuía a límites diarios por tarjeta.
+
+**Decisión/definición acordada:** la identidad de una tarjeta en Ardid se determina **únicamente por el hash de los 16 dígitos completos** del número de tarjeta — nunca por el DNI del pagador, ni por coincidencia parcial de los primeros seis/últimos cuatro dígitos (formato típico que entregan los procesadores como Payway). Dos operaciones con los mismos primeros/últimos dígitos pero distinto tramo medio son, para Ardid, tarjetas distintas con hashes distintos — y por lo tanto las reglas de límite diario (ej. "máximo 3 pagos por día") se evalúan por hash, no por esos datos parciales. Se validó esto en vivo contra Mongo (vía Cosmos Connect, colección `transaction`): al filtrar por el hash real de una tarjeta puntual solo aparecieron 2 operaciones en ~45 días de retención, mientras que el archivo que había armado Payway con datos parciales mostraba muchas más operaciones "coincidentes" que en realidad correspondían a tarjetas distintas (confirmado además por DNIs y emails distintos entre esas operaciones).
+
+**Dato adicional relevante:** el DNI y el email que se cargan en el botón de pagos son datos de completado libre (no hace falta que sean del titular de la tarjeta/deuda) — no se usan para la identidad de la tarjeta. Ardid sí tiene una función para validar que una tarjeta, la primera vez que se usa, quede asociada a un DNI y exigir que las siguientes veces venga con el mismo DNI — pero está **deshabilitada** para evitar bloqueos por errores de tipeo del usuario final. Hay un proyecto próximo provisto por Modo que permitirá validar los 16 números de tarjeta contra el DNI de la persona usuaria.
+
+### 14.2 Bloqueo permanente de tarjeta por hash ligado al primer vencimiento cargado (2026-08-26)
+
+> Fuente: `/sync_meetings` — reunión "Previa demo mayoristas" (2026-08-26), minuta Gemini. Surgido durante un ensayo (dry-run) de la demo a la cámara de supermercados mayoristas, en pagos con enlace/QR — problema real de plataforma, no simulado.
+
+Si en el **primer pago** con una tarjeta se ingresa una fecha de vencimiento incorrecta, el sistema genera un hash que asocia el número de tarjeta a esos datos erróneos **de forma permanente** — la tarjeta queda bloqueada para siempre con ese error, sin mecanismo de autocorrección.
+
+- El hash se compone **exclusivamente de los 16 dígitos de la tarjeta** (consistente con §14.1), pero una vez generado queda atado al primer vencimiento con el que se registró — si ese dato estaba mal, no hay forma de que el sistema lo corrija solo.
+- Diseño histórico heredado de **Billetera Santa Fe**, pensado originalmente como control antifraude (evitar que se reintenten combinaciones de tarjeta+vencimiento).
+- Cuestionamiento abierto (Pablo Gomes): vigencia de ese diseño para el caso de una tarjeta **renovada legalmente** (mismo número, nuevo vencimiento) — con la regla actual, esa renovación legítima también quedaría bloqueada.
+- **Workaround manual ya conocido por Soporte** (mostrado en vivo por Rocío Revelli): cambiar el estado de la tarjeta de "hash bloqueado" a "inválido" permite que el sistema genere un hash nuevo y el cliente pueda reintentar la operación. Tras aplicar el cambio, la transacción pasa a estado pendiente (confirmado por Adriana Endzeliz).
+
+No quedó registrado en la reunión si existe hoy un ticket o pedido formal para automatizar este workaround o revisar la vigencia de la regla heredada — es un hallazgo de mecánica de producto, no una decisión de rediseño.
+
+### 14.3 Mejora pedida — incluir el ID de regla de Ardid en los códigos de rechazo de TRX
+
+> Fuente: misma reunión "Previa demo mayoristas" (2026-08-26).
+
+Gonzalo Rivera propuso que, cuando una transacción se rechaza por Ardid (ej. código 1001), la base de TRX (transacciones) de Bind PSP incluya además, entre paréntesis, el **ID de la regla específica** que causó el rechazo — hoy para saber qué regla exacta rechazó hace falta consultar manualmente la plataforma Ardid. El equipo lo acordó como requerimiento de auditoría técnica; Gonzalo Rivera queda a cargo de cargar el pedido de mejora al sistema correspondiente (no es una tarea de Producto/PM, la carga él mismo).
+
 ---
 *Ver también: [scoring.md](scoring.md) para el sistema de puntuación, [blacklist_whitelist_rafagas.md](blacklist_whitelist_rafagas.md) para blacklist/whitelist y ráfagas de pagos, y [apis_externas.md](apis_externas.md) para las APIs `/Transaction`, `/ClientCard`, `/Loans` involucradas en este flujo.*

@@ -10,7 +10,7 @@ destino_propuesto: wiki/3_recursos/detalle_productos/adquirencia/pos_multiadquir
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

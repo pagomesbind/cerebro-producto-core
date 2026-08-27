@@ -10,7 +10,7 @@ destino_propuesto: .claude/skills/idea_us/SKILL.md (Paso 3 — "Descomponer por 
 tipo_destino: actualizar
 contradice: "no — refina/precisa el Paso 3 actual de la skill, no lo contradice: sigue siendo corte por entregable técnico completo, pero ancla explícitamente qué cuenta como 'un' entregable"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

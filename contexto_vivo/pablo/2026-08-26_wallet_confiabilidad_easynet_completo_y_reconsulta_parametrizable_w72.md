@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/historial_confiabilidad_t
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/historial_confiabilidad_transferencias_y_comprobantes.md §10 — el párrafo de WS-1387 (W 71.1 FIX) dice 'Deuda técnica reconocida: la migración debería extenderse al resto del flujo... todavía no migrados'. WS-1416 (W 72) cierra exactamente esa deuda."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 
