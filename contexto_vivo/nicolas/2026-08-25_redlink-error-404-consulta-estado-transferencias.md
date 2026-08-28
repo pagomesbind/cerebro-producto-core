@@ -10,7 +10,7 @@ destino_propuesto: "sin determinar — a evaluar en /context_merge (posible arqu
 tipo_destino: crear
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 ---
 
 El 2026-08-23 se escaló al "equipo de Integración de Red Link" (mail a `alertas_HtH_Link@bancoindustrial.com.ar`) un pedido de "levantamiento de guardia" por errores bloqueantes en el ambiente de integración: al consumir el endpoint de consulta de estado de transferencias contra `bancos.integracion.redlink.com.ar` (`GET /bancos/transferencias/1/0/0/estado`), el servidor devuelve **HTTP 404 (Not Found)**. Detalle del error: fecha/hora `Ago 23 05:07:55`, W3C trace ID `cd56b9dbf5b79987ec98cb25f70a2915`.

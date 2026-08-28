@@ -78,6 +78,14 @@ Detalle técnico concreto de la vinculación mencionada arriba, relevado de la E
 - El **alias del CVU** que recibió la transferencia se envía a Pago Externo en el campo `identificadorReferencia` del webhook estándar (ver tabla de atributos arriba, §1).
 - Prueba de estrés registrada en el histórico: **proceso asíncrono de Pago Externo** validado con 2000 tx/hora sostenidas durante 2+ horas en paralelo sobre dos entidades de prueba, midiendo % de éxito de inserción/cálculo de impuestos y la posibilidad de reprocesar manualmente cualquier transacción que quedara con error (vía endpoint "Pago General") — mismo patrón de validación de robustez usado después en Newpay PMC MVP (ver [liquidaciones_y_devoluciones.md](devoluciones_y_contracargos.md#liquidador-histórico-de-clientes-traditum-y-newpay-pmc)).
 
+##### Cambio de categorización — CBU externo → CBU corto en CBU Collect (AD V72, 27/08/2026)
+
+> Fuente: Reunión "Análisis de riesgos AD V72" (2026-08-21), minuta Gemini — sección Decisiones, "Categorización de transferencias CBU" y Detalles ([01:09:40]).
+
+En el lote de despliegue de AD V72 (27/08/2026) se corrige la catalogación de las transferencias entrantes desde un **CBU externo hacia un CBU corto** en CBU Collect: hoy se registran/notifican como si fueran de CBU largo, y a partir de este cambio se van a registrar (y notificar por webhook) como `transfer.cortau` (`cortau receipt`).
+
+**Es un cambio de contrato del webhook** — Matias Alzogaray advirtió explícitamente que puede afectar a entidades que controlan/filtran por ese campo de tipo, y mencionó como caso concreto al cliente **Jugadón** (Grupo Slots). Se acordó evaluar el impacto y avisar con anticipación a los clientes involucrados antes del pase.
+
 ##### Lado Wallet del mismo mecanismo — ciclo de vida del CVU asignado a una deuda
 
 > Fuente: reuniones "Join Soporte Clientes" (2026-06-17), "Canales y BS" (2026-06-18), "rxt" (2026-06-25) y "Análisis COBRO" (2026-07-20), minuta Gemini. Mismo concepto de CVU de arriba, visto desde el lado Wallet/Deuda — reciclaje del CVU una vez pagada la deuda que lo usó.
@@ -131,3 +139,4 @@ Ejercicio discutido en la sesión (caso hipotético: agregar "Pago Fácil" como 
 
 ---
 *Ver también: [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el detalle específico del canal QR que alimenta este flujo de notificaciones.*
+*Última actualización: 2026-08-27 — `/context_merge`: nueva sección en la mecánica CVUCollect (cambio de categorización CBU externo→CBU corto como `transfer.cortau`, AD V72, cliente Jugadón).*

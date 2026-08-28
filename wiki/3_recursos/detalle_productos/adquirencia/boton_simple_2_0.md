@@ -98,6 +98,24 @@ Mejoras puntuales sobre **Botón Simple 1.0** (el predecesor mencionado en §1) 
 - **AD 68** (2026-03-30): [AD-670](https://bindpsp.atlassian.net/browse/AD-670) (mensaje de error mal mapeado al devolver monto mayor al pagado), [AD-615](https://bindpsp.atlassian.net/browse/AD-615) (CVU no se da de baja ante vencimiento), [AD-487](https://bindpsp.atlassian.net/browse/AD-487) (consulta de Deuda ya no trae `paymentGuid`), [AD-445](https://bindpsp.atlassian.net/browse/AD-445) (error incorrecto al crear Deuda con todos los medios en false — reaparición de AD-424).
 - **AD 69** (2026-04-29): [AD-899](https://bindpsp.atlassian.net/browse/AD-899) (corregir endpoint DELETE Deuda), [AD-587](https://bindpsp.atlassian.net/browse/AD-587)/[AD-467](https://bindpsp.atlassian.net/browse/AD-467) (aviso de pago exitoso no ocurre para pago QR/Transferencia en otra pestaña — variante persistente del bug central de §3), [AD-971](https://bindpsp.atlassian.net/browse/AD-971) (considerar pagos luego del vencimiento de la deuda).
 
+## 11. Parámetro `pago_unico` — definición formal (1 = Botón de Pago, 0 = RxT) y saneamiento de base (2026-08-20)
+
+> Fuente: Reunión "Análisis COBRO" (2026-08-20), minuta Gemini. Continúa el hallazgo ya documentado en [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md) (bug de asignación automática de CBU corta sin filtro por `pago_unico`, cliente FAVACARD, 2026-08-06, con actualización 2026-08-13 sobre el análisis técnico completo del atributo en `Facart`).
+
+**Decisión acordada (2026-08-20):** el parámetro **"pago único"** se definió para diferenciar el producto asociado a una cuenta con CBU — **valor 1 = botón de pago**, **valor 0 = RXT**. Objetivo: poder identificar qué colecciones/cuentas corresponden a cada categoría.
+
+**Saneamiento de base acordado:** Daniela Collia (Fintexa) y Nicolás Colón van a coordinar el saneamiento de la base de datos para identificar las cuentas de "pago único" existentes y diferenciarlas correctamente entre RXT y botón simple. Nicolás Colón queda a cargo de analizar qué colecciones corresponden a cada categoría. **Decisión de secuencia:** el saneamiento se ejecuta en conjunto con el despliegue del código correspondiente, para asegurar que quede todo alineado en producción al mismo tiempo (no antes, no después).
+
+**Relación con el hallazgo de FAVACARD:** el bug de asignación automática de CBU corta en Botón Simple 2.0 sin filtro por `pago_unico` (identificado el 2026-08-06) y el análisis técnico posterior del 2026-08-13 (que reveló que el atributo servía a la vez para distinguir RxT/Botón 2.0 y para disparar la baja automática del CBU/identificador, con 159 cajas de comercio afectadas) parecen ser el antecedente directo que motivó esta definición formal y el saneamiento — ver el detalle completo en [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md).
+
+## 12. Eliminación del límite de $9.000.000 en creación de links de pago (AD V72, 2026-08-21)
+
+> Fuente: Reunión "Análisis de riesgos AD V72" (2026-08-21), minuta Gemini — sección Decisiones, "Eliminación de límite de pago" y Detalles ([00:42:44]).
+
+En la reunión de riesgo de AD V72 (despliegue 27/08/2026) se aprobó eliminar la validación que hoy limita la creación de links de pago de Botón Simple 2.0 a un monto máximo de **$9.000.000**. Matias Alzogaray lo presentó como un ticket de soporte, sin motivo de negocio específico documentado en la minuta — se retira directamente la restricción, sin reemplazo por un tope configurable. Clasificado con semáforo verde (bajo riesgo).
+
+**Dato relevante para contexto histórico:** este mismo límite de $9M ya había sido señalado como punto sin resolver por un cliente (Provincia NET preguntó en julio si el tope "podía ser más" — ver `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §2`, aunque ese caso es sobre el monto máximo de un QR de pago único, no necesariamente el mismo límite de Botón Simple 2.0; a confirmar si son el mismo control o distinto).
+
 ## Ver también
 
 - [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) — mecánica de órdenes de venta y cajas del Botón Simple "clásico".

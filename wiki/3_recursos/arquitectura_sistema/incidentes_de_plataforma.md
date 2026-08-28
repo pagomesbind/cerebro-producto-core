@@ -73,11 +73,27 @@
 - **Contingencia mientras tanto:** control manual — todas las mañanas se verifica a mano si hay errores de conexión con Poicenot y, de haberlos, se reinicia el servicio de Egress.
 - **Nota de alcance:** Poicenot es uno de los 3 servicios no críticos (junto a Pix y Lirium) ya migrados a Auto External v2 (ver §5) — este incidente es de seguridad/conectividad, no de la migración en sí.
 
+## 8. Repaso Semanal líderes (2026-08-25) — despliegues Wallet 7.2/AuthExternal v2.0 cerrados, decisión pendiente Zero Downtime vs. Sentinela
+
+> Fuente: mail "Repaso Semanal líderes: Mar, 25 de ago de 2026" (minuta directa de Matías Alzogaray por mail, no Gemini), 2026-08-25 (threadId `1a03a1edad15f8f1`). Continuación de §2, §4 y §6.
+
+**Despliegues técnicos recientes confirmados como exitosos y sin reportes de problemas:**
+- Versión **7.2 de Wallet** completada y desplegada.
+- Migración de **AuthExternal a la versión 2.0** finalizada de forma limpia, sin reportes de incidentes — corrobora, desde una fuente distinta, el cierre de la migración a Auto External v2 ya en curso desde §5-§6.
+- Pruebas en desarrollo de **Zero Downtime** (escalar/desescalar microservicios sin pérdida de mensajes) superadas con éxito.
+
+**Decisión de arquitectura pendiente (Parking Lot, sin resolver todavía):** queda como decisión técnica central priorizar entre **Zero Downtime** (aplicarlo a microservicios críticos) vs. **Sentinela** (para resolver problemas recientes con comprobantes) — postergada a la reunión de Arquitectura del jueves siguiente (2026-08-27), donde también se iba a ejecutar el análisis post-mortem de un incidente ocurrido el viernes anterior (2026-08-21). El Cerebro no tiene hoy detalle de ese incidente ni de a qué "problemas recientes con comprobantes" se refiere Sentinela — queda como punto a confirmar en el próximo barrido si hay minuta de esa reunión de Arquitectura.
+
+**Prueba de carga de Wallet 7.2 (contexto ampliado, dueño de la ejecución: Juan Pablo Carubelli):** motivada por el aumento esperado de generación de comprobantes por la salida a producción de clientes de alto volumen — **Arcos Dorados** (septiembre 2026) y la futura integración de QR en los slots del **Hipódromo de Palermo**. Postergada dos veces (cierre de la versión 72, luego prioridad del propio despliegue), queda activa para ejecutarse la semana del 25/08 con métricas reales de producción (no cargas genéricas), con foco en el comportamiento del sistema ante creación simultánea y masiva de comprobantes/vouchers.
+
+**Otra decisión operativa de la misma minuta:** ventana de mantenimiento nocturna (2:00-6:00) a coordinar con el DBA para eliminar comprobantes/operaciones pesadas — corrobora, desde otra fuente, la depuración periódica de bases ya documentada en [`mantenimiento_y_capacidad_aks.md`](mantenimiento_y_capacidad_aks.md).
+
 ## Ver también
-- [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) — plan de mantenimiento AKS de agosto 2026, relacionado con la capacidad de infraestructura discutida acá.
+- [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) — plan de mantenimiento AKS de agosto 2026, relacionado con la capacidad de infraestructura discutida acá; §8 corrobora la ventana de purga de bases documentada ahí.
 - [modelo_acoplado_vs_desacoplado.md](modelo_acoplado_vs_desacoplado.md) — migración de Personal Pay y riesgos del modelo desacoplado.
 - [detalle_productos/wallet/historial_confiabilidad_transferencias_y_comprobantes.md](../detalle_productos/wallet/historial_confiabilidad_transferencias_y_comprobantes.md) — historial de bugs de confiabilidad relacionado.
 
 ---
-*Última actualización: 2026-08-14 — `/sync_mails`: nuevo §7, incidente de seguridad Egress/Poicenot (parametrización pendiente, ventana de prueba suspendida por conflicto de capacidad con el desescalado de AKS).*
+*Última actualización: 2026-08-27 — `/context_merge`: nuevo §8, Repaso Semanal líderes (25/08) — cierre de despliegues Wallet 7.2/AuthExternal v2.0, pruebas de Zero Downtime superadas, decisión de arquitectura pendiente (Zero Downtime vs. Sentinela) y contexto de la prueba de carga de Wallet 7.2 (Arcos Dorados, Hipódromo de Palermo).*
+*Última actualización anterior: 2026-08-14 — `/sync_mails`: nuevo §7, incidente de seguridad Egress/Poicenot (parametrización pendiente, ventana de prueba suspendida por conflicto de capacidad con el desescalado de AKS).*
 *Última actualización anterior: 2026-08-12 — Consolidado desde `detalle_productos/wallet/otros_manuales.md §10-§13` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

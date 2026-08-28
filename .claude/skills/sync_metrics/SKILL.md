@@ -505,7 +505,7 @@ las tool calls no son un shell, ese texto se manda literal y rompe el draft).
 
 ## Paso 5 — Protocolos de control del CLAUDE.md
 
-Todo lo de acá nace como item en `wiki/1_proyectos/contexto_vivo/` (nunca directo):
+Todo lo de acá nace como item en `wiki/1_proyectos/contexto_vivo/` (nunca directo). **Todo item que crees en esta corrida — el store y el reporte del Paso 4 incluidos, no solo gaps/decisiones/oportunidades — nace con `estado: capturado`, nunca `en_cola` ni `ingestado`.** Ese campo lo actualiza `/context_push` cuando efectivamente sube el item al core, no vos: escribirlo ya en `en_cola` deja el item con un estado que miente sobre dónde vive de verdad (ver gotcha al final del archivo — pasó el 2026-08-26 y quedó 5 items "fantasma" hasta que se detectó en un `/context_pull` posterior).
 
 1. **Gaps** → `tipo: gap`, `destino_propuesto: 2_areas/gaps_y_preguntas.md`: todo `[WARN]` sin resolver, todo movimiento sin explicación, todo valor de dimensión desconocido. Y preguntáselos al usuario explícitamente al cerrar tu turno.
 2. **Decisiones** → `tipo: decision`, `destino_propuesto: 2_areas/direccion/decisiones.md`: si el usuario define algo al revisar el reporte (cambia el scope de una NSM, fija un objetivo, descarta una métrica).
@@ -680,3 +680,15 @@ Regenerá `contexto_vivo/index.md` con los items nuevos (el del store `tipo: dat
   manda tal cual, literal, como si fuera el contenido del email. Pasó en la corrida del 2026-08-05 (se
   mandó `$(cat)` literal al primer intento de `update_draft`); se corrigió leyendo el archivo con `Read` y
   pegando el contenido real como valor del parámetro.
+- **Los items de `contexto_vivo/` de esta skill nacen con `estado: capturado`, nunca otro valor — no lo
+  copies del ejemplo equivocado.** En la corrida del 2026-08-26 los 5 items de esa fecha (el store, el
+  reporte, la decisión de metodología de ventana móvil y los dos gaps actualizados) se escribieron con
+  `estado: en_cola` directo en el frontmatter, probablemente por copiar como plantilla un item de una
+  corrida anterior que ya estaba en esa etapa (post-`/context_push`) en vez de arrancar de `_plantilla.md`.
+  Consecuencia: quedaron marcados como "ya subidos al core" sin estarlo de verdad, invisibles para el
+  inventario normal de `/context_push` (que solo busca `estado: capturado`) — el `/context_pull` del
+  2026-08-27 los encontró como anomalía (`en_cola` en el frontmatter, ausentes en `CEREBRO_CORE`) y hubo
+  que subirlos manualmente con permiso explícito del usuario, saltando el paso intermedio. El campo
+  `estado` es un handoff entre skills (`capturado` → lo escribe quien crea el item → `/context_push` lo
+  pasa a `en_cola` al subirlo → `/context_merge` lo pasa a `ingestado` al mergearlo) — ninguna corrida de
+  `/sync_metrics` debe escribir otra cosa que `capturado`.

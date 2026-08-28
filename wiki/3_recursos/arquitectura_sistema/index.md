@@ -26,10 +26,10 @@
 | [nfr_y_slas.md](nfr_y_slas.md) | Alta disponibilidad (réplicas, health checks, circuit breakers, backups) y SLAs técnicos target (uptime, latencia, throughput). |
 | [calidad_y_cicd.md](calidad_y_cicd.md) | Testing, CI/CD, estandarización, mecanismos de integración para clientes, roadmap técnico declarado por el proveedor. |
 | [modernizacion_plataforma_dotnet.md](modernizacion_plataforma_dotnet.md) | Migración incremental a .NET 8, servicio por servicio, en paralelo al desarrollo de producto. |
-| [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) | Plan de mantenimiento AKS de agosto 2026 (reversión post-incidente + optimización de capacidad). |
+| [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) | Plan de mantenimiento AKS de agosto 2026 (reversión post-incidente + optimización de capacidad); más la depuración periódica de bases históricas (Comprobantes/Operaciones/Notificaciones) en ventanas de mantenimiento del proveedor Apibank. |
 | [relacion_con_fintexa.md](relacion_con_fintexa.md) | Dotación de recursos del proveedor (bajas consecutivas jul/ago 2026) y estado del Comité de Arquitectura COE. |
 | [idempotencia_de_plataforma.md](idempotencia_de_plataforma.md) | Síntesis del patrón transversal de falta de idempotencia centralizada, con evidencia de 5 canales distintos. |
-| [incidentes_de_plataforma.md](incidentes_de_plataforma.md) | Incidentes de infraestructura y capacidad de julio-agosto 2026: Wallet Bean Service, sobrecarga por clientes de alto volumen, timeout de inserción (INF-1392), rate limiting, Auto External v2. |
+| [incidentes_de_plataforma.md](incidentes_de_plataforma.md) | Incidentes de infraestructura y capacidad de julio-agosto 2026: Wallet Bean Service, sobrecarga por clientes de alto volumen, timeout de inserción (INF-1392), rate limiting, Auto External v2; despliegues Wallet 7.2/AuthExternal v2.0 y decisión pendiente Zero Downtime vs. Sentinela. |
 | [modelo_acoplado_vs_desacoplado.md](modelo_acoplado_vs_desacoplado.md) | Split QR del PSP 184, migración de Personal Pay al modelo desacoplado con Banco Industrial, y los riesgos operativos de la ventana de sincronización de 2 minutos. |
 
 ## Ver también

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Julieta Gimenez (Fintexa) reportó saturación en la base de datos de impuestos: múltiples entidades comerciales comparten el mismo CUIT, lo que vuelve ineficientes las consultas (descripto en la minuta como modelo de "quit repetido"). Se acordó aplicar un filtro por código de comercio para optimizar el proceso, coordinando el cambio con Sergio (Fintexa). En paralelo se identificó un error de lógica de negocio relacionado: las transacciones en línea no procesadas en el día quedaban en una cola de espera incorrecta en vez de liquidarse el mismo día o descartarse (fix ya acordado, ver conocimiento de producto asociado en `3_recursos/detalle_productos/agente_cobros_y_pagos/integracion_procesadores_pago.md`).

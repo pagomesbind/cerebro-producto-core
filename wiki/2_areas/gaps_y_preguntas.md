@@ -24,6 +24,36 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 
 ---
 
+## [2026-08-27] — Adquirencia: Epic AD-8 no funciona como documenta el canon
+- **Severidad:** Media
+- **Descripción:** Detectada por `/context_merge` al procesar un item de contexto_vivo. `3_recursos/detalle_productos/adquirencia/mejoras_admin_backoffice_prd88.md §2` caracteriza el Epic AD-8 (`canal_entidad`/`canal_comercio`) como construido y validado en producción desde AD 67.5 (76 tickets). El PM aportó en vivo (discovery `/idea_problem` de `convenios_configuracion`, 2026-08-24) que ese mismo mecanismo, al intentarse reusar para convenios, resultó "mal definido y mal ejecutado" según el equipo operativo de Soporte de Cobro (Gonzalo Rivera) — sin precisar si es un problema de diseño, de ejecución, o ambos. Ambas versiones quedaron documentadas en `mejoras_admin_backoffice_prd88.md §2`, sin que el merge elija ganador.
+- **Pregunta para el usuario:** ¿Corresponde ajustar la caracterización de `mejoras_admin_backoffice_prd88.md §2` de "validado en producción" a "construido pero con problemas conocidos"? ¿Hace falta confirmar con Gonzalo Rivera (o relevar tickets de soporte de canales de cobro) el alcance real del problema antes de decidir?
+- **Estado:** Pendiente
+
+## [2026-08-27] — Adquirencia: el contrato real de la API de Convenios contradice dos documentos existentes
+- **Severidad:** Alta
+- **Descripción:** Detectada por `/context_merge` al procesar un item de contexto_vivo. El spec OpenAPI 3.0.1 real de la "Api Comercios" (`Shared.Comercio.Api`, aportado por el PM el 2026-08-24) documenta el modelo real de convenios (Convenio maestro + ComercioConvenio con override opcional y flag `FromCommerce`) — esto reemplaza la descripción informal que tenían tanto `configuracion_de_entidades.md §4` (diseño de herencia "en discusión", 2026-08-11) como `mejoras_admin_backoffice_prd88.md §2` (Epic AD-8 como referencia arquitectónica). Ambos documentos describían el mecanismo sin conocer este contrato real; ambas versiones quedaron documentadas en paralelo, sin que el merge elija ganador.
+- **Pregunta para el usuario:** ¿Se actualiza la caracterización de `configuracion_de_entidades.md §4` y `mejoras_admin_backoffice_prd88.md §2` para apuntar directamente a `gestion_convenios_comisiones.md` como fuente de verdad, o se prefiere mantener ambas versiones documentadas en paralelo (como quedó ahora) hasta validar contra staging/backend si `ValorComision` es un join en vivo o una copia congelada?
+- **Estado:** Pendiente
+
+## [2026-08-27] — Onboarding: contradicción sin resolver sobre el orden de prioridad de desarrollo (PF/PJ/menores)
+- **Severidad:** Media
+- **Descripción:** Detectada por `/context_merge` al integrar conocimiento nuevo a `3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md §7`. La versión ya documentada (reunión del 2026-07-22) ordena las prioridades de desarrollo como **personas físicas mayores → menores → jurídicas**. Un item nuevo (reunión "Producto", 2026-08-18) registra en cambio el orden **personas físicas → jurídicas → menores** — aunque su propio frontmatter marcaba `contradice: "no"`, el contenido sí es incompatible con lo ya documentado. Ambas versiones quedaron escritas en el archivo, marcadas con su fuente y fecha, sin que el merge elija ganador.
+- **Pregunta para el usuario:** ¿La reunión del 2026-08-18 reemplaza formalmente el orden de prioridad fijado el 2026-07-22, o conviven ambos criterios en paralelo para audiencias distintas? Mientras no se resuelva, ningún discovery de Onboarding debería asumir un orden de prioridad único.
+- **Estado:** Pendiente
+
+## [2026-08-25] — Wallet: la documentación pública de `GET /CuentaCorriente` promete campos en `datosOperacion` que el payload real no devuelve
+- **Severidad:** Media
+- **Descripción:** Comparación entre la documentación pública del endpoint (`https://psp.bind.com.ar/developers/apis/consultarmovimientoscuentacorriente`, espejada en `3_recursos/detalle_productos/wallet/apis_expuestas/conciliaciones/endpoint_get_consultar_movimientos_cuenta_corriente.md`) y un payload real (`ComprobanteId` 14648633, 2026-08-18): la documentación promete `fechaCreacion`, `fechaActualización` y `comprobanteDevolucionId` dentro de `movimientos[].datosOperacion`, pero el payload real no incluye ninguno de los tres campos — ni con valor, ni como `null`. Se descartó la hipótesis de "campo omitido por ser null": en el endpoint legacy `GET Movimientos`, para la misma operación, `FechaCreacion`/`FechaActualizacion` sí traían valores reales y `comprobanteDevolucionId` aparecía explícitamente como `null`. Si un cliente (ej. Coto) migra a `/CuentaCorriente` confiando en la documentación pública, no va a recibir esos campos sin ningún aviso.
+- **Pregunta para el usuario:** ¿Es un bug de la implementación real de `/CuentaCorriente` (no setea esos campos aunque el contrato lo prometa), o la documentación pública quedó desactualizada respecto a un cambio deliberado de contrato? Si es un bug, ¿se corrige agregando los campos al response real, o se actualiza la documentación pública para reflejar que no vienen? (Nota: la corrección de la documentación de `apis_expuestas/` es dominio exclusivo de `/sync_web` — este gap solo la señaliza.)
+- **Estado:** Pendiente
+
+## [2026-08-25] — Errores 404 al consultar estado de transferencias contra Red Link — producto/dueño no identificado
+- **Severidad:** Baja
+- **Descripción:** El 2026-08-23 se escaló al "equipo de Integración de Red Link" (mail a `alertas_HtH_Link@bancoindustrial.com.ar`) un pedido de "levantamiento de guardia" por errores bloqueantes en el ambiente de integración: al consumir `GET /bancos/transferencias/1/0/0/estado` contra `bancos.integracion.redlink.com.ar`, el servidor devuelve HTTP 404 (fecha/hora `Ago 23 05:07:55`, W3C trace ID `cd56b9dbf5b79987ec98cb25f70a2915`). No hay wiki actual en `3_recursos/detalle_productos/` que documente una integración con Red Link — no se pudo determinar con confianza qué producto de Bind PSP consume este endpoint (candidatos posibles: Adquirencia o Wallet, dado que el mail llegó a la bandeja de Nicolás Colón, sin contexto suficiente en el hilo para confirmarlo).
+- **Pregunta para el usuario:** ¿Qué producto de Bind PSP integra con Red Link para consulta de estado de transferencias, y a qué carpeta de `detalle_productos/` (o a `arquitectura_sistema/`, si es transversal) corresponde documentarlo? ¿Se resolvió ya el error 404, o sigue bloqueando el ambiente de integración?
+- **Estado:** Pendiente
+
 ## [2026-08-20] — Contradicción sin resolver: ¿el orquestador de configuración de entidades vía API es decisión de roadmap vigente?
 - **Severidad:** Media
 - **Descripción:** Detectada por `/context_merge` al procesar dos items de `contexto_vivo/` del mismo PM líder. El item del 2026-08-19 (reunión "Parámetros de entidades") registra que el equipo "priorizó" un orquestador de configuración de entidades vía API sobre modificar el panel Admin. El item del 2026-08-20 (Pablo Gomes, directo en chat) corrige explícitamente: esa priorización nunca pasó por el criterio formal de priorización de Producto ni por una evaluación de capacidad real. Ver ambas versiones documentadas en [`direccion/decisiones.md`](direccion/decisiones.md) [2026-08-19 / 2026-08-20].

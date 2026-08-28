@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/modulo_pagos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "ARDID" (2026-08-24), Nicolás Colón le aclaró a Rocío Revelli (Soporte) el criterio real de identificación de tarjetas que usa Ardid, a raíz de una consulta de un cliente (Maru, vía Payway) sobre una tasa alta de rechazos que atribuía a límites diarios por tarjeta.

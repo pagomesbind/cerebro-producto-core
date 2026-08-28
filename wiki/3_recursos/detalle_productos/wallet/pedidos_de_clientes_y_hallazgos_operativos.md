@@ -8,6 +8,40 @@
 - **PLD/Worldsys**: envío de interfaz de actividad de cuentas Wallet — ver [3_recursos/cumplimiento_normativo/reporteria_worldsys_bcra.md](../../cumplimiento_normativo/reporteria_worldsys_bcra.md) (en producción).
 - **GST (Hipódromo)**, pedido en aprobación al 2026-08-18 — dos mejoras sobre consultas existentes de Wallet, cada una estimada en ~1 MD (jornada) de desarrollo: (1) `GET cuenta corriente` — agregar filtro por **IDSA**; (2) `GET movimientos` — traer **comprobantes relacionados que no estén asociados a una operación**, pensado especialmente para comprobantes de impuestos. Ambas ya estimadas por el equipo; falta la reunión de aprobación final con Emma Vignoles antes de avanzar el desarrollo. Fuente: minutas de Gemini de "Producto" y "Productos - Weekly Seguimiento" (2026-08-18).
 
+### COTO — diff confirmado entre `GET Movimientos` (legacy) y `GET /CuentaCorriente` (vigente)
+
+> Estado: documentación desactualizada / en disputa — hay una discrepancia confirmada entre lo documentado en el portal público y lo que la API devuelve en la práctica.
+>
+> Nota de ruteo: esta nota compara el payload real de un endpoint de la API pública de Wallet contra su propia documentación (`apis_expuestas/`, dominio exclusivo de `/sync_web`) — se integra acá, no en `apis_expuestas/`, porque ese directorio no admite ediciones fuera de esa skill.
+
+COTO fue transicionado del endpoint legacy `GET Movimientos` (ya no existe en el portal público — `https://psp.bind.com.ar/developers/apis/movimientos` redirige a home) al endpoint vigente `GET /CuentaCorriente` (`walletentidad-operaciones/v1/api/v1.201/CuentaCorriente`). El usuario aportó dos payloads reales para el **mismo `ComprobanteId` (14648633)**, uno de cada endpoint, lo que permitió un diff 1:1 confirmado (no inferido).
+
+**Nivel comprobante (raíz de `movimientos[]`):** sin pérdida de datos, solo renombres — `tipoComprobanteId`→`idTipoComprobante`, `cuentaId`→`idCuenta`. El resto de los campos (`idComprobante`, `descripcionTipoComprobante`, `fecha`, `importe`, `saldo`, `signo`, `referencia`) se mantiene igual.
+
+**Nivel operación (`operacion{}` en Movimientos vs. `datosOperacion{}` en CuentaCorriente) — ausentes del payload real pese a estar documentados como parte del esquema en el portal público:**
+- `fechaCreacion` (era `FechaCreacion` en Movimientos, con valor real no nulo).
+- `fechaActualización` (era `FechaActualizacion` en Movimientos, con valor real no nulo).
+- `comprobanteDevolucionId` (era `null` en Movimientos para este caso, pero la key ni aparece en CuentaCorriente).
+
+Esto es más que un renombre: es una discrepancia entre lo que documenta `https://psp.bind.com.ar/developers/apis/consultarmovimientoscuentacorriente` (que sí lista estos 3 campos como parte de `datosOperacion`) y lo que la API devuelve en la práctica. `importeOperacion` está ausente por diseño (nunca documentado para `datosOperacion`).
+
+**Array `detalle` (Movimientos) vs. `detalles` (CuentaCorriente) — mismo shape clave-valor, contenido distinto:**
+
+| Campo en `Movimientos.detalle` | Presente en `CuentaCorriente.detalles` |
+|---|---|
+| `CuitCuilContraparte` / `NombreContraparte` / `CvuCbuContraparte` | Sí, igual |
+| `CoelsaId` | Sí, pero renombrado a `IdTxProcesador` — confirmado mismo valor exacto |
+| `MotivoRechazo` | No — ausente, sin equivalente |
+| `EstadoExterno` (`"COMPLETED"`/`"FAILED"`/etc.) | No — ausente; lo más cercano es `EstadoOperacionId`/`ProcesoCoelsa`, que no es lo mismo |
+
+`CuentaCorriente.detalles` agrega campos nuevos que `Movimientos.detalle` no tenía: `AliasContraparte`, `CodigoBancoContraparte`, `ComprobanteId`, `EstadoOperacionId`, `IdExterno`, `TipoOperacionCodigo`, `ProcesoCoelsa`.
+
+**`idComprobanteRelacionado` — el problema principal reportado por COTO:** el ejemplo comparado no era un caso de devolución, así que no lo muestra en ninguno de los dos endpoints — pero el usuario confirmó directamente que este es el problema principal que motivó el análisis: `GET Movimientos` sí lo traía (a nivel raíz de cada comprobante) y `GET /CuentaCorriente` no.
+
+**Recomendación, en orden de prioridad si se decide extender `/CuentaCorriente`:** (1) `idComprobanteRelacionado` a nivel raíz de `movimientos[]`; (2) `MotivoRechazo` dentro de `datosOperacion.detalles[]`; (3) `EstadoExterno` dentro de `datosOperacion.detalles[]`; (4) `importeOperacion` dentro de `datosOperacion`; (5) `fechaCreacion`/`fechaActualización`/`comprobanteDevolucionId` en `datosOperacion` — este último punto es reproducir un bug contra la documentación existente, no pedir desarrollo nuevo.
+
+> Fuente: charla directa con el usuario sobre migración de COTO de GET Movimientos a GET /CuentaCorriente; comparación 1:1 con payloads reales para el mismo ComprobanteId (14648633), contrastados contra la documentación pública (2026-08-25).
+
 ### Deuda técnica — trazabilidad de transferencias internas salientes (discusión 2026-08-18)
 
 > Fuente: minutas de Gemini de "Producto" y "Productos - Weekly Seguimiento" (2026-08-18), surgida al analizar el pedido de GST de arriba.
@@ -57,10 +91,18 @@ Cluster de manejo de excepciones y contingencia para operaciones que podían que
 - **PagosQR en estado "Auditar" sin poder resolverse** ([WS-1394](https://bindpsp.atlassian.net/browse/WS-1394), W 71.2 FIX): dos problemas reportados por Soporte: (1) operaciones sin `IdCoelsa` que no se pueden resolver (reincidencia de un reclamo anterior); (2) las que sí tienen `IdCoelsa` tiran error al intentar resolverlas por Swagger. Sin detalle técnico de la resolución en el ticket (secciones de PR quedaron sin completar).
 - **Ruido — sin contenido de producto:** WS-614 (ticket con descripción corrupta/vacía — parece un prompt de IA pegado por error en vez del contenido real; título sugiere validación de estado en ejecución de pasos de FCI, Epic WS-1/PRD-103 ya finalizada, sin info recuperable).
 
+### Bugs y pedidos operativos — tramo W72 (publicada 2026-08-18)
+
+> Fuente: Jira bindpsp.atlassian.net, versión W 72, tickets WS-1437, WS-1287.
+
+- **Eliminar CVU deshabilitaba la cuenta como efecto colateral** ([WS-1437](https://bindpsp.atlassian.net/browse/WS-1437)): bug espejo del cluster "eliminar cuenta debe deshabilitar" (WS-1077/WS-1078, W71, arriba) — pero del lado opuesto. El endpoint `DELETE /api/v1/CVU/{id}` (eliminar **solo** el CVU, sin tocar la cuenta) estaba deshabilitando la cuenta como efecto colateral no deseado; solo `DELETE Cuenta` y `DELETE CuentaYCVU` deben deshabilitar la cuenta. **Causa:** en `CuentaCVU.DeleteCuentaCVU` se asignaba `cuentaCVU.Cuenta.Habilitado = false` (la entidad hija CVU mutando el agregado padre Cuenta) y `DeleteCuentaCVUCommandHandler` persistía con `_cuentaRepository.UpdateAsync(cuentaCVU.Cuenta)` (EF marcaba toda la fila de `Cuentas` como modificada). **Fix:** se remueve esa mutación cruzada. Nicolás Colón pidió explícitamente que el ticket pasara como hotfix (2026-07-28). Sin cambio de status HTTP; el cambio es solo de efecto en base. Las cuentas ya dañadas antes del fix **no se corrigen** con este PR (no hay migración de datos retroactiva). Validado por Andrea Orsini el 2026-08-14 (CVU activo→DELETE CVU→cuenta sigue habilitada; DeleteCuentaYCVU sigue inhabilitando como antes).
+- **`GET OperacionByIdExterno` amplía la ventana de búsqueda de 3 a 180 días** ([WS-1287](https://bindpsp.atlassian.net/browse/WS-1287), Epic WS-518): pedido de negocio — `GET /api/v1/OperacionByIdExterno/{IdExterno}` solo encontraba operaciones de hasta 3 días de antigüedad, insuficiente para que una organización conozca el estado real de una operación más vieja. **Cambio de comportamiento (relevante para Soporte/integraciones): antes de esta versión, una operación entre 3 y 180 días devolvía 404 — ahora devuelve 200 con datos.** Ventana ampliada a 180 días, configurable en caliente vía la Especificación de Wallet `Operaciones/DIAS_CONSULTA_ID_EXTERNO` (sin deploy; si no existe o no es parseable, cae a `appsettings.DíasConsultaIdExterno = 180`). El mensaje 404 ahora incluye la cantidad de días consultados (`"No se encontró la operación para el id externo: {IdExterno}, ó es anterior a los {N} días"`), y el logging distingue `Warning` (existe pero excede la ventana) de `Information` (no existe). Mejora de performance acompañante: nuevo índice `IX_Operaciones_IdExterno_OrganizacionId` — **prerequisito externo gestionado por DBA, no incluido en este PR de código**; el valor de 180 días no debe activarse operativamente hasta que DBA confirme índice + especificación en cada ambiente (el código puede desplegarse antes, pero sin efecto real hasta ese paso). Se corrigió además `DateTime.Now` → `DateTimeOffset.Now` (alineado con `FechaCreacion`) y se agregó cache de 15 minutos a la lectura de la especificación. Alcance del PR: solo `Wallet.Operaciones.Queries`.
+
 ## Ver también
 - [3_recursos/arquitectura_sistema/idempotencia_de_plataforma.md](../../arquitectura_sistema/idempotencia_de_plataforma.md) — patrón transversal de falta de idempotencia centralizada.
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración" y "Mejoras e Iniciativas Técnicas" — ingesta 2026-07-06.*
-*Última actualización: 2026-08-15/18 — `/sync_releases` + `/sync_meetings`: nueva sección "Bugs y pedidos operativos — tramo W71", pedido de GST y deuda técnica de comprobante relacionado.*
+*Última actualización: 2026-08-25/26 — `/context_merge`: nueva sección "Bugs y pedidos operativos — tramo W72" (WS-1437, WS-1287) y nota comparativa COTO (`GET Movimientos` vs. `GET /CuentaCorriente`).*
+*Última actualización anterior: 2026-08-15/18 — `/sync_releases` + `/sync_meetings`: nueva sección "Bugs y pedidos operativos — tramo W71", pedido de GST y deuda técnica de comprobante relacionado.*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Wallet de 3 archivos-cola de `detalle_productos/transversal/`.*

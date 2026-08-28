@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/arquitectura_solicitu
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Producto" (Luciana Rudaz, Pablo Gomes, Emma Vignoles, Nicolás Colón — 2026-08-18) se precisó la arquitectura objetivo de la integración Onboarding↔Wallet:

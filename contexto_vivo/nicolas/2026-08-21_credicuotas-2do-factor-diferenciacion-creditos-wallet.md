@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Credicuotas (cliente en producción, ficha "incompleta" en Notion — ver `CREDICUOTAS` en `casos_de_uso_clientes.md`) pidió por mail visibilidad de fechas: en una reunión del 2026-08-18 ("2nd Factor Wallet", con Facundo Aguirre de Poincenot y Rodrigo Revelli), el equipo de Producto de Bind PSP (Nico y "Ro") se llevó como pendiente analizar una solución de **segundo factor de autenticación** combinada con **diferenciación de créditos**, con el objetivo de poder setear **nuevos límites** para esa operación en Wallet. Gonzalo Martin Santos (Credicuotas) pide que el equipo PSP dé visibilidad de fecha estimada de esa información.

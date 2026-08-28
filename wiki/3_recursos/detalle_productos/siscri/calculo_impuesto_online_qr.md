@@ -113,13 +113,27 @@ Sobre 9.910 transacciones `ACREDITADO` con match en `LIQ_IMP`:
 
 **Próximos pasos acordados:** dejar trazabilidad en DAD-2215/AD-1383 con lo acordado, liberar la historia para desarrollo; crear ticket de backlog para el filtro por entidad; coordinar con Sergio Pavetto la propuesta de mover el acumulado por comercio a una tabla separada de `LIQ_IMP` (fuera de alcance actual, depende de Pavetto no de Fintexa/Bind).
 
+## 8. Saturación de la base de impuestos por CUIT compartido + bug de cola de espera en liquidación same-day (2026-08-20)
+
+> Fuente: reunión recurrente "Análisis COBRO" (2026-08-20 12:05, docId `1Q3PZO-WuwDNq5HOyW-eoww1KEVJBvwL7-NP9nT3WMkE`).
+> Estado: decisión acordada — pendiente de implementación. Confianza media (ver nota al final).
+
+**Problema reportado (Julieta Giménez, Fintexa):** saturación en la base de datos de impuestos (SISCRI) — múltiples entidades comerciales comparten el mismo CUIT, lo que hace que las consultas sean ineficientes (no pueden discriminar por CUIT solo). Esta es una **causa raíz adicional/complementaria** del mismo backlog ya diagnosticado en §1-6 de este documento (alta varianza de latencia, mediana ~1,71h) — no necesariamente el mismo caso PedidosYa ya resuelto en §7.
+
+**Decisión acordada:** aplicar un **filtro por código de comercio** (en vez de CUIT) para optimizar las consultas.
+
+**Bug de lógica de negocio identificado en la misma discusión:** las transacciones en línea no procesadas en el día quedan en una **cola de espera incorrecta** en vez de resolverse. **Regla de negocio acordada:** las transacciones en línea deben **liquidarse en el mismo día**; si no es posible procesarlas, se **descartan** (no quedan pendientes indefinidamente). Ajuste a coordinar con Sergio (sin apellido registrado en la minuta) — la misma regla de negocio y el mismo bug se discutieron también del lado del Agente de Cobros y Pagos, ver [`agente_cobros_y_pagos/integracion_procesadores_pago.md`](../agente_cobros_y_pagos/integracion_procesadores_pago.md).
+
+**Confianza media:** no se pudo confirmar en la wiki actual si "Sergio" corresponde a un contacto ya conocido de Fintexa/Bind, ni el nombre exacto del ticket a crear para el escalado de recursos de BD. Ver también el riesgo transversal de saturación de BD por CUIT compartido registrado en `2_areas/riesgos.md` (capturado por separado, mismo tema de fondo, distinta perspectiva: riesgo cross-producto vs. detalle técnico de este documento).
+
 ## Ver también
 
 - [configuracion_entidades.md](configuracion_entidades.md) — alta y configuración de comercios en SISCRI.
 - [integracion_wallet.md](integracion_wallet.md) — mecanismo de reversa de impuestos ya documentado del lado Wallet, referencia para la pregunta abierta de §5.
 - [adquirencia_overview.md](../../../2_areas/overview_productos/overview_adquirencia.md#liquidaciones-e-impuestos-siscri) — rol de SISCRI en el flujo de liquidación de Adquirencia.
 - [adquirencia/psp_as_a_service_normativa_8432.md](../adquirencia/psp_as_a_service_normativa_8432.md) — el otro frente de la relación con PeYa (modelo de aceptador/agrupador normativo), distinto de la performance del liquidador documentada acá.
+- [agente_cobros_y_pagos/integracion_procesadores_pago.md](../agente_cobros_y_pagos/integracion_procesadores_pago.md) — misma regla de liquidación same-day y mismo bug de cola de espera, del lado del Agente de Cobros y Pagos.
 
 ---
-*Última actualización: 2026-07-17 — `/sync_mails`: nueva §7 con la decisión de diseño confirmada para PedidosYa (modelo por lotes parametrizable, prioridad online, alcance de AD-1383) — cierra el diagnóstico de §1-6 con una resolución concreta.*
-*Última actualización anterior: 2026-07-06 — Agregada sección de volumen/throughput (tx por minuto, ventana de 5/15 min, pico vs. valle horario) para dimensionar el procesamiento por lotes de SISCRI.*
+*Última actualización: 2026-08-27 — `/context_merge`: nueva §8, saturación de la base de impuestos por CUIT compartido (filtro por código de comercio) y bug de cola de espera en liquidación same-day, detectados en la reunión "Análisis COBRO" del 2026-08-20.*
+*Última actualización anterior: 2026-07-17 — `/sync_mails`: nueva §7 con la decisión de diseño confirmada para PedidosYa (modelo por lotes parametrizable, prioridad online, alcance de AD-1383) — cierra el diagnóstico de §1-6 con una resolución concreta.*

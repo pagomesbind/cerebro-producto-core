@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_pull.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 El ticket Coelsa #456632 ("Reactivación de Transferencias Pull - Homologación") documenta el circuito completo para reactivar transferencias pull en el ambiente de homologación de Coelsa, tras un ajuste técnico de Coelsa en la configuración del entorno que invalidó el PSP anterior:

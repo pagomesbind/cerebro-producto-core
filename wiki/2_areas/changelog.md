@@ -6,6 +6,17 @@
 
 ## 2026
 
+### 2026-08-27 (pablo + nicolas)
+
+- `direccion/decisiones.md` — creadas 2 entradas: prioridades de Producto de Cobro/Adquirencia para septiembre 2026 (fusión de 2 items del mismo hecho, Pablo Gomes + Nicolás Colón), y alcance inicial de pagos de servicios BPG (solo botón de pago, sin saldo de wallet).
+- `direccion/oportunidades.md` — creadas 6 filas (OP-010 a OP-015): funcionalidades POS/Botón pedidas por Andesmar, rediseño de convenios entidad→comercio, pago de servicios con saldo de wallet de terceros, ecosistema financiero para cámara de supermercados mayoristas, fix de resiliencia de alias CVU (apibank/Coelsa), integración con Cobros con Transferencia (CCT) de Coelsa.
+- `direccion/iniciativas.md` — actualizada 1 fila (PRD-147, novedad ZIP consolidado Worldsys) y creadas 6 filas nuevas (PRD-66, PRD-216, comercios_mayoristas con 2 novedades, asignacion_alias_cvu con 2 novedades, convenios_configuracion, PRD-223).
+- `riesgos.md` — creados 2 riesgos: saturación de BD de impuestos por CUIT compartido (agente_cobros_y_pagos/siscri), y Proyecto Servicios (continuidad de equipo + bloqueo de pruebas con tarjetas prepagas).
+- `gaps_y_preguntas.md` — creados 5 gaps: doc vs. real de `GET /CuentaCorriente` (datosOperacion), Red Link 404 sin dueño de producto identificado, contradicción de prioridad de desarrollo Onboarding (PF/PJ/menores), Epic AD-8 no funciona como documenta el canon, contrato real de API de Convenios contradice documentación previa.
+- `clientes/casos_de_uso_clientes.md` — actualizadas 4 fichas: CREDICUOTAS (pedido de 2do factor), GRUPO SLOTS - Jugadon (alerta por cambio de categorización de webhook CBU Collect), COTO CICSA (fix de impuestos QR, semáforo amarillo), ARCOS DORADOS (fix de orden de productos al leer QR, con permiso explícito del usuario).
+- `procesos/comunicacion_de_lanzamientos.md` — creado (con permiso explícito del usuario): acuerdo de canal estándar de mail interno para anunciar lanzamientos de producto.
+- `procesos/index.md` — actualizado, sumada fila del archivo nuevo.
+
 ### 2026-08-21 (pablo)
 
 - `direccion/decisiones.md` — creada 1 entrada con contradicción sin resolver (orquestador de configuración de entidades vía API: ¿decisión de roadmap vigente o no? — dos versiones del mismo PM, escaladas).

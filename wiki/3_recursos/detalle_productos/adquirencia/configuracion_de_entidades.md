@@ -89,6 +89,8 @@ Body STG: mismo esquema, cambiando `nombre`/`cuit`/`codigo`/`pspId` ("531")/`dom
   - Preconfiguración de canales a nivel entidad solo aplica al momento de creación del comercio — una vez habilitado un canal en un comercio, no es sencillo deshabilitarlo; Pablo Gomes revisa esta lógica.
   - Arancel reducido/comisiones de Coelsa para PSP 184/164 hoy se corrigen manualmente vía Swagger ("hardcodeado") — Coelsa valida por CUIT + actividad comercial, así que una configuración incorrecta en el admin puede alterar masivamente las comisiones de todos los comercios con esos mismos parámetros. Pablo Gomes analiza una solución más robusta.
 
+> ⚠️ **Contradicción registrada (2026-08-24) — ver antes de usar esta sección para diseño nuevo.** La descripción de arriba (§4) es la caracterización informal del mecanismo de herencia de convenios, construida en reuniones de 2026-07-27/2026-08-11 sin conocer el contrato real de la API. El 2026-08-24, un discovery técnico sobre el proyecto `convenios_configuracion` relevó el spec OpenAPI real de la "Api Comercios" (`Shared.Comercio.Api`) y encontró un modelo de datos más preciso (Convenio maestro + ComercioConvenio con override opcional y flag `FromCommerce`) — ver [gestion_convenios_comisiones.md](gestion_convenios_comisiones.md), que **reemplaza** esta sección para efectos de diseño. Se mantiene el texto original de §4 arriba por trazabilidad (fue el consenso del equipo en su momento), pero no debe tomarse como la fuente de verdad del contrato de API. Gap escalado — pendiente de decisión del usuario, ver `gaps_y_preguntas.md`.
+
 **Validación de Access Management por email, no por CUIT:** para Demo PCP se definió validar por email en vez de CUIT, para evitar conflictos con comercios de CUIT duplicado — alternativa al modo estándar (`username`: CUIT vs. `Admin@{codigoComercio}`, ver §6).
 
 **Bloqueo de desarrollo de Access Manager v2:** detenido — el sistema no soporta la convivencia de v1 y v2 (el cambio de versión rompe la conexión a base de datos), bloqueando el pase de v2 a Staging. Fintexa evalúa un proyecto futuro de reestructuración del Admin/Centralizador — ver oportunidad OP-005 en [2_areas/direccion/oportunidades.md](../../../2_areas/direccion/index.md).
@@ -105,11 +107,24 @@ Requiere asignar una especificación vía `POST` a `Comercio → Especificacione
 ```
 En Producción, `valorDefault`/`valor` = `"7"` en vez de `"13"`.
 
+## 7. Hotfix de localidades/código postal — alcance acotado (ticket 789, continuación 2026-08-20)
+
+> Fuente: Reunión "Análisis COBRO" (2026-08-20), minuta Gemini. Continúa el hallazgo de validación de código postal único en localidades ya documentado en [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md) (cliente Coto, ticket 789, 2026-08-13).
+
+**Problema tratado en esta sesión:** inconsistencias en las validaciones de localidad y código postal durante la creación y edición de comercios/entidades, presentadas por Daniela Collia (Fintexa).
+
+**Decisión acordada (2026-08-20):**
+- El **endpoint de localidades se modifica** para retornar una lista de localidades en vez de una sola — esta tarea se separa en un ticket de menor prioridad (no forma parte del hotfix inmediato).
+- El **alcance del hotfix se mantiene limitado** a corregir las validaciones actuales de código postal/localidad — se posterga la reestructuración de la respuesta de la API a un ticket futuro, al no considerarse una urgencia funcional para los usuarios actuales.
+- Nicolás Colón queda a cargo de crear el ticket para el ajuste de la lista de localidades y códigos postales, una vez documentado el alcance (Daniela Collia debe indicar explícitamente en el ticket 789 que el cambio de respuesta de localidades queda fuera de alcance de este hotfix).
+
 ## Ver también
 - [acreditacion_en_linea_configuracion.md](acreditacion_en_linea_configuracion.md) — configuración de entidad para el modelo de acreditación en línea/wallet (Modelo Coto).
 - [herramientas_operativas_boton_simple.md](herramientas_operativas_boton_simple.md) — configuración de estilo, canales y alta masiva de CVU para Botón Simple.
 - [mejoras_admin_backoffice_prd88.md](mejoras_admin_backoffice_prd88.md) — mejoras recientes al flujo de alta de entidad (IDEA PRD-88).
+- [gestion_convenios_comisiones.md](gestion_convenios_comisiones.md) — contrato real de la API de Convenios (2026-08-24) que reemplaza la descripción informal de §4 para efectos de diseño nuevo — ver nota de contradicción en §4.
 
 ---
-*Última actualización: 2026-08-14 — `/sync_meetings`: §4 suma el diseño en discusión de herencia/retroactividad de convenios (convenios propios por entidad + flag `habilitado` a nivel comercio) y hallazgos de configuración (formato de comisión, vigencia 100 años, origen del convenio no visible, arancel Coelsa "hardcodeado"). Ver reunión "Mejoras en convenios" (2026-08-11) en `wiki/2_areas/control/log_reuniones.md`.*
+*Última actualización: 2026-08-27 — `/context_merge`: §4 suma nota de contradicción (contrato real de API de convenios releva el mecanismo de herencia, ver `gestion_convenios_comisiones.md`); nueva §7 (hotfix de localidades/código postal, ticket 789, continuación 2026-08-20).*
+*Última actualización anterior: 2026-08-14 — `/sync_meetings`: §4 suma el diseño en discusión de herencia/retroactividad de convenios (convenios propios por entidad + flag `habilitado` a nivel comercio) y hallazgos de configuración (formato de comisión, vigencia 100 años, origen del convenio no visible, arancel Coelsa "hardcodeado"). Ver reunión "Mejoras en convenios" (2026-08-11) en `wiki/2_areas/control/log_reuniones.md`.*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo; algunos JSON de ejemplo condensados (campos redundantes/vacíos omitidos).*

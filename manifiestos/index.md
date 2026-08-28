@@ -4,5 +4,6 @@ Un archivo por cada corrida de `/context_merge`, nombrado `YYYY-MM-DD.md`. Cada 
 
 | Fecha | Items ingeridos | Pendientes | Notas |
 |---|---|---|---|
+| [2026-08-27](2026-08-27.md) | 67 (15 nicolas, 52 pablo) | 0 | 3 permisos otorgados (4 fichas de clientes, 1 archivo nuevo de procesos, 1 edit de skill `.claude/skills/idea_us/SKILL.md`). 3 contradicciones abiertas y escaladas (Epic AD-8, contrato API de Convenios, orden de prioridad Onboarding). Procesado con 5 agentes en paralelo para régimen B. |
 | [2026-08-21](2026-08-21.md) | 11 (todos de pablo) | 0 | 1 permiso de régimen D otorgado (ficha OCTAGON). 1 contradicción abierta y escalada (orquestador de configuración de entidades vía API — ver gap 2026-08-20). |
 | [2026-08-19](2026-08-19.md) | 39 (todos de pablo, en 2 corridas) | 0 | Corrida 1 (37 items): bug de `/context_push` detectado (items llegaron `capturado` en vez de `en_cola`) — sorteado con permiso del usuario, ver nota de proceso en el manifiesto. 2 permisos de régimen D otorgados. Corrida 2 (2 items): sin permisos ni contradicciones. |
