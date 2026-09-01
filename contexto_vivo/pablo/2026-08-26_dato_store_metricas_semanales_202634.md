@@ -11,7 +11,7 @@ tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 Payload ya generado por `pipeline.py ingest` (corrida 2026-08-26) en

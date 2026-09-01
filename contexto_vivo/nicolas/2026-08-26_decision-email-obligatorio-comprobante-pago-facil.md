@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 **Contexto:** ticket [SER-66](https://bindpsp.atlassian.net/browse/SER-66) (Proyecto Servicios, no definitivo aún) pide dos cosas al equipo keepit sobre el flujo de Link de Pago de Pago Fácil (`pago_facil.md`): (1, front) agregar un campo de email en la pantalla de "Confirmar datos" del checkout, y (2, backend) enviar automáticamente el comprobante de pago a esa casilla al finalizar el proceso exitosamente. La captura de email se descartó explícitamente del checkout de Botón Simple 2.0 (que hubiera sumado costo cross-equipo) a favor de esta pantalla, propia del dominio de Pago Fácil/keepit — ver [[2026-08-26_pago-facil-sepsa-piloto-productivo-admin-y-pendientes]] y la wiki de Botón Simple 2.0 (`detalle_productos/adquirencia/boton_simple_2_0.md`) para el contexto del motor de checkout que no se toca.

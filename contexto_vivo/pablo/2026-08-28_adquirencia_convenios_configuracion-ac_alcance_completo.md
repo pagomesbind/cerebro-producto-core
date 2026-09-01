@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 `convenios_configuracion` (Adquirencia, Pablo Gomes) suma 28 criterios de aceptación Given/When/Then cubriendo el alcance completo del proyecto de mejoras en la configuración y herencia de convenios entidad↔comercio — happy path (alta sin copia, cascada de resolución, propagación automática, origen visible), casos borde (los 8 casos estado×origen×acción del Admin, diálogo de doble nivel, migración de grupos compartidos), estados de error (constraint de unicidad, validación de comisión QR, idempotencia, concurrencia) y criterios no funcionales (congelamiento del endpoint transaccional, no-borrado físico/auditoría, remediación de datos previa al Go Live).

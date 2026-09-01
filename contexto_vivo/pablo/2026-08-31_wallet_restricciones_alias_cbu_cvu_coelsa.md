@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 ## Restricción de cantidad/formato para modificar el alias de un CBU/CVU corto

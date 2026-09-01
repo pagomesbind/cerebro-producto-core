@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 En la reunión de pre-despliegue de la versión 72 de Cobro/Adquirencia (2026-08-27), el pase a producción se reprogramó del jueves 27/08 21hs a la noche del lunes 31/08 por 12 tickets con errores críticos de QA sin cerrar (Simpra, CBU collect, webhooks duplicados de DPay, desarrollos en CUAP). Gonzalo Rivera (Integraciones/Soporte) planteó una queja de fondo, no puntual de este release: las reprogramaciones recurrentes de fechas ya comunicadas a clientes generan una percepción de falta de profesionalismo — citó el precedente reciente de APIBank (modificación de fecha la misma semana) y señaló que los clientes ya ponen en marcha sus propios avisos internos (popups en billeteras, personal de control) en base a la fecha que Bind les confirma, y tienen que reavisar cuando esa fecha cambia. Pablo Gomes respondió que el riesgo de postergar es preferible al de pasar a producción algo que después falle, pero reconoció que la comunicación institucional después de la reunión de riesgo debe mejorar.

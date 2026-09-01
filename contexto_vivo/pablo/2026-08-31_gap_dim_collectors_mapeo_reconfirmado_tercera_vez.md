@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 Actualización al gap abierto **"[2026-08-18] — dim_collectors sin orden posicional de columnas definido

@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 `/idea_jira` completó la creación en Jira de PRD-202 (Fase 1, Onboarding — validación de identidad KYC en el alta de wallet PF mayor de edad) el 2026-08-31.

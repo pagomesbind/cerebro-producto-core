@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 El PM revisó los 8 tickets recién creados de PRD-202 (Fase 1) y notó que Onboarding no exponía ningún endpoint liviano para que Wallet monitoree el estado de una solicitud — todo lo que Onboarding devolvía en lectura era el endpoint de detalle completo (pesado, prioridad Should-have).

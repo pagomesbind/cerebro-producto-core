@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 Hilo de seguimiento comercial/operativo entre Western Union (marca **Pago Fácil**, legal **SEPSA**) y el equipo Comercial de Bind (Adriana Endzeliz) sobre el desarrollo de la "Pasarela de Pagos Bind-SEPSA" (Botón de Pago / checkout que corre sobre Botón Simple 2.0, mismo motor que documenta `pago_facil_mantenimiento.md`). No estaba documentado en el Cerebro el detalle operativo de este frente — el archivo existente cubre solo el backlog técnico Jira (espacio SER).

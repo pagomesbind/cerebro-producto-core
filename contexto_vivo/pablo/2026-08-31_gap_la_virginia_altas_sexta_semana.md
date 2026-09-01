@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 Actualización al gap abierto **"[2026-08-04] — /sync_metrics: altas de comercios de la 202631 (+238,2% WoW)

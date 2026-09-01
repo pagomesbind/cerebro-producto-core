@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 El informe semanal de Emisión (Fintexa, Nicolás Pomponio) al 28/08/2026 documenta 4 hallazgos de diseño detectados durante las pruebas del MVP2 de Pagos FX cross-border (Mastercard Move), todavía EN DESARROLLO/QA — no son bugs de producción, son gaps de diseño identificados antes de cerrar el contrato:

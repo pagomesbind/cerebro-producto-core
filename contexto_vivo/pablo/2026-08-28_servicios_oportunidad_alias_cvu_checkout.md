@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 ## Oportunidad — alias visible en checkout de transferencia a CVU (pool Servicios/BS2.0)

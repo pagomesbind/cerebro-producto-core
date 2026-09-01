@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: c4148e7
 ---
 
 **Contexto/Problema:** el detector de "caída de cliente" de `/sync_metrics` (`detectar()` en `pipeline.py`)

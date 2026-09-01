@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — es un refinamiento adicional a la precisión ya mergeada del 2026-08-26 sobre frontera de equipo (Paso 3), no la contradice"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c4148e7
 ---
 
 ## Contexto
