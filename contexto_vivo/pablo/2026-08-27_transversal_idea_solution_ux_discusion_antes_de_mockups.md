@@ -10,7 +10,7 @@ destino_propuesto: .claude/skills/idea_solution/SKILL.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

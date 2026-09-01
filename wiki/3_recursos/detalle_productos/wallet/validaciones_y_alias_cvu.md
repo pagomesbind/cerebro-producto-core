@@ -23,6 +23,10 @@ Reglas de plataforma sobre CVU/CBU que aplican de forma transversal a cualquier 
 
 > Fuente: discovery `/idea_start` de `1_proyectos/asignacion_alias_cvu/` (2026-08-25) — ticket MDA-292391 (Banco Industrial/apibank) + conversación técnica del PM con el proveedor bancario (Google Hangouts, 2026-08-24); actualizado por `/idea_solution` (2026-08-25) contra la documentación pública oficial de los endpoints de CVU/alias y aclaraciones del PM sobre el comportamiento actual del sistema.
 
+**Tope anual de modificaciones y formato del alias (confirmado 2026-08-28, todavía no reflejado en `apis_expuestas/cvu/guia_cvu.md`).** Dos reuniones independientes del mismo día citan, de forma consistente entre sí, dos datos que la guía pública hoy no documenta: un alias de CBU/CVU corto puede modificarse un **máximo de diez (10) veces al año** (normativa BCRA, citada explícitamente en la reunión "Web de developers") y debe tener **entre 6 y 20 caracteres**. Una segunda fuente ("Daily producto") citó el mismo tope con un número ambiguo en el dictado ("tres o diez") — se toma 10 como correcto por coincidir con la fuente que cita la normativa de origen. Como la corrección de `apis_expuestas/` es dominio exclusivo de `/sync_web`, este dato queda documentado acá mientras tanto — ver gap señalizado en [`gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-08-31] para que `/sync_web` lo aplique a la guía pública en su próxima corrida.
+
+> Fuente adicional: reuniones "Daily producto" y "Web de developers" (ambas 2026-08-28), en el marco del discovery de `1_proyectos/alias_cvu_checkout/`.
+
 ---
 
 ## 2. Validación de longitud CVU/CBU (22 dígitos) — hardening de plataforma (W 72)

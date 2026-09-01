@@ -10,7 +10,7 @@ destino_propuesto: "2_areas/gaps_y_preguntas.md"
 tipo_destino: actualizar
 contradice: "wiki/2_areas/clientes/log_clientes.md (200 clientes, barrido 2026-07-07) no tiene ninguna fila para 'Pago Fácil', 'Western Union' ni 'SEPSA'"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Contradicción/vacío detectado:** `3_recursos/detalle_productos/servicios/pago_facil_mantenimiento.md` documenta a Pago Fácil como cliente en producción del producto "Servicios" desde al menos 2026-06-04 (versión SER 1, 39 tickets), y el mail "Seguimiento Desarrollo Pasarela de Pagos Bind-SEPSA" (hilo 2026-08-19 → 2026-08-25, ver `[[2026-08-26_pago-facil-sepsa-piloto-productivo-admin-y-pendientes]]`) confirma que sigue activo hoy con un Piloto Productivo en curso (entidades UAT confirmadas, plataforma admin propia). Sin embargo, `wiki/2_areas/clientes/log_clientes.md` (mantenido por `/sync_customers` desde Notion, 200/200 clientes al 2026-07-07) no tiene ninguna fila para "Pago Fácil", "Western Union" ni "SEPSA" — ni en producción ni en ningún otro estado.

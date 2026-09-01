@@ -251,11 +251,27 @@ Adriana Endzeliz (Comercial) planteó al PM que varios clientes externos están 
 
 **Caso de uso descripto para Octagon:** usuario de la wallet de Octagon entra a pago de servicios dentro de la app de Octagon, busca la empresa/deuda a pagar, paga con tarjeta o QR (vía botón de pago externo, no con saldo), la transacción impacta la deuda en BPG, se registra para evitar doble pago, y se emite comprobante.
 
+## Email obligatorio para envío del comprobante de pago (ticket SER-66, confirmado 2026-08-26)
+
+> Fuente: charla directa con el usuario (2026-08-26); confirmación del cliente Guillermo Paolucci (Western Union/Pago Fácil) sobre el ticket [SER-66](https://bindpsp.atlassian.net/browse/SER-66) (Proyecto Servicios, no definitivo aún).
+
+El ticket SER-66 pide dos cosas al equipo keepit sobre este flujo de Link de Pago: (1, front) agregar un campo de email en la pantalla de "Confirmar datos" del checkout, y (2, backend) enviar automáticamente el comprobante de pago a esa casilla al finalizar el proceso exitosamente. La captura de email se descartó explícitamente del checkout de Botón Simple 2.0 (que hubiera sumado costo cross-equipo) a favor de esta pantalla, propia del dominio de Pago Fácil/keepit — ver `detalle_productos/adquirencia/boton_simple_2_0.md` para el contexto del motor de checkout que no se toca, y [`pago_facil_mantenimiento.md`](pago_facil_mantenimiento.md) para el frente comercial/operativo de este mismo cliente (Piloto Productivo Bind-SEPSA).
+
+**Decisión confirmada por el cliente:** el campo email **es obligatorio** — el usuario no puede avanzar de la pantalla de confirmación de datos sin completarlo.
+
+**Impacto en las validaciones del ticket:**
+- Front: campo requerido, con manejo de error inline (recuadro/mensaje de error) si el usuario intenta avanzar sin completarlo o con formato inválido — no alcanza con deshabilitar el botón sin feedback.
+- Mockup de referencia actualizado (basado en la captura real de la pantalla "Confirmar datos" de Pago Fácil) agregando el estado de error visual (recuadro rojo) sobre el campo, para que quede claro que el campo bloquea el avance si está vacío.
+
+No afecta la decisión ya tomada de mantener el envío del comprobante como asíncrono/best-effort en backend — eso no depende de si el campo es obligatorio o no.
+
 ## Ver también
 
 - `detalle_productos/adquirencia/boton_simple_2_0.md §6-9` — búsqueda de deuda BPG, modalidad ThirdPartyStore, y los pedidos de PRD-87 del mismo cliente RIPSA.
 - [3_recursos/arquitectura_sistema/entornos_y_autenticacion_oauth2.md](../../arquitectura_sistema/index.md) — mecánica general de OAuth2 usada por este endpoint.
+- [pago_facil_mantenimiento.md](pago_facil_mantenimiento.md) — frente comercial/operativo de Pago Fácil (Western Union/SEPSA): Piloto Productivo, plataforma admin, puntos abiertos del checkout.
 
 ---
-*Última actualización: 2026-08-12 — Reubicado desde `detalle_productos/transversal/pago_facil.md` (reestructuración PARA en cascada); credenciales de ambiente de staging removidas del cuerpo del documento y reemplazadas por referencia a quién las provee.*
+*Última actualización: 2026-08-31 — `/context_merge`: sección nueva sobre email obligatorio para comprobante de pago (ticket SER-66, confirmado por el cliente 2026-08-26).*
+*Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/transversal/pago_facil.md` (reestructuración PARA en cascada); credenciales de ambiente de staging removidas del cuerpo del documento y reemplazadas por referencia a quién las provee.*
 *Última actualización anterior: 2026-07-06 — Agregada sección "Grupo DESA (formulario RIPSA)" desde Epic Notion "Grupo DESA: requerimientos para salir a prod" (ingesta N3).*

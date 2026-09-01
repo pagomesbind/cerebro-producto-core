@@ -10,7 +10,7 @@ destino_propuesto: .claude/skills/idea_us/SKILL.md (Paso 3 — precisión del 20
 tipo_destino: actualizar
 contradice: "no — es un refinamiento adicional a la precisión ya mergeada del 2026-08-26 sobre frontera de equipo (Paso 3), no la contradice"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

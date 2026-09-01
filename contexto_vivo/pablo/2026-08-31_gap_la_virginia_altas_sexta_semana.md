@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Actualización al gap abierto **"[2026-08-04] — /sync_metrics: altas de comercios de la 202631 (+238,2% WoW)

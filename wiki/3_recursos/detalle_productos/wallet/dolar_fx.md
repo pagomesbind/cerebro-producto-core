@@ -75,6 +75,22 @@ La versión W 69 contiene el corazón funcional de Pagos FX, ya en producción:
 
 **Próximos pasos:** esperar respuesta de Mastercard sobre los webhooks faltantes; colaborar con el front del portal en soporte de configuraciones.
 
+### 2.6ter MVP2 — hallazgos de manejo de errores detectados en pruebas de STG (2026-08-28)
+
+> Fuente: informe semanal de Fintexa "Informe Estado Proyectos Emisión al 28/08/2026" (Nicolás Pomponio). MVP2 todavía EN DESARROLLO/QA — no son bugs de producción, son gaps de diseño detectados antes de cerrar el contrato.
+
+**1. Validación de cuenta (ASV) mucho menos confiable que la de pago (IVS):** de 6 corredores probados para cuentas tipo **IVS**, los 6 cerraron en `VALIDO`; de 7 corredores probados para cuentas tipo **ASV**, solo 2 cerraron en `VALIDO` (4 devuelven `CANNOT_CONFIRM`, 1 sin resultado). `CANNOT_CONFIRM` no es evidencia de que la cuenta sea inválida, solo de que ese corredor no tiene cobertura de verificación — pero hoy no hay forma de distinguir ambos casos desde el contrato de Mastercard.
+
+**2. `TipoCuenta` no se valida contra el esquema real que declara el corredor:** cada corredor declara su esquema de cuenta implícitamente en el regex de `recipient_account_uri` de su guía (`iban:` → tipo IVS, `ban:` → tipo ASV). Hoy es el **front** el que identifica el tipo a mostrar/enviar, y Wallet solo valida que el valor recibido sea literalmente `IVS` o `ASV` — no lo cruza contra lo que el corredor realmente espera. Riesgo de que un front mal configurado mande un tipo de cuenta que el corredor rechace silenciosamente.
+
+**3. Un pago exitoso en MVP1 no predice que la validación de cuenta (ASV, MVP2) vaya a funcionar:** son dos capacidades distintas de Mastercard — el pago usa el rail de transferencia, ASV le pregunta directamente al banco destino por el estado de la cuenta. Se vieron cuentas que dan `CANNOT_CONFIRM` en la validación pese a que el corredor procesa pagos sin problema.
+
+**4. Gap de manejo de errores en `CreatePayment` — dos casos hoy mal clasificados:**
+- **Timeout/corte de red/status ambiguo:** el pago va correctamente a "A auditar" (resultado incierto, lo revisa una persona) — pero la organización **no recibe ninguna notificación** (`PAGO_EXTERIOR_RESULTADO` no se envía). Gap de soporte/operación, no de lógica de negocio.
+- **Un HTTP 500 de Mastercard al crear el pago se trata como rechazo de negocio, y no lo es:** un 500 no indica si el pago nació o no (puede haber fallado sin crearse, o haberse creado con el dinero ya en camino y solo fallar la respuesta). Hoy se agrupa junto a los 400/409 → pasa a `Rechazado`, se informa `PAGO_EXTERIOR_RESULTADO` con `Rechazada`, y nadie lo manda a "A auditar" — riesgo de comunicarle a un cliente que su pago fue rechazado cuando el dinero puede haber salido igual.
+
+Los 5 tickets nuevos que cubren estos gaps ya están EN DESARROLLO/QA a la fecha de este informe.
+
 ### 2.7 Portal Web de Pagos FX — el perfil (b) del §2.2 se construyó (vía `/sync_releases`, Adquirencia)
 
 > Tickets [AD-966](https://bindpsp.atlassian.net/browse/AD-966) (15 SP, Módulo Operaciones), [AD-965](https://bindpsp.atlassian.net/browse/AD-965) (7 SP, Módulo Gestión Destinatarios) y [AD-703](https://bindpsp.atlassian.net/browse/AD-703) (15 SP, Módulo Pagos al Exterior y Dashboard resumen), Epic **"Pagos FX - Portal Web"**, publicados en **AD 70.1** (2026-06-24) — encontrados en el backfill del espacio **AD** (Adquirencia), no WS. Confirma el perfil (b) descripto en §2.2 ("el que quiere una plataforma web/app lista para cargar beneficiarios, fondear y pagar sin integrarse"): efectivamente se construyó como un portal propio (`commerce-staging.epays.services/fxpagoqa`, login por organización tipo Física), con wizard de "Hacer un pago" (selección de beneficiario → confirmación → pantalla "Transferencia en proceso"), módulo de gestión de destinatarios/beneficiarios, módulo de "Mis Operaciones" (histórico, con opción de "repetir operación") y un dashboard resumen. Bugs de UX menores publicados en la misma tanda ([AD-1251](https://bindpsp.atlassian.net/browse/AD-1251)/[AD-1239](https://bindpsp.atlassian.net/browse/AD-1239)): doble spinner de carga simultáneo, y el cartel de "operación en proceso" desaparecía demasiado rápido (se corrigió consultando el estado real de la operación antes de navegar, en vez de asumir éxito apenas responde la cotización).

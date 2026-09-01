@@ -72,7 +72,24 @@ El 2025 fue un año de fuertes ganancias para Bind PSP, impulsado por la perform
   - **Andrés Schneider** — asesora sobre tendencias macroeconómicas y de la industria financiera.
 - **Salida del Directorio: Facundo Vázquez** — deja el Directorio de Grupo BIND tras varios años; continúa como Presidente de **Poincenot** y sigue vinculado a proyectos conjuntos con el Grupo.
 
+## Venta del negocio de banca minorista a Banco Patagonia (2026-08-27)
+
+> Fuente: comunicado interno oficial "Novedad importante sobre Banca Minorista" (`directorio@bind.com.ar`, firmado por Andrés Prida, Presidente de Banco Industrial S.A., 2026-08-27).
+
+Grupo BIND alcanzó un acuerdo con **Banco Patagonia** para la **transferencia parcial del negocio de banca minorista y fondo de comercio** de Banco Industrial (la entidad bancaria del Grupo). No afecta directamente a Bind PSP ni a ningún producto de pagos — el comunicado es sobre el negocio de banca minorista tradicional del banco, sin mención explícita de impacto en la operatoria de Bind PSP.
+
+**Motivación declarada:** la estrategia de Grupo BIND viene focalizándose hace varios años en el negocio de empresas (PyMEs, Medianas y Corporativo) y la banca digital como habilitador financiero — el negocio de banca minorista tradicional "requiere de una capilaridad y una economía de escala que hoy se distancian de nuestro foco estratégico".
+
+**Alcance:** se transfieren 28 sucursales de la red del banco. **Excepción:** la Casa Central (Av. Santa Fe 880, CABA) no se transfiere. **Excluidos del acuerdo:** la Banca Privada Zafiro y ciertos clientes, que continúan siendo parte del negocio de Grupo BIND.
+
+**Sobre Banco Patagonia (contraparte):** uno de los principales bancos privados de Argentina, entre los 6 primeros del país en volumen de préstamos y depósitos. Accionista controlante: Banco do Brasil. Más de 1 millón de clientes individuos, ~2.800 empleados, red de más de 200 puntos de atención a nivel nacional.
+
+**Continuidad laboral:** transferencia al Banco Patagonia de los colaboradores alcanzados, con continuidad de la relación laboral (Arts. 225 y 229 de la LCT — transferencia de establecimiento), reconociendo antigüedad y derechos adquiridos.
+
+**Timeline:** proceso de transición durante los próximos meses. Closing sujeto a condiciones precedentes y aprobaciones regulatorias — estimado efectivo a **inicios de 2027**. Comité de Transición integrado por ambos bancos (por Grupo BIND: Ariel Salituri, Marcela Alboher, Inti Benites, coordinado por Gastón Eckelhart).
+
 ---
-*Última actualización: 2026-08-05 — Nueva sección "Gobierno corporativo (Grupo BIND)": nombra por primera vez a la CEO (Marcela Fernie), Directorio actual, incorporación de 4 advisors y salida de Facundo Vázquez.*
+*Última actualización: 2026-08-31 — `/context_merge`: nueva sección "Venta del negocio de banca minorista a Banco Patagonia" (comunicado interno oficial, 2026-08-27).*
+*Última actualización anterior: 2026-08-05 — Nueva sección "Gobierno corporativo (Grupo BIND)": nombra por primera vez a la CEO (Marcela Fernie), Directorio actual, incorporación de 4 advisors y salida de Facundo Vázquez.*
 *Última actualización anterior: 2026-07-17 — Nota de actualización sobre reafirmación de las North Star Metrics por el CEO (ver [north_star.md](../direccion/north_star.md)).*
 *Última actualización anterior: 2026-07-07 — Agregado "Contexto actual (2026)": salida de Astropay, incidente de fraude de Transferencias Pull y respuesta de Grupo BIND.*

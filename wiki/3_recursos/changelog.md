@@ -6,6 +6,18 @@
 
 ## 2026
 
+### 2026-08-31 (pablo + nicolas)
+
+- `datos/metricas_semanales.md` — actualizado (items `tipo: dato`, aplicado byte a byte): entradas de las semanas 202634 y 202635 antepuestas al histórico (pablo).
+- `datos/datos_metricas_semanales/` — actualizado (items `tipo: dato`, aplicado byte a byte): store cumulativo hasta la semana 202635, incluye primera ingesta completa de `dim_collectors.csv` con mapeo confirmado (pablo).
+- `detalle_productos/adquirencia/gestion_convenios_comisiones.md` — actualizado: inventario completo de los 16 endpoints (3 hallazgos nuevos H9-H11) y dato de arquitectura sobre el flujo transaccional compartido con el Admin (pablo).
+- `detalle_productos/ardid/despliegues_y_operacion.md` — archivo nuevo: protocolo de rollback de dos pasos (imagen + DB) y riesgo de reglas antifraude no aplicadas (caso Coto, AD-1374) (pablo).
+- `detalle_productos/ardid/index.md` — actualizado: registro del archivo nuevo.
+- `detalle_productos/wallet/dolar_fx.md` — actualizado: nueva §2.6ter con 4 hallazgos de manejo de errores del MVP2 de Pagos FX cross-border (Mastercard Move) (pablo).
+- `detalle_productos/wallet/validaciones_y_alias_cvu.md` — actualizado §1: tope de 10 modificaciones de alias/año y formato (6-20 caracteres), confirmado por normativa BCRA — redirigido acá en vez de `apis_expuestas/cvu/guia_cvu.md` (dominio exclusivo de `/sync_web`), con gap señalizado para que esa skill lo aplique a la guía pública (pablo).
+- `detalle_productos/servicios/pago_facil.md` — actualizado: nueva sección sobre email obligatorio para envío de comprobante de pago (ticket SER-66) (nicolas).
+- `detalle_productos/servicios/pago_facil_mantenimiento.md` — actualizado: nueva §5, Piloto Productivo Bind-SEPSA (plataforma admin, Billers, puntos operativos abiertos) (nicolas).
+
 ### 2026-08-27 (pablo + nicolas)
 
 - `datos/changelog_releases.md` — actualizado (item `tipo: dato`, aplicado byte a byte): 4 entradas nuevas (AD 71.3, W 72, W 71.8).

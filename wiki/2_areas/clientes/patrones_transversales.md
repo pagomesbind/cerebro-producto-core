@@ -66,6 +66,13 @@ Casi siempre acompaña a Wallet o Adquirencia como habilitador de altas masivas 
 - **Incumplimiento de piloto productivo** pactado como condición de arranque (Málaga/MoPago).
 - **Inactividad post-contrato** sin uso real del servicio contratado (E-Cobro).
 
+## 5. Notas de identidad de cliente (para no contar demanda dos veces)
+
+> Casos donde un mismo grupo comercial aparece bajo nombres distintos según el producto/interlocutor — relevante al evaluar señal de demanda de una oportunidad (ver `direccion/oportunidades.md`), para no contar una misma relación comercial como dos señales independientes.
+
+- **Pago Fácil = Western Union = SEPSA.** Ninguno de los tres tiene ficha propia en `log_clientes.md` (no están en el log maestro de 200 clientes sincronizado de Notion — se gestionan como "entes" de producto, no como clientes CRM estándar; ver gap en [`gaps_y_preguntas.md`](../gaps_y_preguntas.md) [2026-07-15]). Es un mismo grupo de varias empresas, repartido en distintos productos/interlocutores: "Pago Fácil" (comercial Adriana Endzeliz, checkout de Servicios/Botón Simple 2.0 — ver [`3_recursos/detalle_productos/servicios/pago_facil.md`](../../3_recursos/detalle_productos/servicios/pago_facil.md)) y "Western Union"/"SEPSA" (Guillermo Paolucci, pasarela Bind-SEPSA — ver [`pago_facil_mantenimiento.md §5`](../../3_recursos/detalle_productos/servicios/pago_facil_mantenimiento.md)). Confirmado por el PM (Pablo Gomes) durante el discovery de `alias_cvu_checkout` (2026-08-28), tras detectarse dos pedidos casi idénticos (alias visible en vez de CVU/CBU numérico) llegando por los dos canales por separado.
+
 ---
 
-*Última actualización: 2026-07-07 — cierre de la carga inicial completa (200/200 clientes). Se debe revisar y ajustar en cada corrida de `/sync_customers` que aporte casos nuevos relevantes a alguna de estas secciones.*
+*Última actualización: 2026-08-31 — `/context_merge`: sección 5 nueva (notas de identidad de cliente), item de `contexto_vivo/` sobre Pago Fácil/Western Union/SEPSA.*
+*Última actualización anterior: 2026-07-07 — cierre de la carga inicial completa (200/200 clientes). Se debe revisar y ajustar en cada corrida de `/sync_customers` que aporte casos nuevos relevantes a alguna de estas secciones.*

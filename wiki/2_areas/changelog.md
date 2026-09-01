@@ -6,6 +6,17 @@
 
 ## 2026
 
+### 2026-08-31 (pablo + nicolas)
+
+- `direccion/decisiones.md` — creada 1 entrada: migración del detector de "caída de cliente" de `/sync_metrics` a metodología de ventana móvil 4×4 semanas (pablo).
+- `direccion/oportunidades.md` — creada 1 fila (OP-016): alias de CVU visible en checkout de transferencia de Botón Simple 2.0 (pablo).
+- `direccion/iniciativas.md` — creada 1 fila nueva (alias_cvu_checkout) y actualizadas 2 filas (PRD-202: 2 novedades; convenios_configuracion: 2 novedades) (pablo).
+- `gaps_y_preguntas.md` — creado 1 gap nuevo (guia_cvu.md sin tope anual de modificaciones de alias, señalizado para `/sync_web`); actualizados 4 gaps existentes (dim_collectors, mapeo confirmado/reconfirmado; La Virginia, sexta semana; Pago Fácil sin ficha, ahora con evidencia de producción); cerrado y rotado a `4_archivos/gaps_resueltos.md` el gap de Terra Blockchain/Sucredito (baja por Compliance) (pablo + nicolas).
+- `4_archivos/gaps_resueltos.md` e `index.md` — creados (primera rotación de un gap resuelto en el repo compartido).
+- `overview_empresa/overview_empresa_general.md` — actualizado: nueva sección sobre la venta del negocio de banca minorista de Grupo BIND a Banco Patagonia (permiso explícito del usuario, régimen D) (pablo).
+- `procesos/comunicacion_de_lanzamientos.md` — actualizado: nueva sección sobre la propuesta (sin decisión formal) de calendario de ventanas de despliegue anticipado (permiso explícito, régimen D) (pablo).
+- `clientes/patrones_transversales.md` — actualizado: nueva sección 5 (notas de identidad de cliente) — Pago Fácil/Western Union/SEPSA son el mismo grupo comercial (permiso explícito, régimen D) (pablo).
+
 ### 2026-08-27 (pablo + nicolas)
 
 - `direccion/decisiones.md` — creadas 2 entradas: prioridades de Producto de Cobro/Adquirencia para septiembre 2026 (fusión de 2 items del mismo hecho, Pablo Gomes + Nicolás Colón), y alcance inicial de pagos de servicios BPG (solo botón de pago, sin saldo de wallet).

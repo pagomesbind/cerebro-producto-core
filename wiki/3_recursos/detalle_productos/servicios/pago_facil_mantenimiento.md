@@ -49,8 +49,35 @@ Todos publicados en SER 1 (2026-06-04), sin PRD/IDEA propio relevado — parecen
 - **Estado del backlog (2026-08-24):** el tablero tiene ~65 tickets en total, de los cuales menos de 10 quedan pendientes de integrar a producción. El desarrollo data de diciembre 2025 aprox., por lo que se acordó hacer una revisión ("actualización", no auditoría) de arquitectura y seguridad para ponerse al día con lo agregado en los últimos 7-8 meses, más una solicitud de pentest (a cargo de Pablo Vargas, Fintexa).
 - Nicolás Colón quedó con la acción de compartir con el equipo el listado de épicas y tickets actuales del proyecto.
 
+## 5. Piloto Productivo Bind-SEPSA — plataforma admin, Billers y puntos operativos abiertos (2026-08-26)
+
+> Estado: en producción (Piloto Productivo en curso).
+>
+> Fuente: Mail "Seguimiento Desarrollo Pasarela de Pagos Bind-SEPSA Minuta 19-8" — Guillermo Paolucci (Western Union) y Adriana Endzeliz (Bind, Comercial), hilo 2026-08-19 → 2026-08-25.
+
+Hilo de seguimiento comercial/operativo entre Western Union (marca **Pago Fácil**, legal **SEPSA**) y el equipo Comercial de Bind sobre la "Pasarela de Pagos Bind-SEPSA" (Botón de Pago / checkout que corre sobre Botón Simple 2.0, mismo motor documentado en [`pago_facil.md`](pago_facil.md)) — no estaba documentado en el Cerebro el detalle operativo de este frente; este archivo hasta ahora solo cubría el backlog técnico de Jira (espacio SER).
+
+**Plataforma de administración nueva para el Piloto Productivo:** `https://admin.bindpagos.com.ar/`. Permite a Pago Fácil hacer monitoreo transaccional diario, descargar reportes, y — una vez recibida la capacitación — autogestionar el **bloqueo y desbloqueo de comercios** durante el Piloto Productivo.
+
+**Listado de Billers/comercios:** se compartió un adjunto con el mapeo de cada Biller y el comercio asociado en Bind PSP — no procesado en esta ingesta (regla de la skill: adjuntos quedan pendientes de revisión manual).
+
+**Estado de entidades del Piloto (al 2026-08-19):** UAT confirmada para **PRO ACTION**; próximas entidades piloto: **Colegio Ing Cba** y **Marea TV**.
+
+**Puntos operativos abiertos de la minuta del 19/08** (sin confirmación de resolución al 25/08 — a validar en próxima corrida):
+- **Tarjeta Prepaga:** se iba a configurar como Tarjeta de Crédito (TC) para pasar por ese flujo del checkout; pasaje a producción estimado semana del 17-ago, pendiente de confirmar fecha real.
+- **MODO:** la operatoria entre Bind y MODO se revisaba con Coelsa; status "en espera de validación del administrador", sin novedad.
+- **Botón "Flecha"** en el checkout: se evaluaba sacarlo; mientras tanto queda deshabilitado (provisorio) pero visible, con posibilidad de rebautizarlo "FINALIZAR" una vez confirmado. Sacarlo definitivamente requiere protocolo formal y traslado de costos.
+- **Identificación de origen de pago:** para pagos con QR y Transferencia se necesita informar a Pago Fácil desde qué billetera se emitió el pago; para pagos con Tarjeta, con qué tarjeta — Comercial coordina reunión con Banco Industrial para resolverlo.
+- **Colores del front:** Western Union quedó en validar con su equipo de Marketing la definición de colores para el checkout — pendiente al 25/08.
+- **Confirmación online a entidades:** cambios de alcance a coordinar en reunión propia del Proyecto SEPSA (no confundir con el "Proyecto Servicios" de §4 de este archivo — mismo cliente Pago Fácil, frentes distintos: uno es checkout/Botón de Pago con Western Union/Comercial, el otro es DeudaManagement con Fintexa/Wallet).
+
+> Nota: ni Pago Fácil ni Western Union/SEPSA tienen ficha propia en `2_areas/clientes/log_clientes.md` pese a ser cliente en producción — ver gap actualizado en [`2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-07-15].
+
 ## Ver también
 
 - PRD-57 — Pago Fácil MVP — historia de build del MVP, PM y decisiones de alcance. Proyecto de Nicolás Colón, en su propio Cerebro desde 2026-08-13.
 - [transversal/pago_facil.md](pago_facil.md) — documentación técnica del API cliente-facing.
 - [adquirencia/boton_simple_2_0.md §6-7](../adquirencia/boton_simple_2_0.md) — el objeto Deuda y BPG que este producto reutiliza como motor de cobro.
+
+---
+*Última actualización: 2026-08-31 — `/context_merge`: §5 nuevo — Piloto Productivo Bind-SEPSA (plataforma admin, Billers, puntos operativos abiertos), del hilo de seguimiento comercial 2026-08-19/25.*

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/gestion_convenios_co
 tipo_destino: actualizar
 contradice: "no — enriquece, no contradice, el contenido ya mergeado en ese archivo (item de contexto_vivo 2026-08-24, ya archivado en 4_archivos/contexto_ingestado/)"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

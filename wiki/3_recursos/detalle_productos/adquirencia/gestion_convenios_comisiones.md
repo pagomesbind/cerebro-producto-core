@@ -54,6 +54,13 @@ Lectura con herencia expuesta (GET /comercio/{id}/convenios/{codEntidad}):
 6. Ningún body de alta/modificación declara campos `required` (ni siquiera `Codigo` en alta de Convenio) — probablemente el spec no refleja las validaciones reales del backend.
 7. `CodCanal`/`FPago`/`TipoComision` son strings con `maxLength` pero sin `enum` — los valores válidos no están documentados en esta API.
 8. El modelo general de Comercio (`GET /comercios/{id}` → `ComercioDto`) NO trae convenios embebidos — es un dominio de datos separado, requiere llamada aparte. `ComercioDto.comisiones` es un mecanismo de comisión genérico distinto (`Comision`/`Comisiones`, tags separados en el spec) sin relación de datos con `Convenio`/`ComercioConvenio` — no confundir los dos.
+9. `ValorComision` tiene `minimum: 0, maximum: 1` en el schema, pero ningún `description` aclara la unidad — a confirmar si `0.025` = 2,5% siempre, o si hay algún caso donde ese rango de 0 a 1 significa otra cosa.
+10. Existen **dos endpoints solapados** para "actualizar una comisión de comercio": `PUT /comercios/{id}/comisiones/{idComisionComercio}` (body: solo `{id}`) y `PUT /comercios/{idComercio}/comision/{idComision}` (body: `{nuevoValor, comisionNombreGrupo, comisionTipoId}`) — nombres de path casi idénticos (singular/plural), payloads incompatibles entre sí, sin indicio en el spec de cuál es la vigente o si una está deprecada.
+11. No existe ningún `PUT` para `ComercioConvenio` — a diferencia de `Convenio` (que sí tiene `PUT /convenios/{codConvenio}`), el nivel comercio-convenio solo ofrece alta y baja (`POST`/`DELETE`). Cualquier "edición" de un override existente requiere inferir un patrón de baja+alta, no documentado como tal en el contrato.
+
+## Dato de arquitectura — el flujo transaccional usa el mismo contrato que el Admin
+
+El flujo transaccional de cobro (el que decide qué comisión/plazo aplicar a una operación real) consulta la **misma API** (`Shared.Comercio.Api`) que usa el Admin — confirmado explícitamente por el PM (Pablo Gomes) el 2026-08-27. En la práctica, esto significa que `GET /comercio/{id}/convenios/{codEntidad}` (el único endpoint con schema de respuesta real y fusionado, ver arriba) probablemente sea el que ese flujo consulta — cualquier cambio de contrato ahí arriesga romper el path transaccional, no solo el Admin. Insumo directo para cualquier evolución futura de este contrato, no solo para `convenios_configuracion`.
 
 ## Por qué importa
 
@@ -65,4 +72,4 @@ Es la fuente primaria para diseñar cualquier rediseño de la herencia de conven
 - [mejoras_admin_backoffice_prd88.md §2](mejoras_admin_backoffice_prd88.md) — Epic AD-8 (`canal_entidad`/`canal_comercio`), también en disputa como referencia de patrón reusable para convenios.
 
 ---
-*Última actualización: 2026-08-27 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (spec OpenAPI, 2026-08-24). Contradice la caracterización previa de `configuracion_de_entidades.md §4` y `mejoras_admin_backoffice_prd88.md §2` — gap escalado, ver `gaps_y_preguntas.md`.*
+*Última actualización: 2026-08-31 — `/context_merge`: inventario completo de los 16 endpoints (3 hallazgos nuevos H9-H11) y dato de arquitectura sobre el flujo transaccional, del cierre de `/idea_solution` de `convenios_configuracion` (2026-08-27). Enriquece, no reemplaza, la destilación parcial del 2026-08-27.*

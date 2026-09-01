@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/dolar_fx.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 El informe semanal de Emisión (Fintexa, Nicolás Pomponio) al 28/08/2026 documenta 4 hallazgos de diseño detectados durante las pruebas del MVP2 de Pagos FX cross-border (Mastercard Move), todavía EN DESARROLLO/QA — no son bugs de producción, son gaps de diseño identificados antes de cerrar el contrato:

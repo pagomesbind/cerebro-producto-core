@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Contexto/Problema:** el detector de "caída de cliente" de `/sync_metrics` (`detectar()` en `pipeline.py`)
