@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "Daily producto" (2026-08-28, Pablo Gomes con Nicolás Colón, probando el flujo de las skills `/idea_start` sobre un pedido real) se analizó un requerimiento informal de Adriana (comercial) para el cliente Pago Fácil: mostrar el alias del CBU junto al CBU numérico en la opción de transferencia del checkout de Botón Simple 2.0.

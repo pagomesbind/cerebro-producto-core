@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 Se acordó agregar al webhook de transacción exitosa de **Cobro con QR** tres campos nuevos: **arancel aceptador (porcentaje)**, **arancel aceptador (importe)** e **importe neto** (tras aplicar el arancel). El objetivo explícito es que el consumidor del webhook no tenga que hacer una llamada adicional de consulta de la transacción para obtener estos datos — hoy solo vienen en el detalle vía API, no en el evento. Sin ticket específico identificado en la minuta más allá del compromiso genérico ("el grupo" lo lleva adelante).

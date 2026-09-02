@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "FIX - Pagos" (2026-08-26, con Hernan Clarich, Rocio Revelli, Matias Alzogaray, Nicolás Colón, Andrea Orsini y Osmel Mata) surgió, al analizar un fix de Pentas para corregir estados de transacciones, un segundo problema más grave: dentro de Ardid, uno de los filtros de reglas de pago es por grupo BIN, y en la entidad afectada ese filtro estaba configurado únicamente con la opción "todos" sin ningún grupo BIN específico asignado. Como consecuencia, **las reglas de monitoreo de pago nunca estaban impactando** — si una transacción se rechazaba, era por otro motivo, nunca por estas reglas. El equipo (Rocio Revelli y Lorena Macedo, Fintexa) detectó que el mismo fix de Pentas que corrige el estado de la primera transacción (ver ítem de conocimiento separado si se documenta) también resuelve este problema de grupo BIN.

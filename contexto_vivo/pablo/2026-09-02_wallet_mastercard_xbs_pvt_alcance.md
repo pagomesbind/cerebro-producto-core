@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 **Fuente:** hilo "Implementation plan CIS-2026-13184 PVT XBS" con Mastercard (Omar Vladimir Gomez, Federico Darnond, Juan Puig Moreno, Juan Carlos Lozano Cortes, Olga Perdomo del lado Mastercard; Luciana Rudaz del lado Bind PSP), 2026-08-26/2026-09-01. Proyecto CIS-2026-13184 = **Production Validation Testing (PVT)** de Mastercard Move / Cross-Border Services (XBS), previo/paralelo al alcance ya documentado en `dolar_fx.md §2` (que cubre hasta W70/PRD-10).

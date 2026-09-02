@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 **Oportunidad:** mostrar el alias del CBU (además del CBU numérico) en la opción de pago por transferencia del checkout de Botón Simple 2.0, para facilitar la transacción al usuario final.

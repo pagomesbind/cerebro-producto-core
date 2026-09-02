@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 La IDEA [PRD-202](https://bindpsp.atlassian.net/browse/PRD-202) (API wallet orquestando Onboarding — Fase 1: cuenta PF mayor de edad) tenía la descripción del borrador original de Jira (2026-07-16) — nunca se había actualizado cuando la IDEA se creó formalmente el 2026-08-31 vía `/idea_jira` (esa corrida creó las Epics/Historias con la descripción técnica completa, pero no tocó la descripción de la IDEA en sí).

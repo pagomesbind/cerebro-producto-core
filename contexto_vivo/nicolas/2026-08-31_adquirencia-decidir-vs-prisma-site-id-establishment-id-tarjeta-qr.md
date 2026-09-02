@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "Análisis COBRO" (2026-08-27, con Daniela Collia/Fintexa, Pablo Gomes, Nicolás Colón y equipo Fintexa) se retomó el análisis del desarrollo de tarjeta QR priorizado para la versión de septiembre (ver tarea T-010 en `tareas.md`, 2026-08-25). Daniela Collia planteó que Decidir se usa para ventas no presenciales y Prisma para presenciales, y que ambos procesadores piden datos distintos:

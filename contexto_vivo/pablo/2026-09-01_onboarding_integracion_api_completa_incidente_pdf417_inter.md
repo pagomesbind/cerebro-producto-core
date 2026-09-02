@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 ## Mecánica: integración por API "completa" (distinta de "Onboarding en partes por API")

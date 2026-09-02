@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — no hay archivo de canon existente sobre este tema específico. Complementario a identificacion_personas_fisicas_cvu.md (item 2026-09-01_onboarding_normativa_identificacion_pf_cvu, misma sesión). No se comparó campo a campo contra un contrato de datos ya diseñado de un proyecto PJ (a diferencia de PRD-202/PF) — proyecto-la-virginia-ob-pj ya registra en su proyecto.md (2026-08-20) que 'beneficiarios finales confirmado cubierto por una US existente', pero no hay verificación línea por línea contra esta matriz."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 ## Nota de confiabilidad de la fuente

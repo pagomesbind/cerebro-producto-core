@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "Configuración de tiempos de consulta de Pagos QR" (2026-08-31), Gonzalo Rivera mencionó reclamos del cliente **TPay** sobre tiempos de resolución de pagos QR y transacciones en estado indeterminado — motivo directo del ajuste de parametrización acordado en esa misma reunión (ver item `tipo: conocimiento` `2026-09-01_adquirencia_parametrizacion_tiempos_qr`).

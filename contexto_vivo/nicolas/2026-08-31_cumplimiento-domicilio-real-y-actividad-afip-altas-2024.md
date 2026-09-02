@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: baja
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-08-31) se mencionaron, sin mucho detalle, dos necesidades regulatorias que el equipo va a integrar en su planificación de cumplimiento:

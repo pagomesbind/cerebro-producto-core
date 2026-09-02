@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 Cristian Bonafede (Fintexa/Sandinas) confirmó que la versión 2.0.0 del onboarding jurídico de La Virginia (PRD-223) quedó disponible en staging el 28/08, con todas las historias de usuario acordadas en la estimación técnica — cumple en fecha el compromiso de entrega a pruebas. El cronograma de 2 tandas de producción sigue en pie (Etapa 1 el 4/09, Etapa 2 el 18/09). Detalle completo en `1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md §17`.

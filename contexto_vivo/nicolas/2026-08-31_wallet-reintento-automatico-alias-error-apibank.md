@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 7fd6e3f
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-08-31), Pablo Gomes informó que se implementó un **reintento automático en la creación de alias de cuenta** cuando la operación recibe un error de APIBank, con el objetivo de mitigar los fallos frecuentes de este proceso ("error frecuente en asignación de alias de cuenta automático" — descripto como una regresión nueva, no un error histórico: "antes andaba bien"). No se detalló el mecanismo del reintento (cantidad de intentos, backoff) más allá de la mención en la reunión — a confirmar contra el ticket/desarrollo real si se necesita el detalle técnico.

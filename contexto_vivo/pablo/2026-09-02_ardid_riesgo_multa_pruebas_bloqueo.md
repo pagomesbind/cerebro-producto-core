@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 **Fuente:** minuta de "Repaso Semanal líderes" del 2026-09-01 (Matías Alzogaray, PM), mencionada al pasar como parte del diagnóstico de la sobrecarga operativa que motivó la reforma del ciclo de despliegues (ver `2026-09-02_contexto_fijo_reforma_ciclo_despliegues`).

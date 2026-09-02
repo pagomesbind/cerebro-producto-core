@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 **Proyecto:** `comercios_mayoristas/` (sin PRD todavía — "MayoristaPay"), 🟡 Diferido, condicionado al cierre de un acuerdo comercial con la cámara de supermercados mayoristas.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 Nicolás Colón presentó un desarrollo que permite **parametrizar el tiempo de espera de resolución de pagos QR** (aplica también a **transferencias salientes y Debin**), reemplazando el timeout fijo que tenía el sistema. Historial del parámetro: 7s → 5s (ajuste previo, ya en producción) → nueva configuración acordada en esta reunión: **primera consulta a 4,5s + segunda consulta a 2s** (la segunda toma como base la respuesta de la primera). La base estadística usada es de Coelsa: tiempo promedio de resolución entre 4,7s y 4,8s.

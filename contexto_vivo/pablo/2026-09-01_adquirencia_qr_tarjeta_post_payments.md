@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 7fd6e3f
 ---
 
 En la reunión recurrente "Análisis COBRO" con Fintexa (2026-08-31) se cerraron dos decisiones sobre **QR Tarjeta** (pago con tarjeta desde wallets terceras, ya documentado en `boton_simple_2_0.md` por el cliente MODO):
