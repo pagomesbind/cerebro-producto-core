@@ -127,6 +127,18 @@ Complementa §2.6 (WS-721) con detalle no documentado antes:
 - **Entidad IVSA dedicada "Organización MOVE" (2026-07-28):** para operar este producto, Bind PSP le pide a IVSA crear una entidad nueva en su plataforma (asociada a la cuenta comitente `749049153`), separada de otras organizaciones de Bind PSP en IVSA, con credenciales propias de API Broker (STG y PROD) para consultar cotizaciones y comprar CCL puntualmente para el crossborder de Mastercard Move. Modelo a operar: **senebi (combi)**. Fuente: mail "🔥Nuevas credenciales API Broker para Organización MOVE (Bind PSP)" — Luciana Rudaz, 2026-07-28. Ver también PRD-183 §7 (proyecto de Luciana Rudaz, en su propio Cerebro desde 2026-08-13).
   - **Avance (2026-08-03):** IVSA (Mariano Ferrari, Gastón Degiovanni) confirmó la CBU asociada a la cuenta comitente (`3220001805007490491531`) y que la cuenta se llamará **"BIND PSP - MOVE"** — todavía sin confirmar si la cuenta comitente `749049153` ya existe o la crea IVSA de cero (idas y vueltas sin cerrar en el hilo). En paralelo, Bind (Gonzalo Rivera) compartió con **security@fintexa.tech** las **credenciales de la organización 156 "Pagos FX-QA"** vía enlace cifrado de un solo uso (SendSafely) — a diferencia del incidente de credenciales de MongoDB en texto plano del 2026-07-27 (ver `../../../2_areas/gaps_y_preguntas.md`), acá el canal usado sí es una buena práctica de manejo de secretos.
 
+### 2.9 PVT (Production Validation Testing) de Mastercard Cross-Border (XBS) — Implementation Plan v3.0 aprobado, deadline 16/09/2026
+
+> Fuente: hilo de mail "Re: Fw: Implementation plan CIS-2026-13184 PVT XBS" — Omar Vladimir Gomez/Federico Darnond/Juan Puig Moreno/Juan Carlos Lozano Cortes/Olga Perdomo (Mastercard) y Luciana Rudaz (Bind PSP), 2026-08-26/2026-09-01. Proyecto **CIS-2026-13184** = Production Validation Testing de Mastercard Move/Cross-Border Services, previo/paralelo al alcance ya documentado en §2 (hasta W70/PRD-10). Pablo Gomes está solo en copia como PM de Wallet — la iniciativa la lidera Luciana Rudaz (PRD-183, foco Pagos FX/Mastercard Move), mismo criterio de atribución que §2.6bis.
+
+**Hito 2026-09-01:** Luciana Rudaz aprobó el **Implementation Plan v3.0**. El plazo del proyecto se actualizó a 22 días — **las pruebas productivas de este scope deben completarse a más tardar el 16/09/2026** (el deadline anterior mencionado por Mastercard en el hilo era el 15/09, corregido por su equipo).
+
+**Alcance de corredores (scope) confirmado:**
+- Cubiertos: Brasil, Canadá, Colombia, República Dominicana, México, Estados Unidos, Reino Unido, Suiza, SEPA.
+- **China excluido** del scope — deseable pero no bloqueante, para no atrasar el inicio del proyecto (decisión de Federico Darnond/Mastercard, acordada desde el 28/08).
+- **México con limitación**: Mastercard solo proveyó una cuenta de prueba "Bank Account - Personal" (no "Business"/B2B) — el tipo de corredor B2B que menciona el Implementation Plan **no se puede cubrir** con la cuenta disponible. Casos cubribles para México: *Bank Account MXN P2P* y *Bank Account MXN B2P* únicamente.
+- Mastercard pidió explícitamente que, si Bind quiere habilitar en Producción algún corredor sin completar su PVT correspondiente, se identifique el riesgo asociado a esa falta de validación de forma explícita y documentada.
+
 ## Ver también
 
 - [dolar_ccl.md](dolar_ccl.md) — mercado CCL (bonos), incluye el modelo Combi que Pagos FX planeaba reutilizar.

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/mecanica_qr_coelsa.m
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -58,6 +58,19 @@ Lectura con herencia expuesta (GET /comercio/{id}/convenios/{codEntidad}):
 10. Existen **dos endpoints solapados** para "actualizar una comisión de comercio": `PUT /comercios/{id}/comisiones/{idComisionComercio}` (body: solo `{id}`) y `PUT /comercios/{idComercio}/comision/{idComision}` (body: `{nuevoValor, comisionNombreGrupo, comisionTipoId}`) — nombres de path casi idénticos (singular/plural), payloads incompatibles entre sí, sin indicio en el spec de cuál es la vigente o si una está deprecada.
 11. No existe ningún `PUT` para `ComercioConvenio` — a diferencia de `Convenio` (que sí tiene `PUT /convenios/{codConvenio}`), el nivel comercio-convenio solo ofrece alta y baja (`POST`/`DELETE`). Cualquier "edición" de un override existente requiere inferir un patrón de baja+alta, no documentado como tal en el contrato.
 
+## Confirmación de negocio del modelo de herencia (reunión "Análisis COBRO", 2026-08-27)
+
+En la misma reunión donde el PM presentó el prototipo (ver `1_proyectos/convenios_configuracion/`), Pablo Gomes describió en palabras de negocio el mecanismo que el contrato real de API ya modela arriba:
+
+- Las **entidades** establecen parámetros generales (ej. botón simple débito con 2% de comisión y 3 días de plazo) que se **heredan automáticamente** por los comercios nuevos creados bajo esa entidad.
+- Modificar un parámetro puntual en un comercio (ej. cambiar la comisión de crédito de 1,3% a 99% en un comercio específico) crea una **regla específica que prevalece sobre la entidad** para ese comercio — coincide con el flag `FromCommerce` documentado arriba. Al intentar desactivar esa regla puntual, el sistema alerta y ofrece volver al valor heredado de la entidad o desactivar el canal completo.
+- Las modificaciones a nivel comercio **no impactan** a la entidad matriz ni a otros comercios (que mantienen su herencia intacta). Un cambio global (ej. eliminar un medio de pago a nivel entidad) sí baja en cascada a los comercios sin excepciones propias; los que tienen configuración propia la conservan.
+- Daniela Collia (Fintexa) advirtió que, aunque el panel visual muestra la edición de una sola línea, el backend genera un **nuevo registro por cada modificación** (crecimiento de datos, trazabilidad/auditoría) — el PM respondió que el volumen actual (~50 entidades operativas) mitiga el riesgo de escala y que los estados anulados conservan el historial.
+
+Esta descripción de negocio es consistente con el modelo `Convenio`/`ComercioConvenio`/`FromCommerce` ya documentado arriba — no lo contradice, lo confirma desde otro ángulo (negocio vs. contrato técnico). No cierra por sí sola la pregunta abierta en [`gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-08-27] sobre si corresponde actualizar `configuracion_de_entidades.md §4` y `mejoras_admin_backoffice_prd88.md §2` para apuntar acá como fuente de verdad.
+
+> Fuente: Reunión "Análisis COBRO" (2026-08-27) — mismo item de fuente que la confirmación de negocio de arriba, capturado independientemente por Nicolás Colón, 2026-09-02.
+
 ## Dato de arquitectura — el flujo transaccional usa el mismo contrato que el Admin
 
 El flujo transaccional de cobro (el que decide qué comisión/plazo aplicar a una operación real) consulta la **misma API** (`Shared.Comercio.Api`) que usa el Admin — confirmado explícitamente por el PM (Pablo Gomes) el 2026-08-27. En la práctica, esto significa que `GET /comercio/{id}/convenios/{codEntidad}` (el único endpoint con schema de respuesta real y fusionado, ver arriba) probablemente sea el que ese flujo consulta — cualquier cambio de contrato ahí arriesga romper el path transaccional, no solo el Admin. Insumo directo para cualquier evolución futura de este contrato, no solo para `convenios_configuracion`.

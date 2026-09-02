@@ -574,5 +574,22 @@ Registro de configuración real de comisiones reducidas para comercios propios d
 Ver Parte 4 (arriba) para el mecanismo general de comisiones por actividad comercial y su rango mínimo/máximo.
 
 ---
+
+## Parte 5 — Parametrización del tiempo de espera de resolución (State Monitor)
+
+> Fuente: reunión "Configuración de tiempos de consulta de Pagos QR" (2026-08-31, Pablo Gomes, Emma Vignoles, Mariana Nadalin, Gonzalo Rivera, Nicolás Colón, Luciana Rudaz, Hernan Clarich + Fintexa: Agustín Grau, Juan Pablo Carubelli). Proyecto trackeado: `bajar-tiempos-pagos-qr` (PRD-199) — ver novedad en [`direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md).
+
+Nicolás Colón presentó un desarrollo que permite **parametrizar el tiempo de espera de resolución de pagos QR** (aplica también a **transferencias salientes y Debin**), reemplazando el timeout fijo que tenía el sistema. Historial del parámetro: 7s → 5s (ajuste previo, ya en producción) → nueva configuración acordada en esta reunión: **primera consulta a 4,5s + segunda consulta a 2s** (la segunda toma como base la respuesta de la primera). La base estadística usada es de Coelsa: tiempo promedio de resolución entre 4,7s y 4,8s.
+
+**Mecánica del doble chequeo (Juan Pablo Carubelli, Fintexa):** si tras las dos consultas la transacción no se resuelve, queda en **estado 4 (pendiente)**. El **State Monitor** la toma después; si tampoco logra resolverla, pasa a **estado 5 (auditoría)**. Primera vez que se documenta el detalle de esta máquina de estados en el Cerebro.
+
+**Motivo de negocio y ⚠️ contradicción sin resolver sobre el cliente que lo originó:** el ajuste responde a reclamos por tiempos de resolución largos y transacciones en estado indeterminado. Un item de contexto vivo (Pablo Gomes, minuta Gemini de esta misma reunión) identifica al cliente reclamante como **TPay** — con detalle de seguimiento: Nicolás Colón le entregaría a Gonzalo Rivera un informe técnico de tiempos para que pudiera responderle a TPay puntualmente; TPay no tiene ficha en [`clientes/log_clientes.md`](../../../2_areas/clientes/log_clientes.md), ver gap abierto en [`gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-09-02]. El proyecto `1_proyectos/bajar-tiempos-pagos-qr/` (Nicolás Colón, item de contexto vivo independiente sobre la misma reunión) registra en cambio los clientes **BSF y Global66**, con una corrección propia (decisión D-002, 2026-09-01) que descarta explícitamente "TPay" por no ser un nombre reconocido. Ambas versiones quedan documentadas acá sin que el merge elija ganador — ver el mismo gap para la pregunta al usuario.
+
+**Riesgo aceptado y su mitigación:** reducir el tiempo de la primera consulta corre el riesgo de dejar operaciones fuera antes de que Coelsa termine de resolverlas — se espera que la segunda consulta (2s adicionales) mitigue ese efecto. Nicolás Colón monitorea la evolución del cambio y reporta resultados.
+
+**Pendiente identificado en la misma reunión:** Gonzalo Rivera va a cargar en Jira un caso con las transacciones antiguas que quedaron bloqueadas en estado 4, para que el equipo técnico las analice; Juan Pablo Carubelli investiga por qué ciertas operaciones antiguas no pasaron automáticamente al estado de auditoría según la lógica esperada.
+
+---
 *Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita.*
-*Última actualización: 2026-08-12 — Fusionada sección de arancel reducido desde `configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada).*
+*Última actualización: 2026-09-02 — `/context_merge`: nueva Parte 5, parametrización del tiempo de espera de resolución (State Monitor, doble consulta T1/T2) — incluye contradicción sin resolver sobre el cliente que motivó el ajuste (TPay vs. BSF/Global66).*
+*Última actualización anterior: 2026-08-12 — Fusionada sección de arancel reducido desde `configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada).*

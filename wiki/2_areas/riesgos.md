@@ -30,11 +30,20 @@ La vista `RET_IIBB_REC_ACUM_LOTE` hace un `INNER JOIN` de `LIQ_IMP` contra `COME
 
 Dos riesgos sobre el "Proyecto Servicios" (BPG/Pago Fácil, incorporado al pipeline de Wallet — ver [3_recursos/detalle_productos/servicios/pago_facil_mantenimiento.md §4](../3_recursos/detalle_productos/servicios/pago_facil_mantenimiento.md)): (1) **continuidad de conocimiento** — Pablo Serra (Fintexa) informó (2026-08-21) la baja del integrante identificado como quien más conocía el proyecto, sin plan de traspaso de conocimiento documentado; (2) **bloqueo de pruebas con tarjetas prepagas** (severidad media-alta, impacto directo en clientes) — el ambiente de staging no tiene tarjetas prepagas ni datos de prueba válidos provistos por Pago Fácil o el procesador Decidir, pese a rechazos recurrentes ya reportados por clientes; Andrea Orsini y Adriana Endzeliz gestionan con Decidir/Payway conseguir una tarjeta de prueba válida, sin fecha de resolución confirmada al 2026-08-25.
 
+## Reprogramaciones reiteradas de pases a producción erosionan la confianza de clientes
+
+En la reunión "Adquirencia V 72: Pre-Despliegue" (2026-08-27) se reprogramó el pase a producción para la noche del lunes 31/08 (12 tickets de QA con errores críticos detectados). Gonzalo Rivera expresó malestar propio y de los clientes ante los cambios constantes y postergaciones de fechas de implementación — genera **percepción de falta de profesionalismo** y afecta los avisos previos que las entidades ya comunicaron a sus propios clientes (caso citado: APIBank). El equipo reconoció la frustración pero sostuvo que posponer busca evitar errores críticos en producción; Melisa Belpassi (QA) señaló que ya había advertido la imposibilidad de llegar con los tickets y que su propuesta de coordinar documentación conjunta no se gestionó a tiempo — QA opera como cuello de botella por acumulación de tareas, con necesidad de reformular la coordinación entre equipos. Mitigación propuesta: calendario de lanzamientos anticipado desde la v73 (ver nota de reforma del ciclo de despliegues, pendiente de permiso explícito para `procesos/`).
+
+## Multa de $75 millones por errores en pruebas de bloqueo de transacciones de Ardid
+
+Confirmada una multa de **$75 millones** a Bind PSP originada por errores en las pruebas de bloqueo de transacciones de Ardid (motor antifraude) — transacciones que debían bloquearse no se bloquearon. Mencionada al pasar en la minuta de "Repaso Semanal líderes" (2026-09-01) como parte del diagnóstico que motivó la reforma del ciclo de despliegues (ver `2_areas/procesos/`, pendiente de permiso). El monto fue redactado en la minuta oficial (enviada a Fintexa/Tecnológica Financiera) por sensibilidad ante destinatarios externos, y se completó cruzando la minuta de Gemini de la misma reunión (interna). Sin confirmar la entidad que aplicó la multa, el ticket/versión de Ardid involucrado, ni si ya está resuelta. Señal de que Ardid quedó fuera del loop de coordinación de despliegues — el equipo sumó como acción incorporar a un referente de Ardid a las reuniones de coordinación (Hernán Clarich). Capturado 2026-09-02, confianza media (mención al pasar en ambas fuentes, sin ticket ni informe de causa raíz propio).
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-08-27 — nuevos riesgos "Saturación de la base de datos de impuestos por CUIT compartido" y "Proyecto Servicios — continuidad de equipo y bloqueo de pruebas con tarjetas prepagas".*
+*Última actualización: 2026-09-02 — nuevos riesgos "Reprogramaciones reiteradas erosionan confianza de clientes" y "Multa de $75M por errores en pruebas de bloqueo de Ardid".*
+*Última actualización anterior: 2026-08-27 — nuevos riesgos "Saturación de la base de datos de impuestos por CUIT compartido" y "Proyecto Servicios — continuidad de equipo y bloqueo de pruebas con tarjetas prepagas".*
 *Última actualización anterior: 2026-08-20 — nuevo riesgo "Desalineación entre comisión facturada a la entidad y comisión real cobrada por el procesador".*
 *Última actualización anterior: 2026-08-12 — Creación del archivo en la reestructuración PARA en cascada, consolidando 4 riesgos ya documentados en la wiki pero sin un lugar propio.*

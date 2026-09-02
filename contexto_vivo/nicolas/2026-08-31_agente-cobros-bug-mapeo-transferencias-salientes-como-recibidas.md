@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/agente_cobros_y_pagos/transferen
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-08-31), Nicolás Colón identificó una inconsistencia técnica: **las transferencias salientes del Agente de Cobros y Pagos se están mapeando erróneamente como transferencias recibidas**. La minuta no da más detalle técnico (en qué endpoint/reporte se ve el mapeo incorrecto, desde cuándo, ni el cliente afectado) — se registró como hallazgo a corregir, sin desarrollo asociado todavía. Ver tarea T-018 en `tareas.md` para el seguimiento de reporte/corrección.

@@ -137,10 +137,24 @@ El ticket Coelsa #456632 ("Reactivación de Transferencias Pull - Homologación"
 
 Sin este último paso (registrar la URL vía ese PUT) Coelsa no permite continuar con las pruebas de estado del ambiente de homologación.
 
+**Continuación (2026-08-27/28) — el `PUT` exitoso no se refleja en la consulta posterior.** Tras registrar la URL del PSP con el `PUT` indicado arriba:
+
+- **2026-08-27** — Nicolás Colón (Bind) confirma a Coelsa que modificaron el PSP con la URL correspondiente y que la API respondió exitosamente, pero que **al consultar después, el cambio no aparece reflejado**.
+- **2026-08-28 18:03** — Coelsa (Niurka Yamarte) responde que están enviando una TRX pero no llega al endpoint `https://172.30.8.62/AvisoDebinPendienteCVU` — piden que Bind verifique de su lado.
+- **2026-08-28 18:39** — Ignacio Ghillini (Bind, Analista Canales Digitales) valida en Homologación consultando `GET /PSP/consultaPSP/5071/30714979732` y **sigue devolviendo sin datos**.
+- **2026-08-28 20:27** — Coelsa pide que se les envíe el REQUEST/RESPONSE de esa consulta para poder investigar.
+
+**Aprendizaje operativo:** en el circuito de alta/actualización de PSP de Coelsa, un `PUT /apiCVU/PSP/ModificacionPSP/{cuit}` exitoso (HTTP 200) **no garantiza que el cambio se refleje** en la consulta posterior (`GET /PSP/consultaPSP/{id}/{cuit}`) — hay una discrepancia entre escritura y lectura del lado de Coelsa (o una demora de propagación no documentada) que seguía sin resolverse a la fecha de este barrido. El endpoint `AvisoDebinPendienteCVU` tampoco estaba recibiendo tráfico de Coelsa en este ambiente.
+
+**Estado a cierre de este barrido (2026-08-31):** sin resolver — Bind quedó a la espera de enviar el REQUEST/RESPONSE pedido por Coelsa (ver `1_proyectos/tareas.md` T-011, actualizada).
+
+> Fuente adicional: mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación" — icm@coelsa.com.ar / ighillini@bind.com.ar / ncolon@bind.com.ar (2026-08-27 y 2026-08-28).
+
 > Fuente: hilo de mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación", icm@coelsa.com.ar / Niurka Yamarte (COELSA), mensajes del 2026-06-26 al 2026-08-24; respuesta de Nicolás Colón del 2026-08-21 con los datos del PSP creado (CBU `3220001805007699600017`, CVU `0005071502070018043201`, PSP código `5071`, razón social "KEEP IT SIMPLE SRL").
 
 ---
 *Fuente: Notion histórico, Epic "API: TRX PULL cons tacito" — ingesta 2026-07-06. Nota: 3 tickets de esta Epic devolvieron 404/blank en Notion (páginas eliminadas o de acceso restringido: "Consentimiento lado PSP" —Cancelado—, "Transferencias Pull Entrantes (lado billetera)" —contenedor sin contenido— y una página de prueba QA vinculada); no aportan info adicional a la ya cubierta acá.*
 *Actualización 2026-07-07: agregada nota de incidente de fraude (§5).*
-*Última actualización: 2026-08-25 — nueva §6, circuito de reactivación en homologación con Coelsa (ticket #456632).*
+*Última actualización: 2026-09-02 — `/context_merge`: §6 — continuación del circuito de reactivación en Homologación, el `PUT` de URL de PSP no se refleja en la consulta posterior (ticket #456632, sin resolver a la fecha).*
+*Última actualización anterior: 2026-08-25 — nueva §6, circuito de reactivación en homologación con Coelsa (ticket #456632).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/cobros/transferencias_pull.md` a Wallet en la reestructuración PARA en cascada; banner de vigencia agregado en el encabezado para que no se lea como documentación confiable de §3 sin la advertencia.*

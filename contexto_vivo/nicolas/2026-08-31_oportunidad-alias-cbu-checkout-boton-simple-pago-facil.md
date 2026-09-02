@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Oportunidad:** mostrar el alias del CBU (además del CBU numérico) en la opción de pago por transferencia del checkout de Botón Simple 2.0, para facilitar la transacción al usuario final.

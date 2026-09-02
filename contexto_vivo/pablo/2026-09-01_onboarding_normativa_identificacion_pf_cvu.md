@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/identificacion_personas_fis
 tipo_destino: crear
 contradice: "no — no hay archivo de canon existente que documente este marco específico; único material relacionado ya en canon es 3_recursos/cumplimiento_normativo/limites_operativos_uif_ros.md (topes de ROS, tema complementario no contradictorio) y reporteria_worldsys_bcra.md (informe diario, tema complementario). Sí hay una brecha detectada contra el diseño ya documentado (no canon) de PRD-202 — ver gaps específicos en prd-202_onboarding_consolidado/gaps.md, entrada 2026-09-01."
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

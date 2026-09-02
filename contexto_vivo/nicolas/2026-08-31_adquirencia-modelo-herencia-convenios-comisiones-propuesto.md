@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/gestion_convenios_co
 tipo_destino: actualizar
 contradice: "Revisar contra el gap ya documentado en gestion_convenios_comisiones.md (⚠️ en disputa con configuracion_de_entidades.md §4 y mejoras_admin_backoffice_prd88.md §2, escalado a 2_areas/gaps_y_preguntas.md) — este item podría ser la resolución de ese gap o una propuesta adicional todavía no confrontada con el contrato real de API ya documentado (Convenio maestro + ComercioConvenio con override opcional y flag FromCommerce)."
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Análisis COBRO" (2026-08-27, con Daniela Collia/Fintexa, Pablo Gomes, Flavia Salmeron, Nicolás Colón) Pablo Gomes presentó un prototipo/propuesta de gestión de comisiones y plazos por medio de pago y canal, en reemplazo del concepto de "convenio" por configuraciones directas:

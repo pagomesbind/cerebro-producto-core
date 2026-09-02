@@ -137,6 +137,15 @@ Ejercicio discutido en la sesión (caso hipotético: agregar "Pago Fácil" como 
   - **Estado de auditoría de PagosQR:** el bug venía de interpretar datos **nulos como distintos de cadenas vacías** provenientes de Coelsa — fix implementado, se mantiene vigilancia sobre la calidad del dato entrante.
   - Propuesta a evaluar (no implementada): bajar el timeout del monitor de pagos de 7s a un valor menor para reducir la tasa de fallos.
 
+## Webhook de Cobro QR exitoso — nuevos campos de arancel aceptador (acordado 2026-08-31)
+
+> Fuente: reunión "Análisis COBRO" (2026-08-31). Ver también [boton_simple_2_0.md §8.1](boton_simple_2_0.md) para el resto de las definiciones de la misma reunión (QR Tarjeta post-payments).
+
+Se acordó agregar al webhook de transacción exitosa de **Cobro con QR** tres campos nuevos: **arancel aceptador (porcentaje)**, **arancel aceptador (importe)** e **importe neto** (tras aplicar el arancel). Objetivo explícito: que el consumidor del webhook no tenga que hacer una llamada adicional de consulta de la transacción para obtener estos datos — hoy solo vienen en el detalle vía API, no en el evento. Sin ticket específico identificado en la minuta más allá del compromiso genérico del equipo. Pendiente de definir si va dentro del objeto de mensaje de pago o como info adicional, para no romper integraciones existentes (mencionado en el item de fuente de `boton_simple_2_0.md §8.1`).
+
+También en la misma reunión: se retoma la segunda parte de las mejoras de performance para la generación de archivos (liquidación/rendiciones), tras haber cerrado la primera parte en una corrida anterior — Nicolás Colón consulta con "Euge" si las demoras/errores detectados están relacionados con el rendimiento de la API antes de avanzar. Sin detalle técnico adicional en la minuta sobre qué archivo/proceso puntual.
+
 ---
 *Ver también: [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el detalle específico del canal QR que alimenta este flujo de notificaciones.*
-*Última actualización: 2026-08-27 — `/context_merge`: nueva sección en la mecánica CVUCollect (cambio de categorización CBU externo→CBU corto como `transfer.cortau`, AD V72, cliente Jugadón).*
+*Última actualización: 2026-09-02 — `/context_merge`: nuevos campos de arancel aceptador en el webhook de Cobro QR exitoso.*
+*Última actualización anterior: 2026-08-27 — `/context_merge`: nueva sección en la mecánica CVUCollect (cambio de categorización CBU externo→CBU corto como `transfer.cortau`, AD V72, cliente Jugadón).*

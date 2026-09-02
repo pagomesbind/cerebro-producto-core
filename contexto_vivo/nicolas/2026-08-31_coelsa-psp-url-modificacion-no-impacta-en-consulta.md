@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_pull.md (�
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Continuación del circuito de reactivación de Transferencias Pull en Homologación con Coelsa (ticket #456632, ya documentado en §6 de `transferencias_pull.md`). Coelsa había indicado (2026-08-24) que debía registrarse la URL del PSP con `PUT /apiCVU/PSP/ModificacionPSP/{cuit}` para poder arrancar las pruebas de estado.

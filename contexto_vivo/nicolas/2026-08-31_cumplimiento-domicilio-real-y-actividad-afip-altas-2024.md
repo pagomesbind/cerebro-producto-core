@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/requisitos_kyc_altas_wallet
 tipo_destino: crear
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-08-31) se mencionaron, sin mucho detalle, dos necesidades regulatorias que el equipo va a integrar en su planificación de cumplimiento:

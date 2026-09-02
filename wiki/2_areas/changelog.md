@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-09-02 (pablo + nicolas)
+
+- `direccion/iniciativas.md` — creada 1 fila nueva (bajar-tiempos-pagos-qr, con nota de atribución en disputa TPay vs. BSF/Global66) y actualizadas 3 filas (PRD-202: descripción de IDEA refrescada; PRD-223: staging confirmado en fecha; comercios_mayoristas: demo real ejecutada, 3 socios confirmados) (pablo + nicolas).
+- `riesgos.md` — creados 2 riesgos: reprogramaciones reiteradas erosionan confianza de clientes (nicolas); multa de $75M por errores en pruebas de bloqueo de Ardid (pablo).
+- `gaps_y_preguntas.md` — creados 2 gaps nuevos (contradicción TPay vs. BSF/Global66 sobre el cliente que motivó el ajuste de tiempos QR; TPay sin ficha en `log_clientes.md`); actualizado 1 gap existente (contrato real de Convenios — nueva evidencia confirmatoria, sin cerrar la pregunta) (pablo + nicolas).
+- `direccion/oportunidades.md` — sin cambios: 1 item (`oportunidad-alias-cbu-checkout-boton-simple-pago-facil`, nicolas) evaluado como duplicado de OP-016 ya existente, no se creó fila nueva.
+
 ### 2026-08-31 (pablo + nicolas)
 
 - `direccion/decisiones.md` — creada 1 entrada: migración del detector de "caída de cliente" de `/sync_metrics` a metodología de ventana móvil 4×4 semanas (pablo).

@@ -6,6 +6,24 @@
 
 ## 2026
 
+### 2026-09-02 (pablo + nicolas)
+
+- `cumplimiento_normativo/identificacion_personas_fisicas_cvu.md` — archivo nuevo (⚠️ orientación de diseño, no validada por Compliance): marco regulatorio BCRA/UIF/ARCA/AAIP de identificación para altas CVU de personas físicas (pablo).
+- `cumplimiento_normativo/identificacion_personas_juridicas_vinculados.md` — archivo nuevo (⚠️ orientación de diseño, no validada por Compliance): requisitos UIF para personas jurídicas, FCI/Fideicomisos y beneficiario final (pablo).
+- `cumplimiento_normativo/index.md` — actualizado: filas de los 2 archivos nuevos.
+- `detalle_productos/wallet/validaciones_y_alias_cvu.md` — actualizado: reintento automático de alias ante error de APIBank (§1); nueva §3, nota operativa de baja confianza sobre domicilio real/consulta AFIP en altas 2024 (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/transferencia_saliente_mecanica.md` — actualizado: bug de mapeo de transferencias salientes como recibidas, sin desarrollo asociado (nicolas).
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — actualizado: nueva §8.1, definiciones técnicas de QR Tarjeta post-payments/terminal ID (fusión de 2 items, pablo + nicolas).
+- `detalle_productos/servicios/pago_facil_mantenimiento.md` — actualizado: nueva §6, restricciones de Coelsa sobre alias de CBU (nicolas).
+- `detalle_productos/wallet/transferencias_pull.md` — actualizado §6: continuación del circuito de reactivación en Homologación, `PUT` de URL de PSP no se refleja en consulta posterior (nicolas).
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — actualizado: nueva §15, bug de grupo BIN mal configurado bloqueaba reglas de pago (cliente Coto) (nicolas).
+- `detalle_productos/adquirencia/gestion_convenios_comisiones.md` — actualizado: confirmación de negocio del modelo de herencia (reunión 2026-08-27), no contradice el contrato ya documentado (nicolas).
+- `detalle_productos/adquirencia/pos_multiadquirencia.md` — actualizado: nueva §1.4, Decidir vs. Prisma — parametrización distinta para tarjeta QR (nicolas).
+- `detalle_productos/wallet/dolar_fx.md` — actualizado: nueva §2.9, PVT de Mastercard Cross-Border (XBS) — Implementation Plan v3.0, deadline 16/09 (pablo).
+- `detalle_productos/onboarding/onboarding_por_api.md` — actualizado: nueva §4, modelo de integración "completa" (caso Inter) e incidente de PDF417 asociado (pablo).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — actualizado: nueva Parte 5, parametrización del tiempo de espera de resolución (State Monitor T1/T2) — con contradicción sin resolver sobre el cliente que lo motivó (pablo + nicolas).
+- `detalle_productos/adquirencia/webhooks_y_notificaciones.md` — actualizado: nuevos campos de arancel aceptador en el webhook de Cobro QR exitoso (pablo).
+
 ### 2026-08-31 (pablo + nicolas)
 
 - `datos/metricas_semanales.md` — actualizado (items `tipo: dato`, aplicado byte a byte): entradas de las semanas 202634 y 202635 antepuestas al histórico (pablo).

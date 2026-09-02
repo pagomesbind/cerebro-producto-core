@@ -27,6 +27,12 @@ Reglas de plataforma sobre CVU/CBU que aplican de forma transversal a cualquier 
 
 > Fuente adicional: reuniones "Daily producto" y "Web de developers" (ambas 2026-08-28), en el marco del discovery de `1_proyectos/alias_cvu_checkout/`.
 
+**Reintento automático adicional en la creación de alias ante error de APIBank (2026-08-31, confianza media).** En la reunión "Weekly - Producto / Operaciones" (2026-08-31), Pablo Gomes informó que se implementó un reintento automático en la creación de alias de cuenta cuando la operación recibe un error de APIBank — descripto como mitigación de un error frecuente y como una regresión nueva ("antes andaba bien"), no un error histórico. No se detalló el mecanismo (cantidad de intentos, backoff) más allá de la mención en la reunión. Es un reintento **distinto** del fix de 700ms de MDA-292391/Banco Industrial documentado arriba — mismo tipo de problema (falla de asignación de alias ante error de APIBank), mecanismo de reintento separado, a confirmar contra el ticket/desarrollo real si se necesita el detalle técnico.
+
+## 3. Nota operativa — nuevas necesidades regulatorias mencionadas para 2024 (confianza baja)
+
+En la misma reunión "Weekly - Producto / Operaciones" (2026-08-31) se mencionaron, sin mucho detalle, dos necesidades regulatorias que el equipo va a integrar en su planificación de cumplimiento: (1) obligación de **capturar el domicilio real** de los usuarios finales (personas humanas) en el request de alta de cuenta (CBU/Postcuenta) — coincide con lo ya documentado en detalle en [`cumplimiento_normativo/identificacion_personas_fisicas_cvu.md`](../../cumplimiento_normativo/identificacion_personas_fisicas_cvu.md) (matriz de domicilio real, Art. 13 inc. e); (2) necesidad de **consultar la actividad ante AFIP** durante las altas en wallets — dato nuevo, no cubierto todavía en la matriz de cumplimiento normativo citada. La minuta las etiqueta como "requerimientos regulatorios para 2024" sin más contexto (norma/comunicación de origen, fecha límite, alcance exacto). Confianza baja por lo escueto de la mención; capturado igual porque toca directamente el flujo de alta de cuenta (ver también el gap normativo abierto "CPA no se completa en el 72% de cuentas con domicilio" en [`organizaciones_y_configuracion.md`](organizaciones_y_configuracion.md) §0).
+
 ---
 
 ## 2. Validación de longitud CVU/CBU (22 dígitos) — hardening de plataforma (W 72)
@@ -55,4 +61,5 @@ Cobertura de tests: 90/90 + 57/57 (Wallet.Bind), 348/348 + 156/156 (MS Operacion
 > Fuente: Jira bindpsp.atlassian.net, versión W 72 (publicada 2026-08-18), tickets WS-1191, WS-1113, WS-1083.
 
 ---
-*Última actualización: 2026-08-26 — creado en el merge de `contexto_vivo/` (2026-08-25/26): §1 mecánica de alias de Coelsa (discovery `asignacion_alias_cvu`) y §2 hardening de longitud CVU/CBU (W 72). Separado de `organizaciones_y_configuracion.md` por tema (mecánica de CVU/CBU transversal a la plataforma, no alta/configuración de una organización puntual) y para no seguir engrosando ese archivo.*
+*Última actualización: 2026-09-02 — `/context_merge`: reintento automático de alias ante error de APIBank (§1) y nueva §3 con nota operativa de baja confianza sobre requisitos regulatorios 2024 (domicilio real, consulta de actividad AFIP).*
+*Última actualización anterior: 2026-08-26 — creado en el merge de `contexto_vivo/` (2026-08-25/26): §1 mecánica de alias de Coelsa (discovery `asignacion_alias_cvu`) y §2 hardening de longitud CVU/CBU (W 72). Separado de `organizaciones_y_configuracion.md` por tema (mecánica de CVU/CBU transversal a la plataforma, no alta/configuración de una organización puntual) y para no seguir engrosando ese archivo.*

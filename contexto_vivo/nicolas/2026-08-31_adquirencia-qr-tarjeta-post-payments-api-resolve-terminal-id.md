@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/boton_simple_2_0.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Análisis COBRO" (2026-08-31, Daniela Collia y equipo Fintexa, Pablo Gomes, Nicolás Colón, Luciana Rudaz, Matías Alzogaray) se avanzó sobre el desarrollo de QR Tarjeta (pago con tarjeta desde wallets terceras, cliente MODO — ya documentado en `boton_simple_2_0.md`), continuación de la tarea T-010 (`tareas.md`). Definiciones acordadas:

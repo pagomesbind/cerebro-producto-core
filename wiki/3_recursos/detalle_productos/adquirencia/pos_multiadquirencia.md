@@ -93,6 +93,19 @@ Investigación técnica de Fintexa sobre rechazos de transacciones con tarjeta r
 
 **Estado:** sin cierre — pendiente que Bind PSP acepte la reunión propuesta por Fintexa. El informe interactivo con el detalle de "qué BINES corregir" está en un adjunto HTML no leído en el flujo de ingesta.
 
+## 1.4 Decidir (no presencial) vs. Prisma (presencial) para tarjeta QR — parametrización distinta (2026-08-27)
+
+> Fuente: reunión "Análisis COBRO" (2026-08-27, Daniela Collia/Fintexa, Pablo Gomes, Nicolás Colón). Continuación del análisis de tarjeta QR priorizado para la versión de septiembre — ver [boton_simple_2_0.md §8.1](boton_simple_2_0.md) para las definiciones de post-payments/terminal ID de la misma iniciativa.
+
+Daniela Collia planteó que Decidir se usa para ventas no presenciales y Prisma para presenciales, y que ambos procesadores piden datos distintos:
+
+- **Decidir**: solo requiere un identificador de sitio (**site ID**), descrito como un agrupador de establecimientos. En producción se usa habitualmente el código `00130250`, que agrupa establecimientos por marca de tarjeta — valor que no figura en la tabla de reglas de negocio de Prisma (`Business Rules`, processor ID 2003) que el equipo venía analizando.
+- **Prisma**: requiere múltiples parámetros detallados — identificador de establecimiento e identificador de terminal, exigidos por MODO.
+
+Al revisar el panel de administración (configuración de procesador), se confirmó la misma asimetría en el canal presente con Payway: Prisma pide terminal+establecimiento, Decidir opera principalmente con site ID + un terminal configurado como código de comercio. Hipótesis sin confirmar: el site ID actuaría como nivel de agrupación de establecimientos (ej. el rubro/MCC 5541 tiene un único comercio, mientras que el 4813 agrupa varios — 691 y 992).
+
+Quedó pendiente para Nicolás Colón: unirse a la sesión de integración de Decidir para resolver las dudas, definir la configuración exacta (site ID / establishment ID) y contactar a Gonzalo Rivera para la información técnica que destrabe el desarrollo — ver `1_proyectos/tareas.md` T-010.
+
 ## Ver también
 
 - [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) — mecánica de Centralizador y multiPSP en el canal QR (mismo concepto de orquestación multi-procesador).

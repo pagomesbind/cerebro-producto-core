@@ -73,6 +73,19 @@ Hilo de seguimiento comercial/operativo entre Western Union (marca **Pago Fácil
 
 > Nota: ni Pago Fácil ni Western Union/SEPSA tienen ficha propia en `2_areas/clientes/log_clientes.md` pese a ser cliente en producción — ver gap actualizado en [`2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-07-15].
 
+## 6. Restricciones de Coelsa sobre asignación/modificación de alias de CBU (relevante para el checkout de Botón Simple 2.0)
+
+> Estado: en producción (mecánica de plataforma, no exclusiva de Pago Fácil). Fuente: reunión "Daily producto" (2026-08-28).
+
+Hallazgos técnicos sobre el mecanismo de Coelsa aplicables a cualquier CBU de la plataforma, surgidos al analizar un pedido informal de Adriana (comercial) para el cliente Pago Fácil: mostrar el alias del CBU junto al CBU numérico en la opción de transferencia del checkout de Botón Simple 2.0.
+
+- El sistema hoy genera lotes de CBU asociados a una entidad (en este caso, Pago Fácil) que se **reciclan entre todos los comercios de esa misma entidad** — el reciclaje es a nivel entidad, no comercio. En la creación inicial de esos lotes **no se invoca la asignación de alias**.
+- **Coelsa exige obligatoriamente un alias para todo CBU**: si la plataforma no lo asigna en un plazo de 5 segundos, Coelsa le asigna uno arbitrario de forma automática (ejemplo real visto en pruebas: `pies.farol`) — mismo plazo de 5 segundos ya documentado para CVU en [`wallet/validaciones_y_alias_cvu.md` §1](../wallet/validaciones_y_alias_cvu.md). No es que falte un alias: ya existe uno (aleatorio, generado por Coelsa) que Bind PSP no persiste en base ni muestra en la interfaz.
+- **Restricción de modificación**: no se permite asignar o modificar el alias vinculado a un CBU en un plazo menor a 24 horas desde la última modificación, con un límite de 3 a 10 modificaciones por año (la minuta registra ambos números en distintos pasajes — a confirmar el valor exacto; ver el mismo tope ya documentado con más precisión, 10/año, en `wallet/validaciones_y_alias_cvu.md` §1).
+- Alternativa técnica identificada para evitar consumir el cupo de modificaciones de Coelsa: la API de One Bank (`get cuenta cbu corta y cbu larga`) permite **consultar** (no modificar) el alias ya asignado por Coelsa.
+
+**Decisión tomada en la sesión:** el alcance de una eventual solución sería general para toda la plataforma (no exclusivo de Pago Fácil), con parametrización por entidad/comercio para habilitar la visibilidad, consultando el alias vía la API existente al asignar el CBU y persistiéndolo — posponiendo cualquier asignación de alias personalizado/custom. Ver oportunidad relacionada, ya trackeada como iniciativa `alias_cvu_checkout` en [`direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md) y como OP-016 en [`direccion/oportunidades.md`](../../../2_areas/direccion/oportunidades.md) — el discovery de ese proyecto ya está completo y listo para ticket de Ingeniería.
+
 ## Ver también
 
 - PRD-57 — Pago Fácil MVP — historia de build del MVP, PM y decisiones de alcance. Proyecto de Nicolás Colón, en su propio Cerebro desde 2026-08-13.
@@ -80,4 +93,5 @@ Hilo de seguimiento comercial/operativo entre Western Union (marca **Pago Fácil
 - [adquirencia/boton_simple_2_0.md §6-7](../adquirencia/boton_simple_2_0.md) — el objeto Deuda y BPG que este producto reutiliza como motor de cobro.
 
 ---
-*Última actualización: 2026-08-31 — `/context_merge`: §5 nuevo — Piloto Productivo Bind-SEPSA (plataforma admin, Billers, puntos operativos abiertos), del hilo de seguimiento comercial 2026-08-19/25.*
+*Última actualización: 2026-09-02 — `/context_merge`: §6 nueva — restricciones de Coelsa sobre alias de CBU (mecánica de plataforma, surgida de un pedido puntual de Pago Fácil).*
+*Última actualización anterior: 2026-08-31 — `/context_merge`: §5 nuevo — Piloto Productivo Bind-SEPSA (plataforma admin, Billers, puntos operativos abiertos), del hilo de seguimiento comercial 2026-08-19/25.*

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Adquirencia V 72: Pre-Despliegue" (2026-08-27, equipo Bind PSP + Fintexa) se reprogramó el pase a producción para la noche del lunes 31/08 (12 tickets de QA con errores críticos detectados). Gonzalo Rivera expresó malestar propio y de los clientes ante los cambios constantes y postergaciones de fechas de implementación, señalando que esto genera **percepción de falta de profesionalismo** y afecta los avisos previos que las entidades ya comunicaron a sus propios clientes — citó como ejemplo el caso de APIBank.

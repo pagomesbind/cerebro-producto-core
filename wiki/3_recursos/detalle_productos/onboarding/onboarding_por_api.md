@@ -38,5 +38,22 @@ Producto pensado para entidades que **no quieren consumir el onboarding completo
 - **[US] Invocar endpoints intermedios con externalId** — Pendiente, parte del alcance "Could have" de reutilizar el externalId en más endpoints del flujo.
 - **🕷 Bug de seguridad — aislamiento entre entidades**: con el consumer OAuth2 de una Entidad era posible consultar solicitudes de **otra** Entidad — bug de autorización cross-tenant, quedó registrado como Pendiente al cierre del relevamiento.
 
+## 4. Integración por API "completa" — distinta de "Onboarding en partes por API" (caso Inter)
+
+> Estado: en producción. Fuente: hilo de mail "Fwd: Onboarding INTER-BIND" (Emma Vignoles / Cristian Bonafede, Fintexa-Sandinas / Alberto Murad, 2026-08-31).
+
+Todo lo documentado arriba (§1-3) es el producto "Onboarding en partes por API" (caso COTO CICSA — la entidad invoca pasos puntuales desde su propio front). El caso de **Inter** (cliente Wallet, ver [`2_areas/clientes/casos_de_uso_clientes.md`](../../../2_areas/clientes/casos_de_uso_clientes.md)) es un modelo de integración distinto: la **organización invoca las APIs de Onboarding directamente con todos los datos y con las imágenes del DNI ya capturadas por su propia app** — ningún paso del flujo pasa por el front de Onboarding de Bind PSP.
+
+Confirmado explícitamente por Cristian Bonafede (Fintexa/Sandinas) el 2026-08-31: *"en el flujo de inter, la captura de las imágenes no la realiza onboarding, la organización es quien invoca a las apis con todos los datos y con las imágenes. No es por front la integración que tienen."*
+
+**Consecuencia de diseño:** en este modelo es **Bind PSP quien debe interpretar el documento de identidad (PDF417 o QR/MRZ) del lado servidor** a partir de la imagen recibida por API, y validar contra Renaper — no hay oportunidad de que el propio front de Bind guíe al usuario a repetir la foto si la lectura falla, a diferencia del flujo con front propio. Cualquier cascada de fallback de lectura de documento (ver `1_proyectos/prd-113_leer_nuevo_dni/proyecto.md §3`) tiene que cubrir explícitamente este camino de alta por API, para no dejar clientes de integración completa (como Inter) sin cobertura.
+
+### 4.1 Incidente asociado — caída de tasa de aprobación por error de PDF417 (2026-08-31, sin causa raíz confirmada)
+
+Desde el 2026-08-26, Inter reportó una caída sustancial de su tasa de aprobación de onboarding (de 85% a 32%), con 352 rechazos en los 3 días previos al 31/08, atribuidos al error **"No se pudo encontrar el PDF417 en las imágenes procesadas"** — el problema venía arrastrándose "hace más de un mes" según Emma Vignoles (Bind PSP), agravado fuertemente desde el 26/08. Ninguna de las partes (Inter, Bind PSP, Fintexa) había identificado la causa raíz al cierre del hilo (2026-08-31 21:02). Fintexa (Cristian Bonafede) sugirió inicialmente que faltaba el dato "Género" en el alta; Emma Vignoles aclaró que el género es opcional para Inter y que el punto que falla es específicamente la interpretación del PDF417 de la imagen que envía Inter.
+
+**Hipótesis no confirmada (a verificar):** el síntoma coincide con el que motivó `1_proyectos/prd-113_leer_nuevo_dni` (el DNI argentino nuevo, vigente desde 2026-02-01, no tiene PDF417 — solo QR+MRZ). El posible pase a producción del fix (OB-193) fue el mismo lunes 2026-08-31, pero el incidente de Inter siguió reproduciéndose esa misma noche — sin confirmar si el fix cubre el camino de alta por API o solo el front. Contexto de negocio: Inter lanza el comunicado de prensa de su app el jueves 2026-09-03 — la urgencia de resolución es alta independientemente de la causa raíz final. Seguimiento en `1_proyectos/tareas.md` T-052.
+
 ---
+*Última actualización: 2026-09-02 — `/context_merge`: nueva §4, modelo de integración "completa" (caso Inter) y el incidente de PDF417 asociado.*
 *Fuente: Notion histórico, Epic "Onboarding en partes por API" — ingesta 2026-07-06.*
