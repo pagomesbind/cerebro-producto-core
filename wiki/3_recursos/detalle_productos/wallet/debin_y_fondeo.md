@@ -460,7 +460,24 @@ Sin cambios de contrato, endpoint ni esquema de base en ninguno de los dos. Vali
 
 Cuando un contracargo de DEBIN recurrente entrante no encuentra saldo suficiente y la cuenta queda deshabilitada, se dispara el evento `DESHABILITAR_CUENTA` (motivo `CONTRACARGO_DEBIN_PENDIENTE`). El identificador de cuenta del payload tenía un bug de nomenclatura — viajaba como `IdCuenta` (PascalCase), inconsistente con la convención camelCase del resto de los webhooks de Wallet. Corregido: el campo ahora es `cuentaId`.
 
+## 9. Endpoint de Coelsa para consultar estado de una operación DEBIN por ID propio (incluye DEBINQR)
+
+> Fuente: mail "Permisos COELSA debin HOMO y PROD" — Agustín Grau (Fintexa, CTO), 2026-08-31, con respuestas de Gonzalo Rivera (2026-09-01/02).
+
+Fintexa pidió habilitar permisos en Coelsa para probar y validar la consulta de una operación DEBIN por ID propio (`ori_trx_id`) — caso de uso explícito: **DEBINQR**. Endpoint de Coelsa a habilitar:
+
+```
+GET /apiDebinV1/Debin/Debin3/{ori_trx_id}/{tipo_operacion}/{idPsp}
+```
+
+Usuarios de Coelsa para API Debin mencionados en el pedido: **HOMO** `qrihomoandinas`, **PROD** `qriandinas`. Complementario al endpoint ya documentado en §7 (`GET .../debins/{id}/psp/{idPsp}`, usado en el flujo de contracargos para traer la operación DEBIN original) — no confirmado si es el mismo frente que la reactivación de Transferencias Pull en curso con Coelsa (ticket #456632, ver `2_areas/tareas.md` T-011).
+
+**Resuelto (2026-09-02) — frente independiente confirmado:** Gonzalo Rivera cargó el pedido como ticket interno propio (**MDA-295641**, `bindtm.atlassian.net`, no en el espacio PRD ni ligado al ticket Coelsa #456632) el 2026-09-01, y confirmó "Listo!" el 2026-09-02. Es un frente de acceso **independiente** de la reactivación de Transferencias Pull en Homologación — ambos tocan la misma familia de APIs de Coelsa pero son solicitudes de acceso separadas.
+
 ## Ver también
 
 - [conciliacion_y_totalizadores.md](conciliacion_y_totalizadores.md) — endpoint de consulta enfocada en conciliar (otro requerimiento de Astropay, mismo cliente de esta contingencia).
 - [historial_confiabilidad_transferencias_y_comprobantes.md](historial_confiabilidad_transferencias_y_comprobantes.md) — mismo patrón de confiabilidad de webhooks, aplicado a transferencias y comprobantes.
+
+---
+*Última actualización: 2026-09-03 — `/context_merge`: nueva §9, endpoint de Coelsa para consulta de operación DEBIN/DEBINQR por ID propio (`Debin3`), resuelto como frente de acceso independiente (MDA-295641).*

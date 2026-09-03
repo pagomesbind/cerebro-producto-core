@@ -6,6 +6,19 @@
 
 ## 2026
 
+### 2026-09-03 (pablo + nicolas)
+
+- `detalle_productos/wallet/validaciones_y_alias_cvu.md` — actualizado: reintento de alias confirmado con tickets WS-1556/DEM-1828, detalle de despliegue V72.2 (pablo).
+- `detalle_productos/wallet/validacion_totalizadores_cbu_cvu.md` — archivo nuevo: mecánica completa de validación de totalizadores CBU/CVU (PRD-200, mandato BCRA/Banco Industrial) (pablo).
+- `detalle_productos/wallet/debin_y_fondeo.md` — actualizado: nueva §9, endpoint de Coelsa para consulta de operación DEBIN/DEBINQR por ID propio (nicolas).
+- `detalle_productos/wallet/index.md` — actualizado: filas de los archivos nuevos/tocados.
+- `detalle_productos/onboarding/validacion_lista_negra_bind.md` — archivo nuevo: servicio SOAP de Listas Negras (incluye lista 15 de PLD), ya en producción, insumo de PRD-116 (pablo).
+- `detalle_productos/onboarding/index.md` — actualizado: fila del archivo nuevo.
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — actualizado: Parte 5, evidencia adicional de reclamo activo de Global66 (no cierra la contradicción TPay vs. BSF/Global66) (pablo).
+- `detalle_productos/ardid/modulo_transferencias.md` — actualizado: nueva §9, límites de reglas vigentes y limitación de tooling para trazabilidad regla→rechazo, motivada por el incidente de Terramundi (pablo).
+- `arquitectura_sistema/relacion_con_fintexa.md` — actualizado: §2 con el corte de agosto 2026 del informe COE (delta vs. julio) (pablo).
+- `arquitectura_sistema/modelo_acoplado_vs_desacoplado.md` — actualizado: nueva sección, los dos tracks pendientes reportados por Banco Industrial y su cruce con la decisión de migración CBU Link→Coelsa (pablo).
+
 ### 2026-09-02 (pablo + nicolas)
 
 - `cumplimiento_normativo/identificacion_personas_fisicas_cvu.md` — archivo nuevo (⚠️ orientación de diseño, no validada por Compliance): marco regulatorio BCRA/UIF/ARCA/AAIP de identificación para altas CVU de personas físicas (pablo).

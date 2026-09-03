@@ -41,9 +41,18 @@ El PSP 164 tiene su propia urgencia de split (a diferencia del 184, tratado arri
 
 **Otros costos del cambio, ya identificados:** cambio de identificador en transferencias externas (pasa a usar el ID de Coelsa en vez del ID interno — mejor para el cliente, pero rompe procesos de conciliación que dependen del ID actual); se pierde el reporte de conciliación **por hora** (la V2 del esquema desacoplado solo trae reportería diaria).
 
+## Banco Industrial — dos tracks pendientes de definiciones de Bind (2026-09-02)
+
+> Fuente: mail "Bind PSP - próximos pasos" — Alan Marchesi (Banco Industrial), 2026-09-02.
+
+Banco Industrial dejó registrado que quedan **dos tracks** esperando "los requerimientos y definiciones pendientes" de parte de Bind para poder avanzar: (a) la **migración a desacoplado** ya documentada en este archivo, y (b) la **migración de CBU link a Coelsa** — track nuevo, sin responsable único explícito del lado de Bind en el mail (Cristian Natale, Gonzalo Rivera, Hernán Clarich y Mariana Nadalin en el hilo directo, Pablo Gomes en copia).
+
+**El track (b) queda resuelto por la decisión registrada el mismo día** ([`direccion/decisiones.md`](../../2_areas/direccion/decisiones.md) [2026-09-02]): no es un servicio de vinculación externo, es la migración de **transferencias salientes de CBU larga**, cursadas hoy por la red **Link**, hacia **Coelsa** — motivada por conciliación (Link no da a Bind una referencia utilizable, Coelsa sí). Piloto en curso con Cucurú y Tienda Nube como clientes candidatos (Gonzalo Rivera a cargo del caso de prueba).
+
 ## Ver también
 - [incidentes_de_plataforma.md §6](incidentes_de_plataforma.md) — mismo hilo de "Repaso Semanal líderes" donde se menciona el esquema desacoplado extendiéndose a "BM PCP".
 
 ---
-*Última actualización: 2026-08-14 — `/sync_meetings`: nueva sección "PSP 164 — mismo dilema, split ya roto" (decisión de postergar la migración mientras se espera el fix del banco, con plan escalonado de bajo riesgo como fallback). Ver reunión "Esquema desacoplado/migra PSP 164" (2026-08-12) en `wiki/2_areas/control/log_reuniones.md`.*
+*Última actualización: 2026-09-03 — `/context_merge`: nueva sección con los dos tracks pendientes reportados por Banco Industrial (2026-09-02) y su resolución cruzada con la decisión de migración CBU Link→Coelsa.*
+*Última actualización anterior: 2026-08-14 — `/sync_meetings`: nueva sección "PSP 164 — mismo dilema, split ya roto" (decisión de postergar la migración mientras se espera el fix del banco, con plan escalonado de bajo riesgo como fallback). Ver reunión "Esquema desacoplado/migra PSP 164" (2026-08-12) en `wiki/2_areas/control/log_reuniones.md`.*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/wallet/otros_manuales.md §15` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

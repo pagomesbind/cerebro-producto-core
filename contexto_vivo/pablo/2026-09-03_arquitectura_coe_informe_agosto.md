@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/relacion_con_fintexa.md
 tipo_destino: actualizar
 contradice: "3_recursos/arquitectura_sistema/relacion_con_fintexa.md — estado del Comité de Arquitectura COE probablemente todavía refleja el corte de julio 2026 (ítems 'en progreso'/'en diseño'), este item trae el corte de agosto con varios ítems que avanzaron de categoría"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

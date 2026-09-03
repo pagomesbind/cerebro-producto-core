@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-09-03 (pablo + nicolas)
+
+- `direccion/oportunidades.md` — creadas 2 filas nuevas: OP-017 (autonomía de clientes sobre segmentos de Wallet, caso Credicuotas) y OP-018 (Onboarding no expone motivo de rechazo por totalizadores) (pablo).
+- `direccion/iniciativas.md` — actualizadas 2 filas existentes (PRD-223: fecha de Etapa 2 sin confirmar, propuesta de demo en Staging; bajar-tiempos-pagos-qr: informe entregado a Depay) y creadas 2 filas nuevas (PRD-208: confirmado en alcance v73; PRD-116: hallazgo que reduce esfuerzo, servicio ya integrado) (pablo).
+- `gaps_y_preguntas.md` — creado 1 gap nuevo (cliente "PG" en estimación de volumen BPG sin ficha); actualizado 1 gap existente (contradicción TPay vs. BSF/Global66 — nueva evidencia que refuerza el lado Global66, sin cerrar la pregunta) (pablo).
+- `direccion/decisiones.md` — creada 1 decisión nueva: migración de transferencias salientes de CBU larga de Link a Coelsa (piloto) (pablo).
+
 ### 2026-09-02 (pablo + nicolas)
 
 - `direccion/iniciativas.md` — creada 1 fila nueva (bajar-tiempos-pagos-qr, con nota de atribución en disputa TPay vs. BSF/Global66) y actualizadas 3 filas (PRD-202: descripción de IDEA refrescada; PRD-223: staging confirmado en fecha; comercios_mayoristas: demo real ejecutada, 3 socios confirmados) (pablo + nicolas).

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/modelo_acoplado_vs_desacoplad
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

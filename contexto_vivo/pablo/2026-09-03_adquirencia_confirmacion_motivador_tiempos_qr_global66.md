@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/mecanica_qr_coelsa.m
 tipo_destino: actualizar
 contradice: "2_areas/gaps_y_preguntas.md [2026-09-02] 'Adquirencia: contradicción sin resolver sobre qué cliente motivó el ajuste de tiempos de Pagos QR (TPay vs. BSF/Global66)' — este item no resuelve la contradicción (no hay evidencia de que Global66 sea el motivador específico del ajuste de parametrización de la reunión del 2026-08-31), pero aporta evidencia independiente y reciente (2026-09-02) de que Global66 es, como mínimo, un cliente real con reclamo activo y documentado de latencia QR — refuerza que la versión 'BSF/Global66' no es una atribución errónea, sin descartar que TPay también haya reclamado por separado."
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -424,5 +424,17 @@ Prácticamente idénticos a los de Reglas Estándar entidad-única (sección 5.1
 
 Se finaliza con el botón **"Guardar"**.
 
+## 9. Límites de reglas vigentes y limitación de tooling para trazabilidad regla→rechazo (2026-09-02)
+
+> Fuente: reunión "Join Soporte Clientes" (2026-09-02 10:01), minuta Gemini. Motivada por el análisis del incidente de Terramundi (ver `2_areas/clientes/casos_de_uso_clientes.md`, pendiente de permiso de usuario) — las reglas en sí son transversales, no específicas de ese cliente.
+
+**Reglas de validación confirmadas, vigentes y transversales a entidades:** límite de **$300.000 por transacción** y **$2.000.000 mensuales**.
+
+**Limitación de tooling identificada:** hoy es difícil identificar, para un rechazo puntual, **qué regla específica** de Ardid lo causó — las herramientas de consulta actuales no permiten aislarlo con precisión por rechazo individual. Gonzalo Rivera compartió una consulta de base de datos (no detallada en la minuta) como paliativo para monitoreo de rechazos por entidad y marca, mientras no exista una vía directa de trazabilidad regla→rechazo.
+
+**Plan acordado:** Rocío Revelli y Gonzalo Rivera van a ajustar los parámetros de las reglas para reducir la fricción de experiencia de usuario, manteniendo el nivel de seguridad — sin valor numérico nuevo confirmado ni fecha de implementación. Próximos pasos explícitos: (1) corregir el error técnico causante del alto índice de rechazos, (2) repasar todas las reglas de entidad vigentes, (3) evaluar configuraciones de reglas en cada entidad, (4) actualizar la consulta para incluir el nombre de la regla mediante su ID (mejora de trazabilidad, a cargo de Gonzalo Rivera).
+
 ---
+*Última actualización: 2026-09-03 — `/context_merge`: nueva §9, límites de reglas vigentes ($300k/tx, $2M/mes) y limitación de tooling para trazabilidad regla→rechazo, motivada por el incidente de Terramundi.*
+
 *Ver también: [scoring.md](scoring.md) para el sistema de puntuación aplicado a reglas estándar de este módulo, [blacklist_whitelist_rafagas.md](blacklist_whitelist_rafagas.md) para la fuente de datos de las Reglas Reputacionales, y [apis_externas.md](apis_externas.md) para la API `/Transfer` que analiza estas transferencias en tiempo real.*

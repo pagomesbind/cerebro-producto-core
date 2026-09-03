@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/debin_y_fondeo.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 Fintexa (Agustín Grau, CTO) pidió habilitar permisos en Coelsa para poder probar y validar la consulta de una operación DEBIN por ID propio (`ori_trx_id`) — el caso de uso mencionado explícitamente es **DEBINQR**. El endpoint de Coelsa a habilitar:
