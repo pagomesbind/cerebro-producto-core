@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Reglas de validación confirmadas (vigentes, transversales a entidades):** límite de **$300.000 por transacción** y **$2.000.000 mensuales** — motivadas por el aumento de rechazos analizado en el incidente de Terramundi (ver `2026-09-03_clientes_terramundi_incidente_rechazos_ardid`), pero las reglas en sí no son específicas de ese cliente.

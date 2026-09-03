@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Decisión acordada (2026-09-02, reunión con Banco Industrial):** avanzar con pruebas de enrutamiento de transferencias salientes de CBU larga (hoy cursadas por la red **Link**) a través de **Coelsa** en su lugar, usando cuentas específicas como piloto. Gonzalo Rivera queda a cargo de cargar un caso de prueba con una CBU larga concreta.

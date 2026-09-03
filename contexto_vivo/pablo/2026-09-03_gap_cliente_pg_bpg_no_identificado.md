@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: baja
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Texto literal del mail (cuerpo completo, sin adjunto procesado):** "Les comparto la estimación de volumen del cliente PG por el uso de BPG" — Emma Vignoles, 2026-09-02, a Alberto Murad, Diego Weledniger, Gonzalo Lazzaro, Adriana Endzeliz, Juan Pablo Carubelli, Pablo Gomes, Hernán Clarich, Nicolás Pomponio (Fintexa). Adjunto un Excel ("Ejercicio BIND V3.xlsx") con el detalle numérico — no descargado ni procesado por esta skill (regla de adjuntos).

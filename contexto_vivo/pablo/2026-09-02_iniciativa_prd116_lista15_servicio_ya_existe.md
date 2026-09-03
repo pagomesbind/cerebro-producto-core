@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 ## Novedad a anteponer en la fila de PRD-116 (Validar lista 15 del banco industrial)

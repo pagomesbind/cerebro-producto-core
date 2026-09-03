@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 ## Qué es

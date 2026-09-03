@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Oportunidad detectada:** el equipo discutió (sin resolver ni clasificar Build/Bau, ver `2026-09-03_contexto_fijo_criterios_build_bau`) una posible refactorización de los segmentos de Wallet para dar a clientes como **Credicuotas** mayor autonomía de gestión sobre sus propios segmentos.

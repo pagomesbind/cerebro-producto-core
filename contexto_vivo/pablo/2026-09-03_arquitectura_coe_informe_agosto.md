@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/arquitectura_sistema/relacion_con_fintexa.md — estado del Comité de Arquitectura COE probablemente todavía refleja el corte de julio 2026 (ítems 'en progreso'/'en diseño'), este item trae el corte de agosto con varios ítems que avanzaron de categoría"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Fuente:** mail "RE: INFORME Mensual Comité de Arquitectura COE", Alejandro Sfrede (Fintexa), 2026-09-02, a Emma Vignoles con copia a varios técnicos de Fintexa y Pablo Gomes. Adjunto PDF "COE-TAREAS-30DIAS-SEP2026.pdf" (no descargado). Continúa el mismo thread cuyo informe de julio (2026-08-07) ya está reflejado en `relacion_con_fintexa.md`.

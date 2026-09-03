@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 A diferencia de las corridas anteriores (que solo confirmaban que el cronograma de 2 etapas seguía en pie), esta vez la fecha de Etapa 2 (viernes 18/09) quedó **sin confirmar en la propia reunión** — Matías Alzogaray se comprometió a verificarla, sin cerrarlo. Gonzalo Rivera propuso además una demo del flujo con el cliente en Staging entre el 14 y el 16 de septiembre, condicionada a que el desarrollo esté disponible en Staging el 14/09 — es una propuesta nueva, no confirmada como plan todavía.

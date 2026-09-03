@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Fuente:** mail "Bind PSP - próximos pasos" de Alan Marchesi (Gte. Planeamiento, Control y Cumplimiento IT, BIND Banco Industrial), 2026-09-02, con copia a Emma Vignoles y Gonzalo Eckelhart de Bind, y varios destinatarios de Banco Industrial (Agustín Galano, Aguirre Burualde, Gustavo Fernández, Ibáñez Benites, Nit) y de Bind (Cristian Natale, Gonzalo Rivera, Hernán Clarich, Mariana Nadalin, Pablo Gomes). Comparte una minuta tomada por Gemini (link a Google Docs, no accedido por esta skill).

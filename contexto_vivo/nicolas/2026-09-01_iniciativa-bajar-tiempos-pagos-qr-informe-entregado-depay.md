@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 El proyecto "Bajar tiempos de Pagos QR" (PRD-199) avanzó en su frente de respuesta a clientes: Gonzalo Rivera entregó a Depay (Ramiro Corletti) el informe personalizado de tiempos de Pagos QR ya preparado por este proyecto (`1_proyectos/bajar-tiempos-pagos-qr/artefactos/2026-09-01_informe-depay-tiempos-pagos-qr.md`), con el detalle de la modificación T1/T2 implementada el 2026-08-31. Quedó un seguimiento en curso, sin resolver a la fecha del mail: para las transacciones lentas de julio que Depay había reportado, se les pidió el ID de operación propio de Depay para facilitar la búsqueda; para las de agosto, el equipo técnico ya las ubicó por monto y está analizando con desarrollo el motivo de la demora excesiva — resultado todavía pendiente.

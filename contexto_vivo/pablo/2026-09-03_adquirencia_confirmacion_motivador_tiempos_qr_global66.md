@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/gaps_y_preguntas.md [2026-09-02] 'Adquirencia: contradicción sin resolver sobre qué cliente motivó el ajuste de tiempos de Pagos QR (TPay vs. BSF/Global66)' — este item no resuelve la contradicción (no hay evidencia de que Global66 sea el motivador específico del ajuste de parametrización de la reunión del 2026-08-31), pero aporta evidencia independiente y reciente (2026-09-02) de que Global66 es, como mínimo, un cliente real con reclamo activo y documentado de latencia QR — refuerza que la versión 'BSF/Global66' no es una atribución errónea, sin descartar que TPay también haya reclamado por separado."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 57c0e9b
 ---
 
 **Contexto:** `2_areas/gaps_y_preguntas.md` tiene abierta desde el 2026-09-02 una contradicción entre dos items de `contexto_vivo/` de distinto PM sobre quién motivó el ajuste de tiempos de consulta de Pagos QR acordado en la reunión "Configuración de tiempos de consulta de Pagos QR" (2026-08-31): un item (Nicolás Colón) dice BSF/Global66, descartando explícitamente "TPay" como nombre no reconocido (decisión D-002); otro item (Pablo Gomes, misma fuente) identifica a TPay.
