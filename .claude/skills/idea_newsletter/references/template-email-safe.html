@@ -1,0 +1,180 @@
+<!--
+  PLANTILLA DE MAIL (versión email-safe) — /idea_newsletter
+
+  Esto es lo que se manda de verdad con la herramienta de Gmail (htmlBody),
+  NUNCA la versión del artifact. Reglas de por qué está armada así en
+  design-notes.md — no "mejorarla" con grid/flexbox/variables CSS/fuentes
+  de Google/SVG, se rompe en la mayoría de los clientes de correo.
+
+  No se edita in place: copiala a un archivo de trabajo y reemplazá los
+  tokens {{...}}. Los bloques <!-- OPCIONAL --> ... <!-- FIN OPCIONAL -->
+  se borran enteros si esa sección no aplica.
+-->
+<div style="background-color:#F4F4F3;padding:24px 12px;font-family:Arial,Helvetica,sans-serif">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #E1E1DF">
+<tbody>
+
+<tr>
+<td style="background-color:#33449E;padding:28px 32px">
+<p style="margin:0 0 6px 0;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#C9D3F8;font-weight:bold">📣 Novedades de Producto &middot; {{PRODUCTO}}</p>
+<h1 style="margin:0 0 8px 0;font-size:23px;line-height:1.3;color:#ffffff;font-weight:bold">{{TITULO}}</h1>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#C9D3F8">{{RESUMEN_EJECUTIVO}}</p>
+</td>
+</tr>
+
+<!-- RÓTULO — siempre presente. Interesados opcional, ver template-artifact.html -->
+<tr>
+<td style="padding:20px 32px 0 32px">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tbody>
+<tr>
+<td width="50%" style="padding:0 6px 8px 0">
+<div style="background-color:#F4F4F3;border-radius:8px;padding:9px 13px">
+<p style="margin:0 0 2px 0;font-size:10.5px;color:#8C8A84;text-transform:uppercase;letter-spacing:0.4px">Producto</p>
+<p style="margin:0;font-size:13.5px;color:#2E2E2E;font-weight:bold">{{PRODUCTO}}</p>
+</div>
+</td>
+<td width="50%" style="padding:0 0 8px 6px">
+<div style="background-color:#F4F4F3;border-radius:8px;padding:9px 13px">
+<p style="margin:0 0 2px 0;font-size:10.5px;color:#8C8A84;text-transform:uppercase;letter-spacing:0.4px">Categor&iacute;a</p>
+<p style="margin:0;font-size:13.5px;color:#2E2E2E;font-weight:bold">{{CATEGORIA}}</p>
+</div>
+</td>
+</tr>
+<tr>
+<td width="50%" style="padding:0 6px 8px 0">
+<div style="background-color:#F4F4F3;border-radius:8px;padding:9px 13px">
+<p style="margin:0 0 2px 0;font-size:10.5px;color:#8C8A84;text-transform:uppercase;letter-spacing:0.4px">Publicado en producci&oacute;n desde</p>
+<p style="margin:0;font-size:13.5px;color:#2E2E2E;font-weight:bold">{{FECHA_PUBLICADO}} ({{VERSION}})</p>
+</div>
+</td>
+<td width="50%" style="padding:0 0 8px 6px">
+<div style="background-color:#F4F4F3;border-radius:8px;padding:9px 13px">
+<p style="margin:0 0 2px 0;font-size:10.5px;color:#8C8A84;text-transform:uppercase;letter-spacing:0.4px">Activo en producci&oacute;n desde</p>
+<p style="margin:0;font-size:13.5px;color:#2E2E2E;font-weight:bold">{{FECHA_ACTIVO}}</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- OPCIONAL: interesados -->
+<div style="background-color:#F4F4F3;border-radius:8px;padding:9px 13px;margin-bottom:8px">
+<p style="margin:0 0 2px 0;font-size:10.5px;color:#8C8A84;text-transform:uppercase;letter-spacing:0.4px">Interesados</p>
+<p style="margin:0;font-size:13.5px;color:#55534F">{{INTERESADOS}}</p>
+</div>
+<!-- FIN OPCIONAL -->
+</td>
+</tr>
+
+<tr><td style="padding:0 32px"><div style="border-top:1px solid #E1E1DF;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+
+<tr>
+<td style="padding:18px 32px 0 32px">
+<h3 style="margin:0 0 6px 0;font-size:15px;color:#2E2E2E">🎯 &iquest;Por qu&eacute; se hizo?</h3>
+<p style="margin:0;font-size:14px;color:#55534F;line-height:1.55">{{POR_QUE_SE_HIZO}}</p>
+</td>
+</tr>
+
+<tr><td style="padding:16px 32px 0 32px"><div style="border-top:1px solid #E1E1DF;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+
+<tr>
+<td style="padding:16px 32px 0 32px">
+<h3 style="margin:0 0 6px 0;font-size:15px;color:#2E2E2E">🔧 &iquest;Qu&eacute; se hizo?</h3>
+<p style="margin:0;font-size:14px;color:#55534F;line-height:1.55">{{QUE_SE_HIZO}}</p>
+</td>
+</tr>
+
+<!-- OPCIONAL: ¿qué no se hizo? — incluye también el divisor de arriba si se borra -->
+<tr><td style="padding:16px 32px 0 32px"><div style="border-top:1px solid #E1E1DF;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+
+<tr>
+<td style="padding:16px 32px 0 32px">
+<h3 style="margin:0 0 6px 0;font-size:15px;color:#2E2E2E">🚫 &iquest;Qu&eacute; no se hizo?</h3>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tbody>
+<!-- una <tr> por ítem -->
+<tr><td style="padding:3px 0;font-size:14px;color:#55534F;line-height:1.5">&ndash; {{QUE_NO_SE_HIZO_ITEM_1}}</td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- FIN OPCIONAL -->
+
+<tr><td style="padding:18px 32px 0 32px"><div style="border-top:1px solid #E1E1DF;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+
+<tr>
+<td style="padding:18px 32px 0 32px">
+<h3 style="margin:0 0 10px 0;font-size:15px;color:#2E2E2E">📈 &iquest;Cu&aacute;nto nos beneficia?</h3>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="font-size:13.5px">
+<tbody>
+<tr>
+<td style="padding:6px 4px;border-bottom:1px solid #E1E1DF;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:#8C8A84;text-align:left">M&eacute;trica</td>
+<td style="padding:6px 4px;border-bottom:1px solid #E1E1DF;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:#8C8A84;text-align:right">Antes</td>
+<td style="padding:6px 4px;border-bottom:1px solid #E1E1DF;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:#8C8A84;text-align:right">{{COLUMNA_AHORA}}</td>
+<td style="padding:6px 4px;border-bottom:1px solid #E1E1DF;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:#8C8A84;text-align:right">Cambio</td>
+</tr>
+<!-- una fila de <td>s por métrica. La ÚLTIMA fila de la tabla no lleva
+     border-bottom (para no dejar una línea pegada al texto de abajo) -->
+<tr>
+<td style="padding:8px 4px;border-bottom:1px solid #E1E1DF;color:#55534F;text-align:left">{{METRICA_1_NOMBRE}}</td>
+<td style="padding:8px 4px;border-bottom:1px solid #E1E1DF;color:#55534F;text-align:right">{{METRICA_1_ANTES}}</td>
+<td style="padding:8px 4px;border-bottom:1px solid #E1E1DF;color:#33449E;font-weight:bold;text-align:right">{{METRICA_1_AHORA}}</td>
+<td style="padding:8px 4px;border-bottom:1px solid #E1E1DF;color:#4C65E6;font-weight:bold;text-align:right">{{METRICA_1_CAMBIO}}</td>
+</tr>
+<tr>
+<td style="padding:8px 4px;color:#55534F;text-align:left">{{METRICA_ULTIMA_NOMBRE}}</td>
+<td style="padding:8px 4px;color:#55534F;text-align:right">{{METRICA_ULTIMA_ANTES}}</td>
+<td style="padding:8px 4px;color:#33449E;font-weight:bold;text-align:right">{{METRICA_ULTIMA_AHORA}}</td>
+<td style="padding:8px 4px;color:#4C65E6;font-weight:bold;text-align:right">{{METRICA_ULTIMA_CAMBIO}}</td>
+</tr>
+</tbody>
+</table>
+<p style="margin:12px 0 0 0;font-size:14px;color:#55534F;line-height:1.55">En criollo: {{BENEFICIO_EN_CRIOLLO}}</p>
+<p style="margin:10px 0 0 0;font-size:11.5px;color:#8C8A84;line-height:1.5">{{BENEFICIO_NOTA}}</p>
+</td>
+</tr>
+
+<!-- OPCIONAL: más información — incluye el divisor de arriba si se borra -->
+<tr><td style="padding:18px 32px 0 32px"><div style="border-top:1px solid #E1E1DF;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+
+<tr>
+<td style="padding:18px 32px 24px 32px">
+<h3 style="margin:0 0 6px 0;font-size:15px;color:#2E2E2E">📚 M&aacute;s informaci&oacute;n</h3>
+<p style="margin:0 0 10px 0;font-size:14px;color:#55534F;line-height:1.55">Ac&aacute; dejamos informaci&oacute;n importante relacionada a este nuevo cambio:</p>
+<!-- una tabla-botón por link, con margin-bottom:10px entre ellas salvo la última -->
+<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+<tbody><tr><td style="background-color:#4C65E6;border-radius:14px">
+<a href="{{LINK_1_URL}}" target="_blank" style="display:block;padding:14px 18px;color:#ffffff;text-decoration:none;font-family:Arial,Helvetica,sans-serif">
+<span style="display:block;margin:0 0 2px 0;font-size:10.5px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:#C9D3F8">{{LINK_1_AUDIENCIA}}</span>
+<span style="display:block;font-size:14px;font-weight:bold;color:#ffffff">{{LINK_1_DESCRIPCION}}</span>
+</a>
+</td></tr></tbody>
+</table>
+</td>
+</tr>
+<!-- FIN OPCIONAL -->
+
+<!-- OPCIONAL: importante — el borde y el fondo van en el MISMO <td>, nunca
+     en una fila divisoria separada antes (ver design-notes.md #4: si van
+     separados, entre el bloque anterior y este queda una franja blanca
+     suelta sin gracia). El <td> anterior a este (el último bloque de
+     contenido antes de "importante", sea "más información" u otro)
+     necesita padding-bottom:24px en vez de 0 para que quede aire antes de
+     que arranque el color. -->
+<tr>
+<td style="padding:18px 32px 24px 32px;background-color:#FDFBD8;border-top:1px solid #E1E1DF">
+<h3 style="margin:0 0 6px 0;font-size:15px;color:#2E2E2E">⚠️ Importante</h3>
+<p style="margin:0;font-size:14px;color:#55534F;line-height:1.55">{{IMPORTANTE_ITEM_1}}</p>
+</td>
+</tr>
+<!-- FIN OPCIONAL -->
+
+<tr>
+<td style="background-color:#F4F4F3;padding:16px 32px;border-top:1px solid #E1E1DF">
+<p style="margin:0;font-size:12px;color:#8C8A84">Equipo de Producto de <b style="color:#33449E">Bind PSP</b></p>
+</td>
+</tr>
+
+</tbody>
+</table>
+</div>

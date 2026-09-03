@@ -1,0 +1,435 @@
+<!--
+  PLANTILLA DEL ARTIFACT (versión web, marca completa) — /idea_newsletter
+
+  No se edita in place: copiala a un archivo de trabajo y reemplazá los
+  tokens {{...}}. Los bloques marcados <!-- OPCIONAL --> ... <!-- FIN
+  OPCIONAL --> se BORRAN enteros si esa sección no aplica a esta idea —
+  nunca se dejan vacíos ni con placeholder visible.
+
+  Colores: siempre tomados de
+  .claude/skills/pdf_build/references/brand-bind-psp.md del Cerebro activo
+  (no copiar los hex a mano si ese archivo cambió). Los valores de abajo
+  son los vigentes al momento de escribir esta plantilla.
+
+  Fuente: Jost (Google Fonts) como aproximación web de Century Gothic para
+  títulos — nunca se usa esta fuente en la versión de mail, ver
+  template-email-safe.html.
+-->
+<title>{{TITULO_PAGINA_ARTIFACT}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F4F3;
+    --card: #FFFFFF;
+    --card-raised: #FFFFFF;
+    --ink: #2E2E2E;
+    --ink-soft: #55534f;
+    --ink-faint: #8c8a84;
+    --line: #E1E1DF;
+
+    --primary: #4C65E6;
+    --primary-dark: #33449E;
+    --primary-tint: #EEF1FD;
+
+    --highlight: #F5F400;
+    --highlight-tint: #FDFBD8;
+    --highlight-border: #D6D400;
+    --highlight-ink: #6b6600;
+
+    --tile: #F4F4F3;
+
+    --shadow: 0 1px 2px rgba(46,46,46,.04), 0 8px 24px rgba(46,46,46,.06);
+
+    /* bloque de marca constante — igual en los dos temas, nunca se
+       redefine más abajo. Ver design-notes.md #1 (por qué existe). */
+    --brand-block-bg: #33449E;
+    --brand-block-fg: #FFFFFF;
+    --brand-block-fg-soft: rgba(255,255,255,.75);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #14151b;
+      --card: #1b1d26;
+      --card-raised: #20232e;
+      --ink: #ECEDF2;
+      --ink-soft: #A9ADC1;
+      --ink-faint: #787c8f;
+      --line: #2b2e3c;
+
+      --primary: #7C8FF0;
+      --primary-dark: #A9B7F7;
+      --primary-tint: #202a4d;
+
+      --highlight: #F5F400;
+      --highlight-tint: #33310f;
+      --highlight-border: #6b6600;
+      --highlight-ink: #ECE9A0;
+
+      --tile: #20232e;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --bg: #14151b;
+    --card: #1b1d26;
+    --card-raised: #20232e;
+    --ink: #ECEDF2;
+    --ink-soft: #A9ADC1;
+    --ink-faint: #787c8f;
+    --line: #2b2e3c;
+
+    --primary: #7C8FF0;
+    --primary-dark: #A9B7F7;
+    --primary-tint: #202a4d;
+
+    --highlight: #F5F400;
+    --highlight-tint: #33310f;
+    --highlight-border: #6b6600;
+    --highlight-ink: #ECE9A0;
+
+    --tile: #20232e;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 56px;
+  }
+  h1,h2,h3,.font-display{
+    font-family:'Jost','Century Gothic','Segoe UI',Arial,sans-serif;
+  }
+  .num{ font-variant-numeric: tabular-nums; }
+
+  .sheet{
+    width:100%;
+    max-width:640px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+
+  /* ---- header ---- */
+  .mast{
+    background:var(--brand-block-bg);
+    color:var(--brand-block-fg);
+    padding:26px 30px 24px;
+  }
+  .mast-eyebrow{
+    display:flex; align-items:center; gap:8px;
+    font-size:11.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--brand-block-fg-soft);
+    margin:0 0 10px;
+  }
+  .mast-eyebrow svg{ width:14px; height:14px; flex:none; }
+  .mast-eyebrow .dot{ opacity:.5; }
+  .mast-eyebrow .pill{
+    font-weight:700; letter-spacing:.06em;
+    background:rgba(255,255,255,.14);
+    padding:2px 8px; border-radius:999px;
+    color:var(--brand-block-fg);
+  }
+  .mast h1{
+    margin:0;
+    font-size:25px; font-weight:700; line-height:1.25;
+    text-wrap:balance;
+  }
+  .mast-sub{
+    margin:8px 0 0;
+    font-size:13.5px; line-height:1.5;
+    color:var(--brand-block-fg-soft);
+  }
+
+  /* ---- secciones genéricas ---- */
+  section{ padding:20px 30px; border-top:1px solid var(--line); }
+
+  h2.section-title{
+    display:flex; align-items:center; gap:10px;
+    font-size:15.5px; font-weight:600; color:var(--ink);
+    margin:0 0 10px;
+  }
+  .chip{
+    flex:none;
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary-tint); color:var(--primary-dark);
+  }
+  .chip svg{ width:15px; height:15px; }
+  .chip.highlight{ background:var(--highlight-tint); color:var(--highlight-ink); }
+
+  p.body-text{ margin:0; font-size:14px; line-height:1.6; color:var(--ink-soft); }
+  p.body-text + p.body-text{ margin-top:8px; }
+  p.body-text b{ color:var(--ink); }
+
+  /* ---- importante (sección opcional) ---- */
+  .section-important{ background:var(--highlight-tint); }
+
+  /* ---- tabla comparativa ---- */
+  .table-wrap{ overflow-x:auto; }
+  .compare-table{
+    width:100%; border-collapse:collapse; font-size:13.5px;
+  }
+  .compare-table th, .compare-table td{
+    padding:9px 4px; text-align:right; border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .compare-table th:first-child, .compare-table td:first-child{
+    text-align:left; white-space:normal;
+  }
+  .compare-table td:first-child{ color:var(--ink-soft); }
+  .compare-table thead th{
+    font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--ink-faint);
+  }
+  .compare-table tbody tr:last-child td{ border-bottom:none; }
+  .compare-table td.strong{
+    font-weight:700; font-size:14.5px; color:var(--primary-dark); font-family:'Jost',sans-serif;
+  }
+  .compare-table td.delta{ font-weight:700; color:var(--primary); }
+  .confirm-note{
+    margin:10px 0 0;
+    font-size:11.5px; color:var(--ink-faint); line-height:1.5;
+  }
+
+  /* ---- rótulo ---- */
+  .meta-grid{ display:grid; gap:8px; }
+  .meta-grid + .meta-grid{ margin-top:8px; }
+  .meta-grid-2{ grid-template-columns:1fr 1fr; }
+  .meta-tile.span-full{ margin-top:8px; }
+  .meta-tile{
+    background:var(--tile);
+    border-radius:9px;
+    padding:9px 13px;
+  }
+  .meta-tile .k{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-faint); margin:0 0 2px;
+  }
+  .meta-tile .v{ font-size:13.5px; font-weight:600; color:var(--ink); margin:0; }
+  .meta-tile .v.normal{ font-weight:400; color:var(--ink-soft); }
+
+  /* ---- bloques de detalle (por qué / qué / qué no) ---- */
+  .detail-block + .detail-block{
+    margin-top:18px; padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+
+  /* ---- lista simple (qué no se hizo / importante) ---- */
+  .plain-list{ margin:0; padding:0; list-style:none; }
+  .plain-list li{
+    font-size:14px; line-height:1.6; color:var(--ink-soft);
+    padding-left:14px; position:relative;
+  }
+  .plain-list li + li{ margin-top:6px; }
+  .plain-list li::before{
+    content:"–";
+    position:absolute; left:0; color:var(--ink-faint);
+  }
+
+  /* ---- lista de links tipo botón (más información) ---- */
+  .link-list{ display:flex; flex-direction:column; gap:10px; margin-top:12px; }
+  .link-item{
+    display:block;
+    background:var(--primary);
+    border-radius:10px;
+    padding:12px 16px;
+    text-decoration:none;
+  }
+  .link-item .link-scope{
+    display:block;
+    font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    color:rgba(255,255,255,.72);
+    margin-bottom:3px;
+  }
+  .link-item .link-row{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .link-item .link-label{
+    font-size:14px; font-weight:700; color:#fff; line-height:1.4;
+  }
+  .link-item svg{ width:16px; height:16px; color:#fff; flex:none; }
+  .link-item:focus-visible{ outline:2px solid var(--primary-dark); outline-offset:2px; }
+
+  /* ---- footer ---- */
+  footer{
+    background:var(--tile);
+    border-top:1px solid var(--line);
+    padding:16px 30px;
+    display:flex; justify-content:space-between; align-items:center;
+    gap:10px; flex-wrap:wrap;
+  }
+  footer .brand{ font-size:12px; font-weight:700; color:var(--ink-soft); }
+  footer .brand b{ color:var(--primary-dark); font-family:'Jost',sans-serif; }
+  footer .date{ font-size:11.5px; color:var(--ink-faint); }
+
+  @media (max-width:480px){
+    body{ padding:16px 8px 40px; }
+    section{ padding:18px 18px; }
+    .mast{ padding:22px 18px 20px; }
+    footer{ padding:14px 18px; }
+    .meta-grid-2{ grid-template-columns:1fr; }
+  }
+</style>
+
+<div class="sheet">
+
+  <header class="mast">
+    <p class="mast-eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      Novedades de Producto <span class="dot">·</span> <span class="pill">{{PRODUCTO}}</span>
+    </p>
+    <h1>{{TITULO}}</h1>
+    <p class="mast-sub">{{RESUMEN_EJECUTIVO}}</p>
+  </header>
+
+  <!-- RÓTULO — siempre presente. Interesados solo si hay un cliente/segmento puntual detrás del pedido; si el cambio es 100% interno sin interesado externo puntual, se puede omitir ese tile (nunca inventar un interesado). -->
+  <section>
+    <div class="meta-grid meta-grid-2">
+      <div class="meta-tile">
+        <p class="k">Producto</p>
+        <p class="v">{{PRODUCTO}}</p>
+      </div>
+      <div class="meta-tile">
+        <p class="k">Categoría</p>
+        <p class="v">{{CATEGORIA}}</p>
+      </div>
+    </div>
+    <div class="meta-grid meta-grid-2">
+      <div class="meta-tile">
+        <p class="k">Publicado en producción desde</p>
+        <p class="v">{{FECHA_PUBLICADO}} ({{VERSION}})</p>
+      </div>
+      <div class="meta-tile">
+        <p class="k">Activo en producción desde</p>
+        <p class="v">{{FECHA_ACTIVO}}</p>
+      </div>
+    </div>
+    <!-- OPCIONAL: interesados -->
+    <div class="meta-tile span-full">
+      <p class="k">Interesados</p>
+      <p class="v normal">{{INTERESADOS}}</p>
+    </div>
+    <!-- FIN OPCIONAL -->
+  </section>
+
+  <!-- ¿POR QUÉ? / ¿QUÉ SE HIZO? — siempre presentes. ¿QUÉ NO SE HIZO? es opcional: solo si de verdad queda algo relevante afuera del alcance (no inventar un "qué no se hizo" por completar la sección). -->
+  <section>
+    <div class="detail-block">
+      <h2 class="section-title">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+        </span>
+        ¿Por qué se hizo?
+      </h2>
+      <p class="body-text">{{POR_QUE_SE_HIZO}}</p>
+    </div>
+
+    <div class="detail-block">
+      <h2 class="section-title">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        </span>
+        ¿Qué se hizo?
+      </h2>
+      <p class="body-text">{{QUE_SE_HIZO}}</p>
+    </div>
+
+    <!-- OPCIONAL: ¿qué no se hizo? -->
+    <div class="detail-block">
+      <h2 class="section-title">
+        <span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"></line></svg>
+        </span>
+        ¿Qué no se hizo?
+      </h2>
+      <ul class="plain-list">
+        <!-- una <li> por ítem, ver design-notes.md #6 -->
+        <li>{{QUE_NO_SE_HIZO_ITEM_1}}</li>
+      </ul>
+    </div>
+    <!-- FIN OPCIONAL -->
+  </section>
+
+  <!-- ¿CUÁNTO NOS BENEFICIA? — siempre presente, pero flexible: filas reales "antes/ahora" si ya se midió (ver confirm-note), o "antes/esperado" con la nota aclarando que es proyección si todavía no hay medición. Nunca inventar un número — si no hay dato, se arma la fila igual pero con la métrica cualitativa ("esperamos reducir..."), no con un valor inventado. -->
+  <section>
+    <h2 class="section-title">
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+      </span>
+      ¿Cuánto nos beneficia?
+    </h2>
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Métrica</th><th>Antes</th><th>{{COLUMNA_AHORA}}</th><th>Cambio</th></tr>
+        </thead>
+        <tbody>
+          <!-- una <tr> por métrica -->
+          <tr>
+            <td>{{METRICA_1_NOMBRE}}</td>
+            <td class="num">{{METRICA_1_ANTES}}</td>
+            <td class="num strong">{{METRICA_1_AHORA}}</td>
+            <td class="num delta">{{METRICA_1_CAMBIO}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-text" style="margin-top:12px">En criollo: {{BENEFICIO_EN_CRIOLLO}}</p>
+    <p class="confirm-note">{{BENEFICIO_NOTA}}</p>
+  </section>
+
+  <!-- OPCIONAL: más información — solo si hay un link de documentación/manual relevante para una audiencia puntual (soporte, integraciones, comercial, etc.). Un botón por link; cada botón lleva SU PROPIA etiqueta de audiencia arriba, porque distintos links pueden ser para distintas audiencias. -->
+  <section>
+    <h2 class="section-title">
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      </span>
+      Más información
+    </h2>
+    <p class="body-text">Acá dejamos información importante relacionada a este nuevo cambio:</p>
+    <div class="link-list">
+      <!-- un .link-item por link -->
+      <a class="link-item" href="{{LINK_1_URL}}" target="_blank" rel="noopener">
+        <span class="link-scope">{{LINK_1_AUDIENCIA}}</span>
+        <span class="link-row">
+          <span class="link-label">{{LINK_1_DESCRIPCION}}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+  <!-- FIN OPCIONAL -->
+
+  <!-- OPCIONAL: importante — SOLO si hay una limitación, riesgo o pendiente real que el lector deba conocer (ej. "la solución es general pero por ahora solo se activó para X"). No crear esta sección si no hay nada genuino que avisar: no es un cajón para rellenar. Va al final, después de "más información" — ver design-notes.md #2 (por qué al final y no antes). -->
+  <section class="section-important">
+    <h2 class="section-title">
+      <span class="chip highlight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </span>
+      Importante
+    </h2>
+    <ul class="plain-list">
+      <li>{{IMPORTANTE_ITEM_1}}</li>
+    </ul>
+  </section>
+  <!-- FIN OPCIONAL -->
+
+  <footer>
+    <p class="brand">Equipo de Producto de <b>Bind PSP</b></p>
+    <p class="date">{{FECHA_ENVIO}}</p>
+  </footer>
+
+</div>
