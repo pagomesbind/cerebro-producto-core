@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 `onboarding_consolidado-us.md` (PRD-202, Fase 1 — alta wallet PF mayor de edad) pasó de v5.10 a v6.0 (2026-09-04), aplicando el diseño cerrado en una sesión previa de 23 rondas sobre la matriz de validaciones del motor de Onboarding y los documentos de evidencia del legajo para Worldsys.

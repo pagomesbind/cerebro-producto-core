@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — complementa 3_recursos/detalle_productos/onboarding/validacion_lista_negra_bind.md (mismo dominio: consultas a listas/blacklists durante el onboarding, pero servicio distinto — 'Lista Negra BIND' es un servicio SOAP de Banco Industrial/Bantotal, 'Listas de Informados' es un servicio REST de Worldsys, con su propio Compliance One)."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 ## Qué es
