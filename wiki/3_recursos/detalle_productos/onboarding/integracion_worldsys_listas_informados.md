@@ -1,22 +1,14 @@
----
-id: 2026-09-04_onboarding_integracion_worldsys_listas_informados
-pm: pablo
-fecha_captura: 2026-09-04
-fuente: "Email real de integración con Worldsys AML (Kevin Díaz/Leandro Competiello, Worldsys Group) con Banco Industrial/Bind PSP, hilo 'API WS Listas' (jul-2025 en adelante) — archivado en 4_archivos/historial_raw/2026-09_worldsys_listas_informados/. Complementado con capturas de pantalla del backoffice de Entidades de Onboarding y de la documentación pública apis.worldsys.com.ar, aportadas por el PM el 2026-09-04 en el chat."
-producto: onboarding
-tema: Integración real con el servicio "Listas de Informados" (LDI) de Worldsys — endpoints, autenticación, parámetro ConfigurationName, y distinción Evaluate vs. SourcesSearch
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/onboarding/integracion_worldsys_listas_informados.md
-tipo_destino: crear
-contradice: "no — complementa 3_recursos/detalle_productos/onboarding/validacion_lista_negra_bind.md (mismo dominio: consultas a listas/blacklists durante el onboarding, pero servicio distinto — 'Lista Negra BIND' es un servicio SOAP de Banco Industrial/Bantotal, 'Listas de Informados' es un servicio REST de Worldsys, con su propio Compliance One)."
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# Integración real con "Listas de Informados" (LDI) de Worldsys
+
+> Estado: en producción (Etapa 2 del motor de validación de Onboarding — "Consulta Worldsys").
+
+> Fuente: email real de integración con Worldsys AML (Kevin Díaz/Leandro Competiello, Worldsys Group) con Banco Industrial/Bind PSP, hilo "API WS Listas" (jul-2025 en adelante) — archivado en `4_archivos/historial_raw/2026-09_worldsys_listas_informados/`. Complementado con capturas de pantalla del backoffice de Entidades de Onboarding y de la documentación pública `apis.worldsys.com.ar`, aportadas por el PM el 2026-09-04.
 
 ## Qué es
 
 Bind PSP integra el servicio **"Listas de Informados" (LDI)** de Worldsys — la misma consulta que en el motor de validación de Onboarding se llama **"Consulta Worldsys"**, y que **unifica en una sola llamada las listas de PEP y de Terroristas** (antes hubiera requerido 2 consultas separadas). El resultado de esta consulta es la evidencia que se guarda en el legajo como `EVIDENCIA_WORLDSYS`.
+
+Documento hermano en el mismo dominio (listas/blacklists), pero servicio distinto: [`validacion_lista_negra_bind.md`](validacion_lista_negra_bind.md) (servicio SOAP `ConsultarListaNegra`, Banco Industrial/Bantotal — cubre específicamente la "lista 15" exigida por PLD del banco). **Ambos corren en el motor de Onboarding, en pasos distintos** — "Lista 15 del banco" (Etapa 1, justo después de Renaper Datos) y "Consulta Worldsys" (Etapa 2, incluye PEP).
 
 ## Endpoints reales (confirmados por Worldsys, ambiente productivo)
 
@@ -70,5 +62,8 @@ Aunque la documentación pública del servicio lo lista como parámetro opcional
 
 ## Relación con otros documentos
 
-- Documento hermano en el mismo dominio (listas/blacklists), pero servicio distinto: `validacion_lista_negra_bind.md` (servicio SOAP `ConsultarListaNegra`, Banco Industrial/Bantotal — cubre específicamente la "lista 15" exigida por PLD del banco). **Ambos corren en el motor de Onboarding, en pasos distintos** — "Lista 15 del banco" (Etapa 1, justo después de Renaper Datos) y "Consulta Worldsys" (Etapa 2, incluye PEP).
-- Contrato de datos de PRD-202 (`onboarding_consolidado-us.md`) y el borrador de la matriz de validaciones (`prd-202_onboarding_consolidado/artefactos/2026-09-02_borrador_matriz_validaciones_onboarding.md`) — este último ya documenta el formato propuesto del documento `EVIDENCIA_WORLDSYS` para el legajo, con estos datos reales incorporados (ronda 19).
+- Documento hermano en el mismo dominio (listas/blacklists), pero servicio distinto: [`validacion_lista_negra_bind.md`](validacion_lista_negra_bind.md) (servicio SOAP `ConsultarListaNegra`, Banco Industrial/Bantotal — cubre específicamente la "lista 15" exigida por PLD del banco). **Ambos corren en el motor de Onboarding, en pasos distintos** — "Lista 15 del banco" (Etapa 1, justo después de Renaper Datos) y "Consulta Worldsys" (Etapa 2, incluye PEP).
+- Contrato de datos de PRD-202 (`onboarding_consolidado-us.md`) y el borrador de la matriz de validaciones (`prd-202_onboarding_consolidado/artefactos/2026-09-02_borrador_matriz_validaciones_onboarding.md`, proyecto de Pablo Gomes) — este último ya documenta el formato propuesto del documento `EVIDENCIA_WORLDSYS` para el legajo, con estos datos reales incorporados.
+
+---
+*Creado: 2026-09-07 — `/context_merge`: nuevo archivo, integración real con "Listas de Informados" (LDI) de Worldsys — endpoints, autenticación, parámetro `ConfigurationName`, y distinción `Evaluate` vs. `SourcesSearch`. A partir de un email real de integración (jul-2025 en adelante) y capturas del backoffice/documentación pública aportadas por el PM el 2026-09-04.*

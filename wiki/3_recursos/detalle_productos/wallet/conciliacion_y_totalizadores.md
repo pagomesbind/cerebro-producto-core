@@ -425,3 +425,23 @@ Ejemplo de response:
 - Ejemplo de fila: `11/12/2024;22302808.70;19051866.42;22369580.41;66771.71;19060113.41`
 
 **`CUADRATURA-RESUMENCOMP`:** contiene el consumo del saldo del día, desagregado por tipo de comprobante.
+
+---
+
+## 7. Regularización de campos cuenta corriente vs. movimientos completos, y extensión de conciliación Cash Out (V72.2)
+
+> Fuente: Reunión "Analisis de Riesgo - Emisión V 72.2" (2026-09-02), minuta Gemini. Pase a producción reprogramado a lunes 2026-09-08 8:00hs.
+
+Dos tickets aprobados para el mismo pase a producción:
+
+### 7.1 Regularización cuenta corriente vs. movimientos completos (WS-1554 BIND / DEM-1826 Fintexa — semáforo amarillo, cambio funcional)
+
+El endpoint de **cuenta corriente** no traía todos los campos que sí tiene el de **movimientos completos**, generando fricción cuando una entidad migra de uno a otro (si Bind le indica a un cliente "usá el de cuenta corriente" y ese endpoint devuelve menos datos, se genera discrepancia). Se agregan a las consultas de cuenta corriente y movimientos los campos: **ID de comprobante relacionado, motivo de rechazo, estado externo e importe de operación**. Habilita a organizaciones como **GST** y **Ecocerrado** a vincular y conciliar sus operaciones correctamente. Se notificará a los clientes por el cambio de campos expuestos.
+
+Aclaración de alcance (Juan Pablo Carubelli): el ticket toca dos cosas distintas — (a) en cuenta corriente, agrega los campos que ya tenía movimientos (motivo rechazo, estado externo, importe operación); (b) en el `GET` de movimientos, agrega el **ID de comprobante relacionado** (el identificador, no el detalle completo del comprobante vinculado — mostrar el comprobante relacionado completo es un tema aparte, todavía en discusión, no incluido en este ticket).
+
+### 7.2 Conciliación de transferencias Cash Out vía Coelsa (WS-1552 BIND / DEM-1806 Fintexa — semáforo verde, no funcional)
+
+El proceso de conciliación con Coelsa (§5) contemplaba solo transferencias inmediatas **entrantes**; se corrige para que también incluya transferencias de **tipo cash out**. Sin impacto en otros elementos según María Eugenia Vila (responsable de controlar el funcionamiento post-implementación). Nota aparte: la activación diferida de este cambio para una entidad particular se pospuso por una dependencia de infraestructura (reinicio de ingreso pendiente, a cargo de Nico Pomponio).
+
+**Excluido de este pase a producción:** el ticket de habilitación de API Buffer, que queda para otra oportunidad.

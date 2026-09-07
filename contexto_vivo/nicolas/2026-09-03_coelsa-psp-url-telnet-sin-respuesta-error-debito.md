@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_pull.md (�
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Continúa el circuito de reactivación de Transferencias Pull en Homologación con Coelsa (ticket #456632, ya documentado en §6 de `transferencias_pull.md` — última actualización mergeada citaba el hallazgo del 2026-08-27/28 sobre que un `PUT /apiCVU/PSP/ModificacionPSP/{cuit}` exitoso no se reflejaba en la consulta posterior).

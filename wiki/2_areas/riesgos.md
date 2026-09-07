@@ -38,12 +38,17 @@ En la reunión "Adquirencia V 72: Pre-Despliegue" (2026-08-27) se reprogramó el
 
 Confirmada una multa de **$75 millones** a Bind PSP originada por errores en las pruebas de bloqueo de transacciones de Ardid (motor antifraude) — transacciones que debían bloquearse no se bloquearon. Mencionada al pasar en la minuta de "Repaso Semanal líderes" (2026-09-01) como parte del diagnóstico que motivó la reforma del ciclo de despliegues (ver `2_areas/procesos/`, pendiente de permiso). El monto fue redactado en la minuta oficial (enviada a Fintexa/Tecnológica Financiera) por sensibilidad ante destinatarios externos, y se completó cruzando la minuta de Gemini de la misma reunión (interna). Sin confirmar la entidad que aplicó la multa, el ticket/versión de Ardid involucrado, ni si ya está resuelta. Señal de que Ardid quedó fuera del loop de coordinación de despliegues — el equipo sumó como acción incorporar a un referente de Ardid a las reuniones de coordinación (Hernán Clarich). Capturado 2026-09-02, confianza media (mención al pasar en ambas fuentes, sin ticket ni informe de causa raíz propio).
 
+## Getnet deprecará su arquitectura actual de POS a fin de trimestre — afecta ~5% de la lectura de QR de Bind
+
+Getnet (dispositivos POS provistos por Santander) reiteró que la migración a una nueva arquitectura, en curso desde el año pasado, tiene plazo estimado de adecuación para **fines de este trimestre**; al llegar esa fecha, la arquitectura actual queda deprecada y las operaciones que sigan dependiendo de ella se verían afectadas. Pablo Gomes estimó que esto podría afectar a un **~5%** de los QR que Bind lee actualmente (sin confirmar qué clientes puntuales dependen de esos dispositivos). Podría requerirse una versión intermedia de código QR para no perder capacidad de lectura. Mitigación: se irá levantando en las reuniones periódicas con Wallet (dos por semana) apenas haya definición adicional — clasificado con prioridad 1 interna para tenerlo en el radar, pero deliberadamente **sin fecha de resolución "confirmada"** en el tablero hasta tener más certeza. Capturado 2026-09-04 (reunión "Producto - Prioridades"), confianza baja (mail de un tercero reenviado, sin confirmación técnica propia del alcance).
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-02 — nuevos riesgos "Reprogramaciones reiteradas erosionan confianza de clientes" y "Multa de $75M por errores en pruebas de bloqueo de Ardid".*
+*Última actualización: 2026-09-07 — nuevo riesgo "Getnet deprecará su arquitectura actual de POS a fin de trimestre".*
+*Última actualización anterior: 2026-09-02 — nuevos riesgos "Reprogramaciones reiteradas erosionan confianza de clientes" y "Multa de $75M por errores en pruebas de bloqueo de Ardid".*
 *Última actualización anterior: 2026-08-27 — nuevos riesgos "Saturación de la base de datos de impuestos por CUIT compartido" y "Proyecto Servicios — continuidad de equipo y bloqueo de pruebas con tarjetas prepagas".*
 *Última actualización anterior: 2026-08-20 — nuevo riesgo "Desalineación entre comisión facturada a la entidad y comisión real cobrada por el procesador".*
 *Última actualización anterior: 2026-08-12 — Creación del archivo en la reestructuración PARA en cascada, consolidando 4 riesgos ya documentados en la wiki pero sin un lugar propio.*

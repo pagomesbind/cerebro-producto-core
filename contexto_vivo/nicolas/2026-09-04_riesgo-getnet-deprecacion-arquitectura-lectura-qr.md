@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Producto - Prioridades" (2026-09-04), Matías Alzogaray compartió un mail recibido de **Luciana Rudaz** (del lado de **Getnet**, no confundir con la Luciana Rudaz PM de Bind PSP que participaba de la misma reunión — mismo nombre, personas distintas) donde se reitera que la migración de Getnet a una nueva arquitectura es una iniciativa en curso desde el año pasado, con **plazo estimado de adecuación al nuevo circuito para fines de este trimestre (Q)**. El mail advierte que, al llegar esa fecha, la arquitectura actual quedará deprecada y las operaciones que sigan dependiendo de ella "se verán afectadas".

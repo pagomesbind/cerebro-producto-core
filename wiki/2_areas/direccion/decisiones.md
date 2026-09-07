@@ -26,6 +26,12 @@ Este archivo vivo cubre el trimestre en curso. Al cerrar un trimestre calendario
 
 ---
 
+## [2026-09-04] — Excluir de la versión D73 el ticket Siscri de eficientización de tiempos de liquidación (AD-1383, PRD-205)
+- **Contexto/Problema:** en la reunión "Producto - Prioridades" (2026-09-04), Meli (Fintexa) marcó el ticket **AD-1383 "Siscri"** (PRD-205, eficientizar los tiempos de liquidación de transacciones con plazo de liquidación igual a cero) como un desarrollo "muy grande y complejo" para entrar en la versión D73 (estimada para el 20 de septiembre). El pedido llevaba solicitado hace dos o tres meses.
+- **Decisión tomada:** excluir AD-1383/PRD-205 de la D73 — Luciana Rudaz (PM) coincidió en que se puede prescindir del ticket en esta versión al no ser de máxima prioridad (prioridad 3 según la clasificación previa del equipo), sin alterar la planificación del resto de tickets comprometidos para septiembre.
+- **Impacto en el Roadmap/Producto:** sin nueva fecha objetivo formal — queda para la próxima ventana de versión (D74, tentativa entre la primera y segunda semana de octubre), sin compromiso confirmado todavía.
+- **Estado:** Aprobado.
+
 ## [2026-09-02] — Migrar transferencias salientes de CBU larga de la red Link a Coelsa (piloto)
 - **Contexto/Problema:** en reunión con Banco Industrial ("Bind PSP - Próximos pasos", 2026-09-02), se identificó que las transferencias salientes de CBU larga cursadas hoy por la red **Link** no traen del lado de Bind PSP una referencia utilizable para conciliar (usa un `origin ID` interno que no se envía externamente) — saliendo por **Coelsa** en su lugar, la transferencia sí lleva un ID que permite conciliar.
 - **Decisión tomada:** avanzar con pruebas de enrutamiento de transferencias salientes de CBU larga por Coelsa en lugar de Link, usando cuentas específicas como piloto. Gonzalo Rivera queda a cargo de cargar un caso de prueba con una CBU larga concreta. Alan Marchesi (Banco Industrial) aclaró que la migración no requiere homologación formal, solo verificación técnica de garantías. Responde la pregunta abierta el mismo día por el item de contexto vivo tomado de un mail resumen de la misma reunión ("migración CBU link a Coelsa" sin detalle) — es la misma migración, no un servicio de vinculación externo distinto.

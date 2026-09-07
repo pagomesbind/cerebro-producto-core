@@ -6,6 +6,19 @@
 
 ## 2026
 
+### 2026-09-07 (pablo + nicolas)
+
+- `detalle_productos/onboarding/integracion_worldsys_listas_informados.md` — archivo nuevo: integración real con "Listas de Informados" (LDI) de Worldsys — endpoints, autenticación, `Evaluate` vs. `SourcesSearch`, parámetro `ConfigurationName` (pablo).
+- `detalle_productos/onboarding/validacion_lista_negra_bind.md` — actualizado: referencia cruzada al archivo hermano nuevo de Worldsys LDI.
+- `detalle_productos/onboarding/index.md` — actualizado: fila del archivo nuevo.
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — actualizado: nueva §16, confirmación en producción del fix de grupo BIN (§15) generando rechazos legítimos en el cliente Terramundi (nicolas).
+- `detalle_productos/wallet/conciliacion_y_totalizadores.md` — actualizado: nueva §7, regularización de campos cuenta corriente/movimientos y extensión de conciliación Cash Out vía Coelsa (V72.2) (nicolas).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — actualizado: nueva §4, fix de timeout en contracargo por ID de referencia de transacción sobredimensionado (AD1639, cliente Ripsa) (nicolas).
+- `detalle_productos/adquirencia/webhooks_y_notificaciones.md` — actualizado: nueva sección, tres definiciones sobre el webhook de QR Tarjeta (endpoint de devoluciones separado, comisiones de Coelsa, ID Coelsa en comprobantes) (nicolas).
+- `detalle_productos/wallet/transferencias_pull.md` — actualizado §6: Coelsa confirma que la URL del PSP registrada no responde a telnet; Bind reporta `ERROR DEBITO` en pruebas propias (nicolas).
+- `detalle_productos/adquirencia/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: nueva sección "Hallazgos operativos recientes (septiembre 2026)" — PedidosYa (arancel neto QR) y ProvinciaNET (masividad de QR satura cola general) (nicolas).
+- `detalle_productos/wallet/validaciones_y_alias_cvu.md` — sin cambios: 1 item de nicolas (`wallet-reintento-alias-por-delay-registro-cbu-coelsa`) evaluado como duplicado de contenido ya mergeado en la corrida 2026-09-03 (mismos tickets WS-1556/DEM-1828, misma reunión) — no se escribió contenido nuevo.
+
 ### 2026-09-03 (pablo + nicolas)
 
 - `detalle_productos/wallet/validaciones_y_alias_cvu.md` — actualizado: reintento de alias confirmado con tickets WS-1556/DEM-1828, detalle de despliegue V72.2 (pablo).

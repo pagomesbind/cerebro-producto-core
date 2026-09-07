@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Daily producto" (2026-09-02) el equipo discutió una propuesta de **refactorización de los segmentos de Wallet**, orientada a otorgar a clientes como **Credicuotas** mayor autonomía sobre sus propios segmentos. Situación actual: los segmentos dependen de una API externa del "calculador de costos" y no están integrados directamente en Wallet, lo que limita la capacidad de autogestión de las organizaciones — Wallet hoy no tiene la potestad de crear o actualizar segmentos de forma independiente.

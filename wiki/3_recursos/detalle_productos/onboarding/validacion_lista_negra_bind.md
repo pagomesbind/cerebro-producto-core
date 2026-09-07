@@ -49,7 +49,9 @@ En un flujo de onboarding viejo del banco (captura aportada por el PM), este pas
 ## Relación con otros documentos
 
 - Modelo de 3 etapas de una solicitud de onboarding: [`arquitectura_solicitud_y_flujos.md`](arquitectura_solicitud_y_flujos.md) (mismo módulo).
+- Documento hermano en el mismo dominio (listas/blacklists), pero servicio distinto: [`integracion_worldsys_listas_informados.md`](integracion_worldsys_listas_informados.md) (servicio REST "Listas de Informados" de Worldsys, con su propio Compliance One — cubre PEP y Terroristas en Etapa 2). Ambos corren en el motor de Onboarding, en pasos distintos.
 - Este servicio (middleware Poincenot/Depasse, Banco Industrial/Bantotal) todavía no figura en `3_recursos/arquitectura_sistema/integraciones_externas.md` — pendiente de sumarlo la próxima vez que se toque esa tabla.
 
 ---
 *Creado: 2026-09-03 — `/context_merge`: nuevo archivo, contrato del servicio "Lista Negra BIND" (incluye lista 15 de PLD), a partir de documentación de middleware aportada por el PM y conversación con sistemas de Banco Industrial. Insumo directo de PRD-116.*
+*Actualización 2026-09-07 — `/context_merge`: agregada referencia cruzada a [`integracion_worldsys_listas_informados.md`](integracion_worldsys_listas_informados.md) (documento hermano nuevo).*

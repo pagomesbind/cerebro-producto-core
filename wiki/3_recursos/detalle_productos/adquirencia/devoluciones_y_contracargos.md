@@ -246,7 +246,20 @@ Investigando un reclamo de descuadre de saldo de la cuenta recaudadora de **Coto
 
 **Recomendación operativa:** para obtener el saldo "cerrado" de un día sin ambigüedad, consultar los movimientos de la cuenta vía API en un horario fijo de la mañana (ej. 11:00-11:30), después de que el corte bancario ya haya sido absorbido, en vez de consultar en horario nocturno cercano al corte. El equipo decidió llevar este hallazgo a Emma Vignoles para explicar la limitación técnica y evaluar si la reunión de cuadratura nocturna sigue siendo necesaria.
 
+## 4. Fix — timeout al hacer contracargo desde el portal por ID de referencia de transacción sobredimensionado (AD1639, cliente Ripsa, 2026-09-03)
+
+> Fuente: Reunión "Analisis de riesgo - Fix Contracargo" (2026-09-03), minuta Gemini.
+
+**Síntoma:** al intentar hacer un contracargo desde el portal admin, la operación fallaba con **timeout** y el contracargo no quedaba registrado — sin poder confirmar si se había procesado, cancelado o quedado en estado intermedio. Caso concreto que disparó el ticket: el cliente **Ripsa** no podía hacer devoluciones desde el admin (ver ficha en `2_areas/clientes/casos_de_uso_clientes.md`).
+
+**Causa raíz** (Nicolás Colón, revisando la consola del navegador — F12): la consulta que dispara el contracargo busca por el **ID de referencia de transacción** — un dato que, para operaciones de QR, almacena el **stream completo del código QR** (ID de transacción de QR + el stream del QR en sí), un valor demasiado grande que hacía tirar timeout a la búsqueda.
+
+**Fix:** se mejoró esa consulta puntual para que no falle al hacer el contracargo. Matías Sassa confirmó que el cambio **solo afecta el `GET` filtrado por ID de referencia de transacción** — no toca el `GET` general por ID de deuda (dos queries distintas, aunque bifurcadas del mismo origen), sin riesgo colateral sobre el componente de deuda pese a que el despliegue coincidió con día 2-3 del mes (plena época de vencimientos). Validado con pruebas exitosas de botón 2.0, pagos QR de deuda individuales, y contracargos parciales/totales antes del pase — desplegado a producción el mismo 2026-09-03, en horario laboral.
+
+**Alcance sin confirmar:** Franco Gimenez indicó que, según lo observado, el problema afectaba únicamente al caso de Ripsa — pero Nicolás Colón señaló la duda abierta de si, al ser un problema de fondo en la query (no específico de un cliente), podría haber otros clientes con el mismo síntoma sin haberlo reportado todavía.
+
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-08-27 — `/context_merge`: nueva §2 (bug de tipo de operación en contracargos POS GP, AD-1020/AD-1579, AD V72); §1.1 (historial operativo cliente COTO) extraída a [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) por umbral de tamaño de archivo.*
+*Última actualización: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
+*Última actualización anterior: 2026-08-27 — `/context_merge`: nueva §2 (bug de tipo de operación en contracargos POS GP, AD-1020/AD-1579, AD V72); §1.1 (historial operativo cliente COTO) extraída a [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) por umbral de tamaño de archivo.*
 *Última actualización anterior: 2026-08-12 — Renombrado desde `liquidaciones_y_devoluciones.md`; sección del producto Liquidador extraída a archivo propio (reestructuración PARA en cascada).*

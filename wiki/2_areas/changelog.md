@@ -6,6 +6,14 @@
 
 ## 2026
 
+### 2026-09-07 (pablo + nicolas)
+
+- `direccion/oportunidades.md` — creadas 2 filas nuevas: OP-019 (Agente de Cobros y Pagos sin consulta de cuenta por CBU/CVU/alias, paridad con Wallet) y OP-020 (migrar transferencias de Link a Coelsa para reducir tasa de rechazo) (pablo + nicolas). 1 item de nicolas (`oportunidad-refactor-segmentos-wallet-autonomia-clientes`) evaluado como duplicado de OP-017 ya existente (mismo hecho, misma reunión) — no se creó fila nueva.
+- `direccion/iniciativas.md` — actualizadas 2 filas: PRD-202 (contrato v6.0 aplicado — modelo de palancas simplificado, renombres, precisión de alcance) y bajar-tiempos-pagos-qr (reunión Global66 acota causa de discrepancia de medición, nuevo hallazgo de transferencias no acreditadas) (pablo + nicolas).
+- `tareas.md` — creada 1 fila nueva (T-108): desarrollar skill de automatización de comunicaciones de novedades de producto (nicolas).
+- `direccion/decisiones.md` — creada 1 decisión nueva: exclusión del ticket Siscri (AD-1383/PRD-205) de la versión D73 (nicolas).
+- `riesgos.md` — creado 1 riesgo nuevo: deprecación de la arquitectura actual de POS de Getnet a fin de trimestre, ~5% de la lectura de QR de Bind (nicolas).
+
 ### 2026-09-03 (pablo + nicolas)
 
 - `direccion/oportunidades.md` — creadas 2 filas nuevas: OP-017 (autonomía de clientes sobre segmentos de Wallet, caso Credicuotas) y OP-018 (Onboarding no expone motivo de rechazo por totalizadores) (pablo).

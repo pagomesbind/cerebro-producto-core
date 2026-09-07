@@ -148,13 +148,23 @@ Sin este último paso (registrar la URL vía ese PUT) Coelsa no permite continua
 
 **Estado a cierre de este barrido (2026-08-31):** sin resolver — Bind quedó a la espera de enviar el REQUEST/RESPONSE pedido por Coelsa (ver `1_proyectos/tareas.md` T-011, actualizada).
 
-> Fuente adicional: mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación" — icm@coelsa.com.ar / ighillini@bind.com.ar / ncolon@bind.com.ar (2026-08-27 y 2026-08-28).
+**Continuación (2026-09-03) — Coelsa confirma que la URL registrada del PSP no responde a telnet; Bind ve `ERROR DEBITO` en pruebas propias.**
+
+- **2026-09-03 19:26** — Nicolás Colón (Bind) pregunta a Coelsa si desde su lado ya visualizan la URL (IP) del PSP bien configurada (el REQ/RESP ya se lo había pasado Ignacio Ghillini antes). Agrega un dato nuevo: en pruebas propias de Bind están recibiendo **`ERROR DEBITO`**, y lo atribuye tentativamente a esta falta de "comunicación" con el comprador (Coelsa).
+- **2026-09-03 19:57** — Coelsa (Niurka Yamarte) responde con el dato concreto: la URL configurada en su base de datos es `https://172.30.8.62/`. Al hacer **telnet a esa IP no obtienen respuesta**. Piden a Bind que valide de su lado.
+
+**Aprendizaje operativo (extiende el hallazgo anterior):** el problema ya no se limita a que la escritura (`PUT ModificacionPSP`) no se reflejara en la lectura (`GET consultaPSP`) — ahora Coelsa aporta evidencia de que la propia **conectividad de red** hacia la URL registrada del PSP (`172.30.8.62`, IP privada) falla a nivel telnet desde su lado. Esto es compatible con (aunque no confirma) que el circuito completo dependa de una conexión dedicada/VPN entre Bind y Coelsa que hoy no está respondiendo en homologación — explicaría tanto la falta de tráfico en el webhook `AvisoDebinPendienteCVU` (ya reportada el 2026-08-28) como el `ERROR DEBITO` que ve Bind en sus propias pruebas.
+
+**Estado a cierre de este barrido (2026-09-03):** sin resolver — queda pendiente que Bind valide la conectividad de red hacia `172.30.8.62` desde el ambiente de Coelsa (ver `1_proyectos/tareas.md` T-011, actualizada).
+
+> Fuente adicional: mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación" — icm@coelsa.com.ar / ighillini@bind.com.ar / ncolon@bind.com.ar (2026-08-27, 2026-08-28 y 2026-09-03).
 
 > Fuente: hilo de mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación", icm@coelsa.com.ar / Niurka Yamarte (COELSA), mensajes del 2026-06-26 al 2026-08-24; respuesta de Nicolás Colón del 2026-08-21 con los datos del PSP creado (CBU `3220001805007699600017`, CVU `0005071502070018043201`, PSP código `5071`, razón social "KEEP IT SIMPLE SRL").
 
 ---
 *Fuente: Notion histórico, Epic "API: TRX PULL cons tacito" — ingesta 2026-07-06. Nota: 3 tickets de esta Epic devolvieron 404/blank en Notion (páginas eliminadas o de acceso restringido: "Consentimiento lado PSP" —Cancelado—, "Transferencias Pull Entrantes (lado billetera)" —contenedor sin contenido— y una página de prueba QA vinculada); no aportan info adicional a la ya cubierta acá.*
 *Actualización 2026-07-07: agregada nota de incidente de fraude (§5).*
-*Última actualización: 2026-09-02 — `/context_merge`: §6 — continuación del circuito de reactivación en Homologación, el `PUT` de URL de PSP no se refleja en la consulta posterior (ticket #456632, sin resolver a la fecha).*
+*Última actualización: 2026-09-07 — `/context_merge`: §6 — Coelsa confirma que la URL del PSP registrada no responde a telnet (`172.30.8.62`); Bind reporta `ERROR DEBITO` en pruebas propias (ticket #456632, sin resolver a la fecha).*
+*Última actualización anterior: 2026-09-02 — `/context_merge`: §6 — continuación del circuito de reactivación en Homologación, el `PUT` de URL de PSP no se refleja en la consulta posterior (ticket #456632, sin resolver a la fecha).*
 *Última actualización anterior: 2026-08-25 — nueva §6, circuito de reactivación en homologación con Coelsa (ticket #456632).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/cobros/transferencias_pull.md` a Wallet en la reestructuración PARA en cascada; banner de vigencia agregado en el encabezado para que no se lea como documentación confiable de §3 sin la advertencia.*

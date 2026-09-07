@@ -145,7 +145,18 @@ Se acordó agregar al webhook de transacción exitosa de **Cobro con QR** tres c
 
 También en la misma reunión: se retoma la segunda parte de las mejoras de performance para la generación de archivos (liquidación/rendiciones), tras haber cerrado la primera parte en una corrida anterior — Nicolás Colón consulta con "Euge" si las demoras/errores detectados están relacionados con el rendimiento de la API antes de avanzar. Sin detalle técnico adicional en la minuta sobre qué archivo/proceso puntual.
 
+## Tres definiciones sobre el webhook de QR Tarjeta (acordadas 2026-09-03) — devoluciones, comisiones de Coelsa e ID de conciliación
+
+> Fuente: reunión recurrente "Análisis COBRO" (2026-09-03), minuta Gemini.
+
+1. **Alcance del webhook y endpoint separado para devoluciones:** Daniela Collia (Fintexa) planteó que el ticket de herramientas administrativas ("admin y dos") necesita gestionar reembolsos, pero el webhook actual de **QR Tarjeta** solo notifica pagos aprobados/rechazados — no se puede reutilizar esa lógica para devoluciones. Se acordó **limitar el webhook existente a pagos aprobados/rechazados** y **crear un nuevo endpoint específico para devoluciones de QR Tarjeta**.
+2. **Comisiones de Coelsa en el webhook:** hoy el webhook solo envía el importe neto y las entidades deben consultar la comisión por otra vía — se acordó **incluir las comisiones de Coelsa en el webhook**, manteniendo la cantidad de decimales tal como las provee Coelsa (duda abierta de Daniela Collia entre truncar a 2 decimales o mantener los 7 que existen en la base; Pablo Gomes resolvió enviarlas tal cual las provee Coelsa — Daniela Collia queda en confirmar el formato exacto contra la documentación de Coelsa).
+3. **ID Coelsa en comprobantes de wallet para conciliación:** Nicolás Colón propuso insertar el **ID Coelsa en el campo "ID externo"** de los comprobantes de acreditación en wallet, para que el equipo de administración pueda conciliar sin el proceso manual/duplicado actual (hoy el campo de referencia trae el ID de transacción propio, no el de Coelsa) — mismo objetivo de fondo que el mapeo de campos `reference`/`external_id` ya documentado para Wallet QR en [`wallet/conciliacion_y_totalizadores.md §5`](../wallet/conciliacion_y_totalizadores.md).
+
+Quedó pendiente de más debate (no acordado) si el ticket 361/2209 — corrección del PDF de liquidaciones para Coto, diferenciando "desconocimiento" de "devolución" — entra en la versión 73 o 74; depende de la prioridad que confirme Euge.
+
 ---
 *Ver también: [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el detalle específico del canal QR que alimenta este flujo de notificaciones.*
-*Última actualización: 2026-09-02 — `/context_merge`: nuevos campos de arancel aceptador en el webhook de Cobro QR exitoso.*
+*Última actualización: 2026-09-07 — `/context_merge`: tres definiciones sobre el webhook de QR Tarjeta (endpoint separado de devoluciones, comisiones de Coelsa en el webhook, ID Coelsa en comprobantes de wallet), acordadas 2026-09-03.*
+*Última actualización anterior: 2026-09-02 — `/context_merge`: nuevos campos de arancel aceptador en el webhook de Cobro QR exitoso.*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nueva sección en la mecánica CVUCollect (cambio de categorización CBU externo→CBU corto como `transfer.cortau`, AD V72, cliente Jugadón).*

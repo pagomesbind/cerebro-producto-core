@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/tareas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Daily producto" (2026-09-02) el equipo propuso desarrollar una herramienta (potencialmente una skill de este mismo Cerebro) que automatice la generación de comunicaciones sobre novedades y lanzamientos de producto — borradores de newsletters/mails en formato HTML profesional, con revisión y aprobación humana antes de la distribución final. Objetivo: agilizar el proceso de comunicación y asegurar que todos los interesados reciban actualizaciones consistentes y bien estructuradas, siguiendo el formato estándar acordado en la misma reunión (ver item de decisión relacionado del mismo barrido). Responsable asignado en la reunión: "el grupo" (sin dueño individual confirmado). También quedó pendiente crear un grupo de difusión de mail para distribuir estos boletines.

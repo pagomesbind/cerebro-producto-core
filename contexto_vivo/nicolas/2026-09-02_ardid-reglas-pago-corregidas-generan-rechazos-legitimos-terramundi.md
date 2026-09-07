@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/integracion_con_productos_
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Join Soporte Clientes" (2026-09-02) se reportó un caso concreto de los efectos del fix documentado en `4_archivos/contexto_ingestado/2026-08-31_ardid-bug-grupo-bin-mal-configurado-bloquea-reglas-pago-coto.md` (ya mergeado al canon en `integracion_con_productos_bind.md`): Diego Gaston Weledniger reportó un **aumento significativo de rechazos de tarjetas de débito y crédito para el cliente Terramundi** (ficha `Peak Travel (Terramundi S.A.)` en `clientes/casos_de_uso_clientes.md` — ver item de cliente relacionado). Adriana Endzeliz explicó la causa: la corrección aplicada al filtro de grupo BIN (que antes estaba mal configurado y hacía que las reglas de pago **nunca** impactaran) ahora sí está impactando correctamente en los medios de pago — por lo que transacciones que antes pasaban sin ser evaluadas ahora se rechazan si no cumplen las reglas vigentes.

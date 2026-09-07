@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/conciliacion_y_totalizado
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Analisis de Riesgo - Emisión V 72.2" (2026-09-02) se aprobaron dos tickets adicionales para el mismo pase a producción (reprogramado a lunes 2026-09-08 8:00hs):

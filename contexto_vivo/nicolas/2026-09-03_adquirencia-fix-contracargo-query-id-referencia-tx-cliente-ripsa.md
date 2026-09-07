@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/devoluciones_y_contr
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Analisis de riesgo - Fix Contracargo" (2026-09-03) se presentó y aprobó el fix del ticket **AD1639**: al intentar hacer un contracargo desde el portal, la operación fallaba con **timeout** y el contracargo no quedaba registrado (no se podía confirmar si se había procesado, cancelado o quedado en estado intermedio). Nicolás Colón explicó la causa raíz encontrada al revisar la consola del navegador (F12): la consulta buscaba por el **ID de referencia de transacción**, un dato que almacena el **stream completo del código QR** (ID de transacción de QR + el stream del QR en sí) — un valor demasiado grande que hacía tirar timeout a la búsqueda. El fix consistió en mejorar esa consulta puntual para que no falle al hacer el contracargo.

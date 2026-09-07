@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/webhooks_y_notificac
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión recurrente "Análisis COBRO" (2026-09-03) se acordaron tres definiciones sobre el circuito de **QR Tarjeta**:
