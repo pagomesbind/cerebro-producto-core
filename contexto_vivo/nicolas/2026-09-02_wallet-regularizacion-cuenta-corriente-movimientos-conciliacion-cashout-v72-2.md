@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Analisis de Riesgo - Emisión V 72.2" (2026-09-02) se aprobaron dos tickets adicionales para el mismo pase a producción (reprogramado a lunes 2026-09-08 8:00hs):

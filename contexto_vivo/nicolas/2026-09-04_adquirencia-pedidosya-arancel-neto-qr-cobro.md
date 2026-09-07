@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Producto - Prioridades" (2026-09-04), Luciana Rudaz planteó la necesidad urgente de incorporar el **cálculo de arancel neto** en la transacción de cobro con QR para **PedidosYa (PeYa)** — PRD-228, ticket AD-1644 (cargado la semana previa). El cliente depende de ese dato para su propio cálculo de impuestos; el requerimiento se solicitó originalmente hace ~3-4 meses según Luciana Rudaz.

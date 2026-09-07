@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión recurrente "Análisis COBRO" (2026-09-03) se acordaron tres definiciones sobre el circuito de **QR Tarjeta**:

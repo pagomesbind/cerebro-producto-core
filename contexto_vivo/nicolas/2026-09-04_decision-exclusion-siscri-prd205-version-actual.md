@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Producto - Prioridades" (2026-09-04), Matías Alzogaray informó que Meli (Fintexa) excluyó de la versión actual (D73, estimada para el **20 de septiembre**) el ticket **AD-1383 "Siscri"** — PRD-205, orientado a eficientizar los tiempos de liquidación de transacciones con plazo de liquidación igual a cero — por tratarse de un desarrollo "muy grande y complejo".

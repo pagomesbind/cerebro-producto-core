@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Producto - Prioridades" (2026-09-04), Pablo Gomes y Nicolás Colón identificaron que cuando **ProvinciaNET** genera códigos QR de forma masiva (por batch/lote), esa carga satura la cola general de generación de QR — afectando a **todos** los clientes que generan QR en simultáneo, no solo a ProvinciaNET. El síntoma reportado: hasta **35 segundos** de demora para que le aparezca el QR a una persona que está pagando en el momento (deuda generada en vivo). El patrón es recurrente a principios de mes (coincide con el ciclo de facturación de ProvinciaNET) y ya generó reclamos de otro cliente además de ProvinciaNET: **Pay Evolution (Europagos)** — según confirmó Alan a Nicolás Colón durante la reunión ("de Pay es uno más que se le quejó, pero solo esos dos").

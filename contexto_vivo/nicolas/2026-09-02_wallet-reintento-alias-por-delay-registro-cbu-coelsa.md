@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Analisis de Riesgo - Emisión V 72.2" (2026-09-02, análisis de riesgo de despliegue con Matias Alzogaray, Juan Pablo Carubelli, Gonzalo Rivera, Mariana Nadalin, Nicolás Colón, Maria Eugenia Vila, Nico Pomponio, Andrea Orsini), se aprobaron para pase a producción los tickets WS-1556 (BIND) / DEM-1828 (Fintexa): **reintento automático con espera fija corta en la asignación de alias de cuentas nuevas**.

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: ee14a4b68342c2020cd4dfbc817cd6bc347de70d
 ---
 
 En la reunión "Join Soporte Clientes" (2026-09-02), Gonzalo Rivera propuso migrar las transferencias bancarias de las entidades que hoy operan con **banco Link** hacia **Coelsa**, para reducir la tasa de rechazo. Motivación citada: un incidente reciente donde el **25% de las operaciones de un cliente fueron rechazadas** operando vía Link. Expectativa: mejorar la estabilidad y la experiencia de los agentes de cobros y pagos. No se ticketeó ni se definió alcance/esfuerzo en la reunión — queda como candidata a evaluar, sin IDEA de Jira todavía.
