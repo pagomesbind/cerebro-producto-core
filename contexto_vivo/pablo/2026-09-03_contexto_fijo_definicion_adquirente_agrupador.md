@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 Durante la discusión de criterios Build/Bau surgió una aclaración conceptual sobre roles de la industria de pagos que condiciona obligaciones regulatorias distintas:

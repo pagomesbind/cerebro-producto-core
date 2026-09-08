@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: d783db8
 ---
 
 En la reunión "Análisis COBRO" (2026-09-03), Pablo Antonio Gomes mencionó conversaciones comerciales en curso para integrar cobro de facturas y extracción de efectivo mediante QR en sucursales de **Pago Fácil**, con advertencia sobre requerimientos regulatorios de PLD (separar operaciones de extracción de efectivo de los pagos estándar, límites transaccionales por operación y acumulados mensuales por pagador).

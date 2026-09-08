@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Cliente:** Peak Travel (Terramundi S.A.) — ficha existente en `log_clientes.md` (Adquirencia: Botón de Pago, QRI, RxT — Viajes y Turismo, Mediano, riesgo Bajo).

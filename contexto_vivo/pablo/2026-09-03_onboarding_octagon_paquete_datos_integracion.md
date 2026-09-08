@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Cliente:** OCTAGON (`log_clientes.md`: "Evolutivo en Intg" — QRI, Wallet, Onboarding). Continuación directa del item ya ingestado `2026-08-19_clientes_octagon-demo-onboarding-banco-industrial` (demo de onboarding propio + pedido de acceso de Compliance de Banco Industrial), que dejó pendiente "avanzar en un paquete de datos para automatizar la creación de CBU y alta del comercio".

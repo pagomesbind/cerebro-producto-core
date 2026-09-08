@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Cliente:** Global 66 (Argpagos SA) — ficha existente en `log_clientes.md` (Wallet, Billetera, Pequeño).

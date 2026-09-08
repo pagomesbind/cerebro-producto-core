@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Corrección (2026-09-07):** la captura original de este item (reunión "Producto - Prioridades v1", 2026-09-04) describía el problema como un cambio de **formato del código QR** de los POS de Getnet, con Wallet necesitando actualizar su parser/lector. Se confirmó con el PM que es una descripción imprecisa del mismo hecho — el problema real, ya confirmado contra la documentación técnica oficial de Getnet, es otro: Getnet cambió el **mecanismo de autenticación** de su API Resolve (de un token de acceso fijo a OAuth2 `client_credentials`), no el formato del QR en sí (que sigue el estándar EMVCo/CIMPRA común a todo el ecosistema, sin cambios). El cuerpo de este item queda corregido con el hecho real.

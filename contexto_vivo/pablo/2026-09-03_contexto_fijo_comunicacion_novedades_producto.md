@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Decisión acordada:** el equipo de Producto estandarizó el formato con el que se comunican las novedades/lanzamientos de producto a la organización, para que cualquier interesado pueda leerlas rápido y de forma escaneable. Cada aviso debe incluir:

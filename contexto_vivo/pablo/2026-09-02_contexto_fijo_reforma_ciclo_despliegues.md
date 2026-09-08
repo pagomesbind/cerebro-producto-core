@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/procesos/publicaciones_mensuales.md — el documento describe un ciclo mensual de 4 ceremonias; esta decisión lo reemplaza por un ciclo quincenal con Release Candidates congelados 10-15 días"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Fuente:** reunión "Repaso Semanal líderes" del 2026-09-01, minuta redactada y enviada directamente por Matías Alzogaray (PM) al equipo ampliado (Fintexa, Tecnológica Financiera, Bind) — no es la minuta automática de Gemini, es un documento propio del PM con resumen ejecutivo, tabla de acciones y detalle de temas tratados.

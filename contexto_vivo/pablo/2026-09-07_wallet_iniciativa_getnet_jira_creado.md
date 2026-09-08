@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Novedad puntual:** el proyecto BAU `getnet_oauth2_resolve/` (Pablo Gomes) completó su creación en Jira. IDEA **PRD-237** ("Autenticación configurable por aceptador para la lectura de códigos QR") transicionada a **EN APROBACION** — categoría BAU, producto Wallet, cliente SOPORTE (pedido interno de Integraciones, no de un cliente puntual), SP estimado 10 (rango de riesgo 10–18), prioridad **Highest** a pedido explícito del PM por el deadline duro impuesto por Getnet (corte del circuito de autenticación anterior, 30/09/2026).

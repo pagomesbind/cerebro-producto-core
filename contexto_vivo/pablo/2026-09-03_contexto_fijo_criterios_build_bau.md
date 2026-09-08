@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Decisión acordada:** el equipo de Producto estandarizó el criterio para clasificar cualquier iniciativa/proyecto como **Build** o **Bau**, a los fines de reportar con precisión al equipo directivo el uso de recursos y qué se está trabajando realmente:

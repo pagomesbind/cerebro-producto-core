@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: d783db8
 ---
 
 En la reunión "Daily producto" (2026-09-02, con Luciana Rudaz, Pablo Gomes, Matias Alzogaray, Nicolás Colón) se acordó un criterio explícito para clasificar el trabajo del equipo entre **Build** y **Bau**, ante la necesidad de reflejar con precisión ante la gerencia el uso real de recursos (la clasificación venía siendo subjetiva).

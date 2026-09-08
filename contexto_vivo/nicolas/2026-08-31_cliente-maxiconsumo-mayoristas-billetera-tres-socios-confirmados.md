@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: d783db8
 ---
 
 En la reunión "Demo Mayoristas" (2026-08-31) se hizo una demo completa (onboarding, POS, billetera, backoffice) del ecosistema "eco cerrado" para mayoristas, con **Maxiconsumo** (cliente ya en `log_clientes.md`, estado "En integración") como uno de los participantes centrales (invitado `juan@maxiconsumo.com`). Novedad de negocio: Eugenio Gigena y Emma Vignoles confirmaron que hay **3 socios definidos para la billetera** — se nombró explícitamente a "Yaar Vital" y "Maxiconsumo" (el tercero no se nombró en la minuta) — con posibilidad de sumar más participantes como "adherentes" a futuro. El **acuerdo privado está en curso**, con estimación de cierre en **septiembre 2026**.

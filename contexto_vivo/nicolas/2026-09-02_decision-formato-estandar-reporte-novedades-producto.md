@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: d783db8
 ---
 
 En la reunión "Daily producto" (2026-09-02) se acordó un formato estándar para comunicar el progreso o cierre de proyectos a cualquier interesado, ejemplificado con el caso de la optimización de tiempos de Pagos QR (PRD-199). Puntos que debe incluir el resumen:

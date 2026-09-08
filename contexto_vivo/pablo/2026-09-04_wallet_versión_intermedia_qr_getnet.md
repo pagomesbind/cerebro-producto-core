@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — corrige/retira una captura propia anterior, no contradice otra fuente"
 confianza: baja (premisa técnica desmentida)
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **RETIRADO (2026-09-07).** Este item capturaba, a partir de una transcripción de reunión, un supuesto requerimiento de que Wallet debía desarrollar una "versión intermedia de código QR" para seguir leyendo los QR de los POS de Getnet tras su migración de arquitectura. El PM confirmó que es una descripción imprecisa del mismo hecho ya capturado en `2026-09-04_wallet_decision_migracion_getnet_hard_deadline` (ese item ya quedó corregido) — el problema real es que Getnet cambió el **mecanismo de autenticación** de su API Resolve (OAuth2 `client_credentials` en vez de un token fijo), no el formato del código QR. El estándar del QR (EMVCo/CIMPRA) no cambia.

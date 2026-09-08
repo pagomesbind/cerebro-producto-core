@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: no
 confianza: alta
 estado: ingestado
+merge_commit: d783db8
 ---
 
 ## Semana 202636 (2026-08-31 → 2026-09-07) — Hallazgos de Negocio

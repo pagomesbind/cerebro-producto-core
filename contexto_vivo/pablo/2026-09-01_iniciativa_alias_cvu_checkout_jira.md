@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 ## Novedad — IDEA creada en Jira, discovery a desarrollo completo

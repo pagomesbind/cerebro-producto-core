@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: d783db8
 ---
 
 En la reunión "Analisis de riesgo - Fix Contracargo" (2026-09-03) se generó un debate real y sin resolución formal sobre **cómo clasificar un ticket como hotfix** (pase fuera de ciclo) frente a esperar a la próxima publicación mensual. `2_areas/procesos/analisis_de_riesgo_de_despliegue.md` documenta el proceso de semáforo de riesgo (verde/amarillo/rojo) para tickets **ya incluidos en una versión**, pero no cubre el criterio para decidir si algo amerita salir de ese ciclo como excepción.

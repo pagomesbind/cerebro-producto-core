@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: d783db8
 ---
 
 **Novedad puntual:** nuevo proyecto standalone `getnet_oauth2_resolve/` (Pablo Gomes), sin IDEA de Jira todavía. Getnet (aceptador QR interoperable del ecosistema CIMPRA, procesado por PagoNxt/Banco Industrial) migró su API Resolve de autenticación por `access_token` fijo en query param (esquema estándar de facto del ecosistema, ver `detalle_productos/adquirencia/mecanica_qr_coelsa.md`) a OAuth2.0 `client_credentials` + JWT Bearer (1h de vigencia). El circuito viejo se apaga con deadline interno confirmado **30/09/2026** ("nos bajan el riel que estamos usando", Emma Vignoles) — sin el desarrollo, Bind Wallet dejará de poder resolver/pagar QR de cualquier comercio que use Getnet como aceptador.

@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: d783db8
 ---
 
 ## Decisión
