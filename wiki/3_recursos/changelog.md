@@ -6,6 +6,22 @@
 
 ## 2026
 
+### 2026-09-08 (pablo + nicolas)
+
+- `detalle_productos/wallet/conciliacion_y_totalizadores.md` — actualizado: nueva §8 (conciliación Coelsa ampliada a tipo CAS + corrección de cuadraturas por saldos en FCI, La Virginia/Coppel) (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/devoluciones_y_contracargos.md` — archivo nuevo: bug de contracargos de colectores (Pago Fácil) rechazados por validación de ID de caja vs. ID de colector (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/index.md` — actualizado: fila del archivo nuevo.
+- `detalle_productos/onboarding/hallazgos_operativos_historicos.md` — actualizado: nueva sección, decisión de no priorizar mejoras de lectura de QR/código de barra (nicolas).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — actualizado: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (nicolas).
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — actualizado: nueva §8.2, integración MODO (QR Tarjeta) completada + requerimiento FAVACARD (PRD-235/ticket 1512) ratificado en máxima prioridad (nicolas).
+- `detalle_productos/adquirencia/pagos_fx_portal_beneficiarios.md` — actualizado: nueva §7, estado de QA de Pagos FX tras demora atribuida a Mastercard (nicolas).
+- `detalle_productos/adquirencia/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: nuevo hallazgo, Provincia Net incidente crítico sin resolver (ticket 1676/DAD-2943) y decisión de mantener conviviendo el proceso masivo antiguo con el nuevo desarrollo (nicolas).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — actualizado: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257) (nicolas).
+- `cumplimiento_normativo/limites_operativos_uif_ros.md` — actualizado: nueva sección, definiciones de Cumplimiento confirmadas para casos multi-operatoria (caso Pago Fácil — separación de comercios por operatoria, titularidad CUIT) (pablo).
+- `cumplimiento_normativo/gestion_riesgo_tecnologia_seguridad_a7724.md` — archivo nuevo: marco de gestión de riesgos de TI/ciberseguridad, Com. "A" 7724 BCRA, aplicabilidad asumida por el PM (pablo).
+- `cumplimiento_normativo/index.md` — actualizado: fila del archivo nuevo.
+- `cumplimiento_normativo/identificacion_personas_juridicas_vinculados.md` — actualizado: nueva sección, checklist interno de documentación por tipo societario (Res. UIF 200/2024) (pablo).
+
 ### 2026-09-07, segunda corrida (pablo + nicolas)
 
 - `arquitectura_sistema/api_bank/` — módulo nuevo (carpeta creada con permiso explícito del usuario), 11 archivos: relevamiento completo de la API pública de Banco Industrial (87 endpoints, 10 grupos) — Autenticación, Cuenta, Billetera, Transferencia, TransferenciaMEP, Debin, Vista, Webhooks, Eventos, Alta de Cuenta (con gap de catálogo PSI embebido), Errores (pablo).

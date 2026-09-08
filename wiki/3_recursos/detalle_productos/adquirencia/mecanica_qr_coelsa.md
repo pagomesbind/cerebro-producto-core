@@ -532,6 +532,8 @@ Operación de **$100,00**, comercio categoría **GRANDE**, comisión del comerci
 
 **En una devolución:** se reversan exactamente los mismos montos — débito de $0,7079 en el banco de la Billetera y crédito equivalente al Adquirente; débito de $0,0242 de la cuenta Coelsa y crédito al Adquirente.
 
+**Confirmación (2026-09-07, "Análisis COBRO"):** el 21% de IVA sobre la comisión del webhook de QR (ya reflejado como "+ IVA" en el ejemplo de arriba) lo calcula **Coelsa de forma automática y obligatoria en todos los casos** — no es opcional ni configurable del lado de Bind PSP. El desarrollo para reflejar correctamente este cálculo está en curso (owner: Daniela Collia, Fintexa), sin fecha límite definida todavía.
+
 ### Pago de Comisiones a los Actores (R01-08)
 
 - Tras la liquidación diaria, se realiza **un solo pago consolidado por actor** (Aceptador, Billetera, Coelsa) — la suma de todas las comisiones de la fecha de negocio.
@@ -593,6 +595,7 @@ Nicolás Colón presentó un desarrollo que permite **parametrizar el tiempo de 
 
 ---
 *Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita.*
-*Última actualización: 2026-09-03 — `/context_merge`: Parte 5, evidencia adicional (2026-09-02) de que Global66 tiene un reclamo activo y documentado de latencia QR — no cierra la contradicción TPay vs. BSF/Global66, la refuerza de un lado.*
+*Última actualización: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*
+*Última actualización anterior: 2026-09-03 — `/context_merge`: Parte 5, evidencia adicional (2026-09-02) de que Global66 tiene un reclamo activo y documentado de latencia QR — no cierra la contradicción TPay vs. BSF/Global66, la refuerza de un lado.*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: nueva Parte 5, parametrización del tiempo de espera de resolución (State Monitor, doble consulta T1/T2) — incluye contradicción sin resolver sobre el cliente que motivó el ajuste (TPay vs. BSF/Global66).*
 *Última actualización anterior: 2026-08-12 — Fusionada sección de arancel reducido desde `configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada).*

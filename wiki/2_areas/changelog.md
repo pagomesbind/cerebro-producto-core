@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-09-08 (pablo + nicolas)
+
+- `riesgos.md` — creados 3 riesgos nuevos: capacidad de QA insuficiente frente a múltiples prioridad 1 (nicolas); segregación de fondos/cuenta operativa PSPCP (Com. "A" 7825) sin verificación explícita (pablo); reportes sistemáticos UIF RMTC/RTE (Res. 200/2024) sin evidencia de cobertura, ya con IDEA de discovery propia PRD-244 (pablo).
+- `direccion/iniciativas.md` — creada 1 fila nueva: PRD-244 (reportes sistemáticos UIF RMTC/RTE, discovery) (pablo).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto): decisión "tickets Fintexa deben pasar por Nicolás Colón" (`procesos/gestion_jira.md`, nicolas); 2 gaps de cliente sin ficha en `clientes/log_clientes.md` ("GCT"/posible GST, y "Tienda Nube"/"Pago Nube", nicolas).
+
 ### 2026-09-07, segunda corrida (pablo + nicolas)
 
 - `direccion/decisiones.md` — creadas 2 decisiones nuevas: IDEA de Jira desde el arranque del discovery (2026-09-07) y reforma del ciclo de despliegues a quincenal con Release Candidates (2026-09-01, contradice `procesos/publicaciones_mensuales.md`); creada 1 decisión nueva: Getnet impone migración OAuth2 de su API Resolve, deadline 30/09 (2026-09-04, con corrección del PM del 2026-09-07) (pablo).

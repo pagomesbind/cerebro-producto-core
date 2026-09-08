@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 **Severidad:** Media-Alta (riesgo de capacidad transversal, no específico de un solo proyecto).

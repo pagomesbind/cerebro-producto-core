@@ -10,8 +10,8 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/limites_operativos_uif_ros.
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: pendiente
 ---
 
 ## Definiciones de Cumplimiento confirmadas para la integración de Pago Fácil (QR extracciones + pago de servicios)

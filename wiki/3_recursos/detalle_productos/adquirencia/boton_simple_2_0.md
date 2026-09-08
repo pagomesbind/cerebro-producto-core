@@ -83,6 +83,14 @@ Próximos pasos a cargo de Nicolás Colón: crear los tickets de post-payments, 
 
 > Fuente: Reunión "Análisis COBRO" (2026-08-31) — capturado independientemente por Nicolás Colón y Pablo Gomes, ambas versiones consolidadas acá sin contradicción (mismo hecho, distinto nivel de detalle).
 
+### 8.2 Integración MODO (QR Tarjeta) completada; requerimiento FAVACARD de pago único ratificado en máxima prioridad (2026-09-07)
+
+> Fuente: "Análisis COBRO" (2026-09-07, minuta enviada por mail el mismo día por Matías Alzogaray).
+
+Los trabajos de integración del **proyecto MODO** (QR Tarjeta — pago con tarjeta desde wallets terceras, §8) **se encuentran completados**.
+
+En paralelo, se repasó el requerimiento del cliente **FAVACARD** (ticket 1512 / PRD-235) para **CU Collect y Botón Simple 2.0 de pago único**: se mantiene en máxima prioridad en el colector del equipo dado su nivel avanzado de desarrollo. La historia de usuario 1512 ya fue enviada por Nicolás Colón a Fintexa el 2026-09-07. Ver el bug histórico de asignación de CBU corta / `pago_unico` ya documentado para este mismo cliente en [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md).
+
 ## 9. Botón Simple 1.0 y API Deuda — mejoras pedidas por cliente RIPSA (IDEA Jira PRD-87, Finalizada)
 
 > Fuente: Jira `bindpsp.atlassian.net`, IDEA PRD-87 "DESA: Botón cancelar y filtros en apis" (sin PRD redactado en la Descripción — estándar reciente, no aplicaba a esta IDEA) + Epic AD-260 (10 tickets con contenido, 2 Test/Xray excluidos). Cliente que solicitó la mayoría de estos cambios: **RIPSA**, vía ticket de soporte (`bindtm` BP-46021) e interacción directa con Producto.

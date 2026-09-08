@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/pagos_fx_portal_bene
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 En "Análisis COBRO" (2026-09-07) se mencionó, dentro de la gestión de prioridades del equipo, que **Pagos FX mantiene su urgencia por cumplimiento de un deadline estricto**, encontrándose mayormente en etapa de QA tras superar una demora técnica atribuida a Mastercard (sin más detalle técnico en esta reunión — foco del frente sigue siendo de Luciana Rudaz).

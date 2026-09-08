@@ -10,8 +10,8 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/identificacion_personas_jur
 tipo_destino: actualizar
 contradice: "no — complementa identificacion_personas_juridicas_vinculados.md (2026-09-01), que ya cubre el marco general UIF de personas jurídicas/vinculados/beneficiario final pero sin desagregar por tipo societario. También complementa (sin contradecir) el hallazgo del sub-agente de exploración de esta misma sesión: ya existe un sistema de Onboarding PJ en producción (`3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md`) que cubre SA/SRL/SAS/S.C.A./S.H./Asociación/Fundación con 'documentación requerida variable por tipo de sociedad' — este item aporta el detalle documental exacto por tipo que ese archivo de producto no desagrega, y agrega 2 tipos societarios que no aparecían mencionados en ningún archivo relevado (Sociedad Capítulo I Sección IV, Sociedades en Comandita Simple)."
 confianza: media
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: pendiente
 ---
 
 ## Contexto — por qué se captura

@@ -31,6 +31,12 @@
 - **OB 1 HF** (2026-01-28): [OB-62](https://bindpsp.atlassian.net/browse/OB-62) — error en el alta de onboarding para el cliente Inter.
 - **OB 2 HF** (2026-02-02): [OB-54](https://bindpsp.atlassian.net/browse/OB-54) — error en la integración con **Worldsys** (proveedor de listas Terrorista/PEP consultado durante el onboarding).
 
+## Decisión de producto — no priorizar mejoras de lectura de QR/código de barra (2026-09-07)
+
+> Fuente: Reunión "Weekly - Producto / Operaciones" (2026-09-07), minuta Gemini.
+
+El sistema de Onboarding es estricto leyendo códigos QR/de barra en el proceso de incorporación — rechaza con facilidad fotos de calidad media, afectando a clientes como **Coppel** (transcripto "Copel" en la minuta). Pablo Gomes fijó una posición de producto explícita: **no se van a priorizar mejoras en la lectura de imagen de QR/código de barra en Onboarding**, porque no es un producto que Bind PSP monetice ni sea foco — el foco actual es legajos, validaciones y cumplimiento PLD. Recomendación para clientes con onboarding propio: integrar por API enviando los datos ya leídos de su lado (como ya hace **INTER**) o intentar su propia lectura con mejor tecnología y usar Bind solo como fallback (caso **Arcos Dorados**). Se plantea evaluar a futuro una mejora de UX de captura (lectura QR en vivo mientras se mueve la cámara, en vez de una sola foto estática) sin compromiso de fecha ni prioridad.
+
 ## Riesgos operativos y novedades de compliance
 
 > Fusionado desde `detalle_productos/onboarding/manuales_operativos.md §4` en la reestructuración PARA en cascada (2026-08-12). Fuente: Reunión "Join Soporte Clientes" (2026-07-15), minuta Gemini.

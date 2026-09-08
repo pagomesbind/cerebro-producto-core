@@ -11,8 +11,8 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: pendiente
 ---
 
 Nueva IDEA creada en Jira: **PRD-244** — "Reportes sistemáticos UIF Res. 200/24 (RMTC/RTE) — verificar cobertura", proyecto Producto (`PRD`), tipo Idea, estado **DISCOVERY** (creada directamente en ese estado, sin pasar por PENDIENTE, siguiendo la convención ya vigente de crear la IDEA desde el arranque del discovery). Asignada a Pablo Gomes.

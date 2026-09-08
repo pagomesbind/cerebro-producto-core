@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/mecanica_qr_coelsa.m
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 En la reunión "Análisis COBRO" del 2026-09-07 (minuta enviada por mail a modo de resumen automático por Matías Alzogaray) se confirmó que **CoelSa calcula de forma automática y obligatoria el 21% de IVA sobre el importe de la comisión del webhook de QR, en todos los casos** — no es opcional ni configurable del lado de Bind PSP. El desarrollo para reflejar correctamente este cálculo ya está en curso (owner: Daniela Collia, Fintexa), sin fecha límite definida todavía (action item quedó marcado "[DEFINIR FECHA LÍMITE]", prioridad Alta).

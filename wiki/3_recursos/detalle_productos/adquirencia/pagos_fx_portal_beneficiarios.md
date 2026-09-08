@@ -57,6 +57,12 @@ Se compartieron archivos Excel con el resumen de especificaciones y corredores s
 
 **Entidades de transición:** mientras se esperan las credenciales de producción definitivas de la nueva entidad **"Move"** (apunta a una nueva cuenta comitente + entidad de API Broker, ver también `tareas_producto.md` T-068), el equipo sigue usando la entidad **"Coin"** en producción para pruebas de pago limitadas.
 
+## 7. Estado de QA tras demora atribuida a Mastercard (2026-09-07)
+
+> Fuente: "Análisis COBRO" (2026-09-07, minuta enviada por mail el mismo día por Matías Alzogaray).
+
+Pagos FX mantiene su urgencia por cumplimiento de un deadline estricto, encontrándose mayormente en etapa de **QA** tras superar una demora técnica atribuida a Mastercard (sin más detalle técnico disponible en esta fuente — foco del frente sigue siendo de Luciana Rudaz). Action item asociado: informar al equipo de QA el estado actual de las pruebas de Pagos FX tras los incidentes (owner: Matías Alzogaray, prioridad Alta, sin fecha límite definida).
+
 ## Ver también
 
 - [`psp_as_a_service_normativa_8432.md`](psp_as_a_service_normativa_8432.md) — contexto normativo/impositivo de Pagos FX (Norma 8432 BCRA), caso PeYa.
@@ -64,5 +70,6 @@ Se compartieron archivos Excel con el resumen de especificaciones y corredores s
 - PRD-183 (Pagos FX SEGUNDO MVP - APIs) — frente de APIs del mismo segundo MVP. Ídem, Cerebro de Luciana Rudaz.
 
 ---
-*Última actualización: 2026-08-05 — `/sync_meetings`: nueva §6 (alta operativa de organización nueva de Pagos FX/crossborder — corredores, scripts vs. API, gap de notificación, entidades de transición "Move"/"Coin"). Ver reunión "eco cerrado peya" del 2026-08-05 en `wiki/5_control/log_reuniones.md`.*
+*Última actualización: 2026-09-08 — `/context_merge`: nueva §7 (estado de QA de Pagos FX tras demora atribuida a Mastercard, 2026-09-07).*
+*Última actualización anterior: 2026-08-05 — `/sync_meetings`: nueva §6 (alta operativa de organización nueva de Pagos FX/crossborder — corredores, scripts vs. API, gap de notificación, entidades de transición "Move"/"Coin"). Ver reunión "eco cerrado peya" del 2026-08-05 en `wiki/5_control/log_reuniones.md`.*
 *Última actualización anterior: 2026-07-23 — Creación del archivo (`/sync_meetings`), a partir de la reunión "Seguimiento Portal - Pagos Fx" del 2026-07-23.*

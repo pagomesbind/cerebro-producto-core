@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/conciliacion_y_totalizado
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 Dos ajustes de conciliación/cuadratura de Wallet acordados/detectados el mismo día, en reuniones distintas pero sobre el mismo dominio:

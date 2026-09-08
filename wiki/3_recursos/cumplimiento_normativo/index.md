@@ -12,6 +12,7 @@
 | [identificacion_personas_fisicas_cvu.md](identificacion_personas_fisicas_cvu.md) | ⚠️ Orientación de diseño, no validada por Compliance. Marco regulatorio (BCRA/UIF/ARCA/AAIP) de identificación y resguardo de datos para altas de cuenta CVU de personas humanas — matriz de datos DDC, distinción legajo vs. reporte RSM. |
 | [identificacion_personas_juridicas_vinculados.md](identificacion_personas_juridicas_vinculados.md) | ⚠️ Orientación de diseño, no validada por Compliance. Requisitos UIF de identificación para personas jurídicas, FCI/Fideicomisos y sujetos vinculados/beneficiario final. |
 | [gestion_riesgo_fraude_bcra.md](gestion_riesgo_fraude_bcra.md) | Comunicaciones "A" 8471 y 8473 del BCRA — programa de gestión de riesgo de fraude (Sección 6 extendida a PSPCP) y score de riesgo de fraude por CUIL/CUIT de uso obligatorio. Cronograma de 4 etapas desde 2026-09-01, discovery en curso en `1_proyectos/gestion_riesgo_fraude/`. |
+| [gestion_riesgo_tecnologia_seguridad_a7724.md](gestion_riesgo_tecnologia_seguridad_a7724.md) | Comunicación "A" 7724 BCRA — marco integral de gestión de riesgos de TI/ciberseguridad (gobierno, continuidad del negocio, ciclo de vida de software, terceras partes, Canales Electrónicos). Aplicabilidad a Bind PSP asumida como posición de negocio, sin relevamiento de madurez todavía. |
 
 ## Ver también
 
@@ -20,6 +21,7 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — gap abierto sobre PCI DSS del proveedor Fintexa (distinto de la recertificación propia documentada acá).
 
 ---
-*Última actualización: 2026-09-07 — `/context_merge`: 1 archivo nuevo (gestión de riesgo de fraude, Com. "A" 8471/8473 BCRA), desde discovery de `gestion_riesgo_fraude/` (Pablo Gomes).*
+*Última actualización: 2026-09-08 — `/context_merge`: 1 archivo nuevo (gestión de riesgos de TI/ciberseguridad, Com. "A" 7724 BCRA), desde auditoría de cumplimiento normativo del PM.*
+*Última actualización anterior: 2026-09-07 — `/context_merge`: 1 archivo nuevo (gestión de riesgo de fraude, Com. "A" 8471/8473 BCRA), desde discovery de `gestion_riesgo_fraude/` (Pablo Gomes).*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: 2 archivos nuevos (identificación de personas físicas y jurídicas/vinculados para CVU), desde research de Gemini deep research del PM.*
 *Última actualización anterior: 2026-08-12 — Creación del módulo en la reestructuración PARA en cascada, desarmando `detalle_productos/transversal/cumplimiento_normativo.md` en 3 archivos temáticos.*

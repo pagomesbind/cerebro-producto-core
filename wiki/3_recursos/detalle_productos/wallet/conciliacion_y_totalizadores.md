@@ -445,3 +445,13 @@ Aclaración de alcance (Juan Pablo Carubelli): el ticket toca dos cosas distinta
 El proceso de conciliación con Coelsa (§5) contemplaba solo transferencias inmediatas **entrantes**; se corrige para que también incluya transferencias de **tipo cash out**. Sin impacto en otros elementos según María Eugenia Vila (responsable de controlar el funcionamiento post-implementación). Nota aparte: la activación diferida de este cambio para una entidad particular se pospuso por una dependencia de infraestructura (reinicio de ingreso pendiente, a cargo de Nico Pomponio).
 
 **Excluido de este pase a producción:** el ticket de habilitación de API Buffer, que queda para otra oportunidad.
+
+## 8. Ampliación a CAS y corrección de cuadraturas por FCI (2026-09-07)
+
+> Fuente: Reunión "Daily producto" (2026-09-07) + reunión "Weekly - Producto / Operaciones" (2026-09-07), minutas Gemini.
+
+Dos ajustes acordados/detectados el mismo día sobre este mismo dominio, en reuniones distintas:
+
+- **Conciliación Coelsa — se suma el tipo CAS.** Además de las transferencias inmediatas entrantes y **cash out** (ya cubiertas por §7.2), se acordó que la conciliación de Coelsa contemple también transferencias de tipo **CAS**. Matías Alzogaray señaló que esta corrección, junto con el mecanismo de reintento automático de asignación de alias (ver `validaciones_y_alias_cvu.md`), debería reducir los problemas que un cliente mencionado en la minuta como "Pago Nube" presenta con CBU Collect — identidad de ese cliente sin confirmar, ver gap en [`2_areas/clientes/log_clientes.md`](../../../2_areas/clientes/log_clientes.md) (pendiente de permiso explícito para esa capa).
+- **Cuadraturas de billetera no incluían saldos en fondos comunes de inversión (FCI).** María Eugenia Vila detectó que las cuadraturas de billeteras (ver §6) muestran diferencias incorrectas porque solo consideran los saldos de cuentas principales, sin sumar los saldos retenidos en FCI para entidades como **La Virginia** y **Coppel** (transcripto como "Copel" en la minuta original). Se determinó que el diseño de cuadraturas debe modificarse para sumar estos saldos y reflejar el balance real.
+- **Propuesta sin decisión firme:** programar un proceso automático de conciliación horaria de transferencias entrantes de billeteras para todas las organizaciones (hoy no existe ese automatismo) — "requiere más debate", pendiente de validar capacidad técnica.

@@ -22,6 +22,7 @@
 - **No existe el concepto de "desconocimiento parcial"**: cualquier desconocimiento se aplica sobre el remanente total de la transacción.
 - **Estrategia de emisión tolerante a fallos:** el PDF de liquidación se emite siempre, incluso con inconsistencias de datos — se prioriza la disponibilidad del comprobante sobre la consistencia (correcciones reactivas post-emisión).
 - Detalle completo del seguimiento de este desarrollo en PRD-146 (Tratamiento de contracargos de tarjeta) — proyecto de Nicolás Colón, vive en su propio Cerebro desde 2026-08-13.
+- **Ratificación de prioridad (2026-09-07, "Análisis COBRO"):** el tablero de incidentes ratificó el estatus de **máxima prioridad** para PRD-146, ya iniciado bajo múltiples tickets de Fintexa: [DAD-2209](https://fintexa.atlassian.net/browse/DAD-2209), [DAD-2257](https://fintexa.atlassian.net/browse/DAD-2257). Acción de seguimiento acordada: revisar el avance de estos tickets una vez compartidos (owner: Daniela Collia, Fintexa), sin fecha límite definida. Detalle operativo completo en el Cerebro de Nicolás Colón.
 
 ## 1. Documentación: devoluciones parciales
 
@@ -260,6 +261,7 @@ Investigando un reclamo de descuadre de saldo de la cuenta recaudadora de **Coto
 
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
+*Última actualización: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
+*Última actualización anterior: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nueva §2 (bug de tipo de operación en contracargos POS GP, AD-1020/AD-1579, AD V72); §1.1 (historial operativo cliente COTO) extraída a [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) por umbral de tamaño de archivo.*
 *Última actualización anterior: 2026-08-12 — Renombrado desde `liquidaciones_y_devoluciones.md`; sección del producto Liquidador extraída a archivo propio (reestructuración PARA en cascada).*
