@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — no hay archivo de canon existente que documente esta obligación específica. Complementario a 3_recursos/cumplimiento_normativo/ (que hoy cubre reportería PLD/UIF y límites operativos, no administración de fondos)."
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 ## Qué exige la norma (Sección 4 de "Proveedores de Servicios de Pago", vigente desde Com. "A" 7825)

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 En "Análisis COBRO" (2026-09-07) el tablero de incidentes ratificó el **estatus de máxima prioridad para el proyecto de tratamiento de contracargos** (PRD-146 "Contracargo de tarjetas" — referenciado pero todavía no registrado como IDEA activa en `1_proyectos/index.md` de este PM). El proyecto ya está iniciado bajo múltiples tickets de Fintexa: [DAD-2209](https://fintexa.atlassian.net/browse/DAD-2209), [DAD-2257](https://fintexa.atlassian.net/browse/DAD-2257) (lista compartida por Matías Alzogaray) y un ticket adicional "ehd 146" mencionado como ejemplo de trabajo ya en marcha.

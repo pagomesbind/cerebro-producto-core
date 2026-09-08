@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — 3_recursos/cumplimiento_normativo/pci_dss_recertificacion.md y gestion_riesgo_fraude_bcra.md cubren dominios adyacentes (seguridad de pagos con tarjeta, antifraude) pero ninguno cubre este marco de gestión de riesgos de TI/ciberseguridad de alcance general; se crea como archivo nuevo dentro de la carpeta ya existente."
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 ## Qué es esta normativa

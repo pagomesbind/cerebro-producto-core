@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 Gonzalo Rivera señaló que el sistema de Onboarding es muy estricto leyendo códigos QR/de barra en el proceso de incorporación — rechaza con facilidad fotos de calidad media, afectando a clientes como **Copel** (probable "COPPEL", ver nota de transcripción en el item de cuadraturas FCI del mismo día).

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 ## Definiciones de Cumplimiento confirmadas para la integración de Pago Fácil (QR extracciones + pago de servicios)

@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 Nicolás Colón explicó en la reunión "Weekly - Producto / Operaciones" (2026-09-07) un bug de mecánica de contracargos en el Agente de Cobros y Pagos: para colectores como **Pago Fácil**, las **devoluciones** se procesan correctamente, pero los **contracargos** quedan guardados con estado de rechazo por una validación interna que compara el **ID de caja de la transacción** contra el **ID de caja del colector** — campos que difieren en el ~99% de los casos reales (no tiene por qué coincidir la caja puntual donde se originó la transacción con la caja general configurada del colector).

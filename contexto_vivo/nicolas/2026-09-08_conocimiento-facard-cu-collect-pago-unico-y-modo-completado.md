@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 En "Análisis COBRO" (2026-09-07) se repasó el requerimiento del cliente **Facard** (ticket 1512 / PRD-235) para la funcionalidad de **CU Collect y Botón Simple 2.0 de pago único** — decisión: se mantiene en máxima prioridad en el colector del equipo dado su nivel avanzado de desarrollo. La historia de usuario 1512 ya fue enviada por Nicolás Colón a Mati (Fintexa) el 2026-09-07 (action item marcado "Enviada", sin seguimiento pendiente).

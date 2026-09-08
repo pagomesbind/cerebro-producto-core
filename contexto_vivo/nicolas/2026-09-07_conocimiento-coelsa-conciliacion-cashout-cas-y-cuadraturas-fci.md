@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 Dos ajustes de conciliación/cuadratura de Wallet acordados/detectados el mismo día, en reuniones distintas pero sobre el mismo dominio:

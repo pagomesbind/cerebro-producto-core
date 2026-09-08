@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 En "Análisis COBRO" (2026-09-07) se trató un **error crítico reportado por soporte técnico para el cliente Provincia Net** (ticket 1676 / DAD 2943, "Consulta reclamada"), que a la fecha de la reunión seguía sin respuesta.

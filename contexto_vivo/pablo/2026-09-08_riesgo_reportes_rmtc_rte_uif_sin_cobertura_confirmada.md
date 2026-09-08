@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — es una ausencia, no una contradicción. Lo más cercano ya documentado es 3_recursos/cumplimiento_normativo/reporteria_worldsys_bcra.md (reportería diaria a Worldsys/BCRA, LAVADOOPERACIONES/LAVADOCLIENTES) y limites_operativos_uif_ros.md (topes mensuales para decidir generación de ROS) — ninguno de los dos es RMTC ni RTE."
 confianza: media
 estado: ingestado
-merge_commit: pendiente
+merge_commit: d7e1ccf
 ---
 
 ## Qué se detectó
