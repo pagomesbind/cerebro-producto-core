@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/datos/log_metricas_semanales.md
 tipo_destino: actualizar
 contradice: no
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Semana 202636 (2026-08-31 → 2026-09-07) — Hallazgos de Negocio

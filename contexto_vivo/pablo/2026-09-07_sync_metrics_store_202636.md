@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/datos/datos_metricas_semanales
 tipo_destino: reemplazar
 contradice: no
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Fuente:** Copia de trabajo en `wiki/1_proyectos/contexto_vivo/_staging_sync_metrics/datos_metricas_semanales/` (ingerida mediante `pipeline.py ingest` desde raw/).

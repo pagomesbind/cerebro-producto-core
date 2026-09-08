@@ -11,7 +11,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Nuevo proyecto ⚠️ Obligatorio `gestion_riesgo_fraude/` — Bind PSP está alcanzada como PSPCP por dos Comunicaciones BCRA complementarias de prevención de fraude: la "A" 8471 (programa de gestión de riesgo de fraude, cronograma de 4 etapas ya en curso, primer hito 2026-12-31) y la "A" 8473 (score de riesgo de fraude por persona, de uso obligatorio en altas/monitoreo transaccional/revisión de padrón).

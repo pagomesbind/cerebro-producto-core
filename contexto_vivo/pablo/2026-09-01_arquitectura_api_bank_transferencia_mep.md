@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/api_bank/transferencia_mep.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Reunión conjunta Bind/Global66 (2026-09-02) — seguimiento del reclamo de latencia de Pagos QR ya trackeado en el proyecto `bajar-tiempos-pagos-qr` (PRD-199). Participantes: Mauro Suppan, Gonzalo Rivera, Nicolás Colón, Franco Gimenez, Emma Vignoles (Bind) y Marco Narvaez, Jonathan Castañeda, Alejandro Lopez Torres, Sebastián Díaz, Agustín Grau (Fintexa, invitado puntual) del lado Global66.

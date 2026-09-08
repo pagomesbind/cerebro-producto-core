@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/interoperabilidad_qr_getn
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Getnet (`productoqr@getnet.com.ar`, Luisana Noguera) documentó el circuito nuevo por el que la Billetera Bind Pago debe operar como socio/APM (medio de pago alternativo) dentro de su red interoperable de QR, en reemplazo del circuito viejo a deprecar (ver riesgo asociado `2026-09-06_riesgo-getnet-deadline-30-09-billetera-circuito-interoperable`, deadline 30/09).

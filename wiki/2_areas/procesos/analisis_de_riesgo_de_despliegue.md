@@ -16,6 +16,14 @@ Antes de cada despliegue a producción, el Project Manager (Matias Alzogaray) ar
 
 **Contexto de por qué nace:** el PM de Producto detectó baja confianza en la calidad de lo que se pasaba a producción (tickets de "dudosa procedencia", análisis técnico desactualizado en la descripción vs. lo realmente conversado) y decidió instituir este proceso en vez de depender del criterio caso a caso.
 
+## ⚠️ Gap abierto — sin criterio explícito para decidir cuándo un ticket es hotfix
+
+Este proceso cubre el semáforo de riesgo para tickets **ya incluidos en una versión** — no cubre el criterio para decidir si algo amerita salir de ese ciclo como excepción (hotfix urgente, fuera del ciclo mensual/quincenal).
+
+En la reunión "Analisis de riesgo - Fix Contracargo" (2026-09-03, caso Ripsa — ticket AD1639, ver `clientes/casos_de_uso_clientes.md`) se generó un debate real y sin resolución formal sobre este punto. Nicolás Colón lo planteó explícitamente sin obtener respuesta cerrada: *"necesito entonces dónde dibujar la línea, qué parámetro tomar para determinar si algo es Hotfix o no"* — había levantado ese ticket como urgente por el reclamo de un cliente histórico, pero Andrea Orsini cuestionó en qué momento y con qué criterio alguien determina que algo es hotfix. Pablo Gomes sugirió como heurística consultar primero con el cliente si puede tolerar esperar hasta la próxima implementación antes de escalar como hotfix. En ese caso puntual no se trató de un hotfix improvisado (desarrollo terminado el día anterior, probado en staging la misma mañana, pasado en horario laboral por el canal normal) — pero eso resolvió el caso puntual, no la pregunta de fondo.
+
+**Estado:** sin definición — quedó como heurística informal ("preguntarle al cliente si tolera esperar"), sin plasmarse como criterio del proceso. Ver también [gaps_y_preguntas.md](../gaps_y_preguntas.md) si se necesita trackear como pregunta abierta hacia el usuario.
+
 ## Ver también
 - [gestion_jira.md](gestion_jira.md) — estados de ticket sobre los que se arma el inventario (§1).
 - [publicaciones_mensuales.md](publicaciones_mensuales.md) — ceremonia de Go/No Go donde se usa este informe.

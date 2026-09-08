@@ -6,7 +6,18 @@
 
 ## 2026
 
-### 2026-09-07 (pablo + nicolas)
+### 2026-09-07, segunda corrida (pablo + nicolas)
+
+- `arquitectura_sistema/api_bank/` — módulo nuevo (carpeta creada con permiso explícito del usuario), 11 archivos: relevamiento completo de la API pública de Banco Industrial (87 endpoints, 10 grupos) — Autenticación, Cuenta, Billetera, Transferencia, TransferenciaMEP, Debin, Vista, Webhooks, Eventos, Alta de Cuenta (con gap de catálogo PSI embebido), Errores (pablo).
+- `arquitectura_sistema/index.md` — actualizado: fila del módulo nuevo.
+- `cumplimiento_normativo/gestion_riesgo_fraude_bcra.md` — archivo nuevo: Comunicaciones "A" 8471 y 8473 del BCRA, programa de gestión de riesgo de fraude y score de riesgo por CUIL/CUIT (pablo).
+- `cumplimiento_normativo/index.md` — actualizado: fila del archivo nuevo.
+- `detalle_productos/wallet/interoperabilidad_qr_getnet.md` — archivo nuevo: especificación técnica OAuth2 del circuito interoperable QR de Getnet (socio/APM), con nota de posible superposición sin confirmar con `getnet_oauth2_resolve/` (nicolas).
+- `detalle_productos/wallet/index.md` — actualizado: fila del archivo nuevo.
+- `datos/datos_metricas_semanales/*.csv` y `datos/log_metricas_semanales.md` — reemplazados (copia byte a byte, tipo: dato): store semana 202636 (pablo).
+- `datos/metricas_semanales.md` — nueva entrada: semana 202636, hallazgos de negocio (versión abreviada — sin tablas 1a-1d completas, ver nota en la propia entrada) (pablo).
+
+### 2026-09-07, primera corrida (pablo + nicolas)
 
 - `detalle_productos/onboarding/integracion_worldsys_listas_informados.md` — archivo nuevo: integración real con "Listas de Informados" (LDI) de Worldsys — endpoints, autenticación, `Evaluate` vs. `SourcesSearch`, parámetro `ConfigurationName` (pablo).
 - `detalle_productos/onboarding/validacion_lista_negra_bind.md` — actualizado: referencia cruzada al archivo hermano nuevo de Worldsys LDI.

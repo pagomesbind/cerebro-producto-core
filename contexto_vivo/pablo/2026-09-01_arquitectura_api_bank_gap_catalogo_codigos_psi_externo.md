@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/api_bank/alta_de_cuenta.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

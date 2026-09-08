@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Adquirencia V 72: Pre-Despliegue" (2026-08-27), ante el malestar de clientes por reprogramaciones reiteradas del pase a producción (ver item de riesgo relacionado, misma fuente), Mariana Nadalin propuso establecer un **calendario anticipado y ventanas de despliegue definidas para futuras versiones**, empezando por la versión 73, con el objetivo de dar mayor visibilidad a los clientes y evitar improvisaciones de último momento. Matias Alzogaray aceptó "ponerlo a prueba" — no quedó formalizado como proceso escrito todavía, es una decisión de intención a validar en la práctica con la v73.

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/criterios_de_priorizacion.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

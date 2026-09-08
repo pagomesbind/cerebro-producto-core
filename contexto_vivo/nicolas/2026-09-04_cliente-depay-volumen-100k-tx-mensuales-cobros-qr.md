@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Depay (Paloma Menendez Palau) avisó por mail, en el marco del seguimiento técnico de tiempos de Pagos QR (thread "Depay/Bind PSP- Tecnica"), el volumen transaccional esperado para su producto de **cobros con QR**: proyectan **~100.000 transacciones mensuales**, con un incremento escalonado del tráfico en las próximas semanas hasta llegar a ese nivel de procesamiento. Pidieron explícitamente que Bind lo tenga en cuenta "por si tienen que hacer pruebas o validación de su lado" — sin fecha concreta de cuándo se alcanza el pico.

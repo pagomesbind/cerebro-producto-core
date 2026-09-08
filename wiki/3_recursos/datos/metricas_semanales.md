@@ -25,6 +25,69 @@
 
 ---
 
+## Semana 202636 · 31 de agosto → 7 de septiembre de 2026
+
+*Reportado el 2026-09-07. 53 semanas cerradas en el store (202536 → 202636).* **Nota del merge:** esta
+entrada es más breve que las anteriores — el `/sync_metrics` de esta semana capturó el análisis de
+hallazgos y el store de datos, pero no la corrida completa de tablas 1a-1d (detalle WoW, tendencia 4
+semanas, composición y palancas por NSM). Ver `datos_metricas_semanales/` para los datos crudos ya
+actualizados si hace falta reconstruir esas tablas a mano.
+
+### Resumen ejecutivo
+
+NSM#1 registró recuperación fuerte (+86.6% WoW a $387.389 M) pero la tendencia de 4 semanas móviles sigue
+ligeramente hacia abajo (−1.6%). NSM#2 creció +50.7% WoW a $12.197 M pero con señales de calidad degradada.
+Hallazgo crítico: concentración extrema en NSM#1 (BSF 67.5% del volumen) expone el negocio a riesgo de
+dependencia cliente.
+
+### Hallazgos priorizados
+
+**[ALTA] Tarjeta Prepaga en NSM#2: pico extraordinario de volumen con tasa de rechazo elevada** — Tarjeta
+Prepaga registró $68,4 M esta semana (+483.8% WoW, z=+6.38), con tasa de rechazo saltando a 41.6% vs. la
+media de 8 semanas (24.9%). Lectura: probablemente un cliente puntual que probó algo nuevo o un batch de
+reintentos. Acción: verificar con Adquirencia si es un patrón técnico conocido.
+
+**[ALTA] Bind PSP liquidaciones cta 2: caída del 86.5% en transferencias del Agente de Cobros** — El
+collector registró solo $2.165 M esta semana, cayendo desde $16.093 M (promedio de las 4 semanas previas).
+Lectura: posible cambio de cuenta o redistribución de flows — otros collectors internos (cta 14, cta 39)
+muestran movimiento normal. Acción: validar con Operaciones.
+
+**[ALTA] Concentración extrema en NSM#1: BSF representa el 67.5% del volumen de API BANK** — Sumando
+Cencosud, el top-2 sube a ~80%. Expone el negocio a riesgo de churn cliente frente al objetivo estratégico
+de top 2 en volumen API BANK. BSF creció +134.1% WoW esta semana — vale confirmar si es momentum sostenible.
+
+**[MEDIA] NSM#1 recuperó fuerte: +86.6% WoW** — Segunda semana consecutiva de recuperación, apenas 7.7% por
+debajo del máximo histórico ($419.802 M, semana 202610). Pero la tendencia de 4 semanas móviles sigue
+ligeramente negativa: últimas 4 semanas $1.059.574 M vs. las 4 previas $1.076.874 M (−1.6%) — la semana
+fuerte no revierte la desaceleración de fondo.
+
+**[MEDIA] Altas de comercios en Adquirencia: 192 nuevos, 81.8% concentrados en La Virginia** — +51.2% sobre
+la mediana de 8 semanas, buen leading indicator para NSM#2, pero la dependencia de un solo cliente hace que
+el número sea menos representativo de crecimiento genuino de base.
+
+### Métrica de salud
+
+| Métrica | Semana | Media 8 semanas |
+|---|---|---|
+| NSM#1 — tasa de rechazo | 0,2% | 0,9% |
+| NSM#1 — tasa de devolución | 0,0% | — |
+| NSM#2 — tasa de rechazo | 21,0% | 20,8% |
+| NSM#2 / Prepaga — rechazo | 41,6% | — |
+| NSM#2 / Crédito — rechazo | 35,7% | — |
+
+Leading indicators: Cuentas Wallet +13.5% WoW (28.658), Comercios Adquirencia +26.3% WoW (192).
+
+### Serie histórica resumida
+
+- NSM#1 semanas 202633→202636: $284.837M → $179.788M → $207.559M → $387.389M
+- NSM#2 semanas 202633→202636: $11.783M → $7.659M → $8.094M → $12.197M
+
+---
+
+*Próxima corrida: semana 202637 (7 → 14 de septiembre de 2026).*
+
+---
+
 ## Semana 202635 · 24 → 31 de agosto de 2026
 
 *Reportado el 2026-08-31. 52 semanas cerradas en el store (202536 → 202635). `collectors.csv` volvió a

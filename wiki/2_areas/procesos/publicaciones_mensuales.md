@@ -1,8 +1,10 @@
 # Proceso de Publicaciones Mensuales — Ceremonias Clave
 
 > Contenido completo transcrito desde `wiki/3_recursos/conocimiento_interno/proceso/proceso_publicaciones_mensuales.md` (ingesta original), reubicado desde `detalle_productos/transversal/procesos_internos.md §1` en la reestructuración PARA en cascada (2026-08-12) — es un proceso interno del equipo, no conocimiento de producto.
+>
+> ⚠️ **Contradicción sin resolver (2026-09-07):** el ciclo **mensual** de 4 ceremonias descrito abajo es el proceso documentado en la ingesta original. Una decisión más reciente (ver [`direccion/decisiones.md`](../direccion/decisiones.md) [2026-09-01]) reforma el ciclo hacia **quincenal con Release Candidates** (versiones congeladas 10-15 días, desacople de Adquirencia/Wallet, protocolo de hotfix formalizado), motivada por una sobrecarga operativa crítica (5 lanzamientos en 24hs) y una multa de $75M por errores de Ardid (ver [riesgos.md](../riesgos.md)). Al 2026-09-07 la reforma está "en aplicación desde la v73" (primer Release Candidate publicado en Staging el 2026-09-07, próxima revisión 2026-09-08) pero **no hay confirmación de que reemplace formalmente este documento** — este merge no elige versión ganadora, ver gap abierto en [`gaps_y_preguntas.md`](../gaps_y_preguntas.md) [2026-09-07].
 
-A continuación se describen las ceremonias clave a llevar a cabo por cada versión mensual.
+A continuación se describen las ceremonias clave a llevar a cabo por cada versión mensual (proceso documentado originalmente — ver nota de contradicción arriba).
 
 ## Cierre de alcance
 

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/log_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Producto - Prioridades" (2026-09-04), Luciana Rudaz gestionó un requerimiento activo de **PedidosYa (PeYa)** — arancel neto en cobro QR, PRD-228/AD-1644 (ver item de conocimiento relacionado de esta misma reunión). PeYa ya es un cliente con historia de discovery en el Cerebro: `3_recursos/detalle_productos/adquirencia/psp_as_a_service_normativa_8432.md` documenta la evaluación de modelos aceptador/agrupador bajo la norma 8432 BCRA hecha específicamente con este cliente.

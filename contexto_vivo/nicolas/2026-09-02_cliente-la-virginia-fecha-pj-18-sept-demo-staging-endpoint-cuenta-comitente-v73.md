@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Join Soporte Clientes" (2026-09-02), Mauro Suppan consultó por el estado del desarrollo de Onboarding Personas Jurídicas para **La Virginia** (proyecto ya trackeado como `1_proyectos/proyecto-la-virginia-ob-pj/` — carpeta que no existe en la instancia de este PM, pertenece a otro Cerebro del equipo; se captura igual como novedad de cliente por si el PM dueño no asistió a esta reunión puntual). Matias Alzogaray se comprometió a: (1) confirmar si se mantiene la fecha de compromiso de salida a producción del **18 de septiembre**, y (2) evaluar habilitar un ambiente de Staging para que el cliente pueda validar antes del despliegue. Gonzalo Rivera sugirió realizar la demostración con el cliente entre el **14 y 16 de septiembre**, condicionado a que el desarrollo esté disponible en Staging para el 14/09. Se acordó como decisión de la reunión: realizar esa demostración en Staging con La Virginia antes del pase a producción.

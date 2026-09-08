@@ -28,6 +28,19 @@ Cuando dos iniciativas compiten sin diferencia clara de las reglas de arriba, el
 ### 8. Medición antes que ejecución — 🟡 inferido
 Cuando aparece una duda técnica que condiciona el costo/arquitectura de una decisión (ej. si Worldsys puede devolver archivos), el PM pausa el research de costo hasta confirmar la duda técnica primero — no avanza en paralelo sobre un supuesto no validado (ver `../gaps_y_preguntas.md`, caso Worldsys/ComplianceOne 2026-07-20).
 
+## Criterio de clasificación Build vs. Bau — ✅ confirmado (2026-09-02)
+
+Acordado en la reunión "Daily producto" (2026-09-02, Luciana Rudaz, Pablo Gomes, Matías Alzogaray, Nicolás Colón), ante la necesidad de reflejar con precisión ante la gerencia el uso real de recursos del equipo (la clasificación venía siendo subjetiva):
+
+- **Build:** foco en crecimiento, innovación e impacto directo en métricas clave (nuevas funcionalidades o productos).
+- **Bau (Business as Usual):** foco en mantener la estabilidad, resolver errores, gestionar deuda técnica y garantizar la operatividad diaria — reconocido explícitamente como fundamental para la continuidad del negocio y, a menudo, la mayor parte de la carga operativa real del equipo (aunque menos visible).
+
+**Aplicación práctica discutida en la reunión:**
+- Tareas exigidas por normativa o necesarias para evitar fallas operativas (ej. deshabilitación automática de cuentas bloqueadas en Ardid, reportes normativos) → **Bau**.
+- Proyectos orientados a nuevas capacidades para retener clientes (ej. "alta de cuenta comitente" pedida por clientes específicos, PRD-208) → a evaluar caso a caso con el mismo criterio: si su omisión impediría la operatoria, tira a Bau; si abre una capacidad nueva de negocio, tira a Build.
+
+**Punto abierto, no resuelto en la reunión:** la clasificación del flujo de **Onboarding** completo generó debate extenso — algunos lo ven Bau (mejora de flujos existentes + cumplimiento normativo), otros Build (por ser una reconstrucción integral). El equipo reconoció que esta clasificación específica impacta directamente en el reporte de esfuerzo a la dirección y quedó pendiente aplicarla de forma consistente en futuras asignaciones — sin definición cerrada para este caso puntual. Otro caso sin resolver del mismo origen: la refactorización de segmentos en Wallet (autonomía de clientes como Credicuotas sobre sus segmentos) — ver oportunidad relacionada en `direccion/oportunidades.md` si ya fue consolidada.
+
 ## Cómo usar esto
 
 Al evaluar una IDEA o feature nueva, en este orden: (1) ¿remedia riesgo de compliance/fraude? (2) ¿mueve una NSM, directa o indirectamente? (3) ¿la capacidad real del equipo la absorbe sin canibalizar el foco activo? (4) ¿mantiene el foco simple (no suma un tercer KR)? Si sobrevive a los 4 filtros, los puntos 6-8 desempatan entre candidatas.
@@ -35,4 +48,5 @@ Al evaluar una IDEA o feature nueva, en este orden: (1) ¿remedia riesgo de comp
 **Lo que este archivo NO es:** un sustituto del juicio del PM. Es contexto para que el Cerebro razone con el mismo criterio, y para que cualquier recomendación de priorización cite explícitamente contra cuál de estos puntos se está evaluando.
 
 ---
+*Última actualización: 2026-09-07 — `/context_merge`: nueva sección "Criterio de clasificación Build vs. Bau" (acordada 2026-09-02, contexto_vivo de Nicolás Colón y Pablo Gomes).*
 *Creado: 2026-07-20 — segundo archivo de la capa de Dirección, destilado de decisiones ya tomadas (no un framework nuevo impuesto). Revisar con el PM cuando el equipo pase a la "segunda ola" de foco (ver punto 4) — probablemente haga falta un criterio más granular en ese momento.*

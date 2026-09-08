@@ -158,3 +158,5 @@ Id;Name;Cuit;Codigo;BankId
 163;Bind PSP liquidaciones cta 156;30717449076;210;322
 164;Bind PSP liquidaciones cta 127;30717449076;210;322
 165;Prometeo;30718596277;290;322
+166;Bind PSP liquidaciones cta 115;30717449076;210;322
+﻿1;Bind PSP SA;30717449076;100;322

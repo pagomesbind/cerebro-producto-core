@@ -11,6 +11,15 @@ Bind PSP es una fintech que pertenece al **Grupo BIND**, creada en **2021**. Nac
 - **Foco estratégico:** APIs y funcionalidades apificadas — finanzas embebidas para clientes. Cuenta con alguna plataforma con front para usuario final, pero **no es la prioridad** de producto.
 - **Filosofía:** agilidad y velocidad de respuesta ante necesidades del negocio, buen go-to-market sin sacrificar atención al cliente, y aprovechamiento de sinergias/alianzas con otras empresas del Grupo BIND.
 
+## Roles de la industria de pagos: Adquirente vs. Agrupador
+
+> Fuente: reunión "Daily producto" (2026-09-02), aclaración conceptual surgida durante la discusión de criterios Build/Bau (ver [`procesos/criterios_de_priorizacion.md`](../procesos/criterios_de_priorizacion.md)).
+
+- **Adquirente:** entidad que habilita el procesamiento de pagos directamente con el procesador (ejemplo citado: Payway). Rol más adecuado para comercios de gran volumen.
+- **Agrupador:** actúa como subadquirente para comercios más pequeños — gestiona la relación comercial y el cumplimiento normativo de esos comercios frente al adquirente/procesador.
+
+**Por qué importa:** el BCRA y órganos supervisores como la CFI imponen **obligaciones de cumplimiento y riesgo distintas según el rol** que efectivamente desempeñe Bind PSP (o el cliente/comercio) en una operación dada — no es solo una distinción comercial, tiene consecuencia regulatoria. No se citó ninguna norma puntual (número de comunicación BCRA/CFI) en la reunión de origen — queda como definición conceptual, sin cita normativa exacta todavía.
+
 ## Grupo BIND — el ecosistema
 
 Grupo BIND es un ecosistema integral de servicios financieros y bancarios (digital y humano) para empresas, fintechs y personas. Su estructura está compuesta por:
@@ -89,7 +98,8 @@ Grupo BIND alcanzó un acuerdo con **Banco Patagonia** para la **transferencia p
 **Timeline:** proceso de transición durante los próximos meses. Closing sujeto a condiciones precedentes y aprobaciones regulatorias — estimado efectivo a **inicios de 2027**. Comité de Transición integrado por ambos bancos (por Grupo BIND: Ariel Salituri, Marcela Alboher, Inti Benites, coordinado por Gastón Eckelhart).
 
 ---
-*Última actualización: 2026-08-31 — `/context_merge`: nueva sección "Venta del negocio de banca minorista a Banco Patagonia" (comunicado interno oficial, 2026-08-27).*
+*Última actualización: 2026-09-07 — `/context_merge`: nueva sección "Roles de la industria de pagos: Adquirente vs. Agrupador" (aclaración conceptual, reunión "Daily producto" 2026-09-02).*
+*Última actualización anterior: 2026-08-31 — `/context_merge`: nueva sección "Venta del negocio de banca minorista a Banco Patagonia" (comunicado interno oficial, 2026-08-27).*
 *Última actualización anterior: 2026-08-05 — Nueva sección "Gobierno corporativo (Grupo BIND)": nombra por primera vez a la CEO (Marcela Fernie), Directorio actual, incorporación de 4 advisors y salida de Facundo Vázquez.*
 *Última actualización anterior: 2026-07-17 — Nota de actualización sobre reafirmación de las North Star Metrics por el CEO (ver [north_star.md](../direccion/north_star.md)).*
 *Última actualización anterior: 2026-07-07 — Agregado "Contexto actual (2026)": salida de Astropay, incidente de fraude de Transferencias Pull y respuesta de Grupo BIND.*

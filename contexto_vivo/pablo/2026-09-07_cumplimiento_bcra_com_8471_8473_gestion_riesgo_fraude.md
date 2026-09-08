@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/gestion_riesgo_fraude_bcra.
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Qué son las dos normas

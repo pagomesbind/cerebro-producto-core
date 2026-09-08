@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/publicaciones_mensuales.md
 tipo_destino: actualizar
 contradice: "2_areas/procesos/publicaciones_mensuales.md — el documento describe un ciclo mensual de 4 ceremonias; esta decisión lo reemplaza por un ciclo quincenal con Release Candidates congelados 10-15 días"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

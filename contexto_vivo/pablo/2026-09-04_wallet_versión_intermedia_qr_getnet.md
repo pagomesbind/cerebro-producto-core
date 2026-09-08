@@ -10,7 +10,7 @@ destino_propuesto: ninguno — no crear nada en el canon a partir de este item
 tipo_destino: crear
 contradice: "no — corrige/retira una captura propia anterior, no contradice otra fuente"
 confianza: baja (premisa técnica desmentida)
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

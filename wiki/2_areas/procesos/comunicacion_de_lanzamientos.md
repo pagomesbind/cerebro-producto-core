@@ -14,6 +14,22 @@ La primera comunicación prevista es sobre la funcionalidad de consulta de cotit
 
 > Fuente: Reunión "Productos - Weekly Seguimiento" (2026-08-18), minuta Gemini.
 
+## Formato estándar del contenido de cada aviso (2026-09-02)
+
+> Fuente: reunión "Daily producto" (2026-09-02), minuta Gemini. Participantes: Luciana Rudaz, Pablo Gomes, Matías Alzogaray, Nicolás Colón. **Complementa, no reemplaza**, el acuerdo del 2026-08-18 de arriba — aquel define el *canal* (hilo de mail interno "avisos de producto"), este define el *formato* del contenido.
+
+El equipo de Producto acordó un formato estándar para comunicar el progreso o cierre de proyectos a cualquier interesado, para que se pueda leer rápido y de forma escaneable. Cada aviso debe incluir:
+
+- **Producto** y **categoría** (Build/Bau, ver [criterios_de_priorizacion.md](criterios_de_priorizacion.md)).
+- **Interesados.**
+- **Versión** y **fechas de producción.**
+- **Justificación** (el "por qué") y **qué se hizo** (alcance realizado y no realizado).
+- **Beneficios observados** frente a los esperados, de forma concisa y escaneable.
+
+**Ejemplo usado en la reunión como caso de referencia** (optimización de tiempos de Pagos QR, PRD-199 — ver `detalle_productos/adquirencia/mecanica_qr_coelsa.md`): la mejora consistió en agregar una segunda consulta automática al proveedor (Coelsa) tras la primera, lo que redujo el porcentaje de operaciones que requerían revisión manual del 3% a menos del 1%.
+
+**Relacionado — propuesta de automatización, sin resolver:** el equipo propuso desarrollar una herramienta ("skill") que genere automáticamente borradores de estos avisos en HTML profesional a partir de los reportes de cambios, con revisión humana antes de enviar — ya trackeado como [tareas.md](../tareas.md) T-108. También quedó pendiente crear un grupo de difusión dedicado para distribuir estos boletines.
+
 ## Propuesta relacionada (sin decisión formal, a probar) — calendario de ventanas de despliegue anticipado
 
 > Fuente: reunión "Adquirencia V72: Pre-Despliegue" (2026-08-27), minuta Gemini.

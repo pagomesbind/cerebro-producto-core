@@ -6,7 +6,25 @@
 
 ## 2026
 
-### 2026-09-07 (pablo + nicolas)
+### 2026-09-07, segunda corrida (pablo + nicolas)
+
+- `direccion/decisiones.md` — creadas 2 decisiones nuevas: IDEA de Jira desde el arranque del discovery (2026-09-07) y reforma del ciclo de despliegues a quincenal con Release Candidates (2026-09-01, contradice `procesos/publicaciones_mensuales.md`); creada 1 decisión nueva: Getnet impone migración OAuth2 de su API Resolve, deadline 30/09 (2026-09-04, con corrección del PM del 2026-09-07) (pablo).
+- `direccion/iniciativas.md` — actualizada 1 fila (alias_cvu_checkout: creación completa en Jira, PRD-239); creadas 2 filas nuevas: PRD-238 (gestión de riesgo de fraude, Com. "A" 8471/8473 BCRA) y getnet_oauth2_resolve (migración OAuth2 de Getnet, PRD-237) (pablo).
+- `riesgos.md` — creado 1 riesgo nuevo: Getnet deprecará el circuito viejo de la Billetera Bind Pago como socio/APM, deadline 30/09 — con nota de posible superposición sin confirmar con `getnet_oauth2_resolve/` (nicolas).
+- `3_recursos/cumplimiento_normativo/gestion_riesgo_fraude_bcra.md` — creado: Comunicaciones "A" 8471 y 8473 del BCRA (pablo).
+- `3_recursos/detalle_productos/wallet/interoperabilidad_qr_getnet.md` — creado: especificación técnica OAuth2 del circuito interoperable QR de Getnet (nicolas).
+- `3_recursos/arquitectura_sistema/api_bank/` — módulo nuevo, 11 archivos: relevamiento completo de la API pública de Banco Industrial (pablo).
+- `3_recursos/datos/datos_metricas_semanales/` y `log_metricas_semanales.md` — reemplazados con el store de la semana 202636 (pablo).
+- `3_recursos/datos/metricas_semanales.md` — creada entrada semana 202636 (pablo).
+- `clientes/casos_de_uso_clientes.md` — actualizadas 8 fichas: Maxiconsumo, Global 66 (pablo+nicolas), La Virginia, Peak Travel/Terramundi (pablo+nicolas), RIPSA, Depay, INTER, OCTAGON (pablo + nicolas).
+- `gaps_y_preguntas.md` — creados 4 gaps nuevos: PedidosYa sin ficha en log_clientes.md, Pago Fácil/Western Union sin ficha en log_clientes.md, criterio de hotfix sin definir, tensión publicaciones_mensuales.md vs. reforma quincenal (pablo + nicolas).
+- `procesos/criterios_de_priorizacion.md` — nueva sección: criterio de clasificación Build vs. Bau (pablo + nicolas).
+- `procesos/comunicacion_de_lanzamientos.md` — nueva sección: formato estándar del contenido de cada aviso (pablo + nicolas).
+- `procesos/analisis_de_riesgo_de_despliegue.md` — nueva sección: gap de criterio hotfix vs. despliegue estándar (nicolas).
+- `procesos/publicaciones_mensuales.md` — nota de contradicción con la reforma quincenal (protocolo de contradicción aplicado, ver gap) (pablo).
+- `overview_empresa/overview_empresa_general.md` — nueva sección: roles adquirente vs. agrupador (pablo).
+
+### 2026-09-07, primera corrida (pablo + nicolas)
 
 - `direccion/oportunidades.md` — creadas 2 filas nuevas: OP-019 (Agente de Cobros y Pagos sin consulta de cuenta por CBU/CVU/alias, paridad con Wallet) y OP-020 (migrar transferencias de Link a Coelsa para reducir tasa de rechazo) (pablo + nicolas). 1 item de nicolas (`oportunidad-refactor-segmentos-wallet-autonomia-clientes`) evaluado como duplicado de OP-017 ya existente (mismo hecho, misma reunión) — no se creó fila nueva.
 - `direccion/iniciativas.md` — actualizadas 2 filas: PRD-202 (contrato v6.0 aplicado — modelo de palancas simplificado, renombres, precisión de alcance) y bajar-tiempos-pagos-qr (reunión Global66 acota causa de discrepancia de medición, nuevo hallazgo de transferencias no acreditadas) (pablo + nicolas).

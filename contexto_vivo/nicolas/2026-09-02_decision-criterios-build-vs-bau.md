@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/criterios_build_bau.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Daily producto" (2026-09-02, con Luciana Rudaz, Pablo Gomes, Matias Alzogaray, Nicolás Colón) se acordó un criterio explícito para clasificar el trabajo del equipo entre **Build** y **Bau**, ante la necesidad de reflejar con precisión ante la gerencia el uso real de recursos (la clasificación venía siendo subjetiva).

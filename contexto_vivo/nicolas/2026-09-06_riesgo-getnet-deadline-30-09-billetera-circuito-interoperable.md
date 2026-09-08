@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Getnet (vía Luisana Noguera, `productoqr@getnet.com.ar`) viene reclamando desde el 2026-09-01 que la Billetera Bind Pago migre del circuito viejo al nuevo circuito tecnológico interoperable (especificación "Interoperabilidad v6 BCRA") para poder seguir operando como medio de pago (APM/socio) dentro de su red de QR — es decir, para que un usuario de la billetera pueda seguir pagando escaneando un QR de un comercio afiliado a Getnet. Según Getnet, Bind Pago ya completó una homologación técnica el 17/04 pero solo hizo pruebas manuales por Postman (confirmado por Alan Martínez, área técnica Bind); nunca hubo integración sistémica real, y el circuito viejo sigue en uso en producción.

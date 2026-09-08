@@ -31,6 +31,7 @@
 | [idempotencia_de_plataforma.md](idempotencia_de_plataforma.md) | Síntesis del patrón transversal de falta de idempotencia centralizada, con evidencia de 5 canales distintos. |
 | [incidentes_de_plataforma.md](incidentes_de_plataforma.md) | Incidentes de infraestructura y capacidad de julio-agosto 2026: Wallet Bean Service, sobrecarga por clientes de alto volumen, timeout de inserción (INF-1392), rate limiting, Auto External v2; despliegues Wallet 7.2/AuthExternal v2.0 y decisión pendiente Zero Downtime vs. Sentinela. |
 | [modelo_acoplado_vs_desacoplado.md](modelo_acoplado_vs_desacoplado.md) | Split QR del PSP 184, migración de Personal Pay al modelo desacoplado con Banco Industrial, y los riesgos operativos de la ventana de sincronización de 2 minutos. |
+| [api_bank/index.md](api_bank/index.md) | **Módulo nuevo (2026-09-07), 11 archivos.** Referencia técnica completa de la API pública de Banco Industrial (87 endpoints, 10 grupos): Autenticación, Cuenta, Billetera/CVU, Transferencia, TransferenciaMEP, Debin, Vista, Webhooks, Eventos, Alta de Cuenta (PSI/STI, no usado hoy), y catálogo de Errores. |
 
 ## Ver también
 
@@ -39,4 +40,5 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — inconsistencias abiertas de este módulo (conteo de microservicios, versión del documento fuente, PCI DSS omitido del texto narrativo, atribución de MongoDB).
 
 ---
-*Última actualización: 2026-08-12 — Reestructuración PARA en cascada: los 3 archivos legacy (`index.md`, `flujo_transaccional.md`, `seguridad_y_redes.md`) se desarmaron en 15 archivos temáticos, y se sumaron 6 archivos más provenientes de `detalle_productos/transversal/` y `documentacion_api/general_info.md` desarmados en fases previas — 21 archivos temáticos en total. El módulo pasa a ser explícitamente "sistemas/IT duro no ligado a producto", no solo la traducción de un documento del proveedor.*
+*Última actualización: 2026-09-07 — `/context_merge`: nuevo módulo [api_bank/](api_bank/index.md) (11 archivos, relevamiento completo de la API pública de Banco Industrial, contexto_vivo de Pablo Gomes).*
+*Última actualización anterior: 2026-08-12 — Reestructuración PARA en cascada: los 3 archivos legacy (`index.md`, `flujo_transaccional.md`, `seguridad_y_redes.md`) se desarmaron en 15 archivos temáticos, y se sumaron 6 archivos más provenientes de `detalle_productos/transversal/` y `documentacion_api/general_info.md` desarmados en fases previas — 21 archivos temáticos en total. El módulo pasa a ser explícitamente "sistemas/IT duro no ligado a producto", no solo la traducción de un documento del proveedor.*
