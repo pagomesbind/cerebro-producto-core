@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 El análisis técnico-funcional de la solución de PRD-202 (`onboarding_consolidado-solution.md`) se regeneró de punta a punta, de v1.3 (2026-09-04, sincronizado contra el contrato v6.0) a **v2.0**. En el tiempo transcurrido, el contrato de datos avanzó a v6.3 (agregando `paisNacimiento`, `declaracion.ocde`, `declaracion.detalleUif`, `declaracion.detalleFatca` — todos exigidos por la norma cruzada BCRA/OCDE/FATCA) y las historias de usuario pasaron de un contrato implícito de ~7 endpoints a **11 interfaces plenamente contractualizadas**, agrupadas por frontera de equipo (Wallet↔Organización, Wallet↔Onboarding vía el KYC-wrapper, y 2 historias de configuración/datos sin superficie de API nueva).

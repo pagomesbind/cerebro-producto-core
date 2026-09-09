@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 proyecto: onboarding_estrategico (Pablo Gomes) — nombre exacto de la carpeta/proyecto en su instancia sin confirmar desde acá
 pm_destino: pablo
 ---

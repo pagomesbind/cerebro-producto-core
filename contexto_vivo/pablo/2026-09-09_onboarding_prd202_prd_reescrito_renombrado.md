@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no — es una reversión deliberada y documentada de una decisión anterior (2026-07-21), no una contradicción sin resolver"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 El PRD formal de PRD-202 (Fase 1 — alta de wallet PF mayor de edad) se reescribió de punta a punta y se renombró: pasa de `prd_alta_wallet_pf_mayor_fase1.md` a `onboarding_consolidado-prd.md` (v7.0), alineado a la convención de nombres (`onboarding_consolidado-*`) que ya usan el resto de los artefactos técnicos del proyecto (historias de usuario, análisis de solución, descripción de Epic de Jira).

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 Reunión "Revisemos ADMIN Pago Facil" (2026-09-08, 11:02) — Adriana Endzeliz, Luisina Luca, Nicolás Colón. Preparación de una capacitación al equipo de soporte de Pago Fácil (a las 11:30 el mismo día) para que puedan verificar transacciones, operaciones, devoluciones y estados de pago directamente en el panel de administración, antes de escalar un ticket de soporte a Bind.

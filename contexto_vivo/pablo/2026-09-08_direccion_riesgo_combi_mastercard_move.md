@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Riesgo:** con la fecha límite de salida a producción de **Combi** fijada para el **15 de septiembre de 2026**, Emma Vignoles reportó en la reunión "Producto" (2026-09-08) que Ipsa no está dando certezas técnicas ni compromisos firmes de fecha, y que Giovanni (de Ipsa) sigue exigiendo pruebas adicionales. Emma programó una reunión con Ipsa para el día siguiente (2026-09-09) para intentar destrabar definiciones y fechas concretas.

@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Novedad puntual sobre PRD-66 (Provincia NET: creación masiva de QR) — investigación en curso, sin conclusión cerrada.** A raíz del reclamo de demora en generación de QR de DEPAY (WhatsApp) y el ticket [AD-1676](https://bindpsp.atlassian.net/browse/AD-1676) (atribuido a PNET), un análisis de datos (`dbo.Deuda` por entidad/día/estado, 98 días — junio a septiembre) confirmó que Provincia NET es el mayor generador de Deudas del sistema (2.563.059 en el período, 2,5× la entidad #2), con picos ≥100.000/día tanto antes como después del pase a producción de su carga masiva por SFTP (13/08).

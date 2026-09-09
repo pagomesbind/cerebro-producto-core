@@ -11,6 +11,7 @@ tipo_destino: crear (incidente_provincia_net_convivencia_sistemas.md)
 contradice: "no"
 confianza: Alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 ## Análisis COBRO — Decisiones y Prioridades (7/09/2026)

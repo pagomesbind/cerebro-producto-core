@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Actualiza el riesgo ya mergeado** `2026-09-06_riesgo-getnet-deadline-30-09-billetera-circuito-interoperable` (archivado en `4_archivos/contexto_ingestado/`, producto wallet, deadline duro 30/09 confirmado por Emma Vignoles) — este item no se edita, se resume acá el cambio de estado para que `/context_merge` lo aplique como delta sobre `2_areas/riesgos.md`.

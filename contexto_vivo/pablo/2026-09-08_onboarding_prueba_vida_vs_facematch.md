@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 En la reunión "Producto" (2026-09-08), al repasar los requisitos normativos faltantes para el legajo de onboarding, Pablo Gomes aclaró una distinción que hasta ahora no estaba explicitada en la wiki: **prueba de vida** y **concordancia facial (face match)** son dos validaciones biométricas distintas, y la normativa exige tener **las dos**, no una sola.

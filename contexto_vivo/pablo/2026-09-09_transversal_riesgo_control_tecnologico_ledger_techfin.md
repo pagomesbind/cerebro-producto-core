@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — sin archivo de canon existente que documente el control interno del ledger frente a Techfin específicamente. Relacionado pero distinto de la obligación de segregación de fondos ya capturada el 2026-09-08 (`4_archivos/contexto_ingestado/2026-09-08_cumplimiento_pspcp_segregacion_fondos_cuenta_operativa.md`) — aquella es sobre dónde están los fondos reales; esta es sobre quién controla la creación del saldo virtual que los representa."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 ## Qué encontró el banco

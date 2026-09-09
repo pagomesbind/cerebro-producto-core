@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 Delta de dos minutas semanales sucesivas del seguimiento comercial Bind-SEPSA (mismo frente que §5 de este archivo, hilo 2026-08-19/25 ya documentado) sobre los puntos operativos que seguían abiertos:

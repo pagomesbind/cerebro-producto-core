@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Decisión (Acordada, 2026-09-08):** se detienen los cambios propuestos sobre el webhook (agregar datos adicionales al payload) para no romper las integraciones ya activas de los clientes actuales.

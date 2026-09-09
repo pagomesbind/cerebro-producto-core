@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 El mail "RE: Version W 73 Wallet Service" (Fintexa, 2026-09-08) confirma qué parte del discovery de robustez de Ardid ya documentado en `integracion_con_productos_bind.md` (§6.1 mapeo de motivos de rechazo, §14 diseño de State Monitor — ambos de reuniones de agosto, marcados como "no construido") entra efectivamente en la versión **W73**, y qué queda afuera:

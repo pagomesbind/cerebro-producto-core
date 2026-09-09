@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Contexto/Problema:** Emma Vignoles informó en la reunión "Producto" (2026-09-08) que a BIN PCP se le asignó recientemente la **administración de la PCAB del BIN** (cámara compensadora) — un desafío normativo y operativo nuevo, actualmente en estudio, que incluye presentaciones ante la **Comisión Nacional de Valores (CNV)**. Sin más detalle técnico/de alcance aportado en esta reunión.

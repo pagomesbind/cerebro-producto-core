@@ -11,6 +11,7 @@ tipo_destino: crear (bcra_comunicacion_8471_8473_gestion_riesgo_fraude.md)
 contradice: "no"
 confianza: Alta
 estado: ingestado
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 ## Comunicación "A" 8471 del BCRA — Gestión del Riesgo de Fraude

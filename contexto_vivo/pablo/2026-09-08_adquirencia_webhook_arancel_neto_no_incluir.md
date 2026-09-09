@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4b0d3d1e684ff33256a33a29f86746dfd5c7cc9a
 ---
 
 **Contexto/Problema:** Luciana Rudaz planteó sumar el arancel neto (después de Coelsa) al webhook de notificación de pago que Bind PSP envía a las entidades — hoy el webhook manda el importe bruto, y algunas entidades (ej. Ripsa) ya lo usan para calcular ellas mismas el resto de las liquidaciones impositivas asumiendo una fórmula fija (0,8% + 21% IVA sobre ese arancel). El equipo de Luciana (Dani/Julie) ya tenía el cambio en desarrollo.
