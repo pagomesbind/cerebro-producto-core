@@ -1,6 +1,6 @@
 ---
 artifact: prd
-version: "2.0"
+version: "3.0"
 created: 2026-07-20
 status: complete
 context: Ejemplo ilustrativo — cifras ficticias, no son datos reales de Bind PSP. Continúa el caso de ejemplo de abandono en el alta de comercios de Adquirencia.
@@ -18,7 +18,9 @@ Es la etapa del funnel de alta digital con mayor caída de todo el proceso, y co
 
 ## Resumen de la solución planteada
 
-Agregar una pantalla de preview, antes de arrancar la carga, que le muestre al comercio la lista completa de documentos societarios requeridos según su tipo de entidad (unipersonal / sociedad), con un ejemplo visual de cada documento.
+Se agrega una pantalla de preview, antes de arrancar la carga de KYB, que le muestra al comercio la lista completa de documentos societarios requeridos según su tipo de entidad (unipersonal / sociedad), con un ejemplo visual de cada documento.
+
+El flujo queda así: el comercio ya declaró su tipo de entidad en un paso anterior del alta; con ese dato, el sistema arma la lista de documentos correspondiente y se la muestra antes de llevarlo al formulario de carga. El comercio revisa la lista, entiende qué va a necesitar, y recién ahí decide si continúa. Si el tipo de entidad no está declarado o la resolución de la lista falla por cualquier motivo, el sistema no bloquea el alta: muestra una lista genérica más amplia (la unión de todos los documentos posibles) para no dejar al comercio sin poder avanzar. La carga de KYB en sí no cambia — lo único nuevo es que el comercio sabe de antemano qué le van a pedir.
 
 ## Objetivos
 
@@ -36,50 +38,60 @@ Agregar una pantalla de preview, antes de arrancar la carga, que le muestre al c
 * Se prioriza confirmar primero si la metadata de "documentos requeridos por tipo de entidad" está disponible del lado del proveedor de onboarding (Fintexa) antes de definir si esa lógica se resuelve ahí o del lado de Bind.
 * El flujo de carga comparte componentes de UI con el alta de Wallet — cualquier cambio compartido se coordina con ese equipo antes de tocarlo.
 * No se contempla en esta iteración cambiar el formato de archivo aceptado (sigue siendo solo PDF).
+* **Tipos de entidad**, para referencia del resto del documento: *unipersonal* (persona humana con CUIT de monotributo o autónomo) y *sociedad* (persona jurídica, cualquier forma societaria) — son los dos únicos valores que hoy declara el comercio en el alta, y determinan qué lista de documentos se le muestra.
 
-## Funcionalidades y roadmap
+## Alineación de la solución
+
+### Funcionalidades clave
 
 Priorizado con MoSCoW, sobre el roadmap ya acordado con Ingeniería para este trimestre:
 
-### 🔴 Must have — MVP, imprescindible para bajar el abandono este trimestre
-* Pantalla de preview de documentación requerida, mostrada antes del formulario de carga de KYB.
-* Lógica de armado de la lista según el tipo de entidad declarado por el comercio (unipersonal / sociedad).
-* Comportamiento de fallback: si el tipo de entidad no está declarado o falla la resolución de la lista, mostrar la lista genérica más amplia sin bloquear el alta.
+**Dentro del alcance**
+* 🔴 MUST — Pantalla de preview de documentación requerida, mostrada antes del formulario de carga de KYB.
+* 🔴 MUST — Lógica de armado de la lista según el tipo de entidad declarado por el comercio (unipersonal / sociedad).
+* 🔴 MUST — Comportamiento de fallback: si el tipo de entidad no está declarado o falla la resolución de la lista, mostrar la lista genérica más amplia sin bloquear el alta.
+* 🟠 SHOULD — Imágenes de ejemplo por tipo de documento requerido. No bloquea el lanzamiento si no llega a tiempo.
+* 🟡 COULD — Aceptar fotos sacadas con el celular además de PDF. Depende de cambios del proveedor de onboarding — deseable, sin driver de negocio que lo adelante todavía.
 
-### 🟠 Should have — mejora la calidad del preview, no bloquea el lanzamiento
-* Imágenes de ejemplo por tipo de documento requerido.
+**Fuera del alcance**
+* ⚫ WON'T — Traducción de la lista de documentos a otros idiomas: se difiere porque hoy no hay comercios de fuera de Argentina en el flujo self-service.
 
-### 🟡 Could have — deseable, sin driver de negocio que lo adelante todavía
-* Aceptar fotos sacadas con el celular además de PDF — depende de cambios del proveedor de onboarding.
+**Consideraciones futuras**
+* Si en el futuro se suman más tipos de entidad (ej. fideicomisos), la lógica de armado de lista tiene que poder extenderse sin rehacer la pantalla — no es parte del alcance de este PRD, pero condiciona que la lista no se hardcodee por los dos valores actuales.
 
-### ⚫ Won't have (por ahora) — fuera de foco de este ciclo
-* Traducción de la lista de documentos a otros idiomas, si en el futuro hay comercios de fuera de Argentina.
+### Flujos clave
 
-## Flujos clave y referencias clave
+1. El comercio llega al paso de KYB del alta digital, con su tipo de entidad ya declarado en un paso previo.
+2. El sistema arma la lista de documentos requeridos para ese tipo de entidad y la muestra en la pantalla de preview, con un ejemplo visual de cada documento.
+3. El comercio revisa la lista y confirma que quiere continuar (o sale del alta sin completarla, igual que hoy).
+4. Al confirmar, el comercio pasa al formulario de carga existente — sin cambios sobre cómo se sube cada documento.
+5. Si el tipo de entidad no está declarado, o la resolución de la lista falla, el paso 2 muestra la lista genérica en vez de bloquear el avance.
 
-* Flujo actual de alta de comercios (paso de carga de KYB) — diagrama de referencia disponible internamente.
-* Mockup de la nueva pantalla de preview, todavía en definición con Diseño.
+*(Mockup de la pantalla de preview: en definición con Diseño al momento de este PRD.)*
 
-### Cómo se propone resolver el problema
+### Lógica clave
 
-Cuando el comercio termina de cargar su documentación de KYB, el sistema arma una vista previa con los datos ya extraídos (razón social, CUIT, tipo de documento) antes de que el comercio confirme el envío. El comercio revisa esa vista, corrige lo que esté mal directamente ahí, y recién entonces confirma — el envío al validador solo ocurre después de esa confirmación explícita. Si el comercio cierra la sesión sin confirmar, la carga queda guardada como borrador y puede retomarla más tarde sin perder lo ya ingresado.
+* La lista de documentos se resuelve una sola vez, al entrar a la pantalla de preview — si el comercio corrige su tipo de entidad después de ver el preview, se le vuelve a mostrar la lista actualizada antes de dejarlo avanzar a la carga.
+* El fallback a lista genérica nunca es un error visible para el comercio: se muestra como si fuera el comportamiento normal, sin mensaje de error ni fricción adicional.
+* La pantalla de preview no persiste ninguna decisión del comercio — es solo informativa; no cambia ni valida nada del lado del sistema hasta que el comercio llega al formulario de carga real.
 
-## Análisis de impacto en las distintas áreas
+## Checklist operativo por área
 
-Solo se incluyen las áreas con impacto real — Administración y Legales no tienen impacto identificado en este cambio (no cambia requisitos regulatorios ni procesos administrativos) y se excluyen de la tabla.
-
-| **Área** | **Impacto** | **Cómo la afecta el proyecto** | **¿Ya tiene lo que necesita para actuar?** |
-| --- | --- | --- | --- |
-| Comercial | Medio | Menos altas truncas que hoy terminan re-intentando por canal asistido; libera capacidad del equipo comercial en el corto plazo. | Sí — no requiere ninguna acción de su parte, es una liberación de carga pasiva. |
-| Soporte e integraciones | Bajo | La pantalla nueva puede generar consultas puntuales al principio del lanzamiento. | No del todo — falta coordinar un aviso previo al lanzamiento con el manual de ayuda actualizado; contingencia simple, no requiere alcance nuevo. |
-| Fraude | Bajo | No cambia el criterio de validación de documentos, solo cuándo se le informa al comercio qué va a necesitar. | Sí — no hay acción de su parte. |
-| Clientes externos ya en producción | Nulo | Solo afecta el flujo de alta de comercios nuevos, no a comercios ya activos. | — (sin impacto, no aplica). |
+| **Área** | **Pregunta clave** | **Respuesta (Sí/No + por qué)** | **Qué proponemos** | **Estado** |
+| --- | --- | --- | --- | --- |
+| Comercial | ¿Hay clientes en pipeline cuya integración cambia por esto? | No — el cambio es sobre el flujo self-service, no sobre el proceso de alta asistida que usa comercial. | — | Contemplado y validado |
+| Soporte e Integraciones | ¿Aparecen errores o estados nuevos que Soporte va a ver en un reclamo y hoy no sabe interpretar? | Sí — la pantalla nueva puede generar consultas puntuales al principio del lanzamiento, sobre todo de comercios que no entienden por qué ahora se les pide algo "antes" de cargar. | Tarea previa al go-live: avisar a Soporte antes del lanzamiento y actualizar el manual de ayuda con la pantalla nueva. | Pendiente |
+| Administración | ¿Genera movimientos de dinero nuevos o cambia cómo se contabilizan y concilian? | No — no toca liquidaciones, impuestos ni conciliación; es un cambio de experiencia en el alta. | — | Contemplado y validado |
+| Fraude | ¿Cambia el criterio de validación de documentos o el perfil de riesgo del alta? | No — no cambia qué se valida ni cuándo, solo cuándo se le informa al comercio qué va a necesitar. | — | Contemplado y validado |
+| Legales | ¿Tiene implicancias regulatorias (BCRA, UIF/PLD)? | No — los requisitos documentales de KYB no cambian, solo el momento en que se comunican. | — | Contemplado y validado |
+| IT | ¿Depende de un desarrollo de un proveedor externo y con qué lead time? | Sí — depende de que Fintexa confirme si expone la metadata de "documentos requeridos por tipo de entidad" o si esa lógica se resuelve del lado de Bind. Todavía no está confirmado. | Tarea previa al go-live: confirmar con Fintexa la disponibilidad de la metadata antes de cerrar el diseño técnico; si no la expone, la lógica de lista se resuelve como funcionalidad propia (ya contemplada en Funcionalidades clave). | Pendiente |
+| Clientes externos en producción | ¿Es un breaking change para alguien ya integrado? | No — solo afecta el flujo de alta de comercios nuevos, no a comercios ya activos. | — | Contemplado y validado |
 
 ## **Riesgos**
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
 | El preview alarga la percepción de esfuerzo y empeora el abandono en vez de mejorarlo | Media | Alto | Validar primero con un A/B test antes de lanzar a 100% del tráfico. |
-| Fintexa no expone la metadata de documentos requeridos por tipo de entidad | Media | Medio | Definir la lógica de lista por tipo de entidad del lado de Bind como plan B. |
+| Fintexa no expone la metadata de documentos requeridos por tipo de entidad (gap detectado en el checklist operativo, IT) | Media | Medio | Definir la lógica de lista por tipo de entidad del lado de Bind como plan B. |
 | El cambio impacta componentes de UI compartidos con el alta de Wallet sin coordinación previa | Baja | Medio | Confirmar con el equipo de Wallet antes de tocar componentes compartidos. |
-| Soporte no llega a tener el aviso/manual de ayuda listo para el lanzamiento (gap detectado en el análisis de impacto) | Media | Bajo | Coordinar con Soporte la fecha del aviso antes de fijar la fecha de lanzamiento. |
+| Soporte no llega a tener el aviso/manual de ayuda listo para el lanzamiento (gap detectado en el checklist operativo, Soporte) | Media | Bajo | Coordinar con Soporte la fecha del aviso antes de fijar la fecha de lanzamiento. |

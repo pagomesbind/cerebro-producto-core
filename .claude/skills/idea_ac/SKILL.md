@@ -1,10 +1,14 @@
 ---
 name: idea_ac
-description: Genera criterios de aceptación Given/When/Then estructurados para una historia de usuario o slice de feature, cubriendo happy path, escenarios de falla y expectativas no funcionales. Se activa con /idea_ac.
-when_to_use: Se activa cuando el usuario ejecuta /idea_ac, típicamente cuando una historia de usuario o sección de PRD ya existe y hace falta profundizar en condiciones de pass/fail verificables para handoff a ingeniería y sign-off de QA.
+description: "[DEPRECADA 2026-09-09 — no usar, ver nota] Genera criterios de aceptación Given/When/Then estructurados para una historia de usuario o slice de feature, cubriendo happy path, escenarios de falla y expectativas no funcionales."
+when_to_use: "DEPRECADA — no se activa más. Ver nota de deprecación."
 disable-model-invocation: true
 argument-hint: "[historia o slice de feature a detallar]"
 ---
+
+> ## ⛔ DEPRECADA (2026-09-09) — no usar
+>
+> El PM decidió no usar más esta skill: en la práctica, nunca se corría por separado de `/idea_us`. Sus responsabilidades quedaron absorbidas: la profundidad Given/When/Then (happy path → casos borde → estados de error → no funcionales) ya es parte del Paso 5 de [`/idea_us`](../idea_us/SKILL.md) para toda historia, y el catálogo exhaustivo de fallas de proveedores externos (timeout, caída, respuesta malformada, rate limit) ahora es una regla dura de [`/idea_solution`](../idea_solution/SKILL.md) (Sección 8), no algo que se reconstruye historia por historia. Se conserva este archivo por trazabilidad histórica — no lo invoques, no lo referencies desde otra skill nueva.
 
 <!-- Adaptado de product-on-purpose/pm-skills (deliver-acceptance-criteria), licencia Apache-2.0. https://github.com/product-on-purpose/pm-skills -->
 

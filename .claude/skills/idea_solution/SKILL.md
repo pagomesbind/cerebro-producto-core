@@ -17,8 +17,12 @@ No reemplaza el diseño de arquitectura de Ingeniería: no elige lenguaje, frame
 ## Cuándo NO usarla
 
 - El problema todavía no está enmarcado o en discusión → usá primero [`/idea_problem`](../idea_problem/SKILL.md); este análisis asume un problema ya acordado.
-- Ya existe un diseño de solución confirmado y lo que hace falta es el contrato fino de un endpoint puntual para una historia → usá [`/idea_ac`](../idea_ac/SKILL.md) sobre esa historia, no rehagas el análisis completo.
+- Ya existe un diseño de solución confirmado y lo que hace falta es el contrato fino de un endpoint puntual para una historia → profundizá directo en el Paso 5 de [`/idea_us`](../idea_us/SKILL.md) sobre esa historia, no rehagas el análisis completo.
 - Lo que se necesita es arquitectura de plataforma no ligada a un proyecto concreto (infraestructura, seguridad, NFR de sistema transversal) → eso es contexto de `wiki/3_recursos/arquitectura_sistema/`, se captura como item en `contexto_vivo/`, no en un proyecto puntual.
+
+## Por qué el catálogo de fallas de proveedores externos es una regla dura
+
+Bind PSP no tiene hoy un sandbox confiable para emular el comportamiento de proveedores externos (Coelsa, billeteras de otros PSP, Fintexa) en Staging — el incidente de fraude de Transferencias Pull de marzo 2026 escaló justamente porque QA no pudo probar cómo se comporta el sistema cuando la billetera externa responde distinto de lo esperado. Mientras ese sandbox no exista, este documento es la única instancia donde alguien se sienta a enumerar deliberadamente qué pasa si el proveedor tira timeout, está caído, devuelve algo inesperado o excede un límite — antes de que Ingeniería construya, no después de que algo se rompa en producción. Por eso el catálogo de fallas de la Sección 8 no se limita a los errores de negocio que el proveedor ya documentó — esos son el piso, no el techo (ver regla dura #12).
 
 ## ⚖️ Reglas duras
 
@@ -33,6 +37,15 @@ No reemplaza el diseño de arquitectura de Ingeniería: no elige lenguaje, frame
 9. **Actualización in place, historial de revisiones al pie, cuerpo limpio** — si ya existe un análisis de una corrida anterior, se reescribe lo que cambió y se suma una entrada al historial, nunca se deja texto "actualizado"/"superado" incrustado en el medio.
 10. Todo output en español.
 11. **Si el alcance del proyecto (Sección 1) incluye trabajo nuevo o modificado de front end (UX/UI), la especificación de pantallas para el developer nunca es el primer paso.** Antes de documentarla, corré una discusión dedicada de experiencia de usuario con el PM — mismo método de grilling que el resto de la skill: presentá alternativas con tu recomendación, dejá la decisión de diseño de UX al PM. Si hay un usuario final real accesible (el operador o cliente que va a usar la pantalla), sumá además una validación en vivo con esa persona antes de cerrar la especificación — el acuerdo del PM solo no alcanza para dar la UX por resuelta. Recién con la experiencia acordada y validada, documentá el detalle completo de pantallas (layout, catálogo de casos estado/acción, formularios, diálogos) — como parte de la Sección 7 (Caminos alternativos) o como Anexo dedicado si el volumen lo justifica.
+12. **Todo sistema/proveedor externo del Contrato de integración (Sección 4) lleva su catálogo de fallas completo en la Sección 8 — no solo los errores de negocio que el proveedor ya documentó.** Por cada dependencia externa, la ronda de grilling de esa rama (Paso 2) tiene que agotar antes de preguntarle nada al PM — la mayoría se resuelve por diseño resiliente estándar, no por decisión de negocio — como mínimo estos seis casos, cada uno con su propia fila `E#` si aplica:
+    - **(a) Timeout o error de conexión** (red caída, DNS, TLS).
+    - **(b) El proveedor está caído o en mantenimiento** (5xx sostenido, no un error puntual).
+    - **(c) Responde con un formato inesperado** o un campo/valor que no matchea lo documentado.
+    - **(d) Rate limit o cuota excedida.**
+    - **(e) Latencia degradada sin error explícito** — puede disparar un timeout del lado de Bind aunque el proveedor "esté bien".
+    - **(f) Respuesta duplicada, fuera de orden, o que llega dos veces** (reintento propio o del proveedor).
+    
+    Si alguno de estos seis no aplica a este proveedor puntual (ej. la integración es sincrónica y no admite reintento), la fila lo dice explícito con el motivo — nunca se omite en silencio (regla dura #6). Este catálogo es insumo directo para `/idea_us`: una historia que consume este proveedor no reinventa estos casos, los hereda de acá.
 
 ## 🏃 Pipeline
 
@@ -105,7 +118,7 @@ Con la frontera vacía, volcá el árbol resuelto a las 12 secciones del templat
 5. **Mapa de procedencia de datos** — tabla por campo del request: `Campo | Origen (sistema/tabla/pantalla/derivado) | Transformación | Obligatorio | Qué pasa si falta`. Esta es la sección que resuelve la pregunta "¿de dónde sale la información?" — no la des por implícita en el contrato.
 6. **Camino feliz** — diagrama de secuencia en Mermaid (`sequenceDiagram`) con la operación real nombrada en cada flecha, más los pasos numerados con un ejemplo concreto de request/response debajo de cada uno.
 7. **Caminos alternativos** — cada rama de negocio que no es el camino feliz pero tampoco es un error (ej. "el recurso ya existe, entonces se actualiza en vez de crearse"), numerada igual que el camino feliz.
-8. **Errores y flujos de error controlado** — tabla `E1..En`: condición · origen (transporte / regla de negocio / dato faltante) · cómo se detecta · acción del sistema · política de reintento y backoff si aplica · compensación o rollback si aplica · qué ve el usuario final · qué se loguea y qué dispara una alerta.
+8. **Errores y flujos de error controlado** — tabla `E1..En`: condición · origen (transporte / regla de negocio / dato faltante) · cómo se detecta · acción del sistema · política de reintento y backoff si aplica · compensación o rollback si aplica · qué ve el usuario final · qué se loguea y qué dispara una alerta. Para cada proveedor externo del contrato, cubrí como mínimo los seis casos de la regla dura #12 (timeout/conexión, caída del proveedor, respuesta malformada, rate limit, latencia degradada, duplicado/fuera de orden), además de los errores de negocio conocidos.
 9. **Máquina de estados** — diagrama Mermaid (`stateDiagram-v2`) de la entidad principal del flujo: transiciones válidas, estados terminales, quién dispara cada transición.
 10. **Convivencia con lo existente** — qué mecanismo actual se conserva tal cual, cuál se duplica temporalmente, y cuál se reemplaza — con la fecha o condición de corte si aplica.
 11. **Decisiones de diseño, NFR y alternativas descartadas** — por cada decisión relevante: opción elegida, opciones descartadas y por qué, qué la invalidaría a futuro. Sumá acá volumetría, latencia esperada, ventanas horarias, observabilidad y retención **solo si el PM o el PRD ya los definieron** — no inventes SLAs que nadie pidió.
@@ -127,6 +140,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo (c
 - [ ] El mapa de procedencia de datos cubre todos los campos obligatorios del contrato
 - [ ] Todo diagrama de secuencia nombra la operación real en cada flecha, nunca una descripción genérica
 - [ ] Hay al menos un flujo de error por cada error conocido del proveedor o del sistema existente
+- [ ] Para cada proveedor externo del contrato, la Sección 8 cubre explícitamente los seis casos de la regla dura #12 (timeout/conexión, caída del proveedor, respuesta malformada, rate limit, latencia degradada, duplicado/fuera de orden) — no solo los errores de negocio que el proveedor ya documentó
 - [ ] El material de `referencias/` y de `artefactos/` que quedó sin leer está declarado explícitamente, no omitido en silencio
 - [ ] Cada pedido de material dice qué desbloquea y si es bloqueante
 - [ ] Ninguna pregunta hecha al PM tenía su respuesta ya escrita en `proyecto.md`, el problem statement, o un artefacto propio o de un proyecto hermano

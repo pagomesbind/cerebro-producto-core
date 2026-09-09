@@ -33,8 +33,9 @@ Un lanzamiento significativo toca a más equipos de los que un PM tiene en la ca
 ### Paso 0 — Contexto del lanzamiento
 
 1. Resolvé la ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2. Leé `proyecto.md` y el PRD asociado en `artefactos/` si existen — el checklist parte de lo que ya se especificó, no lo redefine. Si es miembro de un proyecto general, leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre.
-2. Si el lanzamiento involucra un proveedor externo (Fintexa u otro), revisá `wiki/3_recursos/arquitectura_sistema/` por dependencias conocidas.
-3. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-golive.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
+2. **Si el PRD tiene un Checklist operativo por área, revisalo primero.** Cada fila marcada como "tarea previa al go-live" en la columna "Qué proponemos" ya identificó un impacto real en un área y qué hay que hacer antes de salir a producción — traela al checklist de esta skill con responsable y fecha, en vez de volver a descubrir el impacto área por área desde cero.
+3. Si el lanzamiento involucra un proveedor externo (Fintexa u otro), revisá `wiki/3_recursos/arquitectura_sistema/` por dependencias conocidas.
+4. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-golive.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
 
 ### Paso 1 — Definir el contexto del lanzamiento
 

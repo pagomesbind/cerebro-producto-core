@@ -16,12 +16,17 @@ Un PRD describe una iniciativa completa; una historia de usuario es la unidad de
 
 ## Cuándo NO usarla
 
-- Necesitás cobertura de criterios de aceptación mucho más profunda (Given/When/Then exhaustivo) para una sola historia o slice → usá [`/idea_ac`](../idea_ac/SKILL.md) sobre esa historia puntual.
 - La feature todavía no está especificada → usá primero [`/idea_prd`](../idea_prd/SKILL.md); las historias tienen que trazar a requisitos ya documentados.
+
+No existe una skill separada para profundizar Given/When/Then de una historia puntual (`/idea_ac` se deprecó el 2026-09-09) — esa profundidad es responsabilidad directa del Paso 5 de esta misma skill, apoyada en el catálogo de fallas de `{{nombre_corto_proyecto}}-solution.md` (Sección 8, si existe `/idea_solution` previo) en vez de reinventar los casos de error por historia.
 
 ## Por qué esta skill es experta en APIs
 
 Buena parte del negocio de Bind PSP pasa por construir, exponer o consumir APIs (Adquirencia, Wallet, Agente de Cobros y Pagos, Ardid, Siscri, integraciones con Fintexa/Payway/BCRA). Una historia que describe un endpoint mal especificado genera ida y vuelta con Ingeniería y QA, o peor, un desarrollador "elige" el comportamiento no especificado (naming, código de error, estrategia de borrado) y ese criterio ad hoc se vuelve contrato de facto. Por eso, cuando la historia toca un endpoint, esta skill actúa como diseñadora de contrato de API, no solo como redactora de AC — ver el detalle obligatorio del Paso 5.
+
+## Por qué las reglas de negocio transversales importan tanto como el contrato de API
+
+El gate de CI/CD que Infraestructura/Seguridad está mandatorizando (SAST + cobertura mínima + code review formal, ver `2_areas/procesos` una vez mergeado) detecta código riesgoso o mal escrito — no una condición de negocio mal planteada. El incidente de fraude de Transferencias Pull de marzo 2026 lo muestra literal: la causa raíz fue un `if` condicionado sobre la variable equivocada, un error de lógica de negocio que ningún linter ni analizador estático iba a atrapar — solo un AC explícito sobre ese caso borde lo hace. Ese gate cubre la mitad del problema; la otra mitad — que la lógica de negocio esté bien probada, incluidos los caminos de error — sigue siendo terreno exclusivo de Producto al redactar AC. Por eso esta skill no solo pide AC testeables por historia (INVEST), sino que exige mirar el conjunto del proyecto: una regla de negocio que aplica a más de una historia (un límite, una validación de estado, un cálculo compartido) se pierde fácil si cada historia se redacta y revisa de forma aislada, sin nadie mirando el proyecto completo. Ver el inventario del Paso 0 y la revisión cruzada del Paso 5ter.
 
 ## ⚖️ Reglas duras
 
@@ -31,7 +36,8 @@ Buena parte del negocio de Bind PSP pasa por construir, exponer o consumir APIs 
 4. **Aplicá INVEST:** cada historia tiene que ser Independiente, Negociable, Valiosa, Estimable, Chica, Testeable. "Chica" significa acotada a un entregable técnico completo (o a un entregable parcial de ese componente si no entra en un sprint, ver Paso 3) — nunca partir una historia en varias solo porque cubre más de un camino o escenario de uso; eso son AC de una misma historia, no historias distintas. Si una historia no cumple, revisala antes de darla por terminada.
 5. **El documento es siempre autocontenido.** Es la previa a un entregable que ingeniería, QA o un tercero van a leer sin acceso a este sistema — nunca links a la wiki, nombres de archivo o de skill, códigos de ticket usados como si el lector los reconociera, ni jerga de proceso interno ("según el gap...", "ver decisiones.md"). "Contexto y antecedentes" recapitula en prosa lo que el PRD u otro artefacto ya estableció, no lo linkea.
 6. **No dejar puertas abiertas al desarrollador en una historia de API.** Ante cada decisión de contrato (naming, paginación, estrategia de borrado, código de error, versionado) elegí una opción concreta y documentala — nunca "a definir por el equipo técnico" salvo que sea una Pregunta abierta explícita y consciente.
-7. Todo output en español.
+7. **Una regla de negocio transversal al proyecto se prueba en cada historia que la toca, no solo en la primera donde aparece.** Nunca asumas que "ya se probó en otra historia" alcanza — cada componente técnico que ejecuta esa regla (un endpoint, una pantalla, un job) necesita su propio AC, aunque la lógica de negocio detrás sea idéntica. Ver el inventario del Paso 0 y la revisión cruzada del Paso 5ter.
+8. Todo output en español.
 
 ## 🏃 Pipeline
 
@@ -39,13 +45,14 @@ Buena parte del negocio de Bind PSP pasa por construir, exponer o consumir APIs 
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2.
 2. **Leé todo lo que ya existe antes de escribir una sola historia** — no alcanza con el PRD solo:
-   - El PRD formal completo en `artefactos/` (todas las secciones: Problema, Solución, Definiciones, Funcionalidades, Riesgos, Flujos).
+   - El PRD formal completo en `artefactos/` (todas las secciones: Problema, Solución, Definiciones, Alineación de la solución — Funcionalidades/Flujos/Lógica clave —, Checklist operativo por área, Riesgos).
    - **`artefactos/{{nombre_corto_proyecto}}-solution.md`, si existe** — es la fuente principal del contrato de API y de los flujos del Paso 5: el orden de llamadas, los endpoints reales, la procedencia de cada dato y los errores conocidos ya están ahí, no se reinventan por historia. Cualquier documento de acceptance criteria ya redactado (`/idea_ac` previo) es la otra fuente a revisar.
    - El `proyecto.md` del miembro completo (no solo el resumen ejecutivo) — Definiciones, Diseño técnico, Seguimiento PM, Historial de sync suelen tener detalle que el PRD todavía no absorbió.
    - Si es miembro de un proyecto general, el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — las historias no deberían re-litigar una decisión de arquitectura ya cerrada a nivel proyecto.
    - Cualquier otro artefacto de la carpeta (`artefactos/`) que el PM haya referenciado en la sesión — diagramas, docs de validaciones de un proveedor externo, historial de bugs de un endpoint existente, etc. Estos suelen ser la fuente real del detalle fino que hace falta en el Paso 5.
 3. Si no hay PRD asociado, confirmá con el usuario cuál es el alcance antes de escribir historias.
 4. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-us.md`** de una corrida anterior, leelo completo — esta corrida lo actualiza in place (ver Paso 8), no genera un documento nuevo en paralelo.
+5. **Armá el inventario de reglas de negocio transversales del proyecto** — condiciones de validación, cálculo o aprobación/rechazo que aplican a más de un endpoint, pantalla o historia (ej. un límite de monto, una regla de estado, una fórmula compartida, una condición de habilitación) — a partir del PRD, `solution.md` y `proyecto.md` (incluido el §4 del padre si es miembro de un proyecto general). No hace falta un documento aparte: alcanza con tenerlo explícito antes de escribir AC, porque es lo que se contrasta historia por historia en el Paso 5 y en conjunto en el Paso 5ter — el riesgo real es redactar cada historia de forma aislada y perder de vista que una regla compartida terminó sin ningún AC que la cubra, o cubierta de forma inconsistente entre historias distintas.
 
 ### Paso 1 — Entender el contexto de la feature
 
@@ -69,7 +76,7 @@ Formato: "Como [persona], quiero [acción] para [beneficio]."
 
 ### Paso 5 — Definir criterios de aceptación
 
-Criterios específicos y testeables en formato Given/When/Then. Los criterios de aceptación definen "terminado" — si todos pasan, la historia está completa. (Para cobertura más profunda por historia, ver [`/idea_ac`](../idea_ac/SKILL.md).)
+Criterios específicos y testeables en formato Given/When/Then. Los criterios de aceptación definen "terminado" — si todos pasan, la historia está completa. Empezá siempre por el camino feliz y sumá después casos borde, estados de error (con su comportamiento de recuperación visible) y criterios no funcionales cuando corresponda — la profundidad de esta sección es responsabilidad de este mismo paso, no de una skill separada.
 
 **Historias que describen un endpoint o contrato de API — nivel de detalle obligatorio.** Cómo se documenta el contrato depende de si esta historia lo define o lo cambia:
 
@@ -122,6 +129,10 @@ Cubrí explícitamente los siguientes bloques — vayan en la sección de Contra
 - Mocks/fixtures de datos de prueba sin PII real.
 - Pruebas negativas/adversariales: nulos, campos faltantes, tipos erróneos, payloads fuera de rango — no solo el happy path.
 
+**h) Reglas de negocio transversales al proyecto** (contrastar contra el inventario del Paso 0)
+- Si esta historia ejecuta una regla que también aplica a otra historia del mismo proyecto, decilo explícito en el AC (ej. "aplica el mismo límite de monto que la historia de alta — ver Contexto y antecedentes") y sumá el AC del caso borde igual, aunque ya esté probado en la otra historia — nunca asumir que alcanza con probarlo una vez.
+- No confiar en que el gate automático de calidad (SAST/cobertura) va a atrapar una condición de negocio mal escrita — eso solo lo atrapa un AC explícito sobre el caso borde específico, nunca un "valida correctamente" genérico.
+
 ### Paso 5bis — Diagrama de flujo (cuando aplique)
 
 Si el flujo de la historia tiene ramas condicionales, más de un sistema/actor involucrado, reintentos, o estados intermedios que un texto lineal no deja claros a simple vista, agregá un diagrama en Mermaid (`flowchart` para decisiones, `sequenceDiagram` para intercambios entre sistemas) en una sección "Diagrama de flujo" propia dentro de la historia. No es obligatorio para historias simples de un solo paso — es una herramienta para cuando el texto solo no alcanza para que Ingeniería visualice el camino completo sin ambigüedad, especialmente en integraciones con sistemas externos (Fintexa, Payway, BCRA) donde el orden de llamadas y los puntos de fallo importan.
@@ -130,10 +141,11 @@ Si el flujo de la historia tiene ramas condicionales, más de un sistema/actor i
 
 **No se da por cerrado el documento en la primera pasada.** Antes de considerar el entregable terminado:
 
-1. Presentá el documento completo al PM para revisión — es el estado por defecto, no un paso opcional.
-2. Si el PM corrige una historia (dirección de un flujo, alcance, redacción, un AC mal planteado), reescribí esa historia completa reflejando la corrección — no parchear con notas "actualizado" superpuestas al texto viejo (ver regla general de artefactos: cuerpo limpio, historial de revisiones al pie).
-3. Repetí el ciclo de revisión las veces que haga falta hasta que el PM esté de acuerdo con las redacciones — cada vuelta suma una entrada al historial de revisiones del documento, no un documento nuevo.
-4. Recién con el OK explícito del PM se pasa al Paso 8 (persistencia + changelog) y, si el PM lo pide aparte, a la creación de tickets en Jira (ver regla dura de Jira más abajo — sigue siendo un paso separado y explícito, no automático).
+1. **Revisión cruzada de reglas de negocio (antes de la primera presentación):** releé el documento completo, todas las historias juntas y no una por una, contra el inventario del Paso 0. Marcá y corregí cualquier regla transversal que quedó sin AC en alguna historia que la toca, o cubierta de forma contradictoria entre historias distintas (ej. dos límites distintos para la misma condición). Este paso es el que compensa el punto ciego de redactar historia por historia — hacelo siempre, no solo cuando sospechás un problema.
+2. Presentá el documento completo al PM para revisión — es el estado por defecto, no un paso opcional.
+3. Si el PM corrige una historia (dirección de un flujo, alcance, redacción, un AC mal planteado), reescribí esa historia completa reflejando la corrección — no parchear con notas "actualizado" superpuestas al texto viejo (ver regla general de artefactos: cuerpo limpio, historial de revisiones al pie).
+4. Repetí el ciclo de revisión las veces que haga falta hasta que el PM esté de acuerdo con las redacciones — cada vuelta suma una entrada al historial de revisiones del documento, no un documento nuevo.
+5. Recién con el OK explícito del PM se pasa al Paso 8 (persistencia + changelog) y, si el PM lo pide aparte, a la creación de tickets en Jira (ver regla dura de Jira más abajo — sigue siendo un paso separado y explícito, no automático).
 
 ### Paso 6 — Aplicar criterios INVEST
 
@@ -161,6 +173,7 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 - [ ] Si la historia crea o modifica un endpoint: tiene sección "Contrato de API" completa (estilo, método, URL, headers, naming). Si reutiliza uno existente sin cambios, esa sección no está — el detalle equivalente vive en los AC
 - [ ] En cualquiera de los dos casos, los AC cubren validaciones por dato, ejemplos concretos de request/response (bloque JSON, nunca solo en prosa), códigos de respuesta explícitos, anti-BOLA/BOPLA, formato de error RFC 9457 e idempotencia si crea/mueve dinero
 - [ ] Si el flujo de la historia tiene ramas, reintentos o más de un sistema involucrado: hay diagrama Mermaid en "Diagrama de flujo" (Paso 5bis)
+- [ ] Se armó el inventario de reglas de negocio transversales (Paso 0) y se hizo la revisión cruzada de todas las historias contra ese inventario antes de la primera presentación (Paso 5ter, punto 1) — ninguna regla compartida quedó sin AC o con AC contradictorio entre historias
 - [ ] El PM revisó el documento completo y dio su OK explícito a las redacciones (Paso 5ter) antes de darlo por terminado
 
 ## Paso 8 — Cierre estándar
@@ -169,4 +182,4 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 2. **Índices:** `wiki/1_proyectos/index.md`; `wiki/index.md` solo si aplica.
 3. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 5. **Jira:** nunca crear tickets a partir de estas historias sin confirmación explícita del usuario, aunque el Paso 5ter ya haya cerrado con el OK del PM sobre el contenido — la creación en Jira es una decisión aparte que el PM tiene que pedir explícitamente. Si el alcance cruza más de un sistema/equipo (ej. dos proyectos Jira distintos), evaluá si corresponde partir una historia en dos — una por sistema — en vez de una sola historia con dependencias cruzadas de dueño ambiguo. Cuando el PM confirme que quiere crear en Jira, la creación misma (IDEA/Epic/Historias, clasificación, estados, prioridades) es responsabilidad de [`/idea_jira`](../idea_jira/SKILL.md) — no la repliques acá a mano.
-6. Siguiente paso sugerido: [`/idea_ac`](../idea_ac/SKILL.md) para profundizar criterios de una historia puntual, [`/idea_estimate`](../idea_estimate/SKILL.md) para cargar una estimación preliminar de SP por analogía histórica una vez que el PM dio su OK sobre las historias (Paso 5ter ya cerrado), [`/idea_jira`](../idea_jira/SKILL.md) para crear la jerarquía en Jira una vez que haya SP estimado, o [`/idea_golive`](../idea_golive/SKILL.md) cuando el conjunto de historias esté listo para lanzar. Si alguna historia quedó fuera de alcance de desarrollo (ej. una carga de datos puntual/backfill), no la fuerces dentro del documento de historias — anotala como ítem del checklist de lanzamiento en vez de como historia de sprint.
+6. Siguiente paso sugerido: [`/idea_estimate`](../idea_estimate/SKILL.md) para cargar una estimación preliminar de SP por analogía histórica una vez que el PM dio su OK sobre las historias (Paso 5ter ya cerrado), [`/idea_jira`](../idea_jira/SKILL.md) para crear la jerarquía en Jira una vez que haya SP estimado, o [`/idea_golive`](../idea_golive/SKILL.md) cuando el conjunto de historias esté listo para lanzar. Si alguna historia quedó fuera de alcance de desarrollo (ej. una carga de datos puntual/backfill), no la fuerces dentro del documento de historias — anotala como ítem del checklist de lanzamiento en vez de como historia de sprint.

@@ -59,7 +59,7 @@ El discovery y la especificación de una IDEA viven en la wiki (`proyecto.md`, P
 1. **Categoría** (BAU/BUILD/NORMATIVO) — Regla dura 6.
 2. **Producto** — de qué producto(s) trata la IDEA (ver tabla de `references/campos_jira.md` §1.3); de ahí sale también el espacio de desarrollo (WS/AD/OB/ARD/SER) donde va a vivir la Epic y las Historias.
 3. **Cliente** — Regla dura 7.
-4. **Prioridad de cada historia** — mapeá cada historia de usuario confirmada contra la funcionalidad MoSCoW de la que salió en el PRD (🔴/🟠/🟡) y aplicá la tabla de la Regla dura 5. Si el PM marcó la IDEA como urgente/bug productivo en la sesión, confirmá explícitamente con él que corresponde `Highest` antes de aplicarlo.
+4. **Prioridad de cada historia** — mapeá cada historia de usuario confirmada contra la etiqueta MoSCoW de la funcionalidad de la que salió, dentro de "Alineación de la solución › Funcionalidades clave" del PRD (🔴/🟠/🟡) y aplicá la tabla de la Regla dura 5. Si el PM marcó la IDEA como urgente/bug productivo en la sesión, confirmá explícitamente con él que corresponde `Highest` antes de aplicarlo.
 5. **SP estimado** — leído del frontmatter del PRD (Regla dura 8), no se recalcula acá.
 
 ### Paso 2A — La IDEA no existe todavía: crear todo de cero
