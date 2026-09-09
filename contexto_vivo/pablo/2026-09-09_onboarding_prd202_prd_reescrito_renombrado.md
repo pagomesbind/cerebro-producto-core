@@ -11,7 +11,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no — es una reversión deliberada y documentada de una decisión anterior (2026-07-21), no una contradicción sin resolver"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

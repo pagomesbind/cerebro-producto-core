@@ -42,6 +42,12 @@ Un usuario logueado como Entidad no ve sus reportes de Comercios/Movimientos fil
 - Campos que no traen datos: campo "procesador" vacío, campo "comercio" vacío en un caso puntual al generar con usuario de Entidad.
 - UX: falta ícono más descriptivo para el botón de reporte; "Generar reporte" no redirige tras completarse; "TRANSACCIONES" aparecía duplicada en el menú de Admin.
 
+## Búsqueda por referencia en el Admin — solo exacta, no parcial
+
+Al filtrar transacciones por forma de pago "transferencias", se detectó que el personal externo (soporte de Pago Fácil) solo conoce la parte del identificador de referencia ubicada **antes de la barra inclinada** — y el Admin **no permite búsquedas parciales directas** en ese campo. Workaround acordado: descargar el CSV del listado y hacer ahí la búsqueda parcial.
+
+Otros filtros disponibles relevados en la misma prueba (capacitación al equipo de soporte de Pago Fácil, reunión "Revisemos ADMIN Pago Facil", 2026-09-08): identificador externo, identificador de procesador, identificador de deuda. El identificador de transacción propio de Bind se genera **antes** que el registro del emisor. Las transferencias rechazadas por montos más altos u otros motivos deben gestionarse usando el **identificador externo**.
+
 ## Refactorización de permisos (mantenimiento)
 
 Ticket XL de refactorización de permisos del Portal, el más grande de la muestra relevada de la Epic de mejoras técnicas — quedó "Listo para desarrollo" al cierre del relevamiento.
@@ -69,5 +75,6 @@ Ticket XL de refactorización de permisos del Portal, el más grande de la muest
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración", "Defectos encontrados en QA" y "Reporting" (111 SP, 39 tickets) — ingesta 2026-07-06.*
-*Última actualización: 2026-08-19 — nueva sección "Parametrización manual y fragmentada de entidades" (reunión "Parámetros de entidades").*
+*Última actualización: 2026-09-08 — nueva sección "Búsqueda por referencia en el Admin — solo exacta, no parcial" (reunión "Revisemos ADMIN Pago Facil").*
+*Última actualización anterior: 2026-08-19 — nueva sección "Parametrización manual y fragmentada de entidades" (reunión "Parámetros de entidades").*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Admin de 4 archivos-cola de `detalle_productos/transversal/`.*

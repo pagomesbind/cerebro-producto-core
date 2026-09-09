@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Decisión (Acordada, 2026-09-08):** se detienen los cambios propuestos sobre el webhook (agregar datos adicionales al payload) para no romper las integraciones ya activas de los clientes actuales.

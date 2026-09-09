@@ -23,5 +23,6 @@ Pago Fácil tiene su conocimiento repartido en 2 lugares por decisión deliberad
 - [../../../2_areas/gaps_y_preguntas.md](../../../2_areas/gaps_y_preguntas.md) — falta el overview de negocio del producto Servicios, pendiente de que lo aporte el usuario.
 
 ---
-*Última actualización: 2026-08-12 — `pago_facil.md` reubicado a este módulo desde `detalle_productos/transversal/` (reestructuración PARA en cascada); ya no queda ningún archivo de Servicios fuera de esta carpeta.*
+*Última actualización: 2026-09-09 — `/context_merge`: `pago_facil_mantenimiento.md` §5 actualizado — seguimiento semanal del Piloto Productivo Bind-SEPSA (nuevas entidades UAT, puntos operativos resueltos/en curso).*
+*Última actualización anterior: 2026-08-12 — `pago_facil.md` reubicado a este módulo desde `detalle_productos/transversal/` (reestructuración PARA en cascada); ya no queda ningún archivo de Servicios fuera de esta carpeta.*
 *Última actualización anterior: 2026-07-13 — Creación del módulo, backfill `/sync_releases` vía XML (espacio SER COMPLETO: 39 tickets, versión SER 1, única publicada a la fecha).*

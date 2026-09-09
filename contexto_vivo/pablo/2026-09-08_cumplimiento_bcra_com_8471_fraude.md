@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/cumplimiento_normativo/
 tipo_destino: crear (bcra_comunicacion_8471_8473_gestion_riesgo_fraude.md)
 contradice: "no"
 confianza: Alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Comunicación "A" 8471 del BCRA — Gestión del Riesgo de Fraude

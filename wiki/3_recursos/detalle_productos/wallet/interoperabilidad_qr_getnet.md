@@ -1,6 +1,6 @@
 # Interoperabilidad QR — Getnet (Bind Pago como socio/APM)
 
-> Estado: en desarrollo (Fintexa), deadline interno 30/09/2026. Ver riesgo asociado en [2_areas/riesgos.md](../../../2_areas/riesgos.md) y el proyecto de producto relacionado `1_proyectos/getnet_oauth2_resolve/` (Pablo Gomes) — ambos referencian el mismo proveedor (Getnet) y ventana de tiempo; **no confirmado todavía si son la misma migración de fondo vista desde dos puntas** (este documento cubre el lado billetera/pagador — Bind Pago como socio/APM dentro de la red interoperable de Getnet; el proyecto de Pablo Gomes cubre la autenticación de la API Resolve que usa Wallet para leer/pagar QR de comercios Getnet — ver nota al final).
+> Estado: en desarrollo (Fintexa), alcance confirmado dentro de la versión **W73** de Wallet, entrega a QA Externo **21/09/2026**, deadline interno duro **30/09/2026**. Ver riesgo asociado en [2_areas/riesgos.md](../../../2_areas/riesgos.md) y el proyecto de producto relacionado `1_proyectos/getnet_oauth2_resolve/` (Pablo Gomes) — ambos referencian el mismo proveedor (Getnet) y ventana de tiempo; **no confirmado todavía si son la misma migración de fondo vista desde dos puntas** (este documento cubre el lado billetera/pagador — Bind Pago como socio/APM dentro de la red interoperable de Getnet; el proyecto de Pablo Gomes cubre la autenticación de la API Resolve que usa Wallet para leer/pagar QR de comercios Getnet — ver nota al final).
 
 ## Contexto
 
@@ -36,8 +36,19 @@ Getnet (`productoqr@getnet.com.ar`, Luisana Noguera) documentó el circuito nuev
    - `https://api.globalgetnet.com/apm/payment-interoperable/v1/payments/tokens`
 7. Con esas rutas resueltas, se realiza la operación de pago por medio del QR.
 
+## Confirmación de alcance dentro de W73 (2026-09-08)
+
+Fintexa confirmó (mail "RE: Version W 73 Wallet Service", 2026-09-08) el alcance técnico definitivo del desarrollo dentro de la versión W73 de Wallet:
+
+- **Autenticación configurable del aceptador** al resolver un código QR (endpoint `/resolve` con OAuth2 `client_credentials`, especificación arriba).
+- **Gestión de aceptadores con mecanismo de autenticación configurable** — implica adaptar el modelo de datos de aceptadores (hoy en producción con el feature flag de OAuth apagado) para soportar OAuth **además** del esquema de autenticación actual, no en reemplazo.
+- **Entrega a QA Externo: 21/09.**
+
+El desarrollo pasó de fase de análisis (ticket levantado por Fintexa el 05/09, sin fecha) a alcance de versión con fecha concreta de QA. Fintexa evaluó 3 opciones para incorporar este desarrollo dentro de W73 sin correr el fin de mes (reformular alcance — adoptada; estirar Getnet para más adelante — descartada; mantener W73 y patear todo — descartada).
+
 ## Nota — posible superposición con `getnet_oauth2_resolve/`
 
 El proyecto de producto `1_proyectos/getnet_oauth2_resolve/` (Pablo Gomes, IDEA PRD-237) documenta que Getnet migró la autenticación de su API **Resolve** de un `access_token` fijo a **OAuth2 `client_credentials`** — mismo mecanismo de autenticación, mismo dominio (`api.globalgetnet.com`), mismo endpoint `/resolve`, y mismo deadline (30/09/2026) que este documento. No está confirmado si ambos describen la misma migración de fondo (Bind Wallet como pagador, resolviendo/pagando QR de comercios afiliados a Getnet) vista desde dos fuentes — el mail técnico de Getnet a Integraciones (este documento) y el proyecto formal de PM (Jira) — o si son dos alcances técnicos distintos que coinciden en proveedor y ventana de tiempo. Pendiente de confirmación por los PM involucrados (Pablo Gomes / Nicolás Colón).
 
 > Fuente: Mail "Adecuación operativa al nuevo circuito tecnológico - Billetera Bind Pago", mensajes de Luisana Noguera (Getnet) del 2026-09-01 y 2026-09-02, reenviados internamente el 2026-09-03/04. Capturado por Nicolás Colón, 2026-09-06.
+> Actualización de alcance/fecha: mail "RE: Version W 73 Wallet Service" (Nicolas Pomponio, Fintexa, 2026-09-08 20:59). Capturado por Nicolás Colón, 2026-09-09.

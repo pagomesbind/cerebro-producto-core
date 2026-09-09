@@ -73,6 +73,20 @@ Hilo de seguimiento comercial/operativo entre Western Union (marca **Pago Fácil
 
 > Nota: ni Pago Fácil ni Western Union/SEPSA tienen ficha propia en `2_areas/clientes/log_clientes.md` pese a ser cliente en producción — ver gap actualizado en [`2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-07-15].
 
+**Actualización (2026-09-09) — seguimiento semanal, delta de dos minutas sucesivas (2-9 y 9-9):**
+
+- **Nuevas entidades del Piloto:** UAT confirmada para **CREDITIA CORP, CREDIMAS y COMAFI** (minuta 2-9); PRD para **COOP ELECT RIO COLORADO** (minuta 2-9); próxima UAT **EL CUATRO** (minuta 9-9) — reemplaza a las entidades ya mencionadas arriba (PRO ACTION, Colegio Ing Cba, Marea TV) que ya habrían avanzado.
+- **Habilitación/inhabilitación de comercios desde el Portal ADMIN:** finalizado.
+- **Tarjeta Prepaga:** con demora — Bind sigue esperando devolución del procesador para concluir las pruebas.
+- **Envío de comprobante por e-mail:** propuesta refinada compartida el 01/09, a la espera de la devolución de Western Union — iteración posterior a la propuesta previa del 27/08. La minuta 9-9 confirma que WU instruyó "avanzar con el desarrollo".
+- **Alias en transferencias:** se va a mostrar el alias que **genera aleatoriamente Coelsa** (no un alias propio de Bind, ver §6) — sin fecha de implementación todavía.
+- **Confirmación online a entidades:** documento con el alcance corregido entregado el 09/09, con método de seguridad definido: **Whitelist de IP**.
+- **Pago QR y Transferencia (identificación de origen):** resuelto — Bind ya compartió el detalle bruto de transacciones a Western Union para que su equipo de PowerBI trabaje sobre el campo **"CompradorCuenta"** (los 3 primeros dígitos identifican la entidad de origen), junto con el listado de entidades.
+- **Botón "Flecha":** cambiar su descripción es técnicamente posible, sin estimación de fecha todavía (distinto del punto ya cerrado sobre sacarlo definitivamente, que requiere protocolo formal y traslado de costos).
+- **Colores del front (MKT):** seguía pendiente de validación por Western Union al 09/09; Guillermo Paolucci (WU) quedó nuevamente en validarlo, reclamado explícitamente en la minuta.
+
+> Fuente: Mails "Seguimiento Desarrollo Pasarela de Pagos Bind-SEPSA Minuta 2-9" (hilo 2026-09-02 → 2026-09-09) y "Minuta 9-9" (2026-09-09). Capturado por Nicolás Colón.
+
 ## 6. Restricciones de Coelsa sobre asignación/modificación de alias de CBU (relevante para el checkout de Botón Simple 2.0)
 
 > Estado: en producción (mecánica de plataforma, no exclusiva de Pago Fácil). Fuente: reunión "Daily producto" (2026-08-28).
@@ -93,5 +107,6 @@ Hallazgos técnicos sobre el mecanismo de Coelsa aplicables a cualquier CBU de l
 - [adquirencia/boton_simple_2_0.md §6-7](../adquirencia/boton_simple_2_0.md) — el objeto Deuda y BPG que este producto reutiliza como motor de cobro.
 
 ---
-*Última actualización: 2026-09-02 — `/context_merge`: §6 nueva — restricciones de Coelsa sobre alias de CBU (mecánica de plataforma, surgida de un pedido puntual de Pago Fácil).*
+*Última actualización: 2026-09-09 — `/context_merge`: §5 actualizado — seguimiento semanal del Piloto Productivo Bind-SEPSA (nuevas entidades UAT, puntos operativos resueltos/en curso).*
+*Última actualización anterior: 2026-09-02 — `/context_merge`: §6 nueva — restricciones de Coelsa sobre alias de CBU (mecánica de plataforma, surgida de un pedido puntual de Pago Fácil).*
 *Última actualización anterior: 2026-08-31 — `/context_merge`: §5 nuevo — Piloto Productivo Bind-SEPSA (plataforma admin, Billers, puntos operativos abiertos), del hilo de seguimiento comercial 2026-08-19/25.*

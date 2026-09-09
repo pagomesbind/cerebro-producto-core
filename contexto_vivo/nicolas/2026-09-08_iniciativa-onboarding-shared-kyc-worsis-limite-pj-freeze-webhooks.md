@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 proyecto: onboarding_estrategico (Pablo Gomes) — nombre exacto de la carpeta/proyecto en su instancia sin confirmar desde acá
 pm_destino: pablo
 ---

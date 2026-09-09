@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-09 (pablo + nicolas)
+
+- `direccion/decisiones.md` — creadas 5 decisiones nuevas: freeze de webhook de arancel neto de Adquirencia (pablo); freeze de webhook en el marco de Shared KYC/Worsis, alcance sin precisar (nicolas); límite operativo $1.000 para altas PJ sin documentación (nicolas); Bind PSP/BIN asume administración de la PCAB + apetito de riesgo GB/DinX (pablo); `/idea_us` exige revisión cruzada de reglas de negocio transversales + `/idea_estimate` suma Modo Proyecto (pablo).
+- `direccion/oportunidades.md` — creadas 5 oportunidades nuevas (OP-021 a OP-025): Manteca como riel de pagos regionales (pablo); evaluación de riesgos formal pre-lanzamiento de producto (pablo); marco de gestión de reclamos (pablo); panel de visibilidad de APIs de Fintexa (pablo); proceso formal de desarrollo de productos (pablo) — las últimas 4 del assessment de auditoría del banco tras el fraude de Transferencias Pull.
+- `riesgos.md` — actualizado el riesgo Getnet/circuito viejo (entrega a QA Externo confirmada 21/09, W73 reformulado sin correr el deadline 30/09, nicolas); creados 2 riesgos nuevos: Combi (15/09) sin compromiso de Ipsa + Mastercard Move (17/09) (pablo); dependencia de Techfin para la creación del saldo virtual sin control interno documentado (pablo).
+- `direccion/iniciativas.md` — actualizadas 2 filas (PRD-66: investigación en curso sobre volumen PNET; PRD-202: PRD reescrito v7.0 + solution regenerado v2.0, hallazgo de PATCH sin priorizar); creadas 3 filas nuevas: cola_verificacion_manual, visibilidad_error_alta (ambas nicolas) y onboarding_shared_kyc_worsis (novedad de nicolas para pablo).
+- `gaps_y_preguntas.md` — creados 2 gaps nuevos (abiertos por el propio merge): alcance de webhook congelado sin precisar; límite $1.000 PJ sin reconciliar contra tope UIF/ROS ya documentado.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto): 4 arrastrados de la corrida anterior (decisión tickets Fintexa, 2 gaps de cliente sin ficha, alta comitente La Virginia sin ficha) + 1 nuevo (cronograma de despliegues septiembre → `procesos/`, pablo).
+
 ### 2026-09-08 (pablo + nicolas)
 
 - `riesgos.md` — creados 3 riesgos nuevos: capacidad de QA insuficiente frente a múltiples prioridad 1 (nicolas); segregación de fondos/cuenta operativa PSPCP (Com. "A" 7825) sin verificación explícita (pablo); reportes sistemáticos UIF RMTC/RTE (Res. 200/2024) sin evidencia de cobertura, ya con IDEA de discovery propia PRD-244 (pablo).

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Decisión (Acordada, 2026-09-08):** se permite la creación de cuentas de personas jurídicas aplicando un límite operativo máximo de **$1.000** hasta que el cliente presente la documentación de respaldo requerida por cumplimiento.

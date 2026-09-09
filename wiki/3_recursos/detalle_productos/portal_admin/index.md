@@ -15,5 +15,6 @@
 - [3_recursos/arquitectura_sistema/hardening_y_remediacion_de_pentests.md](../../arquitectura_sistema/index.md) — hardening de seguridad sobre Access Management.
 
 ---
-*Última actualización: 2026-08-19/20 — nuevo archivo `accesos_qa_staging.md`; nueva sección de parametrización manual de entidades en `pedidos_de_clientes_y_hallazgos_operativos.md`.*
+*Última actualización: 2026-09-08 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nueva sección "Búsqueda por referencia en el Admin — solo exacta, no parcial" (reunión "Revisemos ADMIN Pago Facil").*
+*Última actualización anterior: 2026-08-19/20 — nuevo archivo `accesos_qa_staging.md`; nueva sección de parametrización manual de entidades en `pedidos_de_clientes_y_hallazgos_operativos.md`.*
 *Última actualización anterior: 2026-08-12 — Creación del módulo en la reestructuración PARA en cascada.*

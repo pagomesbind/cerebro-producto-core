@@ -595,5 +595,17 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 - **Pregunta para el usuario:** ¿Confirmás que "Deuda" es un producto nuevo que merece su propia carpeta en `detalle_productos/` (y su overview en `2_areas/overview_productos/`), o es parte de un producto ya existente (ej. Adquirencia) y debería documentarse ahí? Por la regla de creación de carpetas, no se crea sin tu confirmación.
 - **Estado:** Pendiente
 
+## [2026-09-08] — Freeze de webhook (reunión "Producto" 2026-09-08) sin precisar de qué webhook se trata
+- **Severidad:** Media
+- **Descripción:** La decisión de freeze de cambios al webhook, tomada en la reunión "Producto" (2026-09-08, 16:00) en el marco de la arquitectura de Shared KYC/Worsis, no especifica de qué webhook puntual se trata en la minuta — no queda claro si es un webhook de Onboarding/Wallet o uno más general. Ver `direccion/decisiones.md` (2026-09-08, "Freeze de cambios al webhook en el marco de la arquitectura de Shared KYC/Worsis") — no confundir con la decisión separada, de alcance ya confirmado, de no sumar el arancel neto al webhook de notificación de pago de Adquirencia (misma fecha, otra reunión).
+- **Pregunta para el usuario:** ¿podés confirmar qué webhook específico quedó congelado, para poder aplicar la decisión al documento de producto correspondiente (`detalle_productos/wallet/` u `onboarding/`)?
+- **Estado:** Pendiente
+
+## [2026-09-08] — Límite operativo de $1.000 para personas jurídicas sin reconciliar contra los límites UIF/ROS ya documentados
+- **Severidad:** Baja
+- **Descripción:** La decisión de límite operativo de $1.000 para altas de personas jurídicas sin documentación de respaldo (reunión "Producto" 2026-09-08, ver `direccion/decisiones.md`) no se verificó contra los límites operativos mensuales ya documentados en la decisión del 2026-07-29 ($300.000.000 mensual para personas jurídicas, criterio UIF/ROS) ni contra `3_recursos/cumplimiento_normativo/limites_operativos_uif_ros.md`. Son límites de naturaleza distinta a primera vista (uno es tope de alta sin documentación, el otro es tope mensual de monitoreo) pero no está confirmado si conviene documentarlos juntos para evitar lecturas contradictorias.
+- **Pregunta para el usuario:** ¿confirmás que son dos límites independientes y no hace falta reconciliarlos en un único documento de referencia?
+- **Estado:** Pendiente
+
 ---
 *Última actualización: 2026-08-13 — Split del archivo en la reestructuración PARA en cascada: las entradas ligadas a un proyecto/IDEA vivo se movieron a su `gaps.md` propio en `1_proyectos/`; 4 entradas con cierre real rotaron a `gaps_resueltos.md`. Quedan acá solo las de contexto fijo.*

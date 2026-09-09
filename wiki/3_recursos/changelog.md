@@ -6,6 +6,17 @@
 
 ## 2026
 
+### 2026-09-09 (pablo + nicolas)
+
+- `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — archivo nuevo: saturación de cola de generación de QR por carga masiva de Provincia Net, decisión de convivencia de dos sistemas, y análisis de datos propio del PM que confirma el volumen de PNET pero deja la causa raíz de la ventana de reclamos sin confirmar (pablo).
+- `detalle_productos/adquirencia/index.md` — actualizado: fila nueva del archivo de arriba.
+- `detalle_productos/portal_admin/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: búsqueda por referencia en el Admin solo exacta, no parcial (workaround vía CSV) (nicolas).
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — actualizado: nueva §14.5, confirmación de qué entra en W73 (mapeo de rechazo, habilitación global, rechazo por caída) y qué queda afuera (state monitor, pasa a W74), con riesgo funcional explícito (nicolas).
+- `detalle_productos/wallet/interoperabilidad_qr_getnet.md` — actualizado: alcance confirmado dentro de W73, entrega a QA Externo 21/09 (nicolas).
+- `detalle_productos/servicios/pago_facil_mantenimiento.md` — actualizado: §5, seguimiento semanal del Piloto Productivo Bind-SEPSA (nuevas entidades UAT, puntos operativos resueltos/en curso) (nicolas).
+- `detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md` — actualizado: nueva §6.1, prueba de vida y concordancia facial (face match) son dos validaciones biométricas distintas, la norma exige ambas (pablo).
+- Item `cumplimiento_bcra_com_8471_fraude` (pablo) procesado sin escritura — contenido ya cubierto en profundidad por `cumplimiento_normativo/gestion_riesgo_fraude_bcra.md` (mergeado 2026-09-07).
+
 ### 2026-09-08 (pablo + nicolas)
 
 - `detalle_productos/wallet/conciliacion_y_totalizadores.md` — actualizado: nueva §8 (conciliación Coelsa ampliada a tipo CAS + corrección de cuadraturas por saldos en FCI, La Virginia/Coppel) (nicolas).

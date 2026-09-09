@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/
 tipo_destino: crear (incidente_provincia_net_convivencia_sistemas.md)
 contradice: "no"
 confianza: Alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Análisis COBRO — Decisiones y Prioridades (7/09/2026)
