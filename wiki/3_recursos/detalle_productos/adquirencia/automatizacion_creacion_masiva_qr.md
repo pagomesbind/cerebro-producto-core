@@ -1,26 +1,14 @@
----
-id: 2026-09-10_adquirencia_mecanica_automatizacion_qr_masivo_provincianet
-pm: pablo
-fecha_captura: 2026-09-10
-fuente: "Documento funcional/operativo del flujo (dos exports idénticos en contenido dejados en `raw/`: PDF 'AD-Automatización de creación masiva de QR' y export de página Notion en Markdown+imagen). Generado por `sql-data-explorer@fintexa-sqlserver` vía comando `/fsql` a partir del código fuente y tablas de `PaymentAcceptorDeudaDB` (ambiente qrbind-stg, solo lectura) — autor Daniela Collia (Fintexa), generado 2026-07-06, revisado/corregido por la propia autora el 2026-07-07. Dejado por el PM (Pablo Gomes) en `raw/` el 2026-09-10, antes de una reunión con Fintexa para entender el estado de puesta en producción."
-producto: adquirencia
-tema: mecánica técnica completa del flujo automatizado de creación masiva de QR (SFTP → ETL → SP Orquestador → reportes → webhook) para PRD-66/Provincia NET
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/adquirencia/automatizacion_creacion_masiva_qr.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# Automatización de Creación Masiva de QR (SFTP → ETL → SP Orquestador → Webhook)
 
-**Qué es y para qué existe.** Es el mecanismo de automatización SFTP construido bajo el ticket AD-660 (Epic AD-497, PRD-66 — ver `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §4`) que permite a una entidad (hoy Provincia NET, código de producción `A046` / stage `A026`) generar masivamente QR de deuda a partir de un archivo `.csv` o `.zip`, sin pasar por la creación de a una. Capacidad objetivo: **~1.000.000 de registros por lote**. SLA objetivo de procesamiento: **ventana de 3 horas**. Confirmado en producción el 2026-08-13 (ver `proyecto.md §7`).
-
-**Por qué importa ahora:** esta mecánica es la contracara técnica exacta del hallazgo del 2026-09-08/09 en `gaps.md`/`incidente_qr_masivo_provincia_net.md` de que, desde el pase a producción del 13/08, los picos de PNET pasaron de tener la firma de una "carga manual puntual" (estallido aislado desde una base casi en cero) a la firma de un "proceso automático continuo" (base ya alta, se sostiene elevada varios días). Esta documentación explica el mecanismo que produce esa firma: un job que procesa hasta 1M de registros en una ventana de 3 horas, de forma **secuencial por entidad** (`En_Proceso` debe estar vacía para tomar el siguiente archivo) — es decir, mientras corre un lote, la cola de generación de QR de esa entidad (y, según la hipótesis en investigación, potencialmente la cola compartida con otras entidades) queda ocupada de forma sostenida durante horas, no en un pico instantáneo. No resuelve la pregunta abierta de "por qué el reclamo apareció recién en septiembre y no en cargas anteriores", pero es la pieza de mecánica que faltaba para entender *cómo* se genera el patrón sostenido observado en los datos.
+> Estado: en producción desde 2026-08-13. Mecanismo técnico construido bajo el ticket AD-660 (Epic AD-497, PRD-66 — ver [`1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §4`](../../../1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md)). Es la contracara técnica del [incidente de saturación de cola de QR por PNET](incidente_qr_masivo_provincia_net.md): este documento explica el mecanismo que produce el patrón de carga sostenida observado en los datos.
+>
+> Fuente: documento funcional/operativo generado por `sql-data-explorer@fintexa-sqlserver` vía `/fsql` a partir del código fuente y tablas de `PaymentAcceptorDeudaDB` (ambiente qrbind-stg, solo lectura) — autora Daniela Collia (Fintexa), generado 2026-07-06, revisado 2026-07-07.
 
 ## 1. Propósito
 
-El proceso permite que una entidad genere múltiples QR de deuda de una sola vez mediante un archivo `.csv` o `.zip` que contiene las deudas. La entidad deposita el archivo en un directorio compartido mediante SFTP (`qr_masivo/{CodigoEntidad}/A_Procesar`). A partir de ahí, el proceso: valida el archivo → lo toma para procesamiento → carga la información en la base de datos → crea las deudas → asocia un QR a cada deuda utilizando un pool de QR pre-generados → genera los archivos de resultado → deja los reportes disponibles para descarga → notifica a la entidad mediante un webhook.
+El proceso permite que una entidad (hoy **Provincia NET**, código de producción `A046` / stage `A026`) genere masivamente QR de deuda a partir de un archivo `.csv` o `.zip`, sin pasar por la creación de a una. Capacidad objetivo: **~1.000.000 de registros por lote**. SLA objetivo de procesamiento: **ventana de 3 horas**. Confirmado en producción el 2026-08-13.
+
+La entidad deposita el archivo en un directorio compartido mediante SFTP (`qr_masivo/{CodigoEntidad}/A_Procesar`). A partir de ahí, el proceso: valida el archivo → lo toma para procesamiento → carga la información en la base de datos → crea las deudas → asocia un QR a cada deuda utilizando un pool de QR pre-generados → genera los archivos de resultado → deja los reportes disponibles para descarga → notifica a la entidad mediante un webhook.
 
 ## 2. Actores
 
@@ -80,12 +68,18 @@ PENDIENTE → EN_PROCESO → PROCESADO → COMPLETADO → NOTIFICADO
 - **Nomenclatura obligatoria:** `{entidad}_{caja}_qrmasivo_yyyymmddhhmm.(csv|zip)` — el primer segmento debe coincidir con el `CODIGO_ENTIDAD` configurado para la tarea. Config de entidad: Stage `A026` · Producción `A046`.
 - **Procesamiento secuencial por entidad** — `En_Proceso` debe estar vacía para que el siguiente archivo de esa entidad pueda ser tomado (no es secuencial cross-entidad, es por entidad).
 
-## 6. Fuentes citadas en el documento original
+## 6. Por qué importa para el incidente de saturación de cola QR
+
+Desde el pase a producción el 13/08, los picos de PNET pasaron de tener la firma de una "carga manual puntual" (estallido aislado desde una base casi en cero) a la firma de un "proceso automático continuo" (base ya alta, se sostiene elevada varios días) — ver [incidente_qr_masivo_provincia_net.md](incidente_qr_masivo_provincia_net.md). Esta mecánica explica el *cómo*: un job que procesa hasta 1M de registros en una ventana de 3 horas, de forma secuencial por entidad — mientras corre un lote, la cola de generación de QR de esa entidad (y, según la hipótesis en investigación, potencialmente la cola compartida con otras entidades) queda ocupada de forma sostenida durante horas, no en un pico instantáneo. No resuelve por sí sola la pregunta de "por qué el reclamo apareció recién en septiembre", pero es la pieza de mecánica que faltaba para entender cómo se genera el patrón sostenido observado en los datos.
+
+## 7. Fuentes citadas en el documento original
 
 Diagrama de flujo `Deuda 1.0 - Automatización creación masiva de QR - Flujo v2.png`/`.svg` (regenerado 2026-07-07) · `PaymentAcceptor.Deuda.Api/HostedServices/WorkerService.cs` · `PaymentAcceptor.Deuda.Application/Commands/QrMasivo/` · SP Orquestador primario `DeudaQRMasivo/mvp_v2/02_SP_Orquestador_Dinamico_v2.sql` · SP Orquestador alternativo `DeudaQRMasivo/src/procedures/sp_OrquestadorProcesoCarga.sql` · Jobs `DeudaQRMasivo/src/scripts/jobs/01_Crear_Jobs_Orquestacion.sql` · ETL `DeudaQRMasivo/mvp_v2/cross_server/` · Base `PaymentAcceptorDeudaDB` (ambiente qrbind-stg, solo lectura).
 
-## Ver también (para quien mergee este item)
+## Ver también
 
-- `3_recursos/detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — la investigación en curso de la demora de cola que afecta a PNET/DEPAY; vincular ambos archivos entre sí en el merge (esta mecánica es la pieza técnica que faltaba ahí).
+- [incidente_qr_masivo_provincia_net.md](incidente_qr_masivo_provincia_net.md) — la investigación de la demora de cola que afecta a PNET/DEPAY, para la que esta mecánica es la pieza técnica que faltaba.
 - `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md` §4/§7 — historial de entrega y puesta en producción (13/08) de este mismo mecanismo.
-- `1_proyectos/prd-66_provincianet_creacion_masiva_qr/gaps.md` — gap abierto sobre la causa raíz de la demora de cola, al que esta mecánica aporta contexto sin resolverlo.
+
+---
+*Creado: 2026-09-10 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): mecánica técnica completa del flujo automatizado de creación masiva de QR (SFTP → ETL → SP Orquestador → reportes → webhook) para PRD-66/Provincia NET.*

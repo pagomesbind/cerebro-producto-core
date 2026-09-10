@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/incidente_qr_masivo_
 tipo_destino: actualizar
 contradice: "no — confirma y extiende el mecanismo ya inferido estadísticamente en el archivo canon (sección 'Confirmación cuantitativa' y 'Junio-julio como control'), esta vez con explicación directa de Ingeniería de ambos lados en vez de inferencia sobre datos históricos"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

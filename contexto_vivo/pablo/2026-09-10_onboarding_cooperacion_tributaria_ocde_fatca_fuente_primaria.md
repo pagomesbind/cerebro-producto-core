@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/identificacion_personas_fis
 tipo_destino: actualizar
 contradice: "3_recursos/cumplimiento_normativo/identificacion_personas_fisicas_cvu.md §4 y §5 — la lista de '3 declaraciones juradas obligatorias' queda incompleta (falta la DDJJ de cooperación tributaria internacional) y toda la matriz de ese archivo está basada en investigación de Gemini (confianza declarada como no validada); esta captura aporta el texto primario, ya leído completo, de la norma BCRA que dan origen tanto al punto 1.3 (identificación mínima) que ese archivo sí cubre, como al 4.13.1.1 (cooperación tributaria) que no cubre"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

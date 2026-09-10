@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-09-10 (pablo)
+
+- `direccion/iniciativas.md` — actualizada 1 fila (PRD-66: causa raíz de la demora de QR confirmada en vivo con Provincia Net, plan de mitigación acordado); creada 1 fila nueva (PRD-247: vulnerabilidad Renaper Datos, discovery cerrado en Gate 2 como 🟡 Diferido, consolida las 2 novedades del 09-09 y 09-10 en una sola fila).
+- `riesgos.md` — creado 1 riesgo nuevo: escalamiento de la contención de cola QR por crecimiento del segmento de clientes individuales de Provincia Net.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto): 5 arrastrados de corridas anteriores (decisión tickets Fintexa → `procesos/gestion_jira.md`; 3 gaps/conocimiento de cliente sin ficha → `clientes/log_clientes.md`/`casos_de_uso_clientes.md`; cronograma de despliegues septiembre → `procesos/`) + 1 nuevo (corrección de la restricción de capacidad hardcodeada → `direccion/estado_actual.md`, pablo).
+
 ### 2026-09-09 (pablo + nicolas)
 
 - `direccion/decisiones.md` — creadas 5 decisiones nuevas: freeze de webhook de arancel neto de Adquirencia (pablo); freeze de webhook en el marco de Shared KYC/Worsis, alcance sin precisar (nicolas); límite operativo $1.000 para altas PJ sin documentación (nicolas); Bind PSP/BIN asume administración de la PCAB + apetito de riesgo GB/DinX (pablo); `/idea_us` exige revisión cruzada de reglas de negocio transversales + `/idea_estimate` suma Modo Proyecto (pablo).

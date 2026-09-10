@@ -1,8 +1,8 @@
 # Identificación de Personas Físicas — Marco Regulatorio para Altas de Cuenta CVU
 
-> ⚠️ **Estado: orientación de diseño, no validado como ground truth de auditoría.** Contenido de una investigación hecha por el PM con Gemini (deep research, 2 rondas), citando fuentes públicas concretas (BCRA, Boletín Oficial/UIF, AFIP/ARCA) pero **no verificado línea por línea contra el texto vigente de cada Comunicación/Resolución por Compliance/PLD de Bind PSP**. Antes de tratarlo como ground truth para auditoría o para cerrar un gap de cumplimiento formal, corresponde una validación con Compliance/PLD (ver `1_proyectos/tareas.md` T-053). Se documenta igual porque, aun con esa reserva, es información de calidad suficiente para orientar el diseño de producto y detectar posibles brechas a confirmar.
+> ⚠️ **Estado: orientación de diseño, mayormente no validado como ground truth de auditoría** — con una excepción: los puntos **1.3** (identificación mínima, §1/§5) y **4.13.1.1** (cooperación tributaria OCDE/CRS+FATCA, §4/§5) están confirmados contra el **texto primario** de la norma BCRA (ver abajo), leído completo por el PM, no por research de IA. El resto del documento sigue siendo contenido de una investigación hecha por el PM con Gemini (deep research, 2 rondas), citando fuentes públicas concretas (BCRA, Boletín Oficial/UIF, AFIP/ARCA) pero **no verificado línea por línea contra el texto vigente de cada Comunicación/Resolución por Compliance/PLD de Bind PSP**. Antes de tratar esa porción como ground truth para auditoría o para cerrar un gap de cumplimiento formal, corresponde una validación con Compliance/PLD (ver `1_proyectos/tareas.md` T-053). Se documenta igual porque, aun con esa reserva, es información de calidad suficiente para orientar el diseño de producto y detectar posibles brechas a confirmar.
 >
-> Fuente: research de Pablo Gomes con Gemini — "Normativa CVU PSP Argentina.md" (2026-09-01, panorama general BCRA/UIF/ARCA/AAIP) + "Mapeo Exhaustivo de Requisitos Regulatorios y Datos Obligatorios para CVU en Argentina.md" (2026-09-01, ronda más profunda, matriz de datos DDC de UIF y distinción legajo vs. reporte RSM) — ambas archivadas en `4_archivos/historial_raw/2026-09_normativa_cvu_pf_argentina/`.
+> Fuente: research de Pablo Gomes con Gemini — "Normativa CVU PSP Argentina.md" (2026-09-01, panorama general BCRA/UIF/ARCA/AAIP) + "Mapeo Exhaustivo de Requisitos Regulatorios y Datos Obligatorios para CVU en Argentina.md" (2026-09-01, ronda más profunda, matriz de datos DDC de UIF y distinción legajo vs. reporte RSM) — ambas archivadas en `4_archivos/historial_raw/2026-09_normativa_cvu_pf_argentina/`. Puntos 1.3/4.13.1.1: texto ordenado BCRA "Depósitos de Ahorro, Cuenta Sueldo y Especiales" (última comunicación incorporada "A" 8444, 04/06/26), leído completo por el PM — archivado en `4_archivos/historial_raw/2026-09_normativa_bcra_ampliacion_auditoria_onboarding/`.
 
 ## 1. Cuatro entes regulan la captura de datos en el alta de una cuenta CVU de persona física
 
@@ -39,11 +39,25 @@ Un campo puede ser condicional u opcional en el layout técnico del Reporte Sist
 - **Alertas de incoherencia edad/capacidad (Art. 23 DDC):** exige configurar alertas automáticas cuando el volumen/patrón de operación no es coherente con la edad o capacidad del cliente — casos explícitos: menores de edad con volúmenes no justificables por patrimonio heredado/cedido, personas con dificultad para comprender actos jurídicos o de edad avanzada con movimientos atípicos, y terceros operando cuentas de personas vulnerables sin respaldo documental de tutela/curatela/mandato. **Relevante directo para PRD-211** (Fase 2 — cuenta PF menor de edad, hoy en horizonte "Más tarde"): la norma exige tanto el vínculo formal con el tutor/representante como el monitoreo continuo de coherencia edad-volumen, no solo la validación de identidad en el alta.
 - **Prohibición de anonimato:** bajo ningún concepto se admite dar de alta clientes con nombres falsos o anónimos.
 
-## 4. Las 3 declaraciones juradas obligatorias en el onboarding
+## 4. Las 4 declaraciones juradas obligatorias en el onboarding
 
 1. **PEP** (Persona Expuesta Políticamente) — Resolución UIF 35/2023 — checkbox que, ante respuesta afirmativa, abre un formulario de detalle.
 2. **Sujeto Obligado ante la UIF** — art. 20 Ley 25.246 — checkbox con confirmación explícita.
 3. **Origen y licitud de los fondos** — aceptación de cláusula legal integrada al flujo.
+4. **Cooperación tributaria internacional (OCDE/CRS + FATCA)** — BCRA "Depósitos de Ahorro, Cuenta Sueldo y Especiales", punto 4.13.1.1 (fuente primaria, confianza alta — ver también §1). Ver estructura de datos en §5bis.
+
+### 4bis. Cooperación tributaria internacional — fuente primaria (texto citado, no parafraseado)
+
+> "4.13. Procedimientos especiales de identificación de clientes en materia de cooperación tributaria internacional.
+> 4.13.1. Identificación de clientes.
+> En función del Estándar de la Organización para la Cooperación y Desarrollo Económicos (OCDE) para el Intercambio Automático de Información sobre cuentas financieras y de las disposiciones de la Ley de cumplimiento fiscal de cuentas extranjeras (Foreign Account Tax Compliance Act, FATCA) de los Estados Unidos de América, las entidades financieras deberán arbitrar las medidas necesarias para identificar a los titulares de cuentas alcanzados por dicho estándar y disposiciones.
+> A tal efecto: 4.13.1.1. Deberán solicitar a sus clientes titulares de cuentas declarables que sean personas declarables... la presentación de una declaración jurada... i. Personas humanas: Apellido/s y nombre/s. Documento de identidad. Lugar y fecha de nacimiento. Domicilio correspondiente al de la jurisdicción de residencia fiscal reportada. Información sobre el país de residencia fiscal (jurisdicción). Número de identificación fiscal en el país o jurisdicción residencia fiscal (NIF). Tipo y número de cuenta."
+
+**Punto clave — FATCA y OCDE/CRS son regímenes legales distintos** (FATCA es ley unilateral de EE.UU.; OCDE/CRS es el estándar multilateral), **pero esta norma argentina los agrupa bajo el mismo procedimiento de identificación y exige el mismo shape de dato para ambos** — no hay calificador de "opcional" ni "si lo tuviera" en ningún ítem de la lista, a diferencia de otras partes del mismo texto ordenado que sí marcan datos como opcionales cuando corresponde. Conclusión operativa: cuando un titular es "persona declarable" (residente fiscal en otra jurisdicción, sea por FATCA o por CRS), hace falta capturar — además del booleano de declaración — país/jurisdicción, NIF y domicilio fiscal de esa jurisdicción. Para FATCA la jurisdicción es siempre EE.UU. (no hace falta preguntarla); para OCDE puede haber más de una jurisdicción declarada (estructura array).
+
+El mismo texto ordenado también respalda el punto 1.3 ya cubierto en §1/§5 (identificación mínima: nombres y apellidos completos, lugar y fecha de nacimiento, domicilio, ocupación, estado civil y DDJJ de PEP/No PEP) — ahora con cita textual exacta en vez de solo síntesis de research. No exige domicilio/localidad de nacimiento, solo "lugar" (interpretado como país en el diseño de PRD-202, decisión explícita del PM de no pedir más detalle que el mínimo normativo — ver `1_proyectos/proyecto-onboarding-estrategico/prd-202_onboarding_consolidado/gaps.md`).
+
+**Ya implementado a nivel de proyecto (no todavía generalizado a otros PM):** el contrato de datos de PRD-202 (`personaFisica.declaracion.ocde`/`.fatca`, `personaFisica.personal.paisNacimiento`) ya implementa este hallazgo — ver `1_proyectos/proyecto-onboarding-estrategico/prd-202_onboarding_consolidado/artefactos/onboarding_consolidado-us.md` v7.2 y `decisiones.md`/`gaps.md` [2026-09-08]. La estructura de detalle para "Sujeto Obligado ante la UIF" (`inciso`/`numeroInscripcionUIF`) que también se diseñó ahí **no** se incorpora acá — es una inferencia por analogía, sin norma primaria que la confirme (a diferencia de OCDE/FATCA arriba), pendiente de validar con Compliance/PLD.
 
 ## 5. Matriz de datos a capturar (síntesis)
 
@@ -57,6 +71,7 @@ Un campo puede ser condicional u opcional en el layout técnico del Reporte Sist
 | Biometría | Selfie/prueba de vida interactiva | Liveness + RENAPER | 10 años (evidencia) |
 | Perfil económico | Ocupación/profesión/actividad | Selección de catálogo estandarizado | 10 años |
 | DDJJ | PEP, Sujeto Obligado, Origen y licitud de fondos | Checkboxes + formulario de detalle si PEP=sí | 10 años |
+| DDJJ (fuente primaria, confianza alta) | Cooperación tributaria internacional OCDE/CRS + FATCA — booleano de persona declarable + país/jurisdicción de residencia fiscal + NIF + domicilio fiscal (array si hay más de una jurisdicción; para FATCA la jurisdicción es siempre EE.UU.) | Checkbox + formulario de detalle si declarable=sí (ver §4bis) | 10 años |
 | Respaldo de ingresos | Documentación probatoria (solo riesgo Medio/Alto) | Carga de archivo — nunca DDJJ impositiva | Exigible según matriz de riesgo |
 | Consentimiento | T&C, leyenda BCRA (no es entidad financiera, sin garantía de depósito), política de privacidad | Checkbox firmado con log de IP/timestamp | 10 años |
 
@@ -79,4 +94,5 @@ Este es el mandato que originó [`proyecto-onboarding-estrategico`](../../1_proy
 - [reporteria_worldsys_bcra.md](reporteria_worldsys_bcra.md) — informe diario a Worldsys/BCRA, tema complementario.
 
 ---
+*Última actualización: 2026-09-10 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): 4ta DDJJ obligatoria (cooperación tributaria internacional OCDE/CRS + FATCA, §4/§4bis/§5), a partir de lectura completa del texto primario BCRA "Depósitos de Ahorro, Cuenta Sueldo y Especiales" (punto 4.13.1.1) — sube la confianza declarada del documento para los puntos 1.3 y 4.13.1.1, ya confirmados contra fuente primaria.*
 *Creado: 2026-09-02 — `/context_merge`, desde research de Gemini deep research del PM (2026-09-01).*

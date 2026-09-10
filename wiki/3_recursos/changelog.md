@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-10 (pablo)
+
+- `detalle_productos/adquirencia/automatizacion_creacion_masiva_qr.md` — archivo nuevo: mecánica técnica completa (SFTP→ETL→SP Orquestador→webhook) de la creación masiva de QR de Provincia Net, en producción desde 2026-08-13.
+- `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — actualizado: causa raíz confirmada directamente por Ingeniería de Bind y Provincia Net (cola única compartida + retry storm de reintentos), plan de mitigación corto/largo plazo, líneas de exploración nuevas, contexto de negocio/crecimiento de Provincia Net.
+- `detalle_productos/adquirencia/index.md` — actualizado: fila nueva del archivo de mecánica, nota ampliada del incidente.
+- `cumplimiento_normativo/identificacion_personas_fisicas_cvu.md` — actualizado: 4ta DDJJ obligatoria (cooperación tributaria internacional OCDE/CRS + FATCA, §4/§4bis/§5), confianza subida para los puntos ya confirmados contra fuente primaria BCRA (1.3, 4.13.1.1).
+- `cumplimiento_normativo/index.md` — actualizado: nota de contenido del archivo de arriba.
+- Item `contexto_fijo_correccion_restriccion_capacidad_estado_actual` (pablo) — régimen D (`direccion/estado_actual.md`), queda `en_cola` pendiente de permiso explícito del usuario (ver manifiesto).
+
 ### 2026-09-09 (pablo + nicolas)
 
 - `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — archivo nuevo: saturación de cola de generación de QR por carga masiva de Provincia Net, decisión de convivencia de dos sistemas, y análisis de datos propio del PM que confirma el volumen de PNET pero deja la causa raíz de la ventana de reclamos sin confirmar (pablo).

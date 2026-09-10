@@ -88,12 +88,23 @@ La Resolución UIF 200/2024 exige a los sujetos obligados del art. 20 incisos 5 
 
 **Actualización (2026-09-08):** ya tiene IDEA de discovery propia — [PRD-244](https://bindpsp.atlassian.net/browse/PRD-244) (estado DISCOVERY), slice en `1_proyectos/proyecto-onboarding-estrategico/prd-244_rmtc_rte_reportes_uif/proyecto.md`. Este riesgo sigue siendo la fuente/justificación de por qué se abrió esa IDEA; el seguimiento operativo pasa a vivir en el slice.
 
+## Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net
+
+Provincia Net (Facundo Collerone) proyectó en la reunión "BIND / PNET: Performance, recurrencia, etc." (2026-09-10) un aumento fuerte, en los próximos meses, de su segmento de clientes de consumo **individual/interactivo** ("de a uno" — sin proceso batch, van directo contra la API de creación de deuda/QR de Bind). Mencionó nuevos sectores entrando a este segmento: telefonía, transporte, entre otros. Es exactamente el segmento que hoy reporta timeouts de generación de QR (ej. DEPAY) cuando compite con las ráfagas masivas de Provincia Net contra la **cola única compartida** de generación de QR (mecanismo confirmado por Ingeniería de Bind en la misma reunión). Ver [3_recursos/detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md](../3_recursos/detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md).
+
+**Por qué es un riesgo de contexto fijo y no solo de PRD-66:** el crecimiento proyectado es de clientes de Provincia Net (terceros — municipios, empresas de servicios), pero el síntoma (timeouts en la cola compartida) impacta a **cualquier cliente de Bind** que use el canal interactivo de creación de QR, no solo a los de PNET. Si este crecimiento se concreta antes de que la mitigación de largo plazo (cola separada interactiva/batch, ticket AD935) esté implementada, el número de clientes afectados por el mismo problema puede multiplicarse.
+
+**Estado de la mitigación:** en curso pero sin ETA firme — escalado de recursos (vCores/pods) como paliativo de 1-1,5 mes, diseño de arquitectura de 2 colas todavía en discusión activa. Ver `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §8` para el detalle completo del plan.
+
+**Sin cuantificación dura:** no hay fecha ni número concreto de cuántos clientes/qué volumen se sumaría — proyección cualitativa de Provincia Net sobre su propio negocio, no un compromiso ni un dato medido. Capturado 2026-09-10 (Pablo Gomes), confianza media.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-09 — actualización del riesgo Getnet/circuito viejo (entrega a QA Externo confirmada 21/09, W73 reformulado sin correr el deadline 30/09); nuevos riesgos: Combi (15/09) sin compromiso técnico de Ipsa + Mastercard Move (17/09) con complejidad de altas de beneficiarios (Pablo Gomes); dependencia de Techfin para la creación del saldo virtual sin control interno documentado (Pablo Gomes, assessment de auditoría del banco).*
+*Última actualización: 2026-09-10 — nuevo riesgo "Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net" (Pablo Gomes).*
+*Última actualización anterior: 2026-09-09 — actualización del riesgo Getnet/circuito viejo (entrega a QA Externo confirmada 21/09, W73 reformulado sin correr el deadline 30/09); nuevos riesgos: Combi (15/09) sin compromiso técnico de Ipsa + Mastercard Move (17/09) con complejidad de altas de beneficiarios (Pablo Gomes); dependencia de Techfin para la creación del saldo virtual sin control interno documentado (Pablo Gomes, assessment de auditoría del banco).*
 *Última actualización anterior: 2026-09-08 — nuevos riesgos: capacidad de QA insuficiente frente a múltiples prioridad 1 (Nicolás Colón); segregación de fondos/cuenta operativa PSPCP (Com. "A" 7825) sin verificación explícita; reportes sistemáticos UIF RMTC/RTE (Res. 200/2024) sin evidencia de cobertura (ya con IDEA de discovery propia, PRD-244).*
 *Última actualización anterior: 2026-09-07 — nuevo riesgo "Getnet deprecará el circuito viejo de la Billetera Bind Pago como socio/APM — deadline duro 30/09" (posible superposición sin confirmar con el proyecto `getnet_oauth2_resolve/`, ver nota en la propia entrada).*
 *Última actualización anterior: 2026-09-07 — nuevo riesgo "Getnet deprecará su arquitectura actual de POS a fin de trimestre".*
