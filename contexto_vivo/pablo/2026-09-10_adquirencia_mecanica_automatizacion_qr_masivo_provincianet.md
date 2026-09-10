@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 0de2694
 ---
 
 **Qué es y para qué existe.** Es el mecanismo de automatización SFTP construido bajo el ticket AD-660 (Epic AD-497, PRD-66 — ver `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §4`) que permite a una entidad (hoy Provincia NET, código de producción `A046` / stage `A026`) generar masivamente QR de deuda a partir de un archivo `.csv` o `.zip`, sin pasar por la creación de a una. Capacidad objetivo: **~1.000.000 de registros por lote**. SLA objetivo de procesamiento: **ventana de 3 horas**. Confirmado en producción el 2026-08-13 (ver `proyecto.md §7`).

@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 0de2694
 ---
 
 **Novedad puntual (no estado completo del proyecto, eso está en Jira/`proyecto.md`):** en una reunión directa entre Bind PSP y Provincia Net (2026-09-10), Ingeniería de ambos lados confirmó en vivo la causa raíz de la demora de generación de QR que venía siendo investigada desde principios de septiembre (reclamo de DEPAY/AD-1676): una única cola compartida de generación de QR, agravada por una política de reintentos de Provincia Net que en los picos de saturación genera un "retry storm" (hasta 100% de reintentos fallidos). Se acordó un plan de mitigación de corto plazo (escalado de recursos, paliativo ~1-1,5 mes) y se confirmó que el de largo plazo (separar la cola en interactiva/batch, ticket AD935) ya está en discusión activa de Arquitectura. Se abrieron además 4 líneas de exploración sobre el canal SFTP de Provincia Net (multi-canal en paralelo, reducir tiempo de despacho de lotes chicos, ajuste de backoff de reintentos, medición del ratio deuda/QR).

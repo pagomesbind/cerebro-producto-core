@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — confirma y extiende el mecanismo ya inferido estadísticamente en el archivo canon (sección 'Confirmación cuantitativa' y 'Junio-julio como control'), esta vez con explicación directa de Ingeniería de ambos lados en vez de inferencia sobre datos históricos"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 0de2694
 ---
 
 **Por qué esto es canon y no solo del proyecto:** el archivo `incidente_qr_masivo_provincia_net.md` ya documenta la investigación de esta saturación de cola como conocimiento de producto transversal (no solo de PRD-66) — esta reunión aporta la explicación directa de Ingeniería del mecanismo, que hasta ahora solo se había inferido estadísticamente, más el plan de mitigación concreto. Corresponde agregarse a ese archivo, con referencia cruzada a `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §8` para el detalle completo de la reunión.

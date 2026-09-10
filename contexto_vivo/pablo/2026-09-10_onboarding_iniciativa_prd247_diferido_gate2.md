@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 0de2694
 ---
 
 **PRD-247** ("Vulnerabilidad Renaper Datos: DNI frente/dorso sin cruzar", `proyecto-onboarding-estrategico/prd-247_renaper_dni_no_cruzado/`) cerró su discovery de `/idea_start` el 2026-09-10 en el **Gate 2, con veredicto 🟡 Diferido** — no pasa a Fase 3, queda trackeado con prioridad baja.

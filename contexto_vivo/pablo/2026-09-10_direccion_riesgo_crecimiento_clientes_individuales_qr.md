@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 0de2694
 ---
 
 **Riesgo:** Provincia Net (Facundo Collerone) proyectó en la reunión del 2026-09-10 un aumento fuerte, en los próximos meses, de su segmento de clientes de consumo **individual/interactivo** ("de a uno" — hoy sin ningún proceso batch de por medio, van directo contra la API de creación de deuda/QR de Bind). Mencionó nuevos sectores entrando a este segmento: telefonía, transporte, y otros. Este es exactamente el segmento que hoy reporta los timeouts de generación de QR (ej. DEPAY) cuando compite con las ráfagas masivas de Provincia Net contra la **cola única compartida** de generación de QR (mecanismo confirmado por Ingeniería de Bind en la misma reunión — ver `2026-09-10_adquirencia_reunion_pnet_causa_raiz_cola_unica_y_mitigacion`).
