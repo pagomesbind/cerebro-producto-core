@@ -98,12 +98,28 @@ Provincia Net (Facundo Collerone) proyectó en la reunión "BIND / PNET: Perform
 
 **Sin cuantificación dura:** no hay fecha ni número concreto de cuántos clientes/qué volumen se sumaría — proyección cualitativa de Provincia Net sobre su propio negocio, no un compromiso ni un dato medido. Capturado 2026-09-10 (Pablo Gomes), confianza media.
 
+## Falta de controles en onboardings gestionados por el integrador Gallo
+
+Emma Vignoles informó (reunión "Join Soporte Clientes", 2026-09-09) que ya se envió una carta documento de baja a **Terra BlockChain** (cliente con ficha en `2_areas/clientes/casos_de_uso_clientes.md`, modelo white-label del ecosistema Gallo — "modelo símil IEB") y advirtió sobre una **falta de controles generalizada en los onboardings gestionados por el integrador Gallo**, que afecta también a **Bolsa de Comercio de Chaco, IEB y B Investment**. Se solicitaron auditorías inmediatas de onboarding para estos clientes al equipo de compliance.
+
+**Caso adicional — B Investment:** volumen transaccional decreciente y atípico (4 operaciones en junio, 9 en julio por $72.000, nula actividad en agosto y septiembre); ante el desconocimiento de la operatoria real del cliente, se acordó agendar una reunión para examinar sus actividades.
+
+**Gap de identificación:** de las 4 entidades mencionadas, Bolsa de Comercio de Chaco y B Investment no aparecen en `log_clientes.md` — posibles entidades nuevas del ecosistema white-label de Gallo todavía no relevadas en Notion, a confirmar en el próximo barrido de `/sync_customers`. Capturado 2026-09-10 (Nicolás Colón), confianza alta.
+
+## Error de endpoint impide validar la inclusión de movimientos Cashout en la conciliación Coelsa (post W72.2)
+
+Tras el despliegue en PROD de la versión **W 72.2** (07/09 — HotFixes en microservicios de Operaciones y Cuentas, incluyendo el ajuste de `/ConciliarCoelsa` para integrar operaciones tipo **CASHOUT** en la conciliación de transferencias entrantes, ítem DEM-1806/WS-1552), Maria Eugenia Vila reportó (2026-09-10) que **no pudo validar que se hayan incluido los movimientos de Cashout porque el endpoint da error al correr el proceso** — trabajado en conjunto con Nicolás Colón, sin resolver todavía. Se generaron procesos de validación para las organizaciones Cencosud (4) y Coto (37) en este marco. Este era uno de los puntos de acción asignados a María Eugenia Vila en el plan post-despliegue ("Monitorear el correcto funcionamiento de la conciliación Coelsa — transferencias Cashout", deadline 07/09, prioridad Media) — sigue sin poder cerrarse por este error.
+
+En el mismo hilo, otro punto de acción del plan post-despliegue sí se resolvió: Gonzalo Rivera confirmó que no hay altas de CVU sin alias luego de la implementación. Capturado 2026-09-11 (Nicolás Colón), confianza alta. Sin producto dueño claro identificado en el canon actual (afecta microservicios de Operaciones/Cuentas y la conciliación con Coelsa) — a reconsiderar si corresponde documentarlo en cambio en un archivo temático de `detalle_productos/` cuando el error se resuelva.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-10 — nuevo riesgo "Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net" (Pablo Gomes).*
+*Última actualización: 2026-09-11 — nuevo riesgo "Error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto)" (Nicolás Colón).*
+*Última actualización anterior: 2026-09-10 — nuevo riesgo "Falta de controles en onboardings gestionados por el integrador Gallo (Terra Blockchain ya dado de baja)" (Nicolás Colón).*
+*Última actualización anterior: 2026-09-10 — nuevo riesgo "Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-09 — actualización del riesgo Getnet/circuito viejo (entrega a QA Externo confirmada 21/09, W73 reformulado sin correr el deadline 30/09); nuevos riesgos: Combi (15/09) sin compromiso técnico de Ipsa + Mastercard Move (17/09) con complejidad de altas de beneficiarios (Pablo Gomes); dependencia de Techfin para la creación del saldo virtual sin control interno documentado (Pablo Gomes, assessment de auditoría del banco).*
 *Última actualización anterior: 2026-09-08 — nuevos riesgos: capacidad de QA insuficiente frente a múltiples prioridad 1 (Nicolás Colón); segregación de fondos/cuenta operativa PSPCP (Com. "A" 7825) sin verificación explícita; reportes sistemáticos UIF RMTC/RTE (Res. 200/2024) sin evidencia de cobertura (ya con IDEA de discovery propia, PRD-244).*
 *Última actualización anterior: 2026-09-07 — nuevo riesgo "Getnet deprecará el circuito viejo de la Billetera Bind Pago como socio/APM — deadline duro 30/09" (posible superposición sin confirmar con el proyecto `getnet_oauth2_resolve/`, ver nota en la propia entrada).*

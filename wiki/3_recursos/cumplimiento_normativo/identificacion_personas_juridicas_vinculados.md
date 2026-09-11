@@ -85,6 +85,16 @@ Un segundo documento aportado (`raw/Informe_Requisitos_CVU_Argentina.pdf`) — s
 
 No se comparó este checklist campo a campo contra el diseño ya en producción de `onboarding_personas_juridicas.md` ni contra `proyecto-la-virginia-ob-pj` — sería el paso siguiente natural si se decide invertir en verificar formalmente esa cobertura, o si se retoma PRD-210.
 
+## Wallet Data Service — documentación exigida por el BCRA (habilitación caso a caso)
+
+> Confianza media. Fuente: reunión "Join Soporte Clientes" (2026-09-09, 10:03), minuta Gemini.
+
+Para habilitar el servicio **Wallet Data Service** en cuentas de personas jurídicas, el Banco Central exige un paquete documental específico (según lo detallado por Emma Vignoles): estatutos, constancias de CUIT, nómina de accionistas con participación mayor al 10%, declaraciones juradas de antecedentes con firma digital, flujos de fondos y maquetas visuales. Se acordó remitir el listado completo de documentos y modelos de declaraciones juradas a Mauro Suppan y Diego Weledniger, junto con el listado de clientes y declaraciones juradas pendientes, para iniciar el proceso de presentación ante el Banco Central.
+
+**Contexto operativo:** Bind ya había anticipado un listado preventivo de 48 clientes potenciales al Banco Central, lo que evitó las trabas regulatorias que están experimentando otras empresas del sector. Se definió usar a **Global Loan** como caso piloto del flujo de presentación de legajos, y se acordó revisar el stock de clientes actuales de personas jurídicas para notificarles los nuevos requisitos documentales y habilitarles carpetas en Drive, con un plazo de revisión de compliance de máximo 72 horas hábiles.
+
+Este paquete documental (nómina de accionistas >10%, DDJJ de antecedentes con firma digital, flujos de fondos, maquetas visuales) no está cubierto por el checklist general de tipo societario de la sección anterior — es un requisito adicional específico para habilitar Wallet Data Service, no para el alta de cuenta PJ estándar. No se comparó campo a campo contra ese checklist en esta captura.
+
 ## Relevancia para los proyectos de Onboarding de Bind PSP
 
 No es contenido nuevo para el proyecto de PJ ya en curso, sino confirmación con base normativa citada: `1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md` ya registró (2026-08-20) que "beneficiarios finales confirmado cubierto por una US existente" y ya construye alta de representantes legales/apoderados con su propia validación de identidad (US-2/US-3/US-7). Esta matriz sirve como checklist de referencia si se quiere verificar formalmente ese diseño campo a campo (no hecho en la sesión que originó este documento — el contrato de datos detallado de ese proyecto no se comparó línea por línea, a diferencia de PRD-202/PF). Relevante también para **PRD-210** (Fase 3 — cuenta PJ del proyecto Onboarding Estratégico, hoy en horizonte "Más tarde", sin discovery de campos todavía) cuando se retome.
@@ -98,5 +108,6 @@ Ver [`identificacion_personas_fisicas_cvu.md` §3](identificacion_personas_fisic
 - [identificacion_personas_fisicas_cvu.md](identificacion_personas_fisicas_cvu.md) — mismo research, requisitos para personas físicas.
 
 ---
-*Última actualización: 2026-09-08 — `/context_merge`: nueva sección de checklist interno de documentación por tipo societario (Res. UIF 200/2024), desde auditoría de cumplimiento normativo del PM.*
+*Última actualización: 2026-09-11 — `/context_merge`: nueva sección "Wallet Data Service — documentación exigida por el BCRA", desde contexto_vivo de Nicolás Colón (reunión "Join Soporte Clientes" 2026-09-09).*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: nueva sección de checklist interno de documentación por tipo societario (Res. UIF 200/2024), desde auditoría de cumplimiento normativo del PM.*
 *Creado: 2026-09-02 — `/context_merge`, desde research de Gemini deep research del PM (2026-09-01).*

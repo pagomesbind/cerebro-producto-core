@@ -5,6 +5,8 @@
 > ⚠️ **Infraestructura compartida con Wallet.** Todo lo documentado en este archivo (normativa Transferencia 3.0/3.1, IEP/API Resolve, flujo de mensajería con Coelsa, alta de comercio, interchange/comisiones) es la mecánica técnica que sustenta tanto el **cobro con QR de Adquirencia** (este documento) como el **pago con QR de Wallet** — Bind PSP participa del mismo ecosistema interoperable en ambos roles: como **aceptador** (cuando un comercio de Adquirencia cobra) y como **billetera/emisor** (cuando un usuario de Wallet paga el QR de otro aceptador). Un agente en paralelo puebla la porción equivalente en `wiki/3_recursos/detalle_productos/wallet/` — no duplicar, este es el detalle de referencia para el rol de Adquirencia/Aceptador.
 >
 > Fuente original: `wiki/3_recursos/mecanica_interna_productos/` (qr_interoperable_transferencia3.md, flujo_pago_qr_coelsa.md, alta_comercio_qr_coelsa.md, interchange_comisiones_qr.md). Ver también [wiki/0_direccion/producto/adquirencia_overview.md](../../../2_areas/overview_productos/overview_adquirencia.md) para el overview funcional/de negocio.
+>
+> El catálogo de endpoints/códigos de error de la transacción QR en sí (`QRDebin`/`QRReverso`/`QROperacionFinalizada`), Notification Push y firma EMVCo vive en un archivo separado por umbral de tamaño: [coelsa_qr_catalogo_apis_tecnico.md](coelsa_qr_catalogo_apis_tecnico.md). La API de Coelsa de ABM de comercios con soporte CBU/CVU (distinta y más nueva que `apiCVU/Comercio` de la Parte 4) vive en [coelsa_nueva_api_comercio_cbu_cvu.md](coelsa_nueva_api_comercio_cbu_cvu.md).
 
 ---
 
@@ -593,9 +595,16 @@ Nicolás Colón presentó un desarrollo que permite **parametrizar el tiempo de 
 
 **Pendiente identificado en la misma reunión:** Gonzalo Rivera va a cargar en Jira un caso con las transacciones antiguas que quedaron bloqueadas en estado 4, para que el equipo técnico las analice; Juan Pablo Carubelli investiga por qué ciertas operaciones antiguas no pasaron automáticamente al estado de auditoría según la lógica esperada.
 
+### Seguimiento post-despliegue — optimización de tiempos de PagosQR (2026-09-11)
+
+> Fuente: Mail "Emisión - Tiempos de PagosQR" — Juan Pablo Carubelli (Keep It Simple), 2026-09-11 12:04. Destinatarios: Emma Vignoles, Gonzalo Rivera, Pablo Gomes; CC Nicolás Colón, Nicolás Pomponio, Mariano (KIS), Agustín Grau (TecFinanciera), Mariana Nadalin, Hernán Clarich, Gastón Agustí.
+
+Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arriba (T1 4,5s / T2 2s adicionales), Juan Pablo Carubelli generó un nuevo análisis de tiempos de respuesta con foco en optimización continua: se observa una **mejora medible en los tiempos de respuesta de QR** desde que se configuró la doble consulta (una primera validación fallida deriva a la consulta remota sin agregar latencia excesiva). El análisis detallado (timestamps, distribuciones de latencia, benchmarks) vive en un informe HTML adjunto al mail (`Informe Tiempos PagosQR.html`) más una imagen de gráficos resumen — no reproducido acá, consultar el mail original para el detalle numérico completo. Sin acción de Producto pendiente identificada en el mail; es seguimiento informativo de una optimización ya en producción.
+
 ---
-*Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita.*
-*Última actualización: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*
+*Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita. [coelsa_qr_catalogo_apis_tecnico.md](coelsa_qr_catalogo_apis_tecnico.md) para el catálogo de endpoints/códigos de error de la transacción QR (`QRDebin`/`QRReverso`/`QROperacionFinalizada`), Notification Push y firma EMVCo — separado de este archivo por umbral de tamaño.*
+*Última actualización: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*
 *Última actualización anterior: 2026-09-03 — `/context_merge`: Parte 5, evidencia adicional (2026-09-02) de que Global66 tiene un reclamo activo y documentado de latencia QR — no cierra la contradicción TPay vs. BSF/Global66, la refuerza de un lado.*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: nueva Parte 5, parametrización del tiempo de espera de resolución (State Monitor, doble consulta T1/T2) — incluye contradicción sin resolver sobre el cliente que motivó el ajuste (TPay vs. BSF/Global66).*
 *Última actualización anterior: 2026-08-12 — Fusionada sección de arancel reducido desde `configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada).*

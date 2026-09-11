@@ -6,6 +6,33 @@
 
 ## 2026
 
+### 2026-09-11 (pablo + nicolas)
+
+- `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — actualizado: 5ª línea de exploración, cola de QR exclusiva por cliente para Provincia Net propuesta por Arquitectura, complementaria a la investigación ya en curso (pablo).
+- `detalle_productos/adquirencia/coelsa_nueva_api_comercio_cbu_cvu.md` — archivo nuevo: nueva API "Comercio" de Coelsa (ABM unificado con CBU/CVU), no integrada aún por Bind (pablo).
+- `detalle_productos/adquirencia/coelsa_qr_catalogo_apis_tecnico.md` — archivo nuevo: catálogo de endpoints/códigos de error/Notification Push/firma EMVCo de la API QR de Coelsa, desdoblado de `mecanica_qr_coelsa.md` por umbral de fisión (pablo).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — actualizado: seguimiento post-despliegue de tiempos de PagosQR y referencias cruzadas a los 2 archivos nuevos (pablo).
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — actualizado: icono de confirmación confuso en Link Botón 2.0, clasificado como mejora técnica (nicolas).
+- `detalle_productos/adquirencia/pagos_fx_portal_beneficiarios.md` — actualizado: MVP mayormente en QA externo salvo alta de beneficiarios (nicolas).
+- `detalle_productos/adquirencia/index.md` — actualizado: filas de los 2 archivos nuevos y changelog interno.
+- `detalle_productos/wallet/coelsa_cvu_api_referencia.md` — archivo nuevo: referencia técnica completa de la API CVU de Coelsa (PSP→Cuenta Recaudadora→CVU, screening, Comercios CVU, SFTP masivo, payloads literales) (pablo).
+- `detalle_productos/wallet/coelsa_debin_api_referencia.md` — archivo nuevo: referencia técnica de la API DEBIN de Coelsa (auth, ambientes, API Bancos, transferencia pull JWT, contracargo, scoring) (pablo).
+- `detalle_productos/wallet/coelsa_debin_api_payloads.md` — archivo nuevo: anexo de payloads reales de DEBIN, desdoblado de la referencia por umbral de fisión (pablo).
+- `detalle_productos/wallet/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: Global 66, reactivar CVU eliminada crea CVU nueva por tratarse de cuentas migradas (nicolas).
+- `detalle_productos/wallet/index.md` — actualizado: filas de los 2 archivos nuevos y changelog interno.
+- `cumplimiento_normativo/coelsa_cpf_central_prevencion_fraude.md` — archivo nuevo: Central de Prevención de Fraude de Coelsa (base compartida del ecosistema, API REST, RabbitMQ) (pablo).
+- `cumplimiento_normativo/coelsa_prevent_scoring_y_on_hold.md` — archivo nuevo: COELSA.PREVENT (scoring, umbrales de rechazo, servicio ON HOLD) (pablo).
+- `cumplimiento_normativo/identificacion_personas_juridicas_vinculados.md` — actualizado: documentación exigida por BCRA para Wallet Data Service (nicolas).
+- `cumplimiento_normativo/index.md` — actualizado: filas de los 2 archivos nuevos.
+- `detalle_productos/portal_admin/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: ticket histórico AD132, roles de usuario desaparecían por caché+endpoint recursivo, ya aprobado su desarrollo (nicolas).
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — actualizado: falta de segmentación automática de personas jurídicas por CUIT, discovery sin resolver (nicolas).
+- `detalle_productos/ardid/despliegues_y_operacion.md` — actualizado: seguimiento post-despliegue del fix de estados de tarjetas, solución temporal en Mongo (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/masividad_generacion_qr.md` — archivo nuevo: arquitectura secuencial de generación masiva de QR, tiempos medidos, debate de colas diferenciadas (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/index.md` — actualizado: fila del archivo nuevo.
+- `detalle_productos/portal_comercio/pedidos_de_clientes_y_hallazgos_operativos.md` — actualizado: falta de devoluciones parciales, solo disponible desde el Admin (nicolas).
+- `arquitectura_sistema/integraciones_externas.md` — actualizado: registro de la primera ingesta completa de documentación pública de Coelsa (baseline de changelog para futuras ingestas) (pablo).
+- Items pendientes de permiso explícito (régimen D) o sin producto dueño claro: quedan `en_cola` — ver manifiesto `2026-09-11.md`.
+
 ### 2026-09-10 (pablo)
 
 - `detalle_productos/adquirencia/automatizacion_creacion_masiva_qr.md` — archivo nuevo: mecánica técnica completa (SFTP→ETL→SP Orquestador→webhook) de la creación masiva de QR de Provincia Net, en producción desde 2026-08-13.

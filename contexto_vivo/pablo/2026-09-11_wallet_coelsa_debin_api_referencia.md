@@ -10,8 +10,8 @@ destino_propuesto: wiki/3_recursos/detalle_productos/wallet/coelsa_debin_api_ref
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 ## Por qué este documento

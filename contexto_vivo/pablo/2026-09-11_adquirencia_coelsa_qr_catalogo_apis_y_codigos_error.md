@@ -10,8 +10,8 @@ destino_propuesto: wiki/3_recursos/detalle_productos/adquirencia/mecanica_qr_coe
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: <pendiente>
 ---
 
 ## Por qué este documento

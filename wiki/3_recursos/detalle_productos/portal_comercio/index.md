@@ -13,5 +13,6 @@
 - [detalle_productos/portal_admin/index.md](../portal_admin/index.md) — módulo hermano para el panel interno de Bind PSP.
 
 ---
-*Última actualización: 2026-08-21 — `pedidos_de_clientes_y_hallazgos_operativos.md`: nueva sección sobre la retomada del rollout de Portal 2.0 (despliegue piloto por entidad).*
+*Última actualización: 2026-09-11 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nuevo ítem en "Bugs sin cliente específico": Portal Comercio sin devoluciones parciales, solo disponible desde el Admin (reunión "Análisis COBRO" 2026-09-10).*
+*Última actualización anterior: 2026-08-21 — `pedidos_de_clientes_y_hallazgos_operativos.md`: nueva sección sobre la retomada del rollout de Portal 2.0 (despliegue piloto por entidad).*
 *Última actualización anterior: 2026-08-12 — Creación del módulo en la reestructuración PARA en cascada.*

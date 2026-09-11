@@ -139,6 +139,15 @@ En la reunión de riesgo de AD V72 (despliegue 27/08/2026) se aprobó eliminar l
 
 **Dato relevante para contexto histórico:** este mismo límite de $9M ya había sido señalado como punto sin resolver por un cliente (Provincia NET preguntó en julio si el tope "podía ser más" — ver `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §2`, aunque ese caso es sobre el monto máximo de un QR de pago único, no necesariamente el mismo límite de Botón Simple 2.0; a confirmar si son el mismo control o distinto).
 
+## 13. Icono de confirmación confuso — mejora técnica pendiente (2026-09-10)
+
+> Estado: en producción, con hallazgo de UX pendiente de resolución (mejora técnica de baja prioridad).
+> Fuente: Reunión "Análisis COBRO" (2026-09-10), minuta Gemini.
+
+Daniela Collia (Fintexa) reportó el ingreso de un ticket de soporte indicando que la ventana de confirmación de pago de **Link Botón 2.0** (Botón Simple 2.0) muestra un **icono de exclamación en verde** que visualmente se confunde con un ícono de éxito/pago aprobado. Pablo Gomes consideró menor la importancia del cambio, pero Daniela Collia insistió en que afecta negativamente la experiencia de usuario.
+
+**Decisión acordada:** clasificar la modificación del icono como **mejora técnica**, a implementarse recién cuando se modifique ese componente (no como desarrollo aislado prioritario).
+
 ## Ver también
 
 - [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) — mecánica de órdenes de venta y cajas del Botón Simple "clásico".

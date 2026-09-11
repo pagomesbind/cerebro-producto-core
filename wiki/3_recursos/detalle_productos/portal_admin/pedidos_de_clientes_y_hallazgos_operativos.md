@@ -21,6 +21,7 @@
 - "Olvidé mi contraseña" en el login de Admin, y bugs de recuperación de contraseña (se permitía cambiar a una que no cumplía requisitos de seguridad; no redirigía al login tras completar el cambio).
 - Auditoría de APIs de comercio: persistir en una tabla de auditoría cada alta/baja/modificación de datos sensibles de comercio, con fecha, endpoint, url, body, response, JWT y usuario de Access Management.
 - **AccessManagement 2.0**: migración de modelo de permisos 1:1 por Organización a modelo de plantillas reutilizables (RolTemplate/PermisoTemplate) + esquema Miembro-MiembroOrganizacion-MiembroRol; ABM de roles/usuarios por Entidad desde el Admin; soporte multi-aplicación (antes hardcodeado a una sola app). Ver también hardening de seguridad relacionado en [3_recursos/arquitectura_sistema/hardening_y_remediacion_de_pentests.md](../../arquitectura_sistema/hardening_y_remediacion_de_pentests.md).
+- **Ticket histórico AD132 — roles de usuario desaparecían intermitentemente (aprobado desarrollo, 2026-09-10).** > Estado: discovery — no construido (aprobado, pendiente de desarrollo). En la sección de entidades y usuarios del Admin, los roles de un usuario desaparecían de forma intermitente. Causa raíz identificada por Julieta Gimenez (Fintexa): una combinación de caché defectuosa y un endpoint ineficiente que resolvía los roles de miembros con llamadas recursivas. Resolución acordada en la reunión "Análisis COBRO" (2026-09-10): construir un endpoint exclusivo para la obtención de roles de miembros, sin depender de la caché defectuosa (estimado 3 SP, talle M). El equipo (Pablo Gomes, Matías Alzogaray, Nicolás Colón) dio el visto bueno para el desarrollo, todavía no iniciado a esta fecha.
 
 ## Trazabilidad de datos ("que se vea X")
 
@@ -75,6 +76,7 @@ Ticket XL de refactorización de permisos del Portal, el más grande de la muest
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración", "Defectos encontrados en QA" y "Reporting" (111 SP, 39 tickets) — ingesta 2026-07-06.*
-*Última actualización: 2026-09-08 — nueva sección "Búsqueda por referencia en el Admin — solo exacta, no parcial" (reunión "Revisemos ADMIN Pago Facil").*
+*Última actualización: 2026-09-10 — nuevo ítem en "Access Management y seguridad operativa": ticket histórico AD132 (roles de usuario desaparecían, caché + endpoint recursivo), aprobado para desarrollo (reunión "Análisis COBRO").*
+*Última actualización anterior: 2026-09-08 — nueva sección "Búsqueda por referencia en el Admin — solo exacta, no parcial" (reunión "Revisemos ADMIN Pago Facil").*
 *Última actualización anterior: 2026-08-19 — nueva sección "Parametrización manual y fragmentada de entidades" (reunión "Parámetros de entidades").*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Admin de 4 archivos-cola de `detalle_productos/transversal/`.*

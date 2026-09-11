@@ -1,24 +1,12 @@
----
-id: 2026-09-11_cumplimiento_coelsa_cpf_central_prevencion_fraude
-pm: pablo
-fecha_captura: 2026-09-11
-fuente: "Ingesta manual de documentación pública de Coelsa (VPN habilitada) — https://documentacion.coelsa.com.ar/CPF/#introduccion — sitio completo. Consultado 2026-09-11."
-producto: "transversal"
-tema: Central de Prevención de Fraude (CPF) de Coelsa — base compartida de cuentas sospechosas/fraudulentas del ecosistema, API REST y mensajería RabbitMQ
-tipo: conocimiento
-destino_propuesto: wiki/3_recursos/cumplimiento_normativo/coelsa_cpf_central_prevencion_fraude.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit: PENDIENTE
----
+# Central de Prevención de Fraude (CPF) de Coelsa
+
+> Ingesta: 2026-09-11. Fuente: documentación pública de Coelsa (VPN habilitada), https://documentacion.coelsa.com.ar/CPF/#introduccion, sitio completo.
 
 ## Qué es la CPF y por qué importa
 
-La **Central de Prevención de Fraude (CPF)** es una base de datos **compartida por todo el ecosistema** (bancos, PSP, procesadores) de cuentas (CBU/CVU) y CUIT involucrados en operaciones sospechosas o fraudulentas. Objetivo explícito de Coelsa: *"servir como herramienta en el análisis de fraude al identificar datos y patrones sospechosos"* — es decir, cualquier entidad puede reportar un caso y **cualquier otra entidad puede consultarlo**, incluso antes de operar con esa cuenta. Es distinta de COELSA.PREVENT (scoring transaccional automático, ver item separado) — la CPF es un **registro colaborativo manual/semi-manual** de casos, no un modelo de IA en tiempo real, aunque ambas viven bajo el mismo paraguas comercial "COELSA.PREVENT" (el menú de PREVENT_WEB tiene un acceso directo a CPF).
+La **Central de Prevención de Fraude (CPF)** es una base de datos **compartida por todo el ecosistema** (bancos, PSP, procesadores) de cuentas (CBU/CVU) y CUIT involucrados en operaciones sospechosas o fraudulentas. Objetivo explícito de Coelsa: *"servir como herramienta en el análisis de fraude al identificar datos y patrones sospechosos"* — es decir, cualquier entidad puede reportar un caso y **cualquier otra entidad puede consultarlo**, incluso antes de operar con esa cuenta. Es distinta de [COELSA.PREVENT](coelsa_prevent_scoring_y_on_hold.md) (scoring transaccional automático) — la CPF es un **registro colaborativo manual/semi-manual** de casos, no un modelo de IA en tiempo real, aunque ambas viven bajo el mismo paraguas comercial "COELSA.PREVENT" (el menú de PREVENT_WEB tiene un acceso directo a CPF; ver referencia cruzada en ese archivo).
 
-**Alcance de operaciones cubiertas** (explícito en la documentación): transferencias inmediatas minoristas (Prisma/Link), CREDIN, DEBIN, **Echeq** (excluido de esta ronda de ingesta salvo por esta mención transversal), Pagos con Transferencia (PCT), transferencias inmediatas mayoristas (Interbanking) — personas físicas y jurídicas.
+**Alcance de operaciones cubiertas** (explícito en la documentación): transferencias inmediatas minoristas (Prisma/Link), CREDIN, DEBIN, Echeq, Pagos con Transferencia (PCT), transferencias inmediatas mayoristas (Interbanking) — personas físicas y jurídicas.
 
 ## Autenticación y permisos
 
@@ -81,10 +69,15 @@ Mensajes tipo `STRING` en formato JSON, ej. novedad `CPF_ALTA`:
 ```
 Una variante más rica (solo consumo Link/Prisma) agrega `Estado`, `Fecha_ocurrencia`, `Denominacion_Receptor`, `ID_Moneda`, `Importe`, `Caso_verificado`, `Id_caso_verificado`.
 
-## Relevancia y siguiente paso sugerido
+## Relevancia y pregunta de negocio abierta
 
-No hay evidencia en la wiki de que Bind ya consuma la CPF (ni por API ni por la cola RabbitMQ) — `cumplimiento_normativo/gestion_riesgo_fraude_bcra.md` documenta la normativa BCRA (COM 8471/8473) pero no menciona la CPF como herramienta operativa concreta. Vale la pena que el PM confirme con el equipo de Fraude/Cumplimiento si Bind ya opera contra esta API (alta de casos propios, consulta antes de operar con una cuenta nueva) — no lo registro como gap por no haber contradicción, pero es una pregunta de negocio abierta y de alto valor potencial (evitar fraude cruzando contra una base compartida de todo el ecosistema).
+No hay evidencia en la wiki de que Bind ya consuma la CPF (ni por API ni por la cola RabbitMQ) — [gestion_riesgo_fraude_bcra.md](gestion_riesgo_fraude_bcra.md) documenta la normativa BCRA (COM 8471/8473) pero no menciona la CPF como herramienta operativa concreta. Queda como pregunta de negocio abierta (no gap — no hay contradicción con nada documentado) confirmar con el equipo de Fraude/Cumplimiento si Bind ya opera contra esta API (alta de casos propios, consulta antes de operar con una cuenta nueva): es de alto valor potencial al cruzar contra una base compartida de todo el ecosistema.
 
-## Confianza
+## Ver también
 
-Alta — documentación oficial completa, sin contradicciones detectadas.
+- [coelsa_prevent_scoring_y_on_hold.md](coelsa_prevent_scoring_y_on_hold.md) — COELSA.PREVENT (scoring automático + ON HOLD), que incluye un acceso directo a la CPF desde la misma web `PREVENT_WEB`.
+- [gestion_riesgo_fraude_bcra.md](gestion_riesgo_fraude_bcra.md) — normativa BCRA de gestión de riesgo de fraude (COM 8471/8473).
+- [detalle_productos/wallet/coelsa_debin_api_referencia.md](../detalle_productos/wallet/coelsa_debin_api_referencia.md) — referencia técnica de DEBIN, que usa el mismo motor de scoring en su respuesta (`evaluacion.puntaje`).
+
+---
+*Creado: 2026-09-11 — `/context_merge`, desde ingesta manual de documentación pública de Coelsa (Pablo Gomes).*

@@ -74,6 +74,18 @@ Cluster de manejo de excepciones y contingencia para operaciones que podían que
 - Las cuadraturas (conciliación contable) no deberían generarse si no se encuentra el extracto correspondiente.
 - **Bug de segmentación cruzada**: las cuentas de **TIN** se daban de alta en el calculador de costos con el segmento de **SUR FINANZAS** (mezcla de configuración entre dos clientes white-label distintos) — ver [ecosistema_wallet_adquirencia/sur_finanzas_multi_comercio.md](../ecosistema_wallet_adquirencia/sur_finanzas_multi_comercio.md).
 
+### Global 66 — reactivar una CVU eliminada crea una CVU nueva (cuentas migradas)
+
+En Global 66, al eliminar y volver a dar de alta una Clave Virtual Uniforme (CVU) a través del endpoint de la billetera, el sistema genera una **CVU nueva** en lugar de reactivar la anterior. Causa raíz: esas cuentas provienen de **migraciones previas** y no se crearon originalmente con un identificador de cuenta propio del sistema actual. Luciana Rudaz confirmó que Astropay tuvo exactamente el mismo problema en el pasado, por el mismo motivo de migración de claves.
+
+**Alcance:** afecta únicamente a **3 usuarios/cuentas de Global 66** — no es una situación masiva.
+
+**Solución propuesta (Pablo Gomes):** incorporar un atributo de identificador de cliente y desarrollar una lógica específica para los casos que provienen de migraciones.
+
+**Decisión operativa provisional (estado "Requiere más debate"):** hasta que exista esa solución, la organización de Global 66 puede seguir eliminando CVU libremente, pero debe **solicitar la reactivación de forma manual** — el equipo ejecuta el alta manual vía Swagger en APIBank y actualiza los registros con un script, según el volumen de casos.
+
+> Fuente: reunión "Daily producto" (2026-09-09, 09:31), minuta Gemini.
+
 ### Bugs y pedidos operativos — tramo W71 (releaseDate 2026-07-15 a 2026-07-23)
 
 > Fuente: Jira bindpsp.atlassian.net, versión W 71 (publicada 2026-07-15) y W 71.2 FIX (tickets WS-1389/WS-1394/WS-1395).
@@ -103,6 +115,7 @@ Cluster de manejo de excepciones y contingencia para operaciones que podían que
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración" y "Mejoras e Iniciativas Técnicas" — ingesta 2026-07-06.*
-*Última actualización: 2026-08-25/26 — `/context_merge`: nueva sección "Bugs y pedidos operativos — tramo W72" (WS-1437, WS-1287) y nota comparativa COTO (`GET Movimientos` vs. `GET /CuentaCorriente`).*
+*Última actualización: 2026-09-11 — `/context_merge`: nueva sección "Global 66 — reactivar una CVU eliminada crea una CVU nueva" en "Operación de Wallet", desde contexto_vivo de Nicolás Colón (reunión "Daily producto" 2026-09-09).*
+*Última actualización anterior: 2026-08-25/26 — `/context_merge`: nueva sección "Bugs y pedidos operativos — tramo W72" (WS-1437, WS-1287) y nota comparativa COTO (`GET Movimientos` vs. `GET /CuentaCorriente`).*
 *Última actualización anterior: 2026-08-15/18 — `/sync_releases` + `/sync_meetings`: nueva sección "Bugs y pedidos operativos — tramo W71", pedido de GST y deuda técnica de comprobante relacionado.*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Wallet de 3 archivos-cola de `detalle_productos/transversal/`.*

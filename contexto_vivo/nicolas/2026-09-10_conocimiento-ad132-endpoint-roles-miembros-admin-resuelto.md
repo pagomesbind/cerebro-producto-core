@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/portal_admin/pedidos_de_clientes
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 Julieta Gimenez (Fintexa) presentó en "Análisis COBRO" (2026-09-10) el ticket antiguo **AD132**, relacionado con la sección de entidades y usuarios del Admin: los **roles de usuario desaparecían intermitentemente**, causado por problemas de caché y un endpoint ineficiente con llamadas recursivas para obtener los roles de miembros.

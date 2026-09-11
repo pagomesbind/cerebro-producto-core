@@ -13,6 +13,8 @@
 | [identificacion_personas_juridicas_vinculados.md](identificacion_personas_juridicas_vinculados.md) | ⚠️ Orientación de diseño, no validada por Compliance. Requisitos UIF de identificación para personas jurídicas, FCI/Fideicomisos y sujetos vinculados/beneficiario final. |
 | [gestion_riesgo_fraude_bcra.md](gestion_riesgo_fraude_bcra.md) | Comunicaciones "A" 8471 y 8473 del BCRA — programa de gestión de riesgo de fraude (Sección 6 extendida a PSPCP) y score de riesgo de fraude por CUIL/CUIT de uso obligatorio. Cronograma de 4 etapas desde 2026-09-01, discovery en curso en `1_proyectos/gestion_riesgo_fraude/`. |
 | [gestion_riesgo_tecnologia_seguridad_a7724.md](gestion_riesgo_tecnologia_seguridad_a7724.md) | Comunicación "A" 7724 BCRA — marco integral de gestión de riesgos de TI/ciberseguridad (gobierno, continuidad del negocio, ciclo de vida de software, terceras partes, Canales Electrónicos). Aplicabilidad a Bind PSP asumida como posición de negocio, sin relevamiento de madurez todavía. |
+| [coelsa_cpf_central_prevencion_fraude.md](coelsa_cpf_central_prevencion_fraude.md) | Central de Prevención de Fraude (CPF) de Coelsa: base compartida por todo el ecosistema de cuentas/CUIT sospechosos, catálogo de API REST, ciclo de estados de una operación, alta masiva y mensajería RabbitMQ (`CPFNEWS`). Pregunta de negocio abierta: no hay evidencia de que Bind ya la consuma. |
+| [coelsa_prevent_scoring_y_on_hold.md](coelsa_prevent_scoring_y_on_hold.md) | COELSA.PREVENT: scoring de fraude por IA (1-99) transversal a DEBIN/CVU/PCT, configuración de umbrales de rechazo automático y excepciones, y el nuevo servicio **ON HOLD** (retención preventiva, driver Com. "A" 7463 BCRA) — aporta contexto para cerrar el gap abierto sobre necesidad de opt-in de Bind. |
 
 ## Ver también
 
@@ -21,7 +23,8 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — gap abierto sobre PCI DSS del proveedor Fintexa (distinto de la recertificación propia documentada acá).
 
 ---
-*Última actualización: 2026-09-10 — `/context_merge`: `identificacion_personas_fisicas_cvu.md` actualizado con la 4ta DDJJ obligatoria (cooperación tributaria internacional OCDE/CRS + FATCA, fuente primaria BCRA) y confianza subida para los puntos 1.3/4.13.1.1.*
+*Última actualización: 2026-09-11 — `/context_merge`: 2 archivos nuevos — [coelsa_cpf_central_prevencion_fraude.md](coelsa_cpf_central_prevencion_fraude.md) y [coelsa_prevent_scoring_y_on_hold.md](coelsa_prevent_scoring_y_on_hold.md) (Central de Prevención de Fraude y scoring/ON HOLD de Coelsa, desde ingesta manual de documentación pública de Pablo Gomes); `identificacion_personas_juridicas_vinculados.md` nueva sección Wallet Data Service (documentación exigida por BCRA), desde contexto_vivo de Nicolás Colón.*
+*Última actualización anterior: 2026-09-10 — `/context_merge`: `identificacion_personas_fisicas_cvu.md` actualizado con la 4ta DDJJ obligatoria (cooperación tributaria internacional OCDE/CRS + FATCA, fuente primaria BCRA) y confianza subida para los puntos 1.3/4.13.1.1.*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: 1 archivo nuevo (gestión de riesgos de TI/ciberseguridad, Com. "A" 7724 BCRA), desde auditoría de cumplimiento normativo del PM.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: 1 archivo nuevo (gestión de riesgo de fraude, Com. "A" 8471/8473 BCRA), desde discovery de `gestion_riesgo_fraude/` (Pablo Gomes).*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: 2 archivos nuevos (identificación de personas físicas y jurídicas/vinculados para CVU), desde research de Gemini deep research del PM.*

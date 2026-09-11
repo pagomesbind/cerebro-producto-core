@@ -607,5 +607,11 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 - **Pregunta para el usuario:** ¿confirmás que son dos límites independientes y no hace falta reconciliarlos en un único documento de referencia?
 - **Estado:** Pendiente
 
+## [2026-09-09] — Contradicción en el monto del límite operativo de personas jurídicas: $1.000 (canon) vs. $10.000 (dos reuniones independientes)
+- **Severidad:** Alta
+- **Descripción:** La decisión ya en canon (2026-09-08, "Producto") fija el límite operativo de cuentas de personas jurídicas sin documentación de respaldo en $1.000. El 2026-09-09, dos reuniones independientes con asistentes distintos ("ARDID" — Mariana Nadalin cita un pedido del directorio con deadline 1/10/2026; "Join Soporte Clientes" — sección Decisiones, estado "Acordada") describen el mismo criterio pero con el monto en $10.000. La propia minuta de "Join Soporte Clientes" es inconsistente entre su resumen ($1.000) y su sección de Decisiones ($10.000), sin resolución posible contra la transcripción (no se abrió). Ver ambas versiones documentadas, sin ganador elegido, en `direccion/decisiones.md` [2026-09-09].
+- **Pregunta para el usuario:** ¿cuál es el monto vigente del límite operativo — se mantiene $1.000 o pasó a $10.000 por decisión del directorio? De ser $10.000, ¿fue un cambio deliberado posterior al 2026-09-08, o un error de transcripción que se arrastra entre las dos reuniones del 09/09? Hay un deadline duro del directorio (1 de octubre de 2026) asociado a esta definición — ver `direccion/iniciativas.md` (`onboarding_shared_kyc_worsis`).
+- **Estado:** Pendiente
+
 ---
 *Última actualización: 2026-08-13 — Split del archivo en la reestructuración PARA en cascada: las entradas ligadas a un proyecto/IDEA vivo se movieron a su `gaps.md` propio en `1_proyectos/`; 4 entradas con cierre real rotaron a `gaps_resueltos.md`. Quedan acá solo las de contexto fijo.*

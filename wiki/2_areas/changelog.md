@@ -6,6 +6,14 @@
 
 ## 2026
 
+### 2026-09-11 (pablo + nicolas)
+
+- `direccion/iniciativas.md` — actualizadas 3 filas: PRD-202 (Jira resincronizado tras backlog drift, contrato v7.0); bajar-tiempos-pagos-qr (nuevo informe de tiempos post-despliegue de Keep IT Simple); onboarding_shared_kyc_worsis (novedad de Nicolás Colón — deadline duro 1/oct del directorio, monto en duda, segmentación ARDID sin resolver; `pm_destino: pablo`, ver sección propia del manifiesto).
+- `direccion/decisiones.md` — 2 entradas nuevas: Confluence diferido como solución a límites de Jira, no contratado por licencia (pablo); contradicción sin resolver sobre el monto del límite operativo de personas jurídicas ($1.000 canon vs. $10.000 reportado en 2 reuniones independientes) — ambas versiones documentadas, sin elegir ganador.
+- `gaps_y_preguntas.md` — 1 gap nuevo: contradicción del monto del límite operativo de personas jurídicas, escalado a Pablo Gomes/Compliance.
+- `riesgos.md` — 2 riesgos nuevos: falta de controles en onboardings gestionados por el integrador Gallo (Terra Blockchain ya dado de baja); error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-11.md`): 13 items — 3 arrastrados de corridas anteriores + 10 nuevos (cronograma septiembre, corrección estado_actual, transcripción PNET no descargable, decisión Fintexa→Nicolás, 2 gaps de cliente sin ficha, La Virginia x2, ventana de comunicación de fechas, 2 gaps de cliente Biwi/Global Loan) — más 1 item sin producto dueño clasificable (API VATA de Modo).
+
 ### 2026-09-10 (pablo)
 
 - `direccion/iniciativas.md` — actualizada 1 fila (PRD-66: causa raíz de la demora de QR confirmada en vivo con Provincia Net, plan de mitigación acordado); creada 1 fila nueva (PRD-247: vulnerabilidad Renaper Datos, discovery cerrado en Gate 2 como 🟡 Diferido, consolida las 2 novedades del 09-09 y 09-10 en una sola fila).

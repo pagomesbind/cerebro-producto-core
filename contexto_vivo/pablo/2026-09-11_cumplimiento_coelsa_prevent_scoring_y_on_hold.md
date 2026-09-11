@@ -10,8 +10,8 @@ destino_propuesto: wiki/3_recursos/cumplimiento_normativo/coelsa_prevent_scoring
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 ## Por qué este documento y conexión con un gap ya abierto

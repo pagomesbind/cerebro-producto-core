@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/pagos_fx_portal_bene
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: <pendiente>
 ---
 
 Avance de estado sobre Pagos FX/Pagos Effects (ver antecedente ya en canon del 2026-09-07/08 sobre la demora atribuida a Mastercard, ya superada): en "Análisis COBRO" (2026-09-10), Flavia Salmeron (Fintexa) informó que **todas las historias de usuario del MVP de Pagos Effects ya fueron trasladadas a QA externo**, a excepción del **alta de beneficiarios**, que continúa en pruebas internas. Confirmó además que **no existen requerimientos adicionales pendientes de parte de Lu (Luciana Rudaz)** para esta etapa. Pablo Gomes se comprometió a verificar una vez más con Lu para descartar cualquier solicitud pendiente de último momento antes del cierre de la versión 74.

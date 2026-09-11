@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/mecanica_qr_coelsa.m
 tipo_destino: actualizar
 contradice: no
 confianza: Alta
-estado: en_cola
+estado: ingestado
+merge_commit: <pendiente>
 ---
 
 # Tiempos de PagosQR — Análisis de Optimización Post-Despliegue (Sept 2026)

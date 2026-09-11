@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "wiki/2_areas/direccion/decisiones.md (mergeado 2026-09-09 desde contexto_vivo, item 2026-09-08_decision-limite-1000-cuentas-personas-juridicas-sin-documentacion): \"se permite la creación de cuentas de personas jurídicas aplicando un límite operativo máximo de $1.000 hasta que el cliente presente la documentación de respaldo requerida por cumplimiento\" (reunión \"Producto\", 2026-09-08)."
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING
 ---
 
 El monto del límite operativo para cuentas CVU de personas jurídicas sin documentación de respaldo aparece con **dos valores distintos** según la fuente, ambos posteriores a la decisión ya mergeada en el canon:

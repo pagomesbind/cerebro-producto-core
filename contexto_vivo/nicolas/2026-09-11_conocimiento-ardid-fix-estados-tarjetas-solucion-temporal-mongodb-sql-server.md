@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/despliegues_y_operacion.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 Osmel Mata (Fintexa, SRE Sr) respondió en el hilo del fix "Análisis de Riesgos Fix actualización estado pagos | Corrección BIN" (publicado en PROD el 01/09) con el estado real del despliegue, a pedido de Matías Alzogaray:

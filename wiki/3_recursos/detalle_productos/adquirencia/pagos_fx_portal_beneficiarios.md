@@ -63,6 +63,12 @@ Se compartieron archivos Excel con el resumen de especificaciones y corredores s
 
 Pagos FX mantiene su urgencia por cumplimiento de un deadline estricto, encontrándose mayormente en etapa de **QA** tras superar una demora técnica atribuida a Mastercard (sin más detalle técnico disponible en esta fuente — foco del frente sigue siendo de Luciana Rudaz). Action item asociado: informar al equipo de QA el estado actual de las pruebas de Pagos FX tras los incidentes (owner: Matías Alzogaray, prioridad Alta, sin fecha límite definida).
 
+## 8. Avance de estado — MVP mayormente en QA externo, alta de beneficiarios pendiente (2026-09-10)
+
+> Fuente: Reunión "Análisis COBRO" (2026-09-10), minuta Gemini.
+
+Avance sobre el estado de QA ya documentado en §7 (demora atribuida a Mastercard, ya superada): Flavia Salmeron (Fintexa) informó que **todas las historias de usuario del MVP de Pagos Effects ya fueron trasladadas a QA externo**, a excepción del **alta de beneficiarios** (§3), que continúa en pruebas internas. Confirmó además que **no existen requerimientos adicionales pendientes de parte de Lu (Luciana Rudaz)** para esta etapa. Pablo Gomes se comprometió a verificar una vez más con Lu para descartar cualquier solicitud pendiente de último momento antes del cierre de la versión 74.
+
 ## Ver también
 
 - [`psp_as_a_service_normativa_8432.md`](psp_as_a_service_normativa_8432.md) — contexto normativo/impositivo de Pagos FX (Norma 8432 BCRA), caso PeYa.
@@ -70,6 +76,7 @@ Pagos FX mantiene su urgencia por cumplimiento de un deadline estricto, encontr�
 - PRD-183 (Pagos FX SEGUNDO MVP - APIs) — frente de APIs del mismo segundo MVP. Ídem, Cerebro de Luciana Rudaz.
 
 ---
-*Última actualización: 2026-09-08 — `/context_merge`: nueva §7 (estado de QA de Pagos FX tras demora atribuida a Mastercard, 2026-09-07).*
+*Última actualización: 2026-09-11 — `/context_merge`: nueva §8 (avance de estado — MVP mayormente en QA externo, alta de beneficiarios pendiente en pruebas internas, sin requerimientos adicionales de Luciana Rudaz).*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: nueva §7 (estado de QA de Pagos FX tras demora atribuida a Mastercard, 2026-09-07).*
 *Última actualización anterior: 2026-08-05 — `/sync_meetings`: nueva §6 (alta operativa de organización nueva de Pagos FX/crossborder — corredores, scripts vs. API, gap de notificación, entidades de transición "Move"/"Coin"). Ver reunión "eco cerrado peya" del 2026-08-05 en `wiki/5_control/log_reuniones.md`.*
 *Última actualización anterior: 2026-07-23 — Creación del archivo (`/sync_meetings`), a partir de la reunión "Seguimiento Portal - Pagos Fx" del 2026-07-23.*

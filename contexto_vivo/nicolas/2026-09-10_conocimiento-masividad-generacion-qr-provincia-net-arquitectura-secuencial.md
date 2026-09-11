@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/agente_cobros_y_pagos/masividad_
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 En "Análisis COBRO" (2026-09-10) se profundizó en la limitación arquitectónica que motiva el ticket AD-935 (masividad de Provincia Net satura la cola general de QR, ver [T-030](../tareas.md)):

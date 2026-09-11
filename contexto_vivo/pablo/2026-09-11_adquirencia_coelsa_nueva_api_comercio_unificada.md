@@ -10,8 +10,8 @@ destino_propuesto: wiki/3_recursos/detalle_productos/adquirencia/coelsa_nueva_ap
 tipo_destino: crear
 contradice: "no — complementa, no contradice, apiCVU/Comercio (ver adquirencia/mecanica_qr_coelsa.md Parte 4); es una API nueva y distinta, no una versión de la misma"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: <pendiente>
 ---
 
 ## Hallazgo clave — esta es una API distinta de la ya documentada

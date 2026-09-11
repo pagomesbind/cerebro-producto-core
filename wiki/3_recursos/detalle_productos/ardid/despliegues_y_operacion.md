@@ -21,9 +21,22 @@ El fix de AD-1374 activa reglas antifraude que, por un bug previo, no se estaban
 
 **Deploy:** staging lunes 31/08 9hs, producción martes 01/09 en ventana 6:30-8:00 (media hora previa reservada para el backup de bases). Sin action item de Producto — el seguimiento queda en el equipo técnico (Hernán Clarich monitorea rechazos, Rocío Revelli hace la revisión post-implementación en Ardid).
 
+## 3. Seguimiento post-despliegue (01/09) — solución temporal en Mongo, SQL Server sin resolver
+
+> Estado: en producción, con parche manual sostenido — no es la solución de fondo.
+
+> Fuente: mail "RE: Análisis de Riesgo - Fix de cambios de estados de las tarjetas" — Osmel Mata (Fintexa, SRE Sr, osmel.mata@fintexa.tech), 2026-09-10, a pedido de Matías Alzogaray.
+
+El despliegue del 01/09 (§2) se aplicó **sin inconvenientes**: la vista de Pagos en la consola web quedó corregida y se regularizaron los **250.000 registros** que estaban trabados en estado `PENDING`.
+
+- Esa regularización fue una **solución temporal**: implica seguir corriendo **manualmente un script sobre la base de datos MongoDB de Ardid** para ir moviendo esos registros de `PENDING` a `Realized`, hasta que el equipo de desarrollo de Pentass encuentre una solución permanente de fondo.
+- Del lado de **SQL Server**, el fix implementado **no parece haber funcionado** como se esperaba; Fintexa sigue trabajando en conjunto con el equipo de soporte de Pentass para normalizarlo.
+- Hay indicios (sin confirmación oficial ni documentación todavía) de que se está evaluando pasar Ardid/Akurtech de la versión actual **v1.18.2** a la **v1.19.x**, con la expectativa de que sea más estable.
+
 ## Ver también
 - [modulo_pagos.md](modulo_pagos.md) — reglas antifraude de pagos con tarjeta que este fix corrige.
 - [../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md](../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md) — proceso general de análisis de riesgo de despliegue (semáforo, informe), del que este caso es una instancia concreta.
 
 ---
-*Última actualización: 2026-08-31 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (reunión "Análisis de Riesgo - Fix de cambios de estados de las tarjetas", 2026-08-28).*
+*Última actualización: 2026-09-11 — `/context_merge`: nueva sección "Seguimiento post-despliegue (01/09) — solución temporal en Mongo, SQL Server sin resolver" (mail de Osmel Mata, Fintexa, 2026-09-10).*
+*Última actualización anterior: 2026-08-31 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (reunión "Análisis de Riesgo - Fix de cambios de estados de las tarjetas", 2026-08-28).*

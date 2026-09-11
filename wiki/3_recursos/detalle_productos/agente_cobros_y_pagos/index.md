@@ -13,6 +13,7 @@
 | [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md) | Pedidos puntuales de clientes (Astropay, COTO/GLOBANT, TINSA) y bugs operativos históricos de RxT/CVUCollect. |
 | [integracion_procesadores_pago.md](integracion_procesadores_pago.md) | Integración de procesadores de pago Prisma/GP: deuda técnica de grupos de reglas, parámetro "pago único" (botón de pago vs. RXT), regla de liquidación same-day de transacciones en línea, limitación del panel admin con Prisma, hotfix de localidades/códigos postales. |
 | [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) | Bug de contracargos de colectores (Pago Fácil) rechazados por validación incorrecta de ID de caja vs. ID de colector. |
+| [masividad_generacion_qr.md](masividad_generacion_qr.md) | Arquitectura secuencial de generación masiva de QR (pool pregenerado, sin paralelización por caja/archivo), tiempos medidos y debate de colas diferenciadas — caso Provincia Net (AD-935). |
 
 ## Relación con otros documentos de la wiki
 
@@ -22,7 +23,8 @@
 - [apis_expuestas/index.md](apis_expuestas/index.md) — API pública oficial expuesta a clientes; dominio exclusivo de la skill `/sync_web`, no tocar desde acá.
 
 ---
-*Última actualización: 2026-09-08 — `/context_merge`: nuevo archivo `devoluciones_y_contracargos.md` (bug de contracargos de colectores rechazados por ID de caja vs. ID de colector, Pago Fácil) a partir de la reunión "Weekly - Producto / Operaciones" (2026-09-07).*
+*Última actualización: 2026-09-11 — `/context_merge`: nuevo archivo `masividad_generacion_qr.md` (arquitectura secuencial de generación de QR y límites, caso Provincia Net/AD-935) a partir de la reunión "Análisis COBRO" (2026-09-10).*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: nuevo archivo `devoluciones_y_contracargos.md` (bug de contracargos de colectores rechazados por ID de caja vs. ID de colector, Pago Fácil) a partir de la reunión "Weekly - Producto / Operaciones" (2026-09-07).*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nuevo archivo `integracion_procesadores_pago.md` (deuda técnica Prisma/GP, parámetro "pago único", regla de liquidación same-day, limitación de panel admin, hotfix de localidades, cronograma v72) a partir de la reunión "Análisis COBRO" (2026-08-20).*
 *Última actualización anterior: 2026-08-12 — Renombrado desde `cobros/` en la reestructuración PARA en cascada; `carga_masiva_cajas.md` movido a Adquirencia (RxT) y `transferencias_pull.md` movido a Wallet por no ser de este producto; `configuracion_y_operacion.md` desarmado en 3 archivos temáticos.*
 *Última actualización anterior: 2026-07-06 — Ingesta de Epics de Notion (lote C1): 3 archivos nuevos (cuenta_recaudadora_usd.md, carga_masiva_cajas.md, transferencias_pull.md).*

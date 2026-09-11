@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/pedidos_de_clientes_y_hal
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 **Hallazgo:** en Global 66, al eliminar y volver a dar de alta una Clave Virtual Uniforme (CVU) a través del endpoint de la billetera, el sistema genera una **CVU nueva** en lugar de reactivar la anterior. Causa raíz: esas cuentas provienen de **migraciones previas** y no se crearon originalmente con un identificador de cuenta propio del sistema actual. Luciana Rudaz confirmó que Astropay tuvo exactamente el mismo problema en el pasado, por el mismo motivo de migración de claves.

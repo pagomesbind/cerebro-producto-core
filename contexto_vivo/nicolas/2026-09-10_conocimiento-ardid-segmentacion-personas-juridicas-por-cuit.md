@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/integracion_con_productos_
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 En el marco del nuevo límite operativo para cuentas de personas jurídicas (ver gap asociado sobre el monto exacto, `2026-09-10_gap-contradiccion-limite-operativo-personas-juridicas-1000-vs-10000`), surgió en la reunión "ARDID" (2026-09-09) que **el sistema no tiene hoy un método automático para distinguir si una CBU/CVU corresponde a una persona jurídica**: las cuentas de personas jurídicas se registran bajo el mismo segmento ARDID que las personas físicas, pese a tener CUIT (en vez de CUIL).

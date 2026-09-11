@@ -40,5 +40,6 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — inconsistencias abiertas de este módulo (conteo de microservicios, versión del documento fuente, PCI DSS omitido del texto narrativo, atribución de MongoDB).
 
 ---
-*Última actualización: 2026-09-07 — `/context_merge`: nuevo módulo [api_bank/](api_bank/index.md) (11 archivos, relevamiento completo de la API pública de Banco Industrial, contexto_vivo de Pablo Gomes).*
+*Última actualización: 2026-09-11 — `/context_merge`: `integraciones_externas.md` suma registro de la primera ingesta completa de documentación pública de Coelsa (DEBIN, Comercio, CVU, Prevent, CPF) — baseline de changelog para futuras ingestas incrementales de ese sitio.*
+*Última actualización anterior: 2026-09-07 — `/context_merge`: nuevo módulo [api_bank/](api_bank/index.md) (11 archivos, relevamiento completo de la API pública de Banco Industrial, contexto_vivo de Pablo Gomes).*
 *Última actualización anterior: 2026-08-12 — Reestructuración PARA en cascada: los 3 archivos legacy (`index.md`, `flujo_transaccional.md`, `seguridad_y_redes.md`) se desarmaron en 15 archivos temáticos, y se sumaron 6 archivos más provenientes de `detalle_productos/transversal/` y `documentacion_api/general_info.md` desarmados en fases previas — 21 archivos temáticos en total. El módulo pasa a ser explícitamente "sistemas/IT duro no ligado a producto", no solo la traducción de un documento del proveedor.*

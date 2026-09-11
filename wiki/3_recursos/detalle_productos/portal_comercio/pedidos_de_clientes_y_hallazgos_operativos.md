@@ -50,6 +50,7 @@
 ## Bugs sin cliente específico
 
 - Bug en el botón para devolver una transacción desde el Portal Comercio.
+- **Portal Comercio no tiene devoluciones parciales, solo devolución total** (reportado 2026-09-10 vía ticket de soporte, reunión "Análisis COBRO"). La funcionalidad de devolución parcial existe hoy **únicamente desde el Admin** — no es un bug puntual sino una brecha de funcionalidad entre ambos portales. Nicolás Colón evaluará crear un ticket de desarrollo para habilitarla también en el Portal Comercio; sin ticket ni fecha a esta fecha. Ver [portal_admin/pedidos_de_clientes_y_hallazgos_operativos.md](../portal_admin/pedidos_de_clientes_y_hallazgos_operativos.md) para las herramientas de devolución/recuperación disponibles del lado Admin.
 - **SUR FINANZAS: la sección Usuarios no traía información** — el listado de usuarios del portal quedaba vacío para un administrador real (confirmado en QA antes de producción). Ver ficha del cliente en [`ecosistema_wallet_adquirencia/sur_finanzas_multi_comercio.md`](../ecosistema_wallet_adquirencia/sur_finanzas_multi_comercio.md).
 
 ## Extracto de movimientos HTML (desarrollo en 7 partes)
@@ -70,6 +71,7 @@ Extracto de movimientos con formato HTML (no solo CSV) para Portal Comercio:
 
 ---
 *Fuente: Epics Notion "Dolores de clientes", "Dolores de Soporte y administración" y "Reporting" — ingesta 2026-07-06.*
-*Última actualización: 2026-08-19 — nueva sección "Retomada del rollout de Portal 2.0 — despliegue piloto por entidad" (reunión "Portal 2.0").*
+*Última actualización: 2026-09-10 — nuevo ítem en "Bugs sin cliente específico": Portal Comercio sin devoluciones parciales (reunión "Análisis COBRO").*
+*Última actualización anterior: 2026-08-19 — nueva sección "Retomada del rollout de Portal 2.0 — despliegue piloto por entidad" (reunión "Portal 2.0").*
 *Última actualización anterior: 2026-08-15 — `/sync_releases`: nueva sección "Rollout Portal 2.0 (mayo 2026) — bugs de QA" (20 tickets, ingesta retroactiva por gap del backfill anterior).*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Portal Comercio de 3 archivos-cola de `detalle_productos/transversal/`.*

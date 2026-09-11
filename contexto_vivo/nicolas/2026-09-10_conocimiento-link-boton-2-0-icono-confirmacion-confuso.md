@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/boton_simple_2_0.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: <pendiente>
 ---
 
 Daniela Collia (Fintexa) reportó en "Análisis COBRO" (2026-09-10) el ingreso de un ticket de soporte indicando que la ventana de confirmación de pago de **Link Botón 2.0** (Botón Simple 2.0) muestra un **icono de exclamación en verde** que visualmente se confunde con un ícono de éxito/pago aprobado. Pablo Gomes consideró menor la importancia del cambio, pero Daniela Collia insistió en que afecta negativamente la experiencia de usuario.
