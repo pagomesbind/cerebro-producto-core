@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: 201b3e0
 ---
 
 ## Por qué este documento

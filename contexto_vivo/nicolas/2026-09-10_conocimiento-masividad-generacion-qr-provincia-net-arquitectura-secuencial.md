@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 201b3e0
 ---
 
 En "Análisis COBRO" (2026-09-10) se profundizó en la limitación arquitectónica que motiva el ticket AD-935 (masividad de Provincia Net satura la cola general de QR, ver [T-030](../tareas.md)):

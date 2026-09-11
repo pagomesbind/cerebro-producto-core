@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 201b3e0
 ---
 
 **Hallazgo técnico (2026-09-11, durante la sincronización de Jira de PRD-202):** el campo `description` de un ticket de Jira (formato ADF) tiene un techo real de ~28-30KB — por encima de eso, la API rechaza el contenido con `CONTENT_LIMIT_EXCEEDED`. Se confirmó de forma práctica: OB-235 (historia con 38 criterios de aceptación) lo superó incluso comprimiendo tablas markdown a listas, y tuvo que dividirse en descripción + un comentario aparte del mismo ticket. Además, el conector Jira (MCP) usado desde el Cerebro no expone ninguna tool para adjuntar archivos/imágenes a un ticket, y los bloques ` ```mermaid ` embebidos en las descripciones probablemente no rendericen como diagrama real en Jira Cloud estándar (sin verificar si el workspace de Bind tiene un plugin de Mermaid instalado) — quedan como texto plano.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 201b3e0
 ---
 
 Osmel Mata (Fintexa, SRE Sr) respondió en el hilo del fix "Análisis de Riesgos Fix actualización estado pagos | Corrección BIN" (publicado en PROD el 01/09) con el estado real del despliegue, a pedido de Matías Alzogaray:

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: 201b3e0
 proyecto: onboarding_shared_kyc_worsis (Pablo Gomes) — mismo frente que el item ya archivado 2026-09-08_iniciativa-onboarding-shared-kyc-worsis-limite-pj-freeze-webhooks
 pm_destino: pablo
 ---

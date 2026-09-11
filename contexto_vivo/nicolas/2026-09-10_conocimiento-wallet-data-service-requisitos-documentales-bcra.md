@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: 201b3e0
 ---
 
 Emma Vignoles detalló la documentación que exige el Banco Central para habilitar **Wallet Data Service** en cuentas de personas jurídicas: estatutos, constancias de CUIT, nómina de accionistas con participación mayor al 10%, declaraciones juradas de antecedentes con firma digital, flujos de fondos y maquetas visuales. Se acordó remitir el listado completo de documentos y modelos de declaraciones juradas a Mauro Suppan y Diego Weledniger, junto con el listado de clientes y declaraciones juradas pendientes, para iniciar el proceso de presentación ante el Banco Central.

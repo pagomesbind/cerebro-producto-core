@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: 201b3e0
 ---
 
 Tras el despliegue en PROD de la versión **W 72.2** (07/09 — HotFixes en microservicios de Operaciones y Cuentas, incluyendo el ajuste de `/ConciliarCoelsa` para integrar operaciones tipo **CASHOUT** en la conciliación de transferencias entrantes, ítem DEM-1806/WS-1552), Maria Eugenia Vila reportó el 2026-09-10 que **no pudo validar que se hayan incluido los movimientos de Cashout porque el endpoint da error al correr el proceso** — trabajado en conjunto con Nicolás Colón, sin resolver todavía ("Hay que revisarlo").

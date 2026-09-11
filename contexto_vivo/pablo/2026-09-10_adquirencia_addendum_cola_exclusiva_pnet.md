@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — complementa el item ya en cola 2026-09-10_adquirencia_reunion_pnet_causa_raiz_cola_unica_y_mitigacion con una 5ª línea de exploración que surgió después de esa reunión; no se editó ese item porque ya está en_cola"
 confianza: media
 estado: ingestado
-merge_commit: <pendiente>
+merge_commit: 201b3e0
 ---
 
 **Idea adicional de Arquitectura (post-reunión 09-10):** en vez de (o además de) AD935 — que separa la cola de generación de QR por **tipo de tráfico** (interactivo vs. batch/ráfaga) — se planteó una cola de generación de QR **exclusiva para Provincia Net**, separada de la del resto de los clientes. Es una partición por **cliente**, no por tipo de tráfico.

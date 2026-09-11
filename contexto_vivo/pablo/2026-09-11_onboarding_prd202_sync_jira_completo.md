@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 201b3e0
 ---
 
 **PRD-202 (API wallet orquestando OB — Fase 1: cuenta PF mayor edad) quedó con Jira sincronizado al estado vigente de la wiki, tras un desfasaje de más de una semana.**

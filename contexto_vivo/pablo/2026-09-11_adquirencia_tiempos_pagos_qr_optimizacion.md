@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: no
 confianza: Alta
 estado: ingestado
-merge_commit: <pendiente>
+merge_commit: 201b3e0
 ---
 
 # Tiempos de PagosQR — Análisis de Optimización Post-Despliegue (Sept 2026)

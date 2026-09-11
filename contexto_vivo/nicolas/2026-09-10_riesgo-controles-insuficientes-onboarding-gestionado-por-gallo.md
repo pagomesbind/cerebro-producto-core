@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: 201b3e0
 ---
 
 Emma Vignoles informó que ya se envió una **carta documento de baja a Terra BlockChain** (cliente con ficha en `casos_de_uso_clientes.md`, modelo white-label del ecosistema Gallo — "modelo simil IEB") y advirtió sobre una **falta de controles generalizada en los onboardings gestionados por el integrador Gallo**, que afecta también a **Bolsa de Comercio de Chaco, IEB y B Investment**. Se solicitaron auditorías inmediatas de onboarding para estos clientes al equipo de compliance (acción ya en próximos pasos: Emma Vignoles).

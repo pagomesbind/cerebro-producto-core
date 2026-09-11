@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 201b3e0
 ---
 
 Daniela Collia (Fintexa) reportó en "Análisis COBRO" (2026-09-10) el ingreso de un ticket de soporte indicando que el **Portal Comercio carece de la funcionalidad de devoluciones parciales**, disponible únicamente desde el **Admin**. Nicolás Colón evaluará la creación de un ticket de desarrollo para habilitarla también en el Portal Comercio (ver [T-045](../tareas.md)).

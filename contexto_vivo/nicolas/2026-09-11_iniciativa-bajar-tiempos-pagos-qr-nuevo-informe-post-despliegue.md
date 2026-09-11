@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: 201b3e0
 ---
 
 Juan Pablo Carubelli (Keep IT Simple) avisó el 2026-09-11 que, luego de desplegar en Producción y configurar el esquema de doble consulta a Coelsa (T1/T2) para Pagos QR, generó un **nuevo análisis de tiempos** buscando seguir optimizando los tiempos de respuesta. Adjuntó el informe completo como archivo HTML (`Informe Tiempos PagosQR.html`) más una captura de "spoiler" — **el contenido detallado del análisis está en el adjunto, no se descargó/abrió automáticamente**. Ver T-045 en `tareas.md` para su revisión.
