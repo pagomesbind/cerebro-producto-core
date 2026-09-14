@@ -6,6 +6,11 @@
 
 ## 2026
 
+### 2026-09-14 (pablo) — corrida automática (scheduled task, sin usuario presente)
+
+- `datos/metricas_semanales.md` — reemplazado byte a byte: entrada de la semana 202637 antepuesta al histórico (pablo, `/sync_metrics`).
+- `datos/datos_metricas_semanales/*.csv` (9 archivos: dim_collectors, dim_entidades, dim_organizaciones, fact_comercios, fact_cuentas, fact_operaciones, fact_transacciones, fact_transferencias_agente_cobro, semanas) — reemplazados byte a byte con el store acumulado tras la ingesta de la semana 202637 (pablo, `/sync_metrics`).
+
 ### 2026-09-11 (pablo + nicolas)
 
 - `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — actualizado: 5ª línea de exploración, cola de QR exclusiva por cliente para Provincia Net propuesta por Arquitectura, complementaria a la investigación ya en curso (pablo).

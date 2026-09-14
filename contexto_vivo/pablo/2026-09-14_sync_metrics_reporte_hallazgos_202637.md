@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/datos/metricas_semanales.md
 tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING_COMMIT_HASH
 ---
 
 Contenido final y completo del archivo `3_recursos/datos/metricas_semanales.md`, con la entrada de la

@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING_COMMIT_HASH
 ---
 
 **Contradicción/inconsistencia detectada:** no hay una explicación documentada en la wiki (procesos,

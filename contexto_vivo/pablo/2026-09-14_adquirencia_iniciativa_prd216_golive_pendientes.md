@@ -11,8 +11,8 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: PENDING_COMMIT_HASH
 ---
 
 Novedad puntual sobre PRD-216 (Arcos Dorados: mapear productos de la orden de venta en items del `/resolve`, QR eco cerrado) para la fila de la cartera de iniciativas.
