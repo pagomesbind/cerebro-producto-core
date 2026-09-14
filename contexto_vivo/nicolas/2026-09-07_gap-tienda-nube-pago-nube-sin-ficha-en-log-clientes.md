@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDING_2026-09-14
+merge_commit: c07b365
 ---
 
 El mismo día aparece un cliente mencionado con dos nombres ligeramente distintos, en dos reuniones separadas, ambas con problemas operativos activos:

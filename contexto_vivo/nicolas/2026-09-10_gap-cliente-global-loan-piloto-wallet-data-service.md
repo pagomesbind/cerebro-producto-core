@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDING_2026-09-14
+merge_commit: c07b365
 ---
 
 Se acordó usar a **Global Loan** como caso piloto para procesar y aprender el flujo de presentación de la documentación exigida por el Banco Central para **Wallet Data Service** (ver conocimiento asociado sobre los requisitos documentales, `2026-09-10_conocimiento-wallet-data-service-requisitos-documentales-bcra`). Emma Vignoles mencionó que Global Loan ya estaba incluido en un listado preventivo de 48 clientes potenciales informado al Banco Central (junto con "Santa Mónica", "Elevar" — posibles referencias a ELEBAR (Santa Mónica), ya con ficha propia, y otro nombre no identificado), lo que evitó trabas regulatorias.
