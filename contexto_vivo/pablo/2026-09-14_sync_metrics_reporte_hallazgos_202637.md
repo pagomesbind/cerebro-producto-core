@@ -11,7 +11,7 @@ tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING_COMMIT_HASH
+merge_commit: 122ad74
 ---
 
 Contenido final y completo del archivo `3_recursos/datos/metricas_semanales.md`, con la entrada de la

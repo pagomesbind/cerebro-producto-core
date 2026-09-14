@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING_COMMIT_HASH
+merge_commit: 122ad74
 ---
 
 Actualización al gap abierto **"[2026-08-18] — dim_collectors sin orden posicional de columnas definido

@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDING_COMMIT_HASH
+merge_commit: 122ad74
 ---
 
 **Contradicción/inconsistencia detectada:** no hay una explicación documentada en la wiki (procesos,
