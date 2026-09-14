@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/clientes/log_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING_2026-09-14
 ---
 
 El mismo día aparece un cliente mencionado con dos nombres ligeramente distintos, en dos reuniones separadas, ambas con problemas operativos activos:

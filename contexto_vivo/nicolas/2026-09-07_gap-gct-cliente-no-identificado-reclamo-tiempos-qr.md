@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/clientes/log_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING_2026-09-14
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-09-07), Gonzalo Rivera y Pablo Gomes discutieron un reclamo de un cliente transcripto como **"GCT"**: demoras de hasta 15 segundos en la resolución de cobros con QR, mientras las mediciones internas de Bind muestran ~7 segundos en base de datos y >10 segundos vía APIM (según lo que Agustín Grau/Fintexa reportó el miércoles previo). Pablo Gomes pidió a Nicolás Colón hacer una prueba en vivo desde un endpoint público para verificar el rendimiento real (ver tarea T-032 en `tareas.md`, ligada a `bajar-tiempos-pagos-qr`).

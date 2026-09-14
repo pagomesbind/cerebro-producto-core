@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-09-14 (pablo + nicolas)
+
+- `gaps_y_preguntas.md` — 3 gaps nuevos de cliente sin ficha en `log_clientes.md`: "Biwi"/"Bwi" (fraude reportado de $6.000.000 con reclamo legal a Bind, severidad Alta), "Global Loan" (piloto de Wallet Data Service/BCRA), "GCT" (reclamo de tiempos de Pagos QR, posible confusión con GST/Hipódromo de Palermo) — más 1 actualización a la entrada existente de "Cros Online"/"Pago Nube" (2026-07-16) sumando la hipótesis Tienda Nube y el nuevo reclamo de degradación de Agente de Cobros.
+- **Nota de reclasificación:** estos 4 items venían capturados como `tipo: gap` con `destino_propuesto` apuntando directo a `clientes/log_clientes.md`/`casos_de_uso_clientes.md`, y las corridas de merge del 2026-09-08 al 2026-09-11 los habían dejado repetidamente en régimen D pendiente de permiso sin nunca escribirlos. Esta corrida los reclasifica a régimen A (`gaps_y_preguntas.md`) siguiendo el precedente ya establecido en el propio archivo — que declara explícitamente "clientes/prospectos sin ficha" como parte de su alcance — y el patrón idéntico de los gaps ya ingeridos de TPay, PedidosYa, Pago Fácil/Western Union y el propio Cros Online/Pago Nube original. Queda a criterio de Pablo Gomes (líder) confirmar si este criterio de reclasificación es correcto para casos futuros.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-14.md`): 10 arrastrados de corridas anteriores (cronograma septiembre, corrección estado_actual, transcripción PNET no descargable, decisión Fintexa→Nicolás, La Virginia x2, ventana de comunicación de fechas) + 2 nuevos (Arcos Dorados — demora a producción y riesgo de seguridad aceptado; Consorcio Abierto — cotización de cobranza en efectivo) — más 1 item sin producto dueño clasificable arrastrado (API VATA de Modo, ver tarea T-046 de Nicolás Colón).
+
 ### 2026-09-11 (pablo + nicolas)
 
 - `direccion/iniciativas.md` — actualizadas 3 filas: PRD-202 (Jira resincronizado tras backlog drift, contrato v7.0); bajar-tiempos-pagos-qr (nuevo informe de tiempos post-despliegue de Keep IT Simple); onboarding_shared_kyc_worsis (novedad de Nicolás Colón — deadline duro 1/oct del directorio, monto en duda, segmentación ARDID sin resolver; `pm_destino: pablo`, ver sección propia del manifiesto).

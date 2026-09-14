@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING_2026-09-14
 ---
 
 **Gap de identificación:** la minuta usa dos grafías distintas para el mismo cliente dentro del mismo documento — "Biwi" (sección Detalles) y "Bwi" (sección Próximos pasos) — y ninguna de las dos tiene match en `log_clientes.md`. No se abrió la transcripción para confirmar el nombre real; podría tratarse de un error de transcripción de un cliente ya cargado con nombre fonéticamente similar.
