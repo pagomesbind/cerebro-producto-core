@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: 0b463d974f85a1b19919f0b7ae5d338c8da68ec8
 ---
 
 **Fuente:** Reunión "Daily producto" (2026-09-11), presentado por Luciana Agostina Rudaz.

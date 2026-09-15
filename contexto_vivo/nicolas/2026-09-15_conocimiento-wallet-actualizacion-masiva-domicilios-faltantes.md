@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — es avance/resolución sobre el gap normativo ya documentado en organizaciones_y_configuracion.md §0 (CPA no se completa en el 72% de cuentas con domicilio)"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: 0b463d974f85a1b19919f0b7ae5d338c8da68ec8
 ---
 
 Matías Alzogaray (PM, Bind) compartió la minuta de un "Análisis de riesgo" sobre una actualización masiva planificada en la base de datos de Wallet para cargar domicilios faltantes en cuentas — directamente relacionado al gap normativo ya documentado en `organizaciones_y_configuracion.md §0` (CPA no se completa en el 72% de cuentas con domicilio).

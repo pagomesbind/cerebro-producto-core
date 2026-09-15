@@ -11,7 +11,7 @@ tipo_destino: "no aplica"
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE
+merge_commit: 0b463d974f85a1b19919f0b7ae5d338c8da68ec8
 ---
 
 En la reunión "Daily producto" (2026-09-11), Luciana Agostina Rudaz mencionó a **Despegar** como cliente al que "el banco le vendió el modelo PSI sin que esté en producción", y que se le asignará una CBU corta bajo un modelo similar al de Andina. No hay ninguna fila para "Despegar" en `2_areas/clientes/log_clientes.md` (200 clientes cargados desde Notion) — no está en ningún estado (producción, integración, negociación, frenado, etc.). Podría ser un cliente nuevo aún no cargado en Notion, o estar registrado bajo una razón social distinta.
