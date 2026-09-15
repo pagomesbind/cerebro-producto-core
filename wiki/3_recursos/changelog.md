@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-15 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — archivo nuevo: mecanismo transversal de identificación de BINs de tarjeta — investigación Fintexa (mail 2026-05/08), causa raíz confirmada (6 vs. 8 dígitos), discovery completo PRD-251 (cruce BIN a BIN, bug de datos en override a Prepaga) (pablo); reclasificación de `pos_multiadquirencia.md §6` a este archivo por ser transversal, no específico de POS.
+- `detalle_productos/adquirencia/pos_multiadquirencia.md` — actualizado: §6 removido (contenido movido a `validacion_bines_tarjetas.md`), agregada referencia cruzada.
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — actualizado: referencia cruzada a `validacion_bines_tarjetas.md` (canal de mayor impacto por volumen hoy).
+- `detalle_productos/wallet/crossborder_manteca_billetera_internacional.md` — archivo nuevo: billetera internacional crossborder vía Manteca, casos Tienda Nube/Despegar, propiedad de PM sin confirmar (nicolas).
+- `detalle_productos/wallet/organizaciones_y_configuracion.md` — actualizado: §0.1, avance de actualización masiva de domicilios faltantes (491.495 cuentas) sobre el gap normativo de CPA ya documentado (nicolas).
+- `detalle_productos/wallet/transferencias_red_interna.md` — actualizado: §4, uso indebido del comprobante de transferencia interna por el cliente Copel (nicolas).
+
 ### 2026-09-14 (pablo) — corrida automática (scheduled task, sin usuario presente)
 
 - `datos/metricas_semanales.md` — reemplazado byte a byte: entrada de la semana 202637 antepuesta al histórico (pablo, `/sync_metrics`).

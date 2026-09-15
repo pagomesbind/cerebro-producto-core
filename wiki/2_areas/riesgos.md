@@ -112,12 +112,23 @@ Tras el despliegue en PROD de la versión **W 72.2** (07/09 — HotFixes en micr
 
 En el mismo hilo, otro punto de acción del plan post-despliegue sí se resolvió: Gonzalo Rivera confirmó que no hay altas de CVU sin alias luego de la implementación. Capturado 2026-09-11 (Nicolás Colón), confianza alta. Sin producto dueño claro identificado en el canon actual (afecta microservicios de Operaciones/Cuentas y la conciliación con Coelsa) — a reconsiderar si corresponde documentarlo en cambio en un archivo temático de `detalle_productos/` cuando el error se resuelva.
 
+## Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09
+
+**Fuente:** reunión "W 72.3 (Pagos FX) y Modificaciones en los Proxys de PRD - Análisis de riesgos" (2026-09-11).
+
+Maria Eugenia Vila advirtió que la herramienta que concilia transferencias entrantes está **rota**: hoy el proceso de conciliación depende de que alguien busque manualmente las transferencias y las inserte a mano (no hay automatismo). Pablo Antonio Gomes confirmó: *"tenemos roto una herramienta que concilie... no tendríamos la herramienta para actuar si pasa eso."*
+
+**Por qué es relevante ahora:** el despliegue programado para el jueves 17/09 (actualización de proxy 7:00am + wallet/Pagos Efex 72.3 8:00am) puede generar intermitencias en el tráfico de ingress. Si durante esa ventana se pierden avisos de transferencias entrantes, **no hay herramienta para detectarlo ni resolverlo manualmente** — el riesgo concreto es que transferencias entrantes no se acrediten y los clientes reclamen saldos faltantes, sin que el equipo tenga forma de detectarlo proactivamente.
+
+**Estado:** Gonzalo Damian Rivera pidió el caso (MDA) para tomarlo de inmediato; se acordó no comunicar nada a clientes salvo el aviso estándar de mantenimiento preventivo durante la ventana del despliegue. Capturado 2026-09-11/15 (Nicolás Colón), confianza alta.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-11 — nuevo riesgo "Error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto)" (Nicolás Colón).*
+*Última actualización: 2026-09-15 — nuevo riesgo "Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09" (Nicolás Colón).*
+*Última actualización anterior: 2026-09-11 — nuevo riesgo "Error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto)" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-10 — nuevo riesgo "Falta de controles en onboardings gestionados por el integrador Gallo (Terra Blockchain ya dado de baja)" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-10 — nuevo riesgo "Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-09 — actualización del riesgo Getnet/circuito viejo (entrega a QA Externo confirmada 21/09, W73 reformulado sin correr el deadline 30/09); nuevos riesgos: Combi (15/09) sin compromiso técnico de Ipsa + Mastercard Move (17/09) con complejidad de altas de beneficiarios (Pablo Gomes); dependencia de Techfin para la creación del saldo virtual sin control interno documentado (Pablo Gomes, assessment de auditoría del banco).*

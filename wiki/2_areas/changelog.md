@@ -6,6 +6,14 @@
 
 ## 2026
 
+### 2026-09-15 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `direccion/iniciativas.md` — fila nueva PRD-251 (rechazos_bines_payway, pablo); fila nueva ardid_desconocimientos (PRD-248, nicolas); novedad antepuesta en onboarding_shared_kyc_worsis (adelanto de fecha del onboarding PJ al 16/09, `pm_destino: pablo`, nicolas).
+- `riesgos.md` — 1 riesgo nuevo: herramienta de conciliación de transferencias entrantes rota, agravado por el despliegue del 17/09 (nicolas).
+- `gaps_y_preguntas.md` — 1 gap nuevo: cliente "Despegar" sin ficha en `log_clientes.md` (mismo patrón ya aplicado a Biwi/Global Loan/GCT/PedidosYa/TPay/Pago Fácil — nicolas).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-15.md`): 12 — 9 arrastrados de corridas anteriores (cronograma septiembre, corrección estado_actual, transcripción PNET no descargable, decisión Fintexa→Nicolás, Arcos Dorados, Consorcio Abierto, La Virginia x2, ventana de comunicación de fechas) + 1 nuevo (calendario de versiones septiembre, nicolas) + 1 arrastrado sin producto dueño clasificable (API VATA de Modo, ver tarea T-046).
+- **Nota de precedente aplicado:** el criterio de reclasificar gaps de "cliente sin ficha" a régimen A (`gaps_y_preguntas.md`), establecido en la corrida del 2026-09-14 y pendiente de confirmación del líder, se sigue aplicando (ver gap de Despegar arriba) al no haber objeción registrada.
+
 ### 2026-09-14 (pablo + nicolas)
 
 - `gaps_y_preguntas.md` — 3 gaps nuevos de cliente sin ficha en `log_clientes.md`: "Biwi"/"Bwi" (fraude reportado de $6.000.000 con reclamo legal a Bind, severidad Alta), "Global Loan" (piloto de Wallet Data Service/BCRA), "GCT" (reclamo de tiempos de Pagos QR, posible confusión con GST/Hipódromo de Palermo) — más 1 actualización a la entrada existente de "Cros Online"/"Pago Nube" (2026-07-16) sumando la hipótesis Tienda Nube y el nuevo reclamo de degradación de Agente de Cobros.

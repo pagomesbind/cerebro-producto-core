@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/boton_simple_2_0.md
 tipo_destino: actualizar
 contradice: "pos_multiadquirencia.md §6 — esa entrada (2026-08-20/21) mergeó la misma investigación bajo el módulo de POS multiadquirencia; el PM aclaró (2026-09-14) que el mecanismo de identificación de BIN no es específico de POS, es compartido por cualquier procesamiento de tarjeta, y hoy el mayor impacto por volumen está en tarjeta no presente (Botón Simple 1.0/2.0), no en POS. Corresponde mover/rescopar §6 al mergear este item, no solo agregar contenido nuevo en paralelo"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 **Corrige el alcance de lo ya mergeado en `pos_multiadquirencia.md §6` (2026-08-20/21), además de completarlo.** Esa entrada registró el hilo de mails de Agustín Grau (Fintexa) bajo el módulo de POS multiadquirencia — pero el PM confirmó (2026-09-14) que el mecanismo de identificación de BIN (`SharedIssuerIdentification`) es **transversal a cualquier procesamiento de tarjeta**, no específico del canal POS/presente. Hoy el mayor impacto por volumen está en **tarjeta no presente vía Botón Simple 1.0/2.0**, no en POS. Al mergear, `/context_merge` debería mover el contenido de `pos_multiadquirencia.md §6` a `boton_simple_2_0.md` (o al archivo temático que corresponda si en el futuro se documenta la mecánica de BINs como tema propio, dado que también afecta a POS) en vez de dejarlo duplicado en ambos lados. Este item vuelca además el contenido completo del informe de agosto (marcado antes como "no leído"), un cruce de datos propio y un hallazgo nuevo de calidad de datos, generados en el discovery del proyecto [`1_proyectos/rechazos_bines_payway/`](../rechazos_bines_payway/proyecto.md) (PRD-251, PM Pablo Gomes).

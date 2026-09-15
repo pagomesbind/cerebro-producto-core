@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 proyecto: onboarding_shared_kyc_worsis
 pm_destino: pablo
 ---

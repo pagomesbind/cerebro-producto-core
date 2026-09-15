@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_red_intern
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 **Fuente:** reunión "W 72.3 (Pagos FX) y Modificaciones en los Proxys de PRD - Análisis de riesgos" (2026-09-11), Gonzalo Damian Rivera.

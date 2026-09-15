@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/crossborder_manteca_bille
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 **Fuente:** Reunión "Daily producto" (2026-09-11), presentado por Luciana Agostina Rudaz.

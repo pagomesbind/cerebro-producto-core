@@ -28,3 +28,11 @@ El banco entregó documentación de referencia: *"Red Interna — Cambios en Rep
 ## 3. Estado al freeze
 
 Estimación de la Epic: 30 SP. Solo se ejecutó una regresión previa de referencia ("Pruebas antes de hacer cualquier cambio", validada en STG); las 6 US quedaron **Pendientes** en Notion. Verificar el estado real de la implementación en Jira.
+
+## 4. Uso indebido del comprobante de transferencia interna — cliente Copel (2026-09-11)
+
+> Fuente: reunión "W 72.3 (Pagos FX) y Modificaciones en los Proxys de PRD - Análisis de riesgos" (2026-09-11), Gonzalo Damian Rivera.
+
+Gonzalo Damian Rivera reportó que la entidad **Copel** lleva **dos meses** resolviendo sus operaciones internas mediante el **comprobante de transferencia interna** —un tipo de comprobante reservado para uso del sistema— en lugar de generar la operación real. Consecuencia: quedan comprobantes creados pero sin la operación asociada. Bind ya les avisó hace dos meses que debían dejar de hacerlo; Gonzalo propuso bloquearles directamente el uso de ese tipo de comprobante para forzar el corte ("se quedarán sin operar"). No quedó registrada como decisión formal en la minuta (no aparece en la sección "Decisiones" de la reunión) — es una propuesta verbal, a confirmar si se ejecutó.
+
+**Nota:** "Copel" no tiene ficha propia en `2_areas/clientes/log_clientes.md` — ya apareció antes en el Cerebro como mención relacionada a "La Virginia" (endpoint de alta de cuenta comitente compartido). No queda claro si es un cliente propio o una entidad relacionada/interna a otro cliente — a confirmar en el próximo barrido de `/sync_customers`.

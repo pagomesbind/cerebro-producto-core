@@ -153,3 +153,4 @@ Daniela Collia (Fintexa) reportó el ingreso de un ticket de soporte indicando q
 - [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) — mecánica de órdenes de venta y cajas del Botón Simple "clásico".
 - [liquidaciones_y_devoluciones.md](devoluciones_y_contracargos.md) — mecánica general de contracargos/devoluciones, incluye el caso "Desconocimiento" también de Botón Simple.
 - [transversal/pago_facil.md — sección Grupo DESA](../servicios/pago_facil.md) — mismo cliente RIPSA/Grupo DESA, pedido anterior (Notion histórico) sobre el motor de Link de Pago (checkout personalizado + reportería) en vez de sobre Botón Simple 1.0/API Deuda.
+- [validacion_bines_tarjetas.md](validacion_bines_tarjetas.md) — mecanismo de identificación de BINs de tarjeta; hoy el mayor volumen de impacto (rechazos) está en este canal (tarjeta no presente), aunque el mecanismo en sí es transversal a cualquier canal de tarjeta.

@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/validacion_bines_tar
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 ---
 
 **Hallazgo (Mariana Nadalin / Gonzalo Damian Rivera, reunión "Weekly - Producto / Operaciones", 2026-09-14):** Bind PSP identifica el BIN de una tarjeta tomando los primeros **6 dígitos**, mientras que Payway usa **8 dígitos** para el mismo campo. Consecuencia concreta: tarjetas prepagas quedan mal clasificadas como tarjetas de crédito (y viceversa) porque el 7º/8º dígito es justamente el que distingue el tipo (ej. BIN `454622`: Bind lo tiene cargado como prepaga, pero en el archivo de Payway aparece 4 veces con distintos 7º-8º dígitos — 3 como crédito, 1 como prepaga real). Esto genera **rechazos operativos en producción hoy**: *"a nivel operativo estamos fallando, no estamos cobrando un montón de tarjetas por error de no tener la tabla de bines actualizada"* (Gonzalo Damian Rivera).

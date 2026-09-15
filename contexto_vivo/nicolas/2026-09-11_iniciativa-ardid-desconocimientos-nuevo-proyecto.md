@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE
 proyecto: ardid_desconocimientos
 ---
 

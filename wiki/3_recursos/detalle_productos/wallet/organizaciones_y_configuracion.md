@@ -16,6 +16,17 @@ Manuales operativos para dar de alta y configurar una organización de Wallet: c
 - **Magnitud real del problema** (medida sobre cuentas creadas desde julio 2025): el **85% de las cuentas de Wallet no tiene domicilio cargado en absoluto**; de las que sí lo tienen, el **72% no logra obtener CPA**. El problema está **fuertemente concentrado en la Provincia de Buenos Aires** (código 2): representa 52% de los domicilios sin CPA vs. solo 43% de todos los domicilios registrados — desproporción que apunta a un problema específico de esa jurisdicción, no a un problema aleatorio de calidad de datos.
 - **Estado**: quedó en fase de discovery, con el diagnóstico completo pero sin desarrollo iniciado ni priorizado. Gap normativo real y medible, no solo teórico.
 
+### 0.1 Avance — actualización masiva de domicilios faltantes (despliegue 2026-09-XX)
+
+> Fuente: mail "Análisis de riesgo - Obtencion de domicilios Wallet" — Matías Alzogaray (2026-09-14).
+
+Actualización masiva planificada en la base de datos de Wallet para cargar domicilios faltantes en cuentas — avance directo sobre el 85% de cuentas sin domicilio cargado citado en §0 (no resuelve por sí sola el 72% que no logra obtener CPA una vez que sí hay domicilio).
+
+- **Volumen afectado:** 491.495 cuentas.
+- **Ejecución controlada** por lotes de 10.000 registros, con delay de seguridad de 2-5 segundos entre cada envío. Impacto acotado a la base de datos de Cuentas (`WalletCuentaDB`), con holgura de recursos — se descartan riesgos de rendimiento durante la ventana. Autorización técnica bajo ticket de soporte (trazabilidad/auditoría).
+- **Despliegue:** Producción, prioridad/impacto/urgencia Media, vertical Emisión (Wallet Service). Hora 07:00, duración estimada 40-60 minutos. Plan de rollback: Point-in-Time Restore (PITR) de Azure SQL Database + scripts de inserción idempotentes y reanudables (patrón staging).
+- **Riesgo de intermitencia:** cualquier API/MS que lea las tablas Cuentas y CuentasDomicilios podría sufrir intermitencias — el RCSI evita bloqueos clásicos lector/escritor pero hay competencia por I/O y por el version store de tempdb; el crecimiento del log de transacciones generará eventos de autogrow de 16MB (pausas breves del motor de base de datos).
+
 ---
 
 ## 1. Crear organización de Wallet — PSP = 184 (Bind PSP)
