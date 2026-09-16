@@ -190,7 +190,7 @@
     <h1>Pulso de Delivery</h1>
     <p>__SUBTITLE__</p>
   </div>
-  <div class="espacio-group" role="group" aria-label="Filtro de espacio">
+  <div class="espacio-group" role="group" aria-label="Filtro de espacio (selección múltiple)">
     <div class="seg" id="espacioSeg"></div>
   </div>
 </header>
@@ -353,35 +353,51 @@
     return rowsByEspacio[e].every(function(r){ return r.sp === 0; });
   });
 
-  // ---- 3. Series por ventana móvil (sum/sum), una por espacio × tamaño de ventana ----
+  // ---- 3. Series por ventana móvil (sum/sum), calculadas al vuelo para la selección ----
+  // El filtro de espacio es multi-select (ej. AD+WS combinados), así que en vez de
+  // precomputar una serie por cada espacio individual (lo que no escala a combinaciones
+  // arbitrarias), se suman los meses de los espacios elegidos y recién ahí se arma la
+  // ventana móvil -- barato de sobra para ~14 meses × hasta 6 espacios.
   var PERIODS = [{key:"1", label:"1 mes"}, {key:"3", label:"3 meses"}, {key:"6", label:"6 meses"}];
-  var DATA = {months: MONTH_LABELS, espacios: ESPACIOS, espaciosSinSP: espaciosSinSP, series: {}};
-  ESPACIOS.forEach(function(espacio){
-    var rows = rowsByEspacio[espacio];
-    DATA.series[espacio] = {};
-    PERIODS.forEach(function(p){
-      var P = parseInt(p.key, 10);
-      var pts = [];
-      for(var i = P-1; i < rows.length; i++){
-        var sp=0, horas=0, usd=0, sp_bau=0, sp_known=0;
-        for(var j = i-P+1; j <= i; j++){
-          sp += rows[j].sp; horas += rows[j].horas; usd += rows[j].usd;
-          sp_bau += rows[j].sp_bau; sp_known += rows[j].sp_known_epic;
-        }
-        pts.push({
-          label: MONTH_LABELS[i],
-          sp: Math.round(sp*100)/100,
-          horas: Math.round(horas*100)/100,
-          usd: Math.round(usd*100)/100,
-          usd_horas: horas ? Math.round((usd/horas)*100)/100 : null,
-          horas_sp: sp ? Math.round((horas/sp)*100)/100 : null,
-          usd_sp: sp ? Math.round((usd/sp)*100)/100 : null,
-          pct_mant: sp_known ? Math.round((100*sp_bau/sp_known)*10)/10 : null
-        });
-      }
-      DATA.series[espacio][p.key] = pts;
+
+  function rowsForSelection(selected){
+    var lista = (selected.indexOf("Todos") !== -1) ? Object.keys(espaciosSet) : selected;
+    return periodsSorted.map(function(pk){
+      var acc = {sp:0, sp_bau:0, sp_known_epic:0, horas:0, usd:0};
+      lista.forEach(function(e){
+        var b = buckets[pk+"|"+e];
+        if(!b) return;
+        acc.sp += b.sp; acc.sp_bau += b.sp_bau; acc.sp_known_epic += b.sp_known_epic;
+        acc.horas += b.horas; acc.usd += b.usd;
+      });
+      return acc;
     });
-  });
+  }
+
+  function windowedSeries(rows, periodKeyStr){
+    var P = parseInt(periodKeyStr, 10);
+    var pts = [];
+    for(var i = P-1; i < rows.length; i++){
+      var sp=0, horas=0, usd=0, sp_bau=0, sp_known=0;
+      for(var j = i-P+1; j <= i; j++){
+        sp += rows[j].sp; horas += rows[j].horas; usd += rows[j].usd;
+        sp_bau += rows[j].sp_bau; sp_known += rows[j].sp_known_epic;
+      }
+      pts.push({
+        label: MONTH_LABELS[i],
+        sp: Math.round(sp*100)/100,
+        horas: Math.round(horas*100)/100,
+        usd: Math.round(usd*100)/100,
+        usd_horas: horas ? Math.round((usd/horas)*100)/100 : null,
+        horas_sp: sp ? Math.round((horas/sp)*100)/100 : null,
+        usd_sp: sp ? Math.round((usd/sp)*100)/100 : null,
+        pct_mant: sp_known ? Math.round((100*sp_bau/sp_known)*10)/10 : null
+      });
+    }
+    return pts;
+  }
+
+  var DATA = {months: MONTH_LABELS, espacios: ESPACIOS, espaciosSinSP: espaciosSinSP};
 
   var METRICS = [
     {key:"sp", label:"SP", title:"SP publicados", fmt:fmtNum1, short:function(v){return fmtCompact(v);}},
@@ -393,7 +409,7 @@
     {key:"pct_mant", label:"% Mantenimiento", title:"% de SP en soporte, COE, iniciativas técnicas y regresiones", fmt:fmtPct, short:function(v){return v.toFixed(1)+"%";}}
   ];
 
-  var state = {espacio:"Todos", metric:"sp", period:"1"};
+  var state = {espacios:["Todos"], metric:"sp", period:"1"};
 
   function fmtNum0(v){ return Math.round(v).toLocaleString("es-AR"); }
   function fmtNum1(v){ return v.toLocaleString("es-AR",{maximumFractionDigits:1}); }
@@ -427,9 +443,40 @@
     });
   }
 
+  // Espacio es multi-select: "Todos" es excluyente (lo elige y borra el resto), elegir un
+  // espacio puntual saca "Todos" de la selección, y varios espacios puntuales se pueden
+  // combinar (ej. AD+WS). Nunca se permite quedar sin ninguno seleccionado -- sacar el
+  // último activo vuelve a caer en "Todos" en vez de dejar la selección vacía.
+  function toggleEspacio(e){
+    if(e === "Todos"){
+      state.espacios = ["Todos"];
+      return;
+    }
+    var i = state.espacios.indexOf(e);
+    if(i !== -1){
+      var next = state.espacios.filter(function(x){ return x !== e; });
+      state.espacios = next.length ? next : ["Todos"];
+    } else {
+      var sinTodos = state.espacios.filter(function(x){ return x !== "Todos"; });
+      state.espacios = sinTodos.concat([e]);
+    }
+  }
+
+  function renderEspacioSeg(){
+    var container = document.getElementById("espacioSeg");
+    container.innerHTML = "";
+    ESPACIOS.forEach(function(e){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = e;
+      b.setAttribute("aria-pressed", state.espacios.indexOf(e) !== -1 ? "true" : "false");
+      b.addEventListener("click", function(){ toggleEspacio(e); render(); });
+      container.appendChild(b);
+    });
+  }
+
   function renderControls(){
-    buildSeg(document.getElementById("espacioSeg"), ESPACIOS, function(e){return e;},
-      function(e){ state.espacio = e; }, function(e){ return state.espacio === e; });
+    renderEspacioSeg();
     buildSeg(document.getElementById("metricRow"), METRICS, function(m){return m.label;},
       function(m){ state.metric = m.key; }, function(m){ return state.metric === m.key; });
     buildSeg(document.getElementById("periodRow"), PERIODS, function(p){return p.label;},
@@ -438,8 +485,11 @@
 
   function currentMetric(){ return METRICS.filter(function(m){return m.key===state.metric;})[0]; }
 
+  function espacioLabel(){ return state.espacios.join(" + "); }
+
   function currentPoints(){
-    var raw = DATA.series[state.espacio][state.period];
+    var rows = rowsForSelection(state.espacios);
+    var raw = windowedSeries(rows, state.period);
     var metric = state.metric;
     return raw.filter(function(p){ return p[metric] !== null && p[metric] !== undefined; });
   }
@@ -506,7 +556,7 @@
   function renderChart(){
     var metric = currentMetric();
     var pts = currentPoints();
-    document.getElementById("chartTitle").textContent = metric.title + " — " + state.espacio;
+    document.getElementById("chartTitle").textContent = metric.title + " — " + espacioLabel();
     var cov = pts.length ? (monthShort(pts[0].label)+" – "+monthShort(pts[pts.length-1].label)) : "sin datos";
     document.getElementById("chartCoverage").textContent = pts.length + " puntos · " + cov;
 
@@ -656,8 +706,10 @@
     if(state.period !== "1"){
       flags.push("tamaño de ventana " + PERIODS.filter(function(p){return p.key===state.period;})[0].label + ": cada punto suma los últimos " + state.period + " meses (ventana móvil), no un promedio de ratios mensuales.");
     }
-    if(DATA.espaciosSinSP.indexOf(state.espacio) !== -1 && (metric.key==="sp"||metric.key==="horas_sp"||metric.key==="usd_sp"||metric.key==="pct_mant")){
-      flags.push(state.espacio + " todavía no tiene SP publicados en el log — " + (metric.key==="sp"?"la serie da 0":"el ratio con SP da 0 o no se muestra") + ".");
+    var seleccionSinSP = state.espacios.indexOf("Todos") === -1 &&
+      state.espacios.every(function(e){ return DATA.espaciosSinSP.indexOf(e) !== -1; });
+    if(seleccionSinSP && (metric.key==="sp"||metric.key==="horas_sp"||metric.key==="usd_sp"||metric.key==="pct_mant")){
+      flags.push(espacioLabel() + " todavía no tiene SP publicados en el log — " + (metric.key==="sp"?"la serie da 0":"el ratio con SP da 0 o no se muestra") + ".");
     }
     noteEl.textContent = flags.join(" ");
   }
