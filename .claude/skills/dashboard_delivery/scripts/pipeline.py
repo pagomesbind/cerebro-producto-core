@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Pipeline de /dashboard_delivery — ingesta del reporte mensual del PM (y de backfills
-históricos puntuales) y regeneración del dashboard "Performance de desarrollo".
+históricos puntuales) y regeneración del dashboard "Pulso de Delivery" (rediseño
+2026-09-16: un único gráfico de línea con selector de métrica, tamaño de ventana móvil
+y espacio, ver dashboard_template.html — reemplaza el dashboard multi-pestaña anterior,
+incluida la pestaña de SLA Highest; el log de SLA (formato 4 abajo) se sigue acumulando
+igual, solo que ya no se visualiza en este HTML).
 
 Uso (desde cualquier cwd):
     python pipeline.py inspect   # analiza el/los Excel de raw/ sin escribir nada
@@ -24,9 +28,22 @@ UN item `tipo: dato` en `contexto_vivo/` con `destino_propuesto: 3_recursos/dato
 merge lo aplica por copia byte a byte. El dashboard HTML (`outputs/`) no es canon, sigue
 escribiéndose directo. Ver SKILL.md, Paso de cierre.
 
-Formatos de origen reconocidos (auto-detectados por header, ver sniff_and_read):
-  1. Ticket-level (export Jira del PM, mensual): una fila por ticket, con columna
-     "Clave de incidencia" y "Mes". Año no viene en el archivo -> se asume ANIO_DEFAULT.
+Formatos de origen reconocidos (auto-detectados por header, ver sniff_and_read). Un
+archivo en raw/ que no matchea ninguno de los 4 se salta con un aviso [ABORT-ARCHIVO] —
+no aborta el resto de la corrida (raw/ puede traer, aparte, insumos de otras skills):
+  1. Ticket-level: una fila por ticket, con columna "Clave de incidencia" y "Mes". Dos
+     variantes según el origen:
+       a) Reporte mensual del PM: "Mes" en texto español ("Agosto"), sin columna Año
+          -> se asume ANIO_DEFAULT. Se asume pre-filtrado a publicado (sin columna
+          Estado, no se filtra nada más).
+       b) Export histórico consolidado (2026-09-16, el que usa el PM ahora en cada
+          invocación de /dashboard_delivery en vez del mensual): "Mes" numérico (1-12)
+          + columna "Año" separada + columna "Estado" -> se filtra a Estado en
+          {Finalizada, No aplica} antes de sumar (única fuente de "publicado" — un
+          export histórico trae de todo, Bloqueado/EN QA incluido). El upsert normal
+          por (año,mes,espacio) ya logra el "full reload": como este archivo siempre
+          trae la historia completa, cada combo que trae reemplaza enteramente lo
+          que hubiera antes para ese año×mes×espacio (ver cmd_ingest).
   2. Agregado por versión (backfills históricos encontrados, ej. pre-2026): una fila
      por versión publicada, con columnas SP-US/SP-BUGS/Q-US/Q-BUGS y AÑO PUBLICACIÓN.
      Sin Epic -> los registros quedan con epic=None (sentinel "sin dato de Epic",
@@ -102,11 +119,13 @@ MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
          "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 MES_ALIAS = {"setiembre": "Septiembre"}
 ESPACIOS_BASE = ["AD", "WS", "OB", "SER"]
-ANIO_DEFAULT = 2026  # usado SOLO cuando el origen no trae columna de año (formato ticket-level mensual del PM).
-# GOTCHA: cuando lleguen reportes mensuales de 2027, bump este valor (o mejor: pedirle
-# al PM que incluya el año, y leerlo de ahí en vez de este default). Ver SKILL.md.
+ANIO_DEFAULT = 2026  # usado SOLO si el origen no trae columna de Año (formato mensual legacy del PM).
+# GOTCHA ya resuelto para el flujo normal: el export histórico consolidado (2026-09-16 en
+# adelante) SIEMPRE trae su propia columna Año por fila, así que este default no aplica
+# ahí y no hace falta bumpearlo en el cambio de año. Sigue existiendo solo por si alguna
+# vez vuelve a llegar el formato mensual viejo sin columna Año. Ver SKILL.md.
 
-# --- Formato 1: ticket-level (export Jira mensual del PM) -------------------
+# --- Formato 1: ticket-level (export Jira mensual del PM, o histórico consolidado) ----
 REQUIRED = {
     "clave": ["clave de incidencia"],          # sin esto no hay espacio ni ticket -> ABORTA
     "mes":   ["mes"],                          # sin esto no hay eje X -> ABORTA
@@ -116,11 +135,18 @@ DEGRADABLE = {
     "sp":   ["campo personalizado (story points)", "story points", "puntos de historia"],  # falta -> 0 + warning
     "epic": ["parent summary", "epic"],        # falta -> epic=None (sin dato) + warning
 }
+# Opcionales: si están, se usan; si no, se degrada al comportamiento legacy SIN warning
+# (son variantes de formato esperadas, no datos faltantes de un formato ya contemplado).
+OPTIONAL = {
+    "anio":   ["ano"],       # export histórico consolidado (2026-09): Mes numérico + columna Año separada.
+    "estado": ["estado"],    # si está, filtra a Finalizada/No aplica (ver TERMINAL_ESTADOS) antes de sumar.
+}
+TERMINAL_ESTADOS = {"finalizada", "no aplica"}  # única fuente de verdad de "publicado" — ver principio del skill.
 KNOWN_EXTRA = [
     "id de la incidencia", "resumen", "campo personalizado (id fintexa)", "prioridad",
     "estado", "versiones corregidas", "persona asignada", "id de la persona asignada",
     "principal", "clave principal", "fecha de vencimiento",
-    "campo personalizado (fecha de inicio)",
+    "campo personalizado (fecha de inicio)", "ano",
 ]
 
 # --- Formato 2: agregado por versión (backfills históricos) -----------------
@@ -463,26 +489,48 @@ def write_sla_log(tickets_by_clave, lots, today):
 
 # --- Lectura: formato 1 (ticket-level) ---------------------------------------
 def map_headers(header_row):
-    """Devuelve (colmap, extras, missing_required, missing_degradable)."""
+    """Devuelve (colmap, extras, missing_required, missing_degradable). Los campos de
+    OPTIONAL se resuelven en colmap igual que el resto, pero su ausencia nunca entra en
+    missing_req/missing_deg -- son variantes de formato, no columnas faltantes."""
     headers = {norm(h): i for i, h in enumerate(header_row) if h not in (None, "")}
     colmap, missing_req, missing_deg = {}, [], []
-    for field, aliases in {**REQUIRED, **DEGRADABLE}.items():
+    for field, aliases in {**REQUIRED, **DEGRADABLE, **OPTIONAL}.items():
         idx = next((headers[a] for a in aliases if a in headers), None)
         if idx is not None:
             colmap[field] = idx
         elif field in REQUIRED:
             missing_req.append(field)
-        else:
+        elif field in DEGRADABLE:
             missing_deg.append(field)
-    known = {a for al in list(REQUIRED.values()) + list(DEGRADABLE.values()) for a in al} | set(KNOWN_EXTRA)
+    known = {a for al in list(REQUIRED.values()) + list(DEGRADABLE.values()) + list(OPTIONAL.values()) for a in al} | set(KNOWN_EXTRA)
     extras = [str(header_row[i]) for h, i in headers.items() if h not in known]
     return colmap, extras, missing_req, missing_deg
+
+
+def _parse_mes_cell(mes_raw):
+    """Acepta tanto el texto en español del reporte mensual del PM ('Agosto') como el
+    Mes numérico (1-12) del export histórico consolidado (columna 'Año' aparte). Devuelve
+    el nombre de mes en MESES, o None si no matchea ninguno de los dos formatos."""
+    alias = MES_ALIAS.get(norm(mes_raw))
+    if alias:
+        return alias
+    texto = str(mes_raw or "").strip().capitalize()
+    if texto in MESES:
+        return texto
+    try:
+        n = int(float(mes_raw))
+        if 1 <= n <= 12:
+            return MESES[n - 1]
+    except (TypeError, ValueError):
+        pass
+    return None
 
 
 def read_ticket_ws(ws, colmap, extras, missing_deg, path):
     warnings = [f"columna '{f}' ausente — se degrada a valor por defecto" for f in missing_deg]
     agg = defaultdict(lambda: {"tickets": 0, "sp": 0.0})
-    bad_meses, sin_sp, n_rows = set(), [], 0
+    bad_meses, bad_anios, sin_sp, n_rows, excluidos_estado = set(), set(), [], 0, 0
+    tiene_estado = "estado" in colmap
 
     for row in ws.iter_rows(min_row=2, values_only=True):
         clave = row[colmap["clave"]] if colmap["clave"] < len(row) else None
@@ -490,14 +538,28 @@ def read_ticket_ws(ws, colmap, extras, missing_deg, path):
             continue
         clave = str(clave).strip()
         mes_raw = row[colmap["mes"]] if colmap["mes"] < len(row) else None
-        mes = MES_ALIAS.get(norm(mes_raw), str(mes_raw or "").strip().capitalize())
-        if mes not in MESES:
+        mes = _parse_mes_cell(mes_raw)
+        if mes is None:
             bad_meses.add(repr(mes_raw))
             continue
         def cell(field, default):
             i = colmap.get(field)
             v = row[i] if i is not None and i < len(row) else None
             return default if v in (None, "") else v
+        if tiene_estado:
+            estado_raw = cell("estado", "")
+            if norm(estado_raw) not in TERMINAL_ESTADOS:
+                excluidos_estado += 1
+                continue
+        anio_raw = cell("anio", None)
+        if anio_raw is None:
+            anio = ANIO_DEFAULT
+        else:
+            try:
+                anio = int(float(anio_raw))
+            except (TypeError, ValueError):
+                bad_anios.add(repr(anio_raw))
+                continue
         tipo = str(cell("tipo", "(sin tipo)")).strip()
         epic_raw = cell("epic", None)
         epic = str(epic_raw).strip() if epic_raw is not None else None
@@ -512,13 +574,19 @@ def read_ticket_ws(ws, colmap, extras, missing_deg, path):
                 sin_sp.append(clave)
                 sp = 0.0
         espacio = clave.split("-")[0]
-        key = (ANIO_DEFAULT, mes, espacio, tipo, epic)
+        key = (anio, mes, espacio, tipo, epic)
         agg[key]["tickets"] += 1
         agg[key]["sp"] += sp
         n_rows += 1
 
     if bad_meses:
         warnings.append(f"{len(bad_meses)} valor(es) de Mes no reconocidos y EXCLUIDOS: {sorted(bad_meses)}")
+    if bad_anios:
+        warnings.append(f"{len(bad_anios)} valor(es) de Año no reconocidos y EXCLUIDOS: {sorted(bad_anios)}")
+    if tiene_estado and excluidos_estado:
+        warnings.append(f"{excluidos_estado} fila(s) EXCLUIDAS por Estado (no Finalizada/No aplica) — no cuentan como publicado.")
+    if not tiene_estado:
+        warnings.append("Sin columna de Estado: se cuenta todo lo listado sin filtrar (esperado solo si el archivo ya viene pre-filtrado a publicado, ej. el reporte mensual del PM).")
     if sin_sp:
         warnings.append(f"{len(sin_sp)} tickets sin SP (computan 0): {', '.join(sin_sp[:10])}"
                         + (" …" if len(sin_sp) > 10 else ""))
@@ -716,8 +784,10 @@ def sniff_and_read(path):
     """Detecta el/los formato(s) presentes en el Excel por header y los parsea.
     Un mismo workbook puede traer varias hojas de stock de horas (ej. un archivo de
     control con varios meses); por eso devuelve una LISTA de (records, meta), no un
-    único resultado. Aborta con mensaje claro si ninguna hoja matchea un formato
-    conocido — no se adivina el mapeo."""
+    único resultado. Si ninguna hoja matchea un formato conocido, devuelve []  y avisa
+    con [ABORT-ARCHIVO] — se salta SOLO este archivo, no aborta la corrida entera (raw/
+    puede traer, sin querer o a propósito, otros archivos ajenos a esta skill): no se
+    adivina el mapeo, pero tampoco se bloquea el resto de la ingesta por uno mal puesto."""
     wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
     results = []
     va_done, ticket_done = False, False
@@ -744,10 +814,10 @@ def sniff_and_read(path):
                     anio, mes_num = 2000 + int(m.group(2)), MES3[m.group(1)]
                     results.append(read_stock_ws(ws, path, anio, mes_num))
     if not results:
-        sys.exit(f"[ABORT] {path.name}: ninguna hoja coincide con un formato conocido "
-                 f"(ni ticket-level de Jira con columna 'Clave de incidencia'+'Mes', ni agregado-por-versión "
-                 f"con columnas SP-US/Q-BUGS, ni stock de horas con 'Componente / Proyecto'+'Horas Mes'). "
-                 f"Hojas: {wb.sheetnames}. Revisar el archivo con el usuario antes de reintentar — no adivinar el mapeo.")
+        print(f"[ABORT-ARCHIVO] {path.name}: ninguna hoja coincide con un formato conocido "
+              f"(ni ticket-level de Jira con columna 'Clave de incidencia'+'Mes', ni agregado-por-versión "
+              f"con columnas SP-US/Q-BUGS, ni stock de horas con 'Componente / Proyecto'+'Horas Mes'). "
+              f"Hojas: {wb.sheetnames}. Se salta este archivo — revisar con el usuario antes de reintentar, no adivinar el mapeo.")
     return results
 
 
@@ -815,22 +885,22 @@ def write_log(records, lots, today):
     lots_tbl = ["| Fecha ingesta | Archivo fuente | Cobertura | Tickets | SP | Destino histórico |",
                 "|---|---|---|---|---|---|"] + ["| " + " | ".join(l) + " |" for l in lots]
     last_lot = lots[-1] if lots else ["—"] * 6
-    md = f"""# Log de Performance de Desarrollo — Base de datos del dashboard "Performance de desarrollo"
+    md = f"""# Log de Performance de Desarrollo — Base de datos del dashboard "Pulso de Delivery"
 
 > **Última ingesta:** {today} — {last_lot[1]} ({last_lot[2]}, {last_lot[3]} tickets).
 >
-> Este archivo es la **base de datos acumulada** del dashboard [`outputs/dashboard_performance_desarrollo.html`](../../outputs/dashboard_performance_desarrollo.html), mantenida por la skill [`/dashboard_delivery`](../../.claude/skills/dashboard_delivery/SKILL.md). El PM deja todos los principios de mes un Excel en `raw/` con lo **publicado en producción** (tickets Historia/Error con versión corregida); ocasionalmente se suman backfills históricos puntuales de otras fuentes. Cada ingesta: (1) el pipeline mergea acá las filas nuevas con granularidad año × mes × espacio × tipo × epic — el Excel nuevo PISA los combos año×mes×espacio que trae —, (2) se regenera el dashboard embebiendo esta tabla como JSON, (3) el Excel rota a `4_archivos/historial_raw/`. **No hace falta releer los Excel históricos: este log es la fuente.**
+> Este archivo es la **base de datos acumulada** del dashboard [`outputs/dashboard_performance_desarrollo.html`](../../outputs/dashboard_performance_desarrollo.html) ("Pulso de Delivery"), mantenida por la skill [`/dashboard_delivery`](../../.claude/skills/dashboard_delivery/SKILL.md). El PM deja en `raw/` el export histórico consolidado de tickets (reemplaza todo el historial que cubre) más, puntualmente, backfills de otras fuentes. Cada ingesta: (1) el pipeline mergea acá las filas nuevas con granularidad año × mes × espacio × tipo × epic — el archivo nuevo PISA los combos año×mes×espacio que trae —, (2) se regenera el dashboard embebiendo esta tabla como JSON, (3) el archivo rota a `4_archivos/historial_raw/`. **No hace falta releer los Excel históricos: este log es la fuente.**
 >
 > ⚠️ **Este reporte NO alimenta el conocimiento de producto de la wiki** (indicación del usuario 2026-07-13): es una métrica de management para medir al equipo de desarrollo por lo ENTREGADO en producción. El conocimiento de producto de las publicaciones lo maneja `/sync_releases`. El costo de ese desarrollo (USD/SP) se mide aparte, en [`log_costos_desarrollo.md`](log_costos_desarrollo.md).
 
 ## Metodología / criterios de agregación
 
-- **Fuente:** reporte mensual del PM (export de Jira, formato ticket-level) y, puntualmente, backfills históricos de otras fuentes (formato agregado por versión). Se cuenta todo ticket/versión listado, incluidos los tickets en estado "No aplica" (decisión del usuario 2026-07-13: si está en el reporte de publicaciones, cuenta como entregado).
+- **Fuente (desde 2026-09-16):** export histórico consolidado de tickets (Jira, formato ticket-level con Mes numérico + columna Año propia + columna Estado), reemplazado por completo en cada invocación de la skill — el PM ya no manda un Excel incremental mensual. Se filtra a Estado en {{Finalizada, No aplica}} antes de sumar (única fuente de "publicado"; un export histórico trae de todo, incluido Bloqueado/EN QA). Puntualmente se suman backfills históricos de otras fuentes (formato agregado por versión) para tramos que el histórico consolidado no cubre.
 - **Espacio:** prefijo de la clave del ticket (WS-123 → WS) en el formato ticket-level; columna PRODUCTO (WALLET→WS, COBRO→AD) en el formato agregado por versión.
-- **Epic:** columna "Parent summary" de Jira (formato ticket-level), con trim de espacios. El formato agregado por versión **no trae Epic** — esos registros quedan con Epic vacío (`—`) y **no aparecen en las vistas "por Epic" del dashboard** (no se agrupan en un bucket "sin epic": esos meses simplemente no muestran datos en esa métrica, por pedido explícito del usuario 2026-07-14).
-- **SP nulos → 0**; tickets sin clave se descartan; valores de "Mes"/"Año" no reconocidos se excluyen y se reportan.
-- **Año:** el formato ticket-level mensual del PM no trae columna de año — se asume `ANIO_DEFAULT` (ver `pipeline.py`, hoy 2026; hay que bumpearlo a mano cuando lleguen reportes de 2027). El formato agregado por versión sí trae "AÑO PUBLICACIÓN" explícito.
-- **Epics BAU fijas** (colores constantes en el dashboard): SOPORTE (rojo), REGRESIONES WS, REGRESIONES AD, REGRESIONES OB, REGRESIONES SER, COE, INICIATIVAS TECNICAS. El resto de epics se pinta en escala de grises.
+- **Epic:** columna "Parent summary" de Jira (formato ticket-level), con trim de espacios. El formato agregado por versión **no trae Epic** — esos registros quedan con Epic vacío (`—`). El dashboard actual ("Pulso de Delivery") no tiene vistas por Epic; el Epic solo se usa para calcular el % de SP en mantenimiento (ver bullet siguiente) — un mes sin Epic conocida queda sin dato en esa métrica en vez de contarlo como no-mantenimiento.
+- **SP nulos → 0**; tickets sin clave se descartan; valores de "Mes"/"Año"/"Estado" no reconocidos o no publicados se excluyen y se reportan.
+- **Año:** viene de la propia columna Año del histórico consolidado; solo se asume `ANIO_DEFAULT` (ver `pipeline.py`) si algún origen puntual no trae esa columna (formato mensual legacy).
+- **Epics BAU fijas** (usadas para el % de SP en mantenimiento del dashboard, ver `log_costos_desarrollo.md`/dashboard): SOPORTE, REGRESIONES WS, REGRESIONES AD, REGRESIONES OB, REGRESIONES SER, COE, INICIATIVAS TECNICAS.
 
 ## Registro de lotes ingeridos
 
@@ -1052,15 +1122,26 @@ def resolve_stock_costs(stock_segments, existing_rate_rows):
 
 # --- Dashboard --------------------------------------------------------------
 def write_dashboard(records, cost_records, sla_records, today_ddmmyyyy):
+    # sla_records ya no alimenta este HTML (rediseño 2026-09-16, "Pulso de Delivery" —
+    # ver docstring del módulo): el parámetro se mantiene para no tocar la firma que usa
+    # cmd_ingest, el log de SLA se sigue acumulando en log_sla_highest.md igual que antes.
+    del sla_records
     tpl = TEMPLATE.read_text(encoding="utf-8")
-    subtitle = (f"Tickets, story points y costo de desarrollo <strong>publicados en producción</strong> · "
-                f"Fuente: reporte mensual del PM (Jira) + stock de horas de Fintexa + backfills puntuales · "
+    subtitle = (f"SP publicados, equipo disponible y su costo · ventana móvil de 1/3/6 meses · "
                 f"Última ingesta: {today_ddmmyyyy} ({coverage_str(records)})")
-    out = tpl.replace("__DATA_JSON__", json.dumps(records, ensure_ascii=False, separators=(",", ":")))
-    out = out.replace("__COSTOS_JSON__", json.dumps(cost_records, ensure_ascii=False, separators=(",", ":")))
-    out = out.replace("__SLA_JSON__", json.dumps(sla_records, ensure_ascii=False, separators=(",", ":")))
+
+    def to_json_script(data):
+        # Va dentro de <script type="application/json">, no de un string JS entre
+        # comillas simples (texto libre de Jira, ej. un Epic con comillas dobles, rompía
+        # ese escapado). Única precaución acá: un literal "</script" en el texto libre
+        # cerraría el tag antes de tiempo -- se parte con un backslash, invisible para
+        # JSON.parse (json.dumps ya no vuelve a tocar esta parte del string).
+        return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
+
+    out = tpl.replace("__DATA_JSON__", to_json_script(records))
+    out = out.replace("__COSTOS_JSON__", to_json_script(cost_records))
     out = out.replace("__SUBTITLE__", subtitle)
-    assert "__DATA_JSON__" not in out and "__COSTOS_JSON__" not in out and "__SLA_JSON__" not in out and "__SUBTITLE__" not in out
+    assert "__DATA_JSON__" not in out and "__COSTOS_JSON__" not in out and "__SUBTITLE__" not in out
     DASHBOARD.write_text(out, encoding="utf-8")
 
 
@@ -1088,7 +1169,8 @@ def cmd_inspect():
         for p in csvs:
             fmt = sniff_csv_format(p)
             if fmt != "sla_highest":
-                sys.exit(f"[ABORT] {p.name}: ningún formato CSV conocido matchea este header (hoy solo se reconoce 'SLA Highest', columnas Clave/Estado/Creada + tiempo-en-estado Asignado/Backlog/Finalizada). No se adivina el mapeo — revisar con el usuario.")
+                print(f"[ABORT-ARCHIVO] {p.name}: ningún formato CSV conocido matchea este header (hoy solo se reconoce 'SLA Highest', columnas Clave/Estado/Creada + tiempo-en-estado Asignado/Backlog/Finalizada). Se salta — revisar con el usuario, no adivinar el mapeo.")
+                continue
             print(f"-- {p.name} --")
             tickets, meta = read_sla_csv(p, today_dt)
             report_meta(meta)
@@ -1164,7 +1246,8 @@ def cmd_ingest():
         for p in csvs:
             fmt = sniff_csv_format(p)
             if fmt != "sla_highest":
-                sys.exit(f"[ABORT] {p.name}: ningún formato CSV conocido matchea este header. No se adivina el mapeo — revisar con el usuario.")
+                print(f"[ABORT-ARCHIVO] {p.name}: ningún formato CSV conocido matchea este header. Se salta — revisar con el usuario, no adivinar el mapeo.")
+                continue
             print(f"== Ingesta SLA: {p.name} ==")
             tickets, meta = read_sla_csv(p, today_dt)
             report_meta(meta)

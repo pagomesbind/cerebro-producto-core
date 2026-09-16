@@ -3,950 +3,717 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Performance de desarrollo</title>
+<title>Pulso de Delivery</title>
 <style>
-  :root {
-    --surface-1: #fcfcfb;
-    --page: #f9f9f7;
-    --text-primary: #0b0b0b;
-    --text-secondary: #52514e;
-    --muted: #898781;
-    --grid: #e1e0d9;
-    --baseline: #c3c2b7;
-    --border: rgba(11,11,11,0.10);
-    --chip-hover: rgba(11,11,11,0.05);
-    --accent: #2a78d6;
+  :root{
+    --bg:#f3f5f7;
+    --surface:#ffffff;
+    --surface-2:#eaeef2;
+    --border:#dde3e9;
+    --ink:#12161d;
+    --ink-2:#525b68;
+    --ink-3:#8992a1;
+    --accent:#4c65e6;
+    --accent-ink:#33449e;
+    --accent-soft:#eef1fd;
+    --accent-line:#4c65e6;
+    --accent-fill-a:rgba(76,101,230,0.20);
+    --accent-fill-b:rgba(76,101,230,0.0);
+    --warn:#b3671a;
+    --warn-soft:#f4e6d3;
+    --shadow:0 1px 2px rgba(20,24,30,.05), 0 8px 24px -12px rgba(20,24,30,.12);
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --surface-1: #1a1a19;
-      --page: #0d0d0d;
-      --text-primary: #ffffff;
-      --text-secondary: #c3c2b7;
-      --muted: #898781;
-      --grid: #2c2c2a;
-      --baseline: #383835;
-      --border: rgba(255,255,255,0.10);
-      --chip-hover: rgba(255,255,255,0.07);
-      --accent: #3987e5;
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0c0f13;
+      --surface:#151a20;
+      --surface-2:#1c232b;
+      --border:#2a323c;
+      --ink:#edf1f5;
+      --ink-2:#aab3c0;
+      --ink-3:#6d7684;
+      --accent:#94a3f0;
+      --accent-ink:#c7d0fa;
+      --accent-soft:rgba(76,101,230,0.18);
+      --accent-line:#94a3f0;
+      --accent-fill-a:rgba(148,163,240,0.28);
+      --accent-fill-b:rgba(148,163,240,0.0);
+      --warn:#e0a253;
+      --warn-soft:rgba(224,162,83,0.16);
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
     }
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--page);
-    color: var(--text-primary);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 14px;
-    line-height: 1.45;
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    padding-inline:16px;
+    padding-block:28px 48px;
+    max-width:1040px;
+    margin-inline:auto;
   }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 48px; }
-  header h1 { font-size: 24px; font-weight: 700; margin: 0 0 4px; }
-  header .sub { color: var(--text-secondary); margin: 0 0 20px; font-size: 13px; }
+  .num{font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace; font-variant-numeric:tabular-nums;}
 
-  .controls {
-    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-    justify-content: space-between; margin-bottom: 16px;
+  header{
+    display:flex; flex-wrap:wrap; gap:16px 24px;
+    justify-content:space-between; align-items:flex-end;
+    margin-bottom:22px;
   }
-  .tabs, .spaces { display: flex; flex-wrap: wrap; gap: 4px; }
-  .tabs {
-    background: var(--surface-1); border: 1px solid var(--border);
-    border-radius: 10px; padding: 3px;
+  .title-block h1{
+    font-size:1.5rem; font-weight:650; letter-spacing:-0.01em; margin:0 0 4px;
+    text-wrap:balance;
   }
-  .tabs button {
-    border: none; background: transparent; color: var(--text-secondary);
-    font: inherit; font-size: 13px; font-weight: 600;
-    padding: 6px 14px; border-radius: 7px; cursor: pointer;
-  }
-  .tabs button:hover { background: var(--chip-hover); }
-  .tabs button.active { background: var(--accent); color: #fff; }
-  .spaces { align-items: center; }
-  .spaces .lbl { color: var(--muted); font-size: 12px; margin-right: 2px; }
-  .spaces button {
-    border: 1px solid var(--border); background: var(--surface-1);
-    color: var(--text-secondary); font: inherit; font-size: 13px; font-weight: 600;
-    padding: 5px 12px; border-radius: 999px; cursor: pointer;
-  }
-  .spaces button:hover { background: var(--chip-hover); }
-  .spaces button.active { background: var(--text-primary); color: var(--page); border-color: var(--text-primary); }
-
-  .sla-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .sla-toggle .lbl { color: var(--muted); font-size: 12px; }
-  .sla-toggle .grp { display: flex; gap: 4px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
-  .sla-toggle button {
-    border: none; background: transparent; color: var(--text-secondary);
-    font: inherit; font-size: 12px; font-weight: 600;
-    padding: 4px 12px; border-radius: 7px; cursor: pointer;
-  }
-  .sla-toggle button:hover { background: var(--chip-hover); }
-  .sla-toggle button.active { background: var(--accent); color: #fff; }
-
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
-  .kpi {
-    background: var(--surface-1); border: 1px solid var(--border);
-    border-radius: 12px; padding: 12px 16px;
-  }
-  .kpi .v { font-size: 26px; font-weight: 700; line-height: 1.15; }
-  .kpi .l { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
-
-  .card {
-    background: var(--surface-1); border: 1px solid var(--border);
-    border-radius: 12px; padding: 18px 18px 12px; margin-bottom: 16px;
-  }
-  .card h2 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
-  .card .yunit { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
-  #chartWrap { position: relative; }
-  #chart { display: block; width: 100%; height: auto; }
-  .axis text { fill: var(--muted); font-size: 11px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .axis .tick-num { font-variant-numeric: tabular-nums; }
-  .gridline { stroke: var(--grid); stroke-width: 1; }
-  .baseline { stroke: var(--baseline); stroke-width: 1; }
-  .band { transition: opacity .12s ease; }
-  .dimmed .band { opacity: .18; }
-  .dimmed .band.hl { opacity: 1; }
-  .crosshair { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
-  .empty-msg {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    color: var(--muted); font-size: 14px; pointer-events: none;
+  .title-block p{margin:0; color:var(--ink-2); font-size:.86rem; max-width:60ch;}
+  .eyebrow{
+    font-size:.68rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--accent-ink); background:var(--accent-soft);
+    display:inline-block; padding:3px 8px; border-radius:5px; margin-bottom:8px;
   }
 
-  #tooltip {
-    position: absolute; pointer-events: none; z-index: 5; display: none;
-    background: var(--surface-1); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px 12px; min-width: 210px; max-width: 320px;
-    box-shadow: 0 4px 18px rgba(0,0,0,.16); font-size: 12px;
+  .espacio-group{display:flex; flex-wrap:wrap; gap:6px;}
+  .seg{
+    display:inline-flex; gap:2px; background:var(--surface-2); padding:3px;
+    border-radius:9px; border:1px solid var(--border);
   }
-  #tooltip .t-mes { font-weight: 700; margin-bottom: 6px; }
-  #tooltip .t-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
-  #tooltip .t-row .sw { width: 9px; height: 9px; border-radius: 2px; flex: none; }
-  #tooltip .t-row .nm { flex: 1; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #tooltip .t-row .vl { font-variant-numeric: tabular-nums; font-weight: 600; }
-  #tooltip .t-more { color: var(--muted); margin-top: 3px; }
-  #tooltip .t-total { border-top: 1px solid var(--grid); margin-top: 6px; padding-top: 5px; display: flex; justify-content: space-between; font-weight: 700; }
-
-  #legend { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 10px 2px 4px; }
-  #legend .lg-group { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; width: 100%; margin-top: 6px; }
-  #legend .chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    border: 1px solid var(--border); border-radius: 999px;
-    padding: 3px 10px; font-size: 12px; color: var(--text-secondary); cursor: default;
+  .seg button{
+    all:unset; cursor:pointer; padding:6px 12px; border-radius:7px;
+    font-size:.78rem; font-weight:600; color:var(--ink-2);
+    transition:background .12s, color .12s;
   }
-  #legend .chip:hover { background: var(--chip-hover); }
-  #legend .chip .sw { width: 9px; height: 9px; border-radius: 2px; }
-  #legend .more { color: var(--muted); font-size: 12px; padding: 3px 4px; }
+  .seg button:hover{color:var(--ink);}
+  .seg button[aria-pressed="true"]{background:var(--surface); color:var(--accent-ink); box-shadow:var(--shadow);}
+  .seg button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
-  details { margin-bottom: 16px; }
-  details summary { cursor: pointer; color: var(--text-secondary); font-weight: 600; font-size: 13px; }
-  .tbl-wrap { overflow-x: auto; margin-top: 10px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
-  table { border-collapse: collapse; width: 100%; font-size: 12px; }
-  th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
-  th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface-1); max-width: 340px; overflow: hidden; text-overflow: ellipsis; }
-  thead th { color: var(--muted); font-weight: 600; }
-  td { font-variant-numeric: tabular-nums; }
-  tbody tr:last-child td { border-bottom: none; }
-  tr.total td { font-weight: 700; border-top: 2px solid var(--baseline); }
+  .controls{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:16px 18px; margin-bottom:16px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .control-row{display:flex; flex-direction:column; gap:8px;}
+  .control-row .label{
+    font-size:.7rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .btn-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .btn-row button{
+    all:unset; cursor:pointer; padding:7px 13px; border-radius:8px;
+    font-size:.8rem; font-weight:600; color:var(--ink-2);
+    border:1px solid var(--border); background:var(--surface);
+    transition:background .12s, color .12s, border-color .12s;
+    white-space:nowrap;
+  }
+  .btn-row button:hover{border-color:var(--accent); color:var(--ink);}
+  .btn-row button[aria-pressed="true"]{
+    background:var(--accent); border-color:var(--accent); color:#fff;
+  }
+  .btn-row button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
-  footer { color: var(--muted); font-size: 12px; }
-  footer p { margin: 4px 0; }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    box-shadow:var(--shadow); padding:18px 18px 8px;
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px 16px;
+    margin-bottom:6px;
+  }
+  .card-head h2{font-size:1rem; font-weight:650; margin:0;}
+  .card-head .coverage{font-size:.74rem; color:var(--ink-3);}
+
+  .kpis{display:flex; gap:14px; flex-wrap:wrap; margin:10px 0 6px;}
+  .kpi{
+    background:var(--surface-2); border-radius:10px; padding:10px 14px; min-width:150px; flex:1;
+  }
+  .kpi .l{font-size:.68rem; color:var(--ink-3); font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:3px;}
+  .kpi .v{font-size:1.28rem; font-weight:650;}
+  .kpi .d{font-size:.76rem; margin-top:2px;}
+  .d.up{color:var(--accent-ink);}
+  .d.down{color:var(--warn);}
+
+  .chart-wrap{position:relative; margin-top:4px;}
+  svg{width:100%; height:auto; display:block; overflow:visible;}
+  .gridline{stroke:var(--border); stroke-width:1;}
+  .axis-label{fill:var(--ink-3); font-size:10px; font-family:'IBM Plex Mono',monospace;}
+  .axis-label-x{fill:var(--ink-3); font-size:10px;}
+  .area-fill{fill:url(#areaGrad);}
+  .line-path{fill:none; stroke:var(--accent-line); stroke-width:2.25; stroke-linecap:round; stroke-linejoin:round;}
+  .dot{fill:var(--surface); stroke:var(--accent-line); stroke-width:2;}
+  .dot-end{fill:var(--accent-line);}
+  .end-label{fill:var(--ink); font-size:11.5px; font-weight:650; font-family:'IBM Plex Mono',monospace;}
+  .crosshair{stroke:var(--ink-3); stroke-width:1; stroke-dasharray:3 3;}
+  .hover-dot{fill:var(--accent-line); stroke:var(--surface); stroke-width:2;}
+
+  .tooltip{
+    position:absolute; pointer-events:none; background:var(--ink); color:var(--bg);
+    font-size:.74rem; padding:6px 9px; border-radius:7px; transform:translate(-50%,-115%);
+    white-space:nowrap; box-shadow:var(--shadow); opacity:0; transition:opacity .08s;
+    z-index:5;
+  }
+  .tooltip .tt-m{font-weight:650; margin-top:1px;}
+
+  .note{font-size:.74rem; color:var(--ink-3); margin:10px 0 4px; line-height:1.5;}
+  .empty-state{
+    display:flex; align-items:center; justify-content:center; color:var(--ink-3);
+    font-size:.85rem; height:220px;
+  }
+  details.table-toggle{margin-top:14px; border-top:1px solid var(--border); padding-top:10px;}
+  details.table-toggle summary{
+    cursor:pointer; font-size:.78rem; font-weight:600; color:var(--ink-2); list-style:none;
+    display:flex; align-items:center; gap:5px;
+  }
+  details.table-toggle summary::-webkit-details-marker{display:none;}
+  details.table-toggle summary::before{content:"▸"; font-size:.7rem; transition:transform .12s;}
+  details.table-toggle[open] summary::before{transform:rotate(90deg);}
+  .table-scroll{overflow-x:auto; margin-top:10px;}
+  table{border-collapse:collapse; width:100%; font-size:.78rem;}
+  th,td{padding:6px 10px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap;}
+  th:first-child,td:first-child{text-align:left;}
+  th{color:var(--ink-3); font-weight:600; font-size:.68rem; text-transform:uppercase; letter-spacing:.04em;}
+  td.num{font-family:'IBM Plex Mono',monospace;}
+
+  footer{margin-top:20px; font-size:.72rem; color:var(--ink-3); line-height:1.6;}
+
+  @media (max-width:560px){
+    .kpis{flex-direction:column;}
+    .card-head{flex-direction:column; align-items:flex-start;}
+  }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;650&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Performance de desarrollo</h1>
-    <p class="sub">__SUBTITLE__</p>
-  </header>
 
-  <div class="controls">
-    <div class="tabs" role="tablist" id="tabs"></div>
-    <div class="spaces" id="spaces"><span class="lbl">Espacio:</span></div>
+<header>
+  <div class="title-block">
+    <span class="eyebrow">Performance de desarrollo</span>
+    <h1>Pulso de Delivery</h1>
+    <p>__SUBTITLE__</p>
   </div>
-
-  <div class="sla-toggle">
-    <span class="lbl">KPIs de SLA Highest, ver como:</span>
-    <div class="grp" id="slaToggle"></div>
+  <div class="espacio-group" role="group" aria-label="Filtro de espacio">
+    <div class="seg" id="espacioSeg"></div>
   </div>
+</header>
 
-  <div class="kpis" id="kpis"></div>
-
-  <section class="card">
-    <h2 id="chartTitle"></h2>
-    <p class="yunit" id="yUnit"></p>
-    <div id="chartWrap">
-      <svg id="chart" viewBox="0 0 1040 420" role="img" aria-label="Gráfico de áreas apiladas por mes"></svg>
-      <div id="tooltip"></div>
-    </div>
-    <div id="legend"></div>
-  </section>
-
-  <details>
-    <summary>Ver datos en tabla</summary>
-    <div class="tbl-wrap" id="tableWrap"></div>
-  </details>
-
-  <footer>
-    <p><strong>Metodología:</strong> se cuenta todo ticket/versión del reporte de publicaciones del PM (incluye estado «No aplica»); tickets sin story points computan 0 SP. Epic = «Parent summary» de Jira.</p>
-    <p><strong>Meses sin desglose por Epic:</strong> los backfills históricos que llegan en formato agregado por versión no traen Epic — esos meses no muestran datos en las vistas "por Epic" (sí en "por tipo"). No es un error, es una limitación conocida de la fuente.</p>
-    <p><strong>Colores:</strong> las epics BAU fijas mantienen color constante todos los meses — <span style="color:#e34948;font-weight:700">SOPORTE en rojo</span>, más REGRESIONES WS/AD/OB/SER, COE e INICIATIVAS TÉCNICAS. Las epics nuevas/particulares van en escala de grises (identificarlas con el tooltip o la tabla).</p>
-    <p><strong>USD por SP:</strong> costo de desarrollo (stock de horas facturado por Fintexa, sin Soporte ni IT) dividido los SP publicados ese mes/espacio, fila por fila a la tarifa de cada perfil — nunca un valor hora promedio. Si un espacio no tiene SP publicados ese mes (hoy: OB y SER), la métrica da <strong>0</strong> — no se oculta ni contamina a otros espacios. Cuando el Excel de un mes no trae su propia tabla de precios, se hereda la tarifa del mes conocido más cercano (detalle en <code>wiki/3_recursos/datos/log_costos_desarrollo.md</code>).</p>
-    <p><strong>SLA Highest:</strong> tiempo de resolución de tickets Prioridad=Highest (reclamos, bugs, incendios), agrupado por <strong>mes de creación</strong> del ticket (no de resolución) — "las urgencias creadas en el mes X tardaron Y días". <em>Días hasta Finalizada</em> = tiempo hasta que el ticket entra a estado Finalizada (reloj de desarrollo/QA); <em>Días hasta Publicación</em> = tiempo hasta la fecha real de release de la versión que lo resolvió (Jira `fixVersions`/`releaseDate`; degrada a la fecha de Finalizada si esa versión no tiene fecha). Ambas series muestran la <strong>mediana</strong> (más robusta a outliers que el promedio para este tipo de medición). Los tickets que <strong>todavía no fueron resueltos</strong> quedan fuera de esas medianas (su reloj no paró), pero no se ocultan: los meses con urgencias sin resolver se marcan en <em>itálica</em> en el eje X (cohorte incompleta — su mediana real es peor que la mostrada, porque los lentos todavía no entraron a la cuenta), y las 2 KPI globales (con toggle mediana/promedio) declaran cuántos quedan afuera. Base de datos: <code>wiki/3_recursos/datos/log_sla_highest.md</code>.</p>
-    <p>Bases de datos acumuladas: <code>wiki/3_recursos/datos/log_performance_desarrollo.md</code> (SP/tickets), <code>wiki/3_recursos/datos/log_costos_desarrollo.md</code> (costo) y <code>wiki/3_recursos/datos/log_sla_highest.md</code> (SLA de urgencias). El dashboard se regenera con cada ingesta.</p>
-  </footer>
+<div class="controls">
+  <div class="control-row">
+    <span class="label">Eje Y — métrica</span>
+    <div class="btn-row" id="metricRow" role="group" aria-label="Selector de métrica"></div>
+  </div>
+  <div class="control-row">
+    <span class="label">Tamaño ventana móvil</span>
+    <div class="btn-row" id="periodRow" role="group" aria-label="Selector de tamaño de ventana móvil"></div>
+  </div>
 </div>
 
+<div class="card">
+  <div class="card-head">
+    <h2 id="chartTitle">SP publicados</h2>
+    <span class="coverage" id="chartCoverage"></span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="l">Último punto</div>
+      <div class="v num" id="kpiLast">—</div>
+      <div class="d" id="kpiDelta">—</div>
+    </div>
+    <div class="kpi">
+      <div class="l">Promedio del período mostrado</div>
+      <div class="v num" id="kpiAvg">—</div>
+      <div class="d" id="kpiAvgSub">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap" id="chartWrap">
+    <svg id="chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Gráfico de línea de la métrica seleccionada">
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--accent-fill-a)"/>
+          <stop offset="100%" stop-color="var(--accent-fill-b)"/>
+        </linearGradient>
+      </defs>
+      <g id="gridGroup"></g>
+      <g id="areaGroup"></g>
+      <g id="lineGroup"></g>
+      <g id="dotsGroup"></g>
+      <g id="xAxisGroup"></g>
+      <g id="hoverGroup" style="display:none">
+        <line id="crosshair" class="crosshair" x1="0" y1="0" x2="0" y2="0"></line>
+        <circle id="hoverDot" class="hover-dot" r="4.5"></circle>
+      </g>
+    </svg>
+    <div class="tooltip" id="tooltip"><div class="tt-d" id="ttDate"></div><div class="tt-m num" id="ttVal"></div></div>
+  </div>
+
+  <p class="note" id="dataNote"></p>
+
+  <details class="table-toggle">
+    <summary>Ver tabla de datos</summary>
+    <div class="table-scroll">
+      <table id="dataTable">
+        <thead><tr><th>Mes</th><th>Valor</th></tr></thead>
+        <tbody id="dataTableBody"></tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<footer>
+  Métricas: suma de SP / Horas / USD, USD por Hora, Horas por SP, USD por SP y % de SP en mantenimiento (SOPORTE, COE, iniciativas técnicas, regresiones). Un período de N meses = suma(numerador) / suma(denominador) de esos N meses, nunca promedio de ratios mensuales. El tamaño de ventana es una ventana móvil: cada punto resume los N meses que terminan ahí, por eso ventanas más grandes arrancan más tarde en la serie (necesitan N meses de historia antes de mostrar el primer punto). % Mantenimiento no tiene dato en meses sin Epic conocida (backfills históricos sin ese detalle). Fuente: <a href="../wiki/3_recursos/datos/log_performance_desarrollo.md">log_performance_desarrollo.md</a> + <a href="../wiki/3_recursos/datos/log_costos_desarrollo.md">log_costos_desarrollo.md</a>, mantenidos por <code>/dashboard_delivery</code>.
+</footer>
+
+<script type="application/json" id="raw-delivery-data">__DATA_JSON__</script>
+<script type="application/json" id="raw-costos-data">__COSTOS_JSON__</script>
 <script>
-"use strict";
-const DATA = __DATA_JSON__;
-const COSTOS = __COSTOS_JSON__;
-const SLA_DATA = __SLA_JSON__;
+(function(){
+  "use strict";
+  // Los datos van en <script type="application/json"> (no como string JS entre comillas
+  // simples): el texto libre de Jira (ej. un Epic con comillas dobles adentro) rompía el
+  // escapado al pasar dos veces por un parser de strings (JS y despues JSON).
+  var RAW_DELIVERY = JSON.parse(document.getElementById("raw-delivery-data").textContent);
+  var RAW_COSTOS = JSON.parse(document.getElementById("raw-costos-data").textContent);
 
-const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-const MES_ABBR = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
-const ESPACIOS = [...new Set(["AD","WS","OB","SER", ...DATA.map(r => r.espacio), ...COSTOS.map(r => r.espacio), ...SLA_DATA.map(r => r.espacio)])];
+  var MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
+               "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  var BAU = {"SOPORTE":1,"REGRESIONES WS":1,"REGRESIONES AD":1,"REGRESIONES OB":1,"REGRESIONES SER":1,
+             "COE":1,"INICIATIVAS TECNICAS":1};
+  var ESPACIOS_BASE = ["AD","WS","OB","SER","ARD"];
 
-const darkMq = window.matchMedia("(prefers-color-scheme: dark)");
-const isDark = () => darkMq.matches;
-darkMq.addEventListener("change", () => render());
+  function mesIndex(nombre){ return MESES.indexOf(nombre); }
+  function periodKey(anio, mesIdx){ return anio*12 + mesIdx; }
 
-// Epics BAU fijas: color constante todos los meses (SOPORTE = rojo, pedido explícito).
-const BAU = [
-  { name: "SOPORTE",              light: "#e34948", dark: "#e66767" },
-  { name: "REGRESIONES WS",       light: "#2a78d6", dark: "#3987e5" },
-  { name: "REGRESIONES AD",       light: "#1baf7a", dark: "#199e70" },
-  { name: "REGRESIONES OB",       light: "#eda100", dark: "#c98500" },
-  { name: "REGRESIONES SER",      light: "#4a3aa7", dark: "#9085e9" },
-  { name: "COE",                  light: "#e87ba4", dark: "#d55181" },
-  { name: "INICIATIVAS TECNICAS", light: "#eb6834", dark: "#d95926" },
-];
-const BAU_NAMES = BAU.map(b => b.name);
-const bauColor = n => { const b = BAU.find(x => x.name === n); return isDark() ? b.dark : b.light; };
+  // ---- 1. Descubrir espacios (los de siempre + cualquier prefijo nuevo que aparezca) ----
+  var espaciosSet = {};
+  ESPACIOS_BASE.forEach(function(e){ espaciosSet[e] = true; });
+  RAW_DELIVERY.forEach(function(r){ if(r.espacio) espaciosSet[r.espacio] = true; });
+  RAW_COSTOS.forEach(function(r){ if(r.espacio) espaciosSet[r.espacio] = true; });
+  var extras = Object.keys(espaciosSet).filter(function(e){ return ESPACIOS_BASE.indexOf(e) === -1; }).sort();
+  var ESPACIOS = ["Todos"].concat(ESPACIOS_BASE, extras);
 
-// Escala de grises para epics particulares (orden alternado para separar bandas contiguas).
-const GRAYS_LIGHT = ["#c9c8c2","#807e78","#adaca6","#5c5b56","#98968f","#6e6d67"];
-const GRAYS_DARK  = ["#4a4a47","#a3a29b","#5e5e5a","#8b8a84","#6f6f6a","#b9b8b0"];
-const grays = () => isDark() ? GRAYS_DARK : GRAYS_LIGHT;
-
-const TIPO_COLORS = {
-  "Historia": { light: "#2a78d6", dark: "#3987e5" },
-  "Error":    { light: "#e34948", dark: "#e66767" },
-};
-
-const TABS = [
-  { id: "sp_tipo",  label: "SP por tipo",      metric: "sp",      group: "tipo", title: "Story points publicados por tipo de incidencia", unit: "Story points" },
-  { id: "sp_epic",  label: "SP por Epic",      metric: "sp",      group: "epic", title: "Story points publicados por Epic",               unit: "Story points" },
-  { id: "tk_tipo",  label: "Tickets por tipo", metric: "tickets", group: "tipo", title: "Tickets publicados por tipo de incidencia",      unit: "Tickets" },
-  { id: "tk_epic",  label: "Tickets por Epic", metric: "tickets", group: "epic", title: "Tickets publicados por Epic",                    unit: "Tickets" },
-  { id: "usd_sp",   label: "USD por SP",       mode: "line",      title: "Costo de desarrollo por story point publicado",                 unit: "USD por SP" },
-  { id: "sla_highest", label: "SLA Highest",   mode: "line-sla",  title: "Tiempo de resolución de tickets Highest (mediana, por mes de creación)", unit: "Días" },
-];
-
-const state = { tab: TABS[0], space: "ALL", slaStat: "mediana" };
-
-// Dominio X: cronológico, desde el primer año×mes con datos hasta el último (multi-año,
-// crece con cada ingesta — un backfill puede extenderlo hacia atrás en el tiempo).
-// Se calcula sobre delivery (DATA) + costos (COSTOS) + SLA (SLA_DATA, por mes de Creada)
-// juntos: cada pestaña puede en teoría cubrir un rango que las otras todavía no tienen.
-const periodKey = r => r.anio * 12 + MESES.indexOf(r.mes);
-const PERIODS_ALL = [...DATA.map(periodKey), ...COSTOS.map(periodKey), ...SLA_DATA.map(periodKey)];
-const AXIS_LO = Math.min(...PERIODS_ALL);
-const AXIS_HI = Math.max(...PERIODS_ALL);
-const N_MONTHS = AXIS_HI - AXIS_LO + 1;
-const axisIndex = r => periodKey(r) - AXIS_LO;
-const axisMeta = i => { const k = AXIS_LO + i; const anio = Math.floor(k / 12); return { anio, mesIdx: k - anio * 12 }; };
-const xLabelShort = i => { const m = axisMeta(i); return MES_ABBR[m.mesIdx] + "'" + String(m.anio).slice(-2); };
-const xLabelFull = i => { const m = axisMeta(i); return MESES[m.mesIdx] + " " + m.anio; };
-
-const fmt = v => Number.isInteger(v) ? String(v) : String(Math.round(v * 100) / 100);
-
-function filtered() {
-  return state.space === "ALL" ? DATA : DATA.filter(r => r.espacio === state.space);
-}
-
-function slaFiltered() {
-  return state.space === "ALL" ? SLA_DATA : SLA_DATA.filter(r => r.espacio === state.space);
-}
-
-function median(values) {
-  if (!values.length) return null;
-  const s = [...values].sort((a, b) => a - b);
-  const mid = Math.floor(s.length / 2);
-  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
-}
-
-function mean(values) {
-  return values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
-}
-
-function slaStat(values) {
-  return state.slaStat === "mediana" ? median(values) : mean(values);
-}
-
-// Series de la vista actual: [{name, color, values[meses], total}]
-function computeSeries() {
-  // La vista "por Epic" excluye registros sin dato de Epic (backfills históricos):
-  // esos meses quedan genuinamente vacíos en esta métrica, no se inventa un bucket.
-  const rows = state.tab.group === "epic" ? filtered().filter(r => r.epic) : filtered();
-  const metric = state.tab.metric;
-  const keyOf = state.tab.group === "tipo" ? (r => r.tipo) : (r => r.epic);
-  const map = new Map();
-  for (const r of rows) {
-    const k = keyOf(r);
-    if (!map.has(k)) map.set(k, new Array(N_MONTHS).fill(0));
-    map.get(k)[axisIndex(r)] += r[metric];
+  // ---- 2. Agregar delivery + costos a nivel (periodo, espacio) ----
+  var buckets = {}; // "pk|espacio" -> {sp, sp_bau, sp_known_epic, horas, usd}
+  function bucket(pk, espacio){
+    var k = pk + "|" + espacio;
+    if(!buckets[k]) buckets[k] = {sp:0, sp_bau:0, sp_known_epic:0, horas:0, usd:0};
+    return buckets[k];
   }
-  let series = [...map.entries()].map(([name, values]) => ({
-    name, values, total: values.reduce((a, b) => a + b, 0),
-  }));
-
-  if (state.tab.group === "tipo") {
-    const order = ["Historia", "Error"];
-    series.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
-    series.forEach(s => s.color = isDark() ? TIPO_COLORS[s.name].dark : TIPO_COLORS[s.name].light);
-  } else {
-    const bau = BAU_NAMES.filter(n => map.has(n)).map(n => series.find(s => s.name === n));
-    const rest = series.filter(s => !BAU_NAMES.includes(s.name)).sort((a, b) => b.total - a.total);
-    bau.forEach(s => { s.color = bauColor(s.name); s.isBau = true; });
-    const G = grays();
-    rest.forEach((s, i) => { s.color = G[i % G.length]; s.isBau = false; });
-    series = [...bau, ...rest]; // BAU fijo en la base del apilado
-  }
-  return series;
-}
-
-function niceScale(maxVal) {
-  if (maxVal <= 0) return { max: 10, step: 2 };
-  const target = maxVal / 4.5;
-  const pow = Math.pow(10, Math.floor(Math.log10(target)));
-  let step = pow;
-  for (const m of [1, 2, 2.5, 5, 10]) { if (pow * m >= target) { step = pow * m; break; } }
-  return { max: Math.ceil(maxVal / step) * step, step };
-}
-
-// --- Render ---------------------------------------------------------------
-
-const svg = document.getElementById("chart");
-const tooltip = document.getElementById("tooltip");
-const VB = { w: 1040, h: 420 };
-const PAD = { l: 52, r: 16, t: 14, b: 34 };
-let current = { series: [], stacked: [], scale: null, xs: [] };
-
-function xPos(i) {
-  const iw = VB.w - PAD.l - PAD.r;
-  return N_MONTHS === 1 ? PAD.l + iw / 2 : PAD.l + (iw * i) / (N_MONTHS - 1);
-}
-
-function render() {
-  if (state.tab.mode === "line") { renderLine(); return; }
-  if (state.tab.mode === "line-sla") { renderLineSla(); return; }
-  const series = computeSeries();
-  const totals = new Array(N_MONTHS).fill(0);
-  series.forEach(s => s.values.forEach((v, i) => totals[i] += v));
-  const scale = niceScale(Math.max(...totals, 0));
-  const plotH = VB.h - PAD.t - PAD.b;
-  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
-  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
-
-  // Apilado acumulado
-  let base = new Array(N_MONTHS).fill(0);
-  const stacked = series.map(s => {
-    const y0 = base.slice();
-    const y1 = base.map((b, i) => b + s.values[i]);
-    base = y1;
-    return { ...s, y0, y1 };
-  });
-  current = { series, stacked, scale, xs, yPos };
-
-  let g = "";
-  // Grid + eje Y
-  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
-    const y = yPos(v);
-    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
-    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
-  }
-  // Áreas (borde color superficie = separador entre bandas apiladas)
-  stacked.forEach((s, si) => {
-    if (s.total <= 0) return;
-    const top = s.y1.map((v, i) => `${xs[i]},${yPos(v)}`).join(" L");
-    const bot = s.y0.map((v, i) => `${xs[i]},${yPos(v)}`).reverse().join(" L");
-    g += `<path class="band" data-si="${si}" d="M${top} L${bot} Z" fill="${s.color}" stroke="var(--surface-1)" stroke-width="1.5"></path>`;
-  });
-  // Baseline + eje X
-  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
-  xs.forEach((x, i) => {
-    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle">${xLabelShort(i)}</text>`;
-  });
-  // Capa de hover
-  g += `<g id="hoverLayer"></g>`;
-  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
-
-  svg.innerHTML = `<g class="axis">${g}</g>`;
-  bindHover();
-
-  document.getElementById("chartTitle").textContent =
-    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
-  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " · Eje X: mes de publicación (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
-
-  const empty = document.querySelector(".empty-msg");
-  if (empty) empty.remove();
-  if (series.length === 0 || Math.max(...totals, 0) === 0) {
-    const d = document.createElement("div");
-    d.className = "empty-msg";
-    d.textContent = "Sin publicaciones registradas para el espacio " + state.space + " (aún).";
-    document.getElementById("chartWrap").appendChild(d);
-  }
-
-  renderKpis();
-  renderLegend(series);
-  renderTable(series);
-}
-
-// --- Pestaña USD por SP (líneas, no áreas) ---------------------------------
-// SP por (período, espacio), sumado sin importar tipo/epic — la métrica de costo
-// no discrimina por Epic, solo necesita el total de SP publicados ese mes/espacio.
-function spByPeriodEspacio() {
-  const m = new Map();
-  DATA.forEach(r => {
-    const k = periodKey(r) + "|" + r.espacio;
-    m.set(k, (m.get(k) || 0) + r.sp);
-  });
-  return m;
-}
-function usdByPeriodEspacio() {
-  const m = new Map();
-  COSTOS.forEach(c => {
-    const k = periodKey(c) + "|" + c.espacio;
-    m.set(k, (m.get(k) || 0) + c.usd);
-  });
-  return m;
-}
-
-// USD/SP histórico para un conjunto de espacios: Σusd / Σsp, contando SOLO los pares
-// período×espacio con SP > 0 (si no, el costo de un espacio sin SP registrado -hoy OB
-// y SER- inflaría el numerador sin aportar denominador y desvirtuaría la métrica).
-function usdPerSpGlobal(espacios) {
-  const spM = spByPeriodEspacio(), usdM = usdByPeriodEspacio();
-  let usdSum = 0, spSum = 0;
-  for (let i = 0; i < N_MONTHS; i++) {
-    const period = AXIS_LO + i;
-    espacios.forEach(e => {
-      const sp = spM.get(period + "|" + e) || 0;
-      if (sp > 0) { spSum += sp; usdSum += (usdM.get(period + "|" + e) || 0); }
-    });
-  }
-  return spSum > 0 ? usdSum / spSum : null;
-}
-
-function espacioColor(e) {
-  return BAU_NAMES.includes("REGRESIONES " + e) ? bauColor("REGRESIONES " + e) : (isDark() ? "#a3a29b" : "#807e78");
-}
-
-function computeCostSeries() {
-  const spM = spByPeriodEspacio(), usdM = usdByPeriodEspacio();
-  const espacios = state.space === "ALL" ? ESPACIOS : [state.space];
-  const series = espacios.map(e => {
-    const values = new Array(N_MONTHS).fill(0);
-    for (let i = 0; i < N_MONTHS; i++) {
-      const period = AXIS_LO + i;
-      const sp = spM.get(period + "|" + e) || 0;
-      const usd = usdM.get(period + "|" + e) || 0;
-      values[i] = sp > 0 ? usd / sp : 0;
+  var periodSet = {};
+  RAW_DELIVERY.forEach(function(r){
+    var mi = mesIndex(r.mes);
+    if(mi < 0 || !r.espacio) return;
+    var pk = periodKey(r.anio, mi);
+    periodSet[pk] = true;
+    var b = bucket(pk, r.espacio);
+    b.sp += r.sp;
+    if(r.epic !== null && r.epic !== undefined && r.epic !== ""){
+      b.sp_known_epic += r.sp;
+      if(BAU[String(r.epic).toUpperCase()]) b.sp_bau += r.sp;
     }
-    return { name: e, values, color: espacioColor(e) };
   });
-  if (state.space === "ALL") {
-    const values = new Array(N_MONTHS).fill(0);
-    for (let i = 0; i < N_MONTHS; i++) {
-      const period = AXIS_LO + i;
-      let usdSum = 0, spSum = 0;
-      ESPACIOS.forEach(e => {
-        const sp = spM.get(period + "|" + e) || 0;
-        if (sp > 0) { spSum += sp; usdSum += (usdM.get(period + "|" + e) || 0); }
+  RAW_COSTOS.forEach(function(r){
+    var mi = mesIndex(r.mes);
+    if(mi < 0 || !r.espacio) return;
+    var pk = periodKey(r.anio, mi);
+    periodSet[pk] = true;
+    var b = bucket(pk, r.espacio);
+    b.horas += r.horas;
+    b.usd += r.usd;
+  });
+
+  var periodsSorted = Object.keys(periodSet).map(Number).sort(function(a,b){ return a-b; });
+  var MONTH_LABELS = periodsSorted.map(function(pk){
+    var anio = Math.floor(pk/12), mi = pk%12;
+    return MESES[mi] + " " + anio;
+  });
+
+  function monthRow(pk, espacio){
+    if(espacio === "Todos"){
+      var acc = {sp:0, sp_bau:0, sp_known_epic:0, horas:0, usd:0};
+      Object.keys(espaciosSet).forEach(function(e){
+        var b = buckets[pk+"|"+e];
+        if(!b) return;
+        acc.sp += b.sp; acc.sp_bau += b.sp_bau; acc.sp_known_epic += b.sp_known_epic;
+        acc.horas += b.horas; acc.usd += b.usd;
       });
-      values[i] = spSum > 0 ? usdSum / spSum : 0;
+      return acc;
     }
-    series.push({ name: "Global", values, color: "var(--text-secondary)", isGlobal: true });
+    return buckets[pk+"|"+espacio] || {sp:0, sp_bau:0, sp_known_epic:0, horas:0, usd:0};
   }
-  return series;
-}
 
-let currentLine = { series: [], xs: [], yPos: null };
+  var rowsByEspacio = {};
+  ESPACIOS.forEach(function(espacio){
+    rowsByEspacio[espacio] = periodsSorted.map(function(pk){ return monthRow(pk, espacio); });
+  });
 
-function renderLine() {
-  const series = computeCostSeries();
-  const maxVal = Math.max(0, ...series.map(s => Math.max(...s.values)));
-  const scale = niceScale(maxVal);
-  const plotH = VB.h - PAD.t - PAD.b;
-  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
-  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
-  currentLine = { series, xs, yPos };
+  // Espacios sin ningún SP publicado en toda la serie (ej. OB/SER antes de tener delivery
+  // propio) -- usado solo para la nota dinámica, no para ocultar nada.
+  var espaciosSinSP = ESPACIOS.filter(function(e){
+    if(e === "Todos") return false;
+    return rowsByEspacio[e].every(function(r){ return r.sp === 0; });
+  });
 
-  let g = "";
-  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
-    const y = yPos(v);
-    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
-    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
-  }
-  series.forEach((s, si) => {
-    const pts = s.values.map((v, i) => `${xs[i]},${yPos(v)}`).join(" ");
-    const dash = s.isGlobal ? ` stroke-dasharray="5 4"` : "";
-    g += `<polyline class="band" data-si="${si}" points="${pts}" fill="none" stroke="${s.color}" stroke-width="${s.isGlobal ? 2 : 2.25}"${dash}></polyline>`;
-    s.values.forEach((v, i) => {
-      if (v <= 0) return;
-      g += `<circle data-si="${si}" cx="${xs[i]}" cy="${yPos(v)}" r="2.75" fill="${s.color}"></circle>`;
+  // ---- 3. Series por ventana móvil (sum/sum), una por espacio × tamaño de ventana ----
+  var PERIODS = [{key:"1", label:"1 mes"}, {key:"3", label:"3 meses"}, {key:"6", label:"6 meses"}];
+  var DATA = {months: MONTH_LABELS, espacios: ESPACIOS, espaciosSinSP: espaciosSinSP, series: {}};
+  ESPACIOS.forEach(function(espacio){
+    var rows = rowsByEspacio[espacio];
+    DATA.series[espacio] = {};
+    PERIODS.forEach(function(p){
+      var P = parseInt(p.key, 10);
+      var pts = [];
+      for(var i = P-1; i < rows.length; i++){
+        var sp=0, horas=0, usd=0, sp_bau=0, sp_known=0;
+        for(var j = i-P+1; j <= i; j++){
+          sp += rows[j].sp; horas += rows[j].horas; usd += rows[j].usd;
+          sp_bau += rows[j].sp_bau; sp_known += rows[j].sp_known_epic;
+        }
+        pts.push({
+          label: MONTH_LABELS[i],
+          sp: Math.round(sp*100)/100,
+          horas: Math.round(horas*100)/100,
+          usd: Math.round(usd*100)/100,
+          usd_horas: horas ? Math.round((usd/horas)*100)/100 : null,
+          horas_sp: sp ? Math.round((horas/sp)*100)/100 : null,
+          usd_sp: sp ? Math.round((usd/sp)*100)/100 : null,
+          pct_mant: sp_known ? Math.round((100*sp_bau/sp_known)*10)/10 : null
+        });
+      }
+      DATA.series[espacio][p.key] = pts;
     });
   });
-  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
-  xs.forEach((x, i) => {
-    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle">${xLabelShort(i)}</text>`;
-  });
-  g += `<g id="hoverLayer"></g>`;
-  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
 
-  svg.innerHTML = `<g class="axis">${g}</g>`;
-  bindHoverLine();
+  var METRICS = [
+    {key:"sp", label:"SP", title:"SP publicados", fmt:fmtNum1, short:function(v){return fmtCompact(v);}},
+    {key:"horas", label:"Horas", title:"Horas de equipo disponible", fmt:fmtNum0, short:fmtCompact},
+    {key:"usd", label:"USD", title:"Costo del equipo (USD)", fmt:fmtUsd0, short:function(v){return "$"+fmtCompact(v);}},
+    {key:"usd_horas", label:"USD / Horas", title:"Costo por hora de equipo", fmt:fmtUsd2, short:function(v){return "$"+v.toFixed(2);}},
+    {key:"horas_sp", label:"Horas / SP", title:"Horas de equipo por SP entregado", fmt:fmtNum2, short:function(v){return v.toFixed(2);}},
+    {key:"usd_sp", label:"USD / SP", title:"Costo por SP entregado", fmt:fmtUsd2, short:function(v){return "$"+v.toFixed(2);}},
+    {key:"pct_mant", label:"% Mantenimiento", title:"% de SP en soporte, COE, iniciativas técnicas y regresiones", fmt:fmtPct, short:function(v){return v.toFixed(1)+"%";}}
+  ];
 
-  document.getElementById("chartTitle").textContent =
-    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
-  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " (0 = sin SP publicados ese mes) · Eje X: mes de publicación (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
+  var state = {espacio:"Todos", metric:"sp", period:"1"};
 
-  const empty = document.querySelector(".empty-msg");
-  if (empty) empty.remove();
-  if (COSTOS.length === 0) {
-    const d = document.createElement("div");
-    d.className = "empty-msg";
-    d.textContent = "Sin datos de costo de desarrollo ingeridos todavía.";
-    document.getElementById("chartWrap").appendChild(d);
+  function fmtNum0(v){ return Math.round(v).toLocaleString("es-AR"); }
+  function fmtNum1(v){ return v.toLocaleString("es-AR",{maximumFractionDigits:1}); }
+  function fmtNum2(v){ return v.toLocaleString("es-AR",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function fmtUsd0(v){ return "$"+Math.round(v).toLocaleString("en-US"); }
+  function fmtUsd2(v){ return "$"+v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function fmtPct(v){ return v.toFixed(1)+"%"; }
+  function fmtCompact(v){
+    var a = Math.abs(v);
+    if(a>=1000000) return (v/1000000).toFixed(2)+"M";
+    if(a>=1000) return (v/1000).toFixed(1)+"K";
+    return Math.round(v).toString();
+  }
+  function monthShort(label){
+    var MAP={"Enero":"ene","Febrero":"feb","Marzo":"mar","Abril":"abr","Mayo":"may","Junio":"jun",
+      "Julio":"jul","Agosto":"ago","Septiembre":"sep","Octubre":"oct","Noviembre":"nov","Diciembre":"dic"};
+    var parts = label.split(" ");
+    var y = parts[1].slice(2);
+    return MAP[parts[0]]+"'"+y;
   }
 
-  renderKpis();
-  renderCostLegend(series);
-  renderCostTable(series);
-}
-
-function costChip(s) {
-  const el = document.createElement("span");
-  el.className = "chip";
-  const dashHint = s.isGlobal ? " (promedio ponderado)" : "";
-  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}${dashHint}`;
-  const si = currentLine.series.findIndex(x => x.name === s.name);
-  el.addEventListener("mouseenter", () => highlight(si));
-  el.addEventListener("mouseleave", () => highlight(-1));
-  return el;
-}
-
-function renderCostLegend(series) {
-  const lg = document.getElementById("legend");
-  lg.innerHTML = "";
-  series.forEach(s => lg.appendChild(costChip(s)));
-}
-
-function bindHoverLine() {
-  const zone = document.getElementById("hoverZone");
-  const layer = document.getElementById("hoverLayer");
-  const wrap = document.getElementById("chartWrap");
-
-  zone.addEventListener("mousemove", e => {
-    const rect = svg.getBoundingClientRect();
-    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
-    let mi = 0, best = Infinity;
-    currentLine.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
-
-    const x = currentLine.xs[mi];
-    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
-
-    const vals = currentLine.series
-      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
-      .filter(s => s.v > 0)
-      .sort((a, b) => b.v - a.v);
-    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
-    if (vals.length === 0) {
-      html += `<div class="t-more">Sin SP publicados ese mes en los espacios visibles.</div>`;
-    }
-    vals.forEach(s => {
-      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">$${fmt(Math.round(s.v))}</span></div>`;
+  function buildSeg(container, items, labelFn, onPick, isActive){
+    container.innerHTML = "";
+    items.forEach(function(item){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = labelFn(item);
+      b.setAttribute("aria-pressed", isActive(item) ? "true" : "false");
+      b.addEventListener("click", function(){ onPick(item); render(); });
+      container.appendChild(b);
     });
-    tooltip.innerHTML = html;
-    tooltip.style.display = "block";
-
-    const wrect = wrap.getBoundingClientRect();
-    const px = (x / VB.w) * wrect.width;
-    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
-    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
-  });
-  zone.addEventListener("mouseleave", () => {
-    layer.innerHTML = "";
-    tooltip.style.display = "none";
-  });
-}
-
-function renderCostTable(series) {
-  let html = "<table><thead><tr><th>Espacio</th>";
-  for (let i = 0; i < N_MONTHS; i++) html += `<th>${xLabelShort(i)}</th>`;
-  html += "</tr></thead><tbody>";
-  for (const s of series) {
-    html += `<tr><td title="${s.name}">${s.name}</td>`;
-    s.values.forEach(v => html += `<td>${v > 0 ? "$" + fmt(Math.round(v)) : "·"}</td>`);
-    html += `</tr>`;
   }
-  html += "</tbody></table>";
-  document.getElementById("tableWrap").innerHTML = html;
-}
 
-// --- Pestaña SLA Highest (líneas, mediana, eje X = mes de Creada) -----------
-function computeSlaSeries() {
-  const rows = slaFiltered();
-  const finByMonth = new Map(), pubByMonth = new Map(), openByMonth = new Map();
-  for (const r of rows) {
-    const i = axisIndex(r);
-    if (r.dias_finalizada != null) {
-      if (!finByMonth.has(i)) finByMonth.set(i, []);
-      finByMonth.get(i).push(r.dias_finalizada);
+  function renderControls(){
+    buildSeg(document.getElementById("espacioSeg"), ESPACIOS, function(e){return e;},
+      function(e){ state.espacio = e; }, function(e){ return state.espacio === e; });
+    buildSeg(document.getElementById("metricRow"), METRICS, function(m){return m.label;},
+      function(m){ state.metric = m.key; }, function(m){ return state.metric === m.key; });
+    buildSeg(document.getElementById("periodRow"), PERIODS, function(p){return p.label;},
+      function(p){ state.period = p.key; }, function(p){ return state.period === p.key; });
+  }
+
+  function currentMetric(){ return METRICS.filter(function(m){return m.key===state.metric;})[0]; }
+
+  function currentPoints(){
+    var raw = DATA.series[state.espacio][state.period];
+    var metric = state.metric;
+    return raw.filter(function(p){ return p[metric] !== null && p[metric] !== undefined; });
+  }
+
+  // ---- chart geometry ----
+  var VB_W = 900, VB_H = 340;
+  var PAD = {top:14, right:18, bottom:34, left:54};
+
+  function niceTicks(min, max, count){
+    if(min === max){ min -= 1; max += 1; }
+    var span = max - min;
+    var step = Math.pow(10, Math.floor(Math.log10(span/count)));
+    var err = span / count / step;
+    if(err >= 7.5) step *= 10; else if(err >= 3.5) step *= 5; else if(err >= 1.5) step *= 2;
+    var niceMin = Math.floor(min/step)*step;
+    var niceMax = Math.ceil(max/step)*step;
+    var ticks = [];
+    for(var v = niceMin; v <= niceMax + step*0.001; v += step){ ticks.push(v); }
+    return {min:niceMin, max:niceMax, ticks:ticks};
+  }
+
+  // Monotone cubic (Fritsch-Carlson) interpolation: smooth like a spline, but never
+  // overshoots past a segment's own endpoints, so it can't invent a max/min that
+  // isn't a real data point (unlike Catmull-Rom).
+  function monotoneCubicPath(pts){
+    var n = pts.length;
+    if(n < 2) return n===1 ? ("M"+pts[0].x.toFixed(2)+","+pts[0].y.toFixed(2)) : "";
+    if(n === 2){
+      return "M"+pts[0].x.toFixed(2)+","+pts[0].y.toFixed(2)+" L"+pts[1].x.toFixed(2)+","+pts[1].y.toFixed(2);
     }
-    if (r.dias_publicacion != null) {
-      if (!pubByMonth.has(i)) pubByMonth.set(i, []);
-      pubByMonth.get(i).push(r.dias_publicacion);
+    var dx = new Array(n-1), m = new Array(n-1);
+    for(var i=0;i<n-1;i++){
+      dx[i] = pts[i+1].x - pts[i].x;
+      m[i] = (pts[i+1].y - pts[i].y) / dx[i];
     }
-    if (r.estado !== "Finalizada") openByMonth.set(i, (openByMonth.get(i) || 0) + 1);
-  }
-  const finValues = Array.from({ length: N_MONTHS }, (_, i) => median(finByMonth.get(i) || []));
-  const pubValues = Array.from({ length: N_MONTHS }, (_, i) => median(pubByMonth.get(i) || []));
-  return {
-    series: [
-      { name: "Días hasta Finalizada",  values: finValues, color: isDark() ? "#3987e5" : "#2a78d6" },
-      { name: "Días hasta Publicación", values: pubValues, color: isDark() ? "#199e70" : "#1baf7a" },
-    ],
-    incomplete: new Set(openByMonth.keys()),
-  };
-}
-
-let currentSla = { series: [], xs: [], yPos: null, incomplete: new Set() };
-
-function renderLineSla() {
-  const { series, incomplete } = computeSlaSeries();
-  const allVals = series.flatMap(s => s.values.filter(v => v != null));
-  const scale = niceScale(allVals.length ? Math.max(...allVals) : 0);
-  const plotH = VB.h - PAD.t - PAD.b;
-  const yPos = v => PAD.t + plotH * (1 - v / scale.max);
-  const xs = Array.from({ length: N_MONTHS }, (_, i) => xPos(i));
-  currentSla = { series, xs, yPos, incomplete };
-
-  let g = "";
-  for (let v = 0; v <= scale.max + 1e-9; v += scale.step) {
-    const y = yPos(v);
-    g += `<line class="gridline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${y}" y2="${y}"></line>`;
-    g += `<text class="tick-num" x="${PAD.l - 8}" y="${y + 3.5}" text-anchor="end">${fmt(v)}</text>`;
-  }
-  series.forEach((s, si) => {
-    // segmentos contiguos: cortar la línea en los huecos (mes sin ningún ticket resuelto)
-    let segs = [], cur = [];
-    s.values.forEach((v, i) => {
-      if (v == null) { if (cur.length) segs.push(cur); cur = []; return; }
-      cur.push(`${xs[i]},${yPos(v)}`);
-    });
-    if (cur.length) segs.push(cur);
-    segs.forEach(seg => {
-      g += `<polyline class="band" data-si="${si}" points="${seg.join(" ")}" fill="none" stroke="${s.color}" stroke-width="2.25"></polyline>`;
-    });
-    s.values.forEach((v, i) => {
-      if (v == null) return;
-      g += `<circle data-si="${si}" cx="${xs[i]}" cy="${yPos(v)}" r="2.75" fill="${s.color}"></circle>`;
-    });
-  });
-  g += `<line class="baseline" x1="${PAD.l}" x2="${VB.w - PAD.r}" y1="${yPos(0)}" y2="${yPos(0)}"></line>`;
-  xs.forEach((x, i) => {
-    const italic = incomplete.has(i) ? ` font-style="italic"` : "";
-    g += `<text x="${x}" y="${VB.h - PAD.b + 20}" text-anchor="middle"${italic}>${xLabelShort(i)}</text>`;
-  });
-  g += `<g id="hoverLayer"></g>`;
-  g += `<rect id="hoverZone" x="${PAD.l}" y="${PAD.t}" width="${VB.w - PAD.l - PAD.r}" height="${plotH}" fill="transparent"></rect>`;
-
-  svg.innerHTML = `<g class="axis">${g}</g>`;
-  bindHoverSla();
-
-  document.getElementById("chartTitle").textContent =
-    state.tab.title + (state.space === "ALL" ? " — todos los espacios" : " — espacio " + state.space);
-  document.getElementById("yUnit").textContent = "Eje Y: " + state.tab.unit + " (mediana) · Eje X: mes de creación del ticket — en itálica, meses con urgencias aún sin resolver (" + xLabelFull(0) + " – " + xLabelFull(N_MONTHS - 1) + ")";
-
-  const empty = document.querySelector(".empty-msg");
-  if (empty) empty.remove();
-  if (SLA_DATA.length === 0) {
-    const d = document.createElement("div");
-    d.className = "empty-msg";
-    d.textContent = "Sin tickets Highest ingeridos todavía.";
-    document.getElementById("chartWrap").appendChild(d);
-  }
-
-  renderKpis();
-  renderSlaLegend(series);
-  renderSlaTable();
-}
-
-function slaChip(s) {
-  const el = document.createElement("span");
-  el.className = "chip";
-  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}`;
-  const si = currentSla.series.findIndex(x => x.name === s.name);
-  el.addEventListener("mouseenter", () => highlight(si));
-  el.addEventListener("mouseleave", () => highlight(-1));
-  return el;
-}
-
-function renderSlaLegend(series) {
-  const lg = document.getElementById("legend");
-  lg.innerHTML = "";
-  series.forEach(s => lg.appendChild(slaChip(s)));
-}
-
-function bindHoverSla() {
-  const zone = document.getElementById("hoverZone");
-  const layer = document.getElementById("hoverLayer");
-  const wrap = document.getElementById("chartWrap");
-
-  zone.addEventListener("mousemove", e => {
-    const rect = svg.getBoundingClientRect();
-    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
-    let mi = 0, best = Infinity;
-    currentSla.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
-
-    const x = currentSla.xs[mi];
-    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
-
-    const vals = currentSla.series
-      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
-      .filter(s => s.v != null);
-    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
-    if (currentSla.incomplete.has(mi)) {
-      html += `<div class="t-more">Cohorte incompleta: quedan urgencias de este mes sin resolver — la mediana real es peor.</div>`;
+    var t = new Array(n);
+    t[0] = m[0];
+    t[n-1] = m[n-2];
+    for(var i=1;i<n-1;i++){
+      t[i] = (m[i-1]*m[i] <= 0) ? 0 : (m[i-1]+m[i])/2;
     }
-    if (vals.length === 0) {
-      html += `<div class="t-more">Sin tickets resueltos ese mes.</div>`;
+    for(var i=0;i<n-1;i++){
+      if(m[i] === 0){ t[i] = 0; t[i+1] = 0; continue; }
+      var a = t[i]/m[i], b = t[i+1]/m[i];
+      var s = a*a + b*b;
+      if(s > 9){
+        var tau = 3/Math.sqrt(s);
+        t[i] = tau*a*m[i];
+        t[i+1] = tau*b*m[i];
+      }
     }
-    vals.forEach(s => {
-      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">${fmt(Math.round(s.v * 10) / 10)}d</span></div>`;
-    });
-    tooltip.innerHTML = html;
-    tooltip.style.display = "block";
-
-    const wrect = wrap.getBoundingClientRect();
-    const px = (x / VB.w) * wrect.width;
-    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
-    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
-  });
-  zone.addEventListener("mouseleave", () => {
-    layer.innerHTML = "";
-    tooltip.style.display = "none";
-  });
-}
-
-function renderSlaTable() {
-  const rows = slaFiltered();
-  let html = "<table><thead><tr><th>Mes (creación)</th><th>Creados</th><th>Finalizados</th><th>Abiertos</th><th>Mediana días hasta Finalizada</th><th>Mediana días hasta Publicación</th></tr></thead><tbody>";
-  let any = false;
-  for (let i = 0; i < N_MONTHS; i++) {
-    const period = AXIS_LO + i;
-    const inMonth = rows.filter(r => periodKey(r) === period);
-    if (!inMonth.length) continue;
-    any = true;
-    const fin = inMonth.filter(r => r.estado === "Finalizada");
-    const mFin = median(fin.map(r => r.dias_finalizada).filter(v => v != null));
-    const mPub = median(fin.map(r => r.dias_publicacion).filter(v => v != null));
-    html += `<tr><td>${xLabelFull(i)}</td><td>${inMonth.length}</td><td>${fin.length}</td><td>${inMonth.length - fin.length}</td>` +
-            `<td>${mFin != null ? fmt(Math.round(mFin * 10) / 10) : "·"}</td><td>${mPub != null ? fmt(Math.round(mPub * 10) / 10) : "·"}</td></tr>`;
-  }
-  html += "</tbody></table>";
-  document.getElementById("tableWrap").innerHTML = any ? html : "<p style='padding:12px;color:var(--muted)'>Sin tickets Highest ingeridos todavía.</p>";
-}
-
-function renderKpis() {
-  const rows = filtered();
-  const sp = rows.reduce((a, r) => a + r.sp, 0);
-  const tk = rows.reduce((a, r) => a + r.tickets, 0);
-  // % BAU y % SOPORTE se calculan sobre el subconjunto con Epic conocida: los meses de
-  // backfill sin Epic no pueden clasificarse como BAU/no-BAU, e incluirlos en el
-  // denominador subestimaría artificialmente el porcentaje (desvirtúa la métrica).
-  const rowsWithEpic = rows.filter(r => r.epic);
-  const spWithEpic = rowsWithEpic.reduce((a, r) => a + r.sp, 0);
-  const spBau = rowsWithEpic.filter(r => BAU_NAMES.includes(r.epic)).reduce((a, r) => a + r.sp, 0);
-  const spSop = rowsWithEpic.filter(r => r.epic === "SOPORTE").reduce((a, r) => a + r.sp, 0);
-  const spErr = rows.filter(r => r.tipo === "Error").reduce((a, r) => a + r.sp, 0);
-  const pct = (v, base) => base > 0 ? Math.round((v / base) * 100) + "%" : "—";
-  const avgSpMes = fmt(Math.round((sp / N_MONTHS) * 10) / 10);
-  const scope = state.space === "ALL" ? "todos los espacios" : "espacio " + state.space;
-  const epicNote = rowsWithEpic.length < rows.length ? " (sobre SP con Epic conocida)" : "";
-  const usdSp = usdPerSpGlobal(state.space === "ALL" ? ESPACIOS : [state.space]);
-  const usdSpTxt = usdSp != null ? "$" + fmt(Math.round(usdSp)) : "—";
-
-  // SLA Highest — global (toggle mediana/promedio), respeta el filtro de espacio como
-  // el resto de KPIs. Los tickets aún no resueltos quedan afuera del cálculo (su reloj
-  // no paró) pero se declaran en la etiqueta, nunca se ocultan del todo (ver pestaña).
-  const slaRows = slaFiltered();
-  const slaFin = slaRows.filter(r => r.estado === "Finalizada");
-  const slaAbiertos = slaRows.length - slaFin.length;
-  const finVals = slaFin.map(r => r.dias_finalizada).filter(v => v != null);
-  const pubVals = slaFin.map(r => r.dias_publicacion).filter(v => v != null);
-  const finStat = slaStat(finVals);
-  const pubStat = slaStat(pubVals);
-  const statLabel = state.slaStat === "mediana" ? "Mediana" : "Promedio";
-  const finTxt = finStat != null ? fmt(Math.round(finStat * 10) / 10) + "d" : "—";
-  const pubTxt = pubStat != null ? fmt(Math.round(pubStat * 10) / 10) + "d" : "—";
-  const abiertosNote = slaAbiertos > 0 ? ` · ${slaAbiertos} sin resolver excluidos` : "";
-
-  document.getElementById("kpis").innerHTML = `
-    <div class="kpi"><div class="v">${fmt(sp)}</div><div class="l">SP publicados · ${scope}</div></div>
-    <div class="kpi"><div class="v">${tk}</div><div class="l">Tickets publicados · ${scope}</div></div>
-    <div class="kpi"><div class="v">${avgSpMes}</div><div class="l">Promedio SP/mes · histórico (${N_MONTHS} meses)</div></div>
-    <div class="kpi"><div class="v">${pct(spBau, spWithEpic)}</div><div class="l">% SP en BAU fijo (SOPORTE, regresiones, COE, inic. técnicas)${epicNote}</div></div>
-    <div class="kpi"><div class="v" style="color:#e34948">${pct(spSop, spWithEpic)}</div><div class="l">% SP en SOPORTE${epicNote}</div></div>
-    <div class="kpi"><div class="v" style="color:#e34948">${pct(spErr, sp)}</div><div class="l">% SP en Error (bugs)</div></div>
-    <div class="kpi"><div class="v">${usdSpTxt}</div><div class="l">USD/SP histórico · ${scope} (solo meses con SP publicados)</div></div>
-    <div class="kpi"><div class="v">${finTxt}</div><div class="l">${statLabel} días hasta Finalizada · Highest, ${scope} (N=${finVals.length}${abiertosNote})</div></div>
-    <div class="kpi"><div class="v">${pubTxt}</div><div class="l">${statLabel} días hasta Publicación · Highest, ${scope} (N=${pubVals.length}${abiertosNote})</div></div>`;
-}
-
-function chip(s) {
-  const el = document.createElement("span");
-  el.className = "chip";
-  el.innerHTML = `<span class="sw" style="background:${s.color}"></span>${s.name}`;
-  const si = current.stacked.findIndex(x => x.name === s.name);
-  el.addEventListener("mouseenter", () => highlight(si));
-  el.addEventListener("mouseleave", () => highlight(-1));
-  return el;
-}
-
-function renderLegend(series) {
-  const lg = document.getElementById("legend");
-  lg.innerHTML = "";
-  if (state.tab.group === "tipo") {
-    series.forEach(s => lg.appendChild(chip(s)));
-    return;
-  }
-  const bau = series.filter(s => s.isBau);
-  const rest = series.filter(s => !s.isBau);
-  if (bau.length) {
-    const t = document.createElement("div"); t.className = "lg-group"; t.textContent = "BAU fijo (color constante)";
-    lg.appendChild(t);
-    bau.forEach(s => lg.appendChild(chip(s)));
-  }
-  if (rest.length) {
-    const t = document.createElement("div"); t.className = "lg-group"; t.textContent = "Epics particulares (escala de grises)";
-    lg.appendChild(t);
-    rest.slice(0, 8).forEach(s => lg.appendChild(chip(s)));
-    if (rest.length > 8) {
-      const m = document.createElement("span"); m.className = "more";
-      m.textContent = `+${rest.length - 8} epics más — ver tooltip o tabla`;
-      lg.appendChild(m);
+    var d = "M"+pts[0].x.toFixed(2)+","+pts[0].y.toFixed(2)+" ";
+    for(var i=0;i<n-1;i++){
+      var p0=pts[i], p1=pts[i+1];
+      var c1x = p0.x + dx[i]/3, c1y = p0.y + t[i]*dx[i]/3;
+      var c2x = p1.x - dx[i]/3, c2y = p1.y - t[i+1]*dx[i]/3;
+      d += "C"+c1x.toFixed(2)+","+c1y.toFixed(2)+" "+c2x.toFixed(2)+","+c2y.toFixed(2)+" "+p1.x.toFixed(2)+","+p1.y.toFixed(2)+" ";
     }
+    return d;
   }
-}
 
-function highlight(si) {
-  const root = svg;
-  root.classList.toggle("dimmed", si >= 0);
-  root.querySelectorAll(".band").forEach(p => p.classList.toggle("hl", p.dataset.si == si));
-}
+  var pointsCache = [];
 
-function bindHover() {
-  const zone = document.getElementById("hoverZone");
-  const layer = document.getElementById("hoverLayer");
-  const wrap = document.getElementById("chartWrap");
+  function renderChart(){
+    var metric = currentMetric();
+    var pts = currentPoints();
+    document.getElementById("chartTitle").textContent = metric.title + " — " + state.espacio;
+    var cov = pts.length ? (monthShort(pts[0].label)+" – "+monthShort(pts[pts.length-1].label)) : "sin datos";
+    document.getElementById("chartCoverage").textContent = pts.length + " puntos · " + cov;
 
-  zone.addEventListener("mousemove", e => {
-    const rect = svg.getBoundingClientRect();
-    const sx = (e.clientX - rect.left) * (VB.w / rect.width);
-    let mi = 0, best = Infinity;
-    current.xs.forEach((x, i) => { const d = Math.abs(x - sx); if (d < best) { best = d; mi = i; } });
+    var gridG = document.getElementById("gridGroup");
+    var areaG = document.getElementById("areaGroup");
+    var lineG = document.getElementById("lineGroup");
+    var dotsG = document.getElementById("dotsGroup");
+    var xAxisG = document.getElementById("xAxisGroup");
+    gridG.innerHTML = ""; areaG.innerHTML = ""; lineG.innerHTML = ""; dotsG.innerHTML = ""; xAxisG.innerHTML = "";
 
-    const x = current.xs[mi];
-    layer.innerHTML = `<line class="crosshair" x1="${x}" x2="${x}" y1="${PAD.t}" y2="${VB.h - PAD.b}"></line>`;
+    if(!pts.length){
+      pointsCache = [];
+      updateKpis(metric, []);
+      updateTable(metric, []);
+      return;
+    }
 
-    const vals = current.stacked
-      .map(s => ({ name: s.name, color: s.color, v: s.values[mi] }))
-      .filter(s => s.v > 0)
-      .sort((a, b) => b.v - a.v);
-    const total = vals.reduce((a, s) => a + s.v, 0);
-    const MAXROWS = 12;
-    let html = `<div class="t-mes">${xLabelFull(mi)}${state.space === "ALL" ? "" : " · " + state.space}</div>`;
-    vals.slice(0, MAXROWS).forEach(s => {
-      html += `<div class="t-row"><span class="sw" style="background:${s.color}"></span><span class="nm" title="${s.name}">${s.name}</span><span class="vl">${fmt(s.v)}</span></div>`;
+    var vals = pts.map(function(p){ return p[metric.key]; });
+    var minV = Math.min.apply(null, vals), maxV = Math.max.apply(null, vals);
+    if(minV > 0) minV = Math.min(0, minV);
+    var nice = niceTicks(minV, maxV, 5);
+
+    var innerW = VB_W - PAD.left - PAD.right;
+    var innerH = VB_H - PAD.top - PAD.bottom;
+
+    function xFor(i){ return pts.length===1 ? PAD.left + innerW/2 : PAD.left + (innerW * i/(pts.length-1)); }
+    function yFor(v){ return PAD.top + innerH - ((v - nice.min)/(nice.max - nice.min)) * innerH; }
+
+    // grid + y labels
+    nice.ticks.forEach(function(t){
+      var y = yFor(t);
+      var line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("class","gridline");
+      line.setAttribute("x1", PAD.left); line.setAttribute("x2", VB_W - PAD.right);
+      line.setAttribute("y1", y); line.setAttribute("y2", y);
+      gridG.appendChild(line);
+      var txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+      txt.setAttribute("class","axis-label");
+      txt.setAttribute("x", PAD.left - 8); txt.setAttribute("y", y + 3.5);
+      txt.setAttribute("text-anchor","end");
+      txt.textContent = metric.short(t);
+      gridG.appendChild(txt);
     });
-    if (vals.length > MAXROWS) html += `<div class="t-more">+${vals.length - MAXROWS} epics más (ver tabla)</div>`;
-    html += `<div class="t-total"><span>Total ${state.tab.unit.toLowerCase()}</span><span>${fmt(total)}</span></div>`;
-    tooltip.innerHTML = html;
-    tooltip.style.display = "block";
 
-    const wrect = wrap.getBoundingClientRect();
-    const px = (x / VB.w) * wrect.width;
-    tooltip.style.left = Math.min(px + 14, wrect.width - tooltip.offsetWidth - 4) + "px";
-    tooltip.style.top = Math.max(4, e.clientY - wrect.top - tooltip.offsetHeight / 2) + "px";
-  });
-  zone.addEventListener("mouseleave", () => {
-    layer.innerHTML = "";
-    tooltip.style.display = "none";
-  });
-}
+    var coords = pts.map(function(p,i){ return {x:xFor(i), y:yFor(p[metric.key]), v:p[metric.key], label:p.label}; });
+    pointsCache = coords;
 
-function renderTable(series) {
-  const isSP = state.tab.metric === "sp";
-  let html = "<table><thead><tr><th>" + (state.tab.group === "tipo" ? "Tipo" : "Epic") + "</th>";
-  for (let i = 0; i < N_MONTHS; i++) html += `<th>${xLabelShort(i)}</th>`;
-  html += "<th>Total</th></tr></thead><tbody>";
-  for (const s of series) {
-    html += `<tr><td title="${s.name}">${s.name}</td>`;
-    s.values.forEach(v => html += `<td>${v > 0 ? fmt(v) : "·"}</td>`);
-    html += `<td><strong>${fmt(s.total)}</strong></td></tr>`;
+    // area
+    var areaD = monotoneCubicPath(coords);
+    var baseline = yFor(Math.max(nice.min,0));
+    var areaPath = document.createElementNS("http://www.w3.org/2000/svg","path");
+    areaPath.setAttribute("class","area-fill");
+    areaPath.setAttribute("d", areaD + " L"+coords[coords.length-1].x.toFixed(2)+","+baseline+" L"+coords[0].x.toFixed(2)+","+baseline+" Z");
+    areaG.appendChild(areaPath);
+
+    // line
+    var linePath = document.createElementNS("http://www.w3.org/2000/svg","path");
+    linePath.setAttribute("class","line-path");
+    linePath.setAttribute("d", areaD);
+    lineG.appendChild(linePath);
+
+    // dots: every known data point gets a visible mark on the line, even if its
+    // x-axis label is thinned out below to avoid crowding.
+    coords.forEach(function(c,i){
+      var circ = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      circ.setAttribute("class", i===coords.length-1 ? "dot-end" : "dot");
+      circ.setAttribute("cx", c.x); circ.setAttribute("cy", c.y);
+      circ.setAttribute("r", i===coords.length-1 ? 4.5 : 2.75);
+      dotsG.appendChild(circ);
+    });
+    // endpoint label
+    var endC = coords[coords.length-1];
+    var endLbl = document.createElementNS("http://www.w3.org/2000/svg","text");
+    endLbl.setAttribute("class","end-label");
+    var endAbove = endC.y > PAD.top + 16;
+    endLbl.setAttribute("x", endC.x);
+    endLbl.setAttribute("y", endAbove ? endC.y - 12 : endC.y + 20);
+    endLbl.setAttribute("text-anchor", endC.x > VB_W - PAD.right - 40 ? "end" : "middle");
+    endLbl.textContent = metric.short(endC.v);
+    dotsG.appendChild(endLbl);
+
+    // x axis labels (thin out if many points; every known point still gets a dot above)
+    var xEvery = pts.length > 8 ? Math.ceil(pts.length/8) : 1;
+    coords.forEach(function(c,i){
+      if(i % xEvery !== 0 && i !== coords.length-1) return;
+      var txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+      txt.setAttribute("class","axis-label-x");
+      txt.setAttribute("x", c.x); txt.setAttribute("y", VB_H - PAD.bottom + 20);
+      txt.setAttribute("text-anchor","middle");
+      txt.textContent = monthShort(pts[i].label);
+      xAxisG.appendChild(txt);
+    });
+
+    updateKpis(metric, pts);
+    updateTable(metric, pts);
   }
-  const tot = new Array(N_MONTHS).fill(0);
-  series.forEach(s => s.values.forEach((v, i) => tot[i] += v));
-  html += `<tr class="total"><td>Total ${isSP ? "SP" : "tickets"}</td>`;
-  tot.forEach(v => html += `<td>${fmt(v)}</td>`);
-  html += `<td>${fmt(tot.reduce((a, b) => a + b, 0))}</td></tr>`;
-  html += "</tbody></table>";
-  document.getElementById("tableWrap").innerHTML = html;
-}
 
-// --- Controles --------------------------------------------------------------
+  function updateKpis(metric, pts){
+    var last = document.getElementById("kpiLast");
+    var delta = document.getElementById("kpiDelta");
+    var avg = document.getElementById("kpiAvg");
+    var avgSub = document.getElementById("kpiAvgSub");
+    if(!pts.length){
+      last.textContent = "—"; delta.textContent = "sin datos"; delta.className = "d";
+      avg.textContent = "—"; avgSub.textContent = "";
+      return;
+    }
+    var lastV = pts[pts.length-1][metric.key];
+    last.textContent = metric.fmt(lastV);
+    if(pts.length > 1){
+      var prevV = pts[pts.length-2][metric.key];
+      if(prevV !== 0){
+        var chg = ((lastV - prevV)/Math.abs(prevV))*100;
+        delta.textContent = (chg>=0?"▲ +":"▼ ")+chg.toFixed(1)+"% vs. punto anterior";
+        delta.className = "d " + (chg>=0 ? "up":"down");
+      } else {
+        delta.textContent = "punto anterior en 0";
+        delta.className = "d";
+      }
+    } else {
+      delta.textContent = "único punto disponible";
+      delta.className = "d";
+    }
+    var sum = pts.reduce(function(a,p){return a+p[metric.key];},0);
+    avg.textContent = metric.fmt(sum/pts.length);
+    avgSub.textContent = "sobre " + pts.length + " punto" + (pts.length===1?"":"s") + " visibles";
+  }
 
-const tabsEl = document.getElementById("tabs");
-TABS.forEach(t => {
-  const b = document.createElement("button");
-  b.textContent = t.label;
-  b.setAttribute("role", "tab");
-  b.addEventListener("click", () => {
-    state.tab = t;
-    tabsEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
-    render();
-  });
-  if (t === state.tab) b.classList.add("active");
-  tabsEl.appendChild(b);
-});
+  function updateTable(metric, pts){
+    var body = document.getElementById("dataTableBody");
+    body.innerHTML = "";
+    var rows = pts.slice().reverse();
+    rows.forEach(function(p){
+      var tr = document.createElement("tr");
+      var td1 = document.createElement("td"); td1.textContent = p.label;
+      var td2 = document.createElement("td"); td2.className="num"; td2.textContent = metric.fmt(p[metric.key]);
+      tr.appendChild(td1); tr.appendChild(td2);
+      body.appendChild(tr);
+    });
+    document.querySelector("#dataTable thead th:last-child").textContent = metric.label;
+  }
 
-const spacesEl = document.getElementById("spaces");
-["ALL", ...ESPACIOS].forEach(sp => {
-  const b = document.createElement("button");
-  b.textContent = sp === "ALL" ? "Todos" : sp;
-  b.addEventListener("click", () => {
-    state.space = sp;
-    spacesEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
-    render();
-  });
-  if (sp === state.space) b.classList.add("active");
-  spacesEl.appendChild(b);
-});
+  function updateNote(){
+    var noteEl = document.getElementById("dataNote");
+    var metric = currentMetric();
+    var flags = [];
+    if(state.period !== "1"){
+      flags.push("tamaño de ventana " + PERIODS.filter(function(p){return p.key===state.period;})[0].label + ": cada punto suma los últimos " + state.period + " meses (ventana móvil), no un promedio de ratios mensuales.");
+    }
+    if(DATA.espaciosSinSP.indexOf(state.espacio) !== -1 && (metric.key==="sp"||metric.key==="horas_sp"||metric.key==="usd_sp"||metric.key==="pct_mant")){
+      flags.push(state.espacio + " todavía no tiene SP publicados en el log — " + (metric.key==="sp"?"la serie da 0":"el ratio con SP da 0 o no se muestra") + ".");
+    }
+    noteEl.textContent = flags.join(" ");
+  }
 
-const slaToggleEl = document.getElementById("slaToggle");
-["mediana", "promedio"].forEach(opt => {
-  const b = document.createElement("button");
-  b.textContent = opt === "mediana" ? "Mediana" : "Promedio";
-  b.addEventListener("click", () => {
-    state.slaStat = opt;
-    slaToggleEl.querySelectorAll("button").forEach(x => x.classList.toggle("active", x === b));
-    renderKpis();
-  });
-  if (opt === state.slaStat) b.classList.add("active");
-  slaToggleEl.appendChild(b);
-});
+  function setupHover(){
+    var svg = document.getElementById("chart");
+    var wrap = document.getElementById("chartWrap");
+    var hoverGroup = document.getElementById("hoverGroup");
+    var crosshair = document.getElementById("crosshair");
+    var hoverDot = document.getElementById("hoverDot");
+    var tooltip = document.getElementById("tooltip");
 
-render();
+    function pointerMove(clientX, clientY){
+      if(!pointsCache.length) return;
+      var rect = svg.getBoundingClientRect();
+      var scale = VB_W / rect.width;
+      var localX = (clientX - rect.left) * scale;
+      var nearest = 0, best = Infinity;
+      pointsCache.forEach(function(c,i){
+        var d = Math.abs(c.x - localX);
+        if(d < best){ best = d; nearest = i; }
+      });
+      var c = pointsCache[nearest];
+      hoverGroup.style.display = "block";
+      crosshair.setAttribute("x1", c.x); crosshair.setAttribute("x2", c.x);
+      crosshair.setAttribute("y1", PAD.top); crosshair.setAttribute("y2", VB_H - PAD.bottom);
+      hoverDot.setAttribute("cx", c.x); hoverDot.setAttribute("cy", c.y);
+
+      var wrapRect = wrap.getBoundingClientRect();
+      var svgRect = svg.getBoundingClientRect();
+      var px = svgRect.left + (c.x/VB_W)*svgRect.width - wrapRect.left;
+      var py = svgRect.top + (c.y/VB_H)*svgRect.height - wrapRect.top;
+      tooltip.style.left = px + "px";
+      tooltip.style.top = py + "px";
+      tooltip.style.opacity = "1";
+      document.getElementById("ttDate").textContent = c.label;
+      document.getElementById("ttVal").textContent = currentMetric().fmt(c.v);
+    }
+    function hide(){ hoverGroup.style.display = "none"; tooltip.style.opacity = "0"; }
+
+    svg.addEventListener("mousemove", function(e){ pointerMove(e.clientX, e.clientY); });
+    svg.addEventListener("mouseleave", hide);
+    svg.addEventListener("touchstart", function(e){ if(e.touches[0]) pointerMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+    svg.addEventListener("touchmove", function(e){ if(e.touches[0]) pointerMove(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }, {passive:false});
+    svg.addEventListener("touchend", hide);
+  }
+
+  function render(){
+    renderControls();
+    renderChart();
+    updateNote();
+  }
+
+  setupHover();
+  render();
+})();
 </script>
 </body>
 </html>
