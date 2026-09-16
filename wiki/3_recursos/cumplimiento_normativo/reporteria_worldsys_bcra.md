@@ -35,16 +35,28 @@ A pedido del equipo de PLD (prevención de lavado) del banco, se agregaron campo
 - El campo `FormaJuridica` de `LavadoClientes` pasó a ser opcional (se envía vacío).
 - El código postal de `LavadoDomicilio` se extrae de fuentes distintas según el dominio: `WalletCuentaDB.dbo.CuentasDomicilios.[CP]` para cuentas, `SharedComercioDB.dbo.Direcciones.[CodigoPostal]` para comercios — con lógica para detectar si el valor es un CP simple (4 dígitos) o un CPA (letra + 4 dígitos + 3 letras), extrayendo en ese caso solo los 4 dígitos numéricos.
 
-## 2. Integridad de `LAVADOOPERACIONES`: comprobantes vs. movimientos, y tratamiento de reversas (sin resolver, 2026-07-16)
+## 2. Integridad de `LAVADOOPERACIONES`: comprobantes vs. movimientos, y tratamiento de reversas (resuelto, entra en vigencia 2026-10-01)
 
-> Fuente: reunión "Producto" (2026-07-16), minuta Gemini.
+> Fuente: reunión "Producto" (2026-07-16), minuta Gemini; hilo de mail "Nuevo Requerimiento BIND (PSP) - Monitoreo de TRXs reversadas." (2026-06-04 a 2026-09-15).
 
-Surgió un conflicto de diseño sin resolver sobre qué universo de datos debe alimentar `LAVADOOPERACIONES`:
+Surgió un conflicto de diseño sobre qué universo de datos debe alimentar `LAVADOOPERACIONES`:
 - **Postura interna (Pablo Gomes):** la tabla de **comprobantes** debe ser la única fuente de verdad — es la que efectivamente registra el 100% de los movimientos que alteran el saldo de una CVU. La propuesta es informar el 100% de los comprobantes y dejar que el área de PLD decida qué excluir, en vez de que Bind PSP pre-filtre qué reportar (riesgo de omitir información crítica por una selección propia).
 - **Lo que el área de PLD dijo textualmente en una reunión previa (según Emma Vignoles):** que quieren **movimientos de dinero**, no comprobantes — sugiere que su modelo mental no incluye el concepto de reversa (ej. tratan cualquier registro como definitivo, sin lógica de neteo).
 - **Problema técnico concreto:** Worldsys (vía SOS) **no puede interpretar una reversa referenciando el ID de comprobante original** — la propuesta explorada es reportar el mismo ID de comprobante original con el monto en negativo para netear, pero el equipo lo considera riesgoso (con volumen alto, es fácil que falte un registro de reversa y quede un saldo negativo fantasma sin explicación). Se está evaluando en cambio agregar **un campo nuevo con el ID de comprobante relacionado** para poder identificar la reversa sin alterar el monto de la transacción original.
 - **Casos que complican la definición:** ajustes de saldo virtuales sin movimiento de dinero real (ajustes BCF), transferencias entrantes que generan débito automático (BCF), y transacciones fallidas al instante (no deberían informarse, a diferencia de una reversa el día siguiente).
-- **Estado:** sin resolver — pendiente coordinar una reunión conjunta entre Producto, PLD/Compliance y el equipo de Worldsys/Word para definir el criterio de integridad de una vez. Bloquea el avance de Nicolás Colón en el ticket que detalla el archivo de comprobantes de Worldsys — lleva ~2 meses sin poder avanzar por falta de esta definición.
+
+**Resolución (cronología completa, discovery técnico con Worldsys 2026-06-04 a 2026-09-15):**
+
+1. **Reunión inicial (03/06/2026, minuta de Leandro Competiello — Worldsys/PMO):** se acuerda evaluar cómo incorporar ~500 nuevos tipos de comprobante y cómo distinguir reversiones/devoluciones/contracargos/rechazos de operaciones originales, sin duplicar impacto en los acumuladores de alertas PLD.
+2. **Intercambio técnico (09/06 y 06/07/2026, Pablo Stach — Worldsys):** se descarta la opción de matchear la reversión contra el registro original ya persistido y restarle el monto — Compliance One (el motor de ingesta de Worldsys) **no soporta operaciones aritméticas contra registros ya cargados**, solo importa lo que viene en el archivo de entrada. Se confirma como única vía viable: **enviar la reversión como un registro nuevo e independiente, con monto negativo**, siempre que viaje el CUIT/CUIL. No hace falta que el sistema catalogue el registro como "reversión" — alcanza con que el monto negativo figure en el listado para que el acumulador dé el neto correcto. Riesgo de timing reconocido y aceptado: si la reversión se informa después del cierre del procesamiento mensual de alertas, ese período no la descuenta (queda para el siguiente).
+3. **Archivo de ejemplo (01/09/2026, Nicolás Colón):** se envía a Worldsys el archivo con los 3 cambios esenciales acordados — (a) cambio de `IdOperacion` por `IdComprobante` en el campo `NUMEROOPERACION` (imperceptible para Worldsys), (b) reemplazo de la lista fija de `TIPOOPERACION` por la nueva interfaz `TiposComprobantes` (alimentada periódicamente), (c) inserción de registros de devolución con monto negativo.
+4. **Confirmación de recepción (10/09/2026, Pablo Stach):** Worldsys confirma que recibió el archivo de ejemplo y arranca pruebas de ingesta.
+5. **Escalamiento de urgencia (10/09/2026, Diego Scaldaferri, Gerente de Cumplimiento y Prevención de LA/FT/FP de BIND):** mientras el cambio no esté en producción, las reversas/devoluciones siguen sin netearse en los acumuladores de alertas PLD (riesgo de falsos positivos, o de que el criterio de "movimientos de dinero" que pedía PLD nunca haya distinguido una reversa de una operación real).
+6. **Plan de implementación (15/09/2026, Leandro Competiello):** Worldsys confirma que el tema lo toma él junto con el Account Manager Gonzalo Quintana; es una evolución, no un cambio menor; coordinarán una prueba de captura en ambiente QA la semana del 21/09; **el nuevo esquema entra en vigencia a partir del procesamiento del 01 de octubre de 2026** (primera corrida del mes).
+
+**Mecanismo final adoptado:** conviven dos piezas — el **monto negativo** (punto 2, netea el acumulador) y un **campo nuevo con el ID de comprobante relacionado**, `IdComprobanteRelacionado` (da trazabilidad al analista sobre cuál es la reversa de qué comprobante). Coincide con la alternativa que ya estaba documentada arriba como "se está evaluando".
+
+> Fuente adicional: hilo de mail "Nuevo Requerimiento BIND (PSP) - Monitoreo de TRXs reversadas." (lcompetiello@worldsys.com.ar, pstach@worldsys.io, msimonetti@bind.com.ar, dscaldaferri@bind.com.ar, ncolon@bind.com.ar — 2026-06-04 a 2026-09-15).
 
 ## 3. Bug de mapeo — códigos de actividad/ocupación
 

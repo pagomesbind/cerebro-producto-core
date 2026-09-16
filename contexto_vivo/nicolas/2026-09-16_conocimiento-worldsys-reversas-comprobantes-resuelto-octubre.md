@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/reporteria_worldsys_bcra.md
 tipo_destino: actualizar
 contradice: "no contradice — resuelve el punto marcado 'sin resolver, 2026-07-16' en reporteria_worldsys_bcra.md §2, y desbloquea la tarea T-019 de 2_areas/tareas.md ('Nicolás Colón está bloqueado sin poder avanzar')"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 **Resolución del criterio, y cronología completa desde la reunión de discovery (03/06/2026):**

@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 Al cerrar el discovery de [`titularidad_tarjeta`](../titularidad_tarjeta/proyecto.md) (validación de titularidad de tarjeta en Botón Simple vía MODO VaTa, después de Ardid), el PM planteó que el mismo servicio debería estar disponible a futuro para otros canales — puntualmente **POS**, donde el cobrador ingresaría por teclado el DNI del pagador para validar la titularidad de la tarjeta presente y prevenir fraude, del mismo modo que ya se hace en Botón Simple.

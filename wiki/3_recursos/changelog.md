@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-09-16 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `cumplimiento_normativo/reporteria_worldsys_bcra.md` — actualizado §2: criterio de integridad de `LAVADOOPERACIONES` (comprobantes vs. reversas) resuelto, entra en vigencia 2026-10-01 (nicolas).
+- `datos/log_performance_desarrollo.md` — reemplazado byte a byte: export histórico consolidado de tickets (oct'25-ago'26), 942 tickets / 2.891 SP acumulados (pablo, `/dashboard_delivery`).
+- `datos/log_costos_desarrollo.md` — reemplazado byte a byte: sumado stock de horas jul'26 y ago'26 (pablo, `/dashboard_delivery`).
+
 ### 2026-09-15 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — archivo nuevo: mecanismo transversal de identificación de BINs de tarjeta — investigación Fintexa (mail 2026-05/08), causa raíz confirmada (6 vs. 8 dígitos), discovery completo PRD-251 (cruce BIN a BIN, bug de datos en override a Prepaga) (pablo); reclasificación de `pos_multiadquirencia.md §6` a este archivo por ser transversal, no específico de POS.

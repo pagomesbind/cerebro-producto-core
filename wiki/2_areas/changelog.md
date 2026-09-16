@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-09-16 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `direccion/oportunidades.md` — 2 filas nuevas: OP-026 (validación de titularidad de tarjeta en POS, extensión de `titularidad_tarjeta`, nicolas), OP-027 (segmentación de PJ en Ardid, `ardid_limites_pj`, nicolas).
+- `direccion/iniciativas.md` — 2 filas nuevas: `titularidad_tarjeta` (PRD-25, discovery + PRD formalizado, nicolas), `ardid_limites_pj` (discovery cerrado, nicolas); novedades antepuestas en `ardid_desconocimientos` (corrección de alcance sobre Pentass + problem statement), `visibilidad_error_alta` (PRD escrito + sincronizado a Jira + cotización Fintexa) y `cola_verificacion_manual` (cotización Fintexa) — todas nicolas.
+- `tareas.md` — T-019 (integridad Worldsys) actualizada a Hecha, resolución completa referenciada al canon.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-16.md`): 12 — 11 arrastrados de corridas anteriores + 1 nuevo (fraude Octagon, severidad alta, nicolas) + 1 arrastrado sin producto dueño clasificable (API VATA de Modo, ver tarea T-046).
+
 ### 2026-09-15 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `direccion/iniciativas.md` — fila nueva PRD-251 (rechazos_bines_payway, pablo); fila nueva ardid_desconocimientos (PRD-248, nicolas); novedad antepuesta en onboarding_shared_kyc_worsis (adelanto de fecha del onboarding PJ al 16/09, `pm_destino: pablo`, nicolas).

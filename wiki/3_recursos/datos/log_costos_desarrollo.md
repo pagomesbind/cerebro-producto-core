@@ -1,6 +1,6 @@
 # Log de Costos de Desarrollo — Base de datos de la métrica USD/SP
 
-> **Última ingesta:** 2026-07-27 — `Stock_JUN_2026__final_.xlsx` (Junio 2026, AD + OB + SER + WS, 5700 hs / $276240).
+> **Última ingesta:** 2026-09-16 — `Stock_AGO_2026__final__.xlsx` (Agosto 2026, AD + OB + SER + WS, 4880 hs / $233280).
 >
 > Este archivo es la **base de datos acumulada** de costo de desarrollo, mantenida por la skill [`/dashboard_delivery`](../../.claude/skills/dashboard_delivery/SKILL.md) a partir del **stock de horas mensual que factura Fintexa** (Excel `Stock de Horas - <Mes><Año>` depositado en `raw/`). Junto con [`log_performance_desarrollo.md`](log_performance_desarrollo.md) (SP publicados) alimenta la pestaña **USD por SP** del dashboard [`outputs/dashboard_performance_desarrollo.html`](../../outputs/dashboard_performance_desarrollo.html): cuánto cuesta un punto de historia y cómo evoluciona ese costo mes a mes.
 
@@ -29,6 +29,8 @@
 | 2026-07-21 | `Stock_ABR_2026 (2).xlsx` | Abril 2026, AD + OB + SER + WS | 5533 | 268744 | `4_archivos/historial_raw/2026-07_backfill_stock_horas_fintexa/` |
 | 2026-07-21 | `Stock_MAY_2026 (final).xlsx` | Mayo 2026, AD + OB + SER + WS | 5832 | 282576 | `4_archivos/historial_raw/2026-07_backfill_stock_horas_fintexa/` |
 | 2026-07-21 | `Stock_JUN_2026__final_.xlsx` | Junio 2026, AD + OB + SER + WS | 5700 | 276240 | `4_archivos/historial_raw/2026-07_backfill_stock_horas_fintexa/` |
+| 2026-09-16 | `Stock_JUL_2026__final_.xlsx` | Julio 2026, AD + OB + SER + WS | 5428 | 264952 | `4_archivos/historial_raw/2026-09_backfill_stock_horas_fintexa/` |
+| 2026-09-16 | `Stock_AGO_2026__final__.xlsx` | Agosto 2026, AD + OB + SER + WS | 4880 | 233280 | `4_archivos/historial_raw/2026-09_backfill_stock_horas_fintexa/` |
 
 ## Registro de tarifas por perfil
 
@@ -106,6 +108,18 @@
 | 2026 | Junio | devops | 40 | propia |
 | 2026 | Junio | lider | 60 | propia |
 | 2026 | Junio | qa | 35 | propia |
+| 2026 | Julio | analista | 48 | propia |
+| 2026 | Julio | arq | 60 | propia |
+| 2026 | Julio | dev | 48 | propia |
+| 2026 | Julio | devops | 40 | propia |
+| 2026 | Julio | lider | 60 | propia |
+| 2026 | Julio | qa | 35 | propia |
+| 2026 | Agosto | analista | 48 | propia |
+| 2026 | Agosto | arq | 60 | propia |
+| 2026 | Agosto | dev | 48 | propia |
+| 2026 | Agosto | devops | 40 | propia |
+| 2026 | Agosto | lider | 60 | propia |
+| 2026 | Agosto | qa | 35 | propia |
 
 ## Resumen mensual (horas / USD de desarrollo)
 
@@ -123,7 +137,9 @@
 | 2026 | Abril | 2760 hs / $133800 | 253 hs / $12144 | 80 hs / $3840 | 2440 hs / $118960 | **5533 hs / $268744** |
 | 2026 | Mayo | 2840 hs / $136160 | 432 hs / $20736 | 80 hs / $3840 | 2480 hs / $121840 | **5832 hs / $282576** |
 | 2026 | Junio | 2840 hs / $136160 | 300 hs / $14400 | 80 hs / $3840 | 2480 hs / $121840 | **5700 hs / $276240** |
-| **Total** | **histórico** | **38729 hs / $1894176** | **2759 hs / $126192** | **2592 hs / $129024** | **32417 hs / $1569084** | **76497 hs / $3718476** |
+| 2026 | Julio | 2704 hs / $131400 | 300 hs / $14400 | 80 hs / $3840 | 2344 hs / $115312 | **5428 hs / $264952** |
+| 2026 | Agosto | 2600 hs / $123280 | 80 hs / $3840 | 80 hs / $3840 | 2120 hs / $102320 | **4880 hs / $233280** |
+| **Total** | **histórico** | **44033 hs / $2148856** | **3139 hs / $144432** | **2752 hs / $136704** | **36881 hs / $1786716** | **86805 hs / $4216708** |
 
 ## Datos — detalle año × mes × espacio
 
@@ -175,3 +191,11 @@
 | 2026 | Junio | OB | 300 | 14400 |
 | 2026 | Junio | SER | 80 | 3840 |
 | 2026 | Junio | WS | 2480 | 121840 |
+| 2026 | Julio | AD | 2704 | 131400 |
+| 2026 | Julio | OB | 300 | 14400 |
+| 2026 | Julio | SER | 80 | 3840 |
+| 2026 | Julio | WS | 2344 | 115312 |
+| 2026 | Agosto | AD | 2600 | 123280 |
+| 2026 | Agosto | OB | 80 | 3840 |
+| 2026 | Agosto | SER | 80 | 3840 |
+| 2026 | Agosto | WS | 2120 | 102320 |
