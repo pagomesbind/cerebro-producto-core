@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2026-09-11_iniciativa-ardid-desconocimientos-nuevo-proyecto (en_cola, pendiente de merge) — esa versión decía que se descartaba pedirle un endpoint nuevo a Pentass; esta corrige esa conclusión"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: cb58cfd53c7f3d391017622178663faa33c1c2b8
 proyecto: ardid_desconocimientos
 ---
 

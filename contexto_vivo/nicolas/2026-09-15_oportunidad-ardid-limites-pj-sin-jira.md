@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: cb58cfd53c7f3d391017622178663faa33c1c2b8
 ---
 
 Candidata a IDEA nueva de Jira, sin ticket todavía: segmentar automáticamente las cuentas de Wallet de persona jurídica en Ardid (vía `ClientBankType`, mismo mecanismo que PRD-17 de menores) para asignarles reglas de montos más permisivas que las de persona física, hoy inexistente.

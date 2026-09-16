@@ -11,7 +11,7 @@ tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: cb58cfd53c7f3d391017622178663faa33c1c2b8
 ---
 
 Contenido final y completo de `3_recursos/datos/log_performance_desarrollo.md` y `3_recursos/datos/log_costos_desarrollo.md`, ya generado en `wiki/1_proyectos/contexto_vivo/_staging_dashboard_delivery/` (más `log_sla_highest.md`, idéntico byte a byte al ya mergeado — sin cambios esta corrida, incluido solo porque el pipeline reescribe los 3 juntos). `/context_merge` copia esos 3 archivos, byte a byte, sobre `3_recursos/datos/`.

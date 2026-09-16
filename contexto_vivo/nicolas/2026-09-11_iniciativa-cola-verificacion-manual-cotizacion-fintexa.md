@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: cb58cfd53c7f3d391017622178663faa33c1c2b8
 proyecto: cola_verificacion_manual
 ---
 
