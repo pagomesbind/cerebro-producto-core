@@ -6,6 +6,11 @@
 
 ## 2026
 
+### 2026-09-17 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `direccion/iniciativas.md` — novedad antepuesta en PRD-251 (`rechazos_bines_payway`, pablo): IDEA pasó a EN APROBACION, Epic AD-1712 + 9 Historias creadas en Jira.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-17.md`): 13 — 12 arrastrados de corridas anteriores + 1 nuevo (fraude Carrefour/BSF en app móvil, 217 clientes afectados, nicolas) — más 1 item sin producto dueño clasificable arrastrado (API VATA de Modo, ver tarea T-046).
+
 ### 2026-09-16 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `direccion/oportunidades.md` — 2 filas nuevas: OP-026 (validación de titularidad de tarjeta en POS, extensión de `titularidad_tarjeta`, nicolas), OP-027 (segmentación de PJ en Ardid, `ardid_limites_pj`, nicolas).

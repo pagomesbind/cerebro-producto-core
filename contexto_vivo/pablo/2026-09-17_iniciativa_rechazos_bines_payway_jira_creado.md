@@ -12,8 +12,8 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
-merge_commit:
+estado: ingestado
+merge_commit: PENDING_2026-09-17
 ---
 
 ## Novedad — IDEA transicionada a EN APROBACION, Epic y 9 Historias creadas en Jira
