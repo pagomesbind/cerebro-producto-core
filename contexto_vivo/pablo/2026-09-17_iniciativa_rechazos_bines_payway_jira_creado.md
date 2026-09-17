@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING_2026-09-17
+merge_commit: bc79f09
 ---
 
 ## Novedad — IDEA transicionada a EN APROBACION, Epic y 9 Historias creadas en Jira
