@@ -77,7 +77,7 @@ _// ESTADO — Pendiente | Contemplado pero no validado | Contemplado y validado
 | --- | --- | --- | --- | --- |
 | Comercial |  |  |  | Pendiente |
 | Soporte e Integraciones |  |  |  | Pendiente |
-| Administración |  |  |  | Pendiente |
+| Recaudaciones/Conciliación |  |  |  | Pendiente |
 | Fraude |  |  |  | Pendiente |
 | Legales |  |  |  | Pendiente |
 | IT |  |  |  | Pendiente |
