@@ -106,6 +106,8 @@ Emma Vignoles informó (reunión "Join Soporte Clientes", 2026-09-09) que ya se 
 
 **Gap de identificación:** de las 4 entidades mencionadas, Bolsa de Comercio de Chaco y B Investment no aparecen en `log_clientes.md` — posibles entidades nuevas del ecosistema white-label de Gallo todavía no relevadas en Notion, a confirmar en el próximo barrido de `/sync_customers`. Capturado 2026-09-10 (Nicolás Colón), confianza alta.
 
+**Actualización (2026-09-16) — nueva evidencia y escalamiento a reunión formal con Gallo:** en "Join Soporte Clientes" (2026-09-16), Gonzalo Damian Rivera y Gustavo Gabriel Lazzaro retomaron el tema con evidencia adicional: confirman falta de solidez en la documentación de incorporación de la entidad Gallo y sus cuentas asociadas, suman como nuevo indicio **cuentas con patrones de correo electrónico incongruentes** (posible señal de cuentas fantasma o mal documentadas), y registran un **reclamo nuevo de cargos no acordados** reportado por una persona identificada solo como "Guido" (sin apellido ni rol confirmado — gap de identificación abierto, no se resuelve acá). **Decisión/próximo paso nuevo:** Gustavo Gabriel Lazzaro va a solicitar una **reunión formal con Gallo** a fines de esa semana o principios de la siguiente, para reorganizar y revisar los procesos de onboarding y la operatoria de cuentas de todo el ecosistema (no solo las 4 entidades ya señaladas). Capturado 2026-09-17/18 (Nicolás Colón y Pablo Gomes), confianza alta.
+
 ## Error de endpoint impide validar la inclusión de movimientos Cashout en la conciliación Coelsa (post W72.2)
 
 Tras el despliegue en PROD de la versión **W 72.2** (07/09 — HotFixes en microservicios de Operaciones y Cuentas, incluyendo el ajuste de `/ConciliarCoelsa` para integrar operaciones tipo **CASHOUT** en la conciliación de transferencias entrantes, ítem DEM-1806/WS-1552), Maria Eugenia Vila reportó (2026-09-10) que **no pudo validar que se hayan incluido los movimientos de Cashout porque el endpoint da error al correr el proceso** — trabajado en conjunto con Nicolás Colón, sin resolver todavía. Se generaron procesos de validación para las organizaciones Cencosud (4) y Coto (37) en este marco. Este era uno de los puntos de acción asignados a María Eugenia Vila en el plan post-despliegue ("Monitorear el correcto funcionamiento de la conciliación Coelsa — transferencias Cashout", deadline 07/09, prioridad Media) — sigue sin poder cerrarse por este error.
@@ -127,7 +129,8 @@ Maria Eugenia Vila advirtió que la herramienta que concilia transferencias entr
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-15 — nuevo riesgo "Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09" (Nicolás Colón).*
+*Última actualización: 2026-09-18 — `/context_merge`: actualización del riesgo "Falta de controles en onboardings gestionados por el integrador Gallo" (nueva evidencia y reunión formal solicitada, 2026-09-16).*
+*Última actualización anterior: 2026-09-15 — nuevo riesgo "Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-11 — nuevo riesgo "Error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto)" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-10 — nuevo riesgo "Falta de controles en onboardings gestionados por el integrador Gallo (Terra Blockchain ya dado de baja)" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-10 — nuevo riesgo "Escalamiento de la contención de cola QR — crecimiento de clientes individuales de Provincia Net" (Pablo Gomes).*

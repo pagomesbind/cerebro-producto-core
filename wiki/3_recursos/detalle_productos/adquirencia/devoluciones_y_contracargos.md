@@ -24,6 +24,30 @@
 - Detalle completo del seguimiento de este desarrollo en PRD-146 (Tratamiento de contracargos de tarjeta) — proyecto de Nicolás Colón, vive en su propio Cerebro desde 2026-08-13.
 - **Ratificación de prioridad (2026-09-07, "Análisis COBRO"):** el tablero de incidentes ratificó el estatus de **máxima prioridad** para PRD-146, ya iniciado bajo múltiples tickets de Fintexa: [DAD-2209](https://fintexa.atlassian.net/browse/DAD-2209), [DAD-2257](https://fintexa.atlassian.net/browse/DAD-2257). Acción de seguimiento acordada: revisar el avance de estos tickets una vez compartidos (owner: Daniela Collia, Fintexa), sin fecha límite definida. Detalle operativo completo en el Cerebro de Nicolás Colón.
 
+**Contrato técnico del endpoint (2026-09-17, confianza Verbal — no Confirmado):** transcripto directamente por el PM en sesión de trabajo, sin Swagger ni documento formal citado.
+
+```
+POST https://10.22.0.35/api/v1/Transactions/refund
+```
+
+Body:
+```json
+{
+  "commerceCode": "${codigoComercio}",
+  "identifyOrder": "${identificadorOrden}",
+  "partial": false,
+  "amountGross": "${monto}",
+  "description": "${motivo}",
+  "entityIdentifier": "${entidadIdentificador}",
+  "channel": "BotonSimple",
+  "tipoContracargo": "desconocimiento",
+  "deudaId": "${deudaId}",
+  "transaccionId": "${transaccionId}"
+}
+```
+
+Es el mismo endpoint genérico de "refund"/contracargo — el campo `tipoContracargo` (`"desconocimiento"` vs. el valor usado para "devolución" estándar) es lo que lo diferencia, consistente con la mecánica ya documentada arriba ("se reutiliza todo el motor de devoluciones existente, solo cambia el tipo de contracargo"). No se confirmó en esta sesión de qué ambiente es la URL (la IP interna no indica Staging o Producción), ni el contrato de response/códigos de error/idempotencia. El webhook de contracargo ya documentado más abajo (§1) sí trae un par clave-valor `Tipo: Desconocimiento` — es decir, ya distingue este caso, aunque el proyecto `ardid_desconocimientos` (ver [`2_areas/direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md)) decidió no usarlo como disparador de su automatización, por simplicidad y no por limitación técnica del webhook — en cambio se engancha directo al final de este endpoint.
+
 ## 1. Documentación: devoluciones parciales
 
 ## Documentación: devoluciones parciales
@@ -259,9 +283,18 @@ Investigando un reclamo de descuadre de saldo de la cuenta recaudadora de **Coto
 
 **Alcance sin confirmar:** Franco Gimenez indicó que, según lo observado, el problema afectaba únicamente al caso de Ripsa — pero Nicolás Colón señaló la duda abierta de si, al ser un problema de fondo en la query (no específico de un cliente), podría haber otros clientes con el mismo síntoma sin haberlo reportado todavía.
 
+## 5. Regla de producto — la devolución de R por T (recibo por transferencia) no se puede hacer pasado un mes
+
+> Fuente: reunión "Weekly - Producto / Operaciones" (2026-09-14), minuta Gemini.
+
+Gonzalo Rivera reportó un caso donde no se puede devolver desde el portal una transferencia de una CBU corta porque ya pasó un mes desde la operación. Nicolás Colón explicó que es una **definición de producto original, no un bug**: las devoluciones de R por T se diseñaron para replicar el comportamiento que impone Coelsa para los códigos QR (que también tienen una ventana de devolución acotada) — cambiar ese límite requiere desarrollo, no es solo un parámetro.
+
+**Presión de clientes que rompe la regla:** ya generó conflicto real con clientes institucionales — un **ministerio** reclamó devolver una transacción con más de un mes de antigüedad y, ante la negativa por regla de negocio, contestó explícitamente que no le importaba la regla y que había que devolverla igual; **Rifsa** planteó el mismo reclamo antes. Pablo Gomes instruyó a Nicolás Colón a "levantar" el pedido (registrarlo como candidato a desarrollo) pero remarcó que antes hay que evaluar el costo de implementarlo y si vale la pena, en vez de comprometerse directo. El caso puntual que originó la discusión (Ciencias Económicas) resultó ser una transferencia por QR, no R por T, así que no aplicaba de todos modos — pero la tensión de fondo (clientes grandes que exigen devolución sin importar el plazo) queda abierta como pedido a evaluar.
+
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
+*Última actualización: 2026-09-18 — `/context_merge`: contrato técnico del endpoint de "desconocimiento" en §0 y nueva §5 (regla de devolución R por T, ventana de un mes).*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nueva §2 (bug de tipo de operación en contracargos POS GP, AD-1020/AD-1579, AD V72); §1.1 (historial operativo cliente COTO) extraída a [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) por umbral de tamaño de archivo.*
 *Última actualización anterior: 2026-08-12 — Renombrado desde `liquidaciones_y_devoluciones.md`; sección del producto Liquidador extraída a archivo propio (reestructuración PARA en cascada).*

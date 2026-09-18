@@ -23,7 +23,7 @@
 | [conteo_de_pegadas_api_bank.md](conteo_de_pegadas_api_bank.md) | Header `x-internalclientid` para medir volumen de invocaciones a API Bank por sistema/entidad, con fines de facturación con el proveedor. |
 | [infraestructura_cloud_azure.md](infraestructura_cloud_azure.md) | Cluster AKS, servicios de datos, networking/observabilidad, CI/CD y disaster recovery (descripción genérica del proveedor). |
 | [topologia_de_red.md](topologia_de_red.md) | Infraestructura Azure **real y nombrada** (VNets, IPs, CIDRs) — distinta de la descripción genérica contractual. Incluye la disputa de atribución de la instancia MongoDB. |
-| [nfr_y_slas.md](nfr_y_slas.md) | Alta disponibilidad (réplicas, health checks, circuit breakers, backups) y SLAs técnicos target (uptime, latencia, throughput). |
+| [nfr_y_slas.md](nfr_y_slas.md) | Alta disponibilidad (réplicas, health checks, circuit breakers, backups), SLAs técnicos target (uptime, latencia, throughput), y (§3) iniciativa en discovery para exponer salud/latencia de APIs directamente a clientes vía una API nueva publicada por Kipi en el APIM. |
 | [calidad_y_cicd.md](calidad_y_cicd.md) | Testing, CI/CD, estandarización, mecanismos de integración para clientes, roadmap técnico declarado por el proveedor. |
 | [modernizacion_plataforma_dotnet.md](modernizacion_plataforma_dotnet.md) | Migración incremental a .NET 8, servicio por servicio, en paralelo al desarrollo de producto. |
 | [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) | Plan de mantenimiento AKS de agosto 2026 (reversión post-incidente + optimización de capacidad); más la depuración periódica de bases históricas (Comprobantes/Operaciones/Notificaciones) en ventanas de mantenimiento del proveedor Apibank. |
@@ -40,6 +40,7 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — inconsistencias abiertas de este módulo (conteo de microservicios, versión del documento fuente, PCI DSS omitido del texto narrativo, atribución de MongoDB).
 
 ---
-*Última actualización: 2026-09-11 — `/context_merge`: `integraciones_externas.md` suma registro de la primera ingesta completa de documentación pública de Coelsa (DEBIN, Comercio, CVU, Prevent, CPF) — baseline de changelog para futuras ingestas incrementales de ese sitio.*
+*Última actualización: 2026-09-18 — `/context_merge`: `nfr_y_slas.md` nueva §3 (iniciativa en discovery para exponer salud/latencia de APIs a clientes — Grafana/Elastic interno + API nueva de Kipi en el APIM).*
+*Última actualización anterior: 2026-09-11 — `/context_merge`: `integraciones_externas.md` suma registro de la primera ingesta completa de documentación pública de Coelsa (DEBIN, Comercio, CVU, Prevent, CPF) — baseline de changelog para futuras ingestas incrementales de ese sitio.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: nuevo módulo [api_bank/](api_bank/index.md) (11 archivos, relevamiento completo de la API pública de Banco Industrial, contexto_vivo de Pablo Gomes).*
 *Última actualización anterior: 2026-08-12 — Reestructuración PARA en cascada: los 3 archivos legacy (`index.md`, `flujo_transaccional.md`, `seguridad_y_redes.md`) se desarmaron en 15 archivos temáticos, y se sumaron 6 archivos más provenientes de `detalle_productos/transversal/` y `documentacion_api/general_info.md` desarmados en fases previas — 21 archivos temáticos en total. El módulo pasa a ser explícitamente "sistemas/IT duro no ligado a producto", no solo la traducción de un documento del proveedor.*

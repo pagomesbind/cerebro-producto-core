@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/devoluciones_y_contr
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 El endpoint interno de uso exclusivo de Operaciones que hoy usa Administración para marcar una transacción de Botón Simple como "desconocimiento" (ya documentado funcionalmente en §0 de este archivo — "Desconocimientos de tarjeta") tiene el siguiente contrato técnico, según lo transcribió el PM directamente en el chat (sin Swagger ni documento formal citado — **nivel de confianza Verbal, no Confirmado**):

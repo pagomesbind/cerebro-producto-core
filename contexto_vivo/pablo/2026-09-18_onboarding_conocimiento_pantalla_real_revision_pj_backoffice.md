@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/onboarding_personas_j
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md §7 (flujo AS-IS) — no documenta el detalle real de la pantalla de solicitud, solo el flujo de pasos"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

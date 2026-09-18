@@ -155,8 +155,17 @@ También en la misma reunión: se retoma la segunda parte de las mejoras de perf
 
 Quedó pendiente de más debate (no acordado) si el ticket 361/2209 — corrección del PDF de liquidaciones para Coto, diferenciando "desconocimiento" de "devolución" — entra en la versión 73 o 74; depende de la prioridad que confirme Euge.
 
+## Bug de zona horaria en el webhook de pagos QR — falta el desfase GMT-3 desde el 31/08
+
+> Fuente: reunión "Análisis COBRO" (2026-09-17), minuta Gemini, con Fintexa (Melisa Belpassi).
+
+Un ticket de soporte detectó que el webhook de pagos QR envía la hora de pago **sin el desfase de GMT-3**, generando confusión en los clientes que lo consumen: en vez de recibir la hora real (ej. `18:58`), reciben el valor crudo con el offset pegado pero sin restar (ej. `21:58 -3`), como si fueran las 21:58 horas. Melisa Belpassi (Fintexa) identificó que el cambio se introdujo en el ticket `1448` (identificado internamente como `494`), implementado el **31 de agosto de 2026**, y asumió la responsabilidad del error — el análisis de riesgo y las respuestas del PRD de ese ticket no alertaron lo suficiente sobre el impacto de fecha/hora antes de desplegarlo.
+
+**Decisión pendiente:** el caso se derivó a Mariana Nadalin para discutirlo con Gonzalo Rivera, evaluando dos caminos: **revertir el cambio** (implica volver al estado incorrecto anterior) o **exigir a los clientes que integren considerando correctamente el GMT-3** tal como se envía hoy. Pablo Gomes quedó a cargo de comunicarle a Gonzalo Rivera la situación — sin resolver todavía a la fecha de esta captura (18 días después del cambio original).
+
 ---
 *Ver también: [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el detalle específico del canal QR que alimenta este flujo de notificaciones.*
-*Última actualización: 2026-09-07 — `/context_merge`: tres definiciones sobre el webhook de QR Tarjeta (endpoint separado de devoluciones, comisiones de Coelsa en el webhook, ID Coelsa en comprobantes de wallet), acordadas 2026-09-03.*
+*Última actualización: 2026-09-18 — `/context_merge`: nuevo bug de zona horaria en el webhook de pagos QR (falta desfase GMT-3 desde el 31/08, decisión pendiente).*
+*Última actualización anterior: 2026-09-07 — `/context_merge`: tres definiciones sobre el webhook de QR Tarjeta (endpoint separado de devoluciones, comisiones de Coelsa en el webhook, ID Coelsa en comprobantes de wallet), acordadas 2026-09-03.*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: nuevos campos de arancel aceptador en el webhook de Cobro QR exitoso.*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nueva sección en la mecánica CVUCollect (cambio de categorización CBU externo→CBU corto como `transfer.cortau`, AD V72, cliente Jugadón).*

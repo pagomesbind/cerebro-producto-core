@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-18 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `gaps_y_preguntas.md` — actualizados 2 gaps existentes: "Biwi"/"Bwi" (tercera grafía "Biir", nueva decisión de suspender habilitación hasta reunión con Emilio, nicolas) y "Copel"/"Pago Fácil" (decisiones comerciales nuevas de pricing/freeze de integraciones hasta contrato firmado, nicolas).
+- `riesgos.md` — actualizado el riesgo "Falta de controles en onboardings gestionados por Gallo" (nueva evidencia, reunión formal solicitada, nicolas).
+- `direccion/iniciativas.md` — novedades antepuestas en `ardid_desconocimientos` (análisis técnico-funcional cerrado, nicolas), `ardid_limites_pj` (análisis técnico-funcional cerrado, nicolas) y PRD-223 (deploy confirmado 17/09, pablo); fila nueva PRD-256 (`revision_pj_cumplimiento`, discovery nuevo, pablo).
+- `direccion/decisiones.md` — nueva entrada: refuerzo de seguridad perimetral tras el fraude de Credicotas (georrestricción/lista negra WAF, baja de subscription keys, pablo).
+- `direccion/oportunidades.md` — fila nueva OP-028 (reutilizar OB PJ aprobado por CUIT sin repetir revisión de Cumplimiento, pablo).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-18.md`): 20 — mayoría destinados a `clientes/casos_de_uso_clientes.md`, `clientes/log_clientes.md`, `procesos/*` y `direccion/{estado_actual,north_star}.md` — más 1 item sin producto dueño clasificable (API VATA de Modo, ver tarea T-046).
+
 ### 2026-09-17 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `direccion/iniciativas.md` — novedad antepuesta en PRD-251 (`rechazos_bines_payway`, pablo): IDEA pasó a EN APROBACION, Epic AD-1712 + 9 Historias creadas en Jira.

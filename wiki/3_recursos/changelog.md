@@ -6,6 +6,17 @@
 
 ## 2026
 
+### 2026-09-18 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §18: identificación de transacciones ante Ardid por `PaymentId` de Botón Simple, no por el ID interno de Cobro (nicolas).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — §0: contrato técnico del endpoint de "desconocimiento" (`POST /api/v1/Transactions/refund`, confianza Verbal, nicolas); nueva §5: regla de devolución R por T (ventana de un mes, presión de clientes institucionales, pablo).
+- `detalle_productos/adquirencia/pos_multiadquirencia.md` — nueva §1.1bis: cierre confirmado del Epic "POS con PRISMA: Admin" (AD-430) — la mayoría de la configuración self-service ya está en Producción desde junio-agosto 2026, corrige el estado "bloqueada" del backfill de julio (pablo).
+- `detalle_productos/adquirencia/webhooks_y_notificaciones.md` — nueva sección: bug de zona horaria en el webhook de pagos QR (falta desfase GMT-3 desde el 31/08, decisión pendiente, pablo).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — nueva subsección: mecánica de split (débito/crédito automático) y falla reproducida en Homologación para PCP 531/532, escalada a Coelsa (pablo).
+- `detalle_productos/onboarding/onboarding_personas_juridicas.md` — nueva §8.1: detalle funcional real de la consola de referencia "AVA Compliance" (pablo); nueva §9: estructura real de la pantalla de solicitud en el backoffice (pablo).
+- `arquitectura_sistema/nfr_y_slas.md` — nueva §3: iniciativa en discovery para exponer salud/latencia de APIs a clientes vía API nueva de Kipi en el APIM (pablo).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-18.md`).
+
 ### 2026-09-16 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `cumplimiento_normativo/reporteria_worldsys_bcra.md` — actualizado §2: criterio de integridad de `LAVADOOPERACIONES` (comprobantes vs. reversas) resuelto, entra en vigencia 2026-10-01 (nicolas).

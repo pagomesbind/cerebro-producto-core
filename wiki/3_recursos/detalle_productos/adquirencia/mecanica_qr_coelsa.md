@@ -379,6 +379,18 @@ Ambos modelos requieren los mismos dos pasos base (CVU + comercio en Coelsa). La
 - **Restricciones del split, según Coelsa:** el destino debe ser sí o sí un **CBU** (no se puede hacer split a otro CVU), y ese CBU debe ser de **la misma titularidad** que el CVU de origen.
 - El split se puede habilitar/deshabilitar por comercio de forma independiente — Bind PSP puede ofrecer split a algunos comercios y no a otros según lo que se negocie comercialmente.
 
+#### Mecánica del flujo de fondos con split (débito/crédito automático) y falla reproducida en Homologación (2026-09-18)
+
+> Fuente: reunión "Error de SPLIT en HOMO" (2026-09-11), minuta Gemini, con Banco Industrial (Damian Villa, Alvaro Aguirreburualde, Patricio Banegas, Claudio Grillo).
+
+**Mecánica confirmada:** cuando un comercio tiene el split activo en un canal QR, el comprador paga vía Devin QR y el 100% neto de comisiones se acredita primero en la **cuenta recaudadora** del modelo PCP (ej. la cuenta `2530` para el PCP 164 en producción, subcuenta `77`). Inmediatamente después, Coelsa detecta que el canal tiene split activo y dispara **un débito automático en esa misma cuenta recaudadora por el monto neto acreditado**, con un crédito equivalente hacia la cuenta (interna al Banco Industrial, por decisión de negocio — así los fondos "duermen" en el banco) que corresponde al comercio configurado para recibir el split — dejando la recaudadora en cero. El ID de la operación de split que dispara Coelsa **es distinto** del ID del pago QR original; ambos quedan relacionados recién en el archivo de conciliación posterior que provee Coelsa, no en el momento de la transacción.
+
+**Falla reproducida en Homologación:** Gonzalo Rivera (Bind PSP) probó el split en Homologación para los modelos PCP 532 y PCP 531 (este último funcionaba antes) y en ninguno de los dos se ejecuta el débito/crédito del split — la operación QR original se acredita bien en la recaudadora, pero el segundo movimiento nunca llega. Un caso real de Producción (PCP 164) sí muestra el flujo completo, confirmando que el mecanismo funciona en Producción pero no en Homo para los modelos nuevos.
+
+Del lado de Banco Industrial (Alvaro Aguirreburualde) se descarta que sea un problema de Bantotal — la corrección que se había hecho ahí (permitir débito y crédito con el mismo ID de operación, que antes generaba falso duplicado) ya estaba resuelta, y no hay evidencia de que el banco haya configurado algo específico de split del lado de Bantotal (la habilitación del split es responsabilidad de Bind PSP contra Coelsa). Pablo Gomes confirmó que, según lo validado con desarrollo al dar de alta el comercio/entidad del PCP 532, el canal QR con split había quedado habilitado correctamente del lado de Bind — pero no hay evidencia de que Coelsa haya efectivamente disparado el aviso.
+
+**Conclusión de la reunión:** la hipótesis más fuerte es que Coelsa no está enviando el aviso de split para estos canales en Homologación (no un problema de configuración de Bantotal ni de Bind). Gonzalo Rivera va a escalar un ticket directo a Coelsa adjuntando la evidencia, con copia a Ignacio Ghillini y Claudio Grillo. Si la respuesta de Coelsa indica que el problema está del lado del desarrollo del banco, se retoma con una nueva reunión a partir del 21/09.
+
 ### Evolución PSP 164 → PSP 184
 
 | | **PSP 164** (histórico) | **PSP 184** (actual) |
@@ -603,7 +615,8 @@ Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arrib
 
 ---
 *Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita. [coelsa_qr_catalogo_apis_tecnico.md](coelsa_qr_catalogo_apis_tecnico.md) para el catálogo de endpoints/códigos de error de la transacción QR (`QRDebin`/`QRReverso`/`QROperacionFinalizada`), Notification Push y firma EMVCo — separado de este archivo por umbral de tamaño.*
-*Última actualización: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*
+*Última actualización: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*
+*Última actualización anterior: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*
 *Última actualización anterior: 2026-09-03 — `/context_merge`: Parte 5, evidencia adicional (2026-09-02) de que Global66 tiene un reclamo activo y documentado de latencia QR — no cierra la contradicción TPay vs. BSF/Global66, la refuerza de un lado.*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: nueva Parte 5, parametrización del tiempo de espera de resolución (State Monitor, doble consulta T1/T2) — incluye contradicción sin resolver sobre el cliente que motivó el ajuste (TPay vs. BSF/Global66).*
