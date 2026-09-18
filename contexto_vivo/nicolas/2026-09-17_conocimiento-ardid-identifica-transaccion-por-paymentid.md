@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: f460705
 ---
 
 Al diseñar cómo informarle a Ardid que una transacción de Botón Simple tuvo un contracargo tipo "desconocimiento" (`POST /api/FilProcess/Process`, campo `transactionId`), surgió una precisión importante que no estaba explícita en el resto de la integración ya documentada: **el identificador que Ardid espera no es el `transaccionId` interno del sistema de Cobro** (el que aparece, por ejemplo, en el request del endpoint de refund/contracargo) — **es el identificador con el que Ardid ya conoce esa transacción desde que se la analizó por primera vez** (llamada original a `/Transaction`/`Analyze`).

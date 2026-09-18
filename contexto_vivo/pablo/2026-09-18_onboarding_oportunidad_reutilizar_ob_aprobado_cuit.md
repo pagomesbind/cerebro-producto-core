@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: f460705
 ---
 
 Durante `/idea_problem` sobre `revision_pj_cumplimiento` (PRD-256), al procesar el volumen real de altas de personas jurídicas (export de cuentas Wallet con CUIT de PJ, 2026-09-18), apareció un caso concreto: dentro de una misma organización, un solo CUIT (persona jurídica) puede generar una enorme cantidad de cuentas/sub-cuentas — se detectaron 2 CUIT que por sí solos explican 2.485 filas del export, bajo el mismo `OrganizacionId`.

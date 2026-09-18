@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: f460705
 ---
 
 **Novedad sobre el gap ya abierto** (`2_areas/gaps_y_preguntas.md` [2026-07-15] — "Copel" y "Pago Fácil" mencionados en reunión, sin match en `log_clientes.md`): en la reunión "Join Soporte Clientes" (2026-09-16) se tomaron decisiones comerciales concretas sobre este cliente, todavía sin ficha propia:

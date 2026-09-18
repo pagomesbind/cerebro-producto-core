@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: f460705
 ---
 
 **Novedad:** en la reunión "Join Soporte Clientes" del 2026-09-16 se discutió el cliente **"Biir"** (grafía nueva, tercera variante tras "Biwi"/"Bwi" del gap ya abierto en `2_areas/gaps_y_preguntas.md` [2026-09-10]): Gonzalo Damian RIVERA y Mauro Suppan señalaron que **Biir generó alertas legales al cuestionar las cláusulas del contrato sobre la responsabilidad del onboarding**. Se acordó **mantener suspendida la habilitación del cliente** hasta concretar una reunión formal con **Emilio** (contacto sin apellido ni rol confirmado en la minuta) y sus representantes para aclarar las responsabilidades legales antes de reactivar el servicio.

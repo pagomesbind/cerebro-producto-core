@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: f460705
 ---
 
 **Actualización sobre el riesgo ya mergeado** (`2_areas/riesgos.md`, origen `4_archivos/contexto_ingestado/2026-09-10_riesgo-controles-insuficientes-onboarding-gestionado-por-gallo.md`, merge commit `201b3e0` — falta de controles en onboardings gestionados por Gallo, afectando Terra BlockChain, Bolsa de Comercio de Chaco, IEB y B Investment):

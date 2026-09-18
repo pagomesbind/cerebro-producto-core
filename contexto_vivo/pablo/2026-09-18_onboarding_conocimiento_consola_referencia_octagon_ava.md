@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f460705
 ---
 
 Ampliación de `onboarding_personas_juridicas.md §8` (que ya documenta la demo del 2026-08-19 a alto nivel) con el detalle funcional real, obtenido navegando en vivo un caso de prueba en el ambiente de staging del proveedor (producto internamente llamado "AVA Compliance" / "AVA Onboarding", accedido en `avaonboarding.adfcloudia.com/compliance`) y revisando la grabación completa de la demo.

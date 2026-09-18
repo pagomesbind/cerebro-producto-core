@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f460705
 ---
 
 Nueva IDEA abierta por Pablo Gomes vía `/idea_start`: **PRD-256 — "Backoffice de revisión de PJ por Cumplimiento — UX no está lista para uso obligatorio y masivo"** (`wiki/1_proyectos/revision_pj_cumplimiento/`).

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md §7 (flujo AS-IS) — no documenta el detalle real de la pantalla de solicitud, solo el flujo de pasos"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f460705
 ---
 
 Durante `/idea_solution` sobre `revision_pj_cumplimiento` (PRD-256), el PM navegó en vivo dos solicitudes reales en el ambiente de staging del backoffice de Onboarding jurídico (una en estado "Pendiente Revisión Oficial De Negocio" / Nivel 1, otra en "Pendiente Revisión Cumplimiento" / Nivel 2). Esto confirma el detalle real de la pantalla de solicitud, más allá del flujo de pasos ya documentado en `onboarding_personas_juridicas.md §7`:
