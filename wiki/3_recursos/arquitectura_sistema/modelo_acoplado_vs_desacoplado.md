@@ -49,10 +49,25 @@ Banco Industrial dejó registrado que quedan **dos tracks** esperando "los reque
 
 **El track (b) queda resuelto por la decisión registrada el mismo día** ([`direccion/decisiones.md`](../../2_areas/direccion/decisiones.md) [2026-09-02]): no es un servicio de vinculación externo, es la migración de **transferencias salientes de CBU larga**, cursadas hoy por la red **Link**, hacia **Coelsa** — motivada por conciliación (Link no da a Bind una referencia utilizable, Coelsa sí). Piloto en curso con Cucurú y Tienda Nube como clientes candidatos (Gonzalo Rivera a cargo del caso de prueba).
 
+## Especificación técnica exacta del archivo de conciliación `MovimientosComp` en el modelo desacoplado
+
+> Fuente: mail "RE: [sin asunto]" de Gonzalo Genna (Banco Industrial), originalmente 2026-09-08, reenviado con Pablo Gomes en copia el 2026-09-21.
+
+Completa, con precisión técnica, lo ya dicho arriba sobre cambio de ID de conciliación y pérdida del reporte horario:
+
+- **No hay cambio de formato de interfaz ni de nombre de archivo** — sigue siendo `MovimientosComp`.
+- **Campo `REFERENCIA_MONI`:** en débitos, pasa a enviarse el ID de Coelsa — igual que ya ocurre hoy en los créditos. Ejemplo textual del banco: hoy (Origin ID/ID interno) `1-30717449076-W93400014586895-1`; con desacoplado (ID Coelsa) `WGRXJE27Q6W7W0P97MYQL3`. El banco deja abierta una pregunta técnica: "hay que ver cuál persisten uds al momento de ejecutar la transacción" — Bind tiene que decidir/confirmar qué identificador persiste en su propia base al ejecutar la transacción.
+- **NSBT — nuevo formato de armado:** `NSBTD-1-1-749049-264-1-20260310-125-41-1-1`, máximo posible de **68 caracteres**.
+- **Contracargos:** si Bind usa códigos de movimiento para conciliar, va a recibir mayor nivel de diferenciación (nuevos códigos) en esa operatoria.
+- **Confirmación explícita y sin matices:** "el reporte 'online' (cada una hora) no va a poder utilizarse para conciliar ésta operatoria" en el modelo desacoplado.
+
+**Pregunta técnica sin responder por el banco:** qué ID persiste Bind al ejecutar la transacción — trabajo de definición técnica de Bind (equipo de Administración), no un gap del banco. Ver `1_proyectos/resiliencia_api_bank/proyecto.md §7` (Pablo Gomes) para cuando el proyecto avance a Fase 3/implementación.
+
 ## Ver también
 - [incidentes_de_plataforma.md §6](incidentes_de_plataforma.md) — mismo hilo de "Repaso Semanal líderes" donde se menciona el esquema desacoplado extendiéndose a "BM PCP".
 
 ---
-*Última actualización: 2026-09-03 — `/context_merge`: nueva sección con los dos tracks pendientes reportados por Banco Industrial (2026-09-02) y su resolución cruzada con la decisión de migración CBU Link→Coelsa.*
+*Última actualización: 2026-09-21 — `/context_merge`: nueva sección con la especificación técnica exacta de `MovimientosComp` en el modelo desacoplado (campo `REFERENCIA_MONI`, formato NSBT, contracargos, reporte horario) aportada por Banco Industrial.*
+*Última actualización anterior: 2026-09-03 — `/context_merge`: nueva sección con los dos tracks pendientes reportados por Banco Industrial (2026-09-02) y su resolución cruzada con la decisión de migración CBU Link→Coelsa.*
 *Última actualización anterior: 2026-08-14 — `/sync_meetings`: nueva sección "PSP 164 — mismo dilema, split ya roto" (decisión de postergar la migración mientras se espera el fix del banco, con plan escalonado de bajo riesgo como fallback). Ver reunión "Esquema desacoplado/migra PSP 164" (2026-08-12) en `wiki/2_areas/control/log_reuniones.md`.*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/wallet/otros_manuales.md §15` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

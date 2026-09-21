@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/portal_cobro_contrac
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Fix técnico: contracargo timeout — Ripsa

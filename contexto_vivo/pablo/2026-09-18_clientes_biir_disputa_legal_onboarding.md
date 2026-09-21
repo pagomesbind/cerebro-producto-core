@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/log_clientes.md
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

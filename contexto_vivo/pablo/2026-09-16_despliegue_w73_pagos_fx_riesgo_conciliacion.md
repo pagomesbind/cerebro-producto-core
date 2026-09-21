@@ -10,7 +10,8 @@ destino_propuesto: wiki/2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Despliegue W 72.3 (Pagos FX) — 17/09/2026 7:00 AM

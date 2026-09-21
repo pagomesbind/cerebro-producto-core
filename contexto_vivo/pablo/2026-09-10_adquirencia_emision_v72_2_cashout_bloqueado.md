@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/conciliacion_coelsa_casho
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # 🔴 Emisión V 72.2 — Validación Cashout falla en PROD

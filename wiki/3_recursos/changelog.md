@@ -6,6 +6,18 @@
 
 ## 2026
 
+### 2026-09-21 (pablo) — corrida 2, sesión de merge desatendida sobre el backlog de contexto_vivo/pablo
+
+- `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — nueva §4: mecanismo confirmado del checkout de tarjeta no presente (dos sistemas independientes — `payment_methods.json` frontend vs. `IssuerIdentification` backend — con chequeo de consistencia que rechaza con 400 si discrepan); corrección de §3.5 (pablo).
+- `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — nueva sección: política de despriorización de ráfagas QR V73 (umbral 200 req/min → cola secundaria) y ventana de despliegue AD V73 (24/09) (pablo).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — nueva §4.1: picos de contracargos por fallas físicas de ATM (mecanismo general, caso Octagon) (pablo).
+- `detalle_productos/ardid/modelo_conceptual.md` — nueva §4.1: confirmado que las transacciones de código QR no pasan por Ardid, solo las de tarjeta (pablo).
+- `detalle_productos/ardid/historico/historial_versiones.md` — roadmap Akurtech 1.19/1.19.1 (fix UTC 0)/1.20 (pablo).
+- `arquitectura_sistema/integraciones_externas.md` — nueva sección Coelsa (homologación ABM de CBU, PROD 02/10); nueva sección Atenas+Worsis (integración de datos históricos PCP con Banco Industrial) (pablo).
+- `arquitectura_sistema/modelo_acoplado_vs_desacoplado.md` — especificación técnica exacta de `MovimientosComp` en el modelo desacoplado (campo `REFERENCIA_MONI`, formato NSBT) (pablo).
+- `arquitectura_sistema/relacion_con_fintexa.md` — nueva §3: modelo de evolución del ecosistema (producto único/repo único/release periódico único, comunicado por el CTO de Fintexa) (pablo).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-21.md`).
+
 ### 2026-09-21 (nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `detalle_productos/adquirencia/boton_simple_2_0.md` — nueva §11.1: criterio de saneamiento de `pago_unico` cerrado y `pago_unico=1` obligatorio para Botón Simple 2.0 confirmado en AD V73, caso FAVACARD (2.562 accounts) (nicolas).

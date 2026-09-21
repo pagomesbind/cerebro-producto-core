@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # 🔴 Banco Industrial — SPLIT falla en homologación

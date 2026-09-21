@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "casos_de_uso_clientes.md, ficha 'GRUPO DESA (Edelap/Edesa/Edea/Eden)' — encabezado dice 'Productos: QRI, RxT, Botón de Pago (→ Adquirencia, Botón 2.0)'. El PM confirmó (2026-09-14) que esta entidad opera únicamente Botón Simple 1.0 (solo tarjeta), sin la variante 2.0 que combina QR/transferencia dentro del mismo flujo de pago."
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 Durante el discovery de `/idea_problem` (proyecto `rechazos_bines_payway`, PRD-251), al evaluar si Grupo DESA tiene alguna alternativa/fallback cuando un link de Botón de Pago se rechaza, el PM aclaró: **"Esta entidad no usa bs2.0. Solo usa Bs1.0 (solo tarjeta)"**.

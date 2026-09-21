@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no — la ficha de GRUPO DESA no tiene hoy ningún riesgo de continuidad registrado (columna 'Riesgo' en log_clientes.md está en '—', sin valor); este item completa un vacío, no corrige un dato existente"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 Durante el discovery de `/idea_problem` sobre el proyecto de BINs de Payway, el PM confirmó que **Grupo DESA (EDEA/EDEN/EDELAP/EDESA/EDES, recaudador RIPSA) amenaza con dar de baja el servicio** a raíz del volumen de rechazo de sus pagos con tarjeta vía Botón Simple 1.0. Es el cliente de mayor volumen de ese canal en toda la compañía: 79,7% de todo el volumen de tarjeta no presente de Bind PSP en agosto de 2026, y 90,3% de todo el rechazo de tarjeta no presente de la compañía en ese mismo mes.

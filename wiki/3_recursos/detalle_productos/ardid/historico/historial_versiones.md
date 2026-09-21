@@ -32,6 +32,11 @@ El nombre del producto en el título de cada informe cambia en un punto específ
 | **1.17** | Enero 2026 | Ardid | **Reglas IA y Machine Learning para Pagos con Tarjeta** (nuevo); Reglas Comportamentales ampliadas (Transferencias, Pagos, Login); **estado "Pendiente" para pagos con tarjeta** (rechazar o devolver desde ese estado); nuevo módulo de Excepciones de Pagos (independiente de transferencias); stepper guiado para creación de entidades |
 | 1.18 | ~Marzo-Abril 2026 | **Akurtech** | Reglas de frecuencia mejoradas; cantidad máxima de pagos/intentos de pago por identificación; auditoría de reglas mejorada; reputacionales de pago pendientes de aprobación; marcar pago (confiable/fraudulenta); patrón de correo en blacklist de email; ráfagas de transferencias desde un mismo originante; reportes custom (steps multi-selección, switch intentos/realizados); API Loans requiere `entityCode`+identificación obligatorios |
 | 1.18.1 / 1.18.2 | Mayo 2026 | **Akurtech** | (Continuación de 1.18) Integración con **Lista de Informados de WorldSys** (ticket TKT#1384), disponible desde 1.18.2 |
+| 1.19 | ~18/09/2026 | **Akurtech** | Release ya disponible (manual de actualización, informe de cambios y paquete completo notificados por Pentass — no descargados por este flujo). **No incluye** el fix de zona horaria (UTC 0). |
+| 1.19.1 | Sin fecha confirmada (ya desarrollada, en testing) | **Akurtech** | Incluye **todo lo de UTC 0** — fix de zona horaria mapeado como consecuencia de las ráfagas de tráfico detectadas en COTO. Pablo Gomes confirmó con Lorena Macedo (Pentass) que este fix NO está en la 1.19. |
+| 1.20 | Sin fecha | **Akurtech** | Incluye el scope de reglas interentidades. |
+
+> **Roadmap aclarado por Pentass (Lorena Macedo, mail "Actualización AKURTECH - Release 1.19", 18/09/2026)** ante consulta directa de Pablo Gomes sobre si la 1.19 ya incluía el fix de zona horaria. Queda pendiente la fecha aproximada de release de la 1.19.1 — Lorena ofreció reenviar el roadmap completo con fechas planificadas (ver tarea T-114 en `1_proyectos/tareas.md`, Pablo Gomes).
 
 ## Hitos técnicos relevantes por categoría
 

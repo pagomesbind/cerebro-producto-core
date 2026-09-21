@@ -10,7 +10,8 @@ destino_propuesto: wiki/2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Estado Wallet — Épicas y Reformulación W 73 (al 11/09)

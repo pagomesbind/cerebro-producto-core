@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/arquitectura_sistema/modelo_acoplado_vs_desacoplad
 tipo_destino: actualizar
 contradice: "no — completa con precisión técnica lo que el archivo ya dice en términos generales sobre cambio de ID de conciliación y pérdida del reporte horario"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 ## Conocimiento

@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Decisión: Exclusión de Siscri (PRD-205) — Versión D73

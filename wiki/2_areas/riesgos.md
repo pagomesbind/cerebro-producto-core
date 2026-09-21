@@ -124,12 +124,27 @@ Maria Eugenia Vila advirtió que la herramienta que concilia transferencias entr
 
 **Estado:** Gonzalo Damian Rivera pidió el caso (MDA) para tomarlo de inmediato; se acordó no comunicar nada a clientes salvo el aviso estándar de mantenimiento preventivo durante la ventana del despliegue. Capturado 2026-09-11/15 (Nicolás Colón), confianza alta.
 
+## Pagos Mastercard cross-border a China en USD siguen bloqueados — riesgo de reclamo si la acreditación por default queda en moneda local
+
+Hilo liderado por Luciana Rudaz con Mastercard sobre el proyecto de implementación CIS-2026-13184 (PVT XBS, pagos cross-border). Omar Gómez (Mastercard) confirmó que la validación de Suiza (B2P) tiene status success; queda pendiente resolver la transacción P2P de Canadá. **Bloqueo específico:** los pagos a **China en USD** siguen sin habilitarse — Luciana Rudaz (15-16/09) pidió explícitamente a Mastercard que habiliten cuanto antes, con clientes ya esperando. **Riesgo de negocio señalado por Gerardo Guastavino** (Head de Internacional e Inst. Financieras, 16/09): la funcionalidad de pago en USD con acreditación en destino (optativo USD o moneda local) es clave para la aceptación inicial del producto en los segmentos objetivo — si la acreditación en moneda local queda como opción "por default", puede leerse como compulsiva para el pagador (cuya instrucción de pago es 99% en USD para China), con riesgo concreto de reclamos del proveedor externo hacia el pagador argentino por recibir una moneda distinta de la facturada.
+
+**Respuesta de Mastercard (Federico Darnond, 17/09):** "vemos lo mismo" — se toma con prioridad; el cambio de RSP en China trajo complicaciones no previstas, están armando un plan para compartir a la brevedad (compromiso: antes de fin de esa semana). Sin fecha concreta de resolución. Capturado 2026-09-21 (Pablo Gomes, en copia del hilo — proyecto de Luciana Rudaz), confianza media.
+
+## Riesgo comercial — GRUPO DESA (mayor volumen de Botón Simple 1.0 de la compañía) amenaza con dar de baja el servicio
+
+Durante el discovery de `/idea_problem` sobre el proyecto de BINs de Payway (PRD-251), el PM confirmó que **Grupo DESA (EDEA/EDEN/EDELAP/EDESA/EDES, recaudador RIPSA) amenaza con dar de baja el servicio** por el volumen de rechazo de sus pagos con tarjeta vía Botón Simple 1.0. Es el cliente de mayor volumen de ese canal en toda la compañía: **79,7% de todo el volumen de tarjeta no presente de Bind PSP en agosto de 2026, y 90,3% de todo el rechazo de tarjeta no presente** de la compañía en ese mismo mes. Respaldo: captura de WhatsApp (2026-09-14) de una referente operativa del cliente escribiendo a un contacto comercial de Bind PSP reportando que "seguimos con los mismos inconvenientes... la gente no puede pagar por el botón". Alberto Murad (director de Bind PSP, ex-CEO) reenvió los mensajes internamente a la CEO actual marcando "preocupe esto...." y anticipando que sería tema de la reunión directiva siguiente.
+
+**Importante:** solo una fracción del rechazo de este cliente tiene causa en el sistema de identificación de BINs (5,3%, ver [`3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md`](../3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md)); el 94,7% restante tiene otra causa raíz, probablemente decisión del propio banco emisor — este riesgo comercial es relevante más allá de ese proyecto puntual, no una conclusión de que el proyecto de BINs vaya a resolverlo por completo.
+
+**Pendiente de permiso:** la ficha de GRUPO DESA en `2_areas/clientes/casos_de_uso_clientes.md` y la columna "Riesgo" de `log_clientes.md` (hoy en "—") todavía no reflejan este riesgo — actualizarlas requiere permiso explícito de usuario para tocar `clientes/`. Capturado 2026-09-14 (Pablo Gomes), confianza alta.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-18 — `/context_merge`: actualización del riesgo "Falta de controles en onboardings gestionados por el integrador Gallo" (nueva evidencia y reunión formal solicitada, 2026-09-16).*
+*Última actualización: 2026-09-21 — `/context_merge`: nuevos riesgos "GRUPO DESA amenaza con dar de baja el servicio" (Botón Simple 1.0, riesgo comercial escalado a Dirección) y "Pagos Mastercard cross-border a China en USD siguen bloqueados" (novedad para Luciana Rudaz).*
+*Última actualización anterior: 2026-09-18 — `/context_merge`: actualización del riesgo "Falta de controles en onboardings gestionados por el integrador Gallo" (nueva evidencia y reunión formal solicitada, 2026-09-16).*
 *Última actualización anterior: 2026-09-15 — nuevo riesgo "Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-11 — nuevo riesgo "Error de endpoint impide validar conciliación Cashout post W72.2 (Cencosud/Coto)" (Nicolás Colón).*
 *Última actualización anterior: 2026-09-10 — nuevo riesgo "Falta de controles en onboardings gestionados por el integrador Gallo (Terra Blockchain ya dado de baja)" (Nicolás Colón).*

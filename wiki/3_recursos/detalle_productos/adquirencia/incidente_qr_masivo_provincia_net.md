@@ -68,6 +68,14 @@ Provincia Net segmenta a sus propios clientes (municipios/entes) en 3 tipos: (a)
 
 > Fuente: Reunión "BIND / PNET: Performance, recurrencia, etc." (2026-09-10, 45min) — transcripción completa provista por Facundo Collerone (Provincia Net). Participantes: Bind PSP (Pablo Gomes, Hernan Clarich — Arquitectura, Gonzalo Rivera, Mariana), Provincia NET (Facundo Nicolas Collerone, Ricardo Andres Lavia). Detalle completo en `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md §8`. Capturado por Pablo Gomes, 2026-09-10.
 
+## Política de despriorización de ráfagas QR (V73) y ventana de despliegue
+
+> Fuente: mail "Minuta: Análisis de riesgo: AD V 73" (Matías Alzogaray, threadId `1a0b604212500a77`), 2026-09-18 — minuta de la reunión de análisis de riesgo del 17/09.
+
+En la reunión de análisis de riesgo de AD V73 se aprobó una política de **despriorización temporal (no rechazo) de ráfagas de QR dinámico**: cuando una fuente supera las **200 peticiones por minuto**, esas peticiones se envían a una **cola secundaria** en vez de competir por latencia con el resto del tráfico. Es la pieza de mitigación de gestión de colas que faltaba formalizar, complementaria a las mejoras de infraestructura ya comunicadas a Provincia Net (cola de Deuda+QR, duplicación de pods Workers, escalado de BD — ver iniciativa PRD-66 en [`2_areas/direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md)). Ticket de soporte asociado: AD-1676 (DAD-2943) — Infra revisará las colas nuevas y su performance post-despliegue.
+
+**Despliegue AD V73:** fecha confirmada **24/09/2026, 21hs**, duración estimada 2-2,5 horas, prioridad Alta/Crítica (cambios estructurales en archivos de liquidación, actualización de millones de registros, incidentes previos sobre webhooks y QRs). Orden innegociable en 3 bloques — Código → Verificación/Saneamiento de BD → Filtro (alterar el orden rompe la conciliación externa y la asignación de CVUs en Botón Simple 2.0/RxT, dejando a 32 Collectors sin stock). Riesgo más crítico: las conciliaciones de bancos/comercios externos fallarían completamente si esos terceros no adaptaron sus parsers al nuevo código de liquidación **004** (archivos BOTONLIQ/DEVBOTON) — pendiente avisar a clientes y actualizar la documentación pública de developers (AD-1398/DAD-2257). Zonas vulnerables adicionales: integraciones POS↔Global Processing, webhook FechaNegocio de Botón 2.0, flujo completo de Pagos FX 2.0 del portal.
+
 ## Ver también
 
 - [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) — mecánica normativa/técnica de QR Coelsa (normativa, flujo de pago, alta de comercio, interchange, State Monitor de resolución de pagos).
@@ -77,6 +85,7 @@ Provincia Net segmenta a sus propios clientes (municipios/entes) en 3 tipos: (a)
 - `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md` — detalle técnico completo del análisis de datos, gaps y tareas.
 
 ---
-*Última actualización: 2026-09-11 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): addendum a las líneas de exploración — 5ª línea, propuesta de Arquitectura de una cola de generación de QR exclusiva para Provincia Net (partición por cliente, distinta de AD935), con su limitación reconocida y el probable solapamiento con AD935 sin confirmar.*
+*Última actualización: 2026-09-21 — `/context_merge`: nueva sección "Política de despriorización de ráfagas QR (V73) y ventana de despliegue" (umbral 200 req/min → cola secundaria, despliegue 24/09).*
+*Última actualización anterior: 2026-09-11 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): addendum a las líneas de exploración — 5ª línea, propuesta de Arquitectura de una cola de generación de QR exclusiva para Provincia Net (partición por cliente, distinta de AD935), con su limitación reconocida y el probable solapamiento con AD935 sin confirmar.*
 *Última actualización anterior: 2026-09-10 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): causa raíz confirmada directamente por Ingeniería de Bind y Provincia Net (cola única + retry storm), plan de mitigación corto/largo plazo, líneas de exploración nuevas (multi-canal SFTP, despacho de lotes chicos, ratio deuda/QR), y contexto de negocio/crecimiento de Provincia Net.*
 *Creado: 2026-09-09 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): saturación de cola de generación de QR por carga masiva de Provincia Net, decisión de convivencia de sistemas, y análisis de datos que confirma el volumen de PNET pero deja la causa raíz de la ventana de reclamos (por qué ahora, no en junio/julio) sin confirmar.*

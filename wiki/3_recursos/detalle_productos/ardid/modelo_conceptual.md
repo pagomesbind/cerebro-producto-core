@@ -81,6 +81,12 @@ El texto fuente no cruza explícitamente esta definición con el modelo de scori
 | **Excepción** | Habilitación temporal de una transferencia/pago previamente bloqueado, tras marcarlo manualmente como "Confiable" — retroalimenta el algoritmo de IA para reducir falsos positivos |
 | **Modificaciones pendientes** | Flujo de doble control: toda alta/edición/eliminación de reglas Reputacionales/IA/ML/Comportamentales requiere aprobación de un segundo usuario con permisos antes de tomar efecto |
 
+## 4.1. Alcance confirmado — las transacciones de código QR no pasan por Ardid, solo las de tarjeta
+
+> Fuente: reunión "Join Soporte Clientes" (2026-09-16), minuta Gemini — caso Octagon (pico de 300-500 contracargos en 3 días, atribuible a fallas físicas de extracción en cajeros automáticos, no a fraude — ver mecánica de contracargos por falla de ATM en [`../adquirencia/devoluciones_y_contracargos.md`](../adquirencia/devoluciones_y_contracargos.md)).
+
+Diego Weledniger (Fintexa) aclaró, al descartar que un pico de contracargos fuera un problema de Ardid: **las transacciones de código QR no pasan por Ardid — solo las de tarjeta sí.** Es un dato de alcance relevante para cualquier análisis de motor antifraude sobre un canal QR (ej. extracción de efectivo por QR en ATM): un pico o anomalía en ese canal no se explica ni se mitiga por reglas de Ardid, porque el canal no está instrumentado ahí. Consultado si tenía sentido sumar QR a la hoja de ruta de Ardid, la respuesta (Matias Alzogaray) fue que hoy no es prioridad.
+
 ## 5. Nota histórica — versión del manual fuente
 
 Este manual (versión 1.13, enero 2025) usa **exclusivamente el nombre "Ardid"** — no hay ninguna mención a "Akurtech" en todo el documento, consistente con la hipótesis (confirmada por el usuario, ver [index.md](index.md#nota-ardid--akurtech)) de que Akurtech es el nombre comercial adoptado en un rebranding posterior (documentado a partir de la versión 1.18, mayo 2026 — ver [historico/historial_versiones.md](historico/historial_versiones.md)).

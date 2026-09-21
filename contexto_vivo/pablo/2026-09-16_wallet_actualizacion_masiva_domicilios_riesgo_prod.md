@@ -10,7 +10,8 @@ destino_propuesto: wiki/2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Actualización Masiva DB Domicilios Wallet — 15/09 Análisis de Riesgo

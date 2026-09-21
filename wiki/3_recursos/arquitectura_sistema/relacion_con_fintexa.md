@@ -24,10 +24,26 @@ Estado consolidado de las iniciativas de arquitectura transversal seguidas por e
 - ⚪ **Backlog (corte julio, sin confirmar en agosto):** programa de pruebas de seguridad + desarrollo seguro, mTLS, particionamiento, Hangfire, capacidad AKS, caché Redis, cierre de malla de servicios, prevención de fraude/compliance.
 - 🔴 **Bloqueado (corte julio, sin confirmar en agosto):** evaluación de motor de base de datos (PostgreSQL).
 
+## 3. Modelo de evolución del ecosistema — producto único, repositorio único, release periódico único
+
+> Fuente: mail "Fw: Evolución del ecosistema" (Agustín Grau, CTO Fintexa, 2026-09-16, reenviado 2026-09-18).
+
+Agustín Grau comunicó formalmente — acordado con Emma Vignoles — cómo Fintexa encara la incorporación de nuevos clientes al ecosistema que hoy usa Bind PSP (cada nuevo cliente trae productos/módulos nuevos, ajustes sobre lo existente e integraciones con terceros, ej. conexión con Payway por ISO para e-commerce):
+
+- **Decisión de fondo:** sostener **un único producto, un único repositorio y un release periódico único**, instalado en distintos ambientes según el cliente — no forks ni ramas separadas por cliente.
+- Fintexa comunica todo lo que vaya desarrollando, aun cuando no impacte directamente en la operación de Bind PSP.
+- Todo lo nuevo se diseña **modular, separable por producto y por feature**, para poder habilitarse o no por cliente.
+- **Retrocompatibilidad es prioridad explícita:** lo que hoy funciona en Bind PSP tiene que seguir funcionando igual.
+- **Bind PSP no prueba, en una primera instancia, los productos/features nuevos que no usa** — sí corre una regresión sobre su propio alcance para validar que nada se vio afectado.
+- Si más adelante Bind PSP (u otro cliente) necesita activar un producto/feature ya existente para otro cliente, se conversa en ese momento — no hay activación automática.
+
+Esta decisión encuadra formalmente por qué el ecosistema (Ardid/Akurtech, Wallet, Adquirencia sobre la misma base) evoluciona con roadmaps de release que incluyen features no usadas por Bind — ver por ejemplo el roadmap de Akurtech 1.19/1.19.1/1.20 en [`detalle_productos/ardid/historico/historial_versiones.md`](../detalle_productos/ardid/historico/historial_versiones.md) — es la política general detrás de ese patrón, no un caso aislado.
+
 ## Ver también
 - [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) — plan de mantenimiento AKS de agosto 2026, ejecutado por el mismo proveedor.
 - [calidad_y_cicd.md](calidad_y_cicd.md) — roadmap técnico declarado por el proveedor, contrastar contra el estado real reportado acá por el COE.
 
 ---
-*Última actualización: 2026-09-03 — `/context_merge`: §2 actualizado con el corte de agosto 2026 del informe COE (delta vs. julio, categorías ✅/🟢 completas, 🔵/⚪/🔴 pendientes de confirmar).*
+*Última actualización: 2026-09-21 — `/context_merge`: nueva sección "Modelo de evolución del ecosistema" (producto único/repo único/release periódico único, retrocompatibilidad como prioridad, comunicado por el CTO de Fintexa).*
+*Última actualización anterior: 2026-09-03 — `/context_merge`: §2 actualizado con el corte de agosto 2026 del informe COE (delta vs. julio, categorías ✅/🟢 completas, 🔵/⚪/🔴 pendientes de confirmar).*
 *Última actualización anterior: 2026-08-12 — Reubicado y consolidado desde `arquitectura_sistema/index.md §11` y `§13` (reestructuración PARA en cascada). Contenido sin cambios.*

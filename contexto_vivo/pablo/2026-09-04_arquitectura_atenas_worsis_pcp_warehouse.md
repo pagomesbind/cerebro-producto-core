@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/arquitectura_sistema/integraciones_alertas_cumplim
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: pendiente
 ---
 
 # Arquitectura Atenas + Worsis — integración datos históricos PCP

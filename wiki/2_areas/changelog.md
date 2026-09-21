@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-21 (pablo) — corrida 2, sesión de merge desatendida sobre el backlog de contexto_vivo/pablo
+
+- `gaps_y_preguntas.md` — 6 gaps nuevos: checkout de tarjeta no presente confirma consulta a `IssuerIdentification` (contradice §3.5 de `validacion_bines_tarjetas.md`, corregido en el mismo merge); scope de NSM#2 no refleja que el canal POS (AD-430/PRD-70) ya se shippeó (contradice `north_star.md §2`, requiere permiso); ficha de GRUPO DESA dice Botón 2.0, el PM confirmó que opera solo Botón 1.0; SPLIT no funciona en homologación para PSP 531/532 (Banco Industrial, MDA-297905); frecuencia de historificación SQL + VPN/Seginf sin definir (integración Atenas); límites transaccionales PLD para extracciones QR de Pago Fácil sin definir (todos pablo).
+- `direccion/decisiones.md` — 4 decisiones nuevas: aprobación de pases a producción pasa a Hernán Clarich/Mariana Nadalin; Wallet W73 pasa a PROD (W72.3), split confirmado en W74/W75; actualización masiva de domicilios Wallet en Producción (491.495 registros); despliegue W72.3 Pagos FX con riesgo de conciliación sin herramienta operativa (todos pablo).
+- `riesgos.md` — 2 riesgos nuevos: GRUPO DESA amenaza con dar de baja el servicio (riesgo comercial escalado a Dirección); pagos Mastercard cross-border a China en USD siguen bloqueados (novedad para Luciana Rudaz) (ambos pablo).
+- `direccion/iniciativas.md` — novedad antepuesta en PRD-66 (mejoras de infraestructura de PNET ejecutadas 16/09, pablo).
+- 8 items duplicados (ya cubiertos por captura equivalente de otro PM en corridas previas) marcados `ingestado` sin reescritura: fix contracargo Ripsa, ID Coelsa en comprobantes, alcance webhook devoluciones, decimales comisión Coelsa, cashout `/ConciliarCoelsa`, clientes Biir/Copel/Gallo (todos pablo).
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-21.md`): 15 — 10 nicolas (sin cambios) + 4 pablo (cronograma septiembre, corrección estado_actual, nueva organización Grupo BIND, transcripción PNET no descargable) + fichas de cliente cuyas correcciones/riesgos ya se registraron por vía indirecta arriba (GRUPO DESA) — más 1 item sin producto dueño clasificable (API VATA de Modo, nicolas).
+
 ### 2026-09-18 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `gaps_y_preguntas.md` — actualizados 2 gaps existentes: "Biwi"/"Bwi" (tercera grafía "Biir", nueva decisión de suspender habilitación hasta reunión con Emilio, nicolas) y "Copel"/"Pago Fácil" (decisiones comerciales nuevas de pricing/freeze de integraciones hasta contrato firmado, nicolas).

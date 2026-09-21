@@ -69,6 +69,31 @@ La tabla interna no tiene un valor "Prepaga" en el campo `TipoTarjeta` (solo Dé
 
 Expone solo 2 endpoints, ambos de **consulta** (sin ABM/escritura): `GET /Bin/{bin}/{pan}` (recibe BIN + PAN completo + `digits`) y `GET /BINChecker/{bin}`. El patrón de validación del BIN acepta explícitamente 6 u 8 dígitos en ambos — el contrato ya anticipaba 8 dígitos, la tabla de datos nunca se pobló así. Sin confirmar si la lógica de resolución interna usa los dígitos adicionales del PAN.
 
+> ⚠️ **Corrección (2026-09-21):** este párrafo y el análisis técnico-funcional de `rechazos_bines_payway-solution.md §6.3` daban por Supuesto/no confirmado que el backend del checkout de tarjeta no presente "recibe el tipo ya resuelto, no vuelve a consultar la base". Fintexa confirmó que **sí la consulta** — como chequeo de consistencia contra el frontend, no como fuente primaria. Ver mecanismo completo en §4 (nueva). Gap abierto en [`2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-09-21].
+
+## 4. Checkout de tarjeta no presente — dos sistemas independientes resuelven el tipo de tarjeta, con chequeo de consistencia que rechaza con 400 si discrepan
+
+> Fuente: mail de Melisa Belpassi (Fintexa), hilo del ticket AD-978 — proyecto `rechazos_bines_payway` (PRD-251), 2026-09-21.
+
+Fintexa confirmó, al explicar por qué el ticket de carga masiva de BINs (AD-978, ~89.717 altas) no se puede aplicar todavía en producción, qué componente resuelve marca/tipo de tarjeta en el checkout de tarjeta no presente (Botón Simple) antes de que el pago llegue al backend — gap abierto hasta ahora del proyecto PRD-251.
+
+**Hay dos sistemas independientes que intentan identificar el tipo de tarjeta (Crédito/Débito/Prepaga) a partir del BIN, en dos momentos distintos del mismo pago:**
+
+1. **Frontend — al tipear el número de tarjeta:** la pantalla de pago usa un archivo de configuración estático, `payment_methods.json`. Si no tiene esa tarjeta identificada puntualmente, aplica una regla general de respaldo: "empieza con 4 → Visa Crédito; empieza con 5 → Mastercard Crédito".
+2. **Backend — al confirmar el pago:** el servidor vuelve a resolver el tipo de tarjeta, esta vez consultando la base real `IssuerIdentification` (§3.5). Si tampoco la tiene identificada puntualmente, aplica la **misma** regla general de respaldo.
+
+**Chequeo de consistencia:** al confirmar el pago, el backend compara lo que dijo el frontend contra lo que dice `IssuerIdentification`. Si no coinciden, lo trata como inconsistencia sospechosa y corta la operación con **`400`** ("tarjeta no habilitada") — el pago nunca se termina de procesar.
+
+**Por qué hoy funciona (por casualidad, no por estar bien identificado):** para una tarjeta que ninguno de los dos sistemas tiene identificada puntualmente, ambos caen en la misma regla de respaldo genérica, coinciden, y el pago se aprueba — aunque la clasificación sea incorrecta de fondo (el problema real que motiva PRD-251).
+
+**Por qué el INSERT de BINs reales genera rechazos nuevos:** el script de carga de PRD-251 actualiza `IssuerIdentification` con la clasificación real y específica de cada tarjeta (para el 40% de las ~89.717 tarjetas de AD-978, la clasificación real es Débito o Prepaga, no Crédito). El archivo `payment_methods.json` del frontend **no se toca** con ese script — sigue con la regla genérica vieja. Resultado: toda tarjeta que pasa de "sin identificar, ambos coinciden por regla genérica" a "identificada con precisión solo en el backend" genera una discrepancia, y el chequeo de consistencia la rechaza con 400 — aunque sea una tarjeta perfectamente válida.
+
+**Ejemplo real (BIN `480459`, Visa):** hoy — frontend dice "Crédito" (regla genérica) · backend dice "Crédito" (regla genérica) → coinciden → aprobado. Después del INSERT — frontend sigue diciendo "Crédito" (no se tocó) · backend dice "Prepaga" (dato real) → no coinciden → **rechazado**.
+
+**Alternativa de fondo descartada como inmediata por Fintexa:** cambiar el frontend para que `payment_methods.json` se use solo de forma visual (logo/nombre de marca) sin participar en ninguna validación — dejaría de funcionar a ~35.000 tarjetas que hoy están identificadas puntualmente en el json y dependen de esa identificación (detalle sin desarrollar más por Fintexa).
+
+**Preguntas sin responder de Fintexa (PM, 2026-09-21):** (1) ¿se puede actualizar `payment_methods.json` en el mismo momento que `IssuerIdentification`? (2) ¿convendría migrar el checkout para que valide únicamente contra `IssuerIdentification` vía API, en vez de mantener copia estática en el frontend — es una decisión ya evaluada, o hay restricción técnica/de seguridad? Ver `1_proyectos/rechazos_bines_payway/gaps.md` (2026-09-21).
+
 ## Ver también
 
 - [`1_proyectos/rechazos_bines_payway/proyecto.md`](../../../1_proyectos/rechazos_bines_payway/proyecto.md) (PRD-251) — proyecto vivo con el detalle completo del discovery, la consulta técnica enviada a Fintexa (12 preguntas) y los 4 CSV del cruce BIN a BIN.

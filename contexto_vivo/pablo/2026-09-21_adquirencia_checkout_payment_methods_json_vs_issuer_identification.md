@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/validacion_bines_tar
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md §3.5 y el análisis técnico-funcional de rechazos_bines_payway (artefactos/rechazos_bines_payway-solution.md §6.3) — ambos daban por Supuesto/no confirmado que el backend del checkout de tarjeta no presente 'recibe el tipo ya resuelto, no vuelve a consultar la base'. Este hallazgo confirma que SÍ la consulta, como parte de un chequeo de consistencia contra el frontend, no como fuente primaria."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

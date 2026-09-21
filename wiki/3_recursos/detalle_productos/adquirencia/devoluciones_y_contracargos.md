@@ -247,6 +247,12 @@ Investigando un reclamo de descuadre de saldo de la cuenta recaudadora de **Coto
 
 **Alcance sin confirmar:** Franco Gimenez indicó que, según lo observado, el problema afectaba únicamente al caso de Ripsa — pero Nicolás Colón señaló la duda abierta de si, al ser un problema de fondo en la query (no específico de un cliente), podría haber otros clientes con el mismo síntoma sin haberlo reportado todavía.
 
+## 4.1. Picos de contracargos por fallas físicas de cajeros automáticos (no fraude) — mecanismo general
+
+> Fuente: reunión "Join Soporte Clientes" (2026-09-16), minuta Gemini — caso Octagon (300-500 contracargos en 3 días).
+
+Gonzalo Rivera reportó un volumen inusual de contracargos de un cliente que opera extracción de efectivo en cajeros automáticos. Diego Weledniger (Fintexa) explicó el mecanismo general, no específico de un cliente: cuando falla la extracción física de efectivo en un ATM (el cajero no entrega el dinero, pero la transacción quedó iniciada), el banco emisor genera un contracargo automático — el pico resultante puede confundirse con fraude o con un problema de Ardid, pero es un patrón operativo normal de la mecánica de cajeros, no una señal de abuso. Ver alcance de Ardid sobre este canal (QR no pasa por Ardid, solo tarjeta) en [`../ardid/modelo_conceptual.md §4.1`](../ardid/modelo_conceptual.md).
+
 ## 5. Regla de producto — la devolución de R por T (recibo por transferencia) no se puede hacer pasado un mes
 
 > Fuente: reunión "Weekly - Producto / Operaciones" (2026-09-14), minuta Gemini.
@@ -257,7 +263,7 @@ Gonzalo Rivera reportó un caso donde no se puede devolver desde el portal una t
 
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-09-21 — `/context_merge`: §0 (desconocimientos de tarjeta) extraída a [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) por umbral de tamaño.*
+*Última actualización: 2026-09-21 — `/context_merge`: §0 (desconocimientos de tarjeta) extraída a [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) por umbral de tamaño; nueva §4.1 (picos de contracargos por fallas físicas de ATM, mecanismo general, caso Octagon).*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: contrato técnico del endpoint de "desconocimiento" en §0 y nueva §5 (regla de devolución R por T, ventana de un mes).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
