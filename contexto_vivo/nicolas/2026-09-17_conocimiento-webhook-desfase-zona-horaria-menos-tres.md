@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE_2026-09-21
+merge_commit: 70dcf2a
 ---
 
 > **Nota de merge (2026-09-21):** duplicado del mismo hallazgo capturado independientemente por Pablo Gomes (`pablo/2026-09-18...adquirencia_webhook_qr_desfase_horario_gmt3`, ya ingerido el 2026-09-18 en `webhooks_y_notificaciones.md §"Bug de zona horaria en el webhook de pagos QR"`) — mismo ticket 1448/494, misma fecha de implementación (31/08), mismo estado "decisión pendiente". No se reescribe contenido, la sección ya vigente en el canon cubre este item sin pérdida de información.

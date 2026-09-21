@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE_2026-09-21
+merge_commit: 70dcf2a
 ---
 
 > **Nota de merge (2026-09-21):** integrado en [desconocimientos_de_tarjeta.md](../../wiki/3_recursos/detalle_productos/adquirencia/desconocimientos_de_tarjeta.md) en vez de `devoluciones_y_contracargos.md` directo — el tema (desconocimientos de tarjeta) se extrajo a archivo propio por umbral de tamaño en este mismo merge (ver nota de reclasificación en el manifiesto).

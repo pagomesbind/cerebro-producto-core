@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDIENTE_2026-09-21
+merge_commit: 70dcf2a
 ---
 
 Continuación del saneamiento de la base de datos para el parámetro `pago_unico` ya documentado en `boton_simple_2_0.md §11` (definición formal acordada 2026-08-20: 1 = Botón de Pago, 0 = RXT).
