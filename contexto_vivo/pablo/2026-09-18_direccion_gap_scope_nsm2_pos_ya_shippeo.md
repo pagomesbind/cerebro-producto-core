@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/direccion/north_star.md §2 — nota del 2026-07-21 que dice 'El POS presente (MPOS) todavía NO pasa por Payway: ese proyecto no se shippeó', usada para excluir el canal POS del scope de medición de la métrica de volumen operado por el gateway Payway/Decidir/Prisma"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 ## Gap: el scope de medición de la métrica de volumen por gateway no refleja que el POS ya se shippeó en su mayor parte

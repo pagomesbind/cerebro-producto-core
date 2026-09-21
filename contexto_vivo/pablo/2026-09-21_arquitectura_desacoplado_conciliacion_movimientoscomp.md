@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa con precisión técnica lo que el archivo ya dice en términos generales sobre cambio de ID de conciliación y pérdida del reporte horario"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 ## Conocimiento

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 Hilo liderado por Luciana Rudaz (pm_destino) con Mastercard sobre el proyecto de implementación CIS-2026-13184 (PVT XBS, pagos cross-border). Pablo Gomes está en copia pero no es el dueño de este proyecto — se captura como novedad para que Luciana la evalúe.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 Agustín Grau (CTO de Fintexa) comunicó formalmente — y lo acordó con Emma Vignoles — cómo Fintexa va a encarar la incorporación de nuevos clientes al ecosistema que hoy usa BIND PSP (cada nuevo cliente trae productos/módulos nuevos, ajustes sobre lo existente e integraciones con terceros, ej. conexión con Payway por ISO para e-commerce):

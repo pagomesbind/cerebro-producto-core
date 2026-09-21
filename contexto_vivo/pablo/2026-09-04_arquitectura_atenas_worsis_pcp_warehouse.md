@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: pendiente
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 # Arquitectura Atenas + Worsis — integración datos históricos PCP

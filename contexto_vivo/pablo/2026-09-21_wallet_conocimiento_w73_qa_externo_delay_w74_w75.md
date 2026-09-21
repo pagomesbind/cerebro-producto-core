@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 Continuación/actualización del estado ya capturado en `2026-09-16_wallet_estado_epicasepocas_reformulacion_w73` (todavía en cola, sin mergear) — este item no lo reemplaza, lo completa con el informe semanal siguiente de Fintexa (18/09):

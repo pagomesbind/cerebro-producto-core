@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md §3.5 y el análisis técnico-funcional de rechazos_bines_payway (artefactos/rechazos_bines_payway-solution.md §6.3) — ambos daban por Supuesto/no confirmado que el backend del checkout de tarjeta no presente 'recibe el tipo ya resuelto, no vuelve a consultar la base'. Este hallazgo confirma que SÍ la consulta, como parte de un chequeo de consistencia contra el frontend, no como fuente primaria."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 ## Mecanismo confirmado — por qué cargar datos reales en `IssuerIdentification` puede rechazar tarjetas que hoy funcionan

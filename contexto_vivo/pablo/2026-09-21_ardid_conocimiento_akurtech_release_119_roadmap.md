@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 Pentass (proveedor de Ardid/Akurtech) notificó la disponibilidad de la **Release 1.19** (18/09/2026), con manual de actualización, informe de cambios y paquete completo adjuntos (no descargados por este flujo — quedan en el mail original si hace falta el detalle completo).

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/log_clientes.md
 tipo_destino: crear
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 contradice: "no"
 ---
 

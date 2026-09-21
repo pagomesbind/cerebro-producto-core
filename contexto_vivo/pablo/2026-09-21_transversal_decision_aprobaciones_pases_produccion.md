@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: f230716c54a5ca6600a2bce4e46bf0292d56a58c
 ---
 
 Matías Alzogaray (PM de BIND) propuso y cerró con el equipo un cambio de proceso: por organización, quienes aprueban los tickets de pase a Producción del lado de Bind pasan a ser **Hernán Clarich** y, cuando esté dada de alta en la ticketera de Fintexa, **Mariana Nadalin (COO)**. Mientras Mariana no esté dada de alta, aprueba solo Hernán.
