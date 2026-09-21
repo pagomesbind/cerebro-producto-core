@@ -10,8 +10,11 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/devoluciones_y_contr
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE_2026-09-21
 ---
+
+> **Nota de merge (2026-09-21):** integrado en [desconocimientos_de_tarjeta.md](../../wiki/3_recursos/detalle_productos/adquirencia/desconocimientos_de_tarjeta.md) en vez de `devoluciones_y_contracargos.md` directo — el tema (desconocimientos de tarjeta) se extrajo a archivo propio por umbral de tamaño en este mismo merge (ver nota de reclasificación en el manifiesto).
 
 En "Análisis de riesgo: AD V 73", Matias Alzogaray, Maria Eugenia Vila y Maximiliano Ambrosini abordaron la mejora para separar **desconocimientos (contracargos) y devoluciones**, tanto en los archivos de liquidación como en los reportes en formato PDF. Maximiliano Ambrosini detalló que el PDF mostrará ambos conceptos de forma separada, con distintos códigos. Como decisión, Gonzalo Damian Rivera indicó que se debe avisar previamente a los clientes y modificar el portal de desarrolladores con el nuevo formato de archivos; post-implementación se validará la correcta emisión.
 

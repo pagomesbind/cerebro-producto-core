@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-21 (nicolas) — corrida automática (scheduled task, sin usuario presente)
+
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — nueva §11.1: criterio de saneamiento de `pago_unico` cerrado y `pago_unico=1` obligatorio para Botón Simple 2.0 confirmado en AD V73, caso FAVACARD (2.562 accounts) (nicolas).
+- `detalle_productos/agente_cobros_y_pagos/masividad_generacion_qr.md` — resuelto el debate abierto de "colas diferenciadas por cliente": gestión inteligente de cola por umbral de 200 req/min implementada en AD V73 (nicolas).
+- `detalle_productos/adquirencia/desconocimientos_de_tarjeta.md` — archivo nuevo: extraído de `devoluciones_y_contracargos.md §0` por umbral de tamaño; suma la separación de desconocimientos/devoluciones en PDF y liquidación confirmada para AD V73 (nicolas).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — §0 reemplazada por puntero a `desconocimientos_de_tarjeta.md`.
+- 1 item duplicado (bug de zona horaria GMT-3 en webhook QR, nicolas) marcado `ingestado` sin reescritura — ya cubierto por el item equivalente de Pablo ingerido el 2026-09-18.
+- Items en régimen D pendientes de permiso explícito del usuario (quedan `en_cola`, ver manifiesto `2026-09-21.md`) — backlog sin cambios este merge, 20 items.
+
 ### 2026-09-18 (pablo + nicolas) — corrida automática (scheduled task, sin usuario presente)
 
 - `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §18: identificación de transacciones ante Ardid por `PaymentId` de Botón Simple, no por el ID interno de Cobro (nicolas).

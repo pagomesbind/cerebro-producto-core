@@ -10,8 +10,11 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/webhooks_y_notificac
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE_2026-09-21
 ---
+
+> **Nota de merge (2026-09-21):** duplicado del mismo hallazgo capturado independientemente por Pablo Gomes (`pablo/2026-09-18...adquirencia_webhook_qr_desfase_horario_gmt3`, ya ingerido el 2026-09-18 en `webhooks_y_notificaciones.md §"Bug de zona horaria en el webhook de pagos QR"`) — mismo ticket 1448/494, misma fecha de implementación (31/08), mismo estado "decisión pendiente". No se reescribe contenido, la sección ya vigente en el canon cubre este item sin pérdida de información.
 
 Melisa Belpassi (Fintexa) reportó una incidencia detectada vía ticket de soporte: los webhooks de pago están enviando la hora de la transacción **con el desfase horario `-3` omitido**, generando confusión en los clientes al recibir, por ejemplo, `21:58 -3` en vez de la hora real `18:58` (la resta ya no se aplica sobre el valor mostrado). Melisa asumió la responsabilidad por el error de implementación, ocurrido en el ticket `1448` (identificado internamente como `494`) el pasado 31 de agosto de 2026 — señaló que el análisis de riesgo original y las respuestas del PDR de esa fecha no generaron una alerta suficientemente enfática sobre el impacto.
 

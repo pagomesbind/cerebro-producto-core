@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/boton_simple_2_0.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE_2026-09-21
 ---
 
 Continuación del saneamiento de la base de datos para el parámetro `pago_unico` ya documentado en `boton_simple_2_0.md §11` (definición formal acordada 2026-08-20: 1 = Botón de Pago, 0 = RXT).

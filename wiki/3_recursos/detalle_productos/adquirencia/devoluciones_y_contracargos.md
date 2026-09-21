@@ -10,43 +10,7 @@
 
 ## 0. Desconocimientos de tarjeta (Botón Simple) — contracargo total de uso interno
 
-> Fuente: Notion histórico, Epic **"Desconocimientos de tarjeta"** (Dolor). No confundir con las devoluciones/contracargos estándar documentados abajo — un "desconocimiento" es el caso donde el titular de la tarjeta niega haber hecho la compra.
-
-- **Endpoint de uso exclusivamente interno** (Operaciones Bind PSP, vía Swagger o luego desde el Admin) — nunca expuesto a las entidades/comercios. Marca una transacción de Botón Simple como desconocimiento por transacción.
-- Efecto: crea un **contracargo de tipo "desconocimiento"** (total, no parcial — distinto de los contracargos tipo "devolución" ya soportados), pasa la transacción a estado `DEVUELTA`, y registra el timestamp del desconocimiento.
-- **Se liquida exactamente igual que una devolución** (mismo criterio de impuestos, archivos y PDF de comercio) — resta en la liquidación al comercio en el siguiente día hábil a la fecha de desconocimiento. Es decir: técnicamente reutiliza todo el motor de devoluciones existente, solo cambia el tipo de contracargo y quién puede dispararlo.
-
-**Implementación en curso (agosto 2026, PRD-146/AD-1360):** > Fuente: Mail "Análisis COBRO: Lun, 10 de ago de 2026" — malzogaray@bind.com.ar, 2026-08-10.
-- **Código `004`** identifica el desconocimiento como tipo de contracargo diferenciado de la devolución en el archivo/registro de liquidación — resuelve un bug de importes en cero que ocurría al no distinguirlos.
-- El PDF de liquidación suma un apartado propio "Detalle de desconocimientos" + columna nueva en el resumen, sin alterar el total liquidado.
-- **No existe el concepto de "desconocimiento parcial"**: cualquier desconocimiento se aplica sobre el remanente total de la transacción.
-- **Estrategia de emisión tolerante a fallos:** el PDF de liquidación se emite siempre, incluso con inconsistencias de datos — se prioriza la disponibilidad del comprobante sobre la consistencia (correcciones reactivas post-emisión).
-- Detalle completo del seguimiento de este desarrollo en PRD-146 (Tratamiento de contracargos de tarjeta) — proyecto de Nicolás Colón, vive en su propio Cerebro desde 2026-08-13.
-- **Ratificación de prioridad (2026-09-07, "Análisis COBRO"):** el tablero de incidentes ratificó el estatus de **máxima prioridad** para PRD-146, ya iniciado bajo múltiples tickets de Fintexa: [DAD-2209](https://fintexa.atlassian.net/browse/DAD-2209), [DAD-2257](https://fintexa.atlassian.net/browse/DAD-2257). Acción de seguimiento acordada: revisar el avance de estos tickets una vez compartidos (owner: Daniela Collia, Fintexa), sin fecha límite definida. Detalle operativo completo en el Cerebro de Nicolás Colón.
-
-**Contrato técnico del endpoint (2026-09-17, confianza Verbal — no Confirmado):** transcripto directamente por el PM en sesión de trabajo, sin Swagger ni documento formal citado.
-
-```
-POST https://10.22.0.35/api/v1/Transactions/refund
-```
-
-Body:
-```json
-{
-  "commerceCode": "${codigoComercio}",
-  "identifyOrder": "${identificadorOrden}",
-  "partial": false,
-  "amountGross": "${monto}",
-  "description": "${motivo}",
-  "entityIdentifier": "${entidadIdentificador}",
-  "channel": "BotonSimple",
-  "tipoContracargo": "desconocimiento",
-  "deudaId": "${deudaId}",
-  "transaccionId": "${transaccionId}"
-}
-```
-
-Es el mismo endpoint genérico de "refund"/contracargo — el campo `tipoContracargo` (`"desconocimiento"` vs. el valor usado para "devolución" estándar) es lo que lo diferencia, consistente con la mecánica ya documentada arriba ("se reutiliza todo el motor de devoluciones existente, solo cambia el tipo de contracargo"). No se confirmó en esta sesión de qué ambiente es la URL (la IP interna no indica Staging o Producción), ni el contrato de response/códigos de error/idempotencia. El webhook de contracargo ya documentado más abajo (§1) sí trae un par clave-valor `Tipo: Desconocimiento` — es decir, ya distingue este caso, aunque el proyecto `ardid_desconocimientos` (ver [`2_areas/direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md)) decidió no usarlo como disparador de su automatización, por simplicidad y no por limitación técnica del webhook — en cambio se engancha directo al final de este endpoint.
+> No confundir con las devoluciones/contracargos estándar documentados abajo — un "desconocimiento" es el caso donde el titular de la tarjeta niega haber hecho la compra. Extraído a su propio archivo por umbral de tamaño (2026-09-21): ver [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) — mecánica base, implementación PRD-146/AD-1360, contrato técnico del endpoint, y la separación de desconocimientos/devoluciones en PDF y liquidación confirmada para AD V73 (2026-09-17).
 
 ## 1. Documentación: devoluciones parciales
 
@@ -293,7 +257,8 @@ Gonzalo Rivera reportó un caso donde no se puede devolver desde el portal una t
 
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-09-18 — `/context_merge`: contrato técnico del endpoint de "desconocimiento" en §0 y nueva §5 (regla de devolución R por T, ventana de un mes).*
+*Última actualización: 2026-09-21 — `/context_merge`: §0 (desconocimientos de tarjeta) extraída a [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) por umbral de tamaño.*
+*Última actualización anterior: 2026-09-18 — `/context_merge`: contrato técnico del endpoint de "desconocimiento" en §0 y nueva §5 (regla de devolución R por T, ventana de un mes).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*
 *Última actualización anterior: 2026-08-27 — `/context_merge`: nueva §2 (bug de tipo de operación en contracargos POS GP, AD-1020/AD-1579, AD V72); §1.1 (historial operativo cliente COTO) extraída a [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) por umbral de tamaño de archivo.*

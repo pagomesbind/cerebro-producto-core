@@ -131,6 +131,16 @@ Mejoras puntuales sobre **Botón Simple 1.0** (el predecesor mencionado en §1) 
 
 **Relación con el hallazgo de FAVACARD:** el bug de asignación automática de CBU corta en Botón Simple 2.0 sin filtro por `pago_unico` (identificado el 2026-08-06) y el análisis técnico posterior del 2026-08-13 (que reveló que el atributo servía a la vez para distinguir RxT/Botón 2.0 y para disparar la baja automática del CBU/identificador, con 159 cajas de comercio afectadas) parecen ser el antecedente directo que motivó esta definición formal y el saneamiento — ver el detalle completo en [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md).
 
+### 11.1 Saneamiento cerrado y `pago_unico=1` obligatorio para Botón Simple 2.0 (AD V73, 2026-09-17)
+
+> Fuente: Reuniones "Análisis COBRO" y "Análisis de riesgo: AD V 73" (2026-09-17), minutas Gemini.
+
+**Criterio de saneamiento cerrado ("Análisis COBRO", 12:00):** el criterio inicial de saneamiento falló porque el campo `ID caja` se hereda de las `collectors` y no permitía un empalme seguro. Julieta Gimenez (Fintexa) acordó en cambio: (1) identificar con certeza a los clientes que usan **Botón 0** y actualizar su campo `pago_unico` a `1`, para integrarlos al grupo de selección de CBU para pagos de deudas; (2) detectar `accounts` antiguas que operan con RXT (Ticket QR, Postberry, Astropay, Cucuru, Octopus) con el campo en `1` sin operar con Botón 0, y actualizarlas a `0` vía script para evitar su uso incorrecto en el pool de Botón 0.
+
+**Caso FAVACARD** (2.562 `accounts`: 511 con `pago_unico=0`, 2.051 en `1`): `accounts` creadas por cobro con `ID caja` y `ID orden` propios eran seleccionadas incorrectamente por el pool de Botón 0 pese a pertenecer a RXT. El script de saneamiento **omite esas 511 accounts** (con `ID caja` propio y valor `0`) para que se mantengan sin cambios. Melisa Belpassi indicó que se sumará además desarrollo sobre el mínimo de CBU cortas reutilizables, junto con una guía de ABM (a cargo de Maxi) para configurar altas de clientes nuevos y existentes.
+
+**Decisión de configuración ("Análisis de riesgo: AD V 73", 16:29):** se estableció que los flujos de **Botón Simple 2.0 operen exclusivamente con cuentas configuradas con `pago_unico = 1`** (ticket AD-151; caso de uso: entidades como FAVACARD que necesitan CBUs cortas reutilizables para cobros constantes sin reasignación). Daniel Zalazar manifestó preocupación por completar el saneamiento **antes del despliegue a las 21:00hs del 17/09**, para evitar fallas en clientes ya integrados — Andrea Orsini y Maria Eugenia Vila señalaron riesgo de problemas de transaccionalidad si el saneamiento falla. **Clasificado en rojo**, con necesidad de monitoreo riguroso post-implementación.
+
 ## 12. Eliminación del límite de $9.000.000 en creación de links de pago (AD V72, 2026-08-21)
 
 > Fuente: Reunión "Análisis de riesgos AD V72" (2026-08-21), minuta Gemini — sección Decisiones, "Eliminación de límite de pago" y Detalles ([00:42:44]).

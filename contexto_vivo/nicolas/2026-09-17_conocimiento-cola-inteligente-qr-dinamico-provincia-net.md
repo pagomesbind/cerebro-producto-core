@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/agente_cobros_y_pagos/masividad_
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit: PENDIENTE_2026-09-21
 ---
 
 En "Análisis de riesgo: AD V 73" se discutió una incidencia de demora superior a 35 segundos en la disponibilidad de datos de códigos QR dinámicos, atribuida a Provincia Net (mismo frente ya documentado en `masividad_generacion_qr.md`, ticket AD-935). Daniel Zalazar explicó que **se implementó una gestión inteligente de cola**: los clientes que superen las **200 solicitudes por minuto** se despriorizan temporalmente y pasan a una **cola secundaria**, en vez de competir por los mismos recursos que el resto del tráfico.

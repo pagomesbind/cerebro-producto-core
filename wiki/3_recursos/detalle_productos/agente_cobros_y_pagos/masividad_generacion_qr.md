@@ -24,12 +24,18 @@ En vez de asumir que acortar los intervalos de consulta resuelve el problema (po
 
 Pablo Gomes advirtió que aproximadamente el **97% de los códigos QR creados vencen sin ser abonados**, generando acumulación de deudas inútiles en las tablas del sistema. Queda pendiente confirmar con el equipo de infraestructura si esas tablas se purgan periódicamente.
 
-## Debate abierto — colas diferenciadas por cliente
+## Colas diferenciadas por cliente — resuelto por umbral de tasa, no por cliente nombrado (2026-09-17)
 
-Melisa Belpassi (Fintexa) planteó que separar las colas de procesamiento para clientes urgentes (ej. DPay) de la de Provincia Net sería más económico que seguir escalando recursos de infraestructura para absorber las ráfagas de este último. Tras debatir si la decisión compete a arquitectura o a negocio, se acordó retomar el análisis directamente con el equipo de arquitectura (Hernán) — sin resolución todavía.
+> Fuente: Reunión "Análisis de riesgo: AD V 73" (2026-09-17), minuta Gemini.
+
+El debate abierto arriba (Melisa Belpassi proponía separar colas de procesamiento para clientes urgentes como DPay de la de Provincia Net) se resolvió con una **gestión inteligente de cola implementada en AD V73**: los clientes que superen las **200 solicitudes por minuto** se despriorizan temporalmente y pasan a una **cola secundaria**, en vez de competir por los mismos recursos que el resto del tráfico. La solución final no separa por cliente nombrado sino por **umbral de tasa de peticiones** (200 req/min), que en la práctica despriorizaría a cualquier cliente que genere ráfagas de ese volumen, no solo a Provincia Net.
+
+Contexto del disparador: en esta misma reunión se discutió una incidencia de demora superior a 35 segundos en la disponibilidad de datos de códigos QR dinámicos, atribuida a Provincia Net (ticket AD-935, ya referenciado arriba). Daniel Zalazar explicó la mecánica de despriorización descrita.
+
+**Seguimiento operativo acordado:** el equipo de infraestructura debe monitorear el consumo de bases de datos y las colas de RabbitMQ durante el manejo de ráfagas (asignado color amarillo, no verde). Hernán Clarich queda a cargo de avisar preventivamente a Provincia Net sobre el envío de ráfagas en horarios específicos, para minimizar riesgos durante el despliegue.
 
 ## Ver también
 - [index.md](index.md) — módulo Agente de Cobros y Pagos.
 
 ---
-*Última actualización: 2026-09-11 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (reunión "Análisis COBRO", 2026-09-10).*
+*Última actualización: 2026-09-21 — `/context_merge`: resolución del debate de colas diferenciadas (reunión "Análisis de riesgo: AD V 73", 2026-09-17).*
