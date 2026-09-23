@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "posible contradicción interna entre dos reuniones del mismo día (2026-09-21), no contra el canon existente"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Descripción:** el mismo día (2026-09-21), en dos reuniones distintas sobre la misma arquitectura de segmentación PJ (ver item `2026-09-21_wallet_decision_segmentacion_pj_tipos_banca_segmentos`), se citaron dos topes operativos diferentes para una cuenta de persona jurídica mientras espera aprobación de Cumplimiento:

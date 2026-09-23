@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Novedad puntual para `direccion/iniciativas.md`:** en la reunión "Repaso Semanal líderes" del 22/09/2026, Fintexa (representada por Melisa Belpassi) decidió la resolución de fondo del bloqueo que tenía frenado el Frente A de `rechazos_bines_payway` (PRD-251) desde el 2026-09-21: en vez de sincronizar el archivo estático del frontend (`payment_methods.json`) con la base real `IssuerIdentification`, se acordó **eliminar la validación de bines del frontend directamente**, empaquetado dentro del despliegue de la versión 73 (previsto para el jueves 24/09/2026, según decisión de priorización de la misma reunión — v73 pasa por delante de la regresión de la APK 65 de POS).

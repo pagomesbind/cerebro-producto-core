@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Actualiza el gap `[2026-09-14] — Tarjeta Prepaga (Payway): segunda semana consecutiva de crecimiento explosivo combinado con rechazo muy por encima de lo habitual, sin causa confirmada` en `2_areas/gaps_y_preguntas.md`.**

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 **Qué pasó.** El 2026-09-22 el equipo de Bind PSP no pudo llegar al ambiente UAT de BPG (plataforma de Western Union / Pago Fácil) desde staging: el `POST` al endpoint de consulta de items de proveedor devolvía `connect ETIMEDOUT` (timeout de conexión, no una respuesta de error de la aplicación). Adriana Endzeliz (Comercial) escaló a Western Union con el detalle del request.

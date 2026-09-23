@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Primera vez que se releva de punta a punta el Paso 4 del flujo de onboarding de Persona Jurídica: el onboarding **personal** del representante legal, disparado automáticamente cuando el Paso 3 (cumplimiento) aprueba la solicitud. Hasta ahora `onboarding_personas_juridicas.md` solo documentaba el backoffice (Pasos 2 y 3) y el formulario público de carga de la PJ (Paso 1, capturado ayer); este paso corre en un **tercer sitio, completamente distinto**: `ustus-01.azurewebsites.net` — ni el backoffice ni el formulario público de la PJ.

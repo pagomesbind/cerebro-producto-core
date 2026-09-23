@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Decisión acordada en "Repaso Semanal líderes" (22/09/2026):** el equipo acordó **omitir el despliegue de la versión 19.0 de Ardid/Akurtech y saltar directo a la 19.1** en los ambientes. El roadmap ya documentado en el canon (`historico/historial_versiones.md`, actualizado 2026-09-21 vía mail de Lorena Macedo/Pentass) listaba la secuencia 1.19 (sin fix UTC 0) → 1.19.1 (con el fix UTC 0, sin fecha) → 1.20 — esta reunión confirma que **1.19.1 ya está disponible para subir** y que no tiene sentido pasar primero por 1.19 sin el fix.

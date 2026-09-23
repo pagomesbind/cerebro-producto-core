@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Novedad puntual para la cartera de iniciativas: `prd-147_legajo_worldsys` (comparación de costo Worldsys vs. Legajo Digital, tarea T-002 en curso desde el 2026-09-08, deadline semana del 15/09) suma el primer dato concreto de precio — Worsis no cobra arancel por ticket ni por soporte adicional, el costo es exclusivamente por infraestructura de almacenamiento en su repositorio cloud (sin cifra formal todavía). Detalle en `1_proyectos/proyecto-onboarding-estrategico/prd-147_legajo_worldsys/proyecto.md`.

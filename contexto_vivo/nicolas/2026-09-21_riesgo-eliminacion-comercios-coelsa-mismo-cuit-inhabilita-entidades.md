@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-09-21), Gonzalo Rivera reportó un problema operativo grave: cuando una entidad pide **eliminar** (no bloquear) un comercio en Coelsa, la eliminación deshabilita en Coelsa a **todas las demás entidades que comparten el mismo CUIT y actividad comercial** — es decir, todos los comercios dados de alta bajo el CUIT de BIN PCP. Esto ya había pasado antes (caso "Tinflanor") y **volvió a pasar el mismo día de la reunión**, con Tinflanor de nuevo.

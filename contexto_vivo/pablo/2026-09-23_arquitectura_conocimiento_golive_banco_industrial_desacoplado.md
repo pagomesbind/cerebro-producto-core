@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Contexto — qué es esta reunión:** "GD-6592 - Imple Divorcio" es la guerra de sala (war room) técnica del pase a producción de la nueva plataforma bancaria desacoplada de Banco Industrial ("BIN 24" / "Bind 24"), con participación conjunta de Banco Industrial (Álvaro Aguirreburualde, Dámaso Payares Tovar, Matías Díaz, Natalia Alegre, Carlos Natale, Oscar Rosas, entre otros), el proveedor tecnológico Poincenot (Lionel Raymundi, Oscar Álvarez) y Bind PSP (Ignacio Ghillini, Juan Ignacio Acevedo, Adrián Alves, Juan Martín Cots, Nicolás Pettinato, Tatiana Busko, entre otros). La reunión arrancó a la 01:45 GMT-3 del 22/09/2026 y se extendió hasta pasadas las 08:00 — un cutover nocturno clásico. El canon ya documenta este proyecto en `modelo_acoplado_vs_desacoplado.md` (migración de Personal Pay al modelo desacoplado con Banco Industrial, riesgo de ventana de sincronización de 2 minutos, especificación de `MovimientosComp`) — este item aporta la experiencia real del cutover en vivo, no solo el diseño previo.

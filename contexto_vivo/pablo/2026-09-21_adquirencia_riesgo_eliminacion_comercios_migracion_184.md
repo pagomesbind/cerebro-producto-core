@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Mecanismo confirmado por Gonzalo Rivera (Adquirencia):** en Coelsa, un comercio se identifica por la combinación CUIT + actividad comercial + ID PCP. Bind PSP tiene dadas de alta, bajo el mismo CUIT de BIN PCP, muchos comercios de entidades distintas. Cuando alguien pide **eliminar** (no bloquear) uno de esos comercios, la baja se aplica a nivel de esa combinación CUIT+actividad+PCP en Coelsa — lo que **deja de operar a todos los demás comercios que comparten ese mismo CUIT PCP**, no solo al que se quería dar de baja. Ya ocurrió al menos dos veces: con Tinflanor (caso histórico) y de nuevo la mañana del 2026-09-21.

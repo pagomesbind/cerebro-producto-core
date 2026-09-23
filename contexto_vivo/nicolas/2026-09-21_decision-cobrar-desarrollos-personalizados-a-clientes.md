@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 En la reunión "Producto" del 2026-09-21 (con Emma Vignoles, Pablo Gomes, Luciana Rudaz, Nicolás Colón) se acordó **empezar a cobrar a los clientes por las cotizaciones y desarrollos de funcionalidades personalizadas** — hasta ahora, pedidos puntuales de un cliente (ej. Inter) se cotizaban con Fintexa y se evaluaban como BAU/Build sin que necesariamente el cliente pagara el desarrollo.

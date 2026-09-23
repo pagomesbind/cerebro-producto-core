@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 Durante el análisis técnico-funcional de `titularidad_tarjeta` se evaluó apoyar un mecanismo nuevo (caché de validaciones de titularidad para pagos recurrentes) en Bóveda — el guardado de tarjeta de Botón Simple para pagos recurrentes. El PM confirmó que **Bóveda solo retiene los datos de la tarjeta hasta que finaliza la transacción en curso; se borran al terminar, no persisten entre transacciones**.

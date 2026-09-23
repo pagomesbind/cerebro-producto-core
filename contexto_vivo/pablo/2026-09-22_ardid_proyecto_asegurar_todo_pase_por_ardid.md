@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Contexto:** en una minuta de "Repaso Semanal líderes" del 2026-06-23 había quedado un action item para Pablo Gomes: "Crear ticket para gestionar la conexión y desconexión manual de Ardid" (switch on/off para poder operar aunque Ardid esté caído). El 2026-09-21, Agustín Grau (CTO de Fintexa) retomó el hilo preguntando por el estado de ese ticket.

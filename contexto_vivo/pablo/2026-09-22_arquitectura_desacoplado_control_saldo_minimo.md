@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa la sección de riesgo operativo ya existente con la mitigación concreta que la compañía decidió aplicar"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 ## Conocimiento

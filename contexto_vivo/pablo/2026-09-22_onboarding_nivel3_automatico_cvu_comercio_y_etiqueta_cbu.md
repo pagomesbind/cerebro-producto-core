@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Cierre del flujo de 4 pasos ya documentado (carga → Nivel 1 → Nivel 2/cumplimiento → onboarding personal del representante legal): una vez que el representante legal completa el Paso 4, corre un **Nivel 3 automático, sin intervención de ningún operador**, que termina de aprobar la solicitud y provisiona la cuenta.

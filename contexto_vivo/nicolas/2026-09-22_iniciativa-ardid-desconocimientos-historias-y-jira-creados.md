@@ -12,6 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 Avance del día sobre `ardid_desconocimientos` (PRD-248), que ya tenía PRD y estimación preliminar (14 SP) cargados:

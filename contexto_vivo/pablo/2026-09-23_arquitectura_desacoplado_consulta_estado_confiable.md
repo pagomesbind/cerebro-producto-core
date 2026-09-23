@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no — precisa el riesgo operativo ya documentado (ventana de sincronización), distinguiendo la consulta de saldo (sí puede quedar desactualizada) de la consulta de estado de una operación puntual (confiable de inmediato)"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 ## Conocimiento

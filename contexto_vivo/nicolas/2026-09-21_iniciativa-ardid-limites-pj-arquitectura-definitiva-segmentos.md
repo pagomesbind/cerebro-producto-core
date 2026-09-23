@@ -12,6 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 72d6140
 ---
 
 Novedad del proyecto "Segmentación de personas jurídicas en Ardid" ([ardid_limites_pj](../ardid_limites_pj/proyecto.md), sin Jira todavía): en la reunión "Ardid - Persona Jurídica" (2026-09-21), Nicolás Colón cerró con Rocio Revelli (Ardid) y Pablo Gomes la arquitectura definitiva de configuración: por cada organización, 3 tipos de banca (física mayor, física menor, jurídica) × 2 segmentos (estándar, restringido) = 6 combinaciones en Wallet. Las cuentas jurídicas nacen siempre en el segmento restringido (tope $1.000) hasta presentar documentación a PLD.

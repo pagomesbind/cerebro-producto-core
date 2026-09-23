@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Contexto:** el disparador fue la urgencia de prevenir fraude en altas de personas jurídicas (PJ) — hoy todas las cuentas nuevas (físicas y jurídicas) se dan de alta con el mismo tipo de banca ("todos"/"cliente empresa"), sin distinción, y las reglas de Ardid no pueden segmentar por PJ de forma independiente. El disparador inmediato: no se puede frenar a una PJ en el onboarding porque los documentos no se revisan a tiempo, y ya hubo varios casos de fraude con PJ.

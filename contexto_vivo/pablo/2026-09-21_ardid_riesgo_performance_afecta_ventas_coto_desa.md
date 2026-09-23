@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "posible actualización de un riesgo ya capturado sobre Grupo DESA (id 2026-09-14_clientes_grupo_desa_riesgo_continuidad_escalado_dir, régimen: 'en_cola' según contexto_vivo/index.md) — el archivo correspondiente no se encontró en disco al momento de esta captura (ver nota de anomalía en el cuerpo); no se pudo verificar ni completar in place"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **⚠️ Nota de anomalía de integridad, no del contenido de este item:** `contexto_vivo/index.md` lista el item `2026-09-14_clientes_grupo_desa_riesgo_continuidad_escalado_dir` (riesgo, adquirencia — "Grupo DESA amenaza con dar de baja el servicio, reclamo escalado a dirección") como `en_cola`, pero el archivo `wiki/1_proyectos/contexto_vivo/2026-09-14_clientes_grupo_desa_riesgo_continuidad_escalado_dir.md` **no existe en disco** — junto con una veintena más de items listados como `en_cola`/`capturado` en el índice de fechas 2026-09-16 a 2026-09-21 (ej. todo el lote `2026-09-18_*`, varios `2026-09-21_*`). Este barrido de `/sync_meetings` no investigó la causa (está fuera de su alcance) — se señala para que el usuario lo revise: puede ser una pérdida real de contenido capturado y nunca subido a `CEREBRO_CORE`, o un desfasaje entre el índice y el estado real de la carpeta. Por las dudas, este hallazgo se captura como item **nuevo** (no como edición in place del item de 09-14, que no se pudo localizar), citando el contenido conocido del item anterior por lo que registra el índice.

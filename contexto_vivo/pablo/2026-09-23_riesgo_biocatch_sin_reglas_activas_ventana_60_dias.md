@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Hallazgo (reunión "GD-6592 - Imple Divorcio", cutover de BIN 24, 22/09/2026):** Gonzalo Pereira (proveedor de Biocatch) explicó que la herramienta de control antifraude biométrico de la nueva plataforma BIN 24 **está recolectando información biométrica del dispositivo (patrón de escritura, movimiento del mouse) durante un período recomendado de 60 días, operando sin reglas de fraude activas en producción**. Como consecuencia directa, las solicitudes a la API de scoring devuelven valores bajos que permiten operar con normalidad — es decir, durante esta ventana **Biocatch no está efectivamente bloqueando ni señalando operaciones sospechosas**, solo recolectando datos para calibrar el modelo.

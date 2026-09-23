@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "wiki/3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md §9 punto 1 (mergeado 2026-09-18) — afirma explícitamente 'no existe un botón Observar, la función equivalente la cumple Contactar Cliente (punto 8)'"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Navegación en vivo (no simulada): se aprobó con un comentario general una solicitud jurídica real en STG desde el rol "Oficial De Negocio" (Nivel 1) — pasó automáticamente a "Pendiente Revisión Cumplimiento" (Nivel 2). Dos hallazgos que corrigen/completan lo documentado en §9 sobre esa misma pantalla:

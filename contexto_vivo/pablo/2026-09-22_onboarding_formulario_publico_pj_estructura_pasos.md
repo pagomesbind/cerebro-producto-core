@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Carga real (no simulada) del formulario público de onboarding de Persona Jurídica sobre el ambiente STG de La Virginia ("Mundo Virginia"), como usuario final/operador, con datos de test. Documenta el lado "de entrada" del flujo que `onboarding_personas_juridicas.md` ya cubre desde el backoffice (Pasos 2 y 3) — es decir, qué carga exactamente el usuario final antes de que la solicitud aparezca en la grilla de "Personas Jurídicas" con estado "Pendiente Revisión".

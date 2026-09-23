@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "wiki/3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md §9, puntos 4 y 10 (mergeados 2026-09-18) — punto 10 dice que el menú de cada documento en 'Archivos' es uniformemente 'Descargar, Visualizar, Marcar Pendiente'; punto 4 deja sin confirmar si existe una sección 'Propietarios' separada de Beneficiario Final"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 Navegación en vivo (no simulada) del backoffice STG sobre una solicitud jurídica real pendiente de revisión Nivel 1, para relevar el detalle del Paso 2 del flujo (operador de la organización / rol "Oficial De Negocio"). Dos correcciones/ampliaciones puntuales sobre lo ya mergeado en §9 de `onboarding_personas_juridicas.md`:

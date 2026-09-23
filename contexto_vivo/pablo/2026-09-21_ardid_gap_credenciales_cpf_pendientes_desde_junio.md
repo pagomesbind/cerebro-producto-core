@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Descripción:** en la misma reunión donde se repasó la arquitectura de segmentación PJ (ver item de canon relacionado), se enumeraron tres exigencias pendientes con el equipo de Ardid y Soporte, sin resolver:

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Problema recurrente:** en Botón Simple 2.0 (Do), un usuario que ya transfirió una vez a un CBU corto de Bind PSP puede tenerlo agendado en su app bancaria. Si vuelve a pagar una deuda distinta (mes siguiente, otro comprobante) usando ese CBU agendado en vez de generar el pago desde el link/QR vigente, el pago llega igual por CBU corto pero puede no imputarse a la deuda correcta — genera inconsistencias que a la entidad le cuesta mucho diagnosticar. Gonzalo Rivera citó como ejemplo concreto un caso reciente con **Fabacar**, donde costó bastante entender que el reclamo de "inconsistencia en el pago" era por esta causa.

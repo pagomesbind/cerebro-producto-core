@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Actualiza el item ya capturado `2026-09-21_ardid_riesgo_performance_afecta_ventas_coto_desa`** (en_cola, todavía sin merge al momento de esta captura) — mismo riesgo de negocio (problemas de performance de Ardid afectando la venta del servicio a Coto/Grupo DESA), con desarrollo nuevo un día después.

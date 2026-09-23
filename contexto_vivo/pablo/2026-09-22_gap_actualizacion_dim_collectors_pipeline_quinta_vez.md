@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 72d6140
 ---
 
 **Actualiza el gap `[2026-08-18] — dim_collectors sin orden posicional de columnas definido para exports sin encabezado` en `2_areas/gaps_y_preguntas.md`.**
