@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: no
 confianza: Media (contenido no accesible)
-estado: en_cola
+estado: ingestado
 ---
 
 # Reunión Provincia Net <> Bind — Transcripción Pendiente de Lectura Manual

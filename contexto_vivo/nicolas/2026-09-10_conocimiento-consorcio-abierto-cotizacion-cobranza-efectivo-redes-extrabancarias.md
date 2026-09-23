@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Mauro Suppan expuso la cotización presentada a **Consorcio Abierto** para el pago de expensas en efectivo mediante redes extrabancarias: una cuenta exenta con comisión de **0,3% de entrada y 0,3% de salida**. Advirtió que redes como **Ripsa** o **Cobro Express** cobran un recargo de **2% a 4%** por la recepción de efectivo — costo que el cliente todavía no contempló en su análisis.

@@ -6,7 +6,11 @@
 
 ## 2026
 
-### 2026-09-23 (pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen C, B e iniciativas régimen A
+### 2026-09-23 (corrida 2, nicolas) — ítem sin clasificar, ruteo explícito del usuario
+
+- `detalle_productos/adquirencia/integracion_modo_vata.md` — archivo nuevo: API VATA de MODO (validación de titularidad de tarjetas), servicio externo ruteado a pedido explícito del usuario, conectado con el proyecto activo `titularidad_tarjeta` (nicolas).
+
+### 2026-09-23 (corrida 1, pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen C, B e iniciativas régimen A
 
 - `datos/metricas_semanales.md` — reemplazado byte a byte (semana 202638, ya aplicado en una corrida anterior sin commitear) (pablo).
 - `datos/datos_metricas_semanales/` — reemplazado byte a byte (semana 202638; nota de dim_collectors quinta vez, ya aplicado en una corrida anterior sin commitear) (pablo).

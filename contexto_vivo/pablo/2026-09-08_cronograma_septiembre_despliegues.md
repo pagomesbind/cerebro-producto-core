@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/
 tipo_destino: actualizar
 contradice: "no"
 confianza: Alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Cronograma de Despliegues — Septiembre 2026

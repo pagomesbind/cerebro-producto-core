@@ -53,6 +53,25 @@ A continuación se describen las ceremonias clave a llevar a cabo por cada versi
 - [ ] Monitorear pasaje y documentar el resultado.
 - [ ] Si hubo algún problema o exepción durante el pasaje a producción, desasignar de la versión a los tickets que finalmente no fueron publicados.
 
+## Snapshot — calendario de despliegues de septiembre 2026
+
+> Instantánea puntual de un mes concreto, útil como ejemplo real de cómo se aplicó el ciclo de arriba — no reemplaza el proceso general. Fuente inicial: mail "Cronograma Septiembre" de Matías Alzogaray (2026-09-07); actualizado y consolidado con el tablero de seguimiento presentado en la reunión "Weekly - Producto / Operaciones" del 2026-09-14.
+
+**Confirmadas (según el tablero del 14/09, con fecha):**
+- **Onboarding Persona Jurídica (La Virginia):** 16/09 (terminó saliendo el 17/09 por un día de corrimiento — ver `direccion/iniciativas.md`, proyecto PRD-223).
+- **Pagos Efex (Pagos FX) — versión 72.3 TR:** 17/09 (confirmado también en `direccion/decisiones.md` [2026-09-11]).
+- **PMC (Adquirencia) — 22/09:** archivo PMC vacío (arreglo) + PMC Impuestos Misiones (ambos pedidos de Soporte).
+- **Adquirencia V 73:** 24/09 — masividad de Provincia Net + resto de QR (Botón 2.0), Pagos Efex del portal, tratamiento de contracargos, convivencia de R por T con Botón 2.0 (pedido de Favacard).
+- **Wallet — versión 73:** 28/09 — soporte de Getnet (prioridad 1, ver `tareas.md` T-031) y alta de comitente recuperando de onboarding.
+
+**Sin fecha confirmada al 14/09:**
+- **Emisión — GetNet** (DEM-1964, DEM-1965 — circuito nuevo, depende de T-068/T-069).
+- **Adquirencia:** ProvinciaNet (DAD-2943), Favacard (DAD-2437), incorporar arancel Coelsa en webhook de Cobro (DAD-2801), fix de devoluciones por Pago Fácil, error de reporte de transacciones en el Admin, mejora de tiempos de liquidación (estas 3 últimas, prioridad 2/3).
+- **Wallet:** reporte normativo FSI, desactivación automática de cuentas bloqueadas.
+- **Ardid — versión 19:** pendiente de que RAW (Fintexa) entregue documentación.
+- **Servicios:** fix tarjeta prepaga, error de validación de recaptcha.
+- **Tienda Nube — error en consulta de transferencias salientes:** no se pudo resolver en el mes por complejidad de desarrollo (Melisa Belpassi, Fintexa) — se traslada a la versión 74.
+
 ## Ver también
 
 - [gestion_jira.md](gestion_jira.md) — estados de ticket de desarrollo sobre los que operan estas ceremonias (`FINALIZADO` es el nombre real y único del estado terminal).
@@ -60,4 +79,5 @@ A continuación se describen las ceremonias clave a llevar a cabo por cada versi
 - [requerimientos_al_equipo_tecnico.md](requerimientos_al_equipo_tecnico.md) — cómo entra un pedido al backlog que luego pasa por este ciclo mensual.
 
 ---
-*Última actualización: 2026-08-12 — Reubicado desde `detalle_productos/transversal/procesos_internos.md §1` (reestructuración PARA en cascada). Contenido sin cambios; corrección `HECHO`→`FINALIZADO` ya aplicada en la fuente (2026-07-04).*
+*Última actualización: 2026-09-23 — `/context_merge`: nueva sección "Snapshot — calendario de despliegues de septiembre 2026" (cronograma inicial del 07/09 consolidado con el tablero del 14/09), con permiso explícito del usuario para procesar el backlog de régimen D acumulado (pablo + nicolas).*
+*Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/transversal/procesos_internos.md §1` (reestructuración PARA en cascada). Contenido sin cambios; corrección `HECHO`→`FINALIZADO` ya aplicada en la fuente (2026-07-04).*

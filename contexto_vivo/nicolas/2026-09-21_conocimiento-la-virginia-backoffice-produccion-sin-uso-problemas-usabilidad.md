@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Producto" del 2026-09-21 (con Emma Vignoles), se discutió el estado del **backoffice de La Virginia** para operadores de personas jurídicas: ya se encuentra desplegado en producción, pero **sin uso activo** por parte del equipo/cliente.

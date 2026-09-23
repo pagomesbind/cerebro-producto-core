@@ -31,10 +31,15 @@ OKR pendiente de definir por la PM. Sin métrica que trackear todavía.
 
 OKR pendiente de definir por el PM. Sin métrica que trackear todavía.
 
-## Restricción de capacidad (contexto obligatorio para leer cualquier gap de arriba)
+## Restricción de capacidad (contexto para leer cualquier gap de arriba)
 
-**~1 IDEA entregada cada 3 meses, frente a ~6 IDEAs abiertas simultáneamente en Jira** (dato aportado por el PM en la reunión de validación de estrategia del 2026-07-20, ver T-035 en [`2_areas/tareas_producto.md`](../tareas.md)). Ningún target de arriba es alcanzable sin priorizar duro contra esta restricción — es el dato que debería vetar cualquier lectura optimista de "vamos a cerrar varios KRs en paralelo".
+**Retirada la cifra hardcodeada anterior (2026-09-10, decisión del PM).** Hasta esta fecha, el bloque citaba "~1 IDEA entregada cada 3 meses, frente a ~6 IDEAs abiertas simultáneamente en Jira" como dato duro de Gate 2 — el PM aclaró que fue un comentario coloquial dicho al pasar en la reunión de validación de estrategia del 2026-07-20 (T-035), no una medición real, y pidió sacarlo como regla dura del Cerebro: ningún target de arriba debería seguir leyéndose contra esa cifra.
+
+**Reemplazo de criterio (sin cifra oficial todavía):** la capacidad real del equipo debe medirse a partir de `/sync_releases` — story points entregados por versión publicada, distinguiendo BAU de Build. Esa medición formal sigue pendiente (T-083 en `1_proyectos/tareas.md`).
+
+**Candidato informal, no confirmado como reemplazo (2026-09-21):** en dos reuniones distintas del mismo día ("Producto", con Emma Vignoles/Nicolás Colón/Pablo Gomes) se mencionó, al pasar, que la entrega mensual de Producto/desarrollo **cayó de ~300 a ~100 puntos de historia por mes** — caída de aproximadamente 2/3. No viene de `/sync_releases` ni de un reporte verificado, sino de una mención conversacional sin fuente de datos dura citada, sin período de comparación exacto, ni causa raíz confirmada (¿bajas de personal, foco en soporte/mantenimiento, cambio de metodología de estimación?). Se documenta también como riesgo transversal en [`riesgos.md`](../riesgos.md) ("Capacidad de entrega de Producto/desarrollo cayó de ~300 a ~100 puntos de historia por mes"). **Queda para el PM decidir** si usar esta cifra como aproximación mientras no exista el dato formal de `/sync_releases`, o esperar esa medición antes de volver a citar una restricción de capacidad como dato duro.
 
 ---
-*Última actualización: 2026-07-21 — primera medición real de ambas NSM ($147.326 M API BANK, $10.579 M Payway, semana 202629) a partir de `/sync_metrics`. El gap contra el target sigue abierto: falta el valor de mercado.*
+*Última actualización: 2026-09-23 — `/context_merge`: retirada la restricción de capacidad hardcodeada (decisión del PM, 2026-09-10); sumado el candidato informal ~300→~100 SP/mes (2026-09-21), sin confirmar como reemplazo oficial.*
+*Última actualización anterior: 2026-07-21 — primera medición real de ambas NSM ($147.326 M API BANK, $10.579 M Payway, semana 202629) a partir de `/sync_metrics`. El gap contra el target sigue abierto: falta el valor de mercado.*
 *Creado: 2026-07-20 — primer archivo de la capa de Dirección (`0_direccion/`), en el marco de la reforma estructural del Cerebro (ver `0_direccion/decisiones.md`). Sin sync automático propio todavía — se actualiza a mano cuando aparece una medición nueva.*

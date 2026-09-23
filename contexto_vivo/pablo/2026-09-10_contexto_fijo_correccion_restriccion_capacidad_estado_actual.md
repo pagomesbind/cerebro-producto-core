@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/estado_actual.md
 tipo_destino: actualizar
 contradice: "2_areas/direccion/estado_actual.md §Restricción de capacidad (líneas 34-38) — ese bloque afirma como dato duro '~1 IDEA entregada cada 3 meses, frente a ~6 IDEAs abiertas simultáneamente en Jira', citando la reunión de validación de estrategia del 2026-07-20. El PM aclara ahora que ese número fue un comentario coloquial dicho al pasar en esa reunión, no una medición real, y pide sacarlo como regla dura del Cerebro."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

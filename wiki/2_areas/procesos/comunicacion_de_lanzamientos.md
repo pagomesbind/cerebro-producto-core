@@ -41,3 +41,11 @@ Esta sección cubre comunicación **externa** (a clientes) y el **calendario** d
 **Propuesta discutida:** Mariana Nadalin (Fintexa) propuso armar un calendario de ventanas de despliegue anticipado para los próximos pasajes (empezando por la v73, sin fecha exacta todavía — fines de septiembre o principios de octubre), para poder avisar a las entidades con antelación de que habrá una actualización sin comprometer todavía una fecha exacta, en vez de definir y comunicar la fecha recién en cada reunión de riesgo puntual. Matias Alzogaray (PM de desarrollo, Fintexa) aceptó "probarlo" — **no es una decisión cerrada**, es una prueba a evaluar con la v73.
 
 **Estado:** Propuesta a probar, sin decisión formal. A confirmar en un próximo barrido si se implementó con la v73.
+
+## Decisión — dar siempre 1-2 semanas de margen al comunicar fechas de producción a clientes (2026-09-09)
+
+> Fuente: reunión "Join Soporte Clientes" (2026-09-09), minuta Gemini.
+
+**Decisión (Acordada):** al comunicar fechas de entrega a producción a los clientes, dar siempre una **ventana adicional de 1 a 2 semanas** sobre la fecha interna real, para gestionar y calmar la ansiedad del cliente ante posibles atrasos. Complementa (no reemplaza) el acuerdo de arriba sobre el canal/formato de aviso **interno** — esta decisión agrega un criterio de **cuánto margen** dar en la fecha comunicada **externamente**, hacia el cliente.
+
+**Aplicación inmediata en la misma reunión — caso La Virginia:** Mauro Suppan y Adriana Endzeliz repasaron la fecha de producción del nuevo flujo de onboarding jurídico de La Virginia, fijada para el **18 de septiembre**, ya incorporando esta ventana estratégica al comunicarla al cliente. Matías Alzogaray confirmó que la fecha se mantenía conforme al alcance previsto — aunque no se cruzó explícitamente contra la fecha de entrega a QA Externo (21/09) que Fintexa había confirmado el día anterior por mail, dejando abierta la duda de si el margen ya contemplaba ese dato. La fecha real terminó siendo el 17/09 (ver `direccion/iniciativas.md`, PRD-223) — un día antes del compromiso, no después, así que la tensión de cronograma no se materializó.

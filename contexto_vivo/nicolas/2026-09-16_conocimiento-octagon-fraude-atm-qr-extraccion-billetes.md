@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md (ficha OCTAGON, par
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Incidente:** Octagon (cliente con ficha en `log_clientes.md` / `casos_de_uso_clientes.md`, agente de cobros y pagos que ya opera transacciones en cajeros vía QR) detectó un bug de fraude en su función de extracción de efectivo por QR en ATM.

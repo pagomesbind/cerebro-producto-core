@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/gestion_jira.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Contexto/Problema:** Pablo Gomes criticó la falta de rigor de Fintexa en la documentación y carga de boletos de desarrollo, señalando puntualmente un comentario incompleto de Marcos Sánchez sobre el error de PMC (archivo vacío). También se detectó que Nicolás Colón recibe notificaciones de tickets de forma dispersa (mail + grupo de Teams, a veces en horarios como las 2:37 AM), sin que el análisis quede centralizado en el propio ticket.

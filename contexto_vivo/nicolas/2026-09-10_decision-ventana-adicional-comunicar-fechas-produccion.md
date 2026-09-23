@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/procesos/comunicacion_de_lanzamientos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Decisión (Acordada, 2026-09-09):** se estableció otorgar una ventana de tiempo adicional de **1 a 2 semanas** al comunicar las fechas de entrega a producción a los clientes, para gestionar y calmar su ansiedad ante posibles atrasos.

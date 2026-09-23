@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md (ficha Carrefour (B
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Incidente:** Carrefour (BSF — Banco de Servicios Financieros Carrefour S.A.U., ficha Wallet en `log_clientes.md`/`casos_de_uso_clientes.md`) confirmó un incidente de fraude en su aplicación móvil: detección de transacciones no autorizadas que resultaron en extracción fraudulenta de fondos desde cuentas de **217 clientes** hacia cuentas de terceros.

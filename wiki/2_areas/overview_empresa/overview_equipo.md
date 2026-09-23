@@ -20,6 +20,27 @@ Se presentó oficialmente a **Mariana Nadalin** como nueva **Gerente de Operacio
 
 **Cronograma presencial en Buenos Aires del equipo Fintexa** (coordinado en la misma reunión): Melisa Belpassi y Nicolás Pico asisten a partir del 19/08; Matías Alzogaray de miércoles a viernes.
 
+## Nueva estructura matricial de Grupo BIND (vigente desde septiembre 2026)
+
+> Fuente: mail "Nueva Organización de Grupo BIND" — Marcela Fernie (CEO de Grupo BIND), 2026-09-08, 22:02, con PDF adjunto (`Org Grupo_BIND_sept_2026.pdf`, organigrama actualizado).
+
+Comunicado oficial de la CEO de Grupo BIND: desde que asumió en julio de 2026, Marcela Fernie planteó la pregunta estratégica "¿qué BIND queremos construir para los próximos años?", con la visión de pasar de "un grupo de compañías" a funcionar como "un verdadero ecosistema" — compartir capacidades, conocimiento, tecnología y talento entre compañías que mantienen sus fortalezas pero quedan más conectadas, con decisiones ágiles, responsabilidades claras y el cliente en el centro.
+
+**Estructura nueva:** le reportan a Marcela Fernie (CEO Grupo) 5 roles matriciales de alcance transversal a todo el ecosistema (Banco + Bind PSP + Bind Inversiones + otros negocios):
+
+| Rol | Persona | Cambio |
+|---|---|---|
+| Chief Financial Officer | Rafael Medina Mateazzi | Suma a su rol actual en el Banco |
+| Director a cargo de Compliance y Auditoría | Hernán Lede | Nuevo |
+| Director a cargo de Créditos | Alejandro Coscia | Nuevo |
+| Chief Marketing & People Officer | Valeria Abadi | Nuevo |
+| Gerente de Planeamiento y Control de Gestión | Emanuel Belliard | Nuevo |
+| **Director Comercial (transitorio)** | **Marcela Fernie + Sebastián Habif** | Liderado por la CEO mientras se define la estructura definitiva |
+
+Los CEOs de cada compañía del grupo (incluida Bind PSP) siguen reportándole a Marcela Fernie, pero ahora con esta estructura matricial superpuesta encima de la organización interna de cada compañía (ver "Áreas internas" abajo, que sigue siendo la estructura propia de Bind PSP, sin cambios por esta reforma).
+
+**Impacto esperado:** mejor integración a nivel ecosistema, mayor cobertura en compliance/créditos/marketing, control de gestión centralizado, y estrategia comercial unificada (pendiente la definición permanente del rol de Director Comercial).
+
 ## Áreas internas
 
 | Área                               | Responsabilidad core                                                                                                                                                                                                                                                             | Líder / Responsable                 | Notas operativas                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -42,6 +63,7 @@ Se presentó oficialmente a **Mariana Nadalin** como nueva **Gerente de Operacio
 | **Pentass** | Software factory que desarrolla el producto **Ardid**. |
 
 ---
-*Última actualización: 2026-08-18 — `/sync_mails`: nueva Gerente de Operaciones (Mariana Nadalin) y cronograma presencial del equipo Fintexa en Buenos Aires.*
+*Última actualización: 2026-09-23 — `/context_merge`: nueva sección "Nueva estructura matricial de Grupo BIND" (5 roles transversales reportando a la CEO Marcela Fernie, vigente desde septiembre 2026).*
+*Última actualización anterior: 2026-08-18 — `/sync_mails`: nueva Gerente de Operaciones (Mariana Nadalin) y cronograma presencial del equipo Fintexa en Buenos Aires.*
 *Última actualización anterior: 2026-07-14 — `/sync_meetings` (backfill 30 días): reestructuración organizacional del 2026-06-25 (Comité Directivo Reducido, Hernán Clarich CTO, estandarización de onboarding). Ver `log_decisiones.md`.*
 *Última actualización anterior: 2026-07-04 — Completado el Equipo de QA (IT) con Bethania Tornari y Ana Moreno, Analistas de QA (confirmado por el usuario, cerraba un gap de iniciales sin identificar en el diagrama de responsables de Jira).*

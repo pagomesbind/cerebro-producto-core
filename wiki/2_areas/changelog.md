@@ -6,7 +6,16 @@
 
 ## 2026
 
-### 2026-09-23 (pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen A (riesgos, decisiones, iniciativas), completando una corrida anterior interrumpida
+### 2026-09-23 (corrida 2, pablo + nicolas) — régimen D completo, con permiso explícito del usuario ("Actualizá todo lo de regimen D")
+
+- `procesos/publicaciones_mensuales.md` — nueva sección "Snapshot — calendario de despliegues de septiembre 2026" (cronograma del 07/09 + tablero del 14/09, fusionados) (pablo + nicolas).
+- `procesos/gestion_jira.md` — §1.7 suma la decisión de que todo ticket de Fintexa pase obligatoriamente por Nicolás Colón (nicolas).
+- `procesos/comunicacion_de_lanzamientos.md` — nueva decisión: ventana de 1-2 semanas de margen al comunicar fechas a clientes (nicolas).
+- `direccion/estado_actual.md` — retirada la restricción de capacidad hardcodeada (decisión ya aprobada del PM); sumado el dato candidato ~300→~100 SP/mes sin confirmar como reemplazo oficial (pablo).
+- `overview_empresa/overview_equipo.md` — nueva sección: estructura matricial de Grupo BIND (5 roles reportando a la CEO, vigente desde septiembre 2026) (pablo).
+- `clientes/casos_de_uso_clientes.md` — actualizadas las fichas de La Virginia (4 novedades: endpoint W73, fecha reafirmada + Copel + staging, despliegue sin cambio de URL, backoffice sin uso), INTER (cobro de desarrollos personalizados + 4 pedidos activos), OCTAGON (fraude ATM/QR, severidad alta), Carrefour BSF (fraude transferencias app móvil, severidad alta), Arcos Dorados (fecha corrida a octubre), Consorcio Abierto (cotización redes extrabancarias); ficha nueva Provincia Net (sin relevar por `/sync_customers` todavía) (pablo + nicolas).
+
+### 2026-09-23 (corrida 1, pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen A (riesgos, decisiones, iniciativas), completando una corrida anterior interrumpida
 
 - `gaps_y_preguntas.md` — actualizadas 3 entradas ya aplicadas en una corrida anterior sin commitear: dim_collectors quinta vez, Tarjeta Prepaga tercera semana, y nueva entrada de caída generalizada de volumen NSM#1/NSM#2 (pablo).
 - `riesgos.md` — 6 riesgos nuevos: performance de Ardid afecta comercialización a Coto/Grupo DESA (con actualización de causa raíz); capacidad de entrega cayó de ~300 a ~100 SP/mes; eliminar un comercio en Coelsa deshabilita entidades que comparten CUIT; riesgo de fraude en lanzamiento de INTER (7.600 altas/30 días); Biocatch sin reglas activas durante 60 días de baseline; spread de Dólar COMBI puede hacerlo comercialmente inviable (pablo + nicolas).
