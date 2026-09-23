@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 En la reunión "Producto" del 2026-09-21 (con Emma Vignoles), se discutió el estado del **backoffice de La Virginia** para operadores de personas jurídicas: ya se encuentra desplegado en producción, pero **sin uso activo** por parte del equipo/cliente.

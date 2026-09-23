@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: no
 confianza: Media (contenido no accesible)
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 # Reunión Provincia Net <> Bind — Transcripción Pendiente de Lectura Manual

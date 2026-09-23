@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "Complementa (no contradice) el item en_cola 2026-09-09_conocimiento-la-virginia-endpoint-comitente-confirmado-w73 (mismo tema, fuente mail Fintexa), que dejaba abierta la duda de si la fecha compromiso del 18/09 seguía en pie dado que QA Externo entrega recién el 21/09."
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 Esta reunión (2026-09-09, mismo día que el mail de Fintexa "RE: Version W 73 Wallet Service" que generó el item `2026-09-09_conocimiento-la-virginia-endpoint-comitente-confirmado-w73`) toca el mismo tema desde el ángulo de Soporte/Integraciones y aporta 3 datos nuevos:

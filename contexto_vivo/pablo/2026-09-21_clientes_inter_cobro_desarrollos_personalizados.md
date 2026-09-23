@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 25b8e37
 ---
 
 **Cliente ya con ficha:** Inter (`log_clientes.md`, productos Wallet/Dólar CCL, alta 2025-12-02).

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 25b8e37
 ---
 
 **Hallazgo (reunión "Producto", 2026-09-21):** al discutir la capacidad reducida del equipo de producto/desarrollo, se mencionó que la entrega actual promedia **~100 puntos de historia mensuales**, frente a **~300 anteriores** — sin especificar el período exacto de comparación ("antes" no tiene fecha), ni si el dato surge de un reporte formal (Jira/velocity) o es una estimación conversacional de quien habló en la reunión (identificado en la minuta solo como "alguien en 7F (Plaza San Martin, 7)", posible error de transcripción de Gemini sobre el nombre real del hablante).

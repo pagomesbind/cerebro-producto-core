@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 # Nueva Organización de Grupo BIND

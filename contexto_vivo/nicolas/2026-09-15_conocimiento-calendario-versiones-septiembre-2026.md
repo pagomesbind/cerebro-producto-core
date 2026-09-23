@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 **Fuente:** reunión "Weekly - Producto / Operaciones" (2026-09-14), presentado por Matías Alzogaray sobre el tablero de seguimiento de despliegues (código de colores por fecha, con métricas históricas de cuánto tardan los temas en salir).

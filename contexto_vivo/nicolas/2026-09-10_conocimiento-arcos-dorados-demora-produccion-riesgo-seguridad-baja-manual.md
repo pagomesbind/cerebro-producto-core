@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 **Estado del proyecto:** Adriana Endzeliz solicitó el flujo de validación de DNI con datos de APD para el cierre de la cuenta de Arcos Dorados, pero las reuniones de definición quedaron suspendidas temporalmente por definiciones internas. Emma Vignoles confirmó que **la fecha de salida a producción se corrió de septiembre a octubre** por retrasos en el desarrollo.

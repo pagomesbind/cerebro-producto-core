@@ -11,6 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: baja
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 Pablo Gomes reenvió el 2026-09-10 a Nicolás Colón, **sin agregar comentario propio**, una cadena de mails de enero 2025 (Emma Vignoles → Pablo Gomes, e Ignacio Heidenreich de Modo → Emma Vignoles) sobre una **API de validación de titularidad de tarjetas** ofrecida por Modo:

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 En la reunión "Join Soporte Clientes" (2026-09-16), Mauro Suppan consultó a Matias Hernan ALZOGARAY cómo se gestionaría la entrega a producción de la modificación de onboarding para **La Virginia** — puntualmente si implicaría una nueva dirección web o back office. Matias Hernan ALZOGARAY confirmó que **el despliegue se realiza manteniendo las mismas direcciones**, y que se notificará al cliente de la disponibilidad de la forma habitual (sin comunicación especial de cambio de URL).

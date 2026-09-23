@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/direccion/estado_actual.md §Restricción de capacidad (líneas 34-38) — ese bloque afirma como dato duro '~1 IDEA entregada cada 3 meses, frente a ~6 IDEAs abiertas simultáneamente en Jira', citando la reunión de validación de estrategia del 2026-07-20. El PM aclara ahora que ese número fue un comentario coloquial dicho al pasar en esa reunión, no una medición real, y pide sacarlo como regla dura del Cerebro."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 25b8e37
 ---
 
 **Decisión (2026-09-10, Pablo Gomes):** sacar del canon la "Restricción de capacidad" de `2_areas/direccion/estado_actual.md` (líneas 34-38) tal como está redactada hoy — el dato "~1 IDEA entregada cada 3 meses, frente a ~6 IDEAs abiertas simultáneamente en Jira" fue un decir coloquial de una reunión (T-035, validación de estrategia del 2026-07-20), no una medición real de capacidad, y no debería seguir funcionando como el dato que "vetaría cualquier lectura optimista" en la evaluación de Gate 2 de las IDEAs.

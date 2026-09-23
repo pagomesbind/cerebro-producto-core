@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 Actualiza la ficha de **La Virginia** (`casos_de_uso_clientes.md`) y complementa el item ya ingerido `2026-09-02_cliente-la-virginia-fecha-pj-18-sept-demo-staging-endpoint-cuenta-comitente-v73` (archivado en `4_archivos/contexto_ingestado/`): en esa reunión del 02/09, Matías Alzogaray había confirmado de palabra que el endpoint de alta de cuenta comitente (tareas técnicas 1424/1425 confirmadas, 1423 en evaluación) formaba parte de la versión 73.

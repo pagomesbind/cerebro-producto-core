@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: Alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 ## Cronograma de Despliegues — Septiembre 2026

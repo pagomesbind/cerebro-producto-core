@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 25b8e37
 ---
 
 **Incidente:** Octagon (cliente con ficha en `log_clientes.md` / `casos_de_uso_clientes.md`, agente de cobros y pagos que ya opera transacciones en cajeros vía QR) detectó un bug de fraude en su función de extracción de efectivo por QR en ATM.
