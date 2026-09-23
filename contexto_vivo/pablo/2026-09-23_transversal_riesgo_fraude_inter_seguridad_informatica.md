@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Riesgo detectado en la MINUTA de Repaso Semanal líderes del 22/09/2026 (minuta directa de Matías Alzogaray, no Gemini):** el equipo identificó una necesidad crítica de reforzar la seguridad informática ante un alto riesgo de fraude en el lanzamiento de INTER — se registraron **7.600 altas en menos de 30 días**, un volumen que el TL;DR de la minuta describe explícitamente como "métricas alarmantes". Las acciones acordadas para mitigarlo: exigir todos los comprobantes de las operaciones y agilizar los bloqueos inmediatos de cuentas sospechosas. Ya se ejecutó una limpieza/depuración nocturna en las bases de datos de comprobantes y operaciones como primera medida.

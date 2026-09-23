@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/relacion_con_fintexa.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-09-21), Mariana Nadalin y Pablo Gomes reportaron deficiencias de rendimiento en Ardid: demoras y fallas en la generación de reportes ("tirás un reporte y no trae datos, etc."). El problema es relevante porque Bind está **comercializando/ofreciendo el servicio de Ardid a clientes externos** — Coto ya lo tiene y a **Grupo Desa** se le ofreció la semana anterior (reunión comercial) — y la deficiencia de performance compromete esa oferta.

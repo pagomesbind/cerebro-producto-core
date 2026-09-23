@@ -6,6 +6,27 @@
 
 ## 2026
 
+### 2026-09-23 (pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen C, B e iniciativas régimen A
+
+- `datos/metricas_semanales.md` — reemplazado byte a byte (semana 202638, ya aplicado en una corrida anterior sin commitear) (pablo).
+- `datos/datos_metricas_semanales/` — reemplazado byte a byte (semana 202638; nota de dim_collectors quinta vez, ya aplicado en una corrida anterior sin commitear) (pablo).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — nueva subsección en Parte 3: riesgo de eliminar un comercio con CUIT compartido en Coelsa (agravado por migración PSP 164→184) (pablo).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — nueva §6, cross-referencia al hallazgo de reutilización de CBU corto (FAVACARD) (pablo).
+- `detalle_productos/adquirencia/pedidos_de_clientes_y_hallazgos_operativos.md` — nuevo hallazgo (septiembre 2026): reutilización de CBU corto agendado, caso FAVACARD, método de detección y auditoría v74 (pablo + nicolas).
+- `detalle_productos/ardid/index.md` — nueva sección "Gaps operativos abiertos" (credenciales CPF, listados Credicuotas/Coto, enrutamiento 100% a Ardid) (pablo).
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §14.6, pregunta de Fintexa (CTO) sobre switch manual vs. rechazo global ya confirmado en W73 (pablo).
+- `detalle_productos/ardid/despliegues_y_operacion.md` — nueva §4, dueño técnico y motivo histórico de la ventana de retención de MongoDB (45 días) (nicolas).
+- `detalle_productos/ardid/modulo_pagos.md` — nueva §14.3, el endpoint `/Transaction` admite BIN/últimos 4 pero Bind no los envía hoy (nicolas).
+- `detalle_productos/ardid/historico/historial_versiones.md` — decisión de saltar directo a la versión 19.1, omitiendo la 19.0 (pablo).
+- `detalle_productos/wallet/organizaciones_y_configuracion.md` — nueva §8, segmentación por tipo de banca para PJ (3×2 segmentos, tope $1.000, gap del tope $1.000.000 sin reconciliar) (pablo).
+- `detalle_productos/adquirencia/integracion_prisma_conexion_directa.md` — archivo nuevo: manual ISO 8583 de integración directa con Prisma, tabla completa de códigos de respuesta (pablo).
+- `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — nuevo párrafo en §4: fix temporal acordado y resolución de fondo (eliminar validación del frontend, v73) (nicolas).
+- `detalle_productos/adquirencia/boton_simple_2_0.md` — nueva §14, Bóveda solo retiene datos de tarjeta durante la transacción en curso (nicolas).
+- `detalle_productos/servicios/pago_facil_mantenimiento.md` — nueva §7, BPG UAT timeout de networking de Western Union, resuelto en el día (nicolas).
+- `detalle_productos/onboarding/onboarding_personas_juridicas.md` — nueva §8.2 (gap de PLD, ambiente de pruebas Octagon), corrección de §9 puntos 1/4/10 (botón Observar, Propietario Directo, menú de Archivos), nueva §10 (manual operativo de los 4 pasos con capturas reales) (pablo).
+- `arquitectura_sistema/modelo_acoplado_vs_desacoplado.md` — mitigación del riesgo de ventana de sincronización (política de saldo mínimo), precisión saldo vs. estado de operación, nueva sección con 3 regresiones del cutover de Banco Industrial (22/09) (pablo).
+- `arquitectura_sistema/relacion_con_fintexa.md` — nueva §4, desvío de responsabilidad Fintexa↔Penta sobre performance de Ardid (pablo + nicolas).
+
 ### 2026-09-21 (pablo) — corrida 2, sesión de merge desatendida sobre el backlog de contexto_vivo/pablo
 
 - `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — nueva §4: mecanismo confirmado del checkout de tarjeta no presente (dos sistemas independientes — `payment_methods.json` frontend vs. `IssuerIdentification` backend — con chequeo de consistencia que rechaza con 400 si discrepan); corrección de §3.5 (pablo).

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Fuente:** Ana Laura Irrazabal (Analista de PLA/FT, Gerencia de Prevención de LA/FT/FP y Cumplimiento de BIND) revisó el entorno de pruebas (testing) del "sistema de onboarding de desarrollo propio" que el equipo está por implementar — este es el sistema al que se integraría Octagon (ver `2026-09-03_onboarding_octagon_paquete_datos_integracion`, en cola, y la tarea T-057 de Pablo Gomes).

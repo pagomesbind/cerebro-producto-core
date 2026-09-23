@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 **Contexto — este hilo pertenece al proyecto Mastercard Move / PagosFX de Luciana Rudaz, Pablo Gomes solo está en copia.** Se captura acá porque el riesgo (viabilidad comercial del producto) es transversal y todavía no tiene item propio en el canon; el PM dueño real es Luciana Rudaz.

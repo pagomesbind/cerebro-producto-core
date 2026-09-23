@@ -272,7 +272,15 @@ Si en el **primer pago** con una tarjeta se ingresa una fecha de vencimiento inc
 
 No quedó registrado en la reunión si existe hoy un ticket o pedido formal para automatizar este workaround o revisar la vigencia de la regla heredada — es un hallazgo de mecánica de producto, no una decisión de rediseño.
 
-### 14.3 Mejora pedida — incluir el ID de regla de Ardid en los códigos de rechazo de TRX
+### 14.3 El endpoint `/Transaction` admite BIN y últimos 4 dígitos, pero Bind no los envía hoy (2026-09-22)
+
+> Fuente: confirmación directa del PM durante el análisis técnico-funcional (`/idea_solution`) de `titularidad_tarjeta`, 2026-09-17/22.
+
+El endpoint `/Transaction` del motor antifraude tiene los campos `Bin` y `PanLast4` como **opcionales** en su contrato, pero **Bind PSP hoy no los envía en ningún caso** — solo se envía el hash completo de la tarjeta (campo `HASH`, consistente con §14.1). Consecuencia práctica confirmada: el BIN y los últimos 4 dígitos de una tarjeta **no se retienen en ningún punto del flujo de pago** más allá del momento en que se calcula ese hash — se descartan inmediatamente después.
+
+Relevante para cualquier proyecto futuro que necesite datos truncados de la tarjeta (BIN, últimos 4, vencimiento) en el mismo flujo de pago: hoy no están disponibles "de rebote" en ningún llamado existente — hay que extraerlos explícitamente del número de tarjeta en el momento del pago, antes de que se descarten.
+
+### 14.4 Mejora pedida — incluir el ID de regla de Ardid en los códigos de rechazo de TRX
 
 > Fuente: misma reunión "Previa demo mayoristas" (2026-08-26).
 

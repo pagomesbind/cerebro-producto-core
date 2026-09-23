@@ -360,6 +360,16 @@ Ambos pasos ocurren durante el **alta del canal QR** en el sistema interno (bot�
 | **CUIT** | **Sí rompe** — Coelsa valida el CUIT contra lo que tiene registrado desde el alta del comercio. Si se cambia el CUIT en la base interna sin actualizarlo en Coelsa, la instrucción de pago es rechazada. | Coelsa mantiene su propio registro de comercio por CUIT, no lo re-consulta dinámicamente como al CVU. |
 | **Comisión** | Requiere actualización espejada en Coelsa (ver arriba) | — |
 
+#### ⚠️ Eliminar un comercio afecta a TODOS los que comparten CUIT+actividad — riesgo agravado por la migración PSP 164→184
+
+Coelsa identifica un comercio por la combinación **CUIT + actividad comercial + ID PCP** (no por un ID único de comercio). Bind PSP tiene dados de alta, bajo el mismo CUIT de BIN PCP, muchos comercios de entidades distintas. Cuando alguien pide **eliminar** (baja definitiva) uno de esos comercios — a diferencia de **bloquearlo** — la baja se aplica a nivel de esa combinación CUIT+actividad+PCP en Coelsa, dejando de operar a **todos los demás comercios que comparten ese mismo CUIT**, no solo al que se quería dar de baja. Ya ocurrió al menos dos veces con el mismo comercio (caso Tinflanor, incluida una repetición el 2026-09-21).
+
+**Por qué "bloquear" no reemplaza a "eliminar":** a nivel PLD, un comercio bloqueado sigue "activo" a efectos de reportería normativa, mientras que uno dado de baja necesita fecha de baja imputada en la base para dejar de considerarse operativo ante regímenes informativos — no son intercambiables.
+
+**Workaround manual confirmado con Fintexa:** en vez de usar el endpoint que elimina el comercio completo (dispara la baja compartida en Coelsa), hacer manualmente: (1) eliminar el CBU corto asociado vía Swagger — el comercio deja de poder cobrar con QR; (2) opcionalmente, poner la fecha de baja directamente por base de datos. Fintexa confirmó que Bind PSP ya tiene la herramienta para operar así ("tienen la herramienta, háganlo") y no ofrece, del lado de Coelsa, una solución que separe ambos efectos (baja individual sin afectar al resto del CUIT). Sin automatizar ni documentar como procedimiento estándar todavía — mitigación acordada por ahora es puramente de proceso: "que nadie elimine un comercio" sin avisar antes.
+
+**Por qué se agrava con la migración PSP 164→184:** cuantas más entidades convivan bajo el mismo CUIT de BIN PCP tras la migración, mayor la probabilidad de que alguien —por error o desconocimiento— elimine un comercio y tire abajo la operatoria de comercios de otras entidades no relacionadas. Riesgo mapeado y escalado formalmente a Fintexa, sin prioridad de desarrollo asignada. Impacto de negocio y seguimiento en [`2_areas/riesgos.md`](../../../2_areas/riesgos.md).
+
 ### Adhesión de vendedor (alta de cuenta recaudadora)
 
 - Antes de generar cualquier operación, **cada adquirente debe agregar a Coelsa la(s) cuenta(s) recaudadora(s)** que va a usar, mediante el método **"adhesión de vendedor"** — es un proceso **por única vez por cada cuenta recaudadora**.

@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-09-23 (pablo + nicolas) — merge de contexto_vivo/ acumulado (2026-09-21/23), régimen A (riesgos, decisiones, iniciativas), completando una corrida anterior interrumpida
+
+- `gaps_y_preguntas.md` — actualizadas 3 entradas ya aplicadas en una corrida anterior sin commitear: dim_collectors quinta vez, Tarjeta Prepaga tercera semana, y nueva entrada de caída generalizada de volumen NSM#1/NSM#2 (pablo).
+- `riesgos.md` — 6 riesgos nuevos: performance de Ardid afecta comercialización a Coto/Grupo DESA (con actualización de causa raíz); capacidad de entrega cayó de ~300 a ~100 SP/mes; eliminar un comercio en Coelsa deshabilita entidades que comparten CUIT; riesgo de fraude en lanzamiento de INTER (7.600 altas/30 días); Biocatch sin reglas activas durante 60 días de baseline; spread de Dólar COMBI puede hacerlo comercialmente inviable (pablo + nicolas).
+- `direccion/decisiones.md` — 2 decisiones nuevas: Bind PSP empieza a cobrar por desarrollos personalizados; límite de $1.000 para PJ sin documentación confirmado (resuelve disputa de monto abierta desde 2026-09-09, entrada previa actualizada) (nicolas + pablo).
+- `direccion/iniciativas.md` — upsert de 7 proyectos con novedades: PRD-147 (dato de precio Worsis), PRD-251 (ajuste temporal + decisión de eliminar validación de bines, v73), ardid_limites_pj (arquitectura de 6 segmentos, solución v2 aprobada, estimación 15 SP, PRD v1.0), ardid_desconocimientos (PRD v1.1 + estimación 14 SP, historias y Jira creados), titularidad_tarjeta (estimación 7+3 SP, análisis técnico-funcional cerrado), cola_verificacion_manual y visibilidad_error_alta (discrepancia de cotización, riesgo de no pago de Inter) (pablo + nicolas).
+
 ### 2026-09-21 (pablo) — corrida 2, sesión de merge desatendida sobre el backlog de contexto_vivo/pablo
 
 - `gaps_y_preguntas.md` — 6 gaps nuevos: checkout de tarjeta no presente confirma consulta a `IssuerIdentification` (contradice §3.5 de `validacion_bines_tarjetas.md`, corregido en el mismo merge); scope de NSM#2 no refleja que el canal POS (AD-430/PRD-70) ya se shippeó (contradice `north_star.md §2`, requiere permiso); ficha de GRUPO DESA dice Botón 2.0, el PM confirmó que opera solo Botón 1.0; SPLIT no funciona en homologación para PSP 531/532 (Banco Industrial, MDA-297905); frecuencia de historificación SQL + VPN/Seginf sin definir (integración Atenas); límites transaccionales PLD para extracciones QR de Pago Fácil sin definir (todos pablo).

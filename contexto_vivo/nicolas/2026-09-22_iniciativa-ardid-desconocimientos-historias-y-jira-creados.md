@@ -11,7 +11,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Avance del día sobre `ardid_desconocimientos` (PRD-248), que ya tenía PRD y estimación preliminar (14 SP) cargados:

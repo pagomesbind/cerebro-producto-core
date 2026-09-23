@@ -39,9 +39,16 @@ Agustín Grau comunicó formalmente — acordado con Emma Vignoles — cómo Fin
 
 Esta decisión encuadra formalmente por qué el ecosistema (Ardid/Akurtech, Wallet, Adquirencia sobre la misma base) evoluciona con roadmaps de release que incluyen features no usadas por Bind — ver por ejemplo el roadmap de Akurtech 1.19/1.19.1/1.20 en [`detalle_productos/ardid/historico/historial_versiones.md`](../detalle_productos/ardid/historico/historial_versiones.md) — es la política general detrás de ese patrón, no un caso aislado.
 
+## 4. Desvío de responsabilidad Fintexa↔Penta — performance de Ardid afecta su comercialización a clientes
+
+En la reunión "Weekly - Producto / Operaciones" (2026-09-21), Mariana Nadalin y Pablo Gomes reportaron demoras y fallas en la generación de reportes de Ardid ("tirás un reporte y no trae datos"), y describieron un **desvío de responsabilidad circular entre Fintexa y Penta** (proveedor de infraestructura/hosting de Ardid): "del lado de Fintexa nos dicen que es Penta, Penta nos dice que es Fintexa, y así damos vueltas". Se acordó escalar el reclamo conjuntamente a Fintexa, Hernán Clarich (Arquitectura) y Penta, y evaluar si el problema está relacionado con cómo están paginadas las consultas en las versiones que gestiona Matías Alzogaray.
+
+El riesgo de negocio (Ardid comercializado a Coto y ofrecido a Grupo DESA con esta performance sin resolver) y su actualización del 22/09 — donde Hernán Clarich atribuyó la causa a optimización de consultas de backend, no ya al desvío Fintexa↔Penta — están documentados en [`2_areas/riesgos.md`](../../2_areas/riesgos.md). Esta entrada queda como referencia del lado proveedor/infraestructura; el detalle de impacto comercial y seguimiento vive en el ledger de riesgos.
+
 ## Ver también
 - [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) — plan de mantenimiento AKS de agosto 2026, ejecutado por el mismo proveedor.
 - [calidad_y_cicd.md](calidad_y_cicd.md) — roadmap técnico declarado por el proveedor, contrastar contra el estado real reportado acá por el COE.
+- [2_areas/riesgos.md](../../2_areas/riesgos.md) — riesgo de negocio "Performance de Ardid afecta su comercialización a Coto y Grupo DESA".
 
 ---
 *Última actualización: 2026-09-21 — `/context_merge`: nueva sección "Modelo de evolución del ecosistema" (producto único/repo único/release periódico único, retrocompatibilidad como prioridad, comunicado por el CTO de Fintexa).*

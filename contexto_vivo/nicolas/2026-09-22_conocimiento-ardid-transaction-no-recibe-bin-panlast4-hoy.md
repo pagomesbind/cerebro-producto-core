@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/modulo_pagos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Durante el análisis técnico-funcional de `titularidad_tarjeta` se confirmó con el PM un detalle operativo real, no documentado hasta ahora: el endpoint `/Transaction` del motor antifraude (Ardid) tiene los campos `Bin` y `PanLast4` como opcionales en su contrato, pero **Bind PSP hoy no los envía en ningún caso** — solo se envía el hash completo de la tarjeta (campo `HASH`). Consecuencia práctica confirmada en el mismo análisis: el BIN y los últimos 4 dígitos de una tarjeta **no se retienen en ningún punto del flujo de pago más allá del momento en que se calcula ese hash** — se descartan inmediatamente después.

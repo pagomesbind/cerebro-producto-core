@@ -158,6 +158,14 @@ Daniela Collia (Fintexa) reportó el ingreso de un ticket de soporte indicando q
 
 **Decisión acordada:** clasificar la modificación del icono como **mejora técnica**, a implementarse recién cuando se modifique ese componente (no como desarrollo aislado prioritario).
 
+## 14. Bóveda — solo retiene datos de tarjeta durante la transacción en curso, no entre transacciones (2026-09-22)
+
+> Fuente: confirmación directa del PM durante el análisis técnico-funcional (`/idea_solution`) de `titularidad_tarjeta`, 2026-09-22.
+
+Durante la evaluación de un mecanismo nuevo (caché de validaciones de titularidad para pagos recurrentes) que se planteó apoyar en **Bóveda** — el guardado de tarjeta de Botón Simple para pagos recurrentes — se confirmó que **Bóveda solo retiene los datos de la tarjeta hasta que finaliza la transacción en curso; se borran al terminar, no persisten entre transacciones**. Ver la integración de Bóveda con Ardid (bug de visibilidad en el portal de análisis) en [`ardid/integracion_con_productos_bind.md §4`](../ardid/integracion_con_productos_bind.md).
+
+Esto descarta a Bóveda como fuente de cualquier mecanismo que necesite "recordar" datos de una tarjeta entre distintos cobros (ej. evitar re-consultar un servicio externo en cada cobro recurrente de la misma tarjeta) — cualquier proyecto futuro con esa necesidad tiene que construir su propio mecanismo de persistencia, no puede asumir que Bóveda ya lo resuelve.
+
 ## Ver también
 
 - [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) — mecánica de órdenes de venta y cajas del Botón Simple "clásico".

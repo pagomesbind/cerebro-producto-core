@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "posible actualización de un riesgo ya capturado sobre Grupo DESA (id 2026-09-14_clientes_grupo_desa_riesgo_continuidad_escalado_dir, régimen: 'en_cola' según contexto_vivo/index.md) — el archivo correspondiente no se encontró en disco al momento de esta captura (ver nota de anomalía en el cuerpo); no se pudo verificar ni completar in place"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/validacion_bines_tar
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Análisis COBRO" (2026-09-21) se discutió el mecanismo actual de validación de tarjetas en Botón Simple: el sistema valida las tarjetas contrastando un **archivo JSON del frontend** (con ~90.000 números de identificación bancaria/BINs) contra la base de datos de **Isure**, lo que genera rechazos y discrepancias cuando ambas fuentes no coinciden. Matias Sassa (Fintexa) explicó que la validación en el JSON existe por motivos visuales históricos (mostrar si una tarjeta es débito/crédito antes de confirmar), pero entra en conflicto cuando no coincide con Isure, que es la fuente real usada al confirmar el pago.

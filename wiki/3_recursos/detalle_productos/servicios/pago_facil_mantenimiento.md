@@ -100,6 +100,18 @@ Hallazgos técnicos sobre el mecanismo de Coelsa aplicables a cualquier CBU de l
 
 **Decisión tomada en la sesión:** el alcance de una eventual solución sería general para toda la plataforma (no exclusivo de Pago Fácil), con parametrización por entidad/comercio para habilitar la visibilidad, consultando el alias vía la API existente al asignar el CBU y persistiéndolo — posponiendo cualquier asignación de alias personalizado/custom. Ver oportunidad relacionada, ya trackeada como iniciativa `alias_cvu_checkout` en [`direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md) y como OP-016 en [`direccion/oportunidades.md`](../../../2_areas/direccion/oportunidades.md) — el discovery de ese proyecto ya está completo y listo para ticket de Ingeniería.
 
+## 7. BPG UAT — timeout de networking del lado de Western Union, resuelto en el día (2026-09-22)
+
+> Fuente: mail "BPG <> Bind PSP | TIME OUT | Staging" — Adriana Endzeliz (Comercial Bind PSP) con Nicolás Gut y Alejandro Piaggio (Western Union), 2026-09-22.
+
+El 2026-09-22 el equipo de Bind PSP no pudo llegar al ambiente UAT de BPG (Western Union/Pago Fácil) desde staging: el `POST` al endpoint de consulta de items de proveedor devolvía `connect ETIMEDOUT` (timeout de conexión, no una respuesta de error de la aplicación). Adriana Endzeliz escaló a Western Union con el detalle del request.
+
+**Diagnóstico y resolución:** Alejandro Piaggio (networking WU) confirmó que del lado de Western Union "estuvieron todo el día con problemas" en BPG UAT — causa de networking, no un error de configuración de Bind. Se normalizó el mismo día (17:32 ART).
+
+**Dato técnico útil para homologación BPG:** endpoint UAT `POST http://192.168.176.23:8105/v2/supplier-item/lookup` (IP privada, se accede por vínculo de red con WU, no por internet pública), body de prueba `{"ExcludeScandata": false}`. Headers que exige BPG: `x-retail-store-id` (ej. `8144000`), `x-workstation-id` (ej. `L44000`), `x-operator` (`BINDPS`), `x-trace-id`, `x-customer-id`, `x-datetime` (ISO con offset `-03:00`) y `appkey` (credencial, no se transcribe acá).
+
+**Lección operativa:** un `ETIMEDOUT` contra BPG UAT apunta primero a la conectividad (vínculo de red/networking de WU), no al contrato de la API — el primer paso es pedirle a WU que verifique networking antes de revisar headers o payload.
+
 ## Ver también
 
 - PRD-57 — Pago Fácil MVP — historia de build del MVP, PM y decisiones de alcance. Proyecto de Nicolás Colón, en su propio Cerebro desde 2026-08-13.

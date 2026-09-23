@@ -10,7 +10,7 @@ destino_propuesto: wiki/3_recursos/detalle_productos/onboarding/onboarding_perso
 tipo_destino: actualizar
 contradice: "wiki/3_recursos/detalle_productos/onboarding/onboarding_personas_juridicas.md §9 punto 1 (mergeado 2026-09-18) — afirma explícitamente 'no existe un botón Observar, la función equivalente la cumple Contactar Cliente (punto 8)'"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

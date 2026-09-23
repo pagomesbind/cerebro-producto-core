@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/despliegues_y_operacion.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 La ventana de retención de transacciones de Ardid en MongoDB (hoy 45 días) la controla el proveedor (Pentass/Akurtech), no infraestructura propia de Bind PSP — no es un parámetro que Bind pueda cambiar unilateralmente vía su propia infraestructura Azure.

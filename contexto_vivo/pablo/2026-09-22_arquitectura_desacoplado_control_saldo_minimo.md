@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/modelo_acoplado_vs_desacoplad
 tipo_destino: actualizar
 contradice: "no — completa la sección de riesgo operativo ya existente con la mitigación concreta que la compañía decidió aplicar"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Conocimiento

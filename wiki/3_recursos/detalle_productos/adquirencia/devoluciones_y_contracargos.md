@@ -261,9 +261,14 @@ Gonzalo Rivera reportó un caso donde no se puede devolver desde el portal una t
 
 **Presión de clientes que rompe la regla:** ya generó conflicto real con clientes institucionales — un **ministerio** reclamó devolver una transacción con más de un mes de antigüedad y, ante la negativa por regla de negocio, contestó explícitamente que no le importaba la regla y que había que devolverla igual; **Rifsa** planteó el mismo reclamo antes. Pablo Gomes instruyó a Nicolás Colón a "levantar" el pedido (registrarlo como candidato a desarrollo) pero remarcó que antes hay que evaluar el costo de implementarlo y si vale la pena, en vez de comprometerse directo. El caso puntual que originó la discusión (Ciencias Económicas) resultó ser una transferencia por QR, no R por T, así que no aplicaba de todos modos — pero la tensión de fondo (clientes grandes que exigen devolución sin importar el plazo) queda abierta como pedido a evaluar.
 
+## 6. Reutilización de CBU corto agendado — pagos imputados a la deuda equivocada
+
+Ver [pedidos_de_clientes_y_hallazgos_operativos.md — "Hallazgos operativos recientes (septiembre 2026)"](pedidos_de_clientes_y_hallazgos_operativos.md) para el método de detección (comparar pagador contra múltiples `ID deuda` sobre el mismo CBU corto) y el caso concreto (FAVACARD, auditoría formal asignada a v74).
+
 ---
 *Ver también: [botones_de_pago_y_qr.md](botones_de_pago_y_qr.md) para el manejo de órdenes de venta e identificadores externos, [mecanica_qr_coelsa.md](mecanica_qr_coelsa.md) para el mecanismo de comisiones/interchange que precede a la liquidación, [liquidador_terceros_traditum_newpay.md](liquidador_terceros_traditum_newpay.md) para el producto Liquidador (clientes que cobran por su cuenta), y [cliente_coto_historial_operativo.md](cliente_coto_historial_operativo.md) para el historial operativo detallado del cliente COTO.*
-*Última actualización: 2026-09-21 — `/context_merge`: §0 (desconocimientos de tarjeta) extraída a [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) por umbral de tamaño; nueva §4.1 (picos de contracargos por fallas físicas de ATM, mecanismo general, caso Octagon).*
+*Última actualización: 2026-09-23 — `/context_merge`: nueva §6, cross-referencia al hallazgo de reutilización de CBU corto (FAVACARD) documentado en `pedidos_de_clientes_y_hallazgos_operativos.md`.*
+*Última actualización anterior: 2026-09-21 — `/context_merge`: §0 (desconocimientos de tarjeta) extraída a [desconocimientos_de_tarjeta.md](desconocimientos_de_tarjeta.md) por umbral de tamaño; nueva §4.1 (picos de contracargos por fallas físicas de ATM, mecanismo general, caso Octagon).*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: contrato técnico del endpoint de "desconocimiento" en §0 y nueva §5 (regla de devolución R por T, ventana de un mes).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: ratificación de prioridad máxima de PRD-146 (tickets DAD-2209/DAD-2257), en §0.*
 *Última actualización anterior: 2026-09-07 — `/context_merge`: nueva §4 (fix de timeout en contracargo por ID de referencia de transacción sobredimensionado, AD1639, cliente Ripsa, 2026-09-03).*

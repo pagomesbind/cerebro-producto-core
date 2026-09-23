@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/organizaciones_y_configur
 tipo_destino: actualizar
 contradice: "posible contradicción interna entre dos reuniones del mismo día (2026-09-21), no contra el canon existente"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

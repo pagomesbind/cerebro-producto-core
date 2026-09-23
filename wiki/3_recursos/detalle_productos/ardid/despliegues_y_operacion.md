@@ -33,10 +33,25 @@ El despliegue del 01/09 (§2) se aplicó **sin inconvenientes**: la vista de Pag
 - Del lado de **SQL Server**, el fix implementado **no parece haber funcionado** como se esperaba; Fintexa sigue trabajando en conjunto con el equipo de soporte de Pentass para normalizarlo.
 - Hay indicios (sin confirmación oficial ni documentación todavía) de que se está evaluando pasar Ardid/Akurtech de la versión actual **v1.18.2** a la **v1.19.x**, con la expectativa de que sea más estable.
 
+## 4. Ventana de retención de MongoDB (45 días) — dueño técnico y motivo histórico (2026-09-22)
+
+> Fuente: mail directo de Nicolás Colón a Osmel Mata (SRE, Fintexa/Pentass), 2026-09-22, en el marco del discovery de `ardid_desconocimientos`.
+
+La ventana de retención de transacciones de Ardid en MongoDB (hoy **45 días**) la controla el **proveedor (Pentass/Akurtech)**, no infraestructura propia de Bind PSP — no es un parámetro que Bind pueda cambiar unilateralmente vía su propia infraestructura Azure. Osmel Mata lo confirmó por escrito ante la consulta directa de Nicolás Colón:
+
+> "La gente de Pentass/Akurtech, debido a que en el pasado presentó muchos problemas de rendimiento (al principio se guardaba todo el histórico, luego pasamos a 90, 60 y finalmente 45 días), y luego de varias sugerencias de parte de ellos y pruebas en conjunto, se dejó en 45 días que era donde Ardid funcionaba bien con el histórico en MongoDB (teniendo en cuenta el gran volumen de datos que se almacenan por mes). Es un tema de rendimiento. Si ellos logran resolver ese problema, no veo inconveniente en que se incremente el histórico nuevamente."
+
+Dos hechos duros confirmados para cualquier iniciativa futura que dependa de esta ventana:
+1. **La reducción fue progresiva y deliberada**, en tres pasos: histórico completo → 90 días → 60 días → 45 días (valor actual) — ajustada activamente varias veces por el proveedor, con pruebas conjuntas con Bind, específicamente para resolver problemas de rendimiento de Ardid con el volumen de datos mensual.
+2. **El proveedor no objeta ampliarla de nuevo, pero lo condiciona explícitamente a resolver antes ese problema de rendimiento.** Cualquier pedido de ampliación (ej. a 120 días, para cubrir contracargos que llegan más tarde que la ventana actual — ver proyecto `ardid_desconocimientos`) debería ir acompañado de una confirmación del proveedor de que el problema que motivó las 3 reducciones anteriores ya está resuelto, o se arriesga a reintroducirlo.
+
+Resuelve (parcialmente) un gap abierto desde 2026-09-11 sobre quién era el dueño técnico del cambio de retención — el PM decidió en su momento no bloquear la estimación de `ardid_desconocimientos` por no tener este dato, así que la resolución llega después de haber avanzado con el diseño y la estimación.
+
 ## Ver también
 - [modulo_pagos.md](modulo_pagos.md) — reglas antifraude de pagos con tarjeta que este fix corrige.
 - [../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md](../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md) — proceso general de análisis de riesgo de despliegue (semáforo, informe), del que este caso es una instancia concreta.
 
 ---
-*Última actualización: 2026-09-11 — `/context_merge`: nueva sección "Seguimiento post-despliegue (01/09) — solución temporal en Mongo, SQL Server sin resolver" (mail de Osmel Mata, Fintexa, 2026-09-10).*
+*Última actualización: 2026-09-23 — `/context_merge`: nueva §4, dueño técnico y motivo histórico de la ventana de retención de MongoDB (45 días) — controlada por el proveedor, condicionada a resolver rendimiento (Nicolás Colón).*
+*Última actualización anterior: 2026-09-11 — `/context_merge`: nueva sección "Seguimiento post-despliegue (01/09) — solución temporal en Mongo, SQL Server sin resolver" (mail de Osmel Mata, Fintexa, 2026-09-10).*
 *Última actualización anterior: 2026-08-31 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (reunión "Análisis de Riesgo - Fix de cambios de estados de las tarjetas", 2026-08-28).*

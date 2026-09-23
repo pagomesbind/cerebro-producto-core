@@ -200,6 +200,16 @@ Fintexa confirmó (mail "RE: Version W 73 Wallet Service", 2026-09-08) qué part
 
 > Fuente: mail "RE: Version W 73 Wallet Service" (hilo 2026-09-03 → 2026-09-09), mensaje del 2026-09-08 20:59 de Nicolas Pomponio (Fintexa). Capturado por Nicolás Colón, 2026-09-09.
 
+### 14.6 Fintexa (CTO) pregunta si el switch manual sigue siendo necesario, dado el rechazo global (2026-09-21)
+
+> Fuente: hilo Gmail "Re: MINUTA: Repaso Semanal líderes" (2026-09-21), entre Agustín Grau (CTO, Fintexa) y Pablo Gomes.
+
+En una minuta de "Repaso Semanal líderes" del 2026-06-23 había quedado un action item para Pablo Gomes: "Crear ticket para gestionar la conexión y desconexión manual de Ardid" (switch on/off para poder operar aunque Ardid esté caído). El 2026-09-21, Agustín Grau retomó el hilo preguntando por el estado de ese ticket. Pablo Gomes respondió que ese requerimiento puntual no se ticketeó por separado — lo absorbió Nicolás Colón dentro de este proyecto más amplio de robustez de Ardid, con el requerimiento específico ya en QA del lado de Bind (ver §14.5).
+
+**Pregunta de Agustín Grau sin responder en el hilo:** "¿el switch para encender/apagar la conexión con Ardid ya no sería necesario? ¿Siempre se rechazarán todas las operaciones si Ardid no funciona?" — es decir, Fintexa interpreta que este proyecto podría estar moviendo el comportamiento hacia **fail-closed** (rechazar todo si Ardid no responde) en vez de mantener la posibilidad de desconectarlo manualmente y seguir operando sin control antifraude. **Lo que el propio canon ya documenta (§14.2, §14.5):** el consenso alcanzado en el discovery (§13) fue justamente "100% rígido por defecto" con una palanca de apagado explícita y auditada como única excepción — y W73 ya incluye el rechazo de todas las operaciones cuando Ardid está caído (§14.2) como alcance confirmado. La respuesta técnica a la pregunta de Agustín Grau parece ser "sí" (fail-closed, con excepción solo vía la palanca auditada), pero **Pablo Gomes no llegó a confirmarlo explícitamente en ese hilo** — queda como gap de comunicación externa, no de diseño interno, ver tarea T-116 en `1_proyectos/tareas.md` (Pablo Gomes) para el seguimiento de esa respuesta pendiente a Fintexa.
+
+**Dato adicional del mismo hilo:** el pedido que quedó vigente del lado de Fintexa es un ticket propio (no de Bind), "[US] Habilitación de análisis global y por operación en Ardid" — [DEM-1791](https://fintexa.atlassian.net/browse/DEM-1791).
+
 ## 15. Bug real — filtro de grupo BIN mal configurado bloqueaba las reglas de pago (cliente Coto, 2026-08-26)
 
 > Fuente: reunión "FIX - Pagos" (2026-08-26, Hernan Clarich, Rocio Revelli, Matias Alzogaray, Nicolás Colón, Andrea Orsini, Osmel Mata).

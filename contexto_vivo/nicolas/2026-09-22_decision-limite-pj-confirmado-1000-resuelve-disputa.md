@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no — resuelve el gap ya archivado 2026-09-10_gap-contradiccion-limite-operativo-personas-juridicas-1000-vs-10000 (wiki/4_archivos/contexto_ingestado/)"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Desde el 2026-09-09 había quedado sin resolver una disputa de monto: la decisión ya en el canon (`direccion/decisiones.md`, entrada 2026-09-08) fija el límite operativo de cuentas de persona jurídica sin documentación en **$1.000**, pero dos reuniones independientes del 2026-09-09 ("ARDID" y "Join Soporte Clientes") citaban en cambio **$10.000** — capturado como gap y ya archivado (`2026-09-10_gap-contradiccion-limite-operativo-personas-juridicas-1000-vs-10000`).

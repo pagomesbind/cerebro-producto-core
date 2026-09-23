@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/pedidos_de_clientes_
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En la reunión "Weekly - Producto / Operaciones" (2026-09-21), Gonzalo Rivera retomó un problema operativo ya conocido (caso FAVACARD, "Fabacar" en la minuta): un usuario paga con un **CBU corto de Botón Simple Dos que quedó agendado/guardado en su app** de una deuda anterior, en vez del CBU corto vigente de la deuda actual — genera inconsistencias de pago difíciles de explicarle al cliente ("¿cómo entendemos que la persona pagó mal porque se guardó el CBU corto en otro momento?").

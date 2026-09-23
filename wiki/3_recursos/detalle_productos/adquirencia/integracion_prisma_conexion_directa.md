@@ -1,24 +1,14 @@
----
-id: 2026-09-23_adquirencia_manual_integracion_prisma_conexion_directa
-pm: pablo
-fecha_captura: 2026-09-23
-fuente: "sesión de manual de configuración PRD-70 (POS con Prisma) — PDF oficial de Prisma subido por el PM a raw/, `Manual_Integracin_CD_v1.14_(1).pdf`, 'Manual de Usuario Integraciones Conexión Directa de Sistemas Propios' (v1, autores M. Rodriguez Alemany / J.M. Petrino, nov-2021, 83 páginas)"
-producto: adquirencia
-tema: manual técnico ISO 8583 de integración directa con Prisma (el mismo procesador que el Admin de Bind PSP muestra como "Payway" y que en Transacciones aparece como "PlusPagos")
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/adquirencia/integracion_prisma_conexion_directa.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# Integración directa con Prisma (Conexión Directa, ISO 8583) — Manual Técnico
+
+> Estado: documentación de referencia técnica — la integración en sí (PRD-70, POS con Prisma) está en curso, ver `1_proyectos/prd-70_pos_prisma_finalizar/`.
+>
+> Fuente: `Manual_Integracin_CD_v1.14_(1).pdf`, "Manual de Usuario Integraciones Conexión Directa de Sistemas Propios" (Prisma, v1, autores M. Rodriguez Alemany / J.M. Petrino, noviembre 2021, 83 páginas). Cargado el 2026-09-23 al analizar rechazos reales de un comercio de prueba (MCC 6051).
 
 ## Qué es este documento
 
-Es el manual oficial de Prisma para integrarse por **Conexión Directa** (mensajería ISO 8583 punto a punto, TCP/IP) desde un sistema propio — en este caso, el POS de Bind PSP. Es el mismo procesador que en el Admin de Bind PSP aparece bajo el nombre "Payway" (ID interno "Prisma", 2003) y que en la grilla de Transacciones se ve como "PlusPagos" — ver `pos_multiadquirencia.md` para esa nomenclatura de 3 nombres. El PM lo subió a `raw/` el 2026-09-23 al analizar rechazos reales de un comercio de prueba (MCC 6051, ver `1_proyectos/prd-70_pos_prisma_finalizar/`) y pidió incorporarlo al Cerebro como referencia técnica, más allá de ese caso puntual.
+Manual oficial de Prisma para integrarse por **Conexión Directa** (mensajería ISO 8583 punto a punto, TCP/IP) desde un sistema propio — en este caso, el POS de Bind PSP. Es el mismo procesador que en el Admin de Bind PSP aparece bajo el nombre **"Payway"** (ID interno "Prisma", 2003) y que en la grilla de Transacciones se ve como **"PlusPagos"** — ver [pos_multiadquirencia.md](pos_multiadquirencia.md) para esa nomenclatura de 3 nombres del mismo procesador.
 
-**Alcance de esta primera pasada:** se cargó la estructura general del documento y la tabla completa de códigos de respuesta (la pieza más accionable para diagnosticar rechazos desde Soporte/Producto). **No se cargaron todavía** los ejemplos literales de mensaje 200/210 por cada operación (compra, devolución, anulación, preautorización, cierre de lote) — quedan en el PDF original, archivado en `4_archivos/historial_raw/`. Ver tarea T-120 en `1_proyectos/tareas.md` para retomar esa profundización cuando haga falta.
+**Alcance de esta primera pasada:** se cargó la estructura general del documento y la tabla completa de códigos de respuesta (la pieza más accionable para diagnosticar rechazos desde Soporte/Producto). **No se cargaron todavía** los ejemplos literales de mensaje 200/210 por cada operación (compra, devolución, anulación, preautorización, cierre de lote) — quedan en el PDF original, archivado en `4_archivos/historial_raw/`. Ver tarea T-120 en `1_proyectos/tareas.md` (Pablo Gomes) para retomar esa profundización cuando haga falta.
 
 ## Estructura del documento (índice)
 
@@ -52,7 +42,7 @@ Es el manual oficial de Prisma para integrarse por **Conexión Directa** (mensaj
 
 ## Tabla completa de Códigos de Respuesta (Campo ISO 39)
 
-Esta es la tabla oficial que define qué significa cada código de rechazo/aprobación que Prisma (Payway/PlusPagos) devuelve. **Clave para diagnosticar reclamos de Soporte sin escalar a Fintexa cada vez:**
+Tabla oficial que define qué significa cada código de rechazo/aprobación que Prisma (Payway/PlusPagos) devuelve. **Clave para diagnosticar reclamos de Soporte sin escalar a Fintexa cada vez:**
 
 | Código | Descripción | Referencia / acción |
 |---|---|---|
@@ -100,3 +90,10 @@ Esta es la tabla oficial que define qué significa cada código de rechazo/aprob
 | xx | Rechazada (Codnum) | Denegada, cualquier otro código no contemplado en la tabla |
 
 **Nota de aplicación directa (2026-09-23):** al analizar rechazos con motivo "05" sobre un comercio de prueba de PRD-70 (POS con Prisma), se confirmó que "05" es el código genérico "Denegada" — no distingue por sí solo un rechazo del emisor de una posible mala configuración de datos en Payway. Ver `1_proyectos/prd-70_pos_prisma_finalizar/artefactos/2026-09-22_manual_pos_prisma_payway.html` (Caso Unhappy 3) y tarea T-118.
+
+## Ver también
+- [pos_multiadquirencia.md](pos_multiadquirencia.md) — nomenclatura de 3 nombres del mismo procesador (Prisma/Payway/PlusPagos) y arquitectura multiadquirente del POS.
+- [validacion_bines_tarjetas.md](validacion_bines_tarjetas.md) — base de BINs de Payway, causa raíz distinta de rechazos (clasificación crédito/prepaga), no confundir con los códigos ISO 39 de este documento.
+
+---
+*Última actualización: 2026-09-23 — `/context_merge`: archivo nuevo, manual técnico ISO 8583 de integración directa con Prisma (Pablo Gomes).*

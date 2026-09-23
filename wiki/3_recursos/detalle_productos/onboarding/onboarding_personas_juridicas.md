@@ -136,28 +136,101 @@ Confirma la mecánica ya documentada en `manuales_operativos.md §1` (misma form
 
 **Uso de este conocimiento:** sirvió para decidir qué adoptar en el rediseño de `revision_pj_cumplimiento` (PRD-256) — alertas específicas + contador de progreso, ambos ya implementados en el mockup — y qué descartar por requerir capacidad que Bind no tiene hoy (score/matriz de riesgo, verificación por persona, auditoría granular, confirmado explícitamente por el PM que estas tres no existen en la plataforma actual). Queda como referencia general de producto para cualquier futuro proyecto de Onboarding que evalúe sumar alguna de estas capacidades.
 
+### 8.2 Gap de PLD — datos y DDJJ mínimos faltantes en el ambiente de pruebas del onboarding de desarrollo propio para Octagon (2026-09-22)
+
+> Fuente: mail "Re: Integración On Boarding" — Ana Laura Irrazabal (Analista de PLA/FT, Gerencia de Prevención de LA/FT/FP y Cumplimiento de BIND), 2026-09-22.
+
+Al revisar el ambiente de pruebas del "sistema de onboarding de desarrollo propio" al que se integraría Octagon (insumo directo para la tarea T-057, análisis del paquete de datos propuesto por Octagon), Cumplimiento/PLD detectó que el sistema **omite datos mínimos exigidos por normativa** para identificar a las personas humanas vinculadas (integrantes del órgano de administración, representantes legales, apoderados y Beneficiarios Finales):
+- Número de teléfono, dirección de correo electrónico, estado civil, actividad principal.
+- Declaraciones Juradas (DDJJ) de **PEP, FATCA, OFAC y Sujeto Obligado**.
+
+**Pedido de PLD:** incorporar los datos y DDJJ faltantes para asegurar un proceso de debida diligencia alineado a la normativa vigente de PLA/FT.
+
+**Sugerencias adicionales de UX/gestión documental sobre las actas de designación:** visualizar claramente identidad/cargos/duración de autoridades; mostrar la lista completa de autoridades y representantes autorizados para operar la cuenta; habilitar descarga del legajo completo en PDF.
+
+**Preguntas abiertas de PLD, sin responder (candidatas a reunión):**
+1. Si el motor de búsqueda no encuentra actividad económica asociada, ¿permite continuar con el alta y el análisis?
+2. ¿Qué información contendrá el formulario KYC/KYB final que debe firmar el cliente potencial?
+3. La matriz de riesgo cliente: ¿es única e inicial, o hay una secundaria según la transaccionalidad? ¿Cómo se pondera?
+
+**Relevancia:** el gap de datos detectado por PLD debería incorporarse a la especificación antes de cerrar el diseño de la integración con Octagon (T-057, Pablo Gomes).
+
 ## 9. Estructura real hoy de la pantalla de solicitud en el backoffice (2026-09-18)
 
 > Fuente: sesión `/idea_solution` sobre `revision_pj_cumplimiento` (PRD-256) — el PM navegó en vivo dos solicitudes reales en staging (una en "Pendiente Revisión Oficial De Negocio"/Nivel 1, otra en "Pendiente Revisión Cumplimiento"/Nivel 2). Confirma el detalle real de la pantalla de solicitud, más allá del flujo de pasos ya documentado en §7.
 
 **Estructura (una sola vista larga, sin pestañas):**
-1. **Datos de la Solicitud** — identificador, fecha/hora, trámite (Legajo Digital), informado, IP, dispositivo, razón social, CUIT. Los botones **Aprobar/Rechazar** viven dentro de esta misma tarjeta (no en un header fijo) — **no existe un botón "Observar"**, la función equivalente la cumple "Contactar Cliente" (punto 8).
+1. **Datos de la Solicitud** — identificador, fecha/hora, trámite (Legajo Digital), informado, IP, dispositivo, razón social, CUIT. Los botones **Aprobar/Rechazar** viven dentro de esta misma tarjeta (no en un header fijo).
+   > ⚠️ **Corrección (2026-09-21) — el botón "Observar" sí existe, pero solo para el rol Cumplimiento (Nivel 2).** Lo de arriba ("no existe un botón Observar, la función equivalente la cumple Contactar Cliente") describe correctamente el Nivel 1 (Oficial De Negocio) — la sesión original que lo relevó solo navegó ese nivel y generalizó incorrectamente la ausencia a toda la pantalla. En Nivel 2 (solicitud en "Pendiente Revisión Cumplimiento", usuario con rol Cumplimiento), la cabecera muestra **tres** botones — Aprobar, Rechazar y **Observar** — que abren el mismo modal "Cambiar estado" (Estado pre-cargado + Comentario + Actualizar), con Estado = "Observado" para el tercero. "Observar" no reemplaza a "Contactar Cliente" (punto 8, sigue disponible sin cambios): "Contactar Cliente" pide algo puntual sin tocar el estado de la solicitud; "Observar" cambia el estado a "Observado", devolviendo el trámite sin rechazarlo definitivamente. Esto también confirma que el backoffice real ya tiene el mismo patrón "Aprobar/Observar/Rechazar" de la consola de referencia AVA Compliance (§8.1), al menos para Cumplimiento — no es una funcionalidad exclusiva de esa consola que haya que construir desde cero. **Además, las acciones están gateadas por rol específico por nivel, no por "ser administrador"**: con el usuario "Administrador" logueado sin el rol Cumplimiento asignado, la misma solicitud no mostraba ningún botón de acción; al asignarle el rol "Cumplimiento" (configurable en `/nivelAprobacion`, junto con "Oficial De Negocio"), los tres botones aparecieron sin volver a loguearse. **Implicancia metodológica para cualquier relevamiento futuro de este backoffice:** no alcanza con loguearse como un usuario con acceso — hace falta tener asignado el rol/nivel específico que se quiere observar.
 2. **Contacto** — email y teléfono, cada uno con Editar, badge Verificado/Sin verificar, botón "Enviar código" y campo "Código OTP" + botón Verificar (flujo manual completo).
 3. **Domicilio Fiscal** y **Domicilio Comercial** — dos bloques separados, mismos campos (País, Provincia, Ciudad, Calle, Numeración, Piso, Barrio, Código Postal, Departamento, CPA, Localidad, Manzana, Municipalidad).
-4. **Beneficiario Final** — tabla (Apellido y Nombre, Nro. de Documento, botón "Ver Detalles Beneficiario") que abre un modal con Razón Social, Tipo/Número de Documento, Domicilio Real, Nacionalidad, Fecha de Nacimiento, Profesión, Estado Civil, Votos en la Sociedad, PEP. **No se vio ninguna sección "Propietarios" separada** en los dos casos revisados — sin confirmar si es porque esos casos no tenían propietarios cargados o si el concepto no existe separado de Beneficiario Final.
+4. **Beneficiario Final** — tabla (Apellido y Nombre, Nro. de Documento, botón "Ver Detalles Beneficiario") que abre un modal con Razón Social, Tipo/Número de Documento, Domicilio Real, Nacionalidad, Fecha de Nacimiento, Profesión, Estado Civil, Votos en la Sociedad, PEP.
+   > ⚠️ **Corrección (2026-09-21) — "Propietario Directo" sí es una sección separada, convive con Beneficiario Final.** Los dos casos revisados originalmente no tenían propietario directo cargado, lo que se interpretó erróneamente como ausencia del concepto. Una solicitud con ambas secciones cargadas (FIAT CHRYSLER RIMACO ARGENTINA S.A.) muestra **Propietario Directo** como tabla independiente (Razón Social / Nro de Identificador / "Ver Detalles Propietario"), con modal propio: Domicilio Legal, Lugar de Registración, Tipo de identificador fiscal, Propiedad y/o Votos de la Sociedad (%), Flotación (%) — en el caso observado el propietario directo era otra persona jurídica (Banco de Galicia S.A.), no una persona física. Ambas secciones (Propietario Directo y Beneficiario Final) conviven en la misma pantalla, una debajo de la otra.
 5. **Datos Bancarios** (CBU, Número de cuenta) y **Datos Comerciales** (Nombre de Fantasía, ID del comercio, Código de Caja, Código Sucursal) — vacíos hasta la aprobación, igual que ya estaba documentado.
 6. **Historial** — tabla resumida de cambios de estado relevantes (Fecha, Hora, Estado, Usuario, Comentario), 2-3 filas típicamente.
 7. **Representantes Legales** — tabla (Fecha y Hora, Estado, Representante/CUIL-DNI, Carácter, Email) con acción para ver/gestionar.
 8. **Contactar Cliente** — formulario (Método de Contacto, Documentación, Enviar correo a, Comentario con contador 0/500, botones Cancelar/Enviar).
 9. **Validaciones Servicios Externos** (Deudor-Arca, Arca-Actividad, Documento-Lista Negra, Mba-System, Nosis-Jurídico, Situación-BCRA) y **Validaciones Declaración Jurada** (FATCA, OCDE, PEP, UIF) — **son dos paneles separados**; el segundo es información que el propio cliente declaró (siempre Sí/No), no una consulta a un servicio externo.
-10. **Archivos** — **una sola lista plana de documentos agrupados por categoría** ("Documentación societaria", "Otros archivos"), no agrupados por persona/entidad. Cada documento tiene menú de acciones (Descargar, Visualizar, Marcar Pendiente) vía ícono de tres puntos. Este es el punto que el PM señaló como **la causa concreta de que a un oficial le resulte incómodo validar** — no hay forma de ver de un vistazo qué documentos corresponden a qué persona.
+10. **Archivos** — **una sola lista plana de documentos agrupados por categoría** ("Documentación societaria", "Otros archivos"), no agrupados por persona/entidad. Cada documento tiene menú de acciones vía ícono de tres puntos.
+    > ⚠️ **Corrección (2026-09-21) — el menú de acciones NO es uniforme, depende del estado del documento.** Documento en estado **"Falta"** (naranja, `priority_high`): el menú tiene una única opción, **"Cargar"** — abre el selector de archivo para que el propio operador lo suba en el momento (alternativa a pedírselo al cliente vía "Contactar Cliente"). Documento en estado **"Pendiente"** (ya cargado, con nombre de archivo y fecha): el menú tiene 4 opciones — **Descargar, Visualizar, Marcar Verificado, Reemplazar**. No existe una opción "Marcar Pendiente" en ningún estado observado — el nombre correcto de la acción de aprobación es **"Marcar Verificado"**, y el de corrección es **"Reemplazar"** (no un "marcar pendiente" que regrese a un estado anterior); un oficial que reemplaza un documento mal cargado usa "Reemplazar" — el rechazo es solo a nivel de toda la solicitud, no de un documento puntual. Este es el punto que el PM señaló como **la causa concreta de que a un oficial le resulte incómodo validar** — no hay forma de ver de un vistazo qué documentos corresponden a qué persona.
 11. **Línea de Tiempo** — a diferencia del "Historial" resumido (punto 6), es un **log técnico crudo y muy granular**: decenas de eventos por solicitud (ej. "Update Documentación" repetido muchas veces, "Create Otp Sms", "Update Padron A5"), cada uno con timestamp exacto e ID interno (GUID), pensado para depuración técnica, no para que un analista de negocio lo lea.
 12. **Respuestas Servicios** — pestañas con el JSON crudo de cada respuesta de servicio externo (Afip PadronA5, Legajo Digital, Beneficiario Final, Declaración Jurada, Matriz de Riesgo Jurídica, etc.), colapsable, pensado para debugging técnico. Acá aparece suelto el dato de actividad económica de ARCA (ej. `idActividad: "829900"`) que hoy no se le muestra al oficial en ninguna pantalla legible.
 
 **Dato adicional:** en el Historial de una de las solicitudes aparece el comentario "A revisar por matriz de riesgo" al pasar a Nivel 1 — sugiere algún mecanismo interno de matriz/scoring que dispara ese estado, aunque no hay ninguna tarjeta de score visible para el oficial (consistente con lo confirmado en §8.1: no existe una funcionalidad de "Score de Compliance" como la de la consola de referencia externa). No investigado más a fondo — posible gap a explorar en un futuro discovery si se retoma matriz de riesgo.
 
+## 10. Manual operativo de punta a punta — los 4 pasos del flujo con capturas reales (2026-09-21/22)
+
+> Fuente: manual de uso construido en sesión libre por el PM (`2026-09-21_manual_onboarding_pj_operador.html`, en `1_proyectos/proyecto-la-virginia-ob-pj/artefactos/`), con navegación en vivo del backoffice STG sobre solicitudes reales (FIAT CHRYSLER RIMACO ARGENTINA S.A., CLARO S.A.) y una carga real end-to-end del formulario público de La Virginia ("Mundo Virginia"). Complementa el flujo AS-IS de alto nivel de §7 con el detalle real de UI de cada paso.
+
+### 10.1 Paso 1 — Formulario público de alta (front, Mundo Virginia)
+
+Wizard con barra de progreso, un sub-paso a la vez ("Anterior"/"Siguiente" o "Iniciar"/"Siguiente"):
+
+1. **Bienvenida** — pantalla de marca, advierte que hace falta tener actividad económica dada de alta en ARCA para continuar.
+2. **Datos cliente** — Razón Social, Email, Confirmar Email, CUIT, Tipo de Sociedad (dropdown). Cada campo valida en vivo con un tilde verde.
+3. **Documentación** — grilla de documentos societarios obligatorios (asterisco = obligatorio), cada uno con su propio botón de carga individual (solo PDF, máx. 6MB). Los nombres de documento coinciden con lo que el backoffice ve luego como "Falta"/"Pendiente" en Archivos → Documentación societaria (§9 punto 10) — es la misma lista, acá se sube y en el backoffice se revisa.
+4. **Propietario Directo (socio o accionista)** — dos checkboxes de partida (solo personas humanas / tiene socios persona jurídica). Tildando la segunda, formulario por socio: Razón Social, Lugar de Registro, Tipo+N° de identificador fiscal, Domicilio Legal, % de Propiedad/Votos, % de Flotación, con opción de eliminar el bloque.
+5. **Beneficiario Final** — mismo patrón de checkboxes de partida (umbral 10%+ de participación). Tildando la segunda, formulario completo: Razón Social, Nombre, Apellido, Tipo+Número de documento, Nacionalidad, Tipo+N° de identificador fiscal, Estado civil, Domicilio real, Profesión, Fecha de nacimiento, % de propiedad/votos, ¿Es PEP?, más adjunto del documento de identidad (frente/dorso).
+6. **Domicilio Fiscal** — Calle, Número, Piso, Departamento, Provincia (dropdown), Localidad (combobox con autocompletado) y Código Postal.
+7. **Domicilio Comercial** — mismo formulario que Domicilio Fiscal, para la dirección operativa.
+8. **Teléfono** — código de país + número. Mismo dato que el backoffice muestra en "Contacto" como "Sin verificar" hasta confirmar con OTP.
+9. **Datos representantes** — Carácter del representante (dropdown, ej. "Representante Legal"), Documento, Email. Mismo email que el backoffice ve en "Representantes Legales" con estado "No iniciada", y al que en el Paso 4 le llega la invitación de onboarding personal.
+10. **Declaración** — tres checkboxes de condición especial (Sujeto Obligado / OCDE / FATCA) o "Ninguna de las anteriores". No se relevó qué campos adicionales pide si se tilda alguna de las tres primeras (pendiente para una futura sesión).
+11. **Proceso Completado** — confirma que se enviará email a cada representante/firmante para completar su validación de identidad (dispara el Paso 4/Nivel 2), y que la solicitud será evaluada por un ejecutivo. A partir de acá la solicitud es visible en el backoffice como "Pendiente Revisión"/Nivel "Oficial De Negocio".
+
+Confirma desde el lado de carga que "Propietario Directo" y "Beneficiario Final" son dos sub-formularios independientes (consistente con la corrección de §9 punto 4).
+
+### 10.2 Paso 4 — Onboarding personal del representante legal
+
+Corre en un **tercer sitio, distinto del backoffice y del formulario público**: `ustus-01.azurewebsites.net`. Se dispara con un email al representante legal (email cargado en el Paso 1 / §10.1 punto 9) cuando el Paso 3 (Cumplimiento) aprueba la solicitud.
+
+1. **Bienvenida / Términos y Condiciones** — resumen de los datos ya cargados de la empresa (Razón Social, CUIT, domicilio, teléfono) y las tres declaraciones (Sujeto Obligado UIF/FATCA/OCDE) del Paso 1, para que el representante las revise. Dos checkboxes obligatorios (Términos y Condiciones + confirmación de que los datos/DDJJ de la empresa son correctos) habilitan "Iniciar".
+2. **Validación de identidad — DNI** — foto de frente y dorso del DNI físico (RENAPER), cada una con su propia captura de cámara, pantalla de confirmación con miniaturas, y procesamiento (OCR/MRZ) con barra de progreso.
+3. **Validación de identidad — Selfie (prueba de vida)** — cámara frontal con óvalo guía, confirmación con miniatura y opción "Retomar selfie", procesamiento de facematch selfie-vs-DNI.
+4. **Emails de contacto** — el representante carga **su propio email personal** (no el de la empresa), con verificación por código numérico de 6 dígitos.
+5. **Teléfono de contacto** — mismo patrón con el teléfono propio y verificación por SMS. **Dato relevante:** en una prueba real el SMS llegó con varios segundos de demora, después de que el representante ya había avanzado a la pantalla de Declaración — el formulario no bloquea el avance mientras se espera el código, asincronía a tener en cuenta al explicarle el flujo a un representante real.
+6. **Declaración personal** — cuatro condiciones sobre la persona física (Sujeto Obligado UIF / residente fiscal de otro país OCDE / residente fiscal EEUU FATCA / PEP) o "Ninguna de las anteriores".
+7. **Confirmación final** — avisa que se enviará un email para indicar cómo seguir.
+
+No relevado: qué pasa si la validación biométrica falla definitivamente (reintentos agotados), ni qué campos adicionales pide la Declaración si se tilda alguna condición especial (mismo punto abierto que en el Paso 1).
+
+### 10.3 Nivel 3 automático — alta de Wallet/comercio tras la conformidad del representante legal
+
+Una vez que el representante legal completa el Paso 4 (§10.2), corre un **Nivel 3 automático, sin intervención de ningún operador**, que termina de aprobar la solicitud y provisiona la cuenta. Progresión de estados observada en "Historial" (mismo trigger — la conformidad del representante legal):
+
+1. `Pendiente Revisión` (Nivel 1 — Oficial De Negocio) → Aprobada
+2. `Pendiente Revisión` (Nivel 2 — Cumplimiento) → Aprobada
+3. `Pendiente Representante Legal` (Nivel 2 — Cumplimiento) → "Aprobada por niveles - Emails enviados a RL" (dispara el Paso 4)
+4. `Aprobado a revisar` (Nivel 3) → comentario "Alta Wallet OK"
+5. `Aprobada` (Nivel 3) → comentario "Solicitud completa"
+
+Los pasos 4 y 5 son el Nivel 3 automático — la sección "Documentación" muestra en paralelo `DDJJ`, `Alta Wallet`, `Comercio - Alta` y `Asignar Comercio`, cada una con su propio timestamp, como las tareas internas que ejecuta ese nivel.
+
+**⚠️ Etiqueta incorrecta — "CBU" en realidad muestra el CVU.** En "Datos de la Solicitud" con estado final "Aprobada", el campo que la pantalla etiqueta como **"CBU"** en realidad contiene el **CVU** de la cuenta recién creada — no hay ningún CBU real involucrado en este flujo. Es una etiqueta heredada/incorrecta puntual de esta pantalla del backoffice de Onboarding Jurídico, no un problema de terminología del producto Wallet en general (que sí distingue CBU/CVU correctamente — ver `wallet/validacion_totalizadores_cbu_cvu.md` y `apis_expuestas/cvu/`). "Datos Comerciales" (ID del comercio, Código de caja, Código de sucursal) queda dado de alta y vinculado a la cuenta en el mismo paso.
+
 ---
-*Última actualización: 2026-09-18 — `/context_merge`: nueva §8.1 (detalle funcional real de la consola de referencia "AVA Compliance") y nueva §9 (estructura real de la pantalla de solicitud en el backoffice) — ambas del discovery de `revision_pj_cumplimiento` (PRD-256).*
+*Última actualización: 2026-09-23 — `/context_merge`: nueva §8.2 (gap de PLD sobre datos/DDJJ faltantes en el ambiente de pruebas del onboarding de desarrollo propio para Octagon, insumo T-057); corrección de §9 punto 1 (botón Observar sí existe para el rol Cumplimiento) y punto 4/10 (Propietario Directo es sección separada; menú de Archivos depende del estado del documento); nueva §10 con el manual operativo de punta a punta de los 4 pasos del flujo (formulario público detallado, onboarding del representante legal, Nivel 3 automático y etiqueta CBU/CVU incorrecta).*
+*Última actualización anterior: 2026-09-18 — `/context_merge`: nueva §8.1 (detalle funcional real de la consola de referencia "AVA Compliance") y nueva §9 (estructura real de la pantalla de solicitud en el backoffice) — ambas del discovery de `revision_pj_cumplimiento` (PRD-256).*
 *Última actualización anterior: 2026-08-19 — nueva §8 (demo end-to-end a Octagon/Banco Industrial: consola de cumplimiento y potencial de marca blanca).*
 *Última actualización anterior: 2026-08-06 — nueva §7 (flujo AS-IS paso a paso Front+BO, desde la página Notion "Onboarding Jurídico") a pedido del proyecto [La Virginia — OB PJ](../../../1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md).*
 *Última actualización anterior: Fuente: Notion histórico, Epic "OB Personas Jurídicas MVP" (91 tickets) — ingesta 2026-07-06. §6: backfill `/sync_releases` vía export XML, 2026-07-13.*
