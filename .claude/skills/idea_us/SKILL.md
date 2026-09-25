@@ -44,8 +44,9 @@ El gate de CI/CD que Infraestructura/Seguridad está mandatorizando (SAST + cobe
 ### Paso 0 — Contexto de la feature
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2.
+1bis. **Gate de entrada:** el frontmatter del PRD (`artefactos/{{nombre_corto_proyecto}}-prd.md`) tiene que decir `Aprobado por PM`. Si dice `Propuesta`, pará y ofrecé revisarlo y aprobarlo ahora o volver a `/idea_prd`. En un PRD legacy sin campo `estado`, preguntale al PM una sola vez si lo da por aprobado y registralo en su historial. Si ya existe un `-us.md` aprobado cuyo `basado_en` apunta a una versión anterior del PRD, decile al PM qué cambió y qué historias pueden verse afectadas.
 2. **Leé todo lo que ya existe antes de escribir una sola historia** — no alcanza con el PRD solo:
-   - El PRD formal completo en `artefactos/` (todas las secciones: Problema, Solución, Definiciones, Alineación de la solución — Funcionalidades/Flujos/Lógica clave —, Checklist operativo por área, Riesgos).
+   - El PRD formal completo en `artefactos/` (todas las secciones: Problema, Solución, Definiciones, Alineación de la solución — Funcionalidades/Flujos/Lógica clave —, Impactos por área, Riesgos). Si una fila de Impactos por área es una "funcionalidad en el alcance", tiene que terminar cubierta por alguna historia.
    - **`artefactos/{{nombre_corto_proyecto}}-solution.md`, si existe** — es la fuente principal del contrato de API y de los flujos del Paso 5: el orden de llamadas, los endpoints reales, la procedencia de cada dato y los errores conocidos ya están ahí, no se reinventan por historia. Cualquier documento de acceptance criteria ya redactado (`/idea_ac` previo) es la otra fuente a revisar.
    - El `proyecto.md` del miembro completo (no solo el resumen ejecutivo) — Definiciones, Diseño técnico, Seguimiento PM, Historial de sync suelen tener detalle que el PRD todavía no absorbió.
    - Si es miembro de un proyecto general, el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — las historias no deberían re-litigar una decisión de arquitectura ya cerrada a nivel proyecto.
@@ -145,7 +146,7 @@ Si el flujo de la historia tiene ramas condicionales, más de un sistema/actor i
 2. Presentá el documento completo al PM para revisión — es el estado por defecto, no un paso opcional.
 3. Si el PM corrige una historia (dirección de un flujo, alcance, redacción, un AC mal planteado), reescribí esa historia completa reflejando la corrección — no parchear con notas "actualizado" superpuestas al texto viejo (ver regla general de artefactos: cuerpo limpio, historial de revisiones al pie).
 4. Repetí el ciclo de revisión las veces que haga falta hasta que el PM esté de acuerdo con las redacciones — cada vuelta suma una entrada al historial de revisiones del documento, no un documento nuevo.
-5. Recién con el OK explícito del PM se pasa al Paso 8 (persistencia + changelog) y, si el PM lo pide aparte, a la creación de tickets en Jira (ver regla dura de Jira más abajo — sigue siendo un paso separado y explícito, no automático).
+5. Recién con el OK explícito y literal del PM el frontmatter pasa de `estado: Propuesta` a `Aprobado por PM (YYYY-MM-DD)` — ni el silencio ni "dale, seguí" cuentan — y el historial registra qué versión se aprobó. Si una corrida posterior cambia el cuerpo, vuelve a `Propuesta` con versión nueva hasta la re-aprobación (la estimación que escribe `/idea_estimate` no revoca la aprobación). Con el OK se pasa al Paso 8 (persistencia) y, si el PM lo pide aparte, a la creación de tickets en Jira (ver regla dura de Jira más abajo — sigue siendo un paso separado y explícito, no automático).
 
 ### Paso 6 — Aplicar criterios INVEST
 
@@ -174,11 +175,13 @@ Ver [`references/EXAMPLE.md`](references/EXAMPLE.md) para un ejemplo completo.
 - [ ] En cualquiera de los dos casos, los AC cubren validaciones por dato, ejemplos concretos de request/response (bloque JSON, nunca solo en prosa), códigos de respuesta explícitos, anti-BOLA/BOPLA, formato de error RFC 9457 e idempotencia si crea/mueve dinero
 - [ ] Si el flujo de la historia tiene ramas, reintentos o más de un sistema involucrado: hay diagrama Mermaid en "Diagrama de flujo" (Paso 5bis)
 - [ ] Se armó el inventario de reglas de negocio transversales (Paso 0) y se hizo la revisión cruzada de todas las historias contra ese inventario antes de la primera presentación (Paso 5ter, punto 1) — ninguna regla compartida quedó sin AC o con AC contradictorio entre historias
-- [ ] El PM revisó el documento completo y dio su OK explícito a las redacciones (Paso 5ter) antes de darlo por terminado
+- [ ] El PRD estaba en `Aprobado por PM` antes de empezar (Paso 0.1bis)
+- [ ] Toda funcionalidad en el alcance que aparece en Impactos por área quedó cubierta por alguna historia
+- [ ] El PM revisó el documento completo y dio su OK explícito a las redacciones (Paso 5ter), y el frontmatter dice `Aprobado por PM (YYYY-MM-DD)` — o quedó explícito en `Propuesta`
 
 ## Paso 8 — Cierre estándar
 
-1. **Persistir el entregable** en `artefactos/{{nombre_corto_proyecto}}-us.md` — `{{nombre_corto_proyecto}}` es el nombre corto del proyecto: la carpeta misma si nació de `/idea_start` (sin prefijo `prd-XXX`), o el `<slug>` después de `prd-XXX_` en carpetas legacy (sin fecha en el nombre del archivo — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md`.
+1. **Persistir el entregable** en `artefactos/{{nombre_corto_proyecto}}-us.md` — `{{nombre_corto_proyecto}}` es el nombre corto del proyecto: la carpeta misma si nació de `/idea_start` (sin prefijo `prd-XXX`), o el `<slug>` después de `prd-XXX_` en carpetas legacy (sin fecha en el nombre del archivo — versión en el frontmatter + historial de revisiones al pie, ver regla general de artefactos) dentro de la carpeta del miembro (la ruta resuelta en el Paso 0), referenciado desde `proyecto.md` (§4 Entrega, fila de la tabla "Cadena de artefactos" con versión y estado). Frontmatter: `version`, `estado`, `basado_en: {prd: "<versión>", solution: "<versión>"}`.
 2. **Índices:** `wiki/1_proyectos/index.md`; `wiki/index.md` solo si aplica.
 3. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
 5. **Jira:** nunca crear tickets a partir de estas historias sin confirmación explícita del usuario, aunque el Paso 5ter ya haya cerrado con el OK del PM sobre el contenido — la creación en Jira es una decisión aparte que el PM tiene que pedir explícitamente. Si el alcance cruza más de un sistema/equipo (ej. dos proyectos Jira distintos), evaluá si corresponde partir una historia en dos — una por sistema — en vez de una sola historia con dependencias cruzadas de dueño ambiguo. Cuando el PM confirme que quiere crear en Jira, la creación misma (IDEA/Epic/Historias, clasificación, estados, prioridades) es responsabilidad de [`/idea_jira`](../idea_jira/SKILL.md) — no la repliques acá a mano.

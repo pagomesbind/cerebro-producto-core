@@ -2,7 +2,8 @@
 artifact: analisis-diseno
 version: "1.0"
 created: <YYYY-MM-DD>
-status: draft
+estado: Propuesta  # → "Aprobado por PM (YYYY-MM-DD)" con el OK literal del PM (Paso 4)
+basado_en: {start: "<versión>"}
 ---
 
 # Análisis técnico-funcional: [Nombre de la solución]

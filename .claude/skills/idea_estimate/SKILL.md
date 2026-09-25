@@ -29,7 +29,7 @@ Ninguno de los dos modos reemplaza el sizing técnico real de Ingeniería: son u
 2. **Estimá siempre por analogía, no de la nada.** Modo Proyecto compara contra IDEAs/Epics históricas completas (`log_iniciativas_producto.md`); Modo Historias compara cada historia contra un desarrollo puntual (`referencia_estimaciones.md`) o, si no hay analogía directa, contra otra historia ya estimada del mismo dominio. Cada número debe poder justificarse con un "se parece a X, que costó Y".
 3. **Usá la escala vigente de Bind PSP:** `S = 1 SP · M = 3 SP · L = 7 SP · XL = 15 SP` (confirmada en [`gestion_jira.md` §1.4](../../wiki/2_areas/procesos/gestion_jira.md#14-prioridad-versión-y-story-points)). No inventes otra escala ni mezcles Story Points directos con talles de camiseta sin convertir.
 4. **Nunca sobrescribas un sizing técnico real ya cargado** sin que el usuario lo pida explícitamente — si `customfield_10041` (SP real) ya tiene valores en los tickets de desarrollo de la IDEA, avisá y preguntá antes de tocar el campo de la IDEA. Un valor de `customfield_10389` cargado por `/idea_start` (marcado como preliminar de shaping) es del mismo tipo de dato: se sobrescribe sin pedir confirmación, dejando en el historial de revisiones del artefacto de dónde venía.
-5. **El Modo Proyecto exige como mínimo un PRD confirmado** — nunca estimás sobre una idea sin PRD escrito, aunque el PM tenga apuro por un número. `solution.md`, si ya existe, mejora mucho la precisión (deja ver los componentes técnicos principales) pero no es requisito para correr este modo.
+5. **Gate de entrada por estado, nunca por inferencia.** Modo Proyecto exige el PRD en `estado: Aprobado por PM`; Modo Historias exige el `-us.md` en `estado: Aprobado por PM`. Si el artefacto está en `Propuesta`, pará y ofrecé revisarlo y aprobarlo ahora o volver a la skill que lo produce — nunca estimás sobre una propuesta, aunque el PM tenga apuro por un número. En un artefacto legacy sin campo `estado`, preguntale al PM una sola vez si lo da por aprobado y registralo en su historial. Escribir `sp_estimado`/`sp_estimado_proyecto` en el frontmatter o la estimación en el artefacto **no revoca** su aprobación: es un metadato de esta skill, no un cambio de contenido. `solution.md`, si ya existe, mejora mucho la precisión (deja ver los componentes técnicos principales) pero no es requisito para correr este modo.
 6. **Toda estimación — de proyecto o de historia — suma margen explícito por la fricción del gate de CI/CD mandatorio** (revisión formal de PR por arquitecto/par senior + gate de SAST/cobertura bloqueante antes de poder mergear): si la IDEA previsiblemente se va a construir con muchos PR chicos, o toca código crítico (ledger, validaciones antifraude, aprobación/rechazo de operaciones), señalalo en el racional como factor que empuja el talle o el rango de riesgo hacia arriba. No es un ajuste automático de un porcentaje fijo — es una llamada de atención explícita que el PM confirma o descarta en la revisión.
 7. **Cuando exista una estimación de Modo Historias, es la que manda.** Si el proyecto ya tenía una estimación de Modo Proyecto cargada, correr Modo Historias la reemplaza (no conviven las dos como si fueran independientes) — dejalo explícito en el historial de revisiones de dónde estaba antes y por qué se reemplaza.
 8. **Historial de revisiones, no texto superpuesto** — si se re-estima algo ya estimado antes (una historia, o la IDEA completa), reescribí la fila/sección limpia y sumá una entrada al historial de revisiones del artefacto correspondiente (regla general de artefactos).
@@ -41,15 +41,15 @@ Ninguno de los dos modos reemplaza el sizing técnico real de Ingeniería: son u
 ### Paso 0 — Elegir el modo y precondición común
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../wiki/1_proyectos/index.md) §2.
-2. Si ya existen historias de usuario confirmadas por el PM (Paso 5ter de [`/idea_us`](../idea_us/SKILL.md) cerrado) → seguí por **Modo Historias** (Paso 1-H). Es el modo más preciso; si además ya corriste Modo Proyecto antes sobre esta misma IDEA, esta corrida lo reemplaza (Regla dura 7).
-3. Si todavía no hay historias pero el PRD ya está confirmado → seguí por **Modo Proyecto** (Paso 1-P).
+2. Si existe `-us.md` en `Aprobado por PM` (Paso 5ter de [`/idea_us`](../idea_us/SKILL.md) cerrado con el OK del PM) → seguí por **Modo Historias** (Paso 1-H). Es el modo más preciso; si además ya corriste Modo Proyecto antes sobre esta misma IDEA, esta corrida lo reemplaza (Regla dura 7).
+3. Si todavía no hay historias aprobadas pero el PRD está en `Aprobado por PM` → seguí por **Modo Proyecto** (Paso 1-P). Si ninguno de los dos está aprobado, aplicá la Regla dura 5.
 4. En cualquiera de los dos casos, verificá en Jira si la IDEA ya tiene sizing técnico real acumulado en sus tickets de desarrollo (`customfield_10041`) — si lo tiene, aplicá la Regla dura 4 antes de continuar.
 
 ### Modo Proyecto — dimensionar la IDEA completa apenas hay PRD
 
 #### Paso 1-P — Contexto mínimo
 
-1. Leé el PRD confirmado completo (`artefactos/{{nombre_corto_proyecto}}-prd.md`) — Problema, Solución, Alineación de la solución, Riesgos.
+1. Leé el PRD aprobado completo (`artefactos/{{nombre_corto_proyecto}}-prd.md`) — Problema, Solución, Alineación de la solución, Impactos por área (las funcionalidades que sumó la revisión cruzada también cuestan), Riesgos.
 2. Si existe, leé también `artefactos/{{nombre_corto_proyecto}}-solution.md` — no es requisito (Regla dura 5), pero si ya identifica los componentes técnicos principales (endpoints, pantallas, integraciones) mejora mucho la analogía del Paso 2-P.
 3. Leé el `proyecto.md` del miembro (Definiciones, `riesgos.md`, `decisiones.md`) y, si es miembro de un proyecto general, el §4 del padre — dependencias y riesgos compartidos con otros slices pueden empujar el talle hacia arriba.
 4. Si existe `artefactos/{{nombre_corto_proyecto}}-start.md`, leé el tamaño preliminar de shaping de la alternativa aprobada (§5-§6) y su analogía. Es el valor previo: esta corrida lo refina con el PRD (y `solution.md` si existe) y dice explícitamente si confirma, sube o baja ese número, y por qué.
@@ -80,7 +80,7 @@ Un número aproximado de SP (o, si ni siquiera alcanza para un número, un talle
 
 #### Paso 1-H — Contexto adicional
 
-1. Abrí el artefacto de historias (`artefactos/{{nombre_corto_proyecto}}-us.md`, generado por `/idea_us`). **Verificá que el Paso 5bis de esa skill ya haya cerrado** — el documento tiene que reflejar el estado con el que el PM está de acuerdo (sin `[pendiente revisión]` ni correcciones abiertas). Si no está confirmado, avisá al usuario y no sigas.
+1. Abrí el artefacto de historias (`artefactos/{{nombre_corto_proyecto}}-us.md`, generado por `/idea_us`). **Verificá su frontmatter: tiene que decir `estado: Aprobado por PM`** (Regla dura 5). Si dice `Propuesta`, avisá al usuario y no sigas hasta que lo apruebe.
 2. Leé también el PRD (`artefactos/{{nombre_corto_proyecto}}-prd.md`), `artefactos/{{nombre_corto_proyecto}}-solution.md` si existe, y el `proyecto.md` del miembro — el racional de cada estimación se apoya en el diseño técnico y los riesgos ya documentados ahí (ej. historial de bugs de un endpoint que se vuelve a tocar, complejidad de un wrapper/integración nueva, o un gap técnico bloqueante que puede subir el talle).
 3. Si esta IDEA ya tenía una estimación de Modo Proyecto cargada (`sp_estimado_proyecto` en el PRD), tenela a mano — el Paso 4-H la reemplaza explícitamente, no conviven las dos.
 
@@ -112,8 +112,8 @@ Sumá los SP de todas las historias para el total de la IDEA. Si alguna historia
 ## ✅ Checklist de calidad
 
 - [ ] Se identificó correctamente el modo a correr — Proyecto si no hay historias todavía, Historias si ya están confirmadas (Paso 0)
-- [ ] Modo Proyecto: el PRD estaba confirmado antes de estimar (nunca se estimó sobre un PRD en borrador)
-- [ ] Modo Historias: el artefacto de historias tenía el Paso 5bis de `/idea_us` ya cerrado antes de estimar
+- [ ] Modo Proyecto: el PRD estaba en `Aprobado por PM` antes de estimar (nunca se estimó sobre una `Propuesta`)
+- [ ] Modo Historias: el artefacto de historias estaba en `Aprobado por PM` antes de estimar
 - [ ] La historia (Modo Historias) o la IDEA completa (Modo Proyecto) tiene una analogía histórica concreta citada en el racional — nunca un número sin justificar
 - [ ] La escala de conversión talle→SP es la vigente (`S=1·M=3·L=7·XL=15`)
 - [ ] Se señaló explícitamente si la fricción del nuevo gate de CI/CD (muchos PR chicos, o código crítico como ledger/antifraude) empuja el talle o el rango hacia arriba, cuando aplica (Regla dura 6)
@@ -131,7 +131,7 @@ Sumá los SP de todas las historias para el total de la IDEA. Si alguna historia
 3. **Jira:** actualizá el campo `customfield_10389` ("SP estimado") de la IDEA con `editJiraIssue` al total calculado, dejando en el comentario o la nota que es una estimación de Modo Proyecto (preliminar, sin historias todavía). Si el campo ya tenía un valor cargado por otra persona (no por esta skill), avisá al usuario antes de sobrescribir. Un valor cargado por `/idea_start` (preliminar de shaping) se sobrescribe sin pedir confirmación (Regla dura 4).
 4. **Índices:** verificá igual la regla general de integridad de índices por si el cambio amerita actualizar una descripción.
 5. **Sin changelog y sin git.** El commit del repo personal lo hace el hook `SessionStart` una vez al día.
-6. Siguiente paso sugerido: [`/idea_us`](../idea_us/SKILL.md) para descomponer el PRD en historias. Cuando el PM las confirme (Paso 5ter de esa skill cerrado), volvé a correr esta skill en Modo Historias para reemplazar esta estimación por una más precisa (Regla dura 7).
+6. Siguiente paso sugerido: [`/idea_us`](../idea_us/SKILL.md) para descomponer el PRD en historias. Cuando el PM las apruebe (`-us.md` en `Aprobado por PM`), volvé a correr esta skill en Modo Historias para reemplazar esta estimación por una más precisa (Regla dura 7).
 
 ### Si corriste Modo Historias
 

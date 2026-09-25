@@ -2,7 +2,8 @@
 artifact: user-story
 version: "1.0"
 created: <YYYY-MM-DD>
-status: draft
+estado: Propuesta  # → "Aprobado por PM (YYYY-MM-DD)" con el OK literal del PM (Paso 5ter)
+basado_en: {prd: "<versión>", solution: "<versión>"}
 ---
 
 # Historia de usuario: [Título de la historia]

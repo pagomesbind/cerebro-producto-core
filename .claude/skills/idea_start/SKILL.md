@@ -19,7 +19,7 @@ Interroga al PM en rondas (técnica de [`/grilling`](../grilling/SKILL.md): desi
 ## Cuándo NO usarla
 
 - Ya hay problema, foco y solución aprobados (existe un `-start.md` en `Aprobado`) y falta el diseño funcional-técnico → [`/idea_solution`](../idea_solution/SKILL.md).
-- Ya hay diseño funcional y falta especificar para ingeniería → `/idea_prd`.
+- Ya hay diseño funcional aprobado y falta revisar el impacto por área, los riesgos y especificar para ingeniería → [`/idea_crosscheck`](../idea_crosscheck/SKILL.md) → [`/idea_risks`](../idea_risks/SKILL.md) → [`/idea_prd`](../idea_prd/SKILL.md).
 - Es solo una sesión de trabajo libre sobre un proyecto que ya pasó su shaping → `/debrief`.
 - Es puro estimador de tamaño sobre una IDEA que ya tiene PRD → `/idea_estimate`.
 
@@ -372,6 +372,7 @@ El Cerebro recomienda una alternativa (o una combinación) y **la defiende**, en
 1. **`artefactos/<nombre>-start.md`** desde `TEMPLATE_start.md`, en `Aprobado por PM (YYYY-MM-DD)`, versión en frontmatter + historial de revisiones al pie. Si ya existía (Modo D), se reescribe limpio y se suma una entrada al historial.
 2. **`proyecto.md`:**
    - §1 Resumen ejecutivo, §2 Problema (enunciado + medida con nivel), §3 Alcance (frontera del foco) y §4 Entrega (alternativa elegida y tamaño) en pocas líneas, cada una linkeando al `-start.md`;
+   - §4 Entrega, tabla "Cadena de artefactos": fila del `-start.md` con su versión y estado. Cada skill de la cadena (`/idea_solution`, `/idea_crosscheck`, `/idea_risks`, `/idea_prd`, `/idea_us`) suma o actualiza su fila — así el PM ve de un vistazo qué paso está aprobado y cuál sigue en propuesta;
    - disolver el anexo;
    - entrada en §8 Notas de sesiones y §9 Historial de sync.
 3. **Jira** — actualizar la IDEA creada en el Paso 2 (o crearla ahora si había quedado pendiente), con el OK del PM sobre el delta:
@@ -386,7 +387,7 @@ El Cerebro recomienda una alternativa (o una combinación) y **la defiende**, en
 6. **`wiki/1_proyectos/tareas.md`** — próximos pasos del PM: validar las magnitudes 🔶/⚪ que el PM quiera validar, pedidos de material pendientes, definiciones con stakeholders. Si algo es de interés del equipo, además un item `tipo: tarea_equipo`.
 7. **`1_proyectos/index.md`** §2 — Estado Jira, Última actividad. Item `tipo: iniciativa` en `contexto_vivo/` (proyecto nuevo con alternativa aprobada = novedad para la cartera).
 8. Regenerá `contexto_vivo/index.md` si capturaste items nuevos. **Sin git.**
-9. Cerrá sugiriendo el paso siguiente: **[`/idea_solution`](../idea_solution/SKILL.md)** sobre la alternativa aprobada — hereda el `-start.md` y sus *Preguntas para el análisis funcional-técnico*. Si la alternativa elegida es del carril 1 (sin desarrollo), el paso siguiente no es `/idea_solution`: es acordar el proceso con el área dueña (tarea en `tareas.md`) y, si hay ajustes menores de desarrollo, `/idea_prd` liviano.
+9. Cerrá sugiriendo el paso siguiente: **[`/idea_solution`](../idea_solution/SKILL.md)** sobre la alternativa aprobada — hereda el `-start.md` y sus *Preguntas para el análisis funcional-técnico*. Si la alternativa elegida es del carril 1 (sin desarrollo), el paso siguiente no es `/idea_solution`: es acordar el proceso con el área dueña (tarea en `tareas.md`) y correr [`/idea_crosscheck`](../idea_crosscheck/SKILL.md) directo sobre el `-start.md` — un cambio de proceso también impacta áreas —; si además hay ajustes menores de desarrollo, sigue `/idea_risks` y un `/idea_prd` liviano.
 
 ## Paso 9 — Cierre por parada (abandono / no vale la pena / diferido)
 

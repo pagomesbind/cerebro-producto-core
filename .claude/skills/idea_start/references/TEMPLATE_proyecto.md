@@ -39,12 +39,24 @@ El detalle vive en el -start.md §2 — no repetirlo.>
 ## 3. Alcance y definición
 
 <Al cerrar el Gate 2: la frontera del foco en 2-3 líneas (Dentro / Fuera), link al -start.md §3.
-Después la amplían /idea_solution y /idea_prd.>
+Después la amplían /idea_solution, /idea_crosscheck (requerimientos nuevos aprobados por el PM) y /idea_prd.>
 
 ## 4. Entrega
 
 <Al cerrar el Gate 4: alternativa aprobada, carril y tamaño preliminar de shaping. Después: IDEA,
 Epic e Historias de Jira, hitos.>
+
+**Cadena de artefactos** — cada skill suma o actualiza su fila. Todo nace en `Propuesta` y pasa a
+`Aprobado por PM (YYYY-MM-DD)` solo con el OK literal del PM; la skill siguiente no arranca sobre una propuesta.
+
+| Paso | Artefacto | Versión | Estado |
+|---|---|---|---|
+| Shaping | [`<nombre>-start.md`](artefactos/<nombre>-start.md) | 1.0 | Propuesta |
+| Análisis de solución | — | — | — |
+| Revisión cruzada por área | — | — | — |
+| Riesgos | — | — | — |
+| PRD | — | — | — |
+| Historias de usuario | — | — | — |
 
 ## 5. Decisiones del proyecto
 

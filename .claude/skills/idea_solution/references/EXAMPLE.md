@@ -2,7 +2,8 @@
 artifact: analisis-diseno
 version: "1.0"
 created: 2026-08-19
-status: draft
+estado: Propuesta
+basado_en: {start: "1.0"}
 ---
 
 > Ejemplo ilustrativo — cifras, nombres de endpoints y organizaciones ficticios, no datos reales de Bind PSP.

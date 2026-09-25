@@ -22,8 +22,8 @@ Un lanzamiento significativo genera tareas repartidas entre ingeniería, QA, sop
 2. **Toda tarea lleva un socio/interesado explícito** — una persona puntual si se conoce, si no el área/equipo. Sin este dato la tarea no es accionable.
 3. **Se listan todas las tareas relevadas para el proyecto, resueltas y pendientes.** Nunca se borra ni se archiva aparte una tarea ya hecha — se marca hecha (con fecha) y se conserva en el mismo listado, para que el checklist sirva también de registro de lo que se fue haciendo.
 4. **Orden fijo: primero lo necesario para poder salir a producción (bloqueadores), después el resto de tareas importantes del proyecto** (seguimiento post-lanzamiento, cierres administrativos, deuda diferida que igual se quiere trackear). Dentro de cada grupo, pendientes y resueltas conviven — no hay una sección aparte de "hecho".
-5. **Fuente obligatoria, nunca inventada desde cero:** todo bloqueador sale del Checklist operativo por área del PRD (filas "Tarea previa al go-live") y de los riesgos abiertos (tabla Riesgos del PRD + `riesgos.md` del proyecto). Si ninguno de los dos generó nada, decilo explícitamente en vez de inventar bloqueadores. **Áreas regulatorias (BCRA/UIF/PCI DSS) se relevan siempre**, aunque el lanzamiento parezca puramente técnico.
-6. **Cada tarea del checklist es una fila de `wiki/1_proyectos/tareas.md`** (mismo ID `T-NNN`, mismo dedupe) — nunca un ID paralelo propio del checklist.
+5. **Fuente obligatoria, nunca inventada desde cero:** todo bloqueador sale de la revisión cruzada por área (`-crosscheck.md`, la tabla completa: filas "Tarea previa al go-live" y filas `Pendiente`) y de los riesgos abiertos (`-risks.md` — en particular los marcados `🚧 Bloqueador de go-live` — y `riesgos.md` del proyecto). El resumen de Impactos y Riesgos del PRD es una vista para externos: no alcanza como fuente. En proyectos legacy sin `-crosscheck.md`, la fuente es el Checklist operativo por área del PRD. Si ninguna fuente generó nada, decilo explícitamente en vez de inventar bloqueadores. **Áreas regulatorias (BCRA/UIF/PCI DSS) se relevan siempre**, aunque el lanzamiento parezca puramente técnico.
+6. **Cada tarea del checklist es una fila de `wiki/1_proyectos/tareas.md`** (mismo ID `T-NNN`, mismo dedupe) — nunca un ID paralelo propio del checklist. Las tareas previas al go-live ya nacieron como `T-NNN` en `/idea_crosscheck` (y las mitigaciones accionables, en `/idea_risks`): esta skill **reutiliza esas filas**, nunca las crea de nuevo.
 7. **Comentario en Jira: auto-post, sin pedir confirmación**, cada corrida con novedad real (mismo criterio que `/sync_mails`/`/sync_meetings`) — consolida el estado vigente **completo** del checklist, no solo el delta.
 8. Todo output en español.
 
@@ -35,7 +35,7 @@ Un lanzamiento significativo genera tareas repartidas entre ingeniería, QA, sop
 
 ### Paso 0 — Contexto del lanzamiento
 
-1. Resolvé la ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2. Leé `proyecto.md`, el PRD asociado en `artefactos/`, `gaps.md`, `decisiones.md` y `riesgos.md` si existen. Si es miembro de un proyecto general, leé también el `proyecto.md` del padre.
+1. Resolvé la ruta real en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2. Leé `proyecto.md`, el PRD, `-crosscheck.md` y `-risks.md` en `artefactos/`, `gaps.md`, `decisiones.md` y `riesgos.md` si existen. Si es miembro de un proyecto general, leé también el `proyecto.md` del padre.
 2. **Si ya existe `artefactos/{{nombre_corto_proyecto}}-golive.md`** de una corrida anterior (propia o actualizada por un sync), leelo completo — esta corrida lo actualiza in place (ver Paso 8), nunca genera un documento nuevo en paralelo.
 3. Filtrá `wiki/1_proyectos/tareas.md` por las tareas cuya fuente ya es este proyecto (incluidas las que vienen de una corrida anterior de esta misma skill) — son la base del Paso 3.
 4. Si el lanzamiento involucra un proveedor externo (Fintexa u otro), revisá `wiki/3_recursos/arquitectura_sistema/` por dependencias conocidas.
@@ -44,8 +44,8 @@ Un lanzamiento significativo genera tareas repartidas entre ingeniería, QA, sop
 
 Recorré, sin saltear ninguna fuente:
 
-- **Checklist operativo por área del PRD** (las 7 áreas) — toda fila marcada "Tarea previa al go-live" en la columna "Qué proponemos" es un bloqueador.
-- **Riesgos** (tabla del PRD + `riesgos.md` del proyecto) — todo riesgo abierto cuya mitigación depende de una acción concreta y pendiente, y cuyo impacto no es aceptable dejar para después del pase a producción.
+- **Revisión cruzada por área** (`-crosscheck.md`, las nueve áreas, tabla completa) — toda fila marcada "Tarea previa al go-live" es un bloqueador, y toda fila `Pendiente` también, hasta que el área la confirme. Ya tienen su `T-NNN`: reutilizalo.
+- **Riesgos** (`-risks.md` + `riesgos.md` del proyecto) — todo riesgo marcado `🚧 Bloqueador de go-live`, y todo riesgo abierto cuya mitigación depende de una acción concreta y pendiente, y cuyo impacto no es aceptable dejar para después del pase a producción.
 - `gaps.md`/`decisiones.md` del proyecto — pendientes marcados explícitamente como condición de salida a producción.
 
 ### Paso 2 — Relevar el resto de tareas importantes del proyecto
@@ -83,7 +83,8 @@ Ver [`references/TEMPLATE.md`](references/TEMPLATE.md) y [`references/EXAMPLE.md
 - [ ] Toda fila tiene al PM como responsable y un socio/interesado explícito (persona o área)
 - [ ] Los bloqueadores de producción están arriba, separados del resto
 - [ ] Están todas las tareas relevadas, resueltas y pendientes — ninguna se borró
-- [ ] Todo bloqueador viene del checklist operativo por área o de los riesgos — ninguno inventado desde cero
+- [ ] Todo bloqueador viene de la revisión cruzada por área o de los riesgos — ninguno inventado desde cero
+- [ ] Las tareas que ya nacieron en `/idea_crosscheck` o `/idea_risks` se reutilizaron con su `T-NNN`, sin duplicarlas
 - [ ] Las tareas ya trackeadas en `tareas.md` se revisaron hacia atrás antes de asumir que siguen pendientes
 - [ ] Cada fila existe también como `T-NNN` en `tareas.md`
 - [ ] El comentario en Jira se posteó sin pedir confirmación

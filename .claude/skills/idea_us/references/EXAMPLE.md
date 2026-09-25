@@ -1,8 +1,9 @@
 ---
 artifact: user-story
 version: "1.0"
-created: 2026-07-20
-status: complete
+created: 2026-07-25
+estado: Aprobado por PM (2026-07-25)
+basado_en: {prd: "1.0", solution: "1.0"}
 context: Ejemplo ilustrativo — continúa el caso de ejemplo del preview de documentación KYB (ver /idea_prd). US-1 es una historia de UI que entrega el componente de pantalla completo (lista + filtrado por tipo de entidad en una sola historia, no partida por escenario); US-2 ejemplifica una historia de endpoint con contrato de API completo.
 ---
 

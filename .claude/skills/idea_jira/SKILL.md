@@ -1,7 +1,7 @@
 ---
 name: idea_jira
 description: Crea (o actualiza) en Jira la jerarquía completa IDEA→Epic→Historia de una IDEA ya especificada — clasifica la IDEA (Categoría, Producto, Cliente, SP estimado, prioridad), la deja en estado EN APROBACION, deja en la Epic el análisis técnico-funcional completo (autocontenido, con diagramas Mermaid) para que Ingeniería tenga todo el contexto antes de las historias, y crea las historias de usuario confirmadas como tickets Historia en BACKLOG. Se activa con /idea_jira.
-when_to_use: Se activa cuando el usuario ejecuta /idea_jira, siempre después de que el PRD esté cerrado (/idea_prd), las historias de usuario estén confirmadas (/idea_us, Paso 5ter cerrado) y exista una estimación de SP (/idea_estimate). Nunca antes — esta skill no redacta contenido nuevo, solo lo traslada a Jira.
+when_to_use: Se activa cuando el usuario ejecuta /idea_jira, siempre después de que el PRD (/idea_prd) y las historias de usuario (/idea_us) estén en `Aprobado por PM` y exista una estimación de SP (/idea_estimate). Nunca antes — esta skill no redacta contenido nuevo, solo lo traslada a Jira.
 disable-model-invocation: true
 argument-hint: "[nombre_corto_proyecto o PRD-XXX]"
 ---
@@ -14,8 +14,8 @@ El discovery y la especificación de una IDEA viven en la wiki (`proyecto.md`, P
 
 ## Cuándo NO usarla
 
-- El PRD todavía no está cerrado, o tiene preguntas abiertas que bloquean el alcance → cerralo primero con [`/idea_prd`](../idea_prd/SKILL.md).
-- Las historias de usuario no fueron confirmadas por el PM (Paso 5ter de [`/idea_us`](../idea_us/SKILL.md) sigue abierto) → no crees tickets a partir de una historia a medio revisar.
+- El PRD no está en `estado: Aprobado por PM` → cerralo primero con [`/idea_prd`](../idea_prd/SKILL.md). Lo que va a la descripción de la IDEA lo lee todo el comité: nunca sale una propuesta.
+- Las historias de usuario no están en `estado: Aprobado por PM` → cerralas con [`/idea_us`](../idea_us/SKILL.md). No se crean tickets a partir de una historia a medio revisar.
 - No existe una estimación de SP para la IDEA (`sp_estimado` ausente del frontmatter del PRD) → corré primero [`/idea_estimate`](../idea_estimate/SKILL.md). Esta skill nunca inventa un número de esfuerzo.
 - Lo que hace falta es actualizar el *contenido* de una historia ya creada en Jira (no crear una nueva) → editá el artefacto con `/idea_us` y traé el delta acá solo para que la Regla dura 3 decida si corresponde tocar el ticket ya existente.
 
@@ -47,8 +47,8 @@ El discovery y la especificación de una IDEA viven en la wiki (`proyecto.md`, P
 ### Paso 0 — Contexto y precondiciones
 
 1. Resolvé la ruta real del proyecto en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 — y de paso, leé ahí mismo la columna "IDEA" (ver Regla dura 2).
-2. Leé el PRD completo (`artefactos/{{nombre_corto_proyecto}}-prd.md`) — necesitás su frontmatter (`sp_estimado`) y su contenido íntegro para la descripción de la IDEA.
-3. Leé el artefacto de historias de usuario (`artefactos/{{nombre_corto_proyecto}}-us.md`) — confirmá que el Paso 5ter de `/idea_us` está cerrado (sin `[pendiente revisión]` abierto). Si no lo está, avisá y no sigas.
+2. Leé el PRD completo (`artefactos/{{nombre_corto_proyecto}}-prd.md`) — necesitás su frontmatter (`estado`, `sp_estimado`) y su contenido íntegro para la descripción de la IDEA. **Gate:** si `estado` no es `Aprobado por PM`, avisá y no sigas.
+3. Leé el artefacto de historias de usuario (`artefactos/{{nombre_corto_proyecto}}-us.md`). **Gate:** su `estado` tiene que ser `Aprobado por PM`; si no, avisá y no sigas. En artefactos legacy sin campo `estado`, preguntale al PM una sola vez si los da por aprobados y registralo en su historial.
 4. Si `artefactos/{{nombre_corto_proyecto}}-solution.md` existe, leelo completo — es la fuente de la descripción de la Epic (Reglas duras 11-12) y no alcanza con hojearlo: necesitás cada sección y cada diagrama para reescribirlos autocontenidos en el Paso 2A.3.
 5. Si `sp_estimado` no está en el frontmatter del PRD, parate acá — avisá al PM que hace falta correr `/idea_estimate` primero. Si `sp_estimado` todavía no está en el PRD pero la IDEA tiene el valor preliminar de shaping de `/idea_start`, igual parate y pedí `/idea_estimate`: el valor de shaping no reemplaza la estimación de Producto sobre el PRD.
 6. Cargá [`references/campos_jira.md`](references/campos_jira.md) — es la fuente de todos los IDs de campo, opción y transición que vas a usar en los pasos siguientes. Si algún ID de ese archivo falla al usarlo, no lo reintentes a ciegas: confirmá el valor real contra Jira (`getJiraIssueTypeMetaWithFields`, `getTransitionsForJiraIssue`) y corregí el archivo de referencia en la misma corrida.

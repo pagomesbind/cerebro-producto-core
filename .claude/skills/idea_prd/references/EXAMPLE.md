@@ -1,8 +1,9 @@
 ---
 artifact: prd
-version: "3.0"
-created: 2026-07-20
-status: complete
+version: "1.0"
+created: 2026-07-24
+estado: Aprobado por PM (2026-07-24)
+basado_en: {start: "1.0", solution: "1.0", crosscheck: "1.1", risks: "1.0"}
 context: Ejemplo ilustrativo — cifras ficticias, no son datos reales de Bind PSP. Continúa el caso de ejemplo de abandono en el alta de comercios de Adquirencia.
 ---
 
@@ -50,6 +51,7 @@ Priorizado con MoSCoW, sobre el roadmap ya acordado con Ingeniería para este tr
 * 🔴 MUST — Pantalla de preview de documentación requerida, mostrada antes del formulario de carga de KYB.
 * 🔴 MUST — Lógica de armado de la lista según el tipo de entidad declarado por el comercio (unipersonal / sociedad).
 * 🔴 MUST — Comportamiento de fallback: si el tipo de entidad no está declarado o falla la resolución de la lista, mostrar la lista genérica más amplia sin bloquear el alta.
+* 🔴 MUST — Evento de abandono por paso del alta, visible en el tablero de funnel que ya usa Operaciones. Sin él no hay forma de saber a tiempo si el preview mejora o empeora el abandono que viene a resolver, y es la medición del primer objetivo.
 * 🟠 SHOULD — Imágenes de ejemplo por tipo de documento requerido. No bloquea el lanzamiento si no llega a tiempo.
 * 🟡 COULD — Aceptar fotos sacadas con el celular además de PDF. Depende de cambios del proveedor de onboarding — deseable, sin driver de negocio que lo adelante todavía.
 
@@ -75,23 +77,37 @@ Priorizado con MoSCoW, sobre el roadmap ya acordado con Ingeniería para este tr
 * El fallback a lista genérica nunca es un error visible para el comercio: se muestra como si fuera el comportamiento normal, sin mensaje de error ni fricción adicional.
 * La pantalla de preview no persiste ninguna decisión del comercio — es solo informativa; no cambia ni valida nada del lado del sistema hasta que el comercio llega al formulario de carga real.
 
-## Checklist operativo por área
+## Impactos por área
 
-| **Área** | **Pregunta clave** | **Respuesta (Sí/No + por qué)** | **Qué proponemos** | **Estado** |
-| --- | --- | --- | --- | --- |
-| Comercial | ¿Hay clientes en pipeline cuya integración cambia por esto? | No — el cambio es sobre el flujo self-service, no sobre el proceso de alta asistida que usa comercial. | — | Contemplado y validado |
-| Soporte e Integraciones | ¿Aparecen errores o estados nuevos que Soporte va a ver en un reclamo y hoy no sabe interpretar? | Sí — la pantalla nueva puede generar consultas puntuales al principio del lanzamiento, sobre todo de comercios que no entienden por qué ahora se les pide algo "antes" de cargar. | Tarea previa al go-live: avisar a Soporte antes del lanzamiento y actualizar el manual de ayuda con la pantalla nueva. | Pendiente |
-| Recaudaciones/Conciliación | ¿Genera movimientos de dinero nuevos o cambia cómo se contabilizan y concilian? | No — no toca liquidaciones, impuestos ni conciliación; es un cambio de experiencia en el alta. | — | Contemplado y validado |
-| Fraude | ¿Cambia el criterio de validación de documentos o el perfil de riesgo del alta? | No — no cambia qué se valida ni cuándo, solo cuándo se le informa al comercio qué va a necesitar. | — | Contemplado y validado |
-| Legales | ¿Tiene implicancias regulatorias (BCRA, UIF/PLD)? | No — los requisitos documentales de KYB no cambian, solo el momento en que se comunican. | — | Contemplado y validado |
-| IT | ¿Depende de un desarrollo de un proveedor externo y con qué lead time? | Sí — depende de que Fintexa confirme si expone la metadata de "documentos requeridos por tipo de entidad" o si esa lógica se resuelve del lado de Bind. Todavía no está confirmado. | Tarea previa al go-live: confirmar con Fintexa la disponibilidad de la metadata antes de cerrar el diseño técnico; si no la expone, la lógica de lista se resuelve como funcionalidad propia (ya contemplada en Funcionalidades clave). | Pendiente |
-| Clientes externos en producción | ¿Es un breaking change para alguien ya integrado? | No — solo afecta el flujo de alta de comercios nuevos, no a comercios ya activos. | — | Contemplado y validado |
+Se revisó el impacto en nueve áreas de Bind PSP. Cuatro impactos requieren acción:
 
-## **Riesgos**
-
-| Riesgo | Probabilidad | Impacto | Mitigación |
+| **Área** | **Impacto** | **Qué proponemos** | **Estado** |
 | --- | --- | --- | --- |
-| El preview alarga la percepción de esfuerzo y empeora el abandono en vez de mejorarlo | Media | Alto | Validar primero con un A/B test antes de lanzar a 100% del tráfico. |
-| Fintexa no expone la metadata de documentos requeridos por tipo de entidad (gap detectado en el checklist operativo, IT) | Media | Medio | Definir la lógica de lista por tipo de entidad del lado de Bind como plan B. |
-| El cambio impacta componentes de UI compartidos con el alta de Wallet sin coordinación previa | Baja | Medio | Confirmar con el equipo de Wallet antes de tocar componentes compartidos. |
-| Soporte no llega a tener el aviso/manual de ayuda listo para el lanzamiento (gap detectado en el checklist operativo, Soporte) | Media | Bajo | Coordinar con Soporte la fecha del aviso antes de fijar la fecha de lanzamiento. |
+| Soporte / Operaciones | La pantalla nueva puede generar consultas al principio, de comercios que no entienden por qué se les muestra algo antes de la carga. | Tarea previa al go-live: avisar a Soporte y actualizar el manual de ayuda con la pantalla nueva. | Contemplado pero no validado |
+| Soporte / Operaciones | Hoy nadie ve el abandono en el paso de KYB salvo en el informe mensual: si el preview empeora la conversión, Soporte no se entera. | Funcionalidad en el alcance: evento de abandono por paso del alta. | Contemplado y validado |
+| IT | Depende de que el proveedor de onboarding confirme si expone la lista de documentos requeridos por tipo de entidad. | Tarea previa al go-live: confirmarlo antes de cerrar el diseño; si no la expone, la lista se resuelve del lado de Bind (ya en Funcionalidades clave). | Pendiente |
+| Cumplimiento / PLD | La lista que se muestra tiene que coincidir exactamente con la que exige la política de debida diligencia vigente. | Tarea previa al go-live: validar la lista final con PLD. | Pendiente |
+
+**Áreas evaluadas sin impacto**
+* Comercial — el cambio es sobre el alta self-service, no sobre el alta asistida ni el pricing.
+* Administración y recaudaciones — no genera movimientos de dinero ni toca liquidaciones.
+* Impuestos y contabilidad — no cambia la operatoria facturada ni la información al fisco.
+* Fraude — no cambia qué se valida ni cuándo, solo cuándo se le informa al comercio.
+* Legales — no cambian contratos ni términos.
+* Clientes externos en producción — solo afecta altas nuevas, no a comercios activos ni a integraciones.
+
+## Riesgos
+
+| Riesgo | Familia | Probabilidad | Impacto | Mitigación |
+| --- | --- | --- | --- | --- |
+| El preview alarga la percepción de esfuerzo y empeora el abandono en vez de mejorarlo | Producto | Media | Alto | Lanzamiento gradual (A/B) medido con el evento de abandono por paso, con vuelta atrás si empeora. |
+| El proveedor de onboarding no expone la lista de documentos por tipo de entidad | Entrega | Media | Medio | Resolver la lista del lado de Bind como plan B, ya dentro del alcance. |
+| La lista que se muestra no coincide con la que exige la política de debida diligencia | Producto | Baja | Alto | Validación de la lista final con PLD antes de salir, y un único origen de la lista para el preview y la carga. |
+| El cambio toca componentes de pantalla compartidos con el alta de Wallet sin coordinación | Entrega | Baja | Medio | Confirmar con el equipo de Wallet antes de tocar componentes compartidos. |
+| Soporte no llega a tener el aviso y el manual actualizados para el lanzamiento | Entrega | Media | Bajo | Fijar la fecha del aviso con Soporte antes de fijar la fecha de lanzamiento. |
+
+## Historial de revisiones
+
+| Versión | Fecha | Cambio |
+| --- | --- | --- |
+| 1.0 | 2026-07-24 | Versión inicial, consolidada desde el shaping, el análisis de solución, la revisión cruzada (v1.1) y el relevamiento de riesgos (v1.0). Aprobada por el PM el 2026-07-24. |

@@ -1,8 +1,9 @@
 ---
 artifact: prd
-version: "3.0"
+version: "1.0"
 created: <YYYY-MM-DD>
-status: draft
+estado: Propuesta  # → "Aprobado por PM (YYYY-MM-DD)" con el OK literal del PM
+basado_en: {start: "<versión>", solution: "<versión>", crosscheck: "<versión>", risks: "<versión>"}
 ---
 
 # PRD: [Nombre de la feature/iniciativa]
@@ -64,28 +65,28 @@ _// Reglas que guían el diseño y el desarrollo: escenarios comunes y casos bor
 _// No es el contrato de endpoints ni el manejo técnico del error — es la regla de negocio que decide qué pasa en cada caso._
 * Texto.
 
-## Checklist operativo por área
-_// Recorré las 7 áreas completas, sin saltear ninguna, con una fila por pregunta. El valor está en dejar constancia de que se evaluaron todas, incluidas las que no tienen impacto._
-_// RESPUESTA — nunca un Sí/No pelado: siempre Sí o No **más la explicación de por qué**, en una oración que alguien de esa área pueda leer y reconocer como su propio problema (ej. "Sí, porque se agrega un estado nuevo de la operación que el cliente tiene que contemplar en su conciliación diaria"). Un No también se explica._
-_// QUÉ PROPONEMOS — una de tres salidas, siempre explícita; si la respuesta fue No, va "—":_
-_//   · **Funcionalidad en el alcance** — y cuál, nombrada como aparece en Funcionalidades clave._
-_//   · **Tarea previa al go-live** — algo a hacer antes de salir a producción que no es desarrollo (capacitar a un área, actualizar la documentación pública, comunicar a clientes integrados, cargar una configuración, validar un cálculo con el área). Muchas filas caen acá: el área tiene un impacto real y no hay nada que construir, hay algo que hacer._
-_//   · **Contingencia operativa** — se convive con el impacto; decir cómo y quién lo absorbe._
-_// ESTADO — Pendiente | Contemplado pero no validado | Contemplado y validado. "Validado" significa que el área lo confirmó, no que se asumió por cuenta propia._
+## Impactos por área
+_// CONSOLIDACIÓN, no análisis: se transcribe el "Resumen de impactos" de la revisión cruzada aprobada. Nunca se agrega, quita ni reinterpreta una fila._
+_// Se revisaron nueve áreas: Comercial · Soporte / Operaciones e Integraciones · Administración y recaudaciones · Impuestos y contabilidad · Fraude · Legales · Cumplimiento / PLD · IT · Clientes externos en producción._
+_// Las áreas con impacto van en la tabla; cada área sin impacto, en una línea con su motivo. Sin IDs de pregunta ni códigos de tarea._
+_// QUÉ PROPONEMOS — Funcionalidad en el alcance (nombrada como en Funcionalidades clave) · Tarea previa al go-live · Contingencia operativa (cómo y quién lo absorbe)._
 
-| **Área** | **Pregunta clave** | **Respuesta (Sí/No + por qué)** | **Qué proponemos** | **Estado** |
-| --- | --- | --- | --- | --- |
-| Comercial |  |  |  | Pendiente |
-| Soporte e Integraciones |  |  |  | Pendiente |
-| Recaudaciones/Conciliación |  |  |  | Pendiente |
-| Fraude |  |  |  | Pendiente |
-| Legales |  |  |  | Pendiente |
-| IT |  |  |  | Pendiente |
-| Clientes externos en producción |  |  |  | Pendiente |
-
-## **Riesgos**
-_// Clasificar riesgos identificados con este proyecto — incluí los gaps de capacidad detectados en el checklist operativo que todavía no tengan resolución._
-
-| Riesgo | Probabilidad | Impacto | Mitigación |
+| **Área** | **Impacto** | **Qué proponemos** | **Estado** |
 | --- | --- | --- | --- |
-|  | Baja/Media/Alta | Bajo/Medio/Alto |  |
+|  |  |  |  |
+
+**Áreas evaluadas sin impacto**
+* <Área> — <motivo en una frase>.
+
+## Riesgos
+_// CONSOLIDACIÓN: se transcribe el "Resumen para el PRD" del relevamiento de riesgos aprobado. Dos familias: Entrega (lo que puede impedir construirlo bien y a tiempo) y Producto (lo que puede salir mal una vez en producción)._
+
+| Riesgo | Familia | Probabilidad | Impacto | Mitigación |
+| --- | --- | --- | --- | --- |
+|  | Entrega/Producto | Baja/Media/Alta | Bajo/Medio/Alto |  |
+
+## Historial de revisiones
+
+| Versión | Fecha | Cambio |
+| --- | --- | --- |
+| 1.0 | YYYY-MM-DD | Versión inicial del PRD |

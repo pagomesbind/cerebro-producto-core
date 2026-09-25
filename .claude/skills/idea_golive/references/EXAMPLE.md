@@ -27,4 +27,4 @@ context: Ejemplo ilustrativo — cifras y nombres ficticios. Continúa el caso d
 | T-206 | Confirmar con Legal/Cumplimiento que la pantalla no modifica los requisitos de KYB en sí (solo los muestra antes) | Cumplimiento [Ejemplo] | ✅ Hecho (2026-08-05) |
 
 ---
-*Historial de revisiones: v1.0 (2026-07-20) — primera versión, generada a partir del Checklist operativo por área del PRD y de `riesgos.md` del proyecto. v1.1 (2026-08-12) — T-204 y T-206 marcadas hechas por `/sync_meetings` tras confirmarse en la reunión "Repaso pre-lanzamiento KYB"; comentario de Jira reposteado automáticamente en ese momento.*
+*Historial de revisiones: v1.0 (2026-07-20) — primera versión, generada a partir de la revisión cruzada por área, del relevamiento de riesgos y de `riesgos.md` del proyecto. v1.1 (2026-08-12) — T-204 y T-206 marcadas hechas por `/sync_meetings` tras confirmarse en la reunión "Repaso pre-lanzamiento KYB"; comentario de Jira reposteado automáticamente en ese momento.*
