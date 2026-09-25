@@ -1,132 +1,30 @@
 ---
-artifact: launch-checklist
-version: "1.0"
+artifact: golive-checklist
+version: "1.1"
 created: 2026-07-20
-status: complete
+status: en curso
 context: Ejemplo ilustrativo — cifras y nombres ficticios. Continúa el caso del preview de documentación KYB.
 ---
 
-# Checklist de lanzamiento: Preview de documentación KYB
+# Checklist de go-live: Preview de documentación KYB
 
-## Overview del lanzamiento
+> Responsable de toda tarea: PM de Onboarding [Ejemplo]. El "Socio/interesado" es la persona o área con la que hay que resolverla — no reemplaza al PM como dueño de la fila.
 
-| Campo | Valor |
-|-------|-------|
-| Qué | Pantalla de preview de documentos requeridos antes de la carga de KYB en Adquirencia |
-| Fecha de lanzamiento | [Ejemplo] 2026-08-15 |
-| Tipo de lanzamiento | Feature menor (A/B test primero, luego rollout completo) |
-| Responsable del lanzamiento | [Ejemplo] PM de Onboarding |
-| Quién decide go/no-go | [Ejemplo] Product Lead |
+## Necesarias para producción (bloqueadores)
 
-### Stakeholders clave
+| ID | Tarea | Socio/interesado | Estado |
+|---|---|---|---|
+| T-201 | Conseguir que Ing./Arquitectura resuelva la metadata de Fintexa (o cierre un plan B del lado de Bind) — sin esto no se puede armar la pantalla de preview | Ing./Arquitectura | 🔴 Bloqueador — Pendiente |
+| T-202 | Conseguir que Ingeniería/Data instrumente el evento "vio preview"/"abandonó en preview" — sin esto no se puede medir la hipótesis del A/B test | Ingeniería/Data | 🔴 Bloqueador — Pendiente |
+| T-203 | Conseguir de Diseño las imágenes de ejemplo por tipo de documento (unipersonal + sociedad) | Diseño | 🟡 Pendiente (unipersonal alcanza para lanzar si hace falta priorizar) |
 
-| Rol | Nombre | Contacto |
-|-----|--------|----------|
-| Producto | [Ejemplo] N/N | — |
-| Ingeniería | [Ejemplo] N/N | — |
-| Diseño | [Ejemplo] N/N | — |
-| Soporte | [Ejemplo] N/N | — |
-| Cumplimiento | [Ejemplo] N/N | — |
+## Otras tareas importantes del proyecto
 
-## Ingeniería
+| ID | Tarea | Socio/interesado | Estado |
+|---|---|---|---|
+| T-204 | Avisar a Soporte de la nueva pantalla antes del lanzamiento, para que sepan explicarla si un comercio pregunta | Soporte (Gonzalo Rivera) [Ejemplo] | ✅ Hecho (2026-08-10) |
+| T-205 | Pedirle a un segundo PM que revise el copy de la pantalla | — (interno de Producto) | 🟢 Pendiente, no urgente |
+| T-206 | Confirmar con Legal/Cumplimiento que la pantalla no modifica los requisitos de KYB en sí (solo los muestra antes) | Cumplimiento [Ejemplo] | ✅ Hecho (2026-08-05) |
 
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Código completo y mergeado | Ing. | [Ejemplo] T-5 días | Pendiente | |
-| [ ] Feature flag configurado para A/B 50/50 | Ing. | [Ejemplo] T-5 días | Pendiente | |
-| [ ] Resolución de metadata de Fintexa confirmada | Ing./Arquitectura | [Ejemplo] T-10 días | Bloqueador | Ver PRD de ejemplo, dependencia abierta |
-
-## QA y testing
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Test funcional de ambas variantes (con/sin preview) | QA | [Ejemplo] T-3 días | Pendiente | |
-| [ ] Testing mobile del flujo de alta | QA | [Ejemplo] T-3 días | Pendiente | |
-
-## Diseño y UX
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Mockup de pantalla de preview aprobado | Diseño | [Ejemplo] T-8 días | Pendiente | |
-| [ ] Imágenes de ejemplo por tipo de documento | Diseño | [Ejemplo] T-6 días | Pendiente | |
-
-## Comunicación
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] N/A — cambio interno del flujo, sin comunicación externa | — | — | N/A | El A/B test no requiere anuncio |
-
-## Soporte
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Aviso al equipo de soporte sobre la nueva pantalla | Soporte | [Ejemplo] T-2 días | Pendiente | Para que sepan explicarla si un comercio pregunta |
-
-## Legal y cumplimiento
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Confirmar que la pantalla no modifica los requisitos de KYB en sí (solo los muestra antes) | Cumplimiento | [Ejemplo] T-4 días | Pendiente | |
-
-## Operaciones e infraestructura
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] N/A — sin cambios de infraestructura | — | — | N/A | |
-
-## Analítica y monitoreo
-
-| Item | Responsable | Fecha | Estado | Notas |
-|------|-------------|-------|--------|-------|
-| [ ] Instrumentación de evento "vio preview" y "abandonó en preview" | Ing./Data | [Ejemplo] T-5 días | Pendiente | Necesario para medir la hipótesis de ejemplo |
-| [ ] Dashboard de abandono por variante | Data | [Ejemplo] T-3 días | Pendiente | |
-
-## Criterios de go/no-go
-
-### Imprescindibles (bloqueadores)
-
-- [ ] Metadata de Fintexa resuelta (o plan B del lado de Bind implementado)
-- [ ] Instrumentación de analítica funcionando (sin esto no se puede medir la hipótesis)
-
-### Deseables
-
-- [ ] Imágenes de ejemplo para los 2 tipos de entidad completas (unipersonal puede lanzar sin sociedad si hace falta priorizar)
-
-### Nice to have
-
-- [ ] Copy revisado por un segundo PM
-
-## Plan de rollback
-
-### Condiciones que lo disparan
-
-- El feature flag muestra un error de renderizado en la pantalla de preview para más del 1% de sesiones
-- La variante con preview empeora el abandono en vez de mejorarlo (señal temprana, antes de fin de test)
-
-### Pasos de rollback
-
-1. Apagar el feature flag (rollback inmediato, sin deploy)
-2. Confirmar que el flujo vuelve al comportamiento anterior para el 100% del tráfico
-3. Avisar a soporte que la pantalla de preview ya no está activa
-
-### Responsable del rollback
-
-[Ejemplo] PM de Onboarding — vía feature flag, sin necesidad de ingeniería en el momento
-
-### Tiempo estimado de rollback
-
-Minutos (es un feature flag, no un deploy)
-
-## Cronograma de check-ins
-
-| Checkpoint | Fecha | Participantes |
-|------------|-------|----------------|
-| Revisión T-7 días | [Ejemplo] | PM, Ing., Diseño |
-| Go/no-go T-2 días | [Ejemplo] | PM, Product Lead |
-| Sync día del lanzamiento | [Ejemplo] | PM, Ing. |
-
-## Issues abiertos
-
-| Issue | Responsable | Estado | Impacto |
-|-------|-------------|--------|---------|
-| Metadata de Fintexa sin confirmar | Arquitectura | En curso | Bloqueador |
+---
+*Historial de revisiones: v1.0 (2026-07-20) — primera versión, generada a partir del Checklist operativo por área del PRD y de `riesgos.md` del proyecto. v1.1 (2026-08-12) — T-204 y T-206 marcadas hechas por `/sync_meetings` tras confirmarse en la reunión "Repaso pre-lanzamiento KYB"; comentario de Jira reposteado automáticamente en ese momento.*
