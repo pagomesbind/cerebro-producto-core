@@ -1,7 +1,7 @@
 ---
 name: idea_solution
 description: Produce el análisis técnico-funcional de la solución interrogando al PM en rondas — actores, orden de llamadas, contrato de integración, de dónde sale cada dato del request, camino feliz, caminos alternativos, flujos de error controlado, estados y decisiones de diseño. Se activa con /idea_solution.
-when_to_use: Se activa cuando el usuario ejecuta /idea_solution, siempre después de que el problema esté enmarcado (/idea_problem) y antes de redactar el PRD — el PRD destila este análisis, no lo reinventa.
+when_to_use: Se activa cuando el usuario ejecuta /idea_solution, siempre después de que /idea_start haya cerrado con una alternativa aprobada (`-start.md` en `Aprobado por PM`) y antes de redactar el PRD — el PRD destila este análisis, no lo reinventa.
 disable-model-invocation: true
 argument-hint: "[PRD-XXX o nombre del proyecto a diseñar]"
 ---
@@ -16,7 +16,8 @@ No reemplaza el diseño de arquitectura de Ingeniería: no elige lenguaje, frame
 
 ## Cuándo NO usarla
 
-- El problema todavía no está enmarcado o en discusión → usá primero [`/idea_problem`](../idea_problem/SKILL.md); este análisis asume un problema ya acordado.
+- El problema, el foco o la alternativa de solución todavía no están aprobados → usá primero [`/idea_start`](../idea_start/SKILL.md). Este análisis diseña la alternativa ya elegida, no elige entre alternativas.
+- La alternativa aprobada es del carril operativo (sin desarrollo) → no hay nada que diseñar acá: el proceso se acuerda con el área dueña.
 - Ya existe un diseño de solución confirmado y lo que hace falta es el contrato fino de un endpoint puntual para una historia → profundizá directo en el Paso 5 de [`/idea_us`](../idea_us/SKILL.md) sobre esa historia, no rehagas el análisis completo.
 - Lo que se necesita es arquitectura de plataforma no ligada a un proyecto concreto (infraestructura, seguridad, NFR de sistema transversal) → eso es contexto de `wiki/3_recursos/arquitectura_sistema/`, se captura como item en `contexto_vivo/`, no en un proyecto puntual.
 
@@ -56,7 +57,7 @@ El paso más importante de la skill: **nada de lo que ya se sabe se vuelve a pre
 **Anillo 1 — piso obligatorio, siempre, en el orden natural:**
 1. Resolvé la ruta real en [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 — nunca asumas `prd-XXX_<slug>/` directo.
 2. **`proyecto.md` completo** — incluidos el §5 historial de sync y el anexo de discovery de `/idea_start`. El orden de llamadas que dio un proveedor, o una decisión de arquitectura mencionada de pasada, suelen vivir únicamente ahí, sueltos en una entrada del historial de sync.
-3. El problem statement (`{{nombre_corto_proyecto}}-problem.md`), si existe.
+3. **El shaping aprobado (`{{nombre_corto_proyecto}}-start.md`)** — completo. La alternativa aprobada (§6) es la entrada del análisis: **no se reabre la elección entre alternativas** salvo que el PM lo pida explícitamente, o que el análisis descubra algo que invalida la recomendación (en ese caso, decilo y proponé volver al Gate 4 de `/idea_start` en Modo D). Las *Preguntas abiertas para el análisis funcional-técnico* (§7) entran al árbol del Paso 1 como ramas `abierta`. La frontera del foco (§3) delimita la Sección 1 (Alcance del análisis). En carpetas legacy sin `-start.md`, leé el problem statement (`{{nombre_corto_proyecto}}-problem.md`) si existe.
 4. `decisiones.md` y `gaps.md` propios; si es miembro de un proyecto general, también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre.
 
 **Anillo 2 — inventario completo de artefactos, sin asumir qué existe.** Acá está el riesgo real: la carpeta puede tener material creado fuera del orden normal de la cadena, y la convención de nombres no lo predice.

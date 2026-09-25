@@ -1,8 +1,9 @@
 <!--
-Ejemplo ilustrativo de una sesión de /idea_start de punta a punta, resumida (una sesión real
-tiene más rondas). Cifras y nombres ficticios — no son datos reales de Bind PSP. Muestra:
-(a) el PM llega con problema + solución (Modo A), (b) el estacionamiento funcionando,
-(c) un cierre en 🟡 Diferido en el Gate 2.
+Ejemplo ilustrativo de /idea_start de punta a punta, resumido (una sesión real tiene más rondas).
+Cifras y nombres ficticios — no son datos reales de Bind PSP. Muestra: (a) Modo A (problema +
+solución), (b) el estacionamiento, (c) magnitud propuesta por el Cerebro con nivel de evidencia y
+descuento por incertidumbre, (d) el abanico de 4 carriles con tamaño por analogía, (e) una
+recomendación defendida donde gana una combinación con el carril operativo.
 -->
 
 ## El pedido del PM
@@ -12,61 +13,89 @@ tiene más rondas). Cifras y nombres ficticios — no son datos reales de Bind P
 
 ## Paso 0 — Clasificación
 
-- **Señal de problema:** soporte resuelve manualmente altas que fallaron por timeout de AFIP → Fase 1.
-- **Estacionamiento:** "botón de reintentar en el portal de comercios" → tabla 🅿️, congelado.
+- **Señal de problema:** soporte resuelve a mano altas que fallaron por timeout de AFIP. Workaround actual: ticket de Jira + reintento manual. → Fase 1.
+- **Estacionamiento:** S1 "botón de reintentar en el portal de comercios" → congelado.
 
 ## Paso 1 — Barrido (resumen)
 
-- `direccion/estado_actual.md`: sin mención de este dolor en los KRs vigentes.
-- `procesos/criterios_de_priorizacion.md`: soporte operativo pesa bajo salvo que haya SLA comprometido.
-- `datasets/metricas_semanales.md`: sin métrica de altas fallidas por timeout — gap.
-- `2_areas/tareas.md`: **T-050** ya documenta un problema de certificado AFIP en staging — distinto pero mismo proveedor, se cita como antecedente.
-- `arquitectura_sistema/integraciones_externas.md`: AFIP es dependencia externa conocida, sin SLA propio documentado.
+- `estado_actual.md`: sin mención de este dolor en los KRs vigentes. Restricción de capacidad: el foco Onboarding absorbe el 70% del equipo de Wallet.
+- `criterios_de_priorizacion.md`: el soporte operativo pesa bajo, salvo SLA comprometido.
+- `metricas_semanales`: altas de comercios ~600/mes. No hay métrica de fallas por timeout.
+- `log_iniciativas_producto.md`: "reintento automático de validación de CUIT" (2025) costó **9 SP reales**. "Pantalla de reintento de pagos en portal" costó **14 SP reales**.
+- `arquitectura_sistema/integraciones_externas.md`: AFIP es dependencia externa sin SLA documentado.
+- Descartado tras abrir el índice: `cumplimiento_normativo/` (reintento de una llamada ya autorizada, no toca KYC nuevo).
 
-Descartado tras abrir el índice: `cumplimiento_normativo/` (no toca datos personales ni KYC nuevo, solo reintento de una llamada ya autorizada) — motivo anotado en el anexo.
+## Paso 2 — Carpeta e IDEA
 
-## Paso 1.6 — Pedido de material
+`reintento_alta_afip/` creado. Mostrada al PM la IDEA a crear ("Reintento de altas de comercio que fallan por timeout de AFIP", Categoría BAU, Producto Cobro). Con su OK: **PRD-9XX creada en DISCOVERY**, asignada al PM.
 
-*"¿Tenés el conteo de tickets de soporte por este motivo, aunque sea aproximado? Y si hay un ticket tipo de Jira de soporte, tirámelo — no hace falta para arrancar, seguimos igual."*
+## Fase 1 — Problema esencial (resumida)
 
-## Paso 2 — Nombre y creación
+**Síntoma vs. problema esencial.** El síntoma es "soporte reintenta a mano". El porqué: AFIP tira timeout en picos y el alta no reintenta sola. El problema esencial es que **un alta que falla por una causa transitoria no se recupera sola, y el comercio queda esperando sin saberlo**. El botón resolvería el síntoma de Soporte, pero no la espera del comercio.
 
-`reintento_alta_afip/` — nombra el problema (el reintento de una operación que falla), no la solución (no es `boton_reintentar_portal`). Anunciado, no preguntado.
+**Magnitud propuesta por el Cerebro:**
 
-## Fase 1 — Ronda 1 (resumida)
+| Magnitud | Valor | Cómo se obtuvo | Nivel | ¿El PM lo valida? |
+|---|---|---|---|---|
+| Altas fallidas por timeout | ~15/semana | El PM lo dice de memoria; el Cerebro lo contrasta: 600 altas/mes × ~10% de fallas en un caso análogo (validación CUIT 2025) ≈ 60/mes ≈ 15/semana | 🔶 | No: no quiere pedir el export ahora |
+| Tiempo de soporte | 10-15 min/caso → ~3 h/semana | PM | ⚪ | No |
+| Abandono de comercios por la espera | ⚪ Supuesto: 5% de los fallidos ≈ 3 comercios/mes | Sin dato en el Cerebro; supuesto razonado | ⚪ | No |
 
-```
-❓ Q1 - Segmento afectado: ¿quién sufre esto — el comercio que espera el alta, o el equipo de
-soporte que la resuelve a mano?
+→ Tres incertidumbres a `gaps.md`, con la evidencia que las cerraría (export de tickets de Soporte; cruce de altas fallidas vs. comercios activos a 30 días).
 
-➡️ Ambos, pero el dolor primario es de soporte: son quienes ejecutan el reintento hoy.
+**Gate 1 confirmado:** *"Los comercios que se dan de alta necesitan que un alta caída por un timeout transitorio de AFIP se recupere sin intervención, porque hoy quedan esperando sin saberlo mientras Soporte (~3 h/semana ⚪) las reintenta a mano."*
 
-❓ Q2 - Frecuencia: ¿tenés una cifra, aunque sea estimada?
+## Fase 2 — ¿Vale la pena? + foco (resumida)
 
-➡️ Sin dato en el Cerebro — pregunto directo.
-```
+| Dimensión | Qué dice el Cerebro | Nivel | Veredicto |
+|---|---|---|---|
+| Encaje NSM | Un alta recuperada es un comercio que empieza a operar antes | — | Mueve poco |
+| Tamaño real | ~15/semana 🔶, abandono ⚪ | 🔶/⚪ | **A la baja por falta de evidencia** |
+| Costo de oportunidad | Compite con Onboarding (foco Ahora) | ✅ | Solo si es barato |
+| Generalización | El mismo patrón de reintento sirve para otras validaciones externas del alta (RENAPER, BCRA) | ✅ | Habilita el carril 3 |
 
-PM responde: soporte, ~15 casos/semana, cada uno 10-15 min manuales.
+**Veredicto:** ✅ vale la pena **solo si la solución es chica**. Sobre el escenario conservador (sin abandono comprobado) es fricción operativa. Si se validara el abandono, pasaría a problema de negocio. **Gate 2 confirmado.**
 
-**Gate 1 confirmado:** *"Soporte pierde ~3-4 horas/semana reintentando manualmente altas de comercio que fallaron por timeout de AFIP, sin visibilidad de cuántas veces reintentó antes de escalar."*
+**Frontera del foco:**
+- **Dentro:** altas que fallan por timeout de AFIP.
+- **Fuera:** otras causas de rechazo de AFIP (datos inválidos) y el resto de las validaciones externas. Van al carril 3 como opcionalidad, no como alcance.
 
-## Fase 2 — Tabla de evidencia (resumida)
+## Fase 3 — Abanico
 
-| Dimensión | Qué dice el Cerebro | Veredicto |
-|---|---|---|
-| Encaje NSM | No mueve volumen operado — es fricción operativa, no de negocio | No mueve |
-| Encaje en foco | No cae en Onboarding/Pagos FX/Ardid — es BAU de soporte | BAU |
-| Tamaño real | ~15 casos/semana × 12 min ≈ 3h/semana de soporte. Sin cifra de comercios que abandonan por esto (gap) | Confirmado, acotado |
-| Costo de oportunidad | Desplazaría capacidad de Onboarding (foco Ahora) | Compite mal |
-| Generalización | Afecta a cualquier comercio que dé de alta, no a uno puntual | Producto entero, pero bajo impacto individual |
+| # | Carril | Alternativa | Cubre | Tamaño + analogía | Tiempo a valor |
+|---|---|---|---|---|---|
+| A0 | 0 | Convivir | — | ~3 h/semana de Soporte ⚪ + abandono ⚪ | — |
+| A1 | 1 · Operativa | Soporte reintenta en lote 2 veces por día desde el backoffice existente, con un aviso estándar al comercio | Espera del comercio: parcial. Soporte: baja a ~1 h/semana | 0 SP · ~1 h/semana de Soporte 🔶 | Inmediato |
+| A2 | 2 · Acotada | Reintento automático con backoff en el alta (3 intentos) + aviso al comercio si agota | Total, en el foco | M-L: **7-12 SP** — se parece al reintento de validación CUIT (9 SP reales) 🔶 | ~1 sprint |
+| A3 | 3 · Amplia | Motor de reintentos genérico para todas las validaciones externas del alta | Total + otras validaciones | XL+: **20-35 SP** — análogo a la pantalla de reintento de pagos (14 SP) × 2 integraciones más 🔶 | 2-3 sprints |
+| S1 | 2 (variante) | Botón de reintento en el portal (lo que trajo el PM) | Soporte sí, espera del comercio no (el comercio tiene que darse cuenta) | L: ~12-16 SP (pantalla + reintento) 🔶 | ~1.5 sprints |
 
-**Veredicto: 🟡 Vale la pena, no ahora.** Compite mal contra el foco vigente por 3 horas/semana de fricción operativa sin evidencia de pérdida de negocio. Se difiere hasta tener el dato de abandono, o hasta que el volumen crezca.
+Preguntas para el análisis funcional-técnico:
+1. ¿El alta es idempotente frente a un reintento?
+2. ¿Qué códigos de AFIP son transitorios?
 
-**Gate 2 confirmado por el PM.**
+**Gate 3 confirmado:** el PM no suma opciones.
 
-## Paso 9 — Cierre
+## Fase 4 — Recomendación y defensa
 
-- `proyecto.md`: `**Estado:** 🟡 Diferido — falta evidencia de impacto en negocio (abandono de altas), retomar si supera 30 casos/semana o si aparece un caso de churn atribuible`.
-- `gaps.md`: pregunta abierta sobre el dato de abandono.
-- `decisiones.md`: entrada del Gate 2 con la tabla completa.
-- El ítem del estacionamiento (el botón) queda `⬜ Congelado` — nunca se llegó a discutir, correctamente: no hizo falta evaluar la solución para saber que el problema no competía todavía.
+- **Recomendación:** **A1 ya + A2 en el próximo hueco de capacidad.**
+- **Por qué:** A2 resuelve el problema esencial (la recuperación sin intervención), no solo el síntoma de Soporte. A1 alivia desde mañana sin desarrollo.
+- **Costo / beneficio (conservador):** 7-12 SP contra ~3 h/semana. Se paga en meses, no en semanas, así que no se justifica desplazar Onboarding: va al próximo hueco.
+- **Por qué no las otras:**
+  - A0: el dolor es real y A1 cuesta 0 SP.
+  - A3: la generalización no tiene demanda validada hoy.
+  - S1: cuesta más que A2 y deja al comercio esperando.
+- **Qué la invalidaría:** si se valida un abandono >5% de los fallidos, subir A2 de prioridad. Si RENAPER empieza a tirar timeouts, reevaluar A3.
+- **Repuesto:** A1 sola, indefinidamente.
+- **Sensibilidad:** con el abandono validado en ~3 comercios/mes, A2 pasa a "ahora".
+
+**Gate 4:** el PM aprueba. S1 → ❌ Descartado (lo cubre A2 mejor). `-start.md` en `Aprobado por PM`.
+
+## Cierre
+
+- `artefactos/reintento_alta_afip-start.md` (autocontenido) → descripción de PRD-9XX. SP estimado 10 (preliminar de shaping). Sigue en DISCOVERY.
+- `tareas.md`:
+  - acordar A1 con Soporte;
+  - pedir el export de tickets para validar la magnitud.
+- `gaps.md`: las 3 incertidumbres.
+- Paso siguiente: `/idea_solution` sobre A2 cuando haya capacidad. A1 se acuerda con Soporte, sin skill.

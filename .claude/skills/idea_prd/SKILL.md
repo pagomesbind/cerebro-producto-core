@@ -17,7 +17,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 
 ## Cuándo NO usarla
 
-- El problema todavía no está enmarcado o está en discusión → usá primero [`/idea_problem`](../idea_problem/SKILL.md); un PRD asume un problema ya acordado.
+- El problema todavía no está enmarcado o está en discusión → usá primero [`/idea_start`](../idea_start/SKILL.md); un PRD asume un problema ya acordado.
 - El diseño de la solución todavía no existe → usá primero [`/idea_solution`](../idea_solution/SKILL.md); el PRD destila ese análisis en un resumen (Paso 3), no lo inventa desde cero.
 - Solo hace falta bajar el trabajo a historias de usuario para un sprint, sin necesidad de un documento de especificación completo → usá directamente [`/idea_us`](../idea_us/SKILL.md).
 - Lo que se necesita es registrar una decisión técnica o arquitectónica puntual, no especificar una iniciativa de producto completa.
@@ -42,7 +42,7 @@ argument-hint: "[PRD-XXX o nombre de la iniciativa a especificar]"
 
 1. Resolvé la ruta real de la IDEA en la tabla maestra de [`wiki/1_proyectos/index.md`](../../../wiki/1_proyectos/index.md) §2 — nunca asumas `wiki/1_proyectos/prd-XXX_<slug>/` directo. Leé su `proyecto.md` completo — problema, alcance, decisiones y gaps ya registrados son la base del PRD, no se reinventan acá.
 2. **Si es miembro de un proyecto general** (tiene cabecera `> **Proyecto:** [<Nombre>](../proyecto.md)`), leé también el §4 "Definiciones y decisiones heredadas" del `proyecto.md` padre — son decisiones ya cerradas a nivel proyecto que el PRD no debe re-litigar ni contradecir sin señalarlo explícitamente.
-3. Si existe un problem statement o una hipótesis en `artefactos/`, leelos — el PRD recapitula el problema, no lo redefine.
+3. Leé el shaping (`artefactos/{{nombre_corto_proyecto}}-start.md`) — o, en legacy, el problem statement (`-problem.md`) o una hipótesis si existen. El PRD recapitula el problema, el foco y la alternativa elegida (con sus descartes); no los redefine.
 4. **Leé `artefactos/{{nombre_corto_proyecto}}-solution.md` completo si existe** — es el insumo del resumen del Paso 3 y de la Alineación de la solución del Paso 7: el PRD destila ese análisis, no lo reinventa. Si no existe todavía, avisá al PM antes de escribir esos pasos a ciegas (ver "Cuándo NO usarla").
 5. Contexto de producto y estratégico: `wiki/2_areas/overview_productos/overview_<producto>.md`, `wiki/3_recursos/detalle_productos/<producto>/`, `wiki/2_areas/direccion/north_star.md`.
 6. Contexto de arquitectura si la iniciativa toca proveedores externos: `wiki/3_recursos/arquitectura_sistema/`.
