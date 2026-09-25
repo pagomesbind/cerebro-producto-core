@@ -12,7 +12,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 Novedad puntual sobre PRD-134 (MINISTERIO: Asociar productos en BS 2.0 y POS) para la cartera de iniciativas — no tenía fila propia hasta ahora.

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/ardid/apis_externas.md §10.a — el catálogo del proveedor documenta /CreateClientBankType con `ClientTypeId` y `BankType` (1 empresa, 2 individuo) en PascalCase; el uso real del equipo no manda `ClientTypeId` y usa `bankType` = id del BankType creado. También 2_areas/direccion/oportunidades.md OP-017 (2026-09-02), que dice que Wallet no puede crear o actualizar segmentos en el Calculador de Costos."
 confianza: alta
 estado: ingestado
+merge_commit: 2bc1252
 ---
 
 **Creación de la segmentación de una Organización en Ardid, tal como la hace hoy Wallet** (confirmado por el PM con capturas del uso real, 2026-09-22):

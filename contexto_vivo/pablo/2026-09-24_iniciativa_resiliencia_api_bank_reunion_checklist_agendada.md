@@ -12,6 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 2bc1252
 ---
 
 `resiliencia_api_bank/` (PRD-12, EN APROBACION): el documento de presentación (checklist de impacto de la migración a modelo desacoplado) enviado el 2026-09-23 a Administración/Recaudaciones, Soporte y dirección tiene fecha de repaso confirmada — reunión el **lunes 28/09, 11-12hs**, con Mariana Nadalin, María Eugenia Vila, Gonzalo Rivera, Hernán Clarich y Emma Vignoles. Objetivo: aprobar en conjunto si se le pide al banco la primera cuenta de prueba (BSF/Carrefour).

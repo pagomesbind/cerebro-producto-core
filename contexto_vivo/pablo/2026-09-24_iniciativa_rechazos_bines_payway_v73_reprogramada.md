@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 El pase a producción de la v73 de Adquirencia — que empaqueta el ajuste temporal que destraba PRD-251 (eliminar la validación de bines del frontend) — estaba previsto para el jueves 24/09 y **se canceló esa misma noche**: QA llegó atrasado por tickets urgentes sumados a último momento, pruebas de Bines aún en curso, caída de staging, y se detectaron defectos bloqueantes nuevos en tickets de liquidaciones (no relacionados con bines). **Nueva fecha: martes 29/09 a las 20:30hs.** Ver detalle completo en `1_proyectos/rechazos_bines_payway/proyecto.md` §8.

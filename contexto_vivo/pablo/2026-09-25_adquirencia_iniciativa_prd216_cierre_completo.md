@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "2_areas/direccion/iniciativas.md, fila PRD-216 (entrada 2026-09-14) — describe los 4 pendientes como abiertos; esta entrada los reporta todos resueltos/migrados el 2026-09-25"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 Novedad puntual sobre PRD-216 para anteponer a la fila existente en la cartera de iniciativas (la entrada del 2026-09-14 describe 4 pendientes que ya se resolvieron).

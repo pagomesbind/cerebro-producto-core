@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "integracion_modo_vata.md §'Por qué es relevante ahora' — dice que PRD-25 diseñó la integración con VaTa 'de forma independiente', 'sin que quede confirmado en ninguna fuente si el equipo retomó conscientemente esta propuesta de 2025'"
 confianza: alta
 estado: ingestado
+merge_commit: 2bc1252
 ---
 
 **Qué corrige.** El archivo canon `adquirencia/integracion_modo_vata.md` (creado por `/context_merge` el 2026-09-23, corrida 2, commit `25b8e37`) se redactó a partir de la versión del item `2026-09-11_conocimiento-modo-api-validacion-titularidad-tarjetas-vata` que estaba en el core. Esa versión era la original: `producto: por confirmar`, `confianza: baja`, "sin producto dueño claro". El 2026-09-15 el item se actualizó en el install de Nicolás, pero esa actualización no se volvió a subir al core antes del merge. Por eso el canon no la tiene.

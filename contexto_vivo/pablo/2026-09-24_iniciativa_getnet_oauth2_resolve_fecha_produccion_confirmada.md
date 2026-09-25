@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 Tras revisar dependencias de infraestructura y onboarding sin resolver, el equipo fijó el **jueves 08/10/2026** como fecha de pase a producción de la versión de Wallet que empaqueta la migración de Getnet a OAuth2.0 — dentro del nuevo hito del 12/10 ya acordado con Getnet ese mismo día (ver `getnet_oauth2_resolve/proyecto.md` §8), sin conflicto de plazos. Contingencia confirmada: feature flag para desactivar el modelo nuevo si falla, sin afectar al resto de los aceptadores. Riesgo nuevo abierto: el pase cae en plena semana de vencimientos (alta transaccionalidad de pagos QR) — reunión de análisis de riesgo agendada para el 25/09 (ver `riesgos.md`).

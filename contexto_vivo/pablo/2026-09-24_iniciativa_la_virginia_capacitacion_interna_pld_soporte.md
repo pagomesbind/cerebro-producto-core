@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 Pablo Gomes presentó el flujo de onboarding PJ de La Virginia (ya en producción) a los equipos internos de Soporte y PLD, que todavía no lo conocían en detalle. Deriva una regla de cumplimiento nueva y transversal (legajos PJ >$10.000/mes requieren revisión PLD desde el 1/10, ver item de canon aparte) y un gap operativo sin dueño confirmado (validaciones ARCA/BCRA desactivadas). Se detectó además que la UX del backoffice para La Virginia es deficiente — Pablo Gomes se reúne el 28/09 con Cristian Bonafede para buscar mejoras sin costo de desarrollo. Ver detalle completo en `1_proyectos/proyecto-la-virginia-ob-pj/proyecto.md` §8.

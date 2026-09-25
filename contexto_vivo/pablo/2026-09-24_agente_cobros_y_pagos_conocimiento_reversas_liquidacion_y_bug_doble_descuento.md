@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 **Regeneración de comprobantes de liquidación (Swagger):** Daniela Collia (Fintexa) confirma que hoy se puede regenerar una liquidación ya emitida usando Swagger — la operación **sobrescribe el registro y el comprobante PDF sin dejar versión anterior ni constancia de autoría** (quién la regeneró, cuándo, por qué). Nicolás Colón y Daniela Collia coinciden en que un control de versiones sería complejo de implementar; queda a evaluar la viabilidad técnica.

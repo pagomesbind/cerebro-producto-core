@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: baja
 estado: ingestado
+merge_commit: 2bc1252
 ---
 
 Dos novedades de clientes que no se pueden rutear a una ficha sin confirmar identidad:

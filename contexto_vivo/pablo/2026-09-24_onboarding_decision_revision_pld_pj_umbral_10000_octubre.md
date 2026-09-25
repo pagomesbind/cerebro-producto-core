@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 **Decisión acordada (reunión "Revisión OB PJ | Interna", 2026-09-24):** a partir del **1 de octubre de 2026**, todo legajo de persona jurídica que vaya a operar con un umbral superior a **$10.000 mensuales** debe pasar obligatoriamente por la revisión de cumplimiento (PLD) antes de habilitarse — expuesto por Mauro Suppan (PLD) durante la capacitación interna del flujo de onboarding PJ de La Virginia (PRD-223).

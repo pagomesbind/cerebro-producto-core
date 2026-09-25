@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 2bc1252
 ---
 
 Durante la capacitación interna del flujo de onboarding PJ (La Virginia, PRD-223), Gonzalo Rivera preguntó sobre las validaciones automáticas de identificación de riesgo (ARCA — deudor/actividad, y BCRA) que el sistema puede correr sobre cada solicitud. Pablo Gomes confirmó que en el ambiente de pruebas (staging) **están todas desactivadas** — el único chequeo activo es la consulta del padrón de actividad de ARCA. Aparentemente el mismo estado (todo apagado) se replica en producción, aunque no se confirmó con certeza.
