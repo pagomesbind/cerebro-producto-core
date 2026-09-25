@@ -185,6 +185,8 @@ Sin campos de request. 200: `"Conexión a DB exitosa."`; 500: `"No se puede cone
 
 **Response**: 200 con `data.ClientBankTypeId`; 409 ya existe; 409 PersonType no existe; 409 entidad no existe; 409 campos vacíos; 409 BankType fuera de {1,2} o ClientTypeId negativo.
 
+> ⚠️ **Discrepancia catálogo vs. uso real (2026-09-25):** el catálogo del proveedor documenta `ClientTypeId` como obligatorio (SI), pero el body real que envía Wallet en producción **no incluye `ClientTypeId`** — usa en cambio `bankType` (el Id del `BankType` creado previamente, camelCase, distinto de este `BankType` en PascalCase del catálogo). Ver el body real confirmado por el PM en [`integracion_con_productos_bind.md §19`](integracion_con_productos_bind.md). Sin confirmar con el proveedor si el campo es opcional en la práctica pese a estar documentado como obligatorio, o si el catálogo quedó desactualizado — ver gap abierto en [`2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md) [2026-09-25].
+
 #### 10.b. `/GetClientBankList` (GET)
 **Request**: `EntityCode` (String, SI). **Response** 200: array `{id, bankType, clientTypeId, name, description, entityCode}`. 409 lista no encontrada.
 

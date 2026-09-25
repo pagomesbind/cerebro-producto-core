@@ -68,10 +68,19 @@ JMeter (`CVU_Alta_masiva_de_cajas_-_Swagger_(1).jmx`) que crea una caja en Comer
 
 APIs afectadas: `MiddlewareAggregatorDB`, `SharedComercioDB`. Endpoints: `http://10.22.0.17/api/v1/comercios/{comercio}/sucursales/{sucursal}/cajas` (+ `/{idCaja}`). (Documento de referencia en Notion: `SYO-Alta_Masiva_de_Cajas_con_CVU-300626-125317.pdf`.)
 
+## 6. Registro de una transacción rechazada por Ardid (2026-09-23)
+
+> Fuente: charla directa con el PM (Nicolás Colón) durante `/idea_us` de `titularidad_tarjeta` (PRD-25), 2026-09-23.
+
+Cuando el motor antifraude (Ardid) rechaza por reglas propias un pago con tarjeta de Botón Simple, el flujo no se corta sin dejar rastro. Sigue adelante y registra la transacción con estado **RECHAZADA** y motivo de rechazo **"Rechazada por Ardid"** — comportamiento vigente en producción, confirmado por el PM al corregir una historia de usuario que decía "el flujo termina ahí". Sirve a Soporte para diagnosticar un reclamo por pago rechazado: ese motivo identifica que el rechazo vino del antifraude y no del procesador.
+
+**Contexto a futuro, todavía no es canon:** el proyecto de validación de titularidad de tarjeta (PRD-25, historias AD-1815 a AD-1817) va a sumar un motivo nuevo, **"Rechazo por MODO"**, para las transacciones que el servicio externo de validación de titularidad (MODO VaTa) rechace — ver [`integracion_modo_vata.md`](integracion_modo_vata.md). Solo se debería incorporar como comportamiento vigente cuando ese desarrollo esté en producción.
+
 ## Ver también
 - [configuracion_de_entidades.md](configuracion_de_entidades.md) — creación de la entidad sobre la que operan estas herramientas.
 - [detalle_productos/adquirencia/carga_masiva_cajas_rxt.md](carga_masiva_cajas_rxt.md) — carga masiva equivalente para RxT (endpoint dedicado, no JMeter).
 
 ---
-*Última actualización: 2026-08-27 — `/context_merge`: nueva nota tras §4 (retiro del método de carga masiva de CBU Corto por CSV, ticket 1139, AD V72).*
+*Última actualización: 2026-09-25 — `/context_merge`: nueva §6 (registro de una transacción rechazada por Ardid — estado RECHAZADA, motivo "Rechazada por Ardid").*
+*Última actualización anterior: 2026-08-27 — `/context_merge`: nueva nota tras §4 (retiro del método de carga masiva de CBU Corto por CSV, ticket 1139, AD V72).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/adquirencia/configuracion_entidades_y_comercios.md` (reestructuración PARA en cascada). Contenido sin cambios de fondo.*

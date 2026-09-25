@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_pull.md
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/transferencias_pull.md §6 — 'Aprendizaje operativo (extiende el hallazgo anterior)' (2026-09-03): hipótesis de que la falta de tráfico en AvisoDebinPendienteCVU y el ERROR DEBITO se explican por una falla de conectividad de red/VPN hacia 172.30.8.62"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 Continuación de §6 de `transferencias_pull.md` (circuito de reactivación de Transferencias Pull en Homologación, ticket Coelsa #456632). **Cambia el diagnóstico del bloqueo.**

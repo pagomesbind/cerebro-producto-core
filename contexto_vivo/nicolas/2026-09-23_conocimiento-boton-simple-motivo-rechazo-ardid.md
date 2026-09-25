@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/herramientas_operati
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Cuando el motor antifraude (Ardid) rechaza por reglas propias un pago con tarjeta de Botón Simple, el flujo no se corta sin dejar rastro. Sigue adelante y registra la transacción con estado **RECHAZADA** y motivo de rechazo **"Rechazada por Ardid"**. Es el comportamiento vigente en producción, confirmado por el PM el 2026-09-23 al corregir una historia de usuario que decía "el flujo termina ahí".

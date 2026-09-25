@@ -157,6 +157,55 @@ Sin este último paso (registrar la URL vía ese PUT) Coelsa no permite continua
 
 **Estado a cierre de este barrido (2026-09-03):** sin resolver — queda pendiente que Bind valide la conectividad de red hacia `172.30.8.62` desde el ambiente de Coelsa (ver `1_proyectos/tareas.md` T-011, actualizada).
 
+**Continuación (2026-09-23/24) — cambia el diagnóstico: no es un problema de conectividad, sino de formato de request.**
+
+- **2026-09-23 15:42** — Bind (Nicolás Colón) verifica que el telnet a `172.30.8.62` efectivamente no está habilitado, **pero las peticiones de Coelsa sí llegan a Bind**. El problema real es que internamente no se están interpretando porque **el request que llega es distinto al documentado**. Comparación directa (mismo endpoint de aviso de DEBIN pendiente/CVU, request real recibido el 2026-09-22, operación `ORD6LEN8QOL61LG9M1Y30V`, PSP 5071, importe 1.00, vs. el ejemplo "esperado" de referencia que usa Bind, de 2023, PSP 0070→0532):
+
+  ```json
+  // Request real recibido (Coelsa, 2026-09-22)
+  {
+    "operacion": {
+      "comprador": {
+        "cuenta": {"banco": "322", "sucursal": "0001", "alias": "DISCO.BUDA.TOMATE", "cbu": "3220001805007699600017", "esTitular": 0, "moneda": "032", "tipo": "20"},
+        "codigo": "", "titular": "KEEP IT SIMPLE SRL", "cuit": "30714979732",
+        "cuenta_virtual": {"id_psp": "5071", "cuit_psp": "30714979732", "cvu": "0005071502070018043201", "cuit_cvu": "23244825664", "titular_cvu": "Nicolas Colon"}
+      },
+      "vendedor": { "...": "mismo shape que comprador, sin cuenta_virtual" },
+      "detalle": {"fecha": "...", "fechaExpiracion": "...", "concepto": "VAR", "idUsuario": 1804958, "idComprobante": 1545489, "moneda": "032", "importe": 1.0, "mismoTitular": 0}
+    },
+    "debin": {"id": "ORD6LEN8QOL61LG9M1Y30V", "estado": {"codigo": "INICIADO", "descripcion": "PERSISTIDO"}, "estadoComprador": {"codigo": "01", "descripcion": "NO ADHERIDO"}},
+    "preautorizado": true,
+    "evaluacion": {"puntaje": 65, "reglas": "2a,9,1c"}
+  }
+  ```
+  ```json
+  // Request "esperado" según la documentación que usa Bind como referencia (ejemplo 2023, operación 5R7ZG0QND73YP5E2EXYPOJ)
+  {
+    "operacion": {
+      "objeto": {"tipo": "TRXPL"},
+      "comprador": { "...": "mismo shape, sin id de operación propio" },
+      "vendedor": { "...": "..." },
+      "detalle": { "...": "..." }
+    },
+    "debin": {"id": "5R7ZG0QND73YP5E2EXYPOJ", "estado": {"codigo": "INICIADO", "descripcion": "PERSISTIDO"}, "estadoComprador": {"codigo": "00", "descripcion": "ADHERIDO"}},
+    "preautorizado": true,
+    "evaluacion": {"puntaje": 0, "reglas": ""},
+    "EntityID": 0
+  }
+  ```
+
+  Diferencias concretas: `operacion.objeto.tipo: "TRXPL"` está en el "esperado" pero **ausente** en el real; `operacion.vendedor.cuenta_virtual` está en el "esperado" pero **ausente** en el real (vendedor solo con CBU); `operacion.vendedor.cuenta.terminal` presente en el real (`""`), ausente en el esperado; `esTitular` es entero (`0`) en el real, booleano (`false`) en el esperado; `EntityID` (raíz) ausente en el real, `0` en el esperado; `debin.estadoComprador` es `01`/`NO ADHERIDO` en el real vs. `00`/`ADHERIDO` en el esperado; `evaluacion` trae `puntaje: 65, reglas: "2a,9,1c"` en el real vs. `puntaje: 0, reglas: ""` en el esperado.
+
+  **Observación del Cerebro (no confirmada por Coelsa):** el request real coincide con el esquema estándar de `AvisoDebinPendiente`/`AvisoDebinPendienteCVU` publicado en la documentación pública de Coelsa (ya documentado en `wallet/coelsa_debin_api_payloads.md`) — sin `objeto`, sin `cuenta_virtual` del vendedor, `esTitular` entero, `terminal` en la cuenta del vendedor. El formato "esperado" por Bind (con `objeto.tipo: "TRXPL"` y `EntityID`) parece salir de otra especificación, probablemente la específica de transferencias pull con la que se construyó la implementación original en 2023. Hipótesis más probable: **Coelsa está mandando un aviso DEBIN estándar donde Bind espera el aviso específico de transferencia pull**, ya sea por configuración del PSP nuevo (5071) en homologación o por un cambio de Coelsa. A confirmar por Coelsa. Bind pidió a Coelsa (Niurka Yamarte) que orienten si el problema es de su lado o si la documentación pública está desactualizada.
+
+- **2026-09-24 10:08** — Coelsa pide ejecutar una prueba nueva y enviar el ID o el request. **12:58** — Bind envía dos IDs de pruebas nuevas (`86VRPQ2GD0P1L0Y2GLY0M1`, `0V1JXON170O5M0GNZ64EL7`). **17:55** — Coelsa responde que están validando los mensajes de esos IDs y comparten el resultado al terminar. **Sin resolución a la fecha de esta captura.**
+
+**Aprendizaje operativo (corrige el de 2026-09-03):** que el telnet a la IP del PSP no responda **no implica** que no haya conectividad para los avisos — el tráfico HTTP de Coelsa llega igual. La falta de "tráfico" en `AvisoDebinPendienteCVU` reportada el 2026-08-28 y el `ERROR DEBITO` que Bind veía en sus pruebas se explican (hipótesis actual) por un **desajuste de contrato del payload**, no por red/VPN. Lección para próximos debugging con Coelsa: antes de escalar un problema de red, revisar los logs de entrada del endpoint del lado de Bind y comparar el payload real contra el esperado.
+
+**Estado a cierre de este barrido (2026-09-24):** sin resolver — Bind a la espera de la validación de Coelsa sobre los dos IDs de prueba enviados (ver `1_proyectos/tareas.md` T-011, actualizada).
+
+> Fuente adicional: mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación" — ncolon@bind.com.ar / icm@coelsa.com.ar (Niurka Yamarte), mensajes del 2026-09-23 y 2026-09-24. Captura cruzada de Pablo Gomes (vía `/sync_mails`, mismo hilo) y Nicolás Colón (directo) — consolidada en una sola entrada por tratarse del mismo hallazgo.
+
 > Fuente adicional: mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación" — icm@coelsa.com.ar / ighillini@bind.com.ar / ncolon@bind.com.ar (2026-08-27, 2026-08-28 y 2026-09-03).
 
 > Fuente: hilo de mail "Nueva respuesta en tu ticket 456632 - Reactivación de Transferencias Pull - Homologación", icm@coelsa.com.ar / Niurka Yamarte (COELSA), mensajes del 2026-06-26 al 2026-08-24; respuesta de Nicolás Colón del 2026-08-21 con los datos del PSP creado (CBU `3220001805007699600017`, CVU `0005071502070018043201`, PSP código `5071`, razón social "KEEP IT SIMPLE SRL").
@@ -164,7 +213,8 @@ Sin este último paso (registrar la URL vía ese PUT) Coelsa no permite continua
 ---
 *Fuente: Notion histórico, Epic "API: TRX PULL cons tacito" — ingesta 2026-07-06. Nota: 3 tickets de esta Epic devolvieron 404/blank en Notion (páginas eliminadas o de acceso restringido: "Consentimiento lado PSP" —Cancelado—, "Transferencias Pull Entrantes (lado billetera)" —contenedor sin contenido— y una página de prueba QA vinculada); no aportan info adicional a la ya cubierta acá.*
 *Actualización 2026-07-07: agregada nota de incidente de fraude (§5).*
-*Última actualización: 2026-09-07 — `/context_merge`: §6 — Coelsa confirma que la URL del PSP registrada no responde a telnet (`172.30.8.62`); Bind reporta `ERROR DEBITO` en pruebas propias (ticket #456632, sin resolver a la fecha).*
+*Última actualización: 2026-09-25 — `/context_merge`: §6 — cambia el diagnóstico del bloqueo: las peticiones de Coelsa sí llegan a Bind, el problema es un desajuste de formato entre el request real (esquema estándar `AvisoDebinPendienteCVU`) y el "esperado" por Bind (con `objeto.tipo: "TRXPL"` y `EntityID`, probablemente de otra especificación de 2023); comparación completa de payloads reales incluida (ticket #456632, sin resolver a la fecha).*
+*Última actualización anterior: 2026-09-07 — `/context_merge`: §6 — Coelsa confirma que la URL del PSP registrada no responde a telnet (`172.30.8.62`); Bind reporta `ERROR DEBITO` en pruebas propias (ticket #456632, sin resolver a la fecha).*
 *Última actualización anterior: 2026-09-02 — `/context_merge`: §6 — continuación del circuito de reactivación en Homologación, el `PUT` de URL de PSP no se refleja en la consulta posterior (ticket #456632, sin resolver a la fecha).*
 *Última actualización anterior: 2026-08-25 — nueva §6, circuito de reactivación en homologación con Coelsa (ticket #456632).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/cobros/transferencias_pull.md` a Wallet en la reestructuración PARA en cascada; banner de vigencia agregado en el encabezado para que no se lea como documentación confiable de §3 sin la advertencia.*

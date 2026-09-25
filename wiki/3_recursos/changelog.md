@@ -6,6 +6,17 @@
 
 ## 2026
 
+### 2026-09-25 (pablo + nicolas) — corrida desatendida (scheduled task)
+
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §19: mecánica real de creación de segmentación Wallet→Ardid (`BankType`/`ClientBankType`) y propagación del cambio de segmento (nicolas).
+- `detalle_productos/ardid/apis_externas.md` — §10.a anotada: discrepancia entre catálogo (`ClientTypeId` obligatorio) y uso real (no se envía) (nicolas).
+- `detalle_productos/adquirencia/herramientas_operativas_boton_simple.md` — nueva §6: registro de transacción rechazada por Ardid (motivo "Rechazada por Ardid") (nicolas).
+- `detalle_productos/adquirencia/integracion_modo_vata.md` — corrección: el discovery de `titularidad_tarjeta` no llegó a MODO de forma independiente, el reenvío del 09-10 lo disparó (nicolas).
+- `detalle_productos/wallet/transferencias_pull.md` — §6: cambia el diagnóstico del bloqueo de Homologación (ticket Coelsa #456632) — no es problema de conectividad, sino desajuste de formato de request; comparación de payloads incluida (pablo + nicolas, cross-PM consolidado).
+- `detalle_productos/agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md` — archivo nuevo: mecánica de reversas/aranceles en liquidaciones y 2 bugs abiertos (pablo).
+- `cumplimiento_normativo/limites_operativos_uif_ros.md` — nueva sección: revisión PLD obligatoria para legajos PJ >$10.000/mes desde 1/10/2026, con nota de posible reapertura de la disputa $1.000/$10.000 (pablo).
+- `arquitectura_sistema/nfr_y_slas.md` — §3: primera especificación técnica concreta (Etapa 1) del Background Service Cache y API de consumidor de salud/latencia (pablo).
+
 ### 2026-09-23 (corrida 2, nicolas) — ítem sin clasificar, ruteo explícito del usuario
 
 - `detalle_productos/adquirencia/integracion_modo_vata.md` — archivo nuevo: API VATA de MODO (validación de titularidad de tarjetas), servicio externo ruteado a pedido explícito del usuario, conectado con el proyecto activo `titularidad_tarjeta` (nicolas).

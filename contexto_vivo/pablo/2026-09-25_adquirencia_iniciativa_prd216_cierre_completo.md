@@ -11,7 +11,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "2_areas/direccion/iniciativas.md, fila PRD-216 (entrada 2026-09-14) — describe los 4 pendientes como abiertos; esta entrada los reporta todos resueltos/migrados el 2026-09-25"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

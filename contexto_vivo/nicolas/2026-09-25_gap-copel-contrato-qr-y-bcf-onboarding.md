@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 ---
 
 Dos novedades de clientes que no se pueden rutear a una ficha sin confirmar identidad:

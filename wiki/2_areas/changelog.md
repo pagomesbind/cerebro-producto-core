@@ -6,6 +6,14 @@
 
 ## 2026
 
+### 2026-09-25 (pablo + nicolas) — corrida desatendida (scheduled task)
+
+- `gaps_y_preguntas.md` — gap `dim_collectors` [2026-08-18] marcado Resuelto (mapeo aplicado en `pipeline.py`, commit `0b8d6e8`); 5 gaps nuevos: cliente "BCF" sin ficha (posible Carrefour BSF, sin confirmar), Copel sin ficha, dueño de validaciones ARCA/BCRA en onboarding PJ sin confirmar, discrepancia `ClientTypeId` catálogo Ardid vs. uso real, posible reapertura de la disputa $1.000 vs. $10.000 de PJ (pablo + nicolas).
+- `riesgos.md` — nuevo riesgo: discrepancia sistemática de Story Points entre el Jira de Bind y lo que reporta/factura Fintexa (+53,75 SP netos a favor de Fintexa) (pablo).
+- `direccion/decisiones.md` — nueva decisión: margen de 14 días al comunicar a clientes fechas de entrega de nuevos desarrollos (no aplica a fixes); nota de posible reapertura agregada a la decisión de límite PJ del 09-21 (pablo).
+- `direccion/oportunidades.md` — nueva fila OP-029 (Cash-IN en USD para INTER AR vía BIND Inversiones, MEP→CCL) (pablo).
+- `direccion/iniciativas.md` — actualizadas 8 filas (PRD-251, PRD-238, PRD-223, PRD-216, getnet_oauth2_resolve, titularidad_tarjeta, ardid_limites_pj) y creadas 2 filas nuevas (PRD-134, PRD-12) (pablo + nicolas).
+
 ### 2026-09-23 (corrida 2, pablo + nicolas) — régimen D completo, con permiso explícito del usuario ("Actualizá todo lo de regimen D")
 
 - `procesos/publicaciones_mensuales.md` — nueva sección "Snapshot — calendario de despliegues de septiembre 2026" (cronograma del 07/09 + tablero del 14/09, fusionados) (pablo + nicolas).

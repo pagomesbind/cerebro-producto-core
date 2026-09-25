@@ -21,9 +21,18 @@ Durante el armado del documento de integración técnica para **Pago Fácil** (c
 
 Esto confirma que la separación de operatorias por comercio **es un requisito confirmado**, no solo una preocupación mencionada de pasada. Quedan sin definición numérica los **límites transaccionales exactos** (por operación y acumulados mensuales) para la operatoria de extracción — pendiente de Compliance/Legales.
 
+## Nueva regla — revisión PLD obligatoria para legajos PJ con umbral >$10.000/mes (2026-09-24)
+
+> Fuente: reunión "Revisión OB PJ | Interna" (2026-09-24), capacitación interna del flujo de onboarding PJ de La Virginia (PRD-223) a los equipos de PLD y Soporte.
+
+**Decisión acordada:** a partir del **1 de octubre de 2026**, todo legajo de persona jurídica que vaya a operar con un umbral superior a **$10.000 mensuales** debe pasar obligatoriamente por la revisión de cumplimiento (PLD) antes de habilitarse — expuesto por Mauro Suppan (PLD) durante la capacitación.
+
+> ⚠️ **Posible reapertura de una disputa ya dada por resuelta:** este mismo monto ($10.000) y el mismo deadline (1/10/2026) coinciden con la cifra que la decisión de `direccion/decisiones.md` [2026-09-21] descartó como error de transcripción, al confirmar $1.000 como el límite operativo vigente de cuentas de PJ sin documentación (implementado como el `ClientBankType` restrictivo de Ardid, ver `detalle_productos/wallet/organizaciones_y_configuracion.md §8`). Se documentan acá como **mecanismos conceptualmente distintos** (este es un gate de revisión PLD sobre el legajo; aquel es un tope operativo de cuenta), pero sin confirmar todavía si son realmente independientes — ver gap abierto en [`2_areas/gaps_y_preguntas.md`](../../2_areas/gaps_y_preguntas.md) [2026-09-25].
+
 ## Ver también
 - [reporteria_worldsys_bcra.md](reporteria_worldsys_bcra.md) — mismo dominio PLD/UIF, mecanismo de reporte diario relacionado.
 
 ---
-*Última actualización: 2026-09-08 — `/context_merge`: nueva sección de definiciones de Cumplimiento confirmadas para casos multi-operatoria (caso Pago Fácil, separación de comercios por operatoria y titularidad CUIT).*
+*Última actualización: 2026-09-25 — `/context_merge`: nueva sección — regla de revisión PLD obligatoria para legajos PJ >$10.000/mes desde el 1/10/2026, con nota de posible reapertura de la disputa $1.000/$10.000 ya dada por resuelta el 2026-09-21.*
+*Última actualización anterior: 2026-09-08 — `/context_merge`: nueva sección de definiciones de Cumplimiento confirmadas para casos multi-operatoria (caso Pago Fácil, separación de comercios por operatoria y titularidad CUIT).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/transversal/cumplimiento_normativo.md §4` (reestructuración PARA en cascada). Contenido sin cambios.*

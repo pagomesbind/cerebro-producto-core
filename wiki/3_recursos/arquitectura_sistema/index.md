@@ -40,7 +40,8 @@
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — inconsistencias abiertas de este módulo (conteo de microservicios, versión del documento fuente, PCI DSS omitido del texto narrativo, atribución de MongoDB).
 
 ---
-*Última actualización: 2026-09-21 (corrida 2, pablo) — `/context_merge`: `integraciones_externas.md` (homologación ABM CBU Coelsa, Atenas+Worsis); `modelo_acoplado_vs_desacoplado.md` (especificación `MovimientosComp`); `relacion_con_fintexa.md` (§3, modelo de evolución del ecosistema).*
+*Última actualización: 2026-09-25 — `/context_merge`: `nfr_y_slas.md` §3 — primera especificación técnica concreta (Etapa 1, Hernán Clarich/Fintexa) del Background Service Cache y la API de consumidor de salud/latencia.*
+*Última actualización anterior: 2026-09-21 (corrida 2, pablo) — `/context_merge`: `integraciones_externas.md` (homologación ABM CBU Coelsa, Atenas+Worsis); `modelo_acoplado_vs_desacoplado.md` (especificación `MovimientosComp`); `relacion_con_fintexa.md` (§3, modelo de evolución del ecosistema).*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: `nfr_y_slas.md` nueva §3 (iniciativa en discovery para exponer salud/latencia de APIs a clientes — Grafana/Elastic interno + API nueva de Kipi en el APIM).*
 *Última actualización: 2026-09-23 — `/context_merge`: `modelo_acoplado_vs_desacoplado.md` — mitigación del riesgo de ventana de sincronización (política de saldo mínimo) y precisión saldo vs. estado de operación; nueva sección con las 3 regresiones del cutover de Banco Industrial (22/09). `relacion_con_fintexa.md` nueva §4 (desvío de responsabilidad Fintexa↔Penta, performance de Ardid).*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: `integraciones_externas.md` suma registro de la primera ingesta completa de documentación pública de Coelsa (DEBIN, Comercio, CVU, Prevent, CPF) — baseline de changelog para futuras ingestas incrementales de ese sitio.*
