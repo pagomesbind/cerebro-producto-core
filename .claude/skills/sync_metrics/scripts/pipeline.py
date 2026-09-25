@@ -262,6 +262,14 @@ COLUMN_ORDER_HEADERLESS = {
                        "AdministradorNombre", "_c8", "_c9"],
     "dim_organizaciones": ["Id", "Nombre", "Codigo", "FechaAlta", "FechaBaja", "_c5", "_c6",
                             "_c7", "_c8", "_c9", "CodigoEntidad"],
+    # dim_collectors headerless = volcado "SELECT * FROM [dbo].[Collectors]". Orden confirmado
+    # por el usuario (2026-08-26, reconfirmado 2026-08-31/09-14/09-22 sin cambios, quinta
+    # corrida consecutiva con el mismo mapeo — ver wiki/2_areas/gaps_y_preguntas.md
+    # "[2026-08-18] — dim_collectors sin orden posicional de columnas"). _c9 y _c12 quedan sin
+    # identificar (NULL en toda la muestra / código compuesto tipo "7$$C17105$$B00009548213"),
+    # no se usan en RESOURCES["dim_collectors"]["val"].
+    "dim_collectors": ["Id", "CollectAccountId", "Name", "Cuit", "Psp", "Cbu", "Webhook",
+                        "FechaAlta", "_c9", "Codigo", "BankId", "_c12"],
 }
 # Filas de igual largo son ambiguas por forma sola (operaciones/transferencias_agente_cobro
 # comparten 8 columnas; cuentas/comercios comparten 5) — se desambigua por contenido (texto
