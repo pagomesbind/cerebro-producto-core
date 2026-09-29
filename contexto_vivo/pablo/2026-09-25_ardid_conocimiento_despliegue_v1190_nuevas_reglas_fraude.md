@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/ardid/historico/historial_versiones.md — el roadmap documentado el 2026-09-21 decía 1.19 (sin fix UTC 0) → 1.19.1 (fix UTC 0, sin fecha) → 1.20; esta reunión confirma que el despliegue de staging es sobre 1.19.0 puntual, no 1.19.1 ('Se estuvo hablando de 1191, pero al final no. Solamente nos vamos a estar dedicando a la 1190'). No se aclaró si 1.19.1 se salteó definitivamente o queda pendiente para después — no hay dato suficiente para resolverlo, solo para anotar la confirmación de qué versión se despliega ahora."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 **Contexto:** reunión de análisis de riesgo pre-despliegue de Fintexa/Pentass (Matías Alzogaray como moderador; participan Daniel Zalazar, Osmel Mata, Luis y Santiago Fernandez por Pentass/Fintexa, y por Bind PSP Andrea Orsini, Pablo Serra, Gonzalo Rivera, Mariana Nadalin, Nicolás Colón, Pablo Gomes). Formato estándar: se revisa documentación + ticket de infraestructura y se define fecha/horario/nivel de riesgo antes de autorizar el pase.

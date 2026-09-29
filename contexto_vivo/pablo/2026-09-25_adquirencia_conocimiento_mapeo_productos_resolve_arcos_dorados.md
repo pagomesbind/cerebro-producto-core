@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 > Fuente: Proyecto PRD-216, finalizado 2026-09-25. Detalle técnico real extraído del comentario de QA en el ticket de desarrollo AD-1434 (2026-08-07) — nunca antes reflejado en la wiki, solo descubierto al hacer el relevamiento completo de Jira para el cierre formal.

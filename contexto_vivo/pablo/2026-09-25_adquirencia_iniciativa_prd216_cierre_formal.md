@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 `cierre: true`

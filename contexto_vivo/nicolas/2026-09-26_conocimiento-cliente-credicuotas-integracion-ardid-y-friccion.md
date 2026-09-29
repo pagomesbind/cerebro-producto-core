@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no — nota para el merge: la cronología de la ficha (entrada 2026-08-19) menciona a 'Rodrigo Revelli'; por el dominio de mail y el resto del hilo, la persona de Bind es Rocío Revelli (rrevelli@bind.com.ar). Verificar y corregir si corresponde."
 confianza: media
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 Para sumar a `Particularidades / cronología` de la ficha **CREDICUOTAS** (el cliente ya existe en `log_clientes.md`):

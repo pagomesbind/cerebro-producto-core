@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 Al cerrar la auditoría de go-live de PRD-216 (Arcos Dorados: mapear productos de la orden de venta en items del `/resolve`, QR eco cerrado), el PM confirmó que el cliente había sido avisado informalmente de la fecha final de pase a producción (31/08/2026), pero agregó un dato nuevo y más relevante: **Arcos Dorados se está bajando del proyecto por problemas internos de su lado** — sin más detalle todavía (ni fecha, ni si es la relación completa o solo este frente de QR eco cerrado).

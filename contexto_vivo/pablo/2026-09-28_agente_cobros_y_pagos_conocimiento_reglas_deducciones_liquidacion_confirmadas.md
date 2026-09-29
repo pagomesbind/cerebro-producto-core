@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "sí — corrige la regla de aranceles del item ya mergeado el 2026-09-24 (`2026-09-24_agente_cobros_y_pagos_conocimiento_reversas_liquidacion_y_bug_doble_descuento`, hoy en `liquidaciones_reversas_y_comprobantes.md`): allí Pablo Gomes opinaba, sin validar todavía, que el arancel 'no debe devolverse ni prorratearse' en ninguna devolución parcial. La regla formalmente confirmada el 2026-09-25 (misma persona, Pablo Gomes, respondiendo a Fintexa) es más específica: los aranceles e impuestos SÍ se devuelven, pero solo cuando la reversa es TOTAL y ocurre el MISMO DÍA del cobro; en cualquier reversa parcial, o en una reversa total de otro día, no se devuelve nada."
 confianza: alta
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 Fintexa (Melisa Belpassi) resumió el estado de 4 observaciones de liquidaciones abiertas desde las pruebas de AD-1361/AD-1398, y Pablo Gomes confirmó las 3 definiciones pendientes el mismo día (25/09), destrabando el fix para el pasaje de V73 (martes 29/09).

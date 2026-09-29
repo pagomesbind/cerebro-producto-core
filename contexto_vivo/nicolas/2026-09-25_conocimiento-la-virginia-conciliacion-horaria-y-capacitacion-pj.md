@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 Complemento de la cronología de **La Virginia** (cliente ya cargado en `log_clientes.md`: Wallet + Onboarding + POS, evolutivo en integración):

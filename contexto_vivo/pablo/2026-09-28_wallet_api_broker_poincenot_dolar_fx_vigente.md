@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "dolar_fx.md dice \"Estado: en producción\" sin verificación reciente; en la sesión de /idea_start de inter_fondeo_usd (2026-09-23/28) el PM planteó la sospecha de que Dólar FX/MULC podría estar deprecado por normativa. Este item aporta evidencia (parcial, no concluyente) de que el endpoint sigue publicado del lado de Poincenot — no confirma si Bind PSP lo sigue consumiendo activamente."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 ## Hallazgo principal

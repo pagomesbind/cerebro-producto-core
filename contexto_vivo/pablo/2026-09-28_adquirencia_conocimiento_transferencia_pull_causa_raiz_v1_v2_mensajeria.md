@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa el item ya mergeado el 2026-09-24 (`2026-09-24_adquirencia_conocimiento_transferencia_pull_formato_request_coelsa`), que había identificado la discrepancia de formato del request sin que Coelsa aportara una explicación. Este item aporta la causa raíz que Coelsa confirmó después."
 confianza: alta
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 ## Causa raíz confirmada

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 Nueva entrada para la sección de IDEAs de Jira, mismo formato que las ya existentes (PRD-115, PRD-87, PRD-81):

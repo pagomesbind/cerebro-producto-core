@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/procesos/publicaciones_mensuales.md §Snapshot septiembre 2026: 'Adquirencia V 73: 24/09' y 'Wallet — versión 73: 28/09'"
 confianza: media
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 Actualización del snapshot del calendario de despliegues de septiembre 2026 (sección "Confirmadas") — las dos V73 se corrieron.

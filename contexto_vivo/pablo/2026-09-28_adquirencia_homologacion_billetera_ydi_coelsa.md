@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 Coelsa (Integration Center Management, `icm@coelsa.com.ar`) notificó el 2026-09-25 el inicio del proceso de homologación de interoperabilidad de una nueva billetera bajo el "Procedimiento Interno de Homologación para Billeteras y Aceptadores" (vigente desde octubre 2023, mismo trámite ya documentado para otros pagadores en `mecanica_qr_coelsa.md`):

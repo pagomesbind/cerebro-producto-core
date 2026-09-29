@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9fbee64
 ---
 
 **Novedad:** se cerró el discovery de `inter_fondeo_usd/` (PRD-261 — "Ingreso y envío de dólares al exterior para usuarios con billetera integrada"). El proyecto surgió del pedido de Inter (billetera propia sobre Wallet, lanzada 03/09/2026) de poder ingresar USD bancarizados en Argentina y enviarlos a su cuenta en el exterior desde la misma app.

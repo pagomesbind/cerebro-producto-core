@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/ardid/historico/historial_versiones.md — 'Decisión (22/09/2026, \"Repaso Semanal líderes\"): se salta directo a esta versión [1.19.1], omitiendo la 1.19'. La reunión de análisis de riesgo del 25/09 se titula 'Ardid V 1.19.0'. Puede ser solo el nombre del evento (versión mayor/menor) y no la versión efectiva — no verificable sin la minuta detallada."
 confianza: media
 estado: ingestado
+merge_commit: 9fbee64
 ---
 
 **Análisis de riesgo del pase de Ardid 1.19.x a staging (ambiente de pruebas) — reunión del 2026-09-25.**
