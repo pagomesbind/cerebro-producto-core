@@ -57,10 +57,16 @@ Matias Alzogaray, Maria Eugenia Vila y Maximiliano Ambrosini confirmaron, para l
 
 **Resuelve un pendiente ya documentado:** esto es la confirmación, para AD V73, del ticket 361 (vinculado al 2209) que en la reunión "Análisis COBRO" del 2026-09-03 había quedado "pendiente de más debate" sobre si entraba en la v73 o la v74 — corrección del PDF de liquidaciones para el cliente **Coto**, diferenciando "desconocimiento" de "devolución" (ver [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md), última sección). La novedad extiende/ratifica esa separación con códigos distintos también en el PDF, con aviso previo a clientes y actualización del portal de desarrolladores antes del despliegue.
 
+## Observaciones de QA de AD-1361/AD-1398 resueltas (2026-09-25) — mismo motor de liquidaciones que Agente de Cobros y Pagos
+
+En las pruebas de QA de AD-1361/DAD-2209 y AD-1398/DAD-2257 (las historias que implementan en AD V73 la separación entre desconocimiento y devolución, arriba) se levantaron observaciones sobre reversas fuera de plazo, deducción de arancel/impuestos y un bug de doble descuento. Fintexa (Melisa Belpassi) las consolidó el 25/09 y Pablo Gomes las confirmó el mismo día — **las definiciones son las mismas que resuelven el motor de liquidaciones de Agente de Cobros y Pagos** (mismo mecanismo compartido): ver el detalle completo (clasificación por fecha al regenerar, registro de devoluciones+desconocimientos sumados, AD-1822 confirmado bloqueante para V73) en [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md §2, §4, §5`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md). La regla de deducciones de arancel/impuestos (AD-1835/DAD-3418, arancel repetido en cada línea de devoluciones parciales) vive en [`devoluciones_y_contracargos.md`](devoluciones_y_contracargos.md).
+
 ## Ver también
 
 - [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) — mecánica general de contracargos/devoluciones estándar (no desconocimientos).
 - [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) — webhook de arancel neto y otras notificaciones de cobro.
+- [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md) — mismas reglas de liquidación de AD V73, versión Agente de Cobros y Pagos.
 
 ---
-*Última actualización: 2026-09-21 — `/context_merge`: archivo nuevo, extraído de `devoluciones_y_contracargos.md §0` por umbral de tamaño; nueva sección "Separación de desconocimientos y devoluciones en PDF y liquidación" (reunión "Análisis de riesgo: AD V 73", 2026-09-17).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva sección — observaciones de QA de AD-1361/AD-1398 resueltas (25/09), con referencia cruzada al detalle completo en Agente de Cobros y Pagos (mismo motor de liquidaciones).*
+*Última actualización anterior: 2026-09-21 — `/context_merge`: archivo nuevo, extraído de `devoluciones_y_contracargos.md §0` por umbral de tamaño; nueva sección "Separación de desconocimientos y devoluciones en PDF y liquidación" (reunión "Análisis de riesgo: AD V 73", 2026-09-17).*

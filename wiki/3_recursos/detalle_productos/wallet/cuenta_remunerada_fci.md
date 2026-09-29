@@ -313,3 +313,66 @@ Historia [WS-730](https://bindpsp.atlassian.net/browse/WS-730) (7 SP, estado "Co
 | MAX_BANKS_ACCOUNT_SUPPORTED | El CUIT tiene más de 30 cuentas en Argentina. |
 
 > Ver también §4.1-4.4 arriba — historial interno de bugs de QA encontrados sobre este mismo endpoint (`CuentaYCVUConCuentaComitente`) durante 2025-2026 (IDEA Jira PRD-103), complementario a esta referencia de integración.
+
+## 6. Detalle de endpoints REST del lado de Poincenot (batch de suscripción/rescate)
+
+> Estado: en producción. Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`), navegado en vivo durante el discovery de `inter_fondeo_usd/` (2026-09-28). Ver [`api_broker_poincenot_fundamentos.md`](api_broker_poincenot_fundamentos.md) para autenticación y headers estándar.
+
+Complementa el proceso de negocio ya documentado arriba (Paso 6: "envía las suscripciones y rescates por API a API Broker, armando paquetes") con el detalle real de los endpoints REST de ese mismo flujo batch.
+
+### Precio del fondo — `GET /marketdata/v1/price/fund/`
+
+```json
+{ "code": "1483", "price": 1.55, "date": "2024-10-01", "currency": "USD", "class": "A" }
+```
+**Dato relevante: el fondo puede estar denominado en USD** (`"currency": "USD"` en el ejemplo real de la documentación) — confirma que la infraestructura de Interest Bearing Account de Poincenot ya contempla fondos en moneda extranjera, no solo en pesos. La ficha de Inter (weekly Bind↔Inter del 2026-09-23, `2_areas/clientes/`) registra que "el rendimiento en USD todavía no está disponible para Inter por un acuerdo de exclusividad con el cliente principal (solo FCI en pesos vía Bind Inversiones)" — la restricción es comercial/contractual, no técnica.
+
+### Suscripción batch — `POST /bundle-worker/v1/investment/operate/fund/bulk/SUBSCRIPTION`
+
+Envía un paquete (`bundle`) con una o más suscripciones. Ejemplo real:
+```json
+{
+  "datetime": "2012-11-21T03:00:00Z",
+  "total": { "data_size": 1, "total_amount": "30500.30" },
+  "data": [
+    { "fund": "2", "account": "4652", "value": { "amount": "30500.30" },
+      "third_party_information": { "id": "123", "transaction_id": "trx-1342-232SAF", "detail": "free text" } }
+  ],
+  "third_party_information": { "packet_id": "ewqeq_312321_3123_edewqeq", "type": "A", "description": "..." }
+}
+```
+La respuesta solo confirma la **recepción** del paquete (no el resultado de cada suscripción individual) — coincide con lo ya documentado en el Paso 6 de arriba ("API Broker solo confirma recepción, sin indicar estado definitivo todavía").
+
+### Rescate batch — `POST /bundle-worker/v1/investment/operate/fund/bulk/WITHDRAW`
+
+Mismo mecanismo batch, con variantes "withdrawal by amount" y "total withdrawal" (rescate total de la posición).
+
+### Aviso de fin de envío — Finished sending notice
+
+Endpoint que le avisa a Poincenot que terminó el envío de paquetes del día (Paso 6 final del proceso ya documentado).
+
+### Consulta de paquete/bundle — Bundle query / Package query
+
+Permiten consultar el estado de un paquete ya enviado por su `packet_id`.
+
+### Webhook de fin de procesamiento — Processing finished webhook
+
+```json
+{
+  "datetime": "2023-10-09T10:00:00Z",
+  "funds": [{ "price": 1091.0594, "id": "2", "rejected": [...] }]
+}
+```
+Es el webhook del Paso 7 ya documentado ("API Broker avisa por webhook que procesó cada paquete"), con el detalle de rechazos por fondo.
+
+### Interés ganado y liquidaciones por usuario
+
+- **`GET .../get-interest-earned-per-user`**: consulta cuánto interés ganó un usuario — endpoint distinto del `investment/settlement/info` que este archivo ya documenta (WS-730) para reportes normativos; puede ser el mismo concepto expuesto por dos vías, o un endpoint complementario — a confirmar si hace falta en un futuro trabajo sobre este producto.
+- **`GET .../get-settlements-per-user`**: consulta las liquidaciones (suscripciones/rescates ya liquidados) de un usuario.
+
+## Ver también
+- [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
+- [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md), [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API de Poincenot.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §6, detalle de endpoints REST del flujo batch de Poincenot (precio, suscripción/rescate, webhooks, interés ganado) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

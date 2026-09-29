@@ -26,6 +26,14 @@ Este archivo vivo cubre el trimestre en curso. Al cerrar un trimestre calendario
 
 ---
 
+## [2026-09-25] — Corrección de la falla de seguridad del Admin Centralizador se entrega por hotfix, no en la V74
+- **Contexto/Problema:** Fintexa reportó una falla de seguridad grave en el Admin Centralizador (control de acceso que no valida que la entidad consultada pertenezca a la organización del usuario — ver detalle en [riesgos.md](../riesgos.md), "Falla de control de acceso preexistente en el Admin Centralizador") y propuso dos alternativas de entrega de la corrección (DAD-3428): un hotfix a producción, independiente del calendario de versiones, o incluir la corrección en la V74.
+- **Decisión tomada:** hotfix. Pablo Gomes lo votó primero ("Yo voto hotfix"); Mariana Nadalin (COO) coincidió explícitamente ("es un hotfix porque es una vulnerabilidad grande"); Hernán Clarich (Fintexa) reforzó la urgencia ("dado que es replicable en producción y se comprobó, esto tiene alta prioridad"). Decisión unánime y rápida, tomada dentro de la misma tarde del 2026-09-25.
+- **Impacto en el Roadmap/Producto:** según el informe semanal de Adquirencia del 25/09, la corrección "se está desarrollando y quedará en producción a mediados de la semana que viene" (semana del 28/09) — sin fecha exacta confirmada al momento de esta captura.
+- **Estado:** Aprobado (en desarrollo).
+
+---
+
 ## [2026-09-24] — Margen de 14 días al comunicar a clientes fechas de entrega de nuevos desarrollos
 - **Contexto/Problema:** en la reunión "Join Soporte Clientes" (2026-09-23), Adriana Endzeliz (Comercial) y Mauro Suppan identificaron problemas recurrentes de comunicación con clientes exigentes (caso disparador: La Virginia) cuando faltan instructivos amigables o hay ajustes de último momento que retrasan pruebas, ajustes técnicos o la firma de adendas contractuales — generando fricción y quejas por incumplimiento de fecha.
 - **Decisión tomada:** toda fecha de entrega de un nuevo desarrollo que reciba el área comercial (ej. de Matías Alzogaray) se comunica al cliente con un margen adicional de **14 días** — si el equipo técnico compromete una fecha X, el cliente escucha X+14. Aplica **únicamente a nuevos desarrollos**; las correcciones de errores (fixes) se comunican y gestionan de forma inmediata, sin margen. Complementa (no reemplaza) la decisión ya vigente del 2026-09-09 de dar "1-2 semanas de margen" (14 días cae dentro de ese rango, ahora con la precisión de que el margen no aplica a fixes) — ver [`2_areas/procesos/comunicacion_de_lanzamientos.md`](../procesos/comunicacion_de_lanzamientos.md) para la narrativa completa (régimen de escritura restringido, pendiente de reflejar ahí esta precisión).

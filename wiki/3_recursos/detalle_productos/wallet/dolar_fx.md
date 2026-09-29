@@ -31,6 +31,35 @@ Wrapper de integración con API Broker (US 0), consultar cotización FX (US 1), 
 
 Toda la integración se documenta en el portal de API Broker de Poincenot: `apibroker.pcnt.io/#dolar-fx` (marketdata, intención, ejecución) — mismo proveedor que Dólar CCL, pero namespace `/investment-operation-flow/v1/exchange/fx/` en vez del de bonos.
 
+### 1.5 Confirmación de vigencia y detalle técnico (2026-09-28) — ⚠️ no concluyente sobre si Bind lo sigue consumiendo
+
+> Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`), revisado el 2026-09-28 en el marco del discovery de `inter_fondeo_usd/`, donde el PM había planteado la sospecha de que Dólar FX/MULC estuviera deprecado por normativa.
+
+**Hallazgo principal:** el endpoint de Dólar FX sigue documentado como parte activa de la API de Poincenot, con flujo completo de cotización, compra, venta y DDJJ — no aparece marcado como deprecado ni con ninguna nota de discontinuación en la documentación del proveedor. **Esto no es concluyente del lado de Bind PSP:** que Poincenot lo siga ofreciendo no confirma que Bind PSP lo siga consumiendo activamente hoy — podría haberse dejado de usar del lado de Bind sin que Poincenot lo haya dado de baja. Queda como pregunta para Ingeniería en `gaps.md` de `inter_fondeo_usd/` (nivel de proyecto, no de contexto fijo).
+
+**Cotización — `GET /marketdata/v1/price/fx`:**
+```json
+{
+  "buyPrice": 1481.82, "sellPrice": 1274.23, "timestamp": "2024-08-06T08:09:02Z",
+  "market": "MULC", "hash": "xwY250QG1haWxpbmF0b3IuY29tIiwib3Mi",
+  "priceLimitTime": "2024-08-06T08:19:02Z", "priceLimitTimeInSeconds": "600"
+}
+```
+Diferencia clave con la cotización de D1C ([dolar_ccl.md §3.7bis](dolar_ccl.md)): la de FX trae **`market: "MULC"`**, y un mecanismo de **`hash` + `priceLimitTime`** (10 minutos de vigencia) — el precio cotizado se referencia por hash al ejecutar la operación, similar al mecanismo `priceHash` que [dolar_ccl.md §3.8](dolar_ccl.md) ya documenta para el modo Combi, pero acá aplicado nativamente al circuito FX/MULC completo, no solo a Combi.
+
+**Gastos de venta (preview) — ejemplo real.** `POST /investment-operation-flow/v1/exchange/fx/preview/SELL`. Request: `{"amount": <pesos>, "priceHash": "<hash de la cotización>"}`. Response:
+```json
+{
+  "endOperationDate": "2025-05-05T12:00:00Z", "startOperationDate": "2025-05-05T12:00:00Z",
+  "marketIsOpen": true, "totalExpensesCurrency": "ARS", "price": 104.07
+}
+```
+(Análogo a D1C: gross/net/totalExpenses/taxes, con el agregado del `priceHash` obligatorio en el request.)
+
+**Resto del flujo:** comparte la misma forma que D1C — `enter Purchase`/`enter Sale` (ejecutar la orden con `priceHash`), `Get Operation` (consultar estado), y `Query an affidavit for FX` (DDJJ propia del circuito FX/MULC, separada de la de D1C).
+
+**Implicancia para `inter_fondeo_usd/`:** no cambia la decisión de dirección tomada el 2026-09-23 (aplicar sobre **Dólar 1Click**, no sobre Dólar FX/MULC, el patrón de saldo multimoneda) — Dólar FX/MULC opera distinto (compra de USD con pesos vía mercado oficial, no mover USD que el usuario ya tiene). Este hallazgo solo aporta evidencia sobre el estado de vigencia del endpoint, no cambia la alternativa técnica elegida.
+
 ## 2. Pagos FX — analizado, nunca construido ("deprecado")
 
 > Epic con PRD completo (9 documentos de Definiciones: PRD, "Por qué", "Qué", "Cómo", APIs de Mastercard Move, notas y minutas) pero **cero tickets en Backlog** — quedó en fase de discovery/diseño y se marcó deprecada sin pasar a desarrollo. Se documenta igual porque es un análisis de mercado y de solución completo, útil si se retoma la idea.
@@ -142,3 +171,6 @@ Complementa §2.6 (WS-721) con detalle no documentado antes:
 ## Ver también
 
 - [dolar_ccl.md](dolar_ccl.md) — mercado CCL (bonos), incluye el modelo Combi que Pagos FX planeaba reutilizar.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §1.5, confirmación de que el endpoint de Dólar FX sigue documentado activo en la API de Poincenot (no concluyente sobre si Bind lo sigue consumiendo) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

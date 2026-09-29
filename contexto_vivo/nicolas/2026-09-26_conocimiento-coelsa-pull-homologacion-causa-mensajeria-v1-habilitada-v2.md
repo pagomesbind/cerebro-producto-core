@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/transferencias_pull.md
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/transferencias_pull.md §6 — 'Observación del Cerebro (no confirmada por Coelsa)' (merge 2026-09-25): hipótesis de que el formato 'esperado' por Bind salía de otra especificación de 2023 y que Coelsa mandaba un aviso DEBIN estándar donde Bind espera el de transferencia pull. Coelsa confirma que la diferencia es de VERSIÓN de mensajería (V1 vs. V2) configurada por PSP, no de una especificación distinta."
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Continuación de §6 de `transferencias_pull.md` (reactivación de Transferencias Pull en Homologación, ticket Coelsa #456632). **Cierra el diagnóstico que había quedado abierto en la entrada del 2026-09-23/24 (merge 2026-09-25).**

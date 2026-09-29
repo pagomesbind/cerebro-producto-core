@@ -87,7 +87,7 @@
 | INTERFAST | — | — | — | — | — | 2025-05-28 | — | [🔗](https://app.notion.com/201b3646c94b8042a4c7e671fef0d2cb) |
 | OCTOPUS | Botón de Pago, RxT | Adq | Expensas | Mediano | Medio | 2026-04-17 | ✅ | [🔗](https://app.notion.com/207b3646c94b80d7bb1de7046ea1bab5) |
 | UALA | Agente de Cobros y Pagos, Dolar CCL | AgCyP + Wallet | — | — | — | 2025-09-22 | ✅ | [🔗](https://app.notion.com/207b3646c94b804591f7c88638529c01) |
-| ARCOS DORADOS | Onboarding, Wallet, QRI | Onb + Wallet + Adq | — | — | — | 2026-08-05 | ✅ | [🔗](https://app.notion.com/211b3646c94b801687bdf13ce6136e37) |
+| ARCOS DORADOS | Onboarding, Wallet, QRI | Onb + Wallet + Adq | — | — | Medio (posible salida, 2026-09-25) | 2026-09-25 | ✅ | [🔗](https://app.notion.com/211b3646c94b801687bdf13ce6136e37) |
 | Global 66 (Argpagos SA) | Wallet | Wallet | Billetera | Pequeño | — | 2026-08-05 | ✅ | [🔗](https://app.notion.com/216b3646c94b80c8bb81f2251ebe8e25) |
 | WASSA SRL | RxT, POS, QRI | Adq | Venta de Productos - Bazar | Pequeño | Bajo | 2026-03-11 | ✅ | [🔗](https://app.notion.com/216b3646c94b802d9416c7b6a75f3f5c) |
 | Helipagos | QRI | Adq | Impuestos y Servicios, Agrupador | Mediano | Bajo | 2025-07-03 | — | [🔗](https://app.notion.com/225b3646c94b80b49ee6d60c681f2484) |

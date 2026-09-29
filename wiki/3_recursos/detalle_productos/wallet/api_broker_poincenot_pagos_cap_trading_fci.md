@@ -1,28 +1,16 @@
----
-id: 2026-09-28_wallet_api_broker_poincenot_pagos_cap_trading_fci
-pm: pablo
-fecha_captura: 2026-09-28
-fuente: "portal público de documentación de Poincenot (apibroker.pcnt.io), navegado en vivo con el Chrome del PM durante /idea_start de inter_fondeo_usd — resto de la superficie de la API, sin uso identificado hoy en ningún proyecto de Bind PSP"
-producto: wallet
-tema: "API Broker (Poincenot) — Pagos, CAP (perfil transaccional), Trading de títulos y FCI genérico: inventario de superficie no usada hoy"
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/wallet/api_broker_poincenot_pagos_cap_trading_fci.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# API Broker (Poincenot) — Pagos, CAP (perfil transaccional), Trading de títulos y FCI genérico
+
+> Estado: superficie disponible del proveedor, **sin uso identificado hoy en ningún proyecto documentado en el Cerebro**. Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`), navegado en vivo durante el discovery de `inter_fondeo_usd/` (2026-09-28) — a pedido del PM de completar el relevamiento de toda la API, no solo lo relacionado a USD. Ver [`api_broker_poincenot_fundamentos.md`](api_broker_poincenot_fundamentos.md) para autenticación y headers estándar.
 
 ## Por qué se captura esto
 
-A pedido del PM, se completó el relevamiento de **toda** la API de Poincenot durante el discovery de `inter_fondeo_usd/`, no solo lo relacionado a USD. Estas cuatro secciones no tienen uso identificado hoy en ningún proyecto documentado en el Cerebro — se registran como inventario de superficie disponible, sin profundizar en cada campo, para que quede consolidado que existen y qué resuelven.
+Estas cuatro secciones no tienen uso identificado hoy en ningún proyecto documentado en el Cerebro — se registran como inventario de superficie disponible, sin profundizar en cada campo, para que quede consolidado que existen y qué resuelven.
 
 ## Payments
 
 - **`POST /payments/v1/credit/card`** — descuenta saldo disponible y lo asocia a un pago con tarjeta de crédito. Ejemplo real: `{"currency": "USD", "amount": 10, "thirdPartyId": "...", "destinationBankAccountIdentification": "..."}`. Respuesta: `{"uniqueId": "...", "state": "APPROVED"}`.
 - **`GET /payments/v1/.../credit/card`** — consulta el pago.
-- **`POST /payments/v1/money/transfer/buyer`** — "Collections and Payments - Buyer": descuenta fondos disponibles para realizar un pago, con `destinationBankIdentification` (CBU), `grossAmount`, `totalTaxAmount`, `totalFeeAmount` — parece un mecanismo de cobros/pagos con desglose de impuestos y comisiones, para un flujo comprador/vendedor (hay un endpoint espejo "Seller").
+- **`POST /payments/v1/money/transfer/buyer`** — "Collections and Payments - Buyer": descuenta fondos disponibles para realizar un pago, con `destinationBankIdentification` (CBU), `grossAmount`, `totalTaxAmount`, `totalFeeAmount` — mecanismo de cobros/pagos con desglose de impuestos y comisiones, para un flujo comprador/vendedor (hay un endpoint espejo "Seller").
 - **`POST /payments/v1/.../seller`** — la contraparte del anterior, del lado del vendedor/cobrador.
 
 ## CAP (perfil transaccional)
@@ -37,9 +25,17 @@ Flujo estándar de trading de instrumentos (acciones, bonos — no específico d
 
 ## Mutual Funds (FCI genérico, distinto de la Cuenta Remunerada)
 
-A diferencia de la Cuenta Remunerada (que opera por lotes/`bundle-worker`, ver item hermano de este mismo día), este es un flujo de suscripción/rescate **individual, no por lotes**:
+A diferencia de la Cuenta Remunerada (que opera por lotes/`bundle-worker`, ver [`cuenta_remunerada_fci.md`](cuenta_remunerada_fci.md)), este es un flujo de suscripción/rescate **individual, no por lotes**:
 - `POST /trade/v1/fund/BUY` — "Place Subscription". Ejemplo real: `{"instrument": "ADAR-FCI.1195", "currency": "ARS", "amount": 50000, "thirdPartyId": "..."}`. Respuesta: `{"operationType": "FUND", "operationId": "..."}`.
 - `POST /trade/v1/fund/SELL` — "Place Redemption" (rescate).
 - `GET`/`DELETE` de la orden — consultar y cancelar, mismo patrón que Trade.
 
 Es el mecanismo genérico de FCI de Poincenot — la Cuenta Remunerada de Bind PSP usa el flujo batch (`bundle-worker`) en su lugar, probablemente por volumen (muchos usuarios suscribiendo/rescatando el mismo fondo cada día).
+
+## Ver también
+- [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
+- [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md) — Tesorería, P2P y Portfolio.
+- [cuenta_remunerada_fci.md](cuenta_remunerada_fci.md) — flujo de negocio de la Cuenta Remunerada (FCI batch), sí en producción.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: archivo nuevo, inventario de la superficie de Pagos/CAP/Trading/FCI genérico de la API de Poincenot, sin uso identificado hoy (Pablo Gomes).*

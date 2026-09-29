@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Oportunidad:** que Bind PSP identifique como **préstamo** toda operación originada desde el CUIT de un cliente prestamista (definido para Credicuotas: "toda operación originada desde el CUIT de Credicuotas corresponde a un préstamo") y la **informe a Ardid por el endpoint de Préstamos** (`/Loans`, ver `ardid/apis_externas.md` §16). Sumado a eso, crear en Ardid un **scope específico de Préstamos** para controlar esa operatoria por separado, por ejemplo con **límites propios para las operaciones que usan la línea de crédito**, sin tocar los límites de las otras operaciones del usuario.

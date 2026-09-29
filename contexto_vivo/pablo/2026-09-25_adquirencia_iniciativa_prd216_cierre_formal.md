@@ -11,7 +11,7 @@ destino_propuesto: 3_recursos/datos/log_iniciativas_producto.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

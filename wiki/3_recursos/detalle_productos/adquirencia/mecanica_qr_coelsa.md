@@ -190,6 +190,24 @@ Coelsa suma a **COELSA.PREVENT** (su capa de prevención de fraude para el ecosi
 
 Caso concreto del proceso de alta de aceptador descripto en "Proceso de homologación de nuevos participantes" más arriba: NewPay avisó que el BCRA habilitó al aceptador **WAYA** (CUIT `33-71833017-9`, dominio inverso `ar.waya`, vía el proxy `wallet.newpay.com.ar/external/resolve` de NewPay como Administrador) para operar en producción, y pidió a Bind PSP (como billetera) dar de alta esos datos en su tabla de resolución. Bind (Alan Martínez) lo configuró el mismo día y pidió un QR de prueba; WAYA compartió un QR estático de monto abierto y Bind confirmó un pago de prueba de $10 con `estadoExterno: "ACREDITADO"` — WAYA validó la transacción en su sistema, cerrando la homologación end-to-end en menos de 6 horas.
 
+### Homologación en curso — billetera YDI (YPF Digital), tickets #502085/#502086 (2026-09-25)
+
+> Fuente: mails Coelsa "Resolución del ticket 502085" y "Resolución del ticket 502086" (Integration Center Management, `icm@coelsa.com.ar`), 2026-09-25/27.
+
+Coelsa notificó el 2026-09-25 el inicio del proceso de homologación de interoperabilidad de una nueva billetera, bajo el mismo "Procedimiento Interno de Homologación para Billeteras y Aceptadores" (vigente desde octubre 2023) documentado arriba.
+
+**Datos de la billetera nueva:** denominación **YDI**, razón social YPF Digital SAU, CUIT 33718163809, ID BILLETERA COELSA en HOMO: 112.
+
+Coelsa pidió a Bind los datos de **ambos** aceptadores propios para las pruebas cruzadas de acreditación en homologación — un ticket por cada uno:
+- **Ticket #502085 — Aceptador "BIND PSP":** razón social BIND PAGO SA, CUIT 30717449076, ID PSP HOMO: 532 / ID PSP PROD: 184, URI API Resolve/IEP HOMO `https://gw-staging-qrbind.epays.services/resolve/instore/external/resolve`, dominio inverso test `com.TESTbind`.
+- **Ticket #502086 — Aceptador "BIND PAGOS" (Tecnología Financiera):** razón social BIND PAGOS, CUIT 30717618870, ID PSP HOMO: 531 / ID PSP PROD: 164, misma URI de API Resolve/IEP HOMO y mismo dominio inverso test que el aceptador 532.
+
+Alan Martínez (BIND, Área Técnica) respondió el mismo día con los datos de ambos aceptadores más un QR de prueba de monto abierto para cada uno. Los dos tickets llegaron a estado resuelto (encuesta de satisfacción de Coelsa) sin ida y vuelta de incidencias registrada en el hilo.
+
+**Cronograma del proceso:** comienzo de homologación 2026-09-25; reuniones vía Teams para pruebas en vivo a partir del **2026-10-19**.
+
+**Referencia normativa citada por Coelsa** (aplica en general al régimen de homologación de billeteras/aceptadores, no solo a este caso — candidato a `cumplimiento_normativo/`): Comunicación "A" 7769 del BCRA — si el administrador (Coelsa) certifica billeteras que no completaron satisfactoriamente la integración, tiene 2 días hábiles para notificar por mail a la Gerencia de Sistemas de Pago (`sdep_vigilancia_estadisticas@bcra.gob.ar`) y a la Gerencia de Coordinación de Supervisión (`supervision@bcra.gob.ar`), pudiendo derivar en actuaciones sumariales (Ley 21.526, arts. 41 y 42).
+
 ### Ticket #469781 — Error de SPLIT / acreditación diferida — resuelto por Coelsa (2026-08-03)
 
 > Fuente: mail "Nueva respuesta en tu ticket #469781 - Error de SPLIT - Acreditación diferida" — soporte@coelsa.com.ar, 2026-07-21 a 2026-08-03.
@@ -625,7 +643,8 @@ Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arrib
 
 ---
 *Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita. [coelsa_qr_catalogo_apis_tecnico.md](coelsa_qr_catalogo_apis_tecnico.md) para el catálogo de endpoints/códigos de error de la transacción QR (`QRDebin`/`QRReverso`/`QROperacionFinalizada`), Notification Push y firma EMVCo — separado de este archivo por umbral de tamaño.*
-*Última actualización: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva homologación en curso — billetera YDI (YPF Digital), tickets Coelsa #502085/#502086, pruebas en vivo desde 2026-10-19.*
+*Última actualización anterior: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*
 *Última actualización anterior: 2026-09-03 — `/context_merge`: Parte 5, evidencia adicional (2026-09-02) de que Global66 tiene un reclamo activo y documentado de latencia QR — no cierra la contradicción TPay vs. BSF/Global66, la refuerza de un lado.*

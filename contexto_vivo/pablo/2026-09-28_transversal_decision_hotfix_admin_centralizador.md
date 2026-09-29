@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/decisiones.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Fintexa reportó una falla de seguridad grave en el Admin Centralizador (ver item `tipo: riesgo` capturado el mismo día, `2026-09-28_transversal_riesgo_vulnerabilidad_control_acceso_admin_centralizador`, para el detalle técnico) y propuso dos alternativas de entrega de la corrección (DAD-3428): un hotfix a producción, independiente del calendario de versiones, o incluir la corrección en la V74.

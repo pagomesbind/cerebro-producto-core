@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/devoluciones_y_contr
 tipo_destino: actualizar
 contradice: "no — llena un vacío: la regla nunca estuvo en los tickets de liquidaciones (AD-1361/AD-1398). Ojo: hoy el comprobante de liquidación devuelve arancel e IVA en CADA reversa, y eso no coincide con la regla confirmada."
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Regla confirmada por Pablo Gomes (2026-09-25) para las deducciones en reversas de liquidaciones de Cobro/Botón:**

@@ -1,31 +1,19 @@
----
-id: 2026-09-28_wallet_api_broker_poincenot_fundamentos
-pm: pablo
-fecha_captura: 2026-09-28
-fuente: "portal público de documentación de Poincenot (apibroker.pcnt.io), navegado en vivo con el Chrome del PM durante /idea_start de inter_fondeo_usd — mi navegador propio no pudo acceder por un certificado SSL vencido del lado del sitio"
-producto: wallet
-tema: "API Broker (Poincenot/IVSA) — fundamentos: autenticación, alta y consulta de cuenta comitente, código de errores y enums"
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/wallet/api_broker_poincenot_fundamentos.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# API Broker (Poincenot/IVSA) — Fundamentos: autenticación, cuenta comitente y errores
+
+> Estado: en producción (superficie documentada tal como está publicada en el sandbox de test de Poincenot). Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`, endpoint `https://api-investment-ar-test.pcntassets.com`), navegado en vivo durante el discovery de `inter_fondeo_usd/` (2026-09-28).
 
 ## Qué es este documento
 
-El "API Broker" es la API REST de Poincenot, el proveedor tecnológico que opera la integración de Bind PSP con el broker IVSA (Bind Inversiones) para todo lo relacionado a dólar (CCL/D1C, FX/MULC, Combi), cuenta remunerada/FCI, y trading de instrumentos. Ya está documentado en el Cerebro de forma dispersa (`dolar_ccl.md`, `dolar_fx.md`, `cuenta_remunerada_fci.md` citan esta API sin documentar su superficie completa). Este item, y sus hermanos capturados el mismo día, documentan **la superficie completa de la API pública de Poincenot** tal como está publicada hoy en su sandbox de test (`apibroker.pcnt.io`, endpoint `https://api-investment-ar-test.pcntassets.com`), para que quede consolidada como referencia técnica del Cerebro.
+El "API Broker" es la API REST de Poincenot, el proveedor tecnológico que opera la integración de Bind PSP con el broker IVSA (Bind Inversiones) para todo lo relacionado a dólar (CCL/D1C, FX/MULC, Combi), cuenta remunerada/FCI, y trading de instrumentos. Ya estaba documentado en el Cerebro de forma dispersa ([`dolar_ccl.md`](dolar_ccl.md), [`dolar_fx.md`](dolar_fx.md), [`cuenta_remunerada_fci.md`](cuenta_remunerada_fci.md) citan esta API sin documentar su superficie completa). Este archivo, y sus hermanos de la misma fecha, documentan **la superficie completa de la API pública de Poincenot** tal como está publicada hoy en su sandbox de test.
 
-**Alcance de la API completa** (secciones del portal, cada una con su propio item de contexto_vivo el mismo día):
-- Fundamentos (este item): Auth, Account/KYC, códigos de error y enums.
-- Dólar 1 Click (D1C) — actualiza `dolar_ccl.md`.
-- Dólar FX (MULC) — actualiza `dolar_fx.md`.
-- Dólar Combi — nuevo, pertenece a otro proyecto (COMBI/MOVE).
-- Cuenta remunerada (Interest Bearing Account) — actualiza `cuenta_remunerada_fci.md`.
-- Tesorería, P2P y Portfolio (retiros a CBU/CVU externo, transferencias entre cuentas comitente, consulta de saldo) — nuevo, el más relevante para el proyecto `inter_fondeo_usd`.
-- Pagos, CAP y Trading general (tarjeta de crédito, cambio de perfil transaccional, compra/venta de títulos, FCI genérico) — nuevo, de menor prioridad para Bind PSP hoy.
+**Alcance de la API completa** (secciones del portal):
+- Fundamentos (este archivo): Auth, Account/KYC, códigos de error y enums.
+- Dólar 1 Click (D1C) — ver [`dolar_ccl.md`](dolar_ccl.md).
+- Dólar FX (MULC) — ver [`dolar_fx.md`](dolar_fx.md).
+- Dólar Combi — ver [`dolar_ccl.md §3.8`](dolar_ccl.md), pertenece a otro proyecto (COMBI/MOVE, foco de Luciana Rudaz).
+- Cuenta remunerada (Interest Bearing Account) — ver [`cuenta_remunerada_fci.md`](cuenta_remunerada_fci.md).
+- Tesorería, P2P y Portfolio (retiros a CBU/CVU externo, transferencias entre cuentas comitente, consulta de saldo) — ver [`api_broker_poincenot_tesoreria_p2p_portfolio.md`](api_broker_poincenot_tesoreria_p2p_portfolio.md), el más relevante para el proyecto `inter_fondeo_usd/`.
+- Pagos, CAP y Trading general (tarjeta de crédito, cambio de perfil transaccional, compra/venta de títulos, FCI genérico) — ver [`api_broker_poincenot_pagos_cap_trading_fci.md`](api_broker_poincenot_pagos_cap_trading_fci.md), sin uso identificado hoy en ningún proyecto de Bind PSP.
 
 ## Autenticación
 
@@ -116,3 +104,10 @@ Todas las APIs transaccionales devuelven HTTP 409 en error, con el formato `{"co
 - **VAT Status (`ivaCondition`):** `RI` (Responsable Inscripto), `RNI` (Responsable No Inscripto), `EX` (Exento), `RM` (Monotributista), `CF` (Consumidor Final).
 - **Account States:** `ACTIVE`, `INACTIVE`.
 - Provincias argentinas (código ISO `AR-XX`) y países (ISO de 2 letras) — catálogos completos, no se transcriben acá por ser estándar.
+
+## Ver también
+- [dolar_ccl.md](dolar_ccl.md), [dolar_fx.md](dolar_fx.md), [cuenta_remunerada_fci.md](cuenta_remunerada_fci.md) — flujos de negocio que consumen esta API.
+- [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md), [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: archivo nuevo, relevamiento completo de la API pública de Poincenot durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

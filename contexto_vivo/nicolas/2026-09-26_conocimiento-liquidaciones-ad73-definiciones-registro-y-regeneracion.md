@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/desconocimientos_de_
 tipo_destino: actualizar
 contradice: "no — extiende la sección 'Separación de desconocimientos y devoluciones en PDF y liquidación — confirmada para AD V73'. Matiz para el merge: la separación se mantiene en el PDF, pero el REGISTRO de liquidación (base de datos/Admin) vuelve a guardar devoluciones + desconocimientos sumados en un solo campo (se descartó la 'opción B' de campos separados)."
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 En las pruebas de QA de **AD-1361 / DAD-2209** ("[Cobro] Corregir archivos y registros de liquidaciones") y **AD-1398 / DAD-2257** ("[Cobro] Separar desconocimientos de devoluciones en el PDF de liquidación") se levantaron observaciones. Son las historias que implementan en AD V73 la separación entre desconocimiento y devolución. El 25/09, Fintexa (Melisa Belpassi, PM) consolidó el estado, incluido lo conversado en el refinamiento del 24/09. Pablo Gomes respondió por Bind ese mismo día, porque Nicolás estaba de licencia, y Fintexa confirmó que avanza con esas definiciones.

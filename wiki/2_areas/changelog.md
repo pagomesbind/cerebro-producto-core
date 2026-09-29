@@ -6,6 +6,18 @@
 
 ## 2026
 
+### 2026-09-29 (pablo + nicolas)
+
+- `gaps_y_preguntas.md` — 2 gaps nuevos: ambigüedad Ardid 1.19.0 vs. 1.19.1 en el pase a staging del 29/09 (pablo + nicolas); ambigüedad de fecha/hora del aviso a clientes de la V73 (lunes 28/09 21:00 vs. martes 29/09 20:30) (nicolas).
+- `riesgos.md` — nuevo riesgo: falla de control de acceso preexistente en el Admin Centralizador (CVSS 4.0: 8.7), expone datos/operaciones entre organizaciones distintas (pablo).
+- `direccion/decisiones.md` — nueva decisión: corrección del Admin Centralizador se entrega por hotfix, no en la V74 (pablo).
+- `direccion/oportunidades.md` — nueva fila OP-030 (scope de Préstamos en Ardid para clientes prestamistas, caso Credicuotas) (nicolas).
+- `direccion/iniciativas.md` — fila PRD-216 removida de la cartera viva (cierre, calibración en `3_recursos/datos/log_iniciativas_producto.md`); fila nueva PRD-261 (`inter_fondeo_usd/`, discovery cerrado) (pablo). Novedad para Nicolás Colón (no escrita en su carpeta, ver manifiesto): conciliación automática de transferencias Coelsa para Agente de Cobros y Pagos, sin proyecto levantado todavía.
+- `clientes/log_clientes.md` — fila ARCOS DORADOS: columna Riesgo actualizada a "Medio (posible salida)" (pablo).
+- `clientes/casos_de_uso_clientes.md` — ficha La Virginia (conciliación horaria, capacitación OB PJ) y ficha CREDICUOTAS (integración directa con Ardid/Akurtech, corrección de nombre "Rodrigo"→"Rocío" Revelli) (nicolas).
+- `procesos/referencia_estimaciones.md` — nueva entrada IDEA PRD-216 (Arcos Dorados, esfuerzo real = estimado) (pablo).
+- `procesos/publicaciones_mensuales.md` — snapshot septiembre: Adquirencia V73 cancelada y reprogramada a martes 29/09 20:30; Wallet V73 corrida de 28/09 a "el 8" (nicolas).
+
 ### 2026-09-25 (pablo + nicolas) — corrida desatendida (scheduled task)
 
 - `gaps_y_preguntas.md` — gap `dim_collectors` [2026-08-18] marcado Resuelto (mapeo aplicado en `pipeline.py`, commit `0b8d6e8`); 5 gaps nuevos: cliente "BCF" sin ficha (posible Carrefour BSF, sin confirmar), Copel sin ficha, dueño de validaciones ARCA/BCRA en onboarding PJ sin confirmar, discrepancia `ClientTypeId` catálogo Ardid vs. uso real, posible reapertura de la disputa $1.000 vs. $10.000 de PJ (pablo + nicolas).

@@ -125,8 +125,9 @@ Cada vez que se ingiera una iniciativa nueva (Epic de Notion o IDEA de Jira, en 
 | MOPAGOS: requerimientos específicos | Jira PRD-51 | **2025-11-17** (AD 65) | **2 SP** | `adquirencia/webhooks_y_notificaciones.md §Tipos de evento` (solo 1 de los 3 requerimientos pedidos llegó a construirse; cliente ya no activo) |
 | HIPÓDROMO: Orden de venta con códigos externos | Jira PRD-112 | **2026-02-19** (AD 67.3) | **3 SP** (IDEA) — ≈29 SP reales en los 17 tickets de desarrollo retenidos (AD-518=7, AD-621=3, AD-677=3, AD-651=3, resto 0-1) | `adquirencia/botones_de_pago_y_qr.md §Origen de negocio` (funcionalidad técnica ya documentada por Notion; agrega origen de negocio y cluster de bugs) |
 | Mejoras para integraciones y soporte | Jira PRD-88 | **2025-11-17** (AD 65) | **5 SP** (IDEA) — no aplica un total real: 7 Epics combinadas (~147 tickets), triage agresivo sobre muestra representativa, no fetch exhaustivo (a diferencia del resto de esta ingesta) | `adquirencia/configuracion_entidades_y_comercios.md §Mejoras y bugs de Admin/Backoffice` (rediseño de canales `canal_entidad`/`canal_comercio`, Alta de Entidad, AccessManagement — este último ya documentado por Notion en `agrupador_mayorista.md §3`) — también `wallet/organizaciones_y_configuracion.md §6` (ABM Especificaciones/Aceptadores, mensajes de error en alta de cuenta) |
+| Arcos Dorados: mapear productos de la orden de venta en items del Resolve | Jira PRD-216 | **2026-08-31** (AD 72) | **3 SP** (IDEA) = **3 SP reales** (único ticket de desarrollo, AD-1434) — estimación exacta | `adquirencia/botones_de_pago_y_qr.md §Arcos Dorados` (mecánica del mapeo, validación de cuadratura y limitaciones conocidas) — historial de esfuerzo en `procesos/referencia_estimaciones.md`. Cierre formal 2026-09-25 vía `/idea_finish`: Epic AD-1433 con 8 tickets (1 Historia + 7 subtareas de test), todas Finalizadas sin regresiones. Lectura para estimaciones: diseñar los casos de test como subtareas explícitas desde el arranque sostuvo la estimación, pero surgieron 2 defectos colaterales en el webhook de pago (endpoint vecino), migrados a PRD-134 (Ministerio de Justicia). Cliente (Arcos Dorados) se está bajando del proyecto por problemas internos de su lado — ver `clientes/log_clientes.md`. |
 
-**Total SP — Adquirencia: 550 SP.**
+**Total SP — Adquirencia: 553 SP.**
 
 ---
 
@@ -208,7 +209,7 @@ Cada vez que se ingiera una iniciativa nueva (Epic de Notion o IDEA de Jira, en 
 
 ## Total general (todas las fuentes, todos los productos)
 
-**≈ 2.637 SP.** Suma de los subtotales de cada sección (Wallet 1.138 + TIN 253 + SUR FINANZAS 0 + Adquirencia 550 + Agente de Cobros y Pagos 156 + Onboarding 0 + Ardid 92 + Transversal/Normativo 398 + Multi-producto ~50). **Con este lote se completó el barrido inicial de las 15 IDEAs `Finalizada` de Jira** (ver [1_proyectos/ingesta_jira_producto.md](../../2_areas/1_proyectos/ingesta_jira_producto.md)). **Es un piso, no el esfuerzo real total**: varias de las Epics con más tickets de toda la ingesta (SUR FINANZAS: Requerimientos con 91, OB PJ MVP con 91, Botón Simple 2.0 con 78, Mejoras e Iniciativas Técnicas con ~208, Defectos encontrados en QA con 139) aportan 0 SP acá porque el Notion histórico no les registró talle de camiseta (o porque el volumen hizo inviable un triage exhaustivo) — el conteo de tickets de `referencia_estimaciones.md` es la señal de volumen real en esos casos. **Con este lote se completó el proyecto de ingesta: 93/93 Epics del Notion histórico.**
+**≈ 2.640 SP.** Suma de los subtotales de cada sección (Wallet 1.138 + TIN 253 + SUR FINANZAS 0 + Adquirencia 553 + Agente de Cobros y Pagos 156 + Onboarding 0 + Ardid 92 + Transversal/Normativo 398 + Multi-producto ~50). **Con este lote se completó el barrido inicial de las 15 IDEAs `Finalizada` de Jira** (ver [1_proyectos/ingesta_jira_producto.md](../../2_areas/1_proyectos/ingesta_jira_producto.md)). **Es un piso, no el esfuerzo real total**: varias de las Epics con más tickets de toda la ingesta (SUR FINANZAS: Requerimientos con 91, OB PJ MVP con 91, Botón Simple 2.0 con 78, Mejoras e Iniciativas Técnicas con ~208, Defectos encontrados en QA con 139) aportan 0 SP acá porque el Notion histórico no les registró talle de camiseta (o porque el volumen hizo inviable un triage exhaustivo) — el conteo de tickets de `referencia_estimaciones.md` es la señal de volumen real en esos casos. **Con este lote se completó el proyecto de ingesta: 93/93 Epics del Notion histórico.**
 
 ## Relación con otros documentos de la wiki
 
@@ -219,5 +220,6 @@ Cada vez que se ingiera una iniciativa nueva (Epic de Notion o IDEA de Jira, en 
 - [../../2_areas/gaps_y_preguntas.md](../../2_areas/gaps_y_preguntas.md) — gaps abiertos sobre iniciativas puntuales de este log (ej. Epics "Lanzadas" en Notion sin ejecución real confirmada).
 
 ---
-*Última actualización: 2026-08-10 — `/sync_jira_ideas`: fila nueva PRD-185 (Finalizada, W 71) en Wallet.*
+*Última actualización: 2026-09-29 — `/context_merge`: fila de cierre PRD-216 (Arcos Dorados, AD 72) en Adquirencia — 3 SP estimados = 3 SP reales.*
+*Última actualización anterior: 2026-08-10 — `/sync_jira_ideas`: fila nueva PRD-185 (Finalizada, W 71) en Wallet.*
 *Última actualización anterior: 2026-07-06 — Backfill completo de la columna Tamaño (SP) aplicando la convención Talle→SP (S=1·M=3·L=7·XL=15) sobre los desgloses de `referencia_estimaciones.md`. Tickets sin talle registrado, o con desglose ambiguo entre dos talles (ej. "resto M/S"), cuentan como 0 SP por indicación explícita del usuario. Agregado "Total general" al pie del log.*

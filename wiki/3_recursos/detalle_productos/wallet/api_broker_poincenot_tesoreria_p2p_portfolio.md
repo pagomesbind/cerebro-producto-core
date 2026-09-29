@@ -1,18 +1,6 @@
----
-id: 2026-09-28_wallet_api_broker_poincenot_tesoreria_p2p_portfolio
-pm: pablo
-fecha_captura: 2026-09-28
-fuente: "portal público de documentación de Poincenot (apibroker.pcnt.io), navegado en vivo con el Chrome del PM durante /idea_start de inter_fondeo_usd"
-producto: wallet
-tema: "API Broker (Poincenot/IVSA) — Tesorería (retiro a CBU/CVU externo), P2P (transferencia entre cuentas comitente) y Portfolio (saldo disponible y tenencia)"
-tipo: conocimiento
-destino_propuesto: 3_recursos/detalle_productos/wallet/api_broker_poincenot_tesoreria_p2p_portfolio.md
-tipo_destino: crear
-contradice: "no"
-confianza: alta
-estado: ingestado
-merge_commit:
----
+# API Broker (Poincenot/IVSA) — Tesorería, P2P y Portfolio
+
+> Estado: en producción (superficie documentada tal como está publicada en el sandbox de test de Poincenot). Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`), navegado en vivo durante el discovery de `inter_fondeo_usd/` (2026-09-28). Ver [`api_broker_poincenot_fundamentos.md`](api_broker_poincenot_fundamentos.md) para autenticación y headers estándar.
 
 ## Por qué importa
 
@@ -108,8 +96,15 @@ Devuelve la tenencia completa de la cuenta comitente (bonos, fondos, etc.), con 
   ]
 }
 ```
-(Nota: el ejemplo de la doc valoriza el bono en ARS pese a ser un instrumento denominado en USD — es la lógica de "instrumento vs. moneda de cotización" ya conocida del mecanismo AL30/AL30D de `dolar_ccl.md`.)
+(Nota: el ejemplo de la doc valoriza el bono en ARS pese a ser un instrumento denominado en USD — es la lógica de "instrumento vs. moneda de cotización" ya conocida del mecanismo AL30/AL30D de [`dolar_ccl.md`](dolar_ccl.md).)
 
 ## Lo que NO está documentado: cash-in / acreditación entrante
 
 Se revisó toda la documentación pública de Poincenot y **no existe ningún endpoint de acreditación entrante ("cash-in") ni webhook de "recibiste dinero"** — solo hay salida (Tesorería `OUT`) y transferencia entre cuentas comitente (P2P). Esto es evidencia a favor de que **S1 (cuenta recaudadora dedicada en USD) y S2 (webhook de cash-in)**, las dos piezas centrales del PRD que compartió Gastón Degiovanni para `inter_fondeo_usd/`, son **desarrollo nuevo real de parte de IVSA/Poincenot**, no algo ya expuesto y solo por consumir. Relevante para dimensionar el Carril 2 del discovery en `/idea_solution`.
+
+## Ver también
+- [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
+- [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: archivo nuevo, relevamiento de Tesorería/P2P/Portfolio de la API de Poincenot durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

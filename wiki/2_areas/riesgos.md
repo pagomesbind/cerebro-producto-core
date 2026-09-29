@@ -192,12 +192,29 @@ Matías Alzogaray (PM) comparó los Story Points cargados en el Jira de Bind (AD
 
 **Por qué es un riesgo:** si la facturación o el reporte de capacidad de Fintexa se basa en SP propios distintos de los que Bind tiene cargados en su Jira, hay riesgo de sobrepago o de distorsión del cálculo de capacidad real del equipo — insumo pendiente de T-083 (reemplazo de la restricción de capacidad hardcodeada retirada de `direccion/estado_actual.md`) y relacionado con el riesgo de "Capacidad de entrega cayó de ~300 a ~100 SP/mes" de arriba: si la comparación de SP no concilia entre ambas partes, ese mismo dato de capacidad también podría estar distorsionado. También sugiere que el proceso de medición Build vs. BAU (`2_areas/procesos/`) podría no aplicarse de forma consistente del lado de Fintexa. Capturado 2026-09-24 (Pablo Gomes, mail de Matías Alzogaray), confianza alta.
 
+## Falla de control de acceso preexistente en el Admin Centralizador — expone datos y operaciones entre organizaciones/entidades distintas
+
+**Origen:** el 23/09, durante las pruebas de la V73 de Adquirencia, Bind reportó DAD-3412 (AD-1821): un usuario Administrador Nivel 1 de la entidad BS20 visualizaba la entidad RXT en el módulo Entidades del Admin Centralizador. El análisis de Fintexa identificó dos problemas distintos.
+
+**Qué se encontró:**
+- **Caso reportado (severidad baja):** se debe a un filtro que el navegador conserva de una sesión anterior de un usuario interno de Nivel 0. Solo ocurre en equipos donde antes ingresó personal de Soporte, QA o Desarrollo con ese nivel — no lo puede generar un usuario de cliente final.
+- **Falla de control de acceso preexistente (severidad alta — CVSS 4.0: 8.7):** el backend no valida que la entidad consultada pertenezca a la organización del usuario, ni que el rol tenga permiso para la operación. **No es un error introducido en la V73: existe desde el origen de la plataforma y está presente en todos los ambientes, incluido producción.**
+
+**Alcance de la explotación:** verificado en producción el 24/09 de forma controlada: con un usuario de prueba con rol "Operador solo lectura" de una entidad, fue posible consultar transacciones y comercios de **otra** entidad. Las pruebas se limitaron a lectura. La falla es explotable por un usuario de cliente final, sin conocimientos avanzados — el análisis de código muestra que, además de lectura, expone operaciones de **modificación y baja**, incluida la configuración de canales y los datos de la cuenta de recaudación.
+
+**¿Fue explotada por terceros?** Resultado "no verificable" (investigación DAD-3427): no se puede confirmar ni descartar. Se revisaron los registros de acceso de los últimos 7 y luego 30 días sin detectar actividad anómala, pero por la naturaleza de la falla un acceso indebido es indistinguible de uno legítimo en los logs. Conclusión de Fintexa: no hay casos reportados ni evidencia de intentos de explotación en los últimos 30 días, pero no puede garantizarse que la falla no haya sido aprovechada con éxito.
+
+**Corrección y mitigación:** corrección (DAD-3428) en desarrollo — validar en el backend, en cada operación, que la entidad solicitada corresponda a la organización y nivel del usuario. Pruebas iniciales con resultados favorables. Vía de entrega: **hotfix** (ver [`direccion/decisiones.md`](direccion/decisiones.md) [2026-09-25]) — según el informe semanal de Adquirencia del 25/09, se espera en producción "a mediados de la semana que viene" (semana del 28/09), sin fecha exacta confirmada.
+
+**Estado:** Abierto — corrección en desarrollo, sin fecha de entrega confirmada al momento de esta captura. Capturado 2026-09-28 (Pablo Gomes), confianza alta.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-25 — `/context_merge`: nuevo riesgo "Discrepancia sistemática de Story Points entre el Jira de Bind y lo que reporta/factura Fintexa" (Pablo Gomes).*
+*Última actualización: 2026-09-29 — `/context_merge`: nuevo riesgo "Falla de control de acceso preexistente en el Admin Centralizador" (Pablo Gomes).*
+*Última actualización anterior: 2026-09-25 — `/context_merge`: nuevo riesgo "Discrepancia sistemática de Story Points entre el Jira de Bind y lo que reporta/factura Fintexa" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-23 — `/context_merge`: nuevos riesgos "Performance de Ardid afecta su comercialización a Coto y Grupo DESA" (Pablo Gomes y Nicolás Colón, con actualización de causa raíz), "Capacidad de entrega cayó de ~300 a ~100 SP/mes" (Nicolás Colón/Pablo Gomes), "Eliminar un comercio en Coelsa deshabilita entidades que comparten CUIT" (Pablo Gomes/Nicolás Colón), "Riesgo de fraude en lanzamiento de INTER", "Biocatch sin reglas activas durante 60 días de baseline" y "Spread de Dólar COMBI puede hacerlo comercialmente inviable" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: nuevos riesgos "GRUPO DESA amenaza con dar de baja el servicio" (Botón Simple 1.0, riesgo comercial escalado a Dirección) y "Pagos Mastercard cross-border a China en USD siguen bloqueados" (novedad para Luciana Rudaz).*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: actualización del riesgo "Falta de controles en onboardings gestionados por el integrador Gallo" (nueva evidencia y reunión formal solicitada, 2026-09-16).*

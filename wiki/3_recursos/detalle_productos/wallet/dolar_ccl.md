@@ -280,6 +280,81 @@ Queda en Stand-by/Parking Lot la corrección definitiva de los errores de Apiban
 - **Bug real (causa raíz confirmada)**: intenciones que terminaban `APROBADA` pero sin `montoInvertido`/`montoObtenido` — se verificó que ambos webhooks de IVSA (pata 1 y pata 2) sí llegaban y se hacía el GET correspondiente, pero el valor de `montoObtenido` no se estaba tomando del response en el flujo de captura. De 61 intenciones aprobadas relevadas, solo 36 tenían ambos atributos completos. Aprendizaje: `montoInvertido` debe capturarse en el webhook de pata 1, `montoObtenido` en el de pata 2 — ambos son pasos de guardado independientes, no un cálculo derivado, y uno de los dos no se estaba persistiendo.
 - Otros ajustes de negocio en producción: costo Z (comisión IVSA) expuesto/ajustado, validación de diferencia entre `montoEsperado` y `montoAObtener`, validación de diferencia entre `precioDolarReferencia` y `precioDolar`, cambio de nomenclatura de cotización a `buyPrice`/`sellPrice`.
 
+### 3.7bis Detalle técnico de la API de Poincenot — Dólar 1 Click (D1C)
+
+> Fuente: portal público de documentación de Poincenot (`apibroker.pcnt.io`, en la doc de Poincenot este producto se llama "Dollar 1 Click" / D1C / USDMEP), navegado en vivo durante el discovery de `inter_fondeo_usd/` (2026-09-28). Ver [`api_broker_poincenot_fundamentos.md`](api_broker_poincenot_fundamentos.md) para autenticación y headers estándar. Complementa §3.1-3.7 con los endpoints reales (request/response) y los dos webhooks por operación (patas 1 y 2) que antes no estaban consolidados.
+
+**Cotización — `GET /marketdata/v1/price/usdmep`:**
+```json
+{ "buyPrice": 1481.82, "sellPrice": 1274.23, "timestamp": "2024-08-06T08:09:02Z" }
+```
+
+**Gastos de compra (preview) — `POST /investment-operation-flow/v1/exchange/usdmep/preview/BUY`.** Request: `{"amount": 200700}` (en pesos). Response:
+```json
+{
+  "amount": 200700, "gross": 198208, "net": 200224.72, "totalExpenses": 2016.72,
+  "endOperationDate": "2024-08-07T12:00:00Z", "startOperationDate": "2024-08-06T12:00:00Z",
+  "marketIsOpen": false, "totalExpensesCurrency": "ARS", "price": 1481.82,
+  "taxes": [{ "name": "IDC", "subtype": "M", "aliquotApplied": 0.05, "amount": 100, "currency": "ARS", "registerDate": "2025-12-01" }]
+}
+```
+Análogo simétrico para venta: `preview/SELL`.
+
+**Ejecutar compra — `POST /investment-operation-flow/v1/exchange/usdmep/BUY`.** Request:
+```json
+{
+  "thirdPartyId": "joel-test-uat-20240628-0010",
+  "amount": 600000,
+  "price": "1330.66",
+  "disclaimer": { "accepted": true, "timestamp": "32321321312" }
+}
+```
+Response: `{"operationId": "412412411"}`. El header `location` define a dónde Poincenot manda los webhooks. Errores relevantes: `DISCLAIMER_NOT_ACCEPTED`, `ACCOUNT_DISABLED_TO_OPERATE`, `CLOSED_MARKET`, `CLOSED_OPERATION`, `MONTHLY_SUM_EXCEEDED`, `INVALID_MIN_USD`, `OUTDATED_REFERENCE_PRICE` (desfasaje entre el precio que mandó el cliente y el que devuelve el mercado al momento de ejecutar). Análogo para venta: `.../usdmep/SELL`, con error adicional `NOT_MONEY_AVAILABLE`.
+
+**Webhooks — confirman literalmente el mecanismo de las "dos patas" de §3.4:**
+
+Leg 1 (compra del bono en pesos):
+```json
+{ "id":"00014fuk9x", "external_id":"1270022436872830976", "status":"APPROVED", "amount":599605.16,
+  "taxes": [{ "name": "IDC", "subtype": "M", "aliquotApplied": 0.05, "amount": 100, "currency":"ARS", "registerDate": "2025-12-01" }] }
+```
+Leg 2 (venta del bono en dólares — liquidación final):
+```json
+{ "id":"00014j8x7a", "external_id":"1270384740564017152", "status":"EXCHANGED", "amount":2.35, "exchange_amount":3119.66,
+  "taxes": [{ "name": "IDC", "subtype": "M", "aliquotApplied": 0.05, "amount": 100, "currency":"ARS", "registerDate": "2025-12-01" }] }
+```
+`exchange_amount` es el monto final convertido. Los mismos dos webhooks (leg 1/leg 2) aplican también a la venta.
+
+**Consultar una operación — `GET /investment-operation-flow/v1/exchange`.** Por `thirdPartyId` u `operationId`. Devuelve `state` (`REGISTERED`/`APPROVED`/`EXCHANGED`/`ERROR`), `result: {totalInvested, totalObtained}`, y **`relatedOperations`**: el detalle de cada pata como operación de mercado independiente. Ejemplo real (compra):
+```json
+{
+  "thirdPartyId": "0000tbx5oa", "amount": 1100000, "account": "1680043", "state": "EXCHANGED",
+  "result": { "totalInvested": 1099048.91, "totalObtained": 979.24 },
+  "id": "27293924800256", "operation": "BUY",
+  "relatedOperations": [
+    { "instrument": "BYMA.AL30", "term": "T0", "state": "FILLED", "amount": 1088396.1, "quantity": 1683,
+      "expenses": { "byMarket": 108.81, "byOperation": 10880.6, "total": 10989.41 },
+      "finalAmount": 1088059.5, "finalQuantity": 1683, "currency": "ARS", "operation": "BUY" },
+    { "instrument": "BYMA.AL30D", "term": "T0", "state": "FILLED", "quantity": 1683,
+      "expenses": { "byMarket": 0.1, "byOperation": 0, "total": 0.1 },
+      "finalAmount": 979.34, "finalQuantity": 1683, "currency": "USD", "operation": "SELL" }
+  ]
+}
+```
+Confirma literalmente el mecanismo: comprar `BYMA.AL30` (pesos) y vender `BYMA.AL30D` (dólares) como dos operaciones de mercado relacionadas dentro de una única operación D1C — nota: acá la pata 2 vende `AL30D`, mientras que §3.4 documenta `AL30C` en un caso real; ambos son bonos AL30 en dólares (ley distinta, "D" vs. "C") usados según el circuito.
+
+**DDJJ (affidavit) — `GET /investment-operation-flow/v1/disclaimer/usdmep`:**
+```json
+{
+  "disclaimer": "According to BCRA Communication A 7552, I declare that in the last 90 calendar days I have not accessed the exchange market for the purchase of foreign currency (including swaps or arbitrations) nor am I subject to any legal or regulatory restriction to carry out the operation.",
+  "createdDate": "2023-11-16 11:43:43",
+  "key": "D1C_OPERATION"
+}
+```
+**Referencia normativa nueva: BCRA Comunicación "A" 7552** — la restricción de no haber accedido al mercado de cambios en los últimos 90 días corridos, aplicada al D1C.
+
+**Flag de producto activo — `GET /investment-operation-flow/v1/operation/enabled`:** `{"enabled": true}` — permite consultar si el producto D1C está habilitado para operar en general (no por cuenta), útil para feature-flag del lado de Bind.
+
 ### 3.8 Modelo "Combi": precio fijo y operatoria fuera de horario de mercado
 
 > Fuente: Epic histórica **"Compra/Venta CCL Combi: precio fijo y fuera de horario de mercado"**. Extiende el flujo estándar (§3.1-3.7) para organizaciones marcadas `combi = true` en IVSA — mismo endpoint de API Broker, pero con comportamiento distinto server-side según la configuración de la organización.
@@ -289,8 +364,20 @@ Queda en Stand-by/Parking Lot la corrección definitiva de los errores de Apiban
 - **Ejecutar intención**: se reenvía el `priceHash` guardado. Si IVSA lo considera inválido/vencido, responde `INVALID_PRICE_HASH` — la intención pasa a `RECHAZADA` con ese motivo.
 - Si la organización no es Combi, opera exactamente como el flujo estándar (§3.1-3.7).
 - Aplica simétricamente a compra y venta.
+- **Confirmación técnica del lado de Poincenot (2026-09-28, discovery `inter_fondeo_usd/` — nota de alcance: Combi no es del alcance de ese proyecto, revisado por completitud a pedido del PM, foco de Luciana Rudaz):** `GET /marketdata/v1/price/usdmep` es el **mismo endpoint URL que Dólar 1Click**, pero la respuesta de una organización Combi trae los campos adicionales `hash` y `priceLimitTime`/`priceLimitTimeInSeconds` (600 segundos de vigencia):
+  ```json
+  {
+    "buyPrice": 1481.82, "sellPrice": 1274.23, "timestamp": "2024-08-06T08:09:02Z",
+    "hash": "xwY250QG1haWxpbmF0b3IuY29tIiwib3Mi",
+    "priceLimitTime": "2024-08-06T08:19:02Z", "priceLimitTimeInSeconds": "600"
+  }
+  ```
+  Confirma técnicamente lo ya documentado arriba: Combi usa el mismo endpoint de cotización que D1C, diferenciado por el flag `combi=true` de la organización en IVSA, y el `hash`/`priceHash` como mecanismo de fijación de precio con expiración — sin caché, cada consulta va en vivo. El resto del flujo (gastos de compra/venta, ejecutar compra/venta) sigue la misma estructura que D1C, con `priceHash` obligatorio en el request de ejecución.
 
 ### 3.9 Decisiones de exposición al cliente (API)
 
 - No exponer a la organización campos internos: `montoOrdenado`, `intencionRespuestajson`, `operacionRespuestajson` (responses crudos del broker) se ocultaron del GET de intención; a la vez se agregaron los campos de negocio que faltaban (`montoEsperado`/`montoAObtener` en ejecutar compra y GET, `horarioMercado` en GET cotización, info para el **boleto** en el GET de intención).
 - La DDJJ (declaración jurada de inversor) se solicita con id + timestamp de aceptación (requerimiento de Inter); el modelo quedó preparado para validarla al momento de la compra.
+
+---
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §3.7bis (detalle técnico de la API de Poincenot para D1C — endpoints, request/response, webhooks, DDJJ BCRA "A" 7552) y confirmación técnica del mecanismo Combi en §3.8 (mismo endpoint que D1C, `hash`/`priceLimitTime`) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

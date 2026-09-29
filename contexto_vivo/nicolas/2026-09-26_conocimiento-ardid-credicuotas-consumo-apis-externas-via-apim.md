@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/integracion_con_productos_
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Qué es:** Credicuotas (cliente de Bind PSP, lending de consumo con billetera propia sobre Wallet) se está integrando **directamente contra las APIs externas de Ardid/Akurtech** (catálogo documentado en `ardid/apis_externas.md`) para sus procesos propios de onboarding, login, pagos con tarjeta de débito y préstamos, y así usar el monitoreo antifraude sobre su operatoria. El desarrollo del lado del cliente lo lleva **Poincenot** (Facundo Aguirre). Pentass (Lorena Macedo, Samira Aouada) acompaña la integración funcional. Es un patrón nuevo respecto de lo documentado: hasta ahora Ardid se integraba con los productos de Bind (Wallet, Botón Simple), no con el sistema propio de un cliente.

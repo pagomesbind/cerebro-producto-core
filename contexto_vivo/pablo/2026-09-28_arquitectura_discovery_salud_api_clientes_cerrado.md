@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/nfr_y_slas.md
 tipo_destino: actualizar
 contradice: "3_recursos/arquitectura_sistema/nfr_y_slas.md §3 — la nota vigente dice que la iniciativa sigue 'en discovery desde 2026-09-10' y que la cobertura de terceros vía Elastic es una extensión futura sin cerrar; el discovery formal de Producto ya cerró y decidió que esa cobertura de terceros es parte del MVP, no una fase posterior"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 ## Qué cambia respecto de lo ya mergeado

@@ -14,7 +14,7 @@
 | [integracion_procesadores_pago.md](integracion_procesadores_pago.md) | Integración de procesadores de pago Prisma/GP: deuda técnica de grupos de reglas, parámetro "pago único" (botón de pago vs. RXT), regla de liquidación same-day de transacciones en línea, limitación del panel admin con Prisma, hotfix de localidades/códigos postales. |
 | [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) | Bug de contracargos de colectores (Pago Fácil) rechazados por validación incorrecta de ID de caja vs. ID de colector. |
 | [masividad_generacion_qr.md](masividad_generacion_qr.md) | Arquitectura secuencial de generación masiva de QR (pool pregenerado, sin paralelización por caja/archivo), tiempos medidos — caso Provincia Net (AD-935). **Colas diferenciadas por cliente resuelto**: gestión inteligente de cola por umbral de 200 req/min implementada en AD V73 (2026-09-17), no separación por cliente nombrado. |
-| [liquidaciones_reversas_y_comprobantes.md](liquidaciones_reversas_y_comprobantes.md) | Mecánica de reversas/aranceles en liquidaciones (regeneración de comprobantes sin versionado, reversas fuera de plazo — Opción A adoptada, aranceles en devoluciones parciales), y 2 bugs abiertos: doble descuento en venta devuelta antes de liquidarse, ausencia de columna de "desconocimientos" en el registro de liquidación. |
+| [liquidaciones_reversas_y_comprobantes.md](liquidaciones_reversas_y_comprobantes.md) | Mecánica de reversas/aranceles en liquidaciones (regeneración de comprobantes sin versionado). **Reglas confirmadas por Fintexa el 2026-09-25** (§2-5): clasificación por fecha al regenerar, registro de devoluciones+desconocimientos sumado en un campo, regla de deducciones de arancel/impuestos (solo se devuelven en reversa total del mismo día), y AD-1822 (doble descuento) confirmado **bloqueante para V73** — mismas reglas que el lado Adquirencia, ver `adquirencia/desconocimientos_de_tarjeta.md`/`devoluciones_y_contracargos.md`. |
 
 ## Relación con otros documentos de la wiki
 
@@ -24,7 +24,8 @@
 - [apis_expuestas/index.md](apis_expuestas/index.md) — API pública oficial expuesta a clientes; dominio exclusivo de la skill `/sync_web`, no tocar desde acá.
 
 ---
-*Última actualización: 2026-09-25 — `/context_merge`: archivo nuevo `liquidaciones_reversas_y_comprobantes.md` (mecánica de reversas/aranceles en liquidaciones y 2 bugs abiertos), a partir de la reunión "Análisis COBRO" (2026-09-24).*
+*Última actualización: 2026-09-29 — `/context_merge`: `liquidaciones_reversas_y_comprobantes.md` §2-5 resueltas con las definiciones confirmadas por Fintexa (mail "Liquidaciones AD 73", 2026-09-25).*
+*Última actualización anterior: 2026-09-25 — `/context_merge`: archivo nuevo `liquidaciones_reversas_y_comprobantes.md` (mecánica de reversas/aranceles en liquidaciones y 2 bugs abiertos), a partir de la reunión "Análisis COBRO" (2026-09-24).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: `masividad_generacion_qr.md` — resuelto el debate abierto de colas diferenciadas por cliente (gestión inteligente por umbral de 200 req/min, AD V73, 2026-09-17).*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: nuevo archivo `masividad_generacion_qr.md` (arquitectura secuencial de generación de QR y límites, caso Provincia Net/AD-935) a partir de la reunión "Análisis COBRO" (2026-09-10).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: nuevo archivo `devoluciones_y_contracargos.md` (bug de contracargos de colectores rechazados por ID de caja vs. ID de colector, Pago Fácil) a partir de la reunión "Weekly - Producto / Operaciones" (2026-09-07).*

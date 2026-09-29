@@ -6,6 +6,26 @@
 
 ## 2026
 
+### 2026-09-29 (pablo + nicolas)
+
+- `detalle_productos/adquirencia/botones_de_pago_y_qr.md` — nueva subsección "Resultado final (2026-08-31)" en el caso Arcos Dorados: mapeo de productos entregado en AD-1434, validación de cuadratura, limitaciones conocidas (pablo).
+- `detalle_productos/ardid/despliegues_y_operacion.md` — nueva §5: pase a staging de Ardid 1.19.x (29/09), riesgo amarillo, nuevas reglas de fraude, ambigüedad de versión sin resolver (pablo).
+- `detalle_productos/ardid/historico/historial_versiones.md` — nota de ambigüedad: reunión del 25/09 titulada "V 1.19.0" en tensión con la decisión del 22/09 de saltar a la 1.19.1 (nicolas).
+- `detalle_productos/wallet/transferencias_pull.md` — §6: causa raíz confirmada y resuelta del ticket Coelsa #456632 — PSP 5071 tenía configurada mensajería V1 en vez de V2, ya corregido; descarta la hipótesis de especificación distinta (pablo + nicolas, cross-PM consolidado — no se creó archivo duplicado en `adquirencia/`, ver manifiesto).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — nueva homologación en curso: billetera YDI (YPF Digital), tickets Coelsa #502085/#502086 (pablo).
+- `detalle_productos/agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md` — §2-5 resueltas con las definiciones confirmadas por Fintexa (25/09): clasificación por fecha al regenerar, regla de deducciones de arancel (corrige nota anterior), AD-1822 bloqueante para V73 (pablo).
+- `detalle_productos/adquirencia/desconocimientos_de_tarjeta.md` — nueva sección: observaciones de QA de AD-1361/AD-1398 resueltas, referencia cruzada a Agente de Cobros y Pagos (nicolas).
+- `detalle_productos/adquirencia/devoluciones_y_contracargos.md` — nueva §7: regla de deducciones de arancel/impuestos en reversas confirmada para AD V73 (nicolas).
+- `arquitectura_sistema/nfr_y_slas.md` — §3 actualizada: discovery formal de `salud_api_clientes/` (PRD-262) cerrado, MVP ampliado a terceros (Coelsa/API Bank), mecanismo técnico confirmado (pablo).
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §20: Credicuotas se integra directo con las APIs externas de Ardid/Akurtech, patrón nuevo cliente-vs-producto (nicolas).
+- `detalle_productos/wallet/api_broker_poincenot_fundamentos.md` — archivo nuevo: autenticación, alta de cuenta comitente (KYC), errores y enums de la API de Poincenot (pablo).
+- `detalle_productos/wallet/api_broker_poincenot_tesoreria_p2p_portfolio.md` — archivo nuevo: retiro a cuenta externa, P2P, consulta de saldo/tenencia — confirma que falta cash-in entrante (desarrollo nuevo) (pablo).
+- `detalle_productos/wallet/api_broker_poincenot_pagos_cap_trading_fci.md` — archivo nuevo: inventario de Pagos/CAP/Trading/FCI genérico, sin uso identificado hoy (pablo).
+- `detalle_productos/wallet/cuenta_remunerada_fci.md` — nueva §6: detalle de endpoints REST del flujo batch de Poincenot (pablo).
+- `detalle_productos/wallet/dolar_ccl.md` — nueva §3.7bis (detalle técnico D1C) y confirmación técnica del mecanismo Combi en §3.8 (pablo).
+- `detalle_productos/wallet/dolar_fx.md` — nueva §1.5: el endpoint de Dólar FX sigue documentado activo en Poincenot (no concluyente sobre uso real de Bind) (pablo).
+- `datos/log_iniciativas_producto.md` — fila de cierre PRD-216 (Arcos Dorados, AD 72) en Adquirencia, 3 SP est. = 3 SP reales (pablo).
+
 ### 2026-09-25 (pablo + nicolas) — corrida desatendida (scheduled task)
 
 - `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §19: mecánica real de creación de segmentación Wallet→Ardid (`BankType`/`ClientBankType`) y propagación del cambio de segmento (nicolas).

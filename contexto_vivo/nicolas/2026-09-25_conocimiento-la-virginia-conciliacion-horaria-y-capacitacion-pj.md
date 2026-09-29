@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/clientes/casos_de_uso_clientes.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 Complemento de la cronología de **La Virginia** (cliente ya cargado en `log_clientes.md`: Wallet + Onboarding + POS, evolutivo en integración):

@@ -47,11 +47,44 @@ Dos hechos duros confirmados para cualquier iniciativa futura que dependa de est
 
 Resuelve (parcialmente) un gap abierto desde 2026-09-11 sobre quién era el dueño técnico del cambio de retención — el PM decidió en su momento no bloquear la estimación de `ardid_desconocimientos` por no tener este dato, así que la resolución llega después de haber avanzado con el diseño y la estimación.
 
+## 5. Pase a staging de Ardid 1.19.x (29/09) — alcance técnico, riesgo amarillo y nuevas reglas de fraude
+
+> Fuente: minuta Gemini de la reunión "Análisis de riesgo - Ardid V 1.19.0" (2026-09-25, 16:01), compartida por malzogaray@bind.com.ar. Participan por Fintexa/Pentass Matías Alzogaray (moderador), Daniel Zalazar, Osmel Mata, Luis y Santiago Fernandez; por Bind PSP Andrea Orsini, Pablo Serra, Gonzalo Rivera, Mariana Nadalin, Nicolás Colón, Pablo Gomes.
+
+**⚠️ Qué versión se despliega — ver gap abierto:** el título de la reunión dice "Ardid V 1.19.0", pero el roadmap ya documentado en [`historico/historial_versiones.md`](historico/historial_versiones.md) decía que se saltaba directo a la 1.19.1 (con el fix UTC 0). No se aclaró en esta reunión si el nombre es solo el del evento o si efectivamente se despliega la 1.19.0 puntual — ver gap consolidado en [`../../../2_areas/gaps_y_preguntas.md`](../../../2_areas/gaps_y_preguntas.md).
+
+**Cronograma de staging (no producción):**
+- **Wallet:** lunes 28/09, 9:00–11:00 hs.
+- **Ardid 1.19.x:** martes 29/09, 8:00–10:00 hs (separado del de Wallet a pedido de Andrea Orsini, para no pisar las regresiones y no bloquear en paralelo la ventana de pruebas de Nico Pomponio sobre Wallet). Ventana estimada de ~2 horas, incluyendo pruebas de regresión.
+- Ambos se comunican a clientes como posible intermitencia en el ambiente de staging (no hay impacto de cliente real, es ambiente de pruebas).
+- **Aparte:** un hotfix de producción (sin identificar cuál) se reprograma de hoy (25/09) al **lunes 28/09 a la mañana**, para reducir el impacto en horario de alta transaccionalidad.
+
+**Alcance técnico de la v1.19.x:**
+- APIs/microservicios afectados: Transfer API Gateway, SQL Server, MongoDB.
+- Se crean 4 índices nuevos en las colecciones `transaction` y `transfer` de MongoDB — posible intermitencia/lentitud temporal en pantallas principales, dashboard, pagos y transferencias mientras se actualizan imágenes Docker y corre el actualizador de base de datos.
+- El componente Transfer Service se reinicia por la inyección de una nueva variable de entorno.
+- **Nuevas reglas de fraude incorporadas:** ráfagas de pago, IP, geolocalización y dominios reputacionales — con posibles comportamientos anómalos o rechazos temporales mientras entran en vigencia (sin más detalle de mecánica; posible input para ampliar [`blacklist_whitelist_rafagas.md`](blacklist_whitelist_rafagas.md) cuando haya documentación del proveedor). Rocío Revelli arma un set de pruebas específico para validar el impacto de estas reglas nuevas de pagos y comercios — no confirmado si son las mismas "reglas interentidades" que el canon atribuye a la 1.20.
+- **Plan de rollback:** scripts de reversión en carpeta `rollbacks`, restauración de copias de respaldo previas de archivos y Docker Compose, y comandos `Drops Index` para deshacer los índices nuevos si hay falla de rendimiento.
+- **Lección aprendida citada por Osmel Mata:** en el despliegue anterior de la 1.18.2 en producción, la recreación de índices de MongoDB tardó "varias horas", a diferencia de staging — a tener en cuenta para el futuro pase a producción de la 1.19.x.
+- Se realizan backups de SQL y MongoDB al momento del despliegue; monitoreo a cargo del equipo de Fintech + DBA (Juan).
+- **API externa:** Luis (Pentass) hace un repaso exhaustivo para confirmar que no hay cambios en los endpoints de la API externa de Ardid usados por Botón Simple/Wallet, y reporta cualquier hallazgo.
+
+**Compatibilidad de integraciones confirmada:** Pablo Serra preguntó explícitamente si había cambios de firma o de endpoints usados por las integraciones de Botón Simple y Wallet. Luis (Pentass) confirmó, tras consultar con la líder de desarrollo (Lorena), que **no hubo cambios en los endpoints consumidos por Ardid** en este ciclo — dato que sostiene la clasificación de riesgo.
+
+**Riesgo asignado:** **amarillo** — por el impacto potencial en el transaccionamiento (no por cambios de integración, que se descartaron).
+
+**Precedente citado (no nuevo, pero relevante acá):** para producción, el impacto se mitiga solicitando la desconexión de Coto durante su ventana de mantenimiento (22:00–08:00) — mismo patrón ya documentado en el caso AD-1374 (ver §2).
+
+**Hotfix de producción pendiente (mención separada, mismo día):** Osmel Mata (Fintexa, SRE) envía por mail la consulta pendiente sobre fecha y horario de un hotfix de producción — posible relación con el parche manual de `PENDING` de §3, no confirmado.
+
+Seguimiento: Andrea Orsini ejecuta las regresiones de Wallet y Ardid tras cada pase (flujos de servicios y botones); Matías Alzogaray distribuye la minuta con el plan de acción post pase a staging.
+
 ## Ver también
 - [modulo_pagos.md](modulo_pagos.md) — reglas antifraude de pagos con tarjeta que este fix corrige.
 - [../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md](../../../2_areas/procesos/analisis_de_riesgo_de_despliegue.md) — proceso general de análisis de riesgo de despliegue (semáforo, informe), del que este caso es una instancia concreta.
 
 ---
-*Última actualización: 2026-09-23 — `/context_merge`: nueva §4, dueño técnico y motivo histórico de la ventana de retención de MongoDB (45 días) — controlada por el proveedor, condicionada a resolver rendimiento (Nicolás Colón).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §5, pase a staging de Ardid 1.19.x (29/09) — alcance técnico, riesgo amarillo y nuevas reglas de fraude (Pablo Gomes).*
+*Última actualización anterior: 2026-09-23 — `/context_merge`: nueva §4, dueño técnico y motivo histórico de la ventana de retención de MongoDB (45 días) — controlada por el proveedor, condicionada a resolver rendimiento (Nicolás Colón).*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: nueva sección "Seguimiento post-despliegue (01/09) — solución temporal en Mongo, SQL Server sin resolver" (mail de Osmel Mata, Fintexa, 2026-09-10).*
 *Última actualización anterior: 2026-08-31 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (reunión "Análisis de Riesgo - Fix de cambios de estados de las tarjetas", 2026-08-28).*
