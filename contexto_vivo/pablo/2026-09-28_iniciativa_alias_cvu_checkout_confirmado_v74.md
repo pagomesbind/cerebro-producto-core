@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Novedad puntual:** el proyecto `alias_cvu_checkout/` (PRD-239, EN APROBACION) recibió su primera fecha concreta de entrega — confirmado dentro del alcance de la versión 74 (cierre de alcance previsto jueves/viernes de esta semana), junto con el envío de comprobantes por correo electrónico, a pedido de Adri. Sin cambio de diseño respecto de lo ya definido en el Gate 3 del discovery.

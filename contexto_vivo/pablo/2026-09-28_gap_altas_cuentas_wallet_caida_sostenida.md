@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 ## [2026-09-28] — Altas de cuentas Wallet: cuarta semana consecutiva de caída, nivel más bajo desde fines de junio

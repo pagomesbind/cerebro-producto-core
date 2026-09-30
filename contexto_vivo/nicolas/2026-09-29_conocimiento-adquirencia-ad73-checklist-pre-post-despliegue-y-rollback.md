@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "sí — el párrafo 'Despliegue AD V73' de incidente_qr_masivo_provincia_net.md dice 'fecha confirmada 24/09/2026, 21hs'. Ese pase se canceló y se reprogramó al martes 29/09 a las 20:30 (ver también el item en_cola 2026-09-25_conocimiento-v73-adquirencia-y-wallet-reprogramadas y el capturado 2026-09-29_conocimiento-ad-v73-pase-confirmado-29-09-y-v74-en-planificacion). Inconsistencia menor dentro de la misma minuta: la ficha de riesgo pegada al final todavía dice 'Hora: 21 hs'"
 confianza: alta
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 **Fecha y hora.** El pase se reprogramó "de manera definitiva" al **martes 29/09 a las 20:30hs** (se había sugerido el lunes y se descartó para dar tiempo a corregir liquidaciones y re-testear). La ficha de riesgo que acompaña la minuta mantiene **Hora: 21 hs** y **duración de 2 horas y media**: probablemente quedó sin actualizar desde la versión del 24/09.

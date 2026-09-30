@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 Para mejorar los tiempos de liquidación de los cobros en línea, la reunión "Producto" del 28/09 acordó:

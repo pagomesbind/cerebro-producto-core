@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: baja
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 - **Oportunidad:** evaluar una propuesta vinculada a **Sudameris**: ofrecer servicios a terceros aprovechando la infraestructura de conexión con **Mastercard**. El resumen no aclara si Bind PSP daría el servicio sobre la infra de Sudameris o al revés.

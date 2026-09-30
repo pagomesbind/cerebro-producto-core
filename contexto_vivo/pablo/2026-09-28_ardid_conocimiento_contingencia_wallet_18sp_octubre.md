@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa (no contradice) el conocimiento ya mergeado y archivado el 2026-09-25 (`4_archivos/contexto_ingestado/2026-09-22_ardid_proyecto_asegurar_todo_pase_por_ardid`), que documentaba la iniciativa sin dimensionar el esfuerzo ni tener fecha de cierre."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Nicolás Colón y Pablo Gomes revisaron, en la reunión "Producto", la autenticación configurable por aceptador para la lectura de códigos QR (que ingresa en la versión actual — ver `getnet_oauth2_resolve/`) junto con la consolidación de la operatoria de Wallet a través de Ardid, cuyo objetivo es **evitar pérdidas de datos ante caídas del proveedor bancario/de pagos** asegurando que todas las operaciones pasen efectivamente por la red de Ardid.

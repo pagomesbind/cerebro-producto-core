@@ -11,7 +11,7 @@ tipo_destino: reemplazar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Fuente:** copia de trabajo en `wiki/1_proyectos/contexto_vivo/_staging_sync_metrics/datos_metricas_semanales/`

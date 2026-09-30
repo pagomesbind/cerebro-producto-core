@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 ## [2026-09-28] — Credicuotas: volumen se corre de Wallet a Agente de Cobros, coincidente con el apagado de Bind PSP liquidaciones cta 2

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa la cronología de §2 (punto 6, plan del 15/09): suma el resultado de la prueba de captura y el prerequisito pendiente para la entrada en vigencia"
 confianza: alta
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 **Novedad sobre §2 de `reporteria_worldsys_bcra.md`** (nuevo esquema de reversas con monto negativo + `IdComprobante` + interfaz `TiposComprobantes`, con entrada en vigencia prevista para el procesamiento del 01/10/2026):

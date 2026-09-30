@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Contexto: la operatoria de pagos en dólares a China se ejecuta hoy de forma manual, con dificultades porque el proveedor no envía notificaciones automáticas de cambio de estado. Mastercard homologa con el Banco de Shanghái en China, lo cual genera restricciones para procesar pagos en dólares por esa vía.

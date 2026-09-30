@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Actualiza el gap `[2026-09-14] — Tarjeta Prepaga (Payway): crecimiento explosivo combinado con rechazo muy

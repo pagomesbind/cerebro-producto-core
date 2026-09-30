@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Novedad puntual:** en el proyecto `prd-70_pos_prisma_finalizar/` (PRD-70, en go-live), Pablo Gomes confirmó mediante pruebas exhaustivas con distintos comercios que **todas las transacciones con Mastercard son rechazadas** en Prisma/Payway (T-118) — deja de ser un caso aislado de la entidad de prueba original, eleva la severidad del bloqueo para el go-live a un cliente real. Próximo paso: escalar formalmente a Payway con ayuda de Adri para determinar si es un problema de habilitación.

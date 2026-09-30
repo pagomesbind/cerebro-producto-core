@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 La IDEA "API Health" (PRD-262 — API de consulta de salud y disponibilidad de productos para clientes externos, incluyendo terceros como Coelsa/el banco emisor) completó su ciclo de especificación de Producto y quedó totalmente creada en Jira el 2026-09-29:

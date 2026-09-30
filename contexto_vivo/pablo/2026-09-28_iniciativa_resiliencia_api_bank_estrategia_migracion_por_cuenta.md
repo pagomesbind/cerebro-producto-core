@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Novedad puntual:** el proyecto `resiliencia_api_bank/` (PRD-12, EN APROBACION) definió en reunión técnica con Banco Industrial una estrategia concreta de migración al modelo desacoplado por tamaño de cuenta — BCF descartado como primera prueba por representar ~50% del volumen transaccional de Wallet; Bolsa de Comercio del Chaco y una sociedad militar (SMSB) identificadas como candidatos de bajo volumen para migrar primero. La migración completa de cuentas grandes sigue condicionada al proyecto de conciliación horaria automática (Nicolás Colón, est. nov/dic 2026), sin cambios respecto de lo ya acordado el 2026-09-28 en la revisión de checklist.

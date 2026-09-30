@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Pablo Gomes analizó, en la reunión "Producto", una propuesta de infraestructura de Sudameris basada en la conexión con Mastercard y Worsis. La oportunidad consistiría en evaluar si Bind PSP puede ofrecer ese servicio de conexión (y las validaciones de listas de cumplimiento asociadas) a terceros.

@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 - **API de pagos FX:** está en implementación.

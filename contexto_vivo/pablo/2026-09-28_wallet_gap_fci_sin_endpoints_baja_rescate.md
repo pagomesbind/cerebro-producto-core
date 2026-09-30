@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — completa el inventario de superficie de la API Broker (Poincenot/IVSA) ya capturado el 2026-09-28 vía navegación del portal (`2026-09-28_wallet_api_broker_poincenot_pagos_cap_trading_fci`, `..._cuenta_remunerada_detalle`), que releva endpoints existentes pero no señalaba explícitamente esta ausencia operativa."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Pablo Gomes y Nicolás Colón discutieron en la reunión "Producto" la falta de puntos de interfaz (endpoints) automatizados para procesar bajas, rescates totales o la eliminación de cuentas comitentes de Fondos Comunes de Inversión (FCI). Actualmente estas acciones deben atenderse **de forma completamente manual, mediante soporte** — no existe ningún mecanismo self-service ni API para el cliente ni para Bind.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Nicolás Colón y Pablo Gomes repasaron en la reunión "Producto" las mejoras en los tiempos de liquidación de cobros online: **procesamiento por lotes** (referido también en la reunión "Weekly - Producto / Operaciones" del mismo día como ticket **PR205**), la creación de nuevas vistas de acumulados mensuales y nuevas tablas de liquidación.

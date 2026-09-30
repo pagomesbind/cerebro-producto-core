@@ -11,7 +11,7 @@ tipo_destino: reemplazar(solo tipo:dato)
 contradice: "3_recursos/datos/log_performance_desarrollo.md — el histórico del 2026-09-16 queda corregido en Oct'25–Ago'26 (ver cuerpo)"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Contenido final de los stores en `wiki/1_proyectos/contexto_vivo/_staging_dashboard_delivery/` (`log_performance_desarrollo.md`, `log_costos_desarrollo.md`, `log_sla_highest.md`) — copiar byte a byte a `3_recursos/datos/`. Costos y SLA sin cambios de datos.

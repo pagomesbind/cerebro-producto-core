@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Nicolás Colón informó que **Coelsa ya dejó lista, de su lado, la configuración para la reactivación de transferencias Pool**. Del lado de Bind subsiste un inconveniente con el uso de la mensajería **B1** en el entorno de pruebas (staging) que impide interpretar los mensajes correctamente.

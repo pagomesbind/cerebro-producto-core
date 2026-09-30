@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 3492d04
 ---
 
 **Fecha:** 2026-09-28 · **Estado:** En Revisión. El resumen de la minuta no dice quién tomó la decisión ni su alcance exacto.

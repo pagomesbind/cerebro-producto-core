@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Pablo Gomes expuso en la reunión "Producto" que las correcciones urgentes (hotfixes) y requerimientos gestionados con el proveedor Ardid a menudo no pasan por el proceso normal de documentación y seguimiento en Jira, generando descoordinaciones y falta de control operativo sobre lo que efectivamente se le pide al proveedor.

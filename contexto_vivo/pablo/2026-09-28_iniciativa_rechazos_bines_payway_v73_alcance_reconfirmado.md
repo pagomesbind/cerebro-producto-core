@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 **Novedad puntual:** el proyecto `rechazos_bines_payway/` (PRD-251, EN APROBACION) reconfirmó, sin cambios de alcance, que la actualización de Bines forma parte del paquete de la versión 73 que se despliega el martes 29/09 a las 20:30hs (junto con la masividad de Provincia Net, portal Pagox, contracargos y la convivencia con Botón Simple 2.0 de Fabacar). Plan de comunicación a clientes definido: Gonzalo Rivera avisa a Ripsa y al grupo DAS sobre el retraso puntual de Bines, aclarando que no se esperan interrupciones del servicio.

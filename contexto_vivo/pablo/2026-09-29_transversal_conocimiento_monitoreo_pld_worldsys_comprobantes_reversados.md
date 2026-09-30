@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — módulo distinto del mismo proveedor (Worldsys) que el ya documentado en wiki/3_recursos/detalle_productos/onboarding/integracion_worldsys_complianceone.md (ese cubre el repositorio de legajo/documentos de PRD-147; este cubre el motor de alertas PLD/AML sobre transacciones). Aclarar la relación entre ambos módulos al mergear."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 3492d04
 ---
 
 Worldsys (proveedor del sistema **Compliance One**, ya conocido en el Cerebro por su módulo de legajo/KYC de Onboarding — PRD-147) opera también el motor de monitoreo transaccional PLD/AML de Bind PSP: importa un archivo de operaciones y comprobantes, y sobre ese universo corre acumuladores mensuales que disparan alertas de prevención de lavado. El requerimiento nació en una reunión del 2026-06-03 (Diego Scaldaferri — Gerente de Cumplimiento y Prevención de LA/FT/FP — señalando "un potencial riesgo no visualizado") y se resolvió técnicamente entre junio y septiembre 2026.
