@@ -52,10 +52,21 @@ ISNULL(PERC_IIBB, 0) AS PERC_IIBB
 
 Ambos hallazgos quedaron reportados por Fintexa a `sergio.pavetto@siane.com.ar` y `mvila@bind.com.ar` el 2026-08-20, sin confirmación de resolución al momento de este barrido (2026-08-21). No se identificó una IDEA de Jira asociada en este mail.
 
+## Solución propuesta — tabla intermedia mensual de padrones precalculados (2026-09-28)
+
+> Fuente: reunión "Producto" (2026-09-28), minuta Gemini (Nicolás Colón, Pablo Gomes).
+
+Para evitar el patrón de fondo detrás del bug de arriba (el proceso de liquidación consulta individualmente **más de 160 padrones fiscales** en el momento del cálculo, contra `COMERCIO`/`LIQ_IMP`), el equipo acordó **crear una tabla intermedia** que guarde el resultado precalculado de los padrones usados en las liquidaciones, con **actualización mensual** — la liquidación pasa a consultar un resultado ya calculado en vez de recalcular contra los padrones en cada corrida. Entrega programada para la **versión 74 de octubre**.
+
+Pablo Gomes coordina con Emma la eficiencia de la consulta de padrones y mide el impacto de las mejoras en los tiempos de liquidación; los tickets nuevos de este frente se vinculan a la épica correspondiente (sin confirmar cuál en la reunión). En paralelo, Pablo Gomes le pidió ayuda a "Adri" para resolver errores detectados en Prisma (sin relación directa confirmada con este mecanismo).
+
+Esta es la primera vez que se documenta una solución de fondo (no solo un fix puntual como el `ISNULL` de arriba) para el patrón de performance de esta vista — a confirmar si la tabla intermedia también resuelve el fan-out de la causa raíz descripta arriba, o si son dos frentes independientes sobre el mismo dominio de padrones.
+
 ## Ver también
 
 - [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) — liquidación de comercio (distinto proceso, no de impuestos).
 - [detalle_productos/siscri/](../siscri/) — motor de cálculo de impuestos que también usa Adquirencia para liquidaciones.
 
 ---
-*Última actualización: 2026-08-27 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (mail Fintexa, 2026-08-20).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva sección — solución propuesta (tabla intermedia mensual de padrones precalculados, objetivo versión 74/octubre), reunión "Producto" (2026-09-28, Nicolás Colón y Pablo Gomes).*
+*Última actualización anterior: 2026-08-27 — `/context_merge`: archivo nuevo, item de `contexto_vivo/` (mail Fintexa, 2026-08-20).*

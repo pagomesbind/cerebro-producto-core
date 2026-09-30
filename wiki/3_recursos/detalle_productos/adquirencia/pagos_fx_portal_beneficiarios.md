@@ -69,6 +69,16 @@ Pagos FX mantiene su urgencia por cumplimiento de un deadline estricto, encontr�
 
 Avance sobre el estado de QA ya documentado en §7 (demora atribuida a Mastercard, ya superada): Flavia Salmeron (Fintexa) informó que **todas las historias de usuario del MVP de Pagos Effects ya fueron trasladadas a QA externo**, a excepción del **alta de beneficiarios** (§3), que continúa en pruebas internas. Confirmó además que **no existen requerimientos adicionales pendientes de parte de Lu (Luciana Rudaz)** para esta etapa. Pablo Gomes se comprometió a verificar una vez más con Lu para descartar cualquier solicitud pendiente de último momento antes del cierre de la versión 74.
 
+## 9. China — Bank Wire como alternativa provisional, y revisión de costos/CCL (2026-09-28)
+
+> Fuente: reunión "Producto" (2026-09-28), minuta Gemini. Ver también la decisión formal en [`2_areas/direccion/decisiones.md`](../../../2_areas/direccion/index.md) [2026-09-28].
+
+- **API de pagos FX:** está en implementación.
+- **China:** se evaluaron alternativas para las transacciones con China (ya figura como corredor arriba, §6). Pablo Gomes va a configurar en **staging** la alternativa de pago por **Bank Wire** y a pedir la **adenda contractual** correspondiente — Bank Wire pasa a ser el rail candidato para ese corredor, en reemplazo provisional de Mastercard (que homologa con el Banco de Shanghái, generando restricciones para procesar pagos en dólares por esa vía).
+- **Costos y cotización:** Pablo Gomes va a organizar una reunión con Aguiar y Guastavino para revisar la estructura de costos y cómo se cotiza el precio **contado con liquidación (CCL)**.
+
+> Sin minuta detallada: no se sabe el proveedor concreto de Bank Wire ni por qué se buscan alternativas para China más allá de la restricción de Mastercard/Banco de Shanghái ya conocida.
+
 ## Ver también
 
 - [`psp_as_a_service_normativa_8432.md`](psp_as_a_service_normativa_8432.md) — contexto normativo/impositivo de Pagos FX (Norma 8432 BCRA), caso PeYa.
@@ -76,7 +86,8 @@ Avance sobre el estado de QA ya documentado en §7 (demora atribuida a Mastercar
 - PRD-183 (Pagos FX SEGUNDO MVP - APIs) — frente de APIs del mismo segundo MVP. Ídem, Cerebro de Luciana Rudaz.
 
 ---
-*Última actualización: 2026-09-11 — `/context_merge`: nueva §8 (avance de estado — MVP mayormente en QA externo, alta de beneficiarios pendiente en pruebas internas, sin requerimientos adicionales de Luciana Rudaz).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §9 — China: Bank Wire como alternativa provisional a Mastercard/Banco de Shanghái, revisión de costos/CCL (reunión "Producto", 2026-09-28).*
+*Última actualización anterior: 2026-09-11 — `/context_merge`: nueva §8 (avance de estado — MVP mayormente en QA externo, alta de beneficiarios pendiente en pruebas internas, sin requerimientos adicionales de Luciana Rudaz).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: nueva §7 (estado de QA de Pagos FX tras demora atribuida a Mastercard, 2026-09-07).*
 *Última actualización anterior: 2026-08-05 — `/sync_meetings`: nueva §6 (alta operativa de organización nueva de Pagos FX/crossborder — corredores, scripts vs. API, gap de notificación, entidades de transición "Move"/"Coin"). Ver reunión "eco cerrado peya" del 2026-08-05 en `wiki/5_control/log_reuniones.md`.*
 *Última actualización anterior: 2026-07-23 — Creación del archivo (`/sync_meetings`), a partir de la reunión "Seguimiento Portal - Pagos Fx" del 2026-07-23.*

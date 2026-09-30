@@ -6,6 +6,15 @@
 
 ## 2026
 
+### 2026-09-29 (corrida 2, pablo + nicolas) — corrida desatendida (scheduled task)
+
+- `direccion/iniciativas.md` — novedad prependa en 5 filas existentes (`alias_cvu_checkout`/PRD-239, PRD-251, `titularidad_tarjeta`, `ardid_limites_pj`/PRD-263, PRD-12); 2 filas nuevas (PRD-70 "POS Prisma", PRD-262 "API Health", ya creada completa en Jira) (pablo).
+- `direccion/decisiones.md` — 2 decisiones nuevas: pedidos comerciales canalizados por Nicolás Colón + requerimientos de Ardid a proceso estándar de Jira (capturado de forma independiente por los dos PM en la misma reunión, consolidado en una sola entrada); Bank Wire (Swift) adoptado como alternativa provisional para pagos en dólares a China (pablo + nicolas).
+- `direccion/oportunidades.md` — nueva fila OP-031 (Sudameris — infraestructura de conexión con Mastercard/Worsis, oferta a terceros; capturada de forma independiente por los dos PM en la misma reunión, consolidada en una sola fila) (pablo + nicolas).
+- `riesgos.md` — nuevo riesgo: la comparación de face match entre DNI y selfie no está bloqueando correctamente en la práctica — posible contradicción sin resolver contra el diseño de dos validaciones biométricas ya documentado en `3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md §6.1` (pablo).
+- `gaps_y_preguntas.md` — actualizados 2 gaps (`[2026-09-14]` Tarjeta Prepaga, cuarta semana consecutiva; `[2026-09-22]` caída 202638, explicación alternativa de ciclo intra-mes — pregunta de estacionalidad para `direccion/estacionalidad_metricas.md` queda pendiente de autorización explícita, no aplicada); 3 gaps nuevos (altas de cuentas Wallet en caída sostenida; Credicuotas corriendo volumen de Wallet a Agente de Cobros, coincidente con el apagado de Bind PSP liquidaciones cta 2; contradicción entre el diseño documentado de onboarding y el hallazgo de auditoría sobre face match) (pablo).
+- **Sin procesar, quedan `en_cola` (régimen D, requiere permiso explícito del usuario — corrida desatendida, sin usuario presente):** novedad de AD V73 (pase confirmado 29/09) y planificación de V74 para `procesos/publicaciones_mensuales.md`; propuestas de comité de cambios/tickets a QA con documentación completa para `procesos/analisis_de_riesgo_de_despliegue.md` (ambos ítems de nicolas).
+
 ### 2026-09-29 (pablo + nicolas)
 
 - `gaps_y_preguntas.md` — 2 gaps nuevos: ambigüedad Ardid 1.19.0 vs. 1.19.1 en el pase a staging del 29/09 (pablo + nicolas); ambigüedad de fecha/hora del aviso a clientes de la V73 (lunes 28/09 21:00 vs. martes 29/09 20:30) (nicolas).

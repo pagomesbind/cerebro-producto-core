@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/desconocimientos_de_
 tipo_destino: actualizar
 contradice: "no — continúa el item en_cola 2026-09-26_conocimiento-liquidaciones-ad73-definiciones-registro-y-regeneracion"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 En "Análisis COBRO" del 28/09 (víspera del pase de AD V73) se repasaron los tickets prioritarios y los criterios de aceptación de las liquidaciones de Cobro/Botón. El equipo validó los criterios con ejemplos concretos de ventas y devoluciones.

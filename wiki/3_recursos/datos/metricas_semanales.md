@@ -25,6 +25,257 @@
 
 ---
 
+## Semana 202639 · 21 → 28 de septiembre de 2026
+
+*Reportado el 2026-09-28. 56 semanas cerradas en el store (202536 → 202639). Primera corrida en la que
+`collectors.csv` (sin fila de encabezado) se ingiere sin workaround: el mapeo posicional ya está aplicado en
+`pipeline.py` (gap dim_collectors cerrado el 2026-09-25). Sin `[WARN]`.*
+
+### 1 · Estado de las NSM
+
+#### 1a · Detalle semanal (WoW)
+
+| | **NSM #1 — Volumen API BANK** *(oficial: Wallet + Agente de Cobros)* | **NSM #2 — Volumen Payway** |
+|---|---|---|
+| **Volumen de la semana** | **$166.577 M** | **$7.942 M** |
+| Operaciones / transacciones | 1.347.859 | 67.402 |
+| Ticket promedio | $123.586 | $117.837 |
+| WoW | **−15,6%** | **−3,1%** |
+| vs. promedio 4 semanas | −40,2% | −22,5% |
+| vs. baseline 13 semanas | −36,6% *(baseline $262.899 M)* | −16,9% *(baseline $9.555 M)* |
+| vs. máximo histórico | −60,3% *(máx $419.802 M, sem. 202610)* | −45,9% *(máx $14.687 M, sem. 202632)* |
+| Tendencia 6 semanas | −1,9% por semana | +0,6% por semana |
+| z-score vs. 8 previas | −1,44 | −0,98 |
+
+#### 1b · Tendencia — ventana móvil de 4 semanas (protagonista; NO es un cierre de mes calendario)
+
+> **Nota de metodología:** compara las últimas 4 semanas cerradas contra las 4 inmediatamente anteriores,
+> sin relación a mes calendario — se actualiza todas las semanas. No leer como facturación de "el mes".
+
+| | **NSM #1 — Volumen API BANK** | **NSM #2 — Volumen Payway** |
+|---|---|---|
+| Últimas 4 semanas (202636 → 202639) | $1.073.666 M | $40.863 M |
+| 4 semanas previas (202632 → 202635) | $1.037.180 M | $42.223 M |
+| Tendencia | **+3,5%** | **−3,2%** |
+
+*Serie mensual completa (mes completo vs. mes completo) desde sep-2025 en el anexo (sección 3).*
+
+#### 1c · Composición de NSM#1 — Operaciones (Wallet) vs. Transferencias Agente de Cobros
+
+| | Volumen | Share | WoW |
+|---|---|---|---|
+| Operaciones (Wallet) | $95.074 M | 57,1% | −11,6% |
+| Transferencias Agente de Cobros | $71.503 M | 42,9% | −20,3% |
+
+**Desglose NSM #1 — IN / OUT (total oficial):**
+
+| | Volumen | Share | WoW | Tendencia 6s |
+|---|---|---|---|---|
+| **OUT** | $108.787 M | 65,3% | −17,9% | −0,3% |
+| **IN** | $57.790 M | 34,7% | −10,7% | −4,7% |
+
+Por tipo (Operaciones/Wallet): Transferencia Saliente $45.376 M (47,7% de Wallet, WoW −14,0%) ·
+Transferencia Entrante $46.141 M (48,5%, WoW −9,9%) · Pago con QR $3.531 M (3,7%, WoW −2,6%) · Debin
+Recurrente Crédito $25,1 M (0,0%, WoW +4,3%) · **Transf. Pull Crédito y Débito en $0** (sigue el
+postmortem de marzo 2026).
+
+Por tipo (Agente de Cobros — ya sumado arriba): Saliente $59.879 M (83,7% de TAC, WoW −21,4%) · Entrante
+CVU $11.599 M (16,2%, WoW −13,9%) · Entrante CBU $24,0 M (0,0%, WoW +36,6%).
+
+Top 8 collectors (TAC): Bind PSP liquidaciones cta 14 $17.354 M (24,3%) · Credicuotas $13.628 M (19,1%, ver
+hallazgo 2) · Banelsip $11.130 M (15,6%) · Tienda Nube $10.714 M (15,0%) · BindPSP pagos Cencosud $4.422 M
+(6,2%) · Cucuru $2.395 M (3,3%) · Tarjeta SuCredito $1.051 M (1,5%) · Bind PSP liquidaciones cta 52 $871 M
+(1,2%).
+
+**Desglose NSM #2 — canal y medio de pago:**
+
+| | Volumen | Share | WoW |
+|---|---|---|---|
+| Botón Simple | $7.661 M | 96,5% | −1,8% |
+| Botón 2.0 | $282 M | 3,5% | −29,6% |
+| Tarjeta de Débito | $4.407 M | 55,5% | −9,8% |
+| Tarjeta de Crédito | $3.396 M | 42,8% | +7,4% |
+| Tarjeta Prepaga | $139 M | 1,7% | −7,4% |
+
+#### 1d · Palancas — cada una atada a su NSM (Tendencia de 4 semanas móviles como protagonista; WoW secundario)
+
+**NSM#1:**
+
+| Palanca | Categoría | Volumen | % del padre | WoW | Tendencia | Prev. tendencia |
+|---|---|---:|---:|---:|---:|---:|
+| OUT | Entrante / Saliente | $108.787 M | 65,3% | −17,9% | +4,1% | $670.673 M |
+| Operaciones (Wallet) | Componente de NSM#1 | $95.074 M | 57,1% | −11,6% | +2,4% | $617.646 M |
+| Transferencias Agente de Cobros | Componente de NSM#1 | $71.503 M | 42,9% | −20,3% | +5,1% | $419.533 M |
+| Saliente (Agente de Cobro) | Tipo (Agente de Cobros) | $59.879 M | 83,7% | −21,4% | +4,0% | $362.941 M |
+| Saliente | Entrante / Saliente (TAC) | $59.879 M | 83,7% | −21,4% | +4,0% | $362.941 M |
+| IN | Entrante / Saliente | $57.790 M | 34,7% | −10,7% | +2,5% | $366.507 M |
+| Transferencia Entrante | Tipo de operación (Wallet) | $46.141 M | 48,5% | −9,9% | +0,8% | $309.746 M |
+| Transferencia Saliente | Tipo de operación (Wallet) | $45.376 M | 47,7% | −14,0% | +4,0% | $293.755 M |
+| Entrante | Entrante / Saliente (TAC) | $11.623 M | 16,3% | −13,8% | +12,2% | $56.592 M |
+| Entrante CVU | Tipo (Agente de Cobros) | $11.599 M | 16,2% | −13,9% | +12,8% | $56.205 M |
+| Pago con QR | Tipo de operación (Wallet) | $3.531 M | 3,7% | −2,6% | +5,8% | $13.976 M |
+| Debin Recurrente Crédito | Tipo de operación (Wallet) | $25,1 M | 0,0% | +4,3% | −30,5% | $168 M |
+| Entrante CBU | Tipo (Agente de Cobros) | $24,0 M | 0,0% | +36,6% | −71,3% | $387 M |
+| Transf. Pull Crédito | Tipo de operación (Wallet) | $0,00 M | 0,0% | s/d | s/d | $0,00 M |
+| Transf. Pull Débito | Tipo de operación (Wallet) | $0,00 M | 0,0% | s/d | s/d | $0,00 M |
+| Transf. interna saliente | Palanca indirecta de NSM#1 | $2.196 M | 1,3% | −1,8% | −24,7% | $12.136 M |
+| Transf. interna entrante | Palanca indirecta de NSM#1 | $2.196 M | 1,3% | −1,8% | −24,7% | $12.136 M |
+| Viaje QR | Palanca indirecta de NSM#1 | $30,3 M | 0,0% | −9,1% | −13,4% | $152 M |
+| Compra Dólar CCL | Palanca indirecta de NSM#1 | $1,9 M | 0,0% | +6,9% | +78,9% | $3,4 M |
+| Cuentas de Wallet creadas | Leading indicator | 20.469 | 0,0% | −10,1% | −9,3% | 107.114 |
+| Venta Dólar CCL | Palanca indirecta de NSM#1 | $0,00 M | 0,0% | +157,0% | +4,9% | $0,00 M |
+| Pago FX | Palanca indirecta de NSM#1 | $0,00 M | 0,0% | −100,0% | +480,5% | $0,03 M |
+
+*(palancas indirectas y leading indicator: contexto, no suman al total de NSM#1)*
+
+**NSM#2:**
+
+| Palanca | Categoría | Volumen | % del padre | WoW | Tendencia | Prev. tendencia |
+|---|---|---:|---:|---:|---:|---:|
+| Botón Simple | Canal (Payway) | $7.661 M | 96,5% | −1,8% | −3,0% | $40.147 M |
+| Tarjeta de Débito | Medio de pago (Payway) | $4.407 M | 55,5% | −9,8% | −3,6% | $26.371 M |
+| Tarjeta de Crédito | Medio de pago (Payway) | $3.396 M | 42,8% | +7,4% | −5,6% | $15.768 M |
+| Botón 2.0 | Canal (Payway) | $282 M | 3,5% | −29,6% | −6,8% | $2.076 M |
+| Tarjeta Prepaga | Medio de pago (Payway) | $139 M | 1,7% | −7,4% | +566,6% | $84,1 M |
+| Tarjeta de Crédito Cuotas | Medio de pago (Payway) | $0,00 M | 0,0% | s/d | s/d | $0,00 M |
+| Transferencia 3.0 | Fuera de Payway | $11.762 M | 148,1% | −17,0% | +7,3% | $65.576 M |
+| Transf. Entrante CVU | Fuera de Payway | $11.552 M | 145,4% | −14,3% | +13,6% | $54.797 M |
+| Liquidador | Fuera de Payway | $11.466 M | 144,4% | −30,4% | +1,9% | $70.129 M |
+| MPOS / POS | Fuera de Payway | $787 M | 9,9% | −20,0% | +1,1% | $4.729 M |
+| Comercios de Adquirencia creados | Leading indicator | 194 | 0,0% | +6,6% | +30,2% | 620 |
+| EcoCerrado | Fuera de Payway | $0,00 M | 0,0% | −100,0% | +1302,3% | $0,00 M |
+
+*(fuera de Payway y leading indicator: contexto, fuera del scope de NSM#2 hoy)*
+
+---
+
+### 2 · Hallazgos y puntos más importantes de la semana
+
+#### 🟡 1. La baja de las últimas dos semanas es el ciclo normal del mes, no un problema técnico — pero en Wallet el fin de mes es cada vez más flojo.
+
+Las dos métricas repiten el mismo patrón hace al menos tres meses: pico en la primera semana del mes y
+descenso hasta el cierre (Volumen API BANK: 202632 $364.995 M → 202635 $207.559 M; 202636 $387.389 M →
+202639 $166.577 M). Comparando esta semana contra la misma posición del mes anterior (202635, 24 al 31 de
+agosto), Volumen Payway está prácticamente igual ($7.942 M vs. $8.094 M, −1,9%) y la tendencia de 4
+semanas de las dos métricas sigue estable (API BANK +3,5%, Payway −3,2%). La caída de la semana pasada
+(202638), que se había asociado a los despliegues del 15/9 y 17/9, encaja en este ciclo: contra su semana
+equivalente de agosto (202634) estuvo arriba en las dos métricas (API BANK $197.263 M vs. $179.788 M; Payway
+$8.198 M vs. $7.659 M). **Lo que sí se mueve:** Volumen API BANK quedó −19,7% contra la última semana de
+agosto, y la diferencia está en Wallet — Operaciones Wallet $95.074 M vs. $140.235 M (y $182.425 M en la
+última semana de julio); BSF $54.738 M vs. $76.976 M; Sociedad Militar $12.300 M vs. $30.139 M. **Por qué
+importa:** el volumen del mes se sostiene, pero se concentra cada vez más en los primeros días — el fin de
+mes de Wallet es cada vez más profundo. **Qué mirar:** si la primera semana de octubre (202640) vuelve a
+compensar.
+
+#### 🟡 2. Credicuotas se está corriendo de Wallet al Agente de Cobros, y en el mismo momento se apagó Bind PSP liquidaciones cta 2.
+
+Credicuotas en Wallet cayó a $1.684 M esta semana (−62,4% vs. su promedio de 4 semanas; ventana de 4
+semanas $15.698 M vs. $22.205 M, −29%). Al mismo tiempo, Credicuotas como collector del Agente de Cobros
+pasó de $1.500–5.400 M semanales en agosto a $13.600–25.800 M desde la semana del 31/8 ($74.715 M en las
+últimas 4 semanas vs. $11.483 M en las 4 previas). En la misma semana (202636), Bind PSP liquidaciones cta 2
+— que movía $11.000–21.000 M por semana — cayó a $2.165 M, y lleva tres semanas en cero (su caída ya se
+había marcado en 202636). **Por qué importa:** las dos fuentes suman al Volumen API BANK, así que el neto es
+positivo, pero no hay confirmación de que se trate de una migración de flujos; si no lo es, la salida de cta
+2 es una pérdida de ~$15.000 M semanales que hoy está tapada por el crecimiento de Credicuotas. **Qué
+hacer:** chequearlo con Comercial y Administración.
+
+#### 🔴 3. BSF sigue concentrando el 57,6% del volumen de Wallet (top-3: 83,0%).
+
+Mismo riesgo estructural de las semanas anteriores: BSF (Carrefour) hizo $54.738 M de los $95.074 M de
+Operaciones Wallet, y junto a Sociedad Militar y Global 66 llegan al 83,0%. Es además el cliente que más
+explica el valle de fin de mes de Wallet (hallazgo 1). **Qué hacer:** seguimiento continuo, sin acción nueva.
+
+#### 🟡 4. Tarjeta Prepaga: cuarta semana de crecimiento fuerte con rechazo alto, y el rechazo de Débito también sube.
+
+Tarjeta Prepaga sigue creciendo (tendencia de 4 semanas +566,6%, tendencia de 6 semanas +34,0% por semana,
+$139 M en la semana) con rechazo de 37,8% contra 32,9% de promedio de 8 semanas. Se suma que el rechazo de
+Tarjeta de Débito subió por segunda semana (18,5% → 20,2%, vs. 16,7% de promedio). **Contexto disponible:**
+la corrección de la base de identificación de tarjetas (BINes) — que hoy genera rechazos garantizados en
+parte de las tarjetas prepagas y de débito (PRD-251) — se postergó y sale a producción el martes 29/09 con la
+versión 73. **Qué mirar:** si los rechazos de Prepaga y Débito bajan en las semanas posteriores a ese
+despliegue; el crecimiento del volumen de Prepaga sigue sin explicación confirmada.
+
+#### 🟡 5. Las altas de cuentas Wallet caen por cuarta semana y tocan el nivel más bajo desde fines de junio.
+
+20.469 cuentas nuevas en la semana (202636 28.658 → 202637 25.291 → 202638 22.770 → 202639 20.469), −19%
+contra la misma semana del mes anterior (202635, 25.254) y z-score −2,44 contra las últimas 8 semanas. La
+baja es pareja entre los clientes grandes: BSF 7.372 (vs. 11.287 en 202636), CENCOSUD 4.448 (vs. 6.535),
+Credicuotas 2.425 (vs. 4.122). **Por qué importa:** es la antesala del volumen de Wallet — si sigue, el
+Volumen API BANK vía Wallet lo va a sentir en las próximas semanas. **Qué hacer:** sin explicación comercial
+disponible todavía; vale la pena chequearlo con Comercial.
+
+#### 🟢 6. Altas de comercios de Adquirencia en alza, impulsadas por La Virginia.
+
+194 comercios nuevos (+6,6% WoW; promedio de 4 semanas 202 vs. 30 trece semanas atrás), 118 de La Virginia
+(60,8%), seguidos por Consorcio Abierto (31) y Cobro Express-Flanor (18). Es la ejecución esperada del
+onboarding de comercios de La Virginia. Informativo, sin acción.
+
+---
+
+### 3 · Anexo — Métricas de soporte
+
+**Serie mensual completa (desde sep-2025) — volumen total del mes, para ver la magnitud absoluta.**
+
+| Mes | NSM #1 *(oficial)* | MoM (mes completo) | NSM #2 | MoM (mes completo) |
+|---|---|---|---|---|
+| 2025-09 | $476.139 M | s/d | $4.172 M | s/d |
+| 2025-10 | $730.477 M | +53,4% | $5.042 M | +20,8% |
+| 2025-11 | $625.391 M | −14,4% | $4.401 M | −12,7% |
+| 2025-12 | $813.380 M | +30,1% | $4.640 M | +5,4% |
+| 2026-01 | $1.546.504 M | +90,1% | $5.211 M | +12,3% |
+| 2026-02 | $1.323.010 M | −14,5% | $6.268 M | +20,3% |
+| 2026-03 | $1.451.705 M | +9,7% | $9.611 M | +53,3% |
+| 2026-04 | $1.069.065 M | −26,4% | $12.021 M | +25,1% |
+| 2026-05 | $853.360 M | −20,2% | $11.768 M | −2,1% |
+| 2026-06 | $884.400 M | +3,6% | $20.850 M | +77,2% |
+| 2026-07 | $1.310.086 M | +48,1% | $43.962 M | +110,9% |
+| 2026-08 | $1.037.180 M | −20,8% | $42.223 M | −4,0% |
+| 2026-09* | **$1.073.666 M** | +3,5% | **$40.863 M** | −3,2% |
+
+*(*) septiembre ya tiene cerradas sus 4 semanas ISO (202636 → 202639, asignadas por jueves); la semana
+202640 (28/9 → 5/10) corresponde a octubre. El pipeline todavía lo marca como "en curso".*
+
+**Salud (no suman al volumen NSM):**
+
+| Métrica | Semana | Media 8 semanas |
+|---|---|---|
+| NSM #1 — tasa de rechazo | 1,0% | 0,6% |
+| NSM #1 — tasa de devolución | 0,0% | 0,0% |
+| NSM #2 — tasa de rechazo | 23,3% | 22,3% |
+| NSM #2 — tasa de devolución | 0,0% | 0,0% |
+| NSM #2 / Crédito — rechazo | 27,3% | 31,3% |
+| NSM #2 / Débito — rechazo | 20,2% | 16,7% |
+| NSM #2 / Prepaga — rechazo | 37,8% | 32,9% |
+| TAC Agente de Cobros — tasa de falla (no COMPLETED) | 0,4% | 0,5% |
+
+**Altas (leading indicator del volumen):**
+
+- **Cuentas de Wallet:** 20.469 en la semana (media 8 semanas 26.738; −10,1% WoW; ver hallazgo 5). Top: BSF
+  7.372 (36,0%) · CENCOSUD 4.448 (21,7%) · Global 66 (Argpagos psp) 3.030 (14,8%) · Credicuotas 2.425
+  (11,8%) · Coppel 1.208 (5,9%).
+- **Comercios de Adquirencia:** 194 en la semana (ver hallazgo 6). Top: La Virginia 118 (60,8%) · Consorcio
+  Abierto 31 (16,0%) · Cobro Express-Flanor 18 (9,3%) · LEBANE 17 (8,8%) · BIND PAGO QA 4 (2,1%).
+
+**Top clientes NSM #1 (Operaciones/Wallet):** BSF $54.738 M (57,6%, ver hallazgo 3) · Sociedad Militar
+$12.300 M (12,9%) · Global 66 (Argpagos psp) $11.919 M (12,5%) · CENCOSUD $6.863 M (7,2%) · Depay $2.457 M
+(2,6%) · GALLO $2.000 M (2,1%) · Credicuotas $1.684 M (1,8%, ver hallazgo 2) · Pagos Digitales $749 M (0,8%).
+
+**Top entidades NSM #2:** EDEA $1.882 M (23,7%) · EDEN $1.549 M (19,5%) · EDELAP $1.480 M (18,6%) · EDESA
+$1.464 M (18,4%) · EDES $763 M (9,6%) · RIPSA $335 M (4,2%) · FAVACARD $190 M (2,4%) · Tarjeta Sucredito
+$63,2 M (0,8%).
+
+**Candidatos descartados como ruido:** Bind PSP liquidaciones cta 39 (−94,1% vs. promedio de 4 semanas) —
+sigue su ciclo mensual habitual (pico la primera semana del mes, ~$140 M al cierre, igual que 202631 y
+202635). Caídas de clientes chicos de Payway (Rapifast, ELEBAR, Tarjeta Sucredito, RapiCuotas, CREDIMAS,
+Tarjeta Valor) y de TAC (cta 73, cta 137, Tarjeta unica, Consorcio Abierto), todas ≤1% del volumen y
+consistentes con el valle de fin de mes. Terra Blockchain sigue en su salida ya conocida.
+
+---
+
+*Próxima corrida: semana 202640 (28 de septiembre → 5 de octubre de 2026).*
+
+---
+
 ## Semana 202638 · 14 → 21 de septiembre de 2026
 
 *Reportado el 2026-09-22. 55 semanas cerradas en el store (202536 → 202638). `collectors.csv` volvió a

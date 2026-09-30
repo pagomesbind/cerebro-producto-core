@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/adquirencia/impuestos_iibb_liqui
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 Para mejorar los tiempos de liquidación de los cobros en línea, la reunión "Producto" del 28/09 acordó:

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "2_areas/gaps_y_preguntas.md §[2026-09-22] caída generalizada de volumen coincide con despliegues de riesgo — la evidencia de 202639 sugiere una explicación alternativa (ciclo del mes), no causal"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

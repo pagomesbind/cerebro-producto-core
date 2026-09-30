@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/cuenta_remunerada_fci.md
 tipo_destino: actualizar
 contradice: "no — completa el inventario de superficie de la API Broker (Poincenot/IVSA) ya capturado el 2026-09-28 vía navegación del portal (`2026-09-28_wallet_api_broker_poincenot_pagos_cap_trading_fci`, `..._cuenta_remunerada_detalle`), que releva endpoints existentes pero no señalaba explícitamente esta ausencia operativa."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

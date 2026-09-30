@@ -208,12 +208,27 @@ Matías Alzogaray (PM) comparó los Story Points cargados en el Jira de Bind (AD
 
 **Estado:** Abierto — corrección en desarrollo, sin fecha de entrega confirmada al momento de esta captura. Capturado 2026-09-28 (Pablo Gomes), confianza alta.
 
+## Onboarding — la comparación de face match entre DNI y selfie no está bloqueando correctamente en la práctica
+
+**Origen:** hallazgo de auditorías de seguridad, mencionado por Pablo Gomes en la reunión "Producto" (2026-09-28): actualmente el proceso de onboarding permite completar el alta usando una **foto de otra persona** junto con un número de trámite de DNI correcto — es decir, datos documentales válidos pero sin verificación biométrica real contra la identidad del solicitante.
+
+**Implicancia:** brecha de seguridad con implicancia directa de fraude/PLD — un actor malicioso con acceso al número de trámite de un DNI ajeno podría completar el onboarding sin que el sistema detecte la discordancia facial.
+
+**⚠️ Posible contradicción con el canon ya documentado (sin resolver, ver gap `[2026-09-28]` en `gaps_y_preguntas.md`):** `3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md §6.1` documenta, desde el 2026-09-08, que la normativa exige **dos** validaciones biométricas distintas y separadas — prueba de vida (liveness, sin score) y concordancia facial/face match (score de similitud entre selfie y foto de DNI), con Socialnet/FaceTech corriendo ambas en un mismo servicio. Este hallazgo indica que, en la práctica, el control de face match no está bloqueando correctamente. No se aclaró en la reunión si el control no está implementado, está mal configurado, o es bypasseable en algún camino de contingencia (posible punto de contacto con la vulnerabilidad ya trackeada en PRD-247, "DNI frente/dorso sin cruzar", que también involucra un camino de contingencia — sin confirmar si es el mismo mecanismo).
+
+**Próximo paso (Pablo Gomes):** el hallazgo quedó anotado para abordarse en el desarrollo de los sistemas de puntuación (scoring) y las validaciones de API (T-147, marcada 🔴 por la naturaleza del hallazgo).
+
+**Nota de severidad:** no se registró en la minuta el volumen de casos afectados, si el proveedor de biometría (Socialnet/FaceTec) es el mismo que presenta la falla, ni desde cuándo está expuesta esta brecha — sugerido confirmar esto como parte de T-147 antes de escalar a Cumplimiento/Fraude formalmente.
+
+**Estado:** Abierto — sin confirmar si es bug, mala configuración o bypass de contingencia. Capturado 2026-09-28 (Pablo Gomes), confianza media.
+
 ## Ver también
 - [gaps_y_preguntas.md](gaps_y_preguntas.md) — vacíos de información del contexto fijo, distinto de riesgos ya identificados.
 - [tareas.md](tareas.md) — backlog operativo, no riesgos.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: nuevo riesgo "Falla de control de acceso preexistente en el Admin Centralizador" (Pablo Gomes).*
+*Última actualización: 2026-09-29 — `/context_merge`: nuevo riesgo "Onboarding — la comparación de face match entre DNI y selfie no está bloqueando correctamente en la práctica" (Pablo Gomes), con posible contradicción sin resolver contra `arquitectura_solicitud_y_flujos.md §6.1` (ver gap asociado en `gaps_y_preguntas.md`).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nuevo riesgo "Falla de control de acceso preexistente en el Admin Centralizador" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-25 — `/context_merge`: nuevo riesgo "Discrepancia sistemática de Story Points entre el Jira de Bind y lo que reporta/factura Fintexa" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-23 — `/context_merge`: nuevos riesgos "Performance de Ardid afecta su comercialización a Coto y Grupo DESA" (Pablo Gomes y Nicolás Colón, con actualización de causa raíz), "Capacidad de entrega cayó de ~300 a ~100 SP/mes" (Nicolás Colón/Pablo Gomes), "Eliminar un comercio en Coelsa deshabilita entidades que comparten CUIT" (Pablo Gomes/Nicolás Colón), "Riesgo de fraude en lanzamiento de INTER", "Biocatch sin reglas activas durante 60 días de baseline" y "Spread de Dólar COMBI puede hacerlo comercialmente inviable" (Pablo Gomes).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: nuevos riesgos "GRUPO DESA amenaza con dar de baja el servicio" (Botón Simple 1.0, riesgo comercial escalado a Dirección) y "Pagos Mastercard cross-border a China en USD siguen bloqueados" (novedad para Luciana Rudaz).*

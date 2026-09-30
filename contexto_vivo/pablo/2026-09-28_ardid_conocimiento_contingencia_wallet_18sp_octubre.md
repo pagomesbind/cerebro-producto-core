@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/ardid/arquitectura_y_alcance.md
 tipo_destino: actualizar
 contradice: "no — completa (no contradice) el conocimiento ya mergeado y archivado el 2026-09-25 (`4_archivos/contexto_ingestado/2026-09-22_ardid_proyecto_asegurar_todo_pase_por_ardid`), que documentaba la iniciativa sin dimensionar el esfuerzo ni tener fecha de cierre."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

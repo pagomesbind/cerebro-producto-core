@@ -643,7 +643,18 @@ Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arrib
 
 ---
 *Ver también: [webhooks_y_notificaciones.md](webhooks_y_notificaciones.md) para cómo se notifica al comercio una vez que el cobro QR (bajo cualquiera de los modelos de esta Parte 3) se acredita. [coelsa_qr_catalogo_apis_tecnico.md](coelsa_qr_catalogo_apis_tecnico.md) para el catálogo de endpoints/códigos de error de la transacción QR (`QRDebin`/`QRReverso`/`QROperacionFinalizada`), Notification Push y firma EMVCo — separado de este archivo por umbral de tamaño.*
-*Última actualización: 2026-09-29 — `/context_merge`: nueva homologación en curso — billetera YDI (YPF Digital), tickets Coelsa #502085/#502086, pruebas en vivo desde 2026-10-19.*
+
+---
+
+## Parte 6 — Reactivación de transferencias Pool (en curso, 2026-09-28)
+
+> Fuente: reunión "Producto" (2026-09-28), minuta Gemini.
+
+Nicolás Colón informó que **Coelsa ya dejó lista, de su lado, la configuración para la reactivación de transferencias Pool**. Del lado de Bind subsiste un inconveniente con el uso de la mensajería **B1** en el entorno de pruebas (staging) que impide interpretar los mensajes correctamente.
+
+**Próximos pasos acordados:** Nicolás Colón debe confirmar la habilitación con Coelsa y coordinar con el equipo técnico el cierre de la configuración en staging, evaluando el pase a producción inicialmente con **montos de cero pesos** para evitar invocaciones erróneas mientras se valida el circuito.
+*Última actualización: 2026-09-29 — `/context_merge`: nueva Parte 6 — reactivación de transferencias Pool en curso (Coelsa lista de su lado, bloqueada en staging por mensajería B1).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva homologación en curso — billetera YDI (YPF Digital), tickets Coelsa #502085/#502086, pruebas en vivo desde 2026-10-19.*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: Parte 4, confirmación de que Coelsa calcula el 21% de IVA sobre la comisión del webhook de QR de forma automática y obligatoria (desarrollo en curso, sin fecha límite).*

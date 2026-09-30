@@ -61,6 +61,22 @@ Matias Alzogaray, Maria Eugenia Vila y Maximiliano Ambrosini confirmaron, para l
 
 En las pruebas de QA de AD-1361/DAD-2209 y AD-1398/DAD-2257 (las historias que implementan en AD V73 la separación entre desconocimiento y devolución, arriba) se levantaron observaciones sobre reversas fuera de plazo, deducción de arancel/impuestos y un bug de doble descuento. Fintexa (Melisa Belpassi) las consolidó el 25/09 y Pablo Gomes las confirmó el mismo día — **las definiciones son las mismas que resuelven el motor de liquidaciones de Agente de Cobros y Pagos** (mismo mecanismo compartido): ver el detalle completo (clasificación por fecha al regenerar, registro de devoluciones+desconocimientos sumados, AD-1822 confirmado bloqueante para V73) en [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md §2, §4, §5`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md). La regla de deducciones de arancel/impuestos (AD-1835/DAD-3418, arancel repetido en cada línea de devoluciones parciales) vive en [`devoluciones_y_contracargos.md`](devoluciones_y_contracargos.md).
 
+## Criterios de aceptación validados rumbo a V74, y observaciones de pago único declaradas no bloqueantes (2026-09-28)
+
+> Fuente: Reunión "Análisis COBRO" (2026-09-28, víspera del pase de V73), minuta Gemini.
+
+En "Análisis COBRO" del 28/09 se repasaron los tickets prioritarios y los criterios de aceptación de las liquidaciones de Cobro/Botón, validados con ejemplos concretos de ventas y devoluciones:
+
+- **Transacción y devolución se muestran las dos en el comprobante** (PDF de liquidación) — confirma el comportamiento esperado de AD-1361 que motivó el defecto bloqueante AD-1822 (ver [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md §4`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md)): una venta devuelta antes de liquidarse tiene que aparecer junto con su reversa, no solo la reversa descontada.
+- La **devolución de impuestos** se detalla en el **ticket padre** (probablemente AD-1361, sin aclarar) — alineado con la regla de deducciones en reversas (impuestos y arancel se devuelven solo en reversa total del mismo día, ver [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md §3`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md)).
+- **AD-1845 y AD-1849** (observaciones sobre pagos de **pago único** y control de accesos/permisos) se determinaron **no bloqueantes** para la versión — Julieta Gimenez (Fintexa) va a dejar en el "ticket 15" y en los propios tickets el comentario con la justificación. La minuta habla de "tickets de dualidad", sin más contexto.
+- **AD-1822** sigue abierto con un análisis nuevo de Daniela Collia (Fintexa) pendiente de revisión por Nicolás Colón.
+- **AD-1856** se abre para analizar y sanear el entorno — pendiente de que Producto lo asigne al equipo.
+- Los scripts de implementación posteriores a la V73 necesitan la **aprobación del DBA**.
+- El grupo arma, con un listado compartido en el chat, los tickets que entran en la **V74**.
+
+> Fuente adicional: la minuta no trae el contenido exacto de los ejemplos numéricos validados; el prefijo "AD-" de los tickets se infiere del contexto.
+
 ## Ver también
 
 - [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) — mecánica general de contracargos/devoluciones estándar (no desconocimientos).
@@ -68,5 +84,6 @@ En las pruebas de QA de AD-1361/DAD-2209 y AD-1398/DAD-2257 (las historias que i
 - [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md) — mismas reglas de liquidación de AD V73, versión Agente de Cobros y Pagos.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: nueva sección — observaciones de QA de AD-1361/AD-1398 resueltas (25/09), con referencia cruzada al detalle completo en Agente de Cobros y Pagos (mismo motor de liquidaciones).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva sección — criterios de aceptación validados rumbo a V74 y observaciones de pago único (AD-1845/AD-1849) declaradas no bloqueantes (reunión "Análisis COBRO", 2026-09-28).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva sección — observaciones de QA de AD-1361/AD-1398 resueltas (25/09), con referencia cruzada al detalle completo en Agente de Cobros y Pagos (mismo motor de liquidaciones).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: archivo nuevo, extraído de `devoluciones_y_contracargos.md §0` por umbral de tamaño; nueva sección "Separación de desconocimientos y devoluciones en PDF y liquidación" (reunión "Análisis de riesgo: AD V 73", 2026-09-17).*

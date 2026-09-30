@@ -6,6 +6,22 @@
 
 ## 2026
 
+### 2026-09-29 (corrida 2, pablo + nicolas) — corrida desatendida (scheduled task)
+
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §2.0 (llamado de Botón Simple a Ardid es síncrono, confirmado 1.0 y 2.0) y §14.7 (dimensionamiento del paquete de contingencia "100% por Ardid" — 18 SP, cierre octubre) (nicolas + pablo).
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — nueva Parte 6: reactivación de transferencias Pool en curso, bloqueada en staging por mensajería B1 (pablo).
+- `detalle_productos/adquirencia/impuestos_iibb_liquidacion_lote.md` — nueva sección: solución propuesta (tabla intermedia mensual de padrones precalculados, objetivo v74/octubre) — consolidado cross-PM, un solo destino en vez de duplicar en `agente_cobros_y_pagos/` (nicolas + pablo).
+- `detalle_productos/adquirencia/incidente_qr_masivo_provincia_net.md` — corregida la fecha del despliegue AD V73 (cancelado 24/09, reprogramado 29/09 20:30hs); nueva sección de checklist pre/post despliegue y rollback por ticket, y lecciones de proceso del pase cancelado (nicolas).
+- `detalle_productos/adquirencia/desconocimientos_de_tarjeta.md` — nueva sección: criterios de aceptación validados rumbo a V74, observaciones de pago único (AD-1845/AD-1849) declaradas no bloqueantes (nicolas).
+- `cumplimiento_normativo/reporteria_worldsys_bcra.md` — §2, puntos 7-8: prueba de captura OK en QA (28/09), prerequisito pendiente del listado de tipos de operación para producción; cross-referencia al módulo distinto de legajo/KYC de Onboarding — un solo destino en vez del archivo nuevo que proponía uno de los dos PM (nicolas + pablo, consolidado).
+- `detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md` — nueva §9: planificación de Onboarding estratégico (fecha objetivo noviembre 2026), datos obligatorios nuevos, lista 15/screening a definir, baja manual, revisión de seguridad en validación de identidad (nicolas).
+- `detalle_productos/wallet/cuenta_remunerada_fci.md` — nueva §7: gap operativo de baja/rescate total/eliminación de cuenta comitente sin endpoint automatizado del lado de Bind (pablo).
+- `detalle_productos/adquirencia/pagos_fx_portal_beneficiarios.md` — nueva §9: China — Bank Wire como alternativa provisional a Mastercard/Banco de Shanghái, revisión de costos/CCL (nicolas).
+- `datos/metricas_semanales.md` — reemplazado byte a byte (semana 202639) (pablo).
+- `datos/datos_metricas_semanales/` — reemplazado byte a byte (semana 202639; `dim_collectors` sin workaround por primera vez, detectado solo por forma) (pablo).
+- `datos/log_metricas_semanales.md` — reemplazado byte a byte (semana 202639) (pablo).
+- `datos/log_performance_desarrollo.md` — reemplazado byte a byte (histórico rectificado Oct'25-Sep'26, corrige el export del 16/09) (pablo).
+
 ### 2026-09-29 (pablo + nicolas)
 
 - `detalle_productos/adquirencia/botones_de_pago_y_qr.md` — nueva subsección "Resultado final (2026-08-31)" en el caso Arcos Dorados: mapeo de productos entregado en AD-1434, validación de cuadratura, limitaciones conocidas (pablo).

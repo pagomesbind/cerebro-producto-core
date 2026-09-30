@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/arquitectura_solicitu
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 La reunión "Producto" del 28/09 ordenó los desarrollos en curso de **Onboarding estratégico**, con **fecha objetivo en noviembre de 2026**. Lo que se habló:

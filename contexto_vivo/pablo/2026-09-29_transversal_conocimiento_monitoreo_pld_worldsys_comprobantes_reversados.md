@@ -10,7 +10,7 @@ destino_propuesto: wiki/3_recursos/cumplimiento_normativo/monitoreo_pld_worldsys
 tipo_destino: crear
 contradice: "no — módulo distinto del mismo proveedor (Worldsys) que el ya documentado en wiki/3_recursos/detalle_productos/onboarding/integracion_worldsys_complianceone.md (ese cubre el repositorio de legajo/documentos de PRD-147; este cubre el motor de alertas PLD/AML sobre transacciones). Aclarar la relación entre ambos módulos al mergear."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

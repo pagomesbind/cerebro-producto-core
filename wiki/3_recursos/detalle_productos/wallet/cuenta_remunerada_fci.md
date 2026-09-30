@@ -370,9 +370,18 @@ Es el webhook del Paso 7 ya documentado ("API Broker avisa por webhook que proce
 - **`GET .../get-interest-earned-per-user`**: consulta cuánto interés ganó un usuario — endpoint distinto del `investment/settlement/info` que este archivo ya documenta (WS-730) para reportes normativos; puede ser el mismo concepto expuesto por dos vías, o un endpoint complementario — a confirmar si hace falta en un futuro trabajo sobre este producto.
 - **`GET .../get-settlements-per-user`**: consulta las liquidaciones (suscripciones/rescates ya liquidados) de un usuario.
 
+## 7. Baja, rescate total y eliminación de cuenta comitente — sin endpoint automatizado del lado de Bind (gap operativo, 2026-09-28)
+
+> Fuente: reunión "Producto" (2026-09-28), minuta Gemini (Pablo Gomes, Nicolás Colón).
+
+Pese a que Poincenot expone un endpoint de rescate batch con variante "total withdrawal" (ver §6, `WITHDRAW`), **Bind no tiene hoy ningún mecanismo automatizado propio** (ni self-service para el cliente ni herramienta interna) para procesar la **baja de inversiones, el rescate total, o la eliminación de una cuenta comitente** — estas acciones se atienden de forma completamente manual, vía Soporte. No se confirmó en la reunión si la ausencia es de orquestación interna (Bind no expone/consume ese endpoint de Poincenot para este caso de uso) o si además falta una pieza en el propio Poincenot para el cierre completo de la relación (eliminación de la cuenta comitente, no solo el rescate del saldo).
+
+**Próximo paso acordado:** establecer un procedimiento manual formal para la baja de inversiones, el rescate total y la eliminación de cuentas comitentes mientras no existan los endpoints automáticos, y evaluar si el volumen actual justifica el desarrollo de un punto de interfaz dedicado. Ver también la planificación de Onboarding estratégico que retoma este mismo punto ([`onboarding/arquitectura_solicitud_y_flujos.md §9`](../onboarding/arquitectura_solicitud_y_flujos.md)).
+
 ## Ver también
 - [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
 - [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md), [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API de Poincenot.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: nueva §6, detalle de endpoints REST del flujo batch de Poincenot (precio, suscripción/rescate, webhooks, interés ganado) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*
+*Última actualización: 2026-09-29 — `/context_merge`: nueva §7 — gap operativo de baja/rescate total/eliminación de cuenta comitente sin endpoint automatizado del lado de Bind (reunión "Producto", 2026-09-28).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §6, detalle de endpoints REST del flujo batch de Poincenot (precio, suscripción/rescate, webhooks, interés ganado) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

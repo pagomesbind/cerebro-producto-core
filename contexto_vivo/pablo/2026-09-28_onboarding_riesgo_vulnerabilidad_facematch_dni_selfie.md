@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md — el canon documenta (desde 2026-09-08) que la normativa exige DOS validaciones biométricas distintas y separadas: prueba de vida (liveness, sin score) y concordancia facial/face match (score de similitud entre selfie y foto de DNI). Este hallazgo de auditoría de seguridad indica que, en la práctica, la comparación de face match no está bloqueando correctamente — permite usar una foto ajena junto con un número de trámite de DNI correcto. No se aclaró en la reunión si el control no está implementado, está mal configurado, o es bypasseable en algún camino de contingencia (posible punto de contacto con la vulnerabilidad ya trackeada en PRD-247, 'DNI frente/dorso sin cruzar', que también involucra el camino de contingencia — sin confirmar si es el mismo mecanismo)."
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

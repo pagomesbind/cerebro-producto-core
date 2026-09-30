@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 proyecto: ardid_limites_pj
 ---
 

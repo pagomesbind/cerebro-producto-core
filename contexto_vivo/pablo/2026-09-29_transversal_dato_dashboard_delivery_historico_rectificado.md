@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/datos/
 tipo_destino: reemplazar(solo tipo:dato)
 contradice: "3_recursos/datos/log_performance_desarrollo.md — el histórico del 2026-09-16 queda corregido en Oct'25–Ago'26 (ver cuerpo)"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 ---
 
 - **Oportunidad:** evaluar una propuesta vinculada a **Sudameris**: ofrecer servicios a terceros aprovechando la infraestructura de conexión con **Mastercard**. El resumen no aclara si Bind PSP daría el servicio sobre la infra de Sudameris o al revés.

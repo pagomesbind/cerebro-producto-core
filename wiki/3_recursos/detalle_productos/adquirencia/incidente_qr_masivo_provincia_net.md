@@ -74,7 +74,38 @@ Provincia Net segmenta a sus propios clientes (municipios/entes) en 3 tipos: (a)
 
 En la reunión de análisis de riesgo de AD V73 se aprobó una política de **despriorización temporal (no rechazo) de ráfagas de QR dinámico**: cuando una fuente supera las **200 peticiones por minuto**, esas peticiones se envían a una **cola secundaria** en vez de competir por latencia con el resto del tráfico. Es la pieza de mitigación de gestión de colas que faltaba formalizar, complementaria a las mejoras de infraestructura ya comunicadas a Provincia Net (cola de Deuda+QR, duplicación de pods Workers, escalado de BD — ver iniciativa PRD-66 en [`2_areas/direccion/iniciativas.md`](../../../2_areas/direccion/iniciativas.md)). Ticket de soporte asociado: AD-1676 (DAD-2943) — Infra revisará las colas nuevas y su performance post-despliegue.
 
-**Despliegue AD V73:** fecha confirmada **24/09/2026, 21hs**, duración estimada 2-2,5 horas, prioridad Alta/Crítica (cambios estructurales en archivos de liquidación, actualización de millones de registros, incidentes previos sobre webhooks y QRs). Orden innegociable en 3 bloques — Código → Verificación/Saneamiento de BD → Filtro (alterar el orden rompe la conciliación externa y la asignación de CVUs en Botón Simple 2.0/RxT, dejando a 32 Collectors sin stock). Riesgo más crítico: las conciliaciones de bancos/comercios externos fallarían completamente si esos terceros no adaptaron sus parsers al nuevo código de liquidación **004** (archivos BOTONLIQ/DEVBOTON) — pendiente avisar a clientes y actualizar la documentación pública de developers (AD-1398/DAD-2257). Zonas vulnerables adicionales: integraciones POS↔Global Processing, webhook FechaNegocio de Botón 2.0, flujo completo de Pagos FX 2.0 del portal.
+**Despliegue AD V73 — fecha corregida, ver actualización de proceso abajo.** Este párrafo (redactado el 2026-09-18 a partir de la minuta del 17/09) daba como confirmada la fecha **24/09/2026, 21hs**, duración estimada 2-2,5 horas, prioridad Alta/Crítica (cambios estructurales en archivos de liquidación, actualización de millones de registros, incidentes previos sobre webhooks y QRs). Ese pase **se canceló la noche del 24/09** (ver "Reunión de Pre-despliegue AD 73" y cronología completa en [`agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md`](../agente_cobros_y_pagos/liquidaciones_reversas_y_comprobantes.md) y `direccion/iniciativas.md` PRD-251) y se reprogramó de manera definitiva al **martes 29/09/2026, 20:30hs** (la ficha de riesgo que acompañó la minuta original del 24/09 nunca se actualizó y todavía dice "Hora: 21hs" — inconsistencia menor de la fuente, no una segunda reprogramación real). Orden innegociable en 3 bloques — Código → Verificación/Saneamiento de BD → Filtro (alterar el orden rompe la conciliación externa y la asignación de CVUs en Botón Simple 2.0/RxT, dejando a 32 Collectors sin stock). Riesgo más crítico: las conciliaciones de bancos/comercios externos fallarían completamente si esos terceros no adaptaron sus parsers al nuevo código de liquidación **004** (archivos BOTONLIQ/DEVBOTON) — pendiente avisar a clientes y actualizar la documentación pública de developers (AD-1398/DAD-2257). Zonas vulnerables adicionales: integraciones POS↔Global Processing, webhook FechaNegocio de Botón 2.0, flujo completo de Pagos FX 2.0 del portal.
+
+## Checklist pre/post despliegue y plan de rollback (mail "MINUTA - Reunión de Pre-despliegue AD 73", 2026-09-28)
+
+> Fuente: Mail "MINUTA - Reunión de Pre-despliegue AD 73: Jue, 24 de sept de 2026" — Matías Alzogaray, enviado 2026-09-28.
+
+**Errores bloqueantes que motivaron la cancelación del 24/09:** la minuta cita los tickets **1361, 1791 y 1360** — los totales del PDF de liquidación restaban devoluciones y desconocimientos por duplicado (el mail de Fintexa del 25/09 fijó después AD-1822 como el bloqueante puntual del nuevo pase — ver `liquidaciones_reversas_y_comprobantes.md §4`).
+
+**Microservicios/APIs afectados:** PaymentAcceptor.Rendicion, PaymentAcceptor.Deuda, PaymentAcceptor.Promotions, PaymentAcceptor.WorkflowPagos, PaymentAcceptor.CardOrchestrator, Middleware.Financial, Middleware.Aggregator, Shared.Comercio, Shared.Comisiones, Shared.Pdf, Bind.Configuracion.Admin, Bind.Configuracion.BFF, Bff.BackofficeComercio, Web.BackofficeComercio, Web.Portal20, BotonSimple.PaymentForm.Web.
+
+**Rollback.** Para la mayoría de los MS: revertir las imágenes en AKS (`kubectl set image deployment/{ms-name}`). Excepciones críticas:
+- DAD-2437 (pago único en Botón Simple 2.0) tiene su propio script inverso, `SaneamientoPagoUnico-ROLLBACK.sql`.
+- DAD-2209/2257, DAD-2294/2493 y el flujo de Beneficiarios (DAD-2290/2293/2492) se revierten obligatoriamente en conjunto.
+- DAD-2265 (corrección de unicidad de emails) no borra los duplicados que se hayan creado durante el pase.
+
+**Checklist por ticket (pre / durante / post pase):**
+
+| Ticket AD | DAD | Qué es | Acción |
+|---|---|---|---|
+| AD-87 | DAD-489 | [Promociones][API] "Todas las condiciones enviadas son inválidas" aun siendo válidas | Post: dar de alta un CF de prueba y ver si funciona |
+| AD-1463 | DAD-2378 | [Admin][Convenio] el alta de convenio no valida máximo contra mínimo | Post: crear un convenio y validar que se cobren bien las comisiones |
+| AD-1398 | DAD-2257 | [Cobro] Separar desconocimientos de devoluciones en el PDF de liquidación | Pre: avisar a clientes y actualizar la web de developers con el formato de los archivos |
+| AD-1361 | DAD-2209 | [Cobro] Corregir archivos y registros de liquidaciones | Pre: avisar a clientes y actualizar la web de developers (Gonzalo Rivera y equipo) |
+| AD-1234 | DAD-1986 | [Portal] el Excel de transacciones no trae la fecha de las devoluciones | Verificar durante el pase |
+| AD-1237 | DAD-1984 | [Portal] error o cierre de página al crear usuario operador | Verificar durante el pase |
+| AD-1676 | DAD-2943 | [Soporte] demora de más de 35s en la disponibilidad de datos de QR Dinámico | Pre: avisar a Provincia Net. Post: Infra revisa la performance de las colas nuevas |
+| AD-1512 | DAD-2437 | [BS2.0] Considerar solo Accounts con PagoUnico=1 | Post: revisar y quedar atentos |
+| AD-1392 | DAD-2231 | [Mejora interna] baja y deshabilitación de formas de pago que no liquidan impuestos | Post: revisar los parámetros en prod al liquidar (día siguiente al pase) |
+
+## Lecciones de proceso del pase cancelado (propuestas en stand-by, sin aprobar)
+
+Además de los errores de liquidaciones, la minuta completa da causas de proceso: entraron tickets de soporte y requerimientos de alta prioridad (BINes) a último minuto, hubo inestabilidad en staging, y muchos tickets marcados como defecto (sobre todo en Pagos FX) eran en realidad mejoras visuales despriorizadas. Propuestas discutidas, **sin aprobar todavía** (ver `2_areas/procesos/analisis_de_riesgo_de_despliegue.md`, pendiente de que el usuario autorice su incorporación al proceso formal): comité de cambios para tratar urgencias como hotfixes externos, tickets a QA con documentación completa desde el inicio, y mejor filtro de observaciones de QA (bloqueos reales vs. requerimientos nuevos).
 
 ## Ver también
 
@@ -85,7 +116,8 @@ En la reunión de análisis de riesgo de AD V73 se aprobó una política de **de
 - `1_proyectos/prd-66_provincianet_creacion_masiva_qr/proyecto.md` — detalle técnico completo del análisis de datos, gaps y tareas.
 
 ---
-*Última actualización: 2026-09-21 — `/context_merge`: nueva sección "Política de despriorización de ráfagas QR (V73) y ventana de despliegue" (umbral 200 req/min → cola secundaria, despliegue 24/09).*
+*Última actualización: 2026-09-29 — `/context_merge`: corregida la fecha del despliegue AD V73 (cancelado el 24/09, reprogramado al martes 29/09 20:30hs); nueva sección de checklist pre/post despliegue y plan de rollback por ticket, y lecciones de proceso del pase cancelado (mail "MINUTA - Reunión de Pre-despliegue AD 73", Matías Alzogaray, 2026-09-28).*
+*Última actualización anterior: 2026-09-21 — `/context_merge`: nueva sección "Política de despriorización de ráfagas QR (V73) y ventana de despliegue" (umbral 200 req/min → cola secundaria, despliegue 24/09).*
 *Última actualización anterior: 2026-09-11 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): addendum a las líneas de exploración — 5ª línea, propuesta de Arquitectura de una cola de generación de QR exclusiva para Provincia Net (partición por cliente, distinta de AD935), con su limitación reconocida y el probable solapamiento con AD935 sin confirmar.*
 *Última actualización anterior: 2026-09-10 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): causa raíz confirmada directamente por Ingeniería de Bind y Provincia Net (cola única + retry storm), plan de mitigación corto/largo plazo, líneas de exploración nuevas (multi-canal SFTP, despacho de lotes chicos, ratio deuda/QR), y contexto de negocio/crecimiento de Provincia Net.*
 *Creado: 2026-09-09 — `/context_merge` desde `contexto_vivo/` (Pablo Gomes): saturación de cola de generación de QR por carga masiva de Provincia Net, decisión de convivencia de sistemas, y análisis de datos que confirma el volumen de PNET pero deja la causa raíz de la ventana de reclamos (por qué ahora, no en junio/julio) sin confirmar.*
