@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-09-30 (nicolas) — corrida desatendida (scheduled task)
+
+- `direccion/iniciativas.md` — novedad prependa en `titularidad_tarjeta` (PRD-25): el PM avanza sin esperar aprobación de Emma Vignoles, caché (AD-1817) entra en alcance, estimación total 10 SP.
+- `direccion/oportunidades.md` — OP-021 (Manteca) actualizada: pasa a "en evaluación de continuidad", suma a Polygon (sin confirmar qué es); nueva fila OP-032 (liquidación de impuestos acumulada mensual en Wallet/SISCRI, caso COTO/SIRTAC).
+- `gaps_y_preguntas.md` — nuevo gap: ambigüedad de producto ("Bienes Recurrentes") en un lanzamiento por comunicar, sin match en el canon — no se mergeó contenido de producto para evitar rutear por descarte.
+- **Sin procesar, quedan `en_cola` (régimen D, requiere permiso explícito del usuario — corrida desatendida, sin usuario presente):** AD V73 pase confirmado 29/09 + V74 en planificación (`procesos/publicaciones_mensuales.md`); lecciones de proceso de la cancelación AD V73 — comité de cambios, tickets a QA (`procesos/analisis_de_riesgo_de_despliegue.md`); pedido de cliente COTO sobre retenciones SIRTAC mensuales (`clientes/casos_de_uso_clientes.md`); 44 IDEAs en discovery, flujo de IA, estándar documental (`procesos/requerimientos_al_equipo_tecnico.md`) — los 4 de nicolas. Además, 1 item de baja confianza con destino ambiguo ("Bienes Recurrentes") queda `en_cola` hasta confirmar el producto (ver gap nuevo arriba).
+
 ### 2026-09-29 (corrida 2, pablo + nicolas) — corrida desatendida (scheduled task)
 
 - `direccion/iniciativas.md` — novedad prependa en 5 filas existentes (`alias_cvu_checkout`/PRD-239, PRD-251, `titularidad_tarjeta`, `ardid_limites_pj`/PRD-263, PRD-12); 2 filas nuevas (PRD-70 "POS Prisma", PRD-262 "API Health", ya creada completa en Jira) (pablo).

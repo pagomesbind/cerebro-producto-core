@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-09-30 (nicolas) — corrida desatendida (scheduled task)
+
+- `detalle_productos/servicios/pago_facil.md` — nueva sección: proyecto nuevo en curso, entrega objetivo octubre 2026 (alias pendiente de definir, falta manual funcional de casos borde).
+- `detalle_productos/siscri/integracion_wallet.md §1` — nueva limitación confirmada: el motor de impuestos de Wallet es 100% transaccional, no soporta liquidación acumulada mensual (caso COTO/SIRTAC, ver oportunidad OP-032).
+- `cumplimiento_normativo/reporteria_worldsys_bcra.md §2` — puntos 9-10: Worldsys confirma la fecha del 01/10 y reitera el pedido de códigos de tipos de operación (segundo pedido en dos días, sin respuesta de Bind).
+
 ### 2026-09-29 (corrida 2, pablo + nicolas) — corrida desatendida (scheduled task)
 
 - `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §2.0 (llamado de Botón Simple a Ardid es síncrono, confirmado 1.0 y 2.0) y §14.7 (dimensionamiento del paquete de contingencia "100% por Ardid" — 18 SP, cierre octubre) (nicolas + pablo).

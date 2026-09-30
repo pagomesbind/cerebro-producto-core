@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/detalle_productos/servicios/pago_facil.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 - Hay un **proyecto de Pago Fácil en curso** con **fecha de entrega objetivo en octubre 2026**. En la reunión se estimaron sus tickets y se trató la **definición del alias** (la minuta no dice alias de qué: ¿alias de cuenta/CVU del ente, alias comercial del link?).

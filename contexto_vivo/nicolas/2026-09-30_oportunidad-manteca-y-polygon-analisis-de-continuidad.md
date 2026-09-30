@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/direccion/oportunidades.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 - **Oportunidad:** hay que terminar el análisis de **Manteca** y de **Polygon** para decidir con "Ema" (probablemente Emma Vignoles) si siguen adelante.

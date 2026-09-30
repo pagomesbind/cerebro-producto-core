@@ -10,7 +10,8 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/reporteria_worldsys_bcra.md
 tipo_destino: actualizar
 contradice: "no — completa el item en_cola 2026-09-29_conocimiento-worldsys-reversas-prueba-captura-ok-falta-listado-tipos-operacion (responde uno de sus puntos abiertos)"
 confianza: alta
-estado: en_cola
+estado: ingestado
+merge_commit:
 ---
 
 **Novedad sobre §2 de `reporteria_worldsys_bcra.md`.** Sigue al item del 2026-09-29 (prueba de captura OK, falta el listado de tipos de operación), que ya está `en_cola`.

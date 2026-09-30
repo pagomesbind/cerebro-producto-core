@@ -265,6 +265,16 @@ El ticket SER-66 pide dos cosas al equipo keepit sobre este flujo de Link de Pag
 
 No afecta la decisión ya tomada de mantener el envío del comprobante como asíncrono/best-effort en backend — eso no depende de si el campo es obligatorio o no.
 
+## Proyecto nuevo en curso — entrega objetivo octubre 2026 (2026-09-29)
+
+> Estado: discovery — no construido (estimación de tickets en curso, alcance del alias y viabilidad de fecha sin confirmar).
+>
+> Fuente: Reunión "Productos - Weekly Seguimiento" (2026-09-29), resumen del mail de Gemini, sin minuta detallada (confianza baja hasta leer la minuta completa — no se sabe el responsable de cada paso ni el alcance nuevo respecto del link de pago de deuda ya en producción documentado arriba).
+
+Hay un proyecto de Pago Fácil en curso, con **fecha de entrega objetivo en octubre de 2026**. En la reunión se estimaron sus tickets y se trató la definición de un **alias** (la fuente no aclara si es alias de cuenta/CVU del ente o alias comercial del link). Queda consultar a Pomponio por los recursos disponibles y si es viable llegar a la fecha de octubre.
+
+**Documentación pendiente:** falta un documento funcional/manual que explique cómo se comporta Pago Fácil en casos borde — falla en la confirmación de la transacción (ver Flujo F arriba) y devoluciones parciales — y se pidió redactar el borrador definitivo del manual del producto. Este archivo hoy describe el flujo feliz (Flujos A-D) y no cubre esos casos borde.
+
 ## Ver también
 
 - `detalle_productos/adquirencia/boton_simple_2_0.md §6-9` — búsqueda de deuda BPG, modalidad ThirdPartyStore, y los pedidos de PRD-87 del mismo cliente RIPSA.
@@ -272,6 +282,7 @@ No afecta la decisión ya tomada de mantener el envío del comprobante como así
 - [pago_facil_mantenimiento.md](pago_facil_mantenimiento.md) — frente comercial/operativo de Pago Fácil (Western Union/SEPSA): Piloto Productivo, plataforma admin, puntos abiertos del checkout.
 
 ---
-*Última actualización: 2026-08-31 — `/context_merge`: sección nueva sobre email obligatorio para comprobante de pago (ticket SER-66, confirmado por el cliente 2026-08-26).*
+*Última actualización: 2026-09-29 — `/context_merge`: sección nueva sobre el proyecto de octubre 2026 (alias pendiente de definir, manual funcional de casos borde pendiente).*
+*Última actualización anterior: 2026-08-31 — `/context_merge`: sección nueva sobre email obligatorio para comprobante de pago (ticket SER-66, confirmado por el cliente 2026-08-26).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `detalle_productos/transversal/pago_facil.md` (reestructuración PARA en cascada); credenciales de ambiente de staging removidas del cuerpo del documento y reemplazadas por referencia a quién las provee.*
 *Última actualización anterior: 2026-07-06 — Agregada sección "Grupo DESA (formulario RIPSA)" desde Epic Notion "Grupo DESA: requerimientos para salir a prod" (ingesta N3).*
