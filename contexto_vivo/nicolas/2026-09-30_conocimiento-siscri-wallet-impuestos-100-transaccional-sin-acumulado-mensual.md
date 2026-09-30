@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — agrega una limitación explícita al modelo de §1 (asíncrono, no bloqueante, con recycle)"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 4a37f02
 ---
 
 **Limitación confirmada por el Área Técnica (Alan Martínez, 29/09/2026):** el motor de impuestos de Wallet funciona de forma **100% transaccional**. Calcula y descuenta los impuestos en el momento en que se crea cada comprobante. Si en ese momento la cuenta no tiene fondos, manda el débito a **recycle**, que es el mecanismo ya documentado en §1.

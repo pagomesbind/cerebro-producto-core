@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 4a37f02
 ---
 
 - **Oportunidad:** hay que terminar el análisis de **Manteca** y de **Polygon** para decidir con "Ema" (probablemente Emma Vignoles) si siguen adelante.

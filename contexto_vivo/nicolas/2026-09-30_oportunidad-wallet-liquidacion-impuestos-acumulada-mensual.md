@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 4a37f02
 ---
 
 - **Oportunidad:** agregar al motor de impuestos de Wallet/SISCRI una modalidad de liquidación **acumulada por período**, configurable por entidad y por impuesto. Ejemplo: retener SIRTAC una sola vez, el último día del mes, sobre el acumulado. Convive con la modalidad actual, que es 100% transaccional.
