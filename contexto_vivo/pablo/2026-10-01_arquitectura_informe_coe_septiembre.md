@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Alejandro Sfrede (Fintexa) compartió el 2026-10-01 el informe mensual del Comité de Arquitectura COE correspondiente a septiembre 2026 (período 09/2026, consolidado sobre 4 sesiones del mes). Continúa la serie de informes mensuales ya conocida (julio y agosto ya capturados en el mismo hilo histórico `19fdd426c2490389`).

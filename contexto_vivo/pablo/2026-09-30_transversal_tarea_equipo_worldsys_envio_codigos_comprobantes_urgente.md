@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no — actualiza este mismo item (capturado el 2026-09-30, todavía sin push): Nicolás Colón respondió el mismo día y corrió el deadline duro de producción, aunque el envío del listado de códigos sigue pendiente"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 **Actualización 2026-09-30 13:05-13:08 (mismo día de la captura original, antes de cualquier push):** Nicolás Colón respondió en el hilo — el desarrollo de los cambios en el archivo de reversas **todavía está en curso**, con fecha estimada de finalización y puesta en producción recién **a fines de octubre de 2026** (no 01/10 como había entendido Worldsys). Aclaró que, mientras tanto, Bind PSP puede ir compartiendo el **listado de los Tipos de Comprobante** para que Worldsys lo parametrice en su ambiente productivo desde ya. Leandro Competiello (Worldsys) aceptó la corrección de fecha sin objeción y pidió que se les envíe ese listado para empezar a ajustar de su lado.

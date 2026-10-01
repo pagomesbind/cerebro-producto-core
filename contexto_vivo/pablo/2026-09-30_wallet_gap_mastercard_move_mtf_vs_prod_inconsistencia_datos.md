@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Proyecto Pagos FX (integración Mastercard Move / XBS, liderado por Luciana Rudaz — no es un proyecto de este PM, se captura porque Pablo Gomes está en copia del hilo desde julio). Luciana Rudaz reporta a Mastercard (José Guarín) un nuevo caso, dentro de una serie ya recurrente en este hilo (ver antecedente de julio sobre el campo `purpose_of_payment` en corredores canadienses): al repasar todos los campos de `additional_data.XXX` relacionados con el sender (que Bind no vuelve a pedir al usuario porque ya lo conoce por ser cuenta propia), encontraron que **el ambiente de pruebas (MTF) devuelve `supportedValues` para varios campos que el ambiente de producción no devuelve** para los mismos campos — listado adjunto por Luciana en el mail (no legible en texto plano, solo como imagen).

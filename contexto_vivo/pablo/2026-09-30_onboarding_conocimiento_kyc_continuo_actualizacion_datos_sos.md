@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Gonzalo Rivera (Team Leader de Integraciones y Soporte) reporta el resultado de una reunión con Diego Scaldaferri (Gerente de Cumplimiento y Prevención de LA/FT/FP) y Silvina Condal sobre el proceso de **KYC continuo** — la actualización periódica de datos de clientes ya onboardeados, más allá del alta inicial.

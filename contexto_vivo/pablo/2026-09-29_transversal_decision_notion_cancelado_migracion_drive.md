@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 En la reunión "Productos - Weekly Seguimiento" (10:26, Luciana Rudaz, Pablo Gomes, Nicolás Colón, Matias Alzogaray), Luciana Rudaz informó que **canceló la suscripción de Notion** que usaba el equipo de Producto para documentar (endocs, casos de uso por proyecto). La fecha límite comunicada es el **10 de octubre de 2026**: a partir de ahí, según lo discutido en la reunión, el equipo pierde el **permiso de escritura** sobre lo que tenía en Notion (hubo una contradicción menor dentro de la misma conversación sobre si también se pierde el acceso de lectura — un participante dijo "no lo vas a perder... lo que no vas a poder es escribir", así que se toma la versión más específica: se pierde escritura, no necesariamente lectura).

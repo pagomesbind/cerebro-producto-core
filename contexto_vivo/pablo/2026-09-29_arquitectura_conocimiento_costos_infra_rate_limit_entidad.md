@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 En "Repaso Semanal líderes" (2026-09-29): Emma Vignoles planteó que el costo de infraestructura en el ambiente productivo **supera los USD 50.000/mes**, atribuido en gran parte al consumo inestable de ciertas entidades — **Credicuota** fue señalada explícitamente como caso concreto.

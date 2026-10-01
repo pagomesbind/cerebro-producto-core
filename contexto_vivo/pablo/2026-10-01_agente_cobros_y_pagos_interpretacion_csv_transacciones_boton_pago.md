@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 A pedido de Western Union/SEPSA (cliente de Botón de Pago, mismo grupo que Pago Fácil), Pablo Gomes compartió el 2026-09-29 instrucciones para que el equipo de PowerBI de WU pueda interpretar el CSV exportado desde el Admin de Bind PSP. Esta es la mecánica completa, citada tal cual (no está documentada en otro lugar de la wiki):

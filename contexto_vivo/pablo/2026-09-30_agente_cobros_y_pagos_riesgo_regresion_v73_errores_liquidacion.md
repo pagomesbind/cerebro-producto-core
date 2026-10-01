@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: baja
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 <!--

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Minuta de seguimiento recurrente del desarrollo de la pasarela de pagos Bind-SEPSA (Western Union, mismo cliente/grupo que Pago Fácil en el checkout de Botón de Pago). No está asociado a un proyecto tracker en Jira — es una serie de minutas periódicas sin IDEA propia en `1_proyectos/index.md`. Estado reportado por Guillermo Paolucci (WU) el 2026-09-30:

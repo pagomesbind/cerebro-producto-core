@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Uno de los requerimientos del Anexo B del BCRA le pide a Bind PSP **"proveer los reglamentos de cada uno de los Comités existentes (Tecnología y Seguridad de la Información, Riesgos Tecnológicos y/o Continuidad del Negocio), junto con las actas correspondientes a las reuniones celebradas durante el último semestre"** (carpeta "A1a"). Mariana Nadalin (COO de Bind PSP) consultó el 2026-09-30 a Eugenia Blanco (Auditoría, Banco Industrial) porque **la estructura de la PSP no tiene estos Comités conformados**.

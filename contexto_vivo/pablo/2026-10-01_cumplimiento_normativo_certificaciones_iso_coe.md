@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 El informe mensual del Comité de Arquitectura COE de septiembre 2026 (Fintexa, Alejandro Sfrede) menciona por primera vez, a nivel de reporte ejecutivo, que Bind PSP tiene **tres certificaciones en curso, en etapa de preparación, con fechas de auditoría ya confirmadas para ISO 9001**:

@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Con deadline duro del **10/10/2026** (ver item de decisión `2026-09-29_transversal_decision_notion_cancelado_migracion_drive`), todo el equipo de Producto (Pablo Gomes, Luciana Rudaz, Nicolás Colón, Matias Alzogaray, y cualquier otro con documentación propia en Notion) necesita migrar su documentación a Google Drive antes de perder el permiso de escritura sobre Notion. Sin dueño único asignado en la reunión — cada PM migra lo suyo.

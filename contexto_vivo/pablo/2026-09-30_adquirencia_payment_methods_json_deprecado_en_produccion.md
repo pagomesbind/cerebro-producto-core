@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md §4 (líneas ~93-97) — dice que la eliminación de la validación de payment_methods.json del frontend estaba 'empaquetado en el despliegue de la versión 73 (jueves 24/09)', tratándolo como plan a futuro. En los hechos el despliegue del 24/09 se canceló esa misma noche (atraso de QA, defectos de liquidaciones) y se reprogramó al martes 29/09 20:30hs, fecha en la que finalmente se ejecutó con éxito — el fix ya está en producción, no pendiente."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 ## Qué cambia respecto de lo ya mergeado

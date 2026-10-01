@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "completa el item ya capturado 2026-09-28_agente_cobros_y_pagos_conocimiento_optimizacion_liquidacion_lotes_padrones (mismo ticket, citado ahí como \"PR205\", sin owner ni estado de definición de alcance) con el número de IDEA confirmado (PRD-205), su dueña (Luciana Rudaz, no Pablo Gomes) y el próximo paso pendiente"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 En "Productos - Weekly Seguimiento" (10:26, 2026-09-29), Luciana Rudaz reclamó el ticket de **PRD-205** ("mejorar los tiempos [de liquidación]") de la reunión de Adquirencia del día anterior ("Producto", 2026-09-28) — mismo ticket ya conocido por el Cerebro como optimización de liquidaciones por lotes + tabla de padrones fiscales, pedido hace 2-3 meses originalmente por una necesidad de un cliente (mencionado como "Pella"/similar, sin confirmar el nombre exacto por transcripción imprecisa) pero identificado como una necesidad general de todos los clientes.

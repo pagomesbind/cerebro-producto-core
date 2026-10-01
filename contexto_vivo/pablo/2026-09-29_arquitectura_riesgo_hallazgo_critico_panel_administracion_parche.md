@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "el índice de contexto_vivo (`contexto_vivo/index.md`) lista dos items del 2026-09-28 con id `2026-09-28_transversal_riesgo_vulnerabilidad_control_acceso_admin_centralizador` y `2026-09-28_transversal_decision_hotfix_admin_centralizador`, estado en_cola, aparentemente sobre el mismo hallazgo (Admin Centralizador, CVSS 8.7). Al verificar, ninguno de los dos existe como archivo físico en wiki/1_proyectos/contexto_vivo/ — mismo patrón de anomalía de integridad ya documentado repetidamente en el log de `/context_push` (filas de índice sin archivo real, o viceversa). No se pudo completar el item original; este item se captura de cero con lo que aporta la reunión de hoy, para que el hallazgo no se pierda aunque el original esté inaccesible."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 En "Repaso Semanal líderes" (2026-09-29): Emma Vignoles exigió a Pablo Vargas (Fintexa) y Hernán Clarich mayor visibilidad sobre los hallazgos de las pruebas de intrusión (pentests), más allá de un correo electrónico. En esa discusión, Hernán Clarich, Melisa Belpassi, Sebastián Ríos y Pablo Serra repasaron un **hallazgo de alta criticidad detectado en el panel de administración** durante pruebas técnicas de calidad — sin más detalle técnico en esta minuta sobre la naturaleza exacta de la falla.

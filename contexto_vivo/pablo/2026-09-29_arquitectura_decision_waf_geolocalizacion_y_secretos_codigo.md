@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 En "Repaso Semanal líderes" (2026-09-29), con Fintexa (Pablo Vargas, Hernán Clarich y equipo):

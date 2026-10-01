@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 9bf60c5
 ---
 
 Gonzalo Rivera (Team Leader de Integraciones y Soporte) informó el 2026-10-01 que, a pedido del banco, se desactivó ese mismo día el flujo de Onboarding de pequeños comercios — es decir, el correspondiente a la entidad **Bind Pagos** (distinta de la entidad PSP/Tecnología Financiera bajo la que opera el resto del onboarding). El mail no explica el motivo de negocio detrás del pedido del banco; solo confirma la ejecución técnica.
