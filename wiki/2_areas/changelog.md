@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-10-01 (nicolas) — corrida interactiva (pablo, líder)
+
+- `direccion/oportunidades.md` — nueva fila OP-033 (proceso de ingesta del archivo de KYC continuo desde SOS).
+- `gaps_y_preguntas.md` — nuevos gaps: cliente "Fast Transfer" sin ficha; corrección de la fecha de entrada en vigencia del esquema de reversas Worldsys (01/10 → noviembre, el barrido del 2026-09-30 no había visto los últimos 2 mensajes del hilo).
+- **Sin procesar, quedan `en_cola` (régimen D, permiso pedido en esta corrida — ver reporte):** AD V73 pase confirmado 29/09 + V74 en planificación (`procesos/publicaciones_mensuales.md`); lecciones de proceso de la cancelación AD V73 (`procesos/analisis_de_riesgo_de_despliegue.md`); pedido de cliente COTO sobre retenciones SIRTAC mensuales (`clientes/casos_de_uso_clientes.md`); 44 IDEAs en discovery/flujo de IA/estándar documental (destino a confirmar en `procesos/`) — arrastrados de la corrida desatendida del 2026-09-30. 1 item de baja confianza ("Bienes Recurrentes") sigue `en_cola`, sin novedad desde el gap ya abierto.
+
 ### 2026-09-30 (nicolas) — corrida desatendida (scheduled task)
 
 - `direccion/iniciativas.md` — novedad prependa en `titularidad_tarjeta` (PRD-25): el PM avanza sin esperar aprobación de Emma Vignoles, caché (AD-1817) entra en alcance, estimación total 10 SP.

@@ -6,6 +6,12 @@
 
 ## 2026
 
+### 2026-10-01 (nicolas) — corrida interactiva (pablo, líder)
+
+- `cumplimiento_normativo/kyc_continuo_actualizacion_datos.md` — creado: proceso nuevo de KYC continuo (el banco actualiza datos de clientes en SOS y manda un archivo a Bind PSP), discovery sin construir.
+- `cumplimiento_normativo/index.md` — sumada fila del archivo nuevo; descripción de `reporteria_worldsys_bcra.md` actualizada.
+- `cumplimiento_normativo/reporteria_worldsys_bcra.md §2` — puntos 11-13: corrección — Bind PSP sí había respondido el 30/09 (el barrido anterior no vio los últimos 2 mensajes del hilo); el desarrollo sigue en curso con cierre estimado a fines de octubre, por lo que el esquema de reversas no aplica al 01/10 — entra como mínimo en noviembre.
+
 ### 2026-09-30 (nicolas) — corrida desatendida (scheduled task)
 
 - `detalle_productos/servicios/pago_facil.md` — nueva sección: proyecto nuevo en curso, entrega objetivo octubre 2026 (alias pendiente de definir, falta manual funcional de casos borde).
