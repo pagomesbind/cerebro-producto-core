@@ -10,7 +10,7 @@ destino_propuesto: wiki/2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: baja
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

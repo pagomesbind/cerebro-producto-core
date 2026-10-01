@@ -6,6 +6,23 @@
 
 ## 2026
 
+### 2026-10-01 (pablo) — corrida desatendida (scheduled task, 21 items ingeridos, 2 pendientes)
+
+- `detalle_productos/onboarding/hallazgos_operativos_historicos.md` — actualizado: desactivación del flujo de OB de pequeños comercios (entidad Bind Pagos, a pedido del banco).
+- `detalle_productos/onboarding/index.md` — descripción y changelog actualizados.
+- `cumplimiento_normativo/certificaciones_iso_y_seguridad.md` — creado: 3 certificaciones en preparación (ISO 9001, ISO 27001, programa del socio de procesamiento).
+- `cumplimiento_normativo/gestion_riesgo_tecnologia_seguridad_a7724.md` — actualizado: Anexo B BCRA, Comités de Tecnología/Seguridad y de Riesgos Tecnológicos sin conformar, arranca su constitución.
+- `cumplimiento_normativo/index.md` — fila nueva + descripción actualizada.
+- `arquitectura_sistema/relacion_con_fintexa.md` — nueva §3bis: informe COE septiembre (zero-downtime a estándar obligatorio, interoperabilidad entre billeteras) + detalle operativo (3 etapas, escalado de BD, ventanas de mantenimiento).
+- `arquitectura_sistema/hardening_y_remediacion_de_pentests.md` — actualizado: WAF por geolocalización (China/Rusia, en staging) y nuevo procedimiento de secretos en código fuente. Nota: destino original (`seguridad_de_plataforma.md`) no existe en el canon, ruteado al archivo de hardening existente más específico.
+- `arquitectura_sistema/nfr_y_slas.md` — nueva §4: costo de infraestructura productiva (>USD 50.000/mes) y propuesta de rate limiting por entidad en 4 perfiles.
+- `arquitectura_sistema/index.md` — descripciones y changelog actualizados.
+- `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — §4 actualizado: fix de v73 ejecutado el 29/09 (reprogramado desde el 24/09) y confirmado con datos reales de producción del 30/09 (+15,2% volumen, -1,5pp rechazo).
+- `detalle_productos/adquirencia/index.md` — descripción y changelog actualizados.
+- `detalle_productos/agente_cobros_y_pagos/pedidos_de_clientes_y_hallazgos_operativos.md` — 2 secciones nuevas: mecánica de interpretación del CSV de transacciones para BI (Western Union/SEPSA), seguimiento Bind-SEPSA minuta 23-9.
+- `detalle_productos/agente_cobros_y_pagos/index.md` — descripción y changelog actualizados.
+- `detalle_productos/onboarding/kyc_continuo_actualizacion_datos.md` — sin cambios: item de Pablo Gomes sobre el mismo proceso/mail ya cubierto por este archivo (creado en una corrida anterior desde contexto_vivo de Nicolás Colón) — duplicado cross-PM, no se creó archivo nuevo.
+
 ### 2026-10-01 (nicolas) — corrida interactiva (pablo, líder)
 
 - `cumplimiento_normativo/kyc_continuo_actualizacion_datos.md` — creado: proceso nuevo de KYC continuo (el banco actualiza datos de clientes en SOS y manda un archivo a Bind PSP), discovery sin construir.

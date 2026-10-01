@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/gestion_riesgo_tecnologia_s
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

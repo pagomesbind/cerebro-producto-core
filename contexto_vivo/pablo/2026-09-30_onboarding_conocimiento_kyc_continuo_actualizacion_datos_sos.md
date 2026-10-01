@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/kyc_continuo_y_actual
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

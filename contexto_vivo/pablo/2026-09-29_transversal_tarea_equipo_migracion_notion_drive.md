@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/tareas.md
 tipo_destino: crear
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

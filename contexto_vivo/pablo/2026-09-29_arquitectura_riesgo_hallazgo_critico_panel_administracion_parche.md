@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: crear
 contradice: "el índice de contexto_vivo (`contexto_vivo/index.md`) lista dos items del 2026-09-28 con id `2026-09-28_transversal_riesgo_vulnerabilidad_control_acceso_admin_centralizador` y `2026-09-28_transversal_decision_hotfix_admin_centralizador`, estado en_cola, aparentemente sobre el mismo hallazgo (Admin Centralizador, CVSS 8.7). Al verificar, ninguno de los dos existe como archivo físico en wiki/1_proyectos/contexto_vivo/ — mismo patrón de anomalía de integridad ya documentado repetidamente en el log de `/context_push` (filas de índice sin archivo real, o viceversa). No se pudo completar el item original; este item se captura de cero con lo que aporta la reunión de hoy, para que el hallazgo no se pierda aunque el original esté inaccesible."
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

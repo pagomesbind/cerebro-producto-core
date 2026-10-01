@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/tareas.md
 tipo_destino: crear
 contradice: "no — actualiza este mismo item (capturado el 2026-09-30, todavía sin push): Nicolás Colón respondió el mismo día y corrió el deadline duro de producción, aunque el envío del listado de códigos sigue pendiente"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

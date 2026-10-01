@@ -10,7 +10,7 @@
 | [webhook_transferencia_entrante_cbu.md](webhook_transferencia_entrante_cbu.md) | Webhook de aviso de transferencia entrante a CBU/CVU (caso Astropay). |
 | [transferencia_saliente_mecanica.md](transferencia_saliente_mecanica.md) | Cómo funciona una transferencia saliente, con persistencia temprana en Financial para monitoreo (fix Jugadon). |
 | [cuenta_recaudadora_usd.md](cuenta_recaudadora_usd.md) | Cuenta recaudadora en USD (caso Astropay): mecánica, diferenciación CBU/CVU en webhooks, cluster de bugs de moneda; + consulta de saldo de cuenta recaudadora en ARS. |
-| [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md) | Pedidos puntuales de clientes (Astropay, COTO/GLOBANT, TINSA) y bugs operativos históricos de RxT/CVUCollect. |
+| [pedidos_de_clientes_y_hallazgos_operativos.md](pedidos_de_clientes_y_hallazgos_operativos.md) | Pedidos puntuales de clientes (Astropay, COTO/GLOBANT, TINSA) y bugs operativos históricos de RxT/CVUCollect. Suma mecánica de interpretación del CSV de transacciones del Admin para BI (medio de pago, billetera/banco origen, marca de tarjeta) y seguimiento Bind-SEPSA (Western Union/Pago Fácil, Botón de Pago). |
 | [integracion_procesadores_pago.md](integracion_procesadores_pago.md) | Integración de procesadores de pago Prisma/GP: deuda técnica de grupos de reglas, parámetro "pago único" (botón de pago vs. RXT), regla de liquidación same-day de transacciones en línea, limitación del panel admin con Prisma, hotfix de localidades/códigos postales. |
 | [devoluciones_y_contracargos.md](devoluciones_y_contracargos.md) | Bug de contracargos de colectores (Pago Fácil) rechazados por validación incorrecta de ID de caja vs. ID de colector. |
 | [masividad_generacion_qr.md](masividad_generacion_qr.md) | Arquitectura secuencial de generación masiva de QR (pool pregenerado, sin paralelización por caja/archivo), tiempos medidos — caso Provincia Net (AD-935). **Colas diferenciadas por cliente resuelto**: gestión inteligente de cola por umbral de 200 req/min implementada en AD V73 (2026-09-17), no separación por cliente nombrado. |
@@ -24,7 +24,8 @@
 - [apis_expuestas/index.md](apis_expuestas/index.md) — API pública oficial expuesta a clientes; dominio exclusivo de la skill `/sync_web`, no tocar desde acá.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: `liquidaciones_reversas_y_comprobantes.md` §2-5 resueltas con las definiciones confirmadas por Fintexa (mail "Liquidaciones AD 73", 2026-09-25).*
+*Última actualización: 2026-10-01 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nuevas secciones (mecánica de interpretación del CSV de transacciones para BI, seguimiento Bind-SEPSA minuta 23-9) (Pablo Gomes).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: `liquidaciones_reversas_y_comprobantes.md` §2-5 resueltas con las definiciones confirmadas por Fintexa (mail "Liquidaciones AD 73", 2026-09-25).*
 *Última actualización anterior: 2026-09-25 — `/context_merge`: archivo nuevo `liquidaciones_reversas_y_comprobantes.md` (mecánica de reversas/aranceles en liquidaciones y 2 bugs abiertos), a partir de la reunión "Análisis COBRO" (2026-09-24).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: `masividad_generacion_qr.md` — resuelto el debate abierto de colas diferenciadas por cliente (gestión inteligente por umbral de 200 req/min, AD V73, 2026-09-17).*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: nuevo archivo `masividad_generacion_qr.md` (arquitectura secuencial de generación de QR y límites, caso Provincia Net/AD-935) a partir de la reunión "Análisis COBRO" (2026-09-10).*

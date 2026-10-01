@@ -39,6 +39,31 @@ Agustín Grau comunicó formalmente — acordado con Emma Vignoles — cómo Fin
 
 Esta decisión encuadra formalmente por qué el ecosistema (Ardid/Akurtech, Wallet, Adquirencia sobre la misma base) evoluciona con roadmaps de release que incluyen features no usadas por Bind — ver por ejemplo el roadmap de Akurtech 1.19/1.19.1/1.20 en [`detalle_productos/ardid/historico/historial_versiones.md`](../detalle_productos/ardid/historico/historial_versiones.md) — es la política general detrás de ese patrón, no un caso aislado.
 
+## 3bis. Informe mensual COE — septiembre 2026 (vs. agosto) y detalle de la reunión "Repaso Semanal líderes" del mismo período
+
+> Fuente informe: mail "RE: INFORME Mensual Comité de Arquitectura COE" — Alejandro Sfrede (Fintexa), 2026-10-01, mismo hilo histórico `19fdd426c2490389` de julio/agosto ya capturado en §2. Fuente reunión: "Repaso Semanal líderes" (2026-09-29), con Alejandro Sfrede, Melisa Belpassi, Daniel Zalazar, Hernán Clarich (Fintexa).
+
+**Tres frentes de fondo señalados por el informe de septiembre:**
+
+1. **Despliegues sin interrupción de servicio (zero-downtime) pasan a estándar obligatorio** — sus tickets de implementación están en revisión final antes del pasaje a producción. Confirma y formaliza el roadmap que en agosto figuraba como "en progreso, ampliado a 40+ servicios de Wallet" (§2).
+2. **Desarrollo de interoperabilidad entre billeteras** (marco regulatorio del Banco Central) avanzó, con una estrategia de despliegue diseñada explícitamente para no arriesgar la operación actual. En el detalle por estado figura como "Interoperabilidad entre billeteras Auth2 (AUTH EXTERNAL para Open Finance)" dentro de 🟢 En desarrollo.
+3. **Exposición de seguridad real identificada en un panel administrativo**, con la corrección ya definida y lista para implementarse — coincide con el hallazgo del Admin Centralizador (CVSS 8.7) ya tratado como hotfix (ver [`2_areas/riesgos.md`](../../2_areas/riesgos.md) y [`2_areas/direccion/decisiones.md`](../../2_areas/direccion/decisiones.md) [2026-09-25]); este informe no aporta detalle nuevo sobre ese punto, solo lo confirma a nivel de reporte ejecutivo de arquitectura.
+
+**Detalle completo por estado (septiembre 2026):**
+- ✅ Completado: corrección del cuello de botella de performance en Notificaciones por base de datos · sanitización de datos sensibles en registros técnicos · autenticación externa en Wallet.
+- 🟢 En desarrollo: interoperabilidad entre billeteras Auth2 (Open Finance) · migración de colas de mensajería · simulación de proveedores externos para pruebas (primer proveedor: GP) · estándar único de registro de eventos (logs) · monitoreo de salud de servicios.
+- 🟡 En revisión y aprobación: despliegues sin interrupción de servicio por vertical · notificaciones/webhooks (estabilidad de envío) · estándar de desarrollo seguro.
+- 🔵 Listo para iniciar desarrollo: optimización de la base de datos de Deuda · regla de control de cambios de contrato de API · certificación ISO 9001 (ver nota de desalineación en [`cumplimiento_normativo/certificaciones_iso_y_seguridad.md`](../cumplimiento_normativo/certificaciones_iso_y_seguridad.md)) · fix de red (DNS) para dos servicios.
+
+**Certificaciones:** las tres certificaciones en curso (ISO 9001, ISO 27001 y el programa de seguridad exigido por el socio de procesamiento) están en preparación — detalle completo en [`cumplimiento_normativo/certificaciones_iso_y_seguridad.md`](../cumplimiento_normativo/certificaciones_iso_y_seguridad.md) (archivo nuevo, va a esa capa por ser contenido de cumplimiento normativo, no de arquitectura).
+
+**Detalle operativo del zero-downtime y temas adyacentes (reunión "Repaso Semanal líderes", 2026-09-29):**
+
+- **Migración a cero tiempo de inactividad, en 3 etapas:** priorizando primero los microservicios más críticos — **Webhook Sender** es el primero — para evitar pérdida de mensajes durante despliegues continuos. Esquema ya comunicado a los líderes técnicos.
+- **Escalado automático de bases de datos:** Daniel Zalazar asume revisar y configurar el escalado/desescalado automático de BD, en conjunto con el equipo de infraestructura y desarrollo — pruebas iniciales sobre microservicios específicos antes de extenderlo al resto del ecosistema, para medir impacto en costos. Queda pendiente ("requiere más debate") la prueba de escalamiento en sí, a cargo de Daniel Zalazar, en conjunto con el despliegue de cero downtime.
+- **Ventanas de mantenimiento para depuración de tablas grandes:** las tablas de comprobantes y operaciones están depuradas solo hasta **febrero de 2026** — se necesitan ventanas adicionales. Emma Vignoles objetó que los tiempos actuales (4 horas por cada 2 meses de datos) generan bloqueos con pérdida de transacciones; Gonzalo Rivera sugirió programar las ventanas según los horarios de menor operatoria de **BSF** (decisión acordada: buscar ventana basada en esos horarios). Daniel Zalazar se compromete a revisar optimizaciones con el DBA.
+- **Hallazgos operativos menores relacionados (Ardid):** un proceso automático que cambia el estado de transacciones pendientes de validación quedó con registros trabados desde el 28/09 — se ejecuta manualmente hasta resolverse en la próxima versión; también hay una incidencia de tiempo de espera excesivo que afecta la visualización de la pestaña de transferencias, en resolución.
+
 ## 4. Desvío de responsabilidad Fintexa↔Penta — performance de Ardid afecta su comercialización a clientes
 
 En la reunión "Weekly - Producto / Operaciones" (2026-09-21), Mariana Nadalin y Pablo Gomes reportaron demoras y fallas en la generación de reportes de Ardid ("tirás un reporte y no trae datos"), y describieron un **desvío de responsabilidad circular entre Fintexa y Penta** (proveedor de infraestructura/hosting de Ardid): "del lado de Fintexa nos dicen que es Penta, Penta nos dice que es Fintexa, y así damos vueltas". Se acordó escalar el reclamo conjuntamente a Fintexa, Hernán Clarich (Arquitectura) y Penta, y evaluar si el problema está relacionado con cómo están paginadas las consultas en las versiones que gestiona Matías Alzogaray.
@@ -51,6 +76,7 @@ El riesgo de negocio (Ardid comercializado a Coto y ofrecido a Grupo DESA con es
 - [2_areas/riesgos.md](../../2_areas/riesgos.md) — riesgo de negocio "Performance de Ardid afecta su comercialización a Coto y Grupo DESA".
 
 ---
-*Última actualización: 2026-09-21 — `/context_merge`: nueva sección "Modelo de evolución del ecosistema" (producto único/repo único/release periódico único, retrocompatibilidad como prioridad, comunicado por el CTO de Fintexa).*
+*Última actualización: 2026-10-01 — `/context_merge`: nueva sección "3bis. Informe mensual COE — septiembre 2026" (zero-downtime a estándar obligatorio, interoperabilidad entre billeteras, detalle operativo de 3 etapas de zero-downtime/escalado de BD/ventanas de mantenimiento) (Pablo Gomes).*
+*Última actualización anterior: 2026-09-21 — `/context_merge`: nueva sección "Modelo de evolución del ecosistema" (producto único/repo único/release periódico único, retrocompatibilidad como prioridad, comunicado por el CTO de Fintexa).*
 *Última actualización anterior: 2026-09-03 — `/context_merge`: §2 actualizado con el corte de agosto 2026 del informe COE (delta vs. julio, categorías ✅/🟢 completas, 🔵/⚪/🔴 pendientes de confirmar).*
 *Última actualización anterior: 2026-08-12 — Reubicado y consolidado desde `arquitectura_sistema/index.md §11` y `§13` (reestructuración PARA en cascada). Contenido sin cambios.*

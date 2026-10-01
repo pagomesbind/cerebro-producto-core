@@ -10,7 +10,7 @@ destino_propuesto: wiki/2_areas/gaps_y_preguntas.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

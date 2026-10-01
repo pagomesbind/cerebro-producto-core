@@ -6,6 +6,14 @@
 
 ## 2026
 
+### 2026-10-01 (pablo) — corrida desatendida (scheduled task, 21 items ingeridos, 2 pendientes)
+
+- `direccion/iniciativas.md` — upsert de filas: PRD-262 (Etapa 1 cargada en Jira, Elastic Proxy en primera entrega), PRD-251 (Frente A ejecutado con mejora confirmada en producción); fila nueva PRD-205 (novedad para Luciana Rudaz).
+- `tareas.md` — 2 filas nuevas: T-109 (envío a Worldsys del listado de Tipos de Comprobante, urgencia bajada), T-110 (migración de documentación de Producto de Notion a Drive, deadline 10/10).
+- `gaps_y_preguntas.md` — gap "Fast Transfer" ya existente (merge de nicolas de esta misma corrida) enriquecido con confirmación cruzada de Pablo Gomes — no se creó entrada duplicada (ver nota en el manifiesto).
+- `riesgos.md` — 2 riesgos nuevos: regresión de QA apresurada antes de V73 (errores en liquidación), inconsistencia MTF/PROD en Mastercard Move/XBS (novedad para Luciana Rudaz); actualizado el riesgo "Falla de control de acceso preexistente en el Admin Centralizador" con fecha de parche (30/09-01/10).
+- `direccion/decisiones.md` — nueva entrada: cancelación de Notion, migración de documentación de Producto a Google Drive (deadline 10/10).
+
 ### 2026-10-01 (nicolas) — corrida interactiva (pablo, líder)
 
 - `direccion/oportunidades.md` — nueva fila OP-033 (proceso de ingesta del archivo de KYC continuo desde SOS).

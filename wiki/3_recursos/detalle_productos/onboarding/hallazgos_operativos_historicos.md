@@ -46,6 +46,23 @@ El sistema de Onboarding es estricto leyendo códigos QR/de barra en el proceso 
 - **Legajos de onboarding digital deben alojarse en la herramienta SOS (exigencia de Compliance):** punto de bloqueo reconocido para destrabar nuevas propuestas de negocio, pendiente de resolución entre áreas.
 - **Política de bloqueo de transferencias entrantes en cuentas:** no existe exigencia normativa que obligue a bloquear el ingreso de fondos a una cuenta — el criterio de Compliance es que la solución debe enfocarse en el **monitoreo de transacciones**, no en restringir los ingresos.
 
+## Desactivación del flujo de OB de pequeños comercios (entidad Bind Pagos) — a pedido del banco (2026-10-01)
+
+> Fuente: mail "Desactivación del flujo de OB entidad Bind Pagos" — Gonzalo Rivera (Team Leader de Integraciones y Soporte), 2026-10-01, threadId `1a0f777b988e924c`.
+
+A pedido del banco, se desactivó el 2026-10-01 el flujo de Onboarding de pequeños comercios — el correspondiente a la entidad **Bind Pagos** (distinta de la entidad PSP/Tecnología Financiera bajo la que opera el resto del onboarding). El mail no explica el motivo de negocio detrás del pedido del banco; solo confirma la ejecución técnica.
+
+**Cómo se ejecutó:** se modificó el campo identificador de la entidad en el Backoffice. El identificador anterior (necesario para poder reactivar el flujo en el futuro, dado que Fintexa no lo tiene resguardado en ningún lado) quedó registrado:
+
+```
+03b46cd3-127c-4e58-b849-34df08af5383
+```
+
+Destinatarios directos del aviso: Emma Vignoles, Mariana Nadalin, Pablo Gomes.
+
+**Nota de contexto (no confirmada por este mail):** el mismo día circuló por otro hilo ("Actualización proceso de KYC continuo") un adjunto de "TyC Pequeños Comercios Bind PSP 09.2026" que Luciana Rudaz retiró minutos después por error ("Fe de erratas, desestimar el mail anterior") — no está claro si ese adjunto estaba relacionado con esta desactivación o era para otro propósito; no se pudo confirmar vínculo alguno entre ambos hilos.
+
 ---
 *Fuente: Epic Notion "Dolores de Soporte y administración" (~93 tickets, muestra relevante) — ingesta 2026-07-06.*
-*Última actualización: 2026-08-12 — Fusionadas secciones §3 y §4 de `detalle_productos/onboarding/manuales_operativos.md` (reestructuración PARA en cascada). Contenido base creado consolidando la sección de Onboarding de `detalle_productos/transversal/dolores_soporte_y_administracion.md`.*
+*Última actualización: 2026-10-01 — `/context_merge`: nueva sección "Desactivación del flujo de OB de pequeños comercios (entidad Bind Pagos)" (Pablo Gomes).*
+*Última actualización anterior: 2026-08-12 — Fusionadas secciones §3 y §4 de `detalle_productos/onboarding/manuales_operativos.md` (reestructuración PARA en cascada). Contenido base creado consolidando la sección de Onboarding de `detalle_productos/transversal/dolores_soporte_y_administracion.md`.*

@@ -12,7 +12,7 @@ destino_propuesto: 2_areas/direccion/iniciativas.md
 tipo_destino: actualizar
 contradice: "completa el item ya capturado 2026-09-28_agente_cobros_y_pagos_conocimiento_optimizacion_liquidacion_lotes_padrones (mismo ticket, citado ahí como \"PR205\", sin owner ni estado de definición de alcance) con el número de IDEA confirmado (PRD-205), su dueña (Luciana Rudaz, no Pablo Gomes) y el próximo paso pendiente"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

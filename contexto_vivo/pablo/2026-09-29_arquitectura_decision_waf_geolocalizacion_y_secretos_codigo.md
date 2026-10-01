@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/arquitectura_sistema/seguridad_de_plataforma.md
 tipo_destino: actualizar
 contradice: "no"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

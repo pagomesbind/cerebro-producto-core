@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/pagos_internacionales_mas
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/certificaciones_iso_y_segur
 tipo_destino: crear
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

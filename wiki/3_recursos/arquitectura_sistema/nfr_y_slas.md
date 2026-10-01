@@ -46,12 +46,21 @@ IDEA de Jira: [PRD-262](https://bindpsp.atlassian.net/browse/PRD-262), en DISCOV
 
 **Riesgo técnico identificado, sin resolver:** la definición de "uptime" ya especificada arriba (`ResponseCode 1-499 = éxito`) podría no capturar rechazos de negocio causados por un tercero caído — mismo riesgo de "placebo" señalado en la reunión del 2026-09-10. Queda como pregunta abierta para el análisis funcional-técnico (`/idea_solution`), no resuelta en el discovery.
 
+## 4. Costo de infraestructura productiva y rate limiting por entidad (2026-09-29)
+
+> Fuente: reunión "Repaso Semanal líderes" (2026-09-29), con Fintexa (Hernán Clarich y equipo).
+
+Emma Vignoles planteó que el costo de infraestructura en el ambiente productivo **supera los USD 50.000/mes**, atribuido en gran parte al consumo inestable de ciertas entidades — **Credicuota** fue señalada explícitamente como caso concreto.
+
+**Propuesta/mecanismo en desarrollo (Hernán Clarich):** implementar **rate limiting por entidad**, con perfiles de consumo escalonados — **bronce, plata, oro, platino** — operando mediante políticas en **API Management** y claves de suscripción (subscription keys). Los valores de corte definitivos por perfil todavía están pendientes de análisis (no definidos en esta reunión). **Decisión acordada:** Hernán Clarich activará el rate limit por entidad en producción, previo análisis de los límites por cada producto y categoría.
+
 ## Ver también
 - [infraestructura_cloud_azure.md](infraestructura_cloud_azure.md) — infraestructura que sostiene estos SLAs.
 - [mantenimiento_y_capacidad_aks.md](mantenimiento_y_capacidad_aks.md) — plan de mantenimiento que puede impactar temporalmente estos targets.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: §3 — discovery formal de Producto cerrado (`salud_api_clientes/`, PRD-262): MVP ampliado a cobertura de terceros (Coelsa/API Bank) desde el lanzamiento, mecanismo técnico confirmado (Elastic Search para ingress/egress), alertas proactivas quedan como proyecto futuro separado (Pablo Gomes).*
+*Última actualización: 2026-10-01 — `/context_merge`: nueva §4 — costo de infraestructura productiva (>USD 50.000/mes, caso Credicuota) y propuesta de rate limiting por entidad en 4 perfiles (bronce/plata/oro/platino) vía API Management (Pablo Gomes).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: §3 — discovery formal de Producto cerrado (`salud_api_clientes/`, PRD-262): MVP ampliado a cobertura de terceros (Coelsa/API Bank) desde el lanzamiento, mecanismo técnico confirmado (Elastic Search para ingress/egress), alertas proactivas quedan como proyecto futuro separado (Pablo Gomes).*
 *Última actualización anterior: 2026-09-25 — `/context_merge`: §3 — primera especificación técnica concreta (Etapa 1, Hernán Clarich/Fintexa) del Background Service Cache y la API de consumidor de salud/latencia; puntos abiertos a refinar con Pablo Gomes (cache, ventanas de tiempo, KQL). 3 adjuntos técnicos pendientes de lectura manual.*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: nueva §3, iniciativa en discovery para exponer salud/latencia de APIs directamente a clientes (Grafana/Elastic interno + API nueva publicada por Kipi en el APIM).*
 *Última actualización anterior: 2026-08-12 — Reubicado desde `arquitectura_sistema/seguridad_y_redes.md §2.5-2.6` (reestructuración PARA en cascada). Contenido sin cambios.*
