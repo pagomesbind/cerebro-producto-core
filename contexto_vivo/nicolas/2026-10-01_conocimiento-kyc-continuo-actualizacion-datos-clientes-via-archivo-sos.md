@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDING
+merge_commit: edc1c87
 ---
 
 **Nuevo proceso de KYC continuo (definido el 29/09/2026).** El 29/09 hubo una reunión con Diego Scaldaferri (Gerente de Cumplimiento y Prevención de LA/FT/FP, BIND) y Silvina Condal. Ahí se informó que **se empezarán a actualizar los datos de los clientes de Bind PSP**. Así funciona:

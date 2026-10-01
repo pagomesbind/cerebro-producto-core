@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: baja
 estado: ingestado
-merge_commit: PENDING
+merge_commit: edc1c87
 ---
 
 ## Qué se detectó

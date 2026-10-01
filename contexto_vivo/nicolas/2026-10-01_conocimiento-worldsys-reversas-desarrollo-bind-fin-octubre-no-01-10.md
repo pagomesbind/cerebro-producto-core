@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "sí — corrige el item en_cola 2026-09-30_conocimiento-worldsys-reversas-confirma-01-10-pide-codigos-tipos-operacion (decía que la captura arrancaba el 01/10/2026 y que no había respuesta de Bind en el hilo) y el 2026-09-16_conocimiento-worldsys-reversas-comprobantes-resuelto-octubre (entrada en vigor con el procesamiento del 01/10)"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: edc1c87
 ---
 
 **Corrección sobre §2 de `reporteria_worldsys_bcra.md`.** Sigue a los items del 2026-09-29 y 2026-09-30 (ambos `en_cola`). El barrido del 30/09 no vio los dos últimos mensajes del hilo. Por eso decía que Bind no había respondido y que el esquema arrancaba el 01/10. Las dos cosas quedan corregidas abajo.

@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit: PENDING
+merge_commit: edc1c87
 ---
 
 **Oportunidad:** construir el proceso que reciba el archivo de datos actualizados que va a mandar SOS (KYC continuo, equipo de Silvina Condal) y lo aplique en las bases de Bind PSP. El proceso tiene que validar, aplicar y dejar trazabilidad de los cambios. Hoy no se conoce ningún mecanismo para hacerlo. Es probable que haga falta un desarrollo, salvo que alcance con un proceso operativo.
