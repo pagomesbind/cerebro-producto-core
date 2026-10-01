@@ -24,9 +24,21 @@ En la reunión "Analisis de riesgo - Fix Contracargo" (2026-09-03, caso Ripsa �
 
 **Estado:** sin definición — quedó como heurística informal ("preguntarle al cliente si tolera esperar"), sin plasmarse como criterio del proceso. Ver también [gaps_y_preguntas.md](../gaps_y_preguntas.md) si se necesita trackear como pregunta abierta hacia el usuario.
 
+**Propuestas en stand-by (2026-09-28, "MINUTA - Reunión de Pre-despliegue AD 73" del 24/09, minuta completa recibida recién el 28/09) — ninguna aprobada todavía:**
+
+Esta misma minuta explica por qué se canceló el pase de AD V73 del 24/09, además de los errores de liquidaciones ya documentados en `publicaciones_mensuales.md`: entraron tickets de soporte y requerimientos de alta prioridad (BINes) a último minuto, hubo inestabilidad en staging, y el equipo no llegó a cerrar todos los tickets de la versión. Sumar tickets a una versión a pocas horas del pase sobrecarga a QA y obliga a reiniciar las regresiones. Muchos tickets marcados como defecto (sobre todo en Pagos FX) eran en realidad mejoras visuales o componentes despriorizados, no bloqueantes.
+
+De ahí surgieron 3 propuestas, ninguna aprobada formalmente todavía:
+1. **Comité de cambios** — revisar cómo se prioriza y definir si los requerimientos urgentes de último momento se tratan como **hotfixes externos** en vez de forzarlos dentro de un versionado ya encaminado. Es exactamente el criterio que le falta al gap de arriba.
+2. **Tickets a QA con documentación completa** — que cada ticket llegue a QA con lo necesario para probarlo (endpoints, colección de Postman, etc.), para no perder tiempo buscando información.
+3. **Filtro de observaciones de QA** — mejorar el criterio para separar rápido los bloqueos reales de las observaciones que son en realidad requerimientos nuevos o mejoras funcionales.
+
+Acción relacionada (sin resultado conocido en esta fuente): Mariela Marin (Fintexa QA) tenía que evaluar para el 25/09 por qué las ejecuciones de tests previas no detectaron las fallas de liquidación.
+
 ## Ver también
 - [gestion_jira.md](gestion_jira.md) — estados de ticket sobre los que se arma el inventario (§1).
 - [publicaciones_mensuales.md](publicaciones_mensuales.md) — ceremonia de Go/No Go donde se usa este informe.
 
 ---
-*Última actualización: 2026-08-12 — Extraído como archivo propio desde `detalle_productos/transversal/gestion_jira.md §1.8` (reestructuración PARA en cascada). Contenido sin cambios.*
+*Última actualización: 2026-10-01 — `/context_merge`: sumadas 3 propuestas en stand-by (comité de cambios, documentación completa a QA, filtro de observaciones de QA) al gap ya abierto sobre criterio de hotfix, desde la minuta completa de la reunión de pre-despliegue AD V73 (24/09) — con permiso explícito del usuario (Nicolás Colón).*
+*Última actualización anterior: 2026-08-12 — Extraído como archivo propio desde `detalle_productos/transversal/gestion_jira.md §1.8` (reestructuración PARA en cascada). Contenido sin cambios.*

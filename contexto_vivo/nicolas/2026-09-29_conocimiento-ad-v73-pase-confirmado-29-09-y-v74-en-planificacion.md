@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/procesos/publicaciones_mensuales.md
 tipo_destino: actualizar
 contradice: "no — completa el item en_cola 2026-09-25_conocimiento-v73-adquirencia-y-wallet-reprogramadas: resuelve a favor del martes 29/09 la inconsistencia lunes 28/09 vs. martes 29/09 que ese item dejó abierta"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING
 ---
 
 **Fecha real del pase de Adquirencia V73: martes 29/09.** En la "Weekly - Producto / Operaciones" del lunes 28/09, Matías Alzogaray quedó a cargo de mandar un recordatorio a todos los involucrados sobre los puntos de la V73 "para el despliegue de mañana". Con esto, el pase cae el martes 29/09. Coincide con el acuerdo formal de la "Reunión de Pre-despliegue AD 73" (martes 20:30hs) y con el mail de Fintexa del 25/09 ("pasaje previsto para el martes"). El lunes 28/09 que proponía el borrador de aviso de Gonzalo Rivera queda descartado. La minuta no da la hora exacta; se mantiene 20:30hs como dato de la fuente anterior.

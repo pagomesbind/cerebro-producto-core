@@ -10,7 +10,8 @@ destino_propuesto: 2_areas/procesos/analisis_de_riesgo_de_despliegue.md
 tipo_destino: actualizar
 contradice: "no — alimenta el '⚠️ Gap abierto — sin criterio explícito para decidir cuándo un ticket es hotfix' de ese archivo con una propuesta nueva, todavía en stand-by (no es una decisión tomada)"
 confianza: media
-estado: en_cola
+estado: ingestado
+merge_commit: PENDING
 ---
 
 **Por qué se canceló el pase de AD V73 del 24/09.** La minuta completa de la "Reunión de Pre-despliegue AD 73" (24/09, enviada por mail por Matías Alzogaray el 28/09) da la causa de proceso, además de los errores de liquidaciones ya capturados:

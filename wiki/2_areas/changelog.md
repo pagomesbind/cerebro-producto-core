@@ -9,8 +9,11 @@
 ### 2026-10-01 (nicolas) — corrida interactiva (pablo, líder)
 
 - `direccion/oportunidades.md` — nueva fila OP-033 (proceso de ingesta del archivo de KYC continuo desde SOS).
-- `gaps_y_preguntas.md` — nuevos gaps: cliente "Fast Transfer" sin ficha; corrección de la fecha de entrada en vigencia del esquema de reversas Worldsys (01/10 → noviembre, el barrido del 2026-09-30 no había visto los últimos 2 mensajes del hilo).
-- **Sin procesar, quedan `en_cola` (régimen D, permiso pedido en esta corrida — ver reporte):** AD V73 pase confirmado 29/09 + V74 en planificación (`procesos/publicaciones_mensuales.md`); lecciones de proceso de la cancelación AD V73 (`procesos/analisis_de_riesgo_de_despliegue.md`); pedido de cliente COTO sobre retenciones SIRTAC mensuales (`clientes/casos_de_uso_clientes.md`); 44 IDEAs en discovery/flujo de IA/estándar documental (destino a confirmar en `procesos/`) — arrastrados de la corrida desatendida del 2026-09-30. 1 item de baja confianza ("Bienes Recurrentes") sigue `en_cola`, sin novedad desde el gap ya abierto.
+- `gaps_y_preguntas.md` — nuevos gaps: cliente "Fast Transfer" sin ficha; corrección de la fecha de entrada en vigencia del esquema de reversas Worldsys (01/10 → noviembre, el barrido del 2026-09-30 no había visto los últimos 2 mensajes del hilo). Gap `[2026-09-29]` (ambigüedad lunes/martes aviso AD V73) resuelto y rotado a `4_archivos/gaps_resueltos.md`.
+- `procesos/publicaciones_mensuales.md` — actualizado (con permiso explícito del usuario): confirmada fecha real del pase AD V73 (martes 29/09), incidencia de reportería de transferencias, V74 ya en planificación.
+- `procesos/analisis_de_riesgo_de_despliegue.md` — actualizado (con permiso explícito del usuario): sumadas 3 propuestas en stand-by (comité de cambios, documentación a QA, filtro de observaciones) al gap ya abierto de criterio de hotfix.
+- `clientes/casos_de_uso_clientes.md` — actualizada ficha COTO CICSA (con permiso explícito del usuario): pedido de retenciones SIRTAC mensuales, no viable hoy.
+- **Sin procesar, quedan `en_cola` por decisión explícita del usuario (no por falta de permiso):** 44 IDEAs en discovery/flujo de IA/estándar documental (destino dudoso, multi-tema); "Bienes Recurrentes" (producto sin identificar, sin novedad desde el gap ya abierto).
 
 ### 2026-09-30 (nicolas) — corrida desatendida (scheduled task)
 
