@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — alimenta el '⚠️ Gap abierto — sin criterio explícito para decidir cuándo un ticket es hotfix' de ese archivo con una propuesta nueva, todavía en stand-by (no es una decisión tomada)"
 confianza: media
 estado: ingestado
-merge_commit: PENDING
+merge_commit: a9c0600
 ---
 
 **Por qué se canceló el pase de AD V73 del 24/09.** La minuta completa de la "Reunión de Pre-despliegue AD 73" (24/09, enviada por mail por Matías Alzogaray el 28/09) da la causa de proceso, además de los errores de liquidaciones ya capturados:

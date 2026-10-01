@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit: PENDING
+merge_commit: a9c0600
 ---
 
 **Para `Particularidades / cronología` de la ficha COTO CICSA:**
