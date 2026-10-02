@@ -46,6 +46,19 @@ Fintexa confirmó (mail "RE: Version W 73 Wallet Service", 2026-09-08) el alcanc
 
 El desarrollo pasó de fase de análisis (ticket levantado por Fintexa el 05/09, sin fecha) a alcance de versión con fecha concreta de QA. Fintexa evaluó 3 opciones para incorporar este desarrollo dentro de W73 sin correr el fin de mes (reformular alcance — adoptada; estirar Getnet para más adelante — descartada; mantener W73 y patear todo — descartada).
 
+## Gestión de aceptadores (ABM) — WS-1601, documentación funcional entregada por Keep IT Simple (2026-10-02)
+
+> Fuente: hilo de mail "Gestión de Aceptadores QR" (threadId `1a0fc5e4f47e7e8a`), Martín Hovanyecz (Keep IT Simple) / Pablo Gomes, 2026-10-02.
+
+Keep IT Simple entregó la documentación funcional del desarrollo de **gestión de aceptadores (ABM)** — corresponde a la Historia **WS-1601** ("Gestión de aceptadores con mecanismo de autenticación configurable", ya anticipada arriba en "Confirmación de alcance dentro de W73"), empaquetada en el mismo despliegue del 08/10/2026 que `getnet_oauth2_resolve/` (PRD-237).
+
+**Alcance descrito en el mail (cuerpo del mensaje; el adjunto HTML `gestion-aceptadores-documentacion-negocio.html` con el detalle técnico completo — contratos de request/response, catálogo de códigos — queda pendiente de lectura manual y fusión en esta misma sección):**
+- Flujos de habilitación automática de QR para aceptadores.
+- Endpoints de **Consulta**, **Asignación** y **Habilitación** de QRs.
+- Todos los endpoints documentados con su lógica y sus **códigos de respuesta/error**.
+
+**Reacción de Pablo Gomes (mismo hilo):** confirmó que la documentación "está muy clara y completa", destacó que incluya los códigos de error existentes, y pidió que este mismo formato (endpoints + códigos de error) se adopte como entregable estándar al cerrar cualquier proyecto a futuro — ver decisión relacionada en [`2_areas/procesos/requerimientos_al_equipo_tecnico.md`](../../../2_areas/procesos/requerimientos_al_equipo_tecnico.md) (pendiente de confirmación del usuario).
+
 ## Nota — posible superposición con `getnet_oauth2_resolve/`
 
 El proyecto de producto `1_proyectos/getnet_oauth2_resolve/` (Pablo Gomes, IDEA PRD-237) documenta que Getnet migró la autenticación de su API **Resolve** de un `access_token` fijo a **OAuth2 `client_credentials`** — mismo mecanismo de autenticación, mismo dominio (`api.globalgetnet.com`), mismo endpoint `/resolve`, y mismo deadline (30/09/2026) que este documento. No está confirmado si ambos describen la misma migración de fondo (Bind Wallet como pagador, resolviendo/pagando QR de comercios afiliados a Getnet) vista desde dos fuentes — el mail técnico de Getnet a Integraciones (este documento) y el proyecto formal de PM (Jira) — o si son dos alcances técnicos distintos que coinciden en proveedor y ventana de tiempo. Pendiente de confirmación por los PM involucrados (Pablo Gomes / Nicolás Colón).

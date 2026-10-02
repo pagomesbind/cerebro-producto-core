@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/conciliacion_y_totalizado
 tipo_destino: actualizar
 contradice: "2_areas/riesgos.md, riesgo 'Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09' (dice que la herramienta está rota y que la conciliación depende de insertar a mano); y conciliacion_y_totalizadores.md §5 / WS-413 (documenta una amplitud máxima de rango de 24 hs)"
 confianza: alta
-estado: en_cola
+estado: ingestado
 ---
 
 Tres precisiones sobre el proceso de conciliación de transferencias entrantes contra Coelsa (`POST /Operaciones/ConciliacionCoelsa`, ver `conciliacion_y_totalizadores.md` §5), confirmadas por el PM dueño del tema:

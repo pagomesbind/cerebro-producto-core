@@ -6,6 +6,26 @@
 
 ## 2026
 
+### 2026-10-02 (pablo, líder) — corrida desatendida (scheduled task, 16 items ingeridos, 4 pendientes)
+
+- `detalle_productos/adquirencia/index.md` — actualizado: descripción de `validacion_bines_tarjetas.md` y changelog actualizados.
+- `detalle_productos/adquirencia/validacion_bines_tarjetas.md` — actualizado §4: corrección con 3 meses de datos — contradicción sin resolver, ambas versiones registradas.
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — actualizado: nuevo ejemplo de homologación de aceptador (Safetypay vía Newpay); archivo marcado por encima del umbral de fisión.
+- `detalle_productos/wallet/organizaciones_y_configuracion.md` — nueva §9: análisis de riesgo del pase V73.
+- `detalle_productos/wallet/conciliacion_y_totalizadores.md` — actualizado §5: tensión sin resolver sobre amplitud de rango vs. "herramienta rota".
+- `detalle_productos/wallet/validacion_totalizadores_cbu_cvu.md` — actualizado: Coelsa actualiza el servicio ABM de CBU/Totalizador, prod 18/10/2026.
+- `detalle_productos/wallet/interoperabilidad_qr_getnet.md` — actualizado: doc funcional WS-1601 (gestión de aceptadores) entregada por Keep IT Simple.
+- `detalle_productos/wallet/cuenta_remunerada_fci.md` — nueva §7.1: procedimiento real de rescate masivo ejecutado (74 comitentes Astropay).
+- `detalle_productos/wallet/index.md` — changelog actualizado.
+- `detalle_productos/ardid/integracion_con_productos_bind.md` — nueva §21: WS-1398 (deshabilitación automática de cuentas bloqueadas + webhook) y WS-1718 (cobertura antifraude débito recurrente), V73.
+- `detalle_productos/ardid/modulo_pagos.md` — nueva §15: comportamiento observado de rechazo por monto en checkout desde el 01/09.
+- `detalle_productos/ardid/index.md` — changelog actualizado.
+- `detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md` — nueva §1quater: mecánica completa de lectura de DNI (PDF417→QR→MRZ).
+- `detalle_productos/onboarding/index.md` — changelog actualizado.
+- `detalle_productos/agente_cobros_y_pagos/pedidos_de_clientes_y_hallazgos_operativos.md` — nueva sección: optimización de tiempos de pagos QR (Hipódromo de Palermo).
+- `detalle_productos/agente_cobros_y_pagos/devoluciones_y_contracargos.md` — nueva sección: devoluciones hasta 6 meses por entidad (Ministerio de Justicia).
+- `detalle_productos/agente_cobros_y_pagos/index.md` — changelog actualizado.
+
 ### 2026-10-01 (pablo) — corrida desatendida (scheduled task, 21 items ingeridos, 2 pendientes)
 
 - `detalle_productos/onboarding/hallazgos_operativos_historicos.md` — actualizado: desactivación del flujo de OB de pequeños comercios (entidad Bind Pagos, a pedido del banco).

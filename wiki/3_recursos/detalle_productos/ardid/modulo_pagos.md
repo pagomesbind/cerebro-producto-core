@@ -286,5 +286,23 @@ Relevante para cualquier proyecto futuro que necesite datos truncados de la tarj
 
 Gonzalo Rivera propuso que, cuando una transacción se rechaza por Ardid (ej. código 1001), la base de TRX (transacciones) de Bind PSP incluya además, entre paréntesis, el **ID de la regla específica** que causó el rechazo — hoy para saber qué regla exacta rechazó hace falta consultar manualmente la plataforma Ardid. El equipo lo acordó como requerimiento de auditoría técnica; Gonzalo Rivera queda a cargo de cargar el pedido de mejora al sistema correspondiente (no es una tarea de Producto/PM, la carga él mismo).
 
+## 15. Comportamiento observado — Ardid empezó a rechazar por monto el 01/09 en checkout, con un tope que subió de $500 mil a $1,2 M y se aflojó el 23/09 (2026-10-02)
+
+> Estado: inferencia a partir de datos de transacciones, **no confirmada por Fraude/Ardid** (tarea de seguimiento en el proyecto `rechazos_bines_payway`). Consistente con las reglas por tarjeta parametrizables (monto acumulado diario/mensual, frecuencia, grupos de BIN y de comercio) ya documentadas en §8 de este archivo.
+>
+> Fuente: análisis propio del PM de las transacciones con tarjeta de julio a octubre (1.821.393 filas, 01/07–02/10 14:41, POS y checkout), aportado en el proyecto `rechazos_bines_payway` (PRD-251).
+
+En el cobro con tarjeta del checkout, el rechazo "Rechazada por Ardid (1001)" sumó 83.756 rechazos entre julio y el 02/10 (23,7% de todos los rechazos, ARS 35.406 M, 37,9% del monto rechazado) — casi no ocurre en POS (0 casos). Su comportamiento cambia de forma abrupta en septiembre y es consistente con una regla de monto por transacción:
+
+- **Julio y agosto:** sin distinción por monto — rechaza entre 2% y 3% de las transacciones en todos los tramos de importe.
+- **Desde el 01/09 a las 07hs:** en checkout rechaza entre 90% y 99% de las transacciones de $500 mil a $1,2 M y de 96% a 99% de las de más de $1,2 M; por debajo de $500 mil, ~4–6%. El 31/08 el tramo $500 mil–$1,2 M rechazaba 3%; el 01/09 sube a 70% a las 07hs, 84% a las 08hs y 90%+ desde las 09hs. Tope práctico: $500 mil.
+- **Desde el 15/09:** el tramo $500 mil–$1,2 M baja a 1–14% por día, mientras que por encima de $1,2 M sigue en 95–100%. El tope pasó a $1,2 M.
+- **Desde el 23/09:** también se afloja por encima de $1,2 M (59% el 23/09, 25% el 24/09, 7% el 25/09, 3% el 26/09), con un residuo de 18–29% por día entre el 27/09 y el 02/10.
+- **Peso en septiembre:** Ardid explica el 40,0% de los rechazos y el 68,9% del monto rechazado del mes (ARS 31.927 M de ARS 46.367 M). Con importes desde $500 mil, 28.216 rechazos por ARS 27.333 M (59% del monto rechazado del mes). En el mismo período, "Tarjeta denegada (5)" (rechazo del emisor) baja de ~6% a ~3% de las transacciones — porque Ardid corta antes los importes altos.
+- Hay además BINs donde Ardid rechaza una fracción alta de sus transacciones (ej. 483188, 417309, 423001, 517230, 433810, 555889), consistente con una regla por grupo de BIN (ver §8).
+
+**Detalle y gráficos:** `1_proyectos/rechazos_bines_payway/artefactos/` (sección 8).
+
 ---
+*Última actualización: 2026-10-02 — `/context_merge`: nueva §15 — comportamiento observado de rechazo por monto en checkout desde el 01/09, inferencia a partir de datos (Pablo Gomes).*
 *Ver también: [scoring.md](scoring.md) para el sistema de puntuación, [blacklist_whitelist_rafagas.md](blacklist_whitelist_rafagas.md) para blacklist/whitelist y ráfagas de pagos, y [apis_externas.md](apis_externas.md) para las APIs `/Transaction`, `/ClientCard`, `/Loans` involucradas en este flujo.*

@@ -24,6 +24,20 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 
 ---
 
+## [2026-10-02] — Adquirencia: contradicción sin resolver sobre la magnitud real del impacto del despliegue v73 sobre los BINs (PRD-251)
+
+- **Severidad:** Media
+- **Descripción:** `3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md` §4 y la fila PRD-251 de `2_areas/direccion/iniciativas.md` (novedad 2026-09-30, Pablo Gomes) miden el impacto del pase a producción del 29/09 comparando una sola ventana matutina contra el día anterior: +15,2% de volumen, rechazo 18,82%→17,28%, 37 BINs "antes inexistentes". Un análisis posterior del mismo PM (2026-10-02, 1.821.393 filas de julio a octubre) sostiene que ese +15,2% es inicio de mes (no atribuible al fix), que los BINs realmente nuevos son 80 (no 37), y que no hay aumento general de BINs aceptados — el efecto que sí se sostiene es la corrección de clasificación crédito/débito/prepaga. Ambas versiones quedaron escritas en los dos archivos, sin que el merge elija cuál es la vigente.
+- **Pregunta para el usuario:** ¿Se confirma la lectura de 3 meses de datos como la vigente y se reemplazan las cifras del 30/09 en ambos archivos, o hace falta una medición adicional (más días post-pase, archivo de Payway actualizado) antes de cerrar esto?
+- **Estado:** Pendiente
+
+## [2026-10-01] — Wallet: contradicción sin resolver sobre si la herramienta de conciliación de transferencias entrantes está "rota" o solo tiene una limitación de rango horario
+
+- **Severidad:** Media
+- **Descripción:** `2_areas/riesgos.md` (Nicolás Colón, 2026-09-11/15) registra que la herramienta de conciliación de transferencias entrantes contra Coelsa está "rota" y que el proceso depende de inserción manual. `3_recursos/detalle_productos/wallet/conciliacion_y_totalizadores.md` §5 (WS-413, Jira) documenta que el endpoint `POST /Operaciones/ConciliacionCoelsa` admite una amplitud máxima de rango de **24 hs**. Un aporte posterior del mismo PM (2026-10-01, discovery de `conciliacion_entrantes`/PRD-240) sostiene que la herramienta **no está rota** — funciona bien con rangos de hasta 1 hora, y fallaba en la práctica con rangos más amplios, lo que tensiona tanto la caracterización de "rota" como la amplitud de 24 hs documentada en WS-413. Las dos versiones quedaron escritas lado a lado en ambos archivos (riesgos.md y conciliacion_y_totalizadores.md §5), sin que el merge elija cuál es la vigente.
+- **Pregunta para el usuario:** ¿La falla de rango >1h se corrigió en una versión posterior a WS-413? ¿Aplica solo a consultas sin `cvuDestino`? ¿La caracterización correcta hoy es "rota" (riesgos.md) o "limitación práctica de rango" (versión del PM)? Confirmar con Ingeniería/Fintexa.
+- **Estado:** Pendiente
+
 ## [2026-09-29] — Ardid: ¿la reunión de análisis de riesgo del 25/09 despliega la 1.19.0 o la 1.19.1 en staging?
 - **Severidad:** Media
 - **Descripción:** `3_recursos/detalle_productos/ardid/historico/historial_versiones.md` documenta una decisión formal del 22/09 ("Repaso Semanal líderes") de saltar directo a la 1.19.1 (con el fix UTC 0), omitiendo el despliegue de la 1.19.0. Tres días después, la reunión de análisis de riesgo pre-despliegue de staging (25/09) se tituló explícitamente "Análisis de riesgo - Ardid V 1.19.0". Capturado independientemente por Pablo Gomes (`despliegues_y_operacion.md §5`) y Nicolás Colón (`historico/historial_versiones.md`), ambos presentes en la reunión del 25/09 — ninguno de los dos pudo confirmarlo porque solo tuvieron el resumen + próximos pasos del mail de Gemini, sin transcripción ni acceso a Drive en esa corrida.

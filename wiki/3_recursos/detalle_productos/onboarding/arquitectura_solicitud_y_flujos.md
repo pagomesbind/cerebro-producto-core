@@ -87,6 +87,25 @@ Durante una sesión de pruebas de onboarding en ambiente **productivo** (test co
 
 > Fuente: minuta Gemini de la reunión "RE: BIND PSP - REI - Onboarding Digital" (2026-08-25, 15:31 GMT-03:00), compartida por Emma Vignoles, con Victoria Farías (LLYASOC, auditoría externa por cuenta de Banco Industrial/REI), Mariana Nadalin, Pilar Erviti, Adriana Endzeliz.
 
+### 1quater. Mecánica completa de lectura automática de DNI (PDF417 → QR → MRZ) y su limitación central (2026-10-01)
+
+> Fuente: reunión "Revisión OB Coppel | Casos de Rechazo" (2026-10-01), Pablo Gomes explicándole a Soporte (Adriana Endzeliz) el mecanismo real con casos reales de rechazo de Coppel. Completa el detalle técnico que §1bis ya documentaba parcialmente (reintentos de PDF417 configurables por flujo), sin describir hasta ahora la cadena completa de fallback ni la librería usada.
+
+El request de onboarding llega con las imágenes en base64 (frente, dorso, selfie) más los datos declarativos — en ese momento el sistema **no tiene ningún dato estructurado del DNI**, solo las fotos. Cadena de lectura, en orden:
+
+1. **Primer intento — PDF417 del frente.** Se lee con una librería paga externa, **Aspose**, integrada por Fintexa (Bind PSP paga por cada lectura efectuada). Si se lee bien, se obtienen número de trámite, nombre, apellido, documento y sexo, y el flujo continúa a la consulta a Renaper Datos.
+2. **Si no se puede leer el PDF417** (típico en **DNI nuevo**, donde a veces no es legible aunque esté en el frente): se busca el **código QR del dorso**. Problema: el QR **no incluye el dato de sexo/género**, que Renaper exige para la consulta.
+3. **Tercer intento — MRZ del dorso**, que sí contiene el sexo. Si tampoco se puede leer, el flujo se frena — no hay más fuentes de las que extraer los 3 datos mínimos (documento, número de trámite, sexo) para consultar a Renaper.
+4. **En DNI viejo**, la cadena es la misma pero sin el paso de QR (no tienen QR en el dorso): si el PDF417 no se lee, se intenta directo con el MRZ.
+
+**Limitación central de la librería:** Aspose (vía Fintexa) frecuentemente no logra detectar el código o el texto aun con fotos de buena calidad — patrón observado: falla más seguido con fotos tomadas desde iPhone, por el procesamiento de imagen que aplican esos dispositivos. El sistema hace **un solo intento de lectura por imagen enviada** — no hay reintento automático sobre la misma imagen con otro parámetro, solo reintento de todo el flujo si el cliente reenvía (esto es lo que §1bis ya documentaba como "reintentos configurables por flujo").
+
+**Patrón de rechazo observado (Coppel):** la mayoría de los casos no son por DNI nuevo con MRZ no legible (como el cliente asumía) — la falla de lectura ocurre en proporción similar en DNI viejos y nuevos. La causa de fondo es la limitación general de la librería, no una particularidad del formato nuevo.
+
+**Propuesta del PM (no implementada, directiva a comunicar a clientes):** mejorar la librería de lectura requiere una inversión que hoy no se justifica (onboarding no es el producto principal de Bind PSP) — la solución recae en las aplicaciones cliente: si el cliente tiene su propia librería de OCR superior (o reintenta pidiéndole al usuario otra foto), puede extraer documento, número de trámite y género él mismo y enviarlos **en crudo** junto con las imágenes del DNI; si Onboarding no puede leerlos de las imágenes pero el cliente los manda explícitamente, el sistema los toma y continúa el flujo normal sin bloquear. **Esto no está comunicado hoy a los clientes que ya integraron** (ej. Coppel, Arcos Dorados) — quedó como vector de reclamo recurrente de Soporte.
+
+**Seguimiento:** Pablo Gomes reporta internamente a Fintexa (Cristian) el caso puntual de falla de MRZ detectado en la reunión; Adriana Endzeliz le pedirá a Coppel que levante un ticket de soporte formal (no había ninguno abierto pese a los reclamos informales).
+
 ## 2. Configuración por flujo/entidad
 
 - En Onboarding, cada organización se modela como una **entidad**, y cada entidad consume un **flujo** configurado específicamente para ella (no hay un flujo genérico único). El flujo define, paso por paso, qué validaciones de la Etapa 1 corren y cuáles no (ej.: una organización con prueba de vida propia con otro proveedor puede tildar "no validar" ese paso y solo exigir la evidencia como archivo).
@@ -259,7 +278,8 @@ La reunión "Producto" del 28/09 ordenó los desarrollos en curso de Onboarding 
 - **Rechazos por longitud:** hay que investigar por qué se rechazan cuentas con una cantidad alta de caracteres — no se aclara en qué campo.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: nueva §9 — planificación de Onboarding estratégico (fecha objetivo noviembre 2026), datos obligatorios nuevos (domicilio legal, género), lista 15/screening de compliance a definir, baja manual mientras no haya endpoints, revisión de seguridad en validación de identidad (reunión "Producto", 2026-09-28).*
+*Última actualización: 2026-10-02 — `/context_merge`: nueva §1quater — mecánica completa de lectura automática de DNI (PDF417→QR→MRZ, librería Aspose/Fintexa) y su limitación central, con casos reales de rechazo de Coppel (reunión "Revisión OB Coppel", 2026-10-01) (Pablo Gomes).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §9 — planificación de Onboarding estratégico (fecha objetivo noviembre 2026), datos obligatorios nuevos (domicilio legal, género), lista 15/screening de compliance a definir, baja manual mientras no haya endpoints, revisión de seguridad en validación de identidad (reunión "Producto", 2026-09-28).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: nueva §6.1 — prueba de vida y concordancia facial (face match) son dos validaciones biométricas distintas, la norma exige ambas; implicancia para el diseño de evidencia del legajo de PRD-147/PRD-202.*
 *Última actualización anterior: 2026-08-25 — `/context_merge`: nueva §1ter con el hallazgo de vulnerabilidad de la sesión de pruebas en producción (2026-08-25) — Renaper no cruza imágenes de DNI (valida por CUIL+género+número de trámite, no por foto), lo que permite en ciertas configuraciones combinar el frente y el dorso de DNIs de dos personas distintas; señalado por auditoría externa (LLYASOC/Banco Industrial). También suma, desde la reunión "Producto" (2026-08-18): casos legado excluidos de la migración (§0), los tres escenarios operativos y los 4 endpoints propuestos para pausar/reanudar una solicitud (§3), el riesgo de arquitectura "Frankenstein" (§8), y un gap de prioridades sin reconciliar entre esta reunión y la de 2026-07-22 (§7 — ver nota ⚠️ en esa sección).*
 *Última actualización anterior: 2026-08-04 (4) — Corregido el hallazgo sobre el estado `VENCIDA`: sí existe hoy (`estado=9`, confirmado por el usuario y visible en la API pública de Registro Único), transiciona bien, pero no dispara webhook — el requisito real es agregar esa notificación, no crear el estado.*

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/wallet/organizaciones_y_configur
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Contexto.** Hubo un análisis de riesgo del pase de Wallet V73 el 2026-10-01. El pase venía corrido "al 8" (probablemente 2026-10-08) según la reunión "W 73 - Impacto de temas" del 2026-09-24.

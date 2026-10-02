@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/arquitectura_solicitu
 tipo_destino: actualizar
 contradice: "no — complementa la mención ya existente en arquitectura_solicitud_y_flujos.md §1bis sobre reintentos configurables de PDF417, sin describir hasta ahora la cadena completa de fallback ni la librería usada"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

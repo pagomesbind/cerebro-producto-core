@@ -480,3 +480,23 @@ Los endpoints de alta de cuenta Wallet (cuenta+CVU, cuenta+CVU+cuenta comitente,
 - **Precedente de tope físico:** reclamo de Octagon (cartera con PJ) porque el tope de personas físicas ($25M) resultaba insuficiente para sus cuentas jurídicas — se subió a $300M ad hoc, sin avisar antes al cliente del criterio. Refuerza por qué "jurídica" se trata como tipo de banca aparte con su propio criterio de tope.
 
 **Impacto:** arquitectura de Wallet (tipos de banca/segmentos), sin IDEA propia en Jira todavía — Nicolás Colón queda de implementarlo, sin ticket ni fecha confirmados. Detalle de implementación técnica (`ClientBankType` restrictivo en Ardid) en el proyecto `ardid_limites_pj`.
+
+## 9. Análisis de riesgo del pase de Wallet V73 (2026-10-01) — 11 microservicios, OAuth2, colas quórum, alta previa en Ardid
+
+> Fuente: reunión "W 73 - Análisis de riesgos" (2026-10-01), resumen del mail de Gemini (Drive invalidado, sin minuta completa). El pase venía corrido "al 8" (probablemente 2026-10-08) según la reunión "W 73 - Impacto de temas" del 2026-09-24; fecha confirmada en `2_areas/direccion/iniciativas.md` (getnet_oauth2_resolve/PRD-237): jueves 08/10 6:30hs.
+
+**Qué entra en V73, según el resumen:**
+- **11 microservicios** a coordinar en estimación y alcance técnico.
+- **Autenticación de aceptadores** (ver `interoperabilidad_qr_getnet.md` y PRD-237 en `iniciativas.md`), con tickets operativos asociados, y **control antifraude** reforzado (ver también WS-1398/WS-1718 en [`detalle_productos/ardid/integracion_con_productos_bind.md`](../ardid/integracion_con_productos_bind.md)).
+- **Migración a colas quórum** (RabbitMQ) y **soporte OAuth2** — ambas con validaciones pendientes.
+- **Nuevo webhook de aviso de bloqueo de cuenta** (WS-1398, ver `ardid/integracion_con_productos_bind.md`): Pablo Gomes lo documenta en el portal de developers; cuando esté publicado, `/sync_web` lo levanta en `wallet/apis_expuestas/`.
+- **Débito recurrente:** Andrea Orsini hace la regresión para confirmar que sigue pasando bien por Ardid.
+
+**Prerequisitos operativos antes del pase:**
+- Nico Pomponio avisa al grupo cuando la infraestructura esté terminada.
+- Juan Pablo Carubelli carga los aceptadores nuevos cuando el microservicio esté desplegado.
+- Ana prueba el flujo de lectura de QR el viernes 2026-10-02; Andrea Orsini abre un chat para coordinar las pruebas de habilitación de flags del viernes.
+- **Nicolás Colón da de alta en Ardid todas las cuentas pendientes antes del pase**, y arma una consulta automática que detecte altas de cuenta fallidas en Ardid y mande una notificación diaria — conecta con el alta de cuenta con timeouts de Ardid ya documentada en §1 de este archivo, con la deuda técnica de redelivery (WS-1139) y con la especificación `OPERACIONES_ORGANIZACION_HABILITADA_ARDID` (WS-1242, también §1).
+- Matías Alzogaray hace el seguimiento diario y manda por mail el plan de acción con semáforos.
+
+**Lo que la minuta no dice:** la fecha exacta del pase a nivel semáforo de riesgo y cuántas cuentas están pendientes de alta en Ardid.

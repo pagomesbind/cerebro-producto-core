@@ -24,7 +24,8 @@
 - [apis_expuestas/index.md](apis_expuestas/index.md) — API pública oficial expuesta a clientes; dominio exclusivo de la skill `/sync_web`, no tocar desde acá.
 
 ---
-*Última actualización: 2026-10-01 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nuevas secciones (mecánica de interpretación del CSV de transacciones para BI, seguimiento Bind-SEPSA minuta 23-9) (Pablo Gomes).*
+*Última actualización: 2026-10-02 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nueva sección (optimización de tiempos de pagos QR, Hipódromo de Palermo, Pablo Gomes); `devoluciones_y_contracargos.md` nueva sección (devoluciones hasta 6 meses por entidad, pedido Ministerio de Justicia, Nicolás Colón).*
+*Última actualización anterior: 2026-10-01 — `/context_merge`: `pedidos_de_clientes_y_hallazgos_operativos.md` nuevas secciones (mecánica de interpretación del CSV de transacciones para BI, seguimiento Bind-SEPSA minuta 23-9) (Pablo Gomes).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: `liquidaciones_reversas_y_comprobantes.md` §2-5 resueltas con las definiciones confirmadas por Fintexa (mail "Liquidaciones AD 73", 2026-09-25).*
 *Última actualización anterior: 2026-09-25 — `/context_merge`: archivo nuevo `liquidaciones_reversas_y_comprobantes.md` (mecánica de reversas/aranceles en liquidaciones y 2 bugs abiertos), a partir de la reunión "Análisis COBRO" (2026-09-24).*
 *Última actualización anterior: 2026-09-21 — `/context_merge`: `masividad_generacion_qr.md` — resuelto el debate abierto de colas diferenciadas por cliente (gestión inteligente por umbral de 200 req/min, AD V73, 2026-09-17).*

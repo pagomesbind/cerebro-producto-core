@@ -378,10 +378,24 @@ Pese a que Poincenot expone un endpoint de rescate batch con variante "total wit
 
 **Próximo paso acordado:** establecer un procedimiento manual formal para la baja de inversiones, el rescate total y la eliminación de cuentas comitentes mientras no existan los endpoints automáticos, y evaluar si el volumen actual justifica el desarrollo de un punto de interfaz dedicado. Ver también la planificación de Onboarding estratégico que retoma este mismo punto ([`onboarding/arquitectura_solicitud_y_flujos.md §9`](../onboarding/arquitectura_solicitud_y_flujos.md)).
 
+### 7.1 Procedimiento manual ejecutado — rescate masivo real de 74 comitentes de Astropay (2026-09-28/2026-10-02)
+
+> Fuente: hilos de mail "Comitentes Astropay con saldo" (Gastón Degiovanni, BIND Inversiones, 2026-09-28/2026-10-01) y "RV: Astropay FCI - Rescate masivo de cuentas" (Guillermo Bonino vía Nicolás Pomponio, Fintexa, 2026-10-01).
+
+Primera ejecución real del procedimiento manual que §7 pedía formalizar: BIND Inversiones (Gastón Degiovanni) pidió instruir el rescate total de **74 comitentes con saldo en Astropay** (cuentas remanentes del producto, en proceso de salida/discontinuación). Pablo Gomes derivó el pedido a Soporte (Gonzalo Rivera, Mariana Nadalin), que coordinó la ejecución técnica con Fintexa/Keep IT Simple. Guillermo Bonino (Keep IT Simple) documentó el procedimiento real:
+
+1. Convenir con el negocio (BIND Inversiones) la **fecha exacta** de ejecución.
+2. El negocio solicita a Poincenot el **reporte de posición de cada cuenta** actualizado a esa fecha, en Excel — columna relevante: **"Monto Valuado en Moneda del Fondo"**. El reporte debe sacarse el mismo día convenido, porque el cálculo depende del **VCP (valor cuotaparte)** vigente ese día.
+3. Con ese Excel, Keep IT Simple arma el **JSON de la solicitud de rescate masivo** (`WITHDRAW`, §6) a enviar a Poincenot.
+4. Ejecución del endpoint correspondiente desde el **swagger del wrapper de Poincenot**.
+
+**Limitación técnica real detectada:** para una tanda de 74 cuentas, el JSON generado es lo bastante extenso como para que **Swagger UI no permita ejecutar la llamada desde su propia interfaz** (body demasiado grande). En ese caso, la solicitud debe ejecutarse **vía Postman desde el bastión de producción** — requiere tener a mano un acceso al bastión con Postman configurado de antemano. Se adjuntó un JSON de ejemplo (`paquete-rescates-poincenot.json`) generado a partir del Excel de referencia, para validar formato.
+
 ## Ver también
 - [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
 - [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md), [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API de Poincenot.
 
 ---
-*Última actualización: 2026-09-29 — `/context_merge`: nueva §7 — gap operativo de baja/rescate total/eliminación de cuenta comitente sin endpoint automatizado del lado de Bind (reunión "Producto", 2026-09-28).*
+*Última actualización: 2026-10-02 — `/context_merge`: nueva §7.1 — procedimiento manual real de rescate masivo ejecutado (74 comitentes de Astropay), con la limitación de Swagger para JSON extensos (Pablo Gomes).*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §7 — gap operativo de baja/rescate total/eliminación de cuenta comitente sin endpoint automatizado del lado de Bind (reunión "Producto", 2026-09-28).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §6, detalle de endpoints REST del flujo batch de Poincenot (precio, suscripción/rescate, webhooks, interés ganado) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

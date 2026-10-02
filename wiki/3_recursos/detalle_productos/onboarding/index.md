@@ -25,7 +25,8 @@
 - [apis_expuestas/index.md](apis_expuestas/index.md) — API pública oficial expuesta a clientes; dominio exclusivo de la skill `/sync_web`, no tocar desde acá.
 
 ---
-*Última actualización: 2026-10-01 — `/context_merge`: `hallazgos_operativos_historicos.md` nueva sección (desactivación del flujo de OB de pequeños comercios, entidad Bind Pagos, a pedido del banco) (Pablo Gomes).*
+*Última actualización: 2026-10-02 — `/context_merge`: `arquitectura_solicitud_y_flujos.md` nueva §1quater (mecánica completa de lectura de DNI PDF417→QR→MRZ, librería Aspose/Fintexa, casos de rechazo de Coppel) (Pablo Gomes).*
+*Última actualización anterior: 2026-10-01 — `/context_merge`: `hallazgos_operativos_historicos.md` nueva sección (desactivación del flujo de OB de pequeños comercios, entidad Bind Pagos, a pedido del banco) (Pablo Gomes).*
 *Última actualización anterior: 2026-09-23 — `/context_merge`: `onboarding_personas_juridicas.md` nueva §8.2 (gap de PLD, ambiente de pruebas del onboarding propio para Octagon), corrección de §9 (botón Observar para Cumplimiento, sección Propietario Directo, menú de Archivos por estado), y nueva §10 (manual operativo de los 4 pasos del flujo con capturas reales).*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: `onboarding_personas_juridicas.md` nueva §8.1 (detalle funcional real de la consola de referencia "AVA Compliance") y nueva §9 (estructura real de la pantalla de solicitud en el backoffice) — ambas del discovery de `revision_pj_cumplimiento` (PRD-256).*
 *Última actualización anterior: 2026-09-08 — `/context_merge`: `arquitectura_solicitud_y_flujos.md` nueva §6.1 — prueba de vida y concordancia facial (face match) son dos validaciones biométricas distintas, la norma exige ambas; implicancia para el diseño de evidencia del legajo de PRD-147/PRD-202.*

@@ -384,6 +384,8 @@ Ejemplo de response:
 
 > Documentación de referencia adicional: PDF "BindPSP - Consulta de operaciones directo a Coelsa" adjunto en la fuente Notion original.
 
+**⚠️ Tensión sin resolver con la amplitud documentada (2026-10-01, Nicolás Colón, discovery de `conciliacion_entrantes`/PRD-240, confianza alta):** WS-413 documenta que la amplitud máxima admitida del rango es **24 hs**, pero según el PM dueño del tema el proceso en la práctica **fallaba con rangos de más de 1 hora** (confirmado "funciona bien" hasta 1 hora) — es la causa real de la falla reportada por Soporte en septiembre 2026 que [`2_areas/riesgos.md`](../../../2_areas/riesgos.md) había registrado como "herramienta rota". No se sabe si la falla se corrigió en una versión posterior ni si aplica solo sin `cvuDestino` — ver gap abierto en `2_areas/gaps_y_preguntas.md` [2026-10-01]. El mismo PM confirma que la conciliación directa contra Coelsa registra y acredita el saldo aunque ApiBank esté caído (Coelsa es la fuente de verdad), y que hoy los faltantes se detectan solo por reclamo del cliente o en la conciliación del día posterior contra el banco — sin detección proactiva intradiaria. El caso de uso que motiva automatizarlo son las caídas de ApiBank (~1/mes estimado por el PM, sin dato duro), sobre todo fuera de horario de Soporte.
+
 ### Habilitación del proceso de conciliación para organizaciones más allá de Astropay (2026-07-13)
 
 > Fuente: Reunión "Reunión del 13 jul 2026 a las 14:47 GMT-03:00" (2026-07-13), minuta Gemini.

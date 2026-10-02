@@ -37,5 +37,18 @@ Probado con CUITs de referencia reales contra Coelsa (no valores sintéticos), e
 
 **Aprendizaje operativo para pruebas futuras sobre el mismo mecanismo:** el CUIT de referencia usado en QA no es estable entre corridas — cualquier alta que efectivamente cree un CVU sube el total real que Coelsa devuelve para ese CUIT (se vio subir de 79 a 80 CVU a mitad de una tanda de pruebas, causando un resultado inesperado). Recomendado: usar solo `POST /api/v1/Cuenta` (sin crear CVU) para pruebas de borde, y reconsultar `GetTotalizadoresCoelsa` antes de cada tanda en vez de asumir valores fijos.
 
+## Coelsa actualiza el servicio de origen — ABM de CBU vinculado al Totalizador, con fecha de alta/baja de cuenta (2026-10-01)
+
+> Fuente: mail "Homologación ABM de CBU" (threadId `1a0f7c4a7d26484a`), Coelsa (`icm@coelsa.com.ar`), 2026-10-01. Destinatarios principales: equipo de desarrollo/productos de Banco Industrial e Implementaciones de Bind PSP — Pablo Gomes en copia.
+
+Coelsa notificó una actualización del servicio **ABM de CBU vinculado al Totalizador de cuentas** (el mismo servicio que este mecanismo consulta antes de dar de alta una cuenta, ver "Qué es" arriba): la nueva versión incorpora el registro de **fecha de alta y fecha de baja** de las cuentas bancarias, en línea con requerimientos normativos vigentes (sin especificar cuál en el mail — a confirmar si se relaciona con alguno de los ya trackeados en [`cumplimiento_normativo/`](../../cumplimiento_normativo/index.md)).
+
+**Cronograma:** ambiente de Homologación disponible desde el 24/08/2026 hasta el 16/10/2026 inclusive; salida a Producción a partir del **18/10/2026**.
+
+**Documentación técnica publicada por Coelsa:** API nuevo `https://documentacion.coelsa.com.ar/aliascbu/#api-cbu-nuevo`; Batch nuevo `https://documentacion.coelsa.com.ar/aliascbu/#batch-cbu-nuevo`.
+
+**Sin acción puntual identificada para Producto en el mail** — de requerirse homologar antes del 16/10, es responsabilidad operativa de Implementaciones/Integraciones. No confirmado todavía si este cambio de fondo (fecha alta/baja de cuenta) impacta el mecanismo de validación de límites documentado arriba.
+
 ---
+*Última actualización: 2026-10-02 — `/context_merge`: nueva sección — Coelsa actualiza el servicio ABM de CBU/Totalizador con fecha de alta/baja de cuenta, salida a producción 18/10/2026 (Pablo Gomes).*
 *Creado: 2026-09-03 — `/context_merge`: nuevo archivo, mecánica completa de validación de totalizadores CBU/CVU (PRD-200), destilado de Jira (WS-1312/WS-1313 y subtareas) a pedido del PM en el cierre/go-live del proyecto.*

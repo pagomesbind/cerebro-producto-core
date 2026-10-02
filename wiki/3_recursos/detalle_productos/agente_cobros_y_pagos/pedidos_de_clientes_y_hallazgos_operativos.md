@@ -8,6 +8,18 @@
 - **COTO / GLOBANT**: pedido de idempotencia en transferencia saliente (quedó Pendiente) — mismo cliente que la Epic COTO de devoluciones parciales de Adquirencia (Jira PRD-81), pidiendo esta vez protección de duplicados del lado de salida de dinero del Agente de Cobros y Pagos.
 - **TINSA**: 2 bugs de RxT/CVUCollect en el Admin — cambiar el nombre de una caja terminaba cambiando el nombre del titular del CVU asociado (bug de acoplamiento de datos), y el Admin rompía al ver las cajas de una sucursal (ambos quedaron Pendientes).
 
+## Optimización de tiempos de respuesta en pagos QR — Hipódromo de Palermo (2026-10-01)
+
+> Fuente: reunión semanal "Análisis COBRO" con Fintexa (2026-10-01).
+
+El análisis técnico de un pedido de optimización de tiempos de respuesta en los pagos QR del **Hipódromo de Palermo** determinó que el proceso de registro de un pago QR consta de **16 pasos**, reducibles a **11** (y en una segunda vuelta, a **8**) sin perder funcionalidad.
+
+**Problema operativo identificado:** cuando un usuario escanea el QR muy rápido, la transacción no alcanza a insertarse en la base de datos a tiempo — se envía a una cola de procesamiento que genera demoras considerables. La solución propuesta es eliminar ese camino de cola para los casos de escaneo rápido, bajando el tiempo de respuesta de los ~7 segundos actuales a un objetivo estimado de **~4 segundos**.
+
+**Nota sin confirmar:** se mencionó de forma tangencial un ticket de cambio de "Barchart Max" (BMX) para optimizar el rendimiento general de la base de datos, sin detalle técnico adicional.
+
+**Estado:** análisis técnico ya realizado por Fintexa; sin ticket de Jira identificado en la minuta ni fecha de implementación confirmada — queda dentro del backlog general de la versión 74/75 (ver también la propuesta de liberaciones quincenales en curso, sin decidir, mencionada en la misma reunión).
+
 ## Bugs sin cliente específico (RxT/CVUCollect)
 
 - **Endpoint conciliar transferencias devuelve HTTP 200 con un mensaje de error adentro** (en vez de un código de error real) — mismo patrón de "error poco transparente" documentado en otras partes de la plataforma (CCL, DEBIN, TIN en Wallet).
@@ -70,5 +82,6 @@ Para los medios `20` y `40`, el campo `CompradorCuenta` trae el **CBU o CVU** as
 
 ---
 *Fuente: Epics Notion "Dolores de clientes" (38 tickets) y "Dolores de Soporte y administración" (~93 tickets, muestra relevante) — ingesta cola final 2026-07-06.*
-*Última actualización: 2026-10-01 — `/context_merge`: nuevas secciones "Mecánica para interpretar el CSV de transacciones exportado desde el Admin" y "Seguimiento Bind-SEPSA (Western Union/Pago Fácil, Botón de Pago) — minuta 23-9" (Pablo Gomes).*
+*Última actualización: 2026-10-02 — `/context_merge`: nueva sección "Optimización de tiempos de respuesta en pagos QR — Hipódromo de Palermo" (Pablo Gomes).*
+*Última actualización anterior: 2026-10-01 — `/context_merge`: nuevas secciones "Mecánica para interpretar el CSV de transacciones exportado desde el Admin" y "Seguimiento Bind-SEPSA (Western Union/Pago Fácil, Botón de Pago) — minuta 23-9" (Pablo Gomes).*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Agente de Cobros y Pagos de 3 archivos-cola de `detalle_productos/transversal/`.*

@@ -6,6 +6,19 @@
 
 ## 2026
 
+### 2026-10-02 (pablo, líder) — corrida desatendida (scheduled task, 16 items ingeridos, 4 pendientes)
+
+- `direccion/iniciativas.md` — upsert de filas: PRD-208 (WS-1424/WS-1425 confirmadas en V73, 08/10), getnet_oauth2_resolve (fecha de despliegue 08/10 confirmada + doc WS-1601 entregada), PRD-251 (corrección de la medición de BINs del 30/09 con 3 meses de datos — contradicción sin resolver, ver gap); fila nueva PRD-259 (Nicolás Colón, fechas en webhook Dólar CCL, shaping aprobado).
+- `riesgos.md` — riesgo "Herramienta de conciliación de transferencias entrantes rota" matizado con versión del PM que lo tensiona (limitación de rango, no herramienta rota) — contradicción sin resolver, ver gap.
+- `gaps_y_preguntas.md` — 2 gaps nuevos: contradicción sobre si la conciliación de entrantes está "rota" o tiene una limitación de rango; contradicción sobre la magnitud real del impacto de BINs en V73 (PRD-251).
+- `3_recursos/detalle_productos/adquirencia/` — `validacion_bines_tarjetas.md` §4 (corrección con 3 meses de datos, ambas versiones registradas); `mecanica_qr_coelsa.md` (nuevo aceptador homologado Safetypay); `index.md` (lanzamientos pendientes de comunicar, sin confirmar).
+- `3_recursos/detalle_productos/wallet/` — `organizaciones_y_configuracion.md` §9 (análisis de riesgo V73); `conciliacion_y_totalizadores.md` §5 (tensión de amplitud de rango); `validacion_totalizadores_cbu_cvu.md` (actualización del servicio Coelsa ABM de CBU, prod 18/10); `interoperabilidad_qr_getnet.md` (doc funcional WS-1601); `cuenta_remunerada_fci.md` §7.1 (procedimiento real de rescate masivo Astropay).
+- `3_recursos/detalle_productos/ardid/` — `integracion_con_productos_bind.md` §21 (WS-1398/WS-1718, V73); `modulo_pagos.md` §15 (comportamiento observado de rechazo por monto).
+- `3_recursos/detalle_productos/onboarding/` — `arquitectura_solicitud_y_flujos.md` §1quater (mecánica de lectura de DNI PDF417→QR→MRZ).
+- `3_recursos/detalle_productos/agente_cobros_y_pagos/` — `pedidos_de_clientes_y_hallazgos_operativos.md` (optimización QR Hipódromo de Palermo); `devoluciones_y_contracargos.md` (devoluciones hasta 6 meses por entidad).
+- **Pendientes de permiso explícito del usuario (régimen D, `procesos/`)** — quedan en `en_cola`, no se tocó `2_areas/procesos/`: novedades del weekly de Producto del 29/09 (44 IDEAs en discovery, flujo con IA, estándar documental); propuesta de liberaciones quincenales de AD (sin decidir); decisión de estandarizar el entregable de documentación funcional al cerrar un proyecto.
+- **Pendiente, sin novedad (ya declinado por el usuario en la corrida interactiva del 2026-10-01):** lanzamientos sin confirmar de Contracargos/"Bienes Recurrentes" — mismo item, sin cambios desde entonces, sigue `en_cola`.
+
 ### 2026-10-01 (pablo) — corrida desatendida (scheduled task, 21 items ingeridos, 2 pendientes)
 
 - `direccion/iniciativas.md` — upsert de filas: PRD-262 (Etapa 1 cargada en Jira, Elastic Proxy en primera entrega), PRD-251 (Frente A ejecutado con mejora confirmada en producción); fila nueva PRD-205 (novedad para Luciana Rudaz).

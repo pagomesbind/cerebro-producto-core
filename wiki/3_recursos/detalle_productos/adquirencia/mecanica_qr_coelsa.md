@@ -190,6 +190,21 @@ Coelsa suma a **COELSA.PREVENT** (su capa de prevención de fraude para el ecosi
 
 Caso concreto del proceso de alta de aceptador descripto en "Proceso de homologación de nuevos participantes" más arriba: NewPay avisó que el BCRA habilitó al aceptador **WAYA** (CUIT `33-71833017-9`, dominio inverso `ar.waya`, vía el proxy `wallet.newpay.com.ar/external/resolve` de NewPay como Administrador) para operar en producción, y pidió a Bind PSP (como billetera) dar de alta esos datos en su tabla de resolución. Bind (Alan Martínez) lo configuró el mismo día y pidió un QR de prueba; WAYA compartió un QR estático de monto abierto y Bind confirmó un pago de prueba de $10 con `estadoExterno: "ACREDITADO"` — WAYA validó la transacción en su sistema, cerrando la homologación end-to-end en menos de 6 horas.
 
+### Ejemplo real de homologación de un nuevo aceptador — Safetypay vía Newpay (2026-10-01)
+
+> Fuente: hilo de mail "PRODUCCION: Aceptador Safetypay (Newpay) – Billetera BIND PSP (COELSA)" — Rocío Rodríguez (Newpay) / Adriana Huerta (Paysafe) / Alan Martínez (BIND PSP), 2026-10-01, threadId `1a0f88a4a284598e`.
+
+Mismo patrón que el alta de WAYA arriba: el aceptador **Safetypay** (Paysafe Group) quedó habilitado para operar en producción dentro del ecosistema QR interoperable, vía el mismo proxy Newpay que ya usan otros aceptadores homologados con Billetera BIND PSP.
+
+**Datos de configuración (producción):**
+- Denominación: Safetypay · Razón social: Safetypay Argentina S.A. · CUIT 30717813185.
+- Reverse Domain: `com.safetypay`.
+- URL IEP producción (Proxy Newpay): `https://wallet.newpay.com.ar/external/resolve?access_token={Access_token}&data={QR_RAW}` — mismo mecanismo estándar `access_token` en query param que usa el resto del ecosistema (no OAuth2 como Getnet, ver `wallet/interoperabilidad_qr_getnet.md`).
+- Access Token producción: reutiliza el ya configurado para el "Proxy Newpay" en Billetera BIND PSP.
+- Datos del Administrador (Aceptador): NEWPAY S.A.U., CUIT 30-71786245-3.
+
+**Prueba productiva realizada el mismo día (2026-10-01):** pago de prueba con QR real ejecutado con éxito — `operacionIdExterno: LOEJWV9JXWM5755RNQMD0G`, `estadoExterno: ACREDITADO`. Alta de configuración confirmada por Alan Martínez (BIND PSP, Área Técnica).
+
 ### Homologación en curso — billetera YDI (YPF Digital), tickets #502085/#502086 (2026-09-25)
 
 > Fuente: mails Coelsa "Resolución del ticket 502085" y "Resolución del ticket 502086" (Integration Center Management, `icm@coelsa.com.ar`), 2026-09-25/27.
@@ -653,7 +668,8 @@ Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arrib
 Nicolás Colón informó que **Coelsa ya dejó lista, de su lado, la configuración para la reactivación de transferencias Pool**. Del lado de Bind subsiste un inconveniente con el uso de la mensajería **B1** en el entorno de pruebas (staging) que impide interpretar los mensajes correctamente.
 
 **Próximos pasos acordados:** Nicolás Colón debe confirmar la habilitación con Coelsa y coordinar con el equipo técnico el cierre de la configuración en staging, evaluando el pase a producción inicialmente con **montos de cero pesos** para evitar invocaciones erróneas mientras se valida el circuito.
-*Última actualización: 2026-09-29 — `/context_merge`: nueva Parte 6 — reactivación de transferencias Pool en curso (Coelsa lista de su lado, bloqueada en staging por mensajería B1).*
+*Última actualización: 2026-10-02 — `/context_merge`: nuevo ejemplo real de homologación de aceptador — Safetypay vía Newpay, habilitado en producción (2026-10-01) (Pablo Gomes). ⚠️ Archivo por encima del umbral de fisión (~300 líneas) — pendiente de evaluar extraer un archivo dedicado "aceptadores homologados" (WAYA, YDI, Safetypay) en un próximo merge.*
+*Última actualización anterior: 2026-09-29 — `/context_merge`: nueva Parte 6 — reactivación de transferencias Pool en curso (Coelsa lista de su lado, bloqueada en staging por mensajería B1).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva homologación en curso — billetera YDI (YPF Digital), tickets Coelsa #502085/#502086, pruebas en vivo desde 2026-10-19.*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*
 *Última actualización anterior: 2026-09-11 — `/context_merge`: Parte 5, seguimiento post-despliegue de tiempos de PagosQR (mejora medible tras la doble consulta a Coelsa, informe de Juan Pablo Carubelli/KIS); nueva referencia cruzada a `coelsa_qr_catalogo_apis_tecnico.md` (catálogo de endpoints/errores de la API QR, desdoblado de este archivo por tamaño).*

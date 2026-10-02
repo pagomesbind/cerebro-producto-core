@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/agente_cobros_y_pagos/devolucion
 tipo_destino: actualizar
 contradice: "no"
 confianza: media
-estado: en_cola
+estado: ingestado
 ---
 
 **Qué se definió.** Hoy el portal no deja devolver una transferencia después de un mes (plazo estándar de 30 días, ver T-053 del 2026-09-14). En la reunión "Análisis COBRO" del 2026-10-01 se acordó cómo resolverlo: una **especificación por entidad** que habilita devoluciones de **hasta 6 meses**. No cambia la regla general: solo se abre para las entidades que tengan la especificación activa.
