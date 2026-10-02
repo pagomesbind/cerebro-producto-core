@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 El aceptador **Safetypay** (Paysafe Group) quedó habilitado para operar en producción dentro del ecosistema QR interoperable, vía el mismo proxy Newpay que ya usan otros aceptadores homologados con Billetera BIND PSP (patrón ya documentado para WAYA, ver `mecanica_qr_coelsa.md`).

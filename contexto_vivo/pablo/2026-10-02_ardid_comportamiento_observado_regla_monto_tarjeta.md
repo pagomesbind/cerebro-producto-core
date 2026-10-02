@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 ## Qué se observó

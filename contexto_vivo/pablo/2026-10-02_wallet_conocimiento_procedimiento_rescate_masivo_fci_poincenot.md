@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 BIND Inversiones (Gastón Degiovanni) pidió instruir el rescate total de **74 comitentes con saldo en Astropay** (cuentas remanentes del producto, en proceso de salida/discontinuación). Pablo Gomes derivó el pedido al equipo de soporte (Gonzalo Rivera, Mariana Nadalin), que coordinó la ejecución técnica con Fintexa/Keep IT Simple. Guillermo Bonino (Keep IT Simple) documentó el **procedimiento operativo real para un rescate masivo de FCI** contra la API Broker (Poincenot/IVSA):

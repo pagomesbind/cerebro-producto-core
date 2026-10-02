@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 **Novedad puntual:** el proyecto `getnet_oauth2_resolve/` (PRD-237, Pablo Gomes) tiene fecha y plan de despliegue confirmados tras la reunión formal de análisis de riesgos de la versión 73 de Wallet. Despliegue a producción el **jueves 08/10 a las 6:30hs** (dentro del hito del 12/10 acordado con Getnet), con activación en dos etapas: microservicio desplegado el jueves con el flag de autenticación configurable por aceptador apagado, y recién el viernes 09/10 se cargan los aceptadores con su nueva configuración y se levanta el flag — fuera del horario de apertura transaccional por coincidir con semana de pagos. Contingencia de rollback vía el propio flag ya confirmada en sesiones anteriores.

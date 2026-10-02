@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 **Novedad puntual:** el proyecto `getnet_oauth2_resolve/` (PRD-237, Pablo Gomes) recibió de Keep IT Simple (Martín Hovanyecz) la documentación funcional completa de la Historia WS-1601 (gestión de aceptadores/ABM, con endpoints de Consulta/Asignación/Habilitación de QR y sus códigos de respuesta/error), parte del paquete de despliegue de la versión 73 de Wallet confirmado para el 08/10/2026. Sin comentario adicional en Jira esta corrida (no hay novedad de alcance/fecha, solo entrega de documentación).

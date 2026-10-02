@@ -12,7 +12,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 **Novedad puntual:** la IDEA PRD-208 (Alta de comitente simplificada por `idCuenta`, Pablo Gomes) tiene sus historias WS-1424 (US-4) y WS-1425 (US-5) confirmadas dentro del paquete de despliegue de la versión 73 de Wallet, con pase a producción el jueves 08/10/2026 — mismo despliegue que `getnet_oauth2_resolve/` (PRD-237). El plan de acción de la minuta de riesgos asigna a Pablo Gomes la tarea de comunicar el nuevo endpoint a las organizaciones una vez confirmado en producción (T-162 en `tareas.md`).

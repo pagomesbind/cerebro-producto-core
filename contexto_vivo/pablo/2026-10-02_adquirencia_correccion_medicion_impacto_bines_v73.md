@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/adquirencia/validacion_bines_tarjetas.md §4 (bloque 'Ejecución real y confirmación con datos de producción', viñetas Volumen, % de rechazo y BINs concretos, y párrafo Relevancia) — afirma +15,2% de volumen y 37 BINs 'antes inexistentes' a partir de una sola ventana matutina. Con tres meses de historia el aumento de volumen es de inicio de mes y no atribuible; el efecto real son los BINs que la regla genérica no cubre (prefijo 2) y la corrección de clasificación. Mismo ajuste necesario en 2_areas/direccion/iniciativas.md (fila PRD-251, novedad 2026-09-30)."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 ## Qué cambia respecto de lo ya mergeado

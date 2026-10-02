@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 Martín Hovanyecz (Keep IT Simple) envió la documentación funcional del nuevo desarrollo de **gestión de aceptadores (ABM)** — corresponde a la Historia WS-1601 ("Gestión de aceptadores con mecanismo de autenticación configurable") empaquetada en la versión 73 de Wallet junto con el proyecto `getnet_oauth2_resolve/` (PRD-237, despliegue a producción confirmado 08/10/2026, ver `getnet_oauth2_resolve/proyecto.md §8`).

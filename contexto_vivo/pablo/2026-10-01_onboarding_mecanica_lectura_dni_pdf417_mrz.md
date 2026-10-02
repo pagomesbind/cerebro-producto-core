@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — complementa la mención ya existente en arquitectura_solicitud_y_flujos.md §1bis sobre reintentos configurables de PDF417, sin describir hasta ahora la cadena completa de fallback ni la librería usada"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 Pablo Gomes le explicó a Adriana Endzeliz (Soporte) el mecanismo real de lectura automática de documento en Onboarding, usando casos reales de rechazo de Coppel como ejemplo. Completa el detalle técnico que `arquitectura_solicitud_y_flujos.md §1bis` ya documenta parcialmente (reintentos de PDF417 configurables por flujo).

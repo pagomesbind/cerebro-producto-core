@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 Dos mecánicas de integración Ardid↔Wallet confirmadas en el análisis de riesgos de la versión 73 (despliegue 08/10/2026, ver `getnet_oauth2_resolve/proyecto.md §8`):

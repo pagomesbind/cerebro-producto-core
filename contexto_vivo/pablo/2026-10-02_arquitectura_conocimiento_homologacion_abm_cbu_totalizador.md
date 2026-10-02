@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 Coelsa notificó a Banco Industrial (Pablo Gomes en copia) una actualización del servicio **ABM de CBU vinculado al Totalizador de cuentas**: la nueva versión incorpora el registro de **fecha de alta y fecha de baja** de las cuentas bancarias, en línea con requerimientos normativos vigentes (sin especificar cuál — a confirmar si se relaciona con alguno de los requisitos ya trackeados en `cumplimiento_normativo/`).

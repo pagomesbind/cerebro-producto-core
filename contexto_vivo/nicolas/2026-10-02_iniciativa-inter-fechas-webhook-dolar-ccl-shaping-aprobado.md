@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 proyecto: inter_trazabilidad_ccl
 ---
 

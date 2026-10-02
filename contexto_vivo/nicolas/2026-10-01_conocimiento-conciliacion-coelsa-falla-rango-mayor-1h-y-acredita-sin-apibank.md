@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/riesgos.md, riesgo 'Herramienta de conciliación de transferencias entrantes rota — agravado por el despliegue del 17/09' (dice que la herramienta está rota y que la conciliación depende de insertar a mano); y conciliacion_y_totalizadores.md §5 / WS-413 (documenta una amplitud máxima de rango de 24 hs)"
 confianza: alta
 estado: ingestado
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 Tres precisiones sobre el proceso de conciliación de transferencias entrantes contra Coelsa (`POST /Operaciones/ConciliacionCoelsa`, ver `conciliacion_y_totalizadores.md` §5), confirmadas por el PM dueño del tema:

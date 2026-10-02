@@ -11,6 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: media
 estado: ingestado
+merge_commit: 75ba8d792351add07011499b503adabf55d5e4bd
 ---
 
 **Contexto.** Hubo un análisis de riesgo del pase de Wallet V73 el 2026-10-01. El pase venía corrido "al 8" (probablemente 2026-10-08) según la reunión "W 73 - Impacto de temas" del 2026-09-24.
