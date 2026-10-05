@@ -24,6 +24,20 @@ Toda entrada nace con Estado = Pendiente. Cuando llega a un cierre **sin acción
 
 ---
 
+## [2026-10-05] — Onboarding: numeración de estados del diagrama interno PF no coincide con el enum de la API pública
+
+- **Severidad:** Baja
+- **Descripción:** `3_recursos/detalle_productos/onboarding/flujos_onboarding_pf_pj_documentados.md §2` (diagrama de Onboarding Persona Humana, documento oficial de Bind PSP aportado por Luciana Rudaz) usa 5 = requiere validación manual y 3 = rechazada. La API pública "Registro Único" (ver `arquitectura_solicitud_y_flujos.md §1bis`) documenta en cambio 4 = Validación Manual y 5 = Pendiente credenciales para el mismo dominio. Probablemente son vistas distintas (numeración interna de un diagrama de proceso vs. el enum expuesto a integradores externos), pero no está confirmado — ninguna fuente lo aclara explícitamente.
+- **Pregunta para el usuario:** ¿la numeración del diagrama interno y la del enum de la API pública son dos escalas independientes (interna vs. expuesta), o una de las dos quedó desactualizada? Relevante antes de que `bcra_anexo_b`/P-01 se firme citando estos estados.
+- **Estado:** Pendiente
+
+## [2026-10-05] — Cliente Provincia Net (PNET) sin ficha en `log_clientes.md` pese a proyecto activo y conversación comercial en curso
+
+- **Severidad:** Media
+- **Descripción:** Provincia Net (PNET) es cliente de Bind PSP desde al menos 2026-08 (integración de recaudación con Banco Industrial, QR masivo — proyecto `1_proyectos/prd-66_provincianet_creacion_masiva_qr/`) y sigue activo comercialmente: la reunión del 2026-10-02 ("PNET / Boton 2.0 y RxT a CBU") trae una propuesta nueva de cuenta recaudadora dedicada por ente + evaluación de sinergia con su producto propio "Net Pagos" (+130 clientes integrados). Pese a esto, **Provincia Net no tiene ficha en `wiki/2_areas/clientes/log_clientes.md`** (verificado por búsqueda, sin resultados para "Provincia" ni "PNET").
+- **Pregunta para el usuario:** ¿Podés confirmar el nombre canónico de Provincia Net en Notion, para que `/sync_customers` lo levante en su próximo barrido? Mientras tanto no corresponde crear una ficha en `casos_de_uso_clientes.md` sin confirmar el cliente en el log maestro.
+- **Estado:** Pendiente
+
 ## [2026-10-02] — Adquirencia: contradicción sin resolver sobre la magnitud real del impacto del despliegue v73 sobre los BINs (PRD-251)
 
 - **Severidad:** Media

@@ -6,6 +6,19 @@
 
 ## 2026
 
+### 2026-10-05 (pablo, líder) — corrida desatendida (scheduled task, 11 items ingeridos, 6 pendientes)
+
+- `detalle_productos/agente_cobros_y_pagos/pedidos_de_clientes_y_hallazgos_operativos.md` — nueva sección: propuesta de cuenta recaudadora dedicada por ente (Provincia Net) + sinergia con Botón 2.0/"Net Pagos".
+- `detalle_productos/agente_cobros_y_pagos/index.md` — changelog actualizado.
+- `cumplimiento_normativo/gestion_riesgo_tecnologia_seguridad_a7724.md` — nuevas secciones: cronograma de auditoría BCRA sobre ciclo de vida de software (2 etapas); desglose de planillas B1a-B1h con dueños asignados.
+- `detalle_productos/adquirencia/mecanica_qr_coelsa.md` — nueva baja: aceptador Naranja X migra de Coelsa a Nave Galicia.
+- `detalle_productos/adquirencia/index.md` — changelog actualizado.
+- `detalle_productos/onboarding/flujos_onboarding_pf_pj_documentados.md` — archivo nuevo: manual de enrolamiento + diagramas PF/PJ + requisitos Res. UIF 200/24 (material aportado por Luciana Rudaz para `bcra_anexo_b`, no verificado punto a punto contra producción).
+- `detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md` — nueva §1quinquies: comportamiento confirmado del PM al revisar P-01 (estados, revisión manual/Reprocesar, encriptación de datos, canales de uso, consultas externas PJ).
+- `detalle_productos/onboarding/index.md` — changelog actualizado.
+- `detalle_productos/wallet/cuenta_remunerada_fci.md` — actualizado §7.1: cambio de dirección del bastión usado en el workaround de Postman (baja confirmada 09/10).
+- `detalle_productos/wallet/index.md` — changelog actualizado.
+
 ### 2026-10-02 (pablo, líder) — corrida desatendida (scheduled task, 16 items ingeridos, 4 pendientes)
 
 - `detalle_productos/adquirencia/index.md` — actualizado: descripción de `validacion_bines_tarjetas.md` y changelog actualizados.

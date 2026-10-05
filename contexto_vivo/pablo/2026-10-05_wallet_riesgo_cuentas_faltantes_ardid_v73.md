@@ -12,7 +12,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no — riesgo operativo nuevo, no reemplaza ninguna entrada existente"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/gestion_riesgo_tecnologia_s
 tipo_destino: actualizar
 contradice: "no — complementa el archivo ya existente sobre Anexo B/Com. A7724 (conformación de Comités de TI/Seguridad en curso desde 2026-09-30/10-01) con el cronograma concreto de auditoría y el detalle de qué va a pedir el BCRA sobre ciclo de vida de software"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

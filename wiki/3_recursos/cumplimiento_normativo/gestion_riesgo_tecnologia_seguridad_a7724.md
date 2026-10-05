@@ -52,11 +52,45 @@ Uno de los requerimientos del Anexo B del BCRA le pide a Bind PSP **"proveer los
 
 En copia en todo el hilo: Emma Vignoles, Hernán Clarich, Pablo Gomes.
 
+## Cronograma de auditoría del BCRA sobre el ciclo de vida completo del software (2026-10-02)
+
+> Fuente: reunión "Revisión Pruebas QA" (Bind PSP + Fintexa, 2026-10-02).
+
+Hernán Clarich (Fintexa, gobierno de tecnología/sistemas) confirmó que, a partir de ahora, el **BCRA audita el ciclo de vida completo del software hasta la puesta en producción**, incluyendo segregación de ambientes y trazabilidad de punta a punta — esto es parte del marco de Anexo B ya referenciado arriba (conformación de Comités de TI/Seguridad), no un requisito nuevo separado.
+
+**Cronograma de 2 etapas:**
+1. **Este año (2026):** el BCRA pide una "foto" del estado actual — qué procesos existen hoy, cuáles están en curso, y cuál es el gap de todo lo que falta regularizar. No es todavía una auditoría formal, es el primer relevamiento de scope.
+2. **El año que viene (2027, sin fecha exacta):** inspección formal.
+
+**Motivo adicional citado:** el BCRA viene mirando este proceso específicamente a raíz de un incidente ya reportado anteriormente (ocurrido en abril, según la minuta) — van a revisar de nuevo procesos de seguridad, gestión de vulnerabilidades y gestión de backlog, buscando "debilidades en la gobernanza y la gestión".
+
+**Qué van a pedir — métricas de gestión:** cantidad y forma de los pasajes/releases, cómo están segregados los ambientes, cómo son las pruebas, el ciclo de vida de punta a punta (incluye evolutivos). Esto alcanza también la relación con terceras partes (Fintexa como proveedor) — el BCRA pone foco especial en el control que Bind PSP ejerce sobre lo que delega a terceros. Matías Alzogaray (PM Bind) se compromete a presentar un primer boceto de métricas estandarizadas el viernes 2026-10-09, en paralelo con sus propias métricas de ciclo de ticket (tiempo desde asignación hasta cierre) y el trabajo ya en curso de equiparar story points entre el Jira de Bind y el de Fintexa.
+
+**Conexión con el semáforo de riesgo de despliegue:** el registro formal de aceptación de riesgo (acordado en la misma serie de reuniones, ver `2_areas/procesos/analisis_de_riesgo_de_despliegue.md`, pendiente de permiso de usuario) alimenta directamente el "apetito de riesgo" que el BCRA va a pedir en esta auditoría.
+
+## Desglose operativo del apartado B del Anexo B en planillas B1a-B1h, con dueños asignados (2026-10-02)
+
+> Fuente: mail "BCRA Anexo B. ver este próximo Lunes" — Hernán Clarich, 2026-10-02.
+
+Hernán Clarich compartió el desglose de trabajo del apartado **B** del Anexo B del BCRA — "Requisitos mínimos para la gestión y control de los riesgos de tecnología y seguridad de la información asociados a los servicios financieros digitales" — con asignación de dueños por planilla, todas en una carpeta de Drive compartida ("Anexo B"):
+
+- **B1a** (estado de cumplimiento de la planilla general) — Hernán, nivel macro; Pablo/Maru ayudan con las herramientas de monitoreo transaccional.
+- **B1b** (servicios financieros digitales + herramientas de monitoreo transaccional) — Pablo, con soporte de evaluación de Hernán.
+- **B1c** (detalle de soluciones aplicadas en el proceso de alta digital de clientes/onboarding + su monitoreo transaccional) — Pablo.
+- **B1d** (controles aplicados en el proceso de alta digital) — Maru/Rocío.
+- **B1e** (monitoreo transaccional para prevención de fraude + cumplimiento Com. B 13117/CPF) — Maru/Rocío.
+- **B1f** (estrategia de monitoreo transaccional por modalidad de servicio financiero digital, patrones de comportamiento, factores de autenticación) — Pablo.
+- **B1g** (procedimientos de alta digital de clientes y de alta no concretada) — Pablo, solo si existe un nuevo servicio financiero digital en curso de desarrollo o a desarrollarse.
+- **B1h** (proyectos en desarrollo/previstos de nuevos productos/servicios financieros digitales, con sus medidas de protección, factores de autenticación, monitoreo y gestión de ciberincidentes) — sin asignado explícito en el mail.
+
+Seguimiento de avance programado para el lunes 2026-10-05.
+
 ## Ver también
 
 - [pci_dss_recertificacion.md](pci_dss_recertificacion.md) — seguridad de pagos con tarjeta, dominio adyacente pero distinto (PCI DSS es específico de datos de tarjeta; esta norma es de alcance general de TI/ciberseguridad).
 - [gestion_riesgo_fraude_bcra.md](gestion_riesgo_fraude_bcra.md) — antifraude (Com. "A" 8471/8473), dominio adyacente pero distinto.
 
 ---
-*Última actualización: 2026-10-01 — `/context_merge`: nueva sección "Anexo B — Comités de Tecnología/Seguridad de la Información y de Riesgos Tecnológicos/Continuidad del Negocio" (Pablo Gomes).*
+*Última actualización: 2026-10-05 — `/context_merge`: nuevas secciones "Cronograma de auditoría del BCRA sobre el ciclo de vida completo del software" y "Desglose operativo del apartado B del Anexo B en planillas B1a-B1h, con dueños asignados" (Pablo Gomes).*
+*Última actualización anterior: 2026-10-01 — `/context_merge`: nueva sección "Anexo B — Comités de Tecnología/Seguridad de la Información y de Riesgos Tecnológicos/Continuidad del Negocio" (Pablo Gomes).*
 *Creado: 2026-09-08 — `/context_merge`, desde auditoría de cumplimiento normativo del PM (2026-09-08).*

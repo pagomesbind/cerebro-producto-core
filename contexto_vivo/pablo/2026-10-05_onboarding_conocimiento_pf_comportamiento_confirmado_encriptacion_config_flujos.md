@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/arquitectura_solicitu
 tipo_destino: actualizar
 contradice: "2026-10-05_onboarding_conocimiento_flujos_pf_pj_manual_enrolamiento_res200 (item en cola de captura, punto a reconciliar 1) — el diagrama de Luciana rechaza al agotar reintentos en la consulta a fuentes externas; el PM confirma que en ese caso la solicitud queda en revisión manual, coherente con arquitectura_solicitud_y_flujos.md §1bis. El diagrama quedó desactualizado en ese punto."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

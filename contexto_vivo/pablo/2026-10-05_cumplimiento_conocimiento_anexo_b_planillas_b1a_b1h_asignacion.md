@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/cumplimiento_normativo/gestion_riesgo_tecnologia_s
 tipo_destino: actualizar
 contradice: "no — complementa la sección existente \"Anexo B — Comités...\" y el item en cola `2026-10-02_cumplimiento_bcra_anexo_b_cronograma_auditoria_ciclo_vida_software` (cronograma de auditoría) con el detalle operativo de las planillas B1a-B1h y sus dueños, no capturado en esa reunión"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

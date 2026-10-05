@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "no — riesgo nuevo, sin entrada previa en el canon sobre este incidente puntual"
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

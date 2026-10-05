@@ -391,11 +391,14 @@ Primera ejecución real del procedimiento manual que §7 pedía formalizar: BIND
 
 **Limitación técnica real detectada:** para una tanda de 74 cuentas, el JSON generado es lo bastante extenso como para que **Swagger UI no permita ejecutar la llamada desde su propia interfaz** (body demasiado grande). En ese caso, la solicitud debe ejecutarse **vía Postman desde el bastión de producción** — requiere tener a mano un acceso al bastión con Postman configurado de antemano. Se adjuntó un JSON de ejemplo (`paquete-rescates-poincenot.json`) generado a partir del Excel de referencia, para validar formato.
 
+**⚠️ Cambio de dirección del bastión usado en este workaround (confirmado 2026-10-02, efectivo 09/10/2026 18hs):** Infraestructura (Fintexa) dio de baja los bastiones viejos de soporte — Bastion PRD `10.45.2.10` → nueva dirección `10.45.2.20`; Bastion STG `10.55.2.10` → nueva dirección `10.210.255.6` (mismo usuario/contraseña, acceso a los nuevos ya operativo desde antes de la baja). El workaround de arriba (Postman desde el bastión de producción) debe actualizarse con la nueva dirección del Bastion PRD antes del 09/10 — después de esa fecha la IP vieja deja de estar disponible. Fuente: mails "Confirmación de baja de servidor anterior SOPORTE PRD/STG" (Emiliano Gonzalez Cortiñas, Fintexa, 2026-10-02).
+
 ## Ver también
 - [api_broker_poincenot_fundamentos.md](api_broker_poincenot_fundamentos.md) — autenticación, alta de cuenta comitente, errores.
 - [api_broker_poincenot_tesoreria_p2p_portfolio.md](api_broker_poincenot_tesoreria_p2p_portfolio.md), [api_broker_poincenot_pagos_cap_trading_fci.md](api_broker_poincenot_pagos_cap_trading_fci.md) — resto de la superficie de la API de Poincenot.
 
 ---
-*Última actualización: 2026-10-02 — `/context_merge`: nueva §7.1 — procedimiento manual real de rescate masivo ejecutado (74 comitentes de Astropay), con la limitación de Swagger para JSON extensos (Pablo Gomes).*
+*Última actualización: 2026-10-05 — `/context_merge`: §7.1 actualizada — cambio de dirección del bastión usado en el workaround de Postman (baja confirmada para el 09/10/2026) (Pablo Gomes).*
+*Última actualización anterior: 2026-10-02 — `/context_merge`: nueva §7.1 — procedimiento manual real de rescate masivo ejecutado (74 comitentes de Astropay), con la limitación de Swagger para JSON extensos (Pablo Gomes).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §7 — gap operativo de baja/rescate total/eliminación de cuenta comitente sin endpoint automatizado del lado de Bind (reunión "Producto", 2026-09-28).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva §6, detalle de endpoints REST del flujo batch de Poincenot (precio, suscripción/rescate, webhooks, interés ganado) — relevado durante el discovery de `inter_fondeo_usd/` (Pablo Gomes).*

@@ -10,7 +10,7 @@ destino_propuesto: 2_areas/riesgos.md
 tipo_destino: actualizar
 contradice: "2_areas/riesgos.md §\"Falla de control de acceso preexistente en el Admin Centralizador\" — actualiza el estado de la corrección: la fecha estimada ahí era \"a mediados de la semana del 28/09\"; el informe semanal de Adquirencia del 02/10 confirma que el hotfix (DAD-3428, corrección del incidente DAD-3412/AD-1821) recién estaba en QA externo (Pentass probando del lado de Bind) a esa fecha, con salida confirmada en el pasaje intermedio del lunes 05/10/2026 (junto con DAD-3512)."
 confianza: alta
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

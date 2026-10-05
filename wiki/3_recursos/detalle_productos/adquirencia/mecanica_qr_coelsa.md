@@ -205,6 +205,14 @@ Mismo patrón que el alta de WAYA arriba: el aceptador **Safetypay** (Paysafe Gr
 
 **Prueba productiva realizada el mismo día (2026-10-01):** pago de prueba con QR real ejecutado con éxito — `operacionIdExterno: LOEJWV9JXWM5755RNQMD0G`, `estadoExterno: ACREDITADO`. Alta de configuración confirmada por Alan Martínez (BIND PSP, Área Técnica).
 
+### Baja — aceptador Naranja X migra de Coelsa a Nave Galicia (2026-10-02)
+
+> Fuente: mail "Re: Pruebas Homologación COELSA Pagador: Bind-Naranja X" — Jhon Velasquez (Naranja X), 2026-10-02.
+
+Alan Martínez (Bind, Área Técnica) pidió a Naranja X un QR de producción para retomar unas pruebas de homologación pendientes del aceptador **Naranja X** (integración histórica vía Coelsa Pagador, iniciada en 2023 — PSP ID 014/433). Jhon Velasquez (Naranja X) respondió que **esa integración vía Coelsa quedó deprecada**: el aceptador pasó a operar vía una integración distinta, **Nave Galicia**, y que cualquier información o soporte sobre QR aceptador para Naranja X debe solicitarse ahora al mail `qraceptador@navenegocios.com` (en vez del canal histórico de Coelsa/Naranja X).
+
+Implica que cualquier documentación de Naranja X que el Cerebro tuviera como aceptador vía Coelsa queda desactualizada — a confirmar en una futura ingesta si Nave Galicia usa el mismo mecanismo IEP/`access_token` estándar del ecosistema CIMPRA documentado arriba, o uno propio.
+
 ### Homologación en curso — billetera YDI (YPF Digital), tickets #502085/#502086 (2026-09-25)
 
 > Fuente: mails Coelsa "Resolución del ticket 502085" y "Resolución del ticket 502086" (Integration Center Management, `icm@coelsa.com.ar`), 2026-09-25/27.
@@ -668,7 +676,8 @@ Tras el despliegue en PROD del esquema de doble consulta a Coelsa descrito arrib
 Nicolás Colón informó que **Coelsa ya dejó lista, de su lado, la configuración para la reactivación de transferencias Pool**. Del lado de Bind subsiste un inconveniente con el uso de la mensajería **B1** en el entorno de pruebas (staging) que impide interpretar los mensajes correctamente.
 
 **Próximos pasos acordados:** Nicolás Colón debe confirmar la habilitación con Coelsa y coordinar con el equipo técnico el cierre de la configuración en staging, evaluando el pase a producción inicialmente con **montos de cero pesos** para evitar invocaciones erróneas mientras se valida el circuito.
-*Última actualización: 2026-10-02 — `/context_merge`: nuevo ejemplo real de homologación de aceptador — Safetypay vía Newpay, habilitado en producción (2026-10-01) (Pablo Gomes). ⚠️ Archivo por encima del umbral de fisión (~300 líneas) — pendiente de evaluar extraer un archivo dedicado "aceptadores homologados" (WAYA, YDI, Safetypay) en un próximo merge.*
+*Última actualización: 2026-10-05 — `/context_merge`: nueva baja — aceptador Naranja X migra de Coelsa a Nave Galicia (2026-10-02) (Pablo Gomes). ⚠️ Archivo sigue por encima del umbral de fisión (~300 líneas, ya señalado en el merge anterior) — pendiente de evaluar extraer un archivo dedicado "aceptadores homologados" (WAYA, YDI, Safetypay, Naranja X/Nave Galicia).*
+*Última actualización anterior: 2026-10-02 — `/context_merge`: nuevo ejemplo real de homologación de aceptador — Safetypay vía Newpay, habilitado en producción (2026-10-01) (Pablo Gomes).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva Parte 6 — reactivación de transferencias Pool en curso (Coelsa lista de su lado, bloqueada en staging por mensajería B1).*
 *Última actualización anterior: 2026-09-29 — `/context_merge`: nueva homologación en curso — billetera YDI (YPF Digital), tickets Coelsa #502085/#502086, pruebas en vivo desde 2026-10-19.*
 *Última actualización anterior: 2026-09-18 — `/context_merge`: nueva subsección de mecánica de split (débito/crédito automático) y falla reproducida en Homologación para los modelos PCP 531/532, escalada a Coelsa.*

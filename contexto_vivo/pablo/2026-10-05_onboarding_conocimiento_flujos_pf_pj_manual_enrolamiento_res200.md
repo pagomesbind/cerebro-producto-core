@@ -10,7 +10,7 @@ destino_propuesto: 3_recursos/detalle_productos/onboarding/flujos_onboarding_pf_
 tipo_destino: crear
 contradice: "3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md §1bis — el diagrama PF muestra que, tras agotar reintentos en la consulta a fuentes externas, la solicitud se rechaza (código 99), mientras la wiki dice que en esa etapa la solicitud queda en validación manual; y la numeración de estados del diagrama (3 rechazada, 5 requiere validación manual) difiere del enum de la API pública (4 = Validación Manual, 5 = Pendiente credenciales). Ver 'Puntos a reconciliar'."
 confianza: media
-estado: en_cola
+estado: ingestado
 merge_commit:
 ---
 

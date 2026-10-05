@@ -75,13 +75,28 @@ Para los medios `20` y `40`, el campo `CompradorCuenta` trae el **CBU o CVU** as
 6. **Eliminar definitivamente el botón "flecha":** propuesta de pantallas ya compartida, con comentarios de Marketing ya devueltos (ver también `2_areas/tareas.md` T-017, mismo tema). Es desarrollo de front, en curso — Adriana Endzeliz debe confirmar fecha de pasaje.
 7. **Pedido nuevo — cliente Mercedes Benz:** necesitan identificar en el reporte transaccional el CUIT del pagador/titular de la billetera o cuenta que transfiere, y la descripción del CVU de destino tal como la ve el usuario. Pendiente: validar con Adriana Endzeliz con qué dato se puede trazar la transacción (si se puede incorporar el `trace id`) y compartir un archivo de ejemplo.
 
+## Propuesta de cuenta recaudadora dedicada por ente (Provincia Net) + sinergia con Botón 2.0 (2026-10-02)
+
+> Fuente: reunión "PNET / Boton 2.0 y RxT a CBU" (2026-10-02).
+
+**Contexto:** Provincia Net (PNET, integración existente de recaudación bancaria con Banco Industrial — proyecto `1_proyectos/prd-66_provincianet_creacion_masiva_qr/`) planteó un caso de uso nuevo de uno de sus clientes ("entes"): un cliente corporativo con 250 usuarios finales necesita que esos usuarios le transfieran montos altos por plataformas no convencionales. El circuito actual de Provincia Net (CBU corto / RxT, pensado para asociar una deuda a un monto exacto) no es viable para este caso — los montos variables generan costos de impuestos débito/crédito al tener que devolver diferencias, y el volumen/monto excede lo operable por RxT.
+
+**Propuesta técnica (Gustavo Lazzaro, BIN PCP):** en vez de una integración nueva, reutilizar la infraestructura ya existente de Agente de Cobros y Pagos: crear una **subcuenta con CBU largo exclusiva por "ente"** (cada cliente corporativo de Provincia Net que lo necesite), bajo el mismo CUIT/quid recaudador de BIN PCP que ya opera Provincia Net.
+- El ente le da a sus clientes finales el CBU largo de su subcuenta dedicada (no un alias, para no generar rotación de identificadores).
+- Cada transferencia entrante llega directo a esa subcuenta — Provincia Net ve, vía la integración de Agente de Cobros y Pagos que ya tiene, todos los movimientos y el saldo de esa cuenta en línea, igual que hoy.
+- El webhook que reciben ya no asocia la transferencia a una deuda/CB corto, sino que informa directamente el CUIT originante de quien transfirió (identificación por pagador, no por deuda).
+- **No requiere desarrollo nuevo** — solo alta de la subcuenta y nuevas credenciales de acceso para Provincia Net. Punto a definir del lado de BIN: la salida de fondos hacia una cuenta de BAPRO (o equivalente) y si el costo pasa a ser por transacción (hoy Provincia Net paga costo fijo) — Diego Weledniger evalúa bonificar el servicio de cuenta para que la propuesta sea competitiva.
+- Pendiente de confirmación técnica y comercial por parte de Provincia Net el lunes 2026-10-05.
+
+**Botón 2.0 — sinergia detectada:** en la misma reunión, Adriana Endzeliz/Diego Weledniger presentaron el Botón 2.0 (checkout web con tarjeta/QR/transferencia, vía API + generación de link de pago, con devolución automática de fondos si el monto transferido no coincide con la deuda). Gilda Carneiro (Provincia Net) señaló que ya operan un producto equivalente, **"Net Pagos"**, con **+130 clientes integrados hace más de 2 años** — se evalúa sinergia entre ambas herramientas (posible reventa del Botón 2.0 por parte de Provincia Net a sus propios "entes", integrado dentro de su propia botonera, sin que el ente tenga que integrarse directo con BIN). Mecánica de integración del Botón 2.0 explicada por Pablo Gomes: el ente conecta su sistema ERP/base de deudas, Bind genera el link de pago y notifica por webhook — la integración completa (conexión a la base de deudas) tomó ~2 meses en el caso de referencia (Provincia Net); también es posible operar el botón sin búsqueda de deuda, con monto manual.
+
 ## Ver también
 
 - [configuracion_y_operacion.md](index.md) — cómo se crea un collector, mecánica de webhooks entrantes/salientes.
 - [cuenta_recaudadora_usd.md](cuenta_recaudadora_usd.md) — cluster de bugs de la puesta en producción en USD (mismo circuito CVUCollect).
 
 ---
-*Fuente: Epics Notion "Dolores de clientes" (38 tickets) y "Dolores de Soporte y administración" (~93 tickets, muestra relevante) — ingesta cola final 2026-07-06.*
-*Última actualización: 2026-10-02 — `/context_merge`: nueva sección "Optimización de tiempos de respuesta en pagos QR — Hipódromo de Palermo" (Pablo Gomes).*
+*Última actualización: 2026-10-05 — `/context_merge`: nueva sección "Propuesta de cuenta recaudadora dedicada por ente (Provincia Net) + sinergia con Botón 2.0" (Pablo Gomes).*
+*Última actualización anterior: 2026-10-02 — `/context_merge`: nueva sección "Optimización de tiempos de respuesta en pagos QR — Hipódromo de Palermo" (Pablo Gomes).*
 *Última actualización anterior: 2026-10-01 — `/context_merge`: nuevas secciones "Mecánica para interpretar el CSV de transacciones exportado desde el Admin" y "Seguimiento Bind-SEPSA (Western Union/Pago Fácil, Botón de Pago) — minuta 23-9" (Pablo Gomes).*
 *Última actualización anterior: 2026-08-12 — Creado en la reestructuración PARA en cascada, consolidando las secciones de Agente de Cobros y Pagos de 3 archivos-cola de `detalle_productos/transversal/`.*

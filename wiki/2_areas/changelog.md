@@ -6,6 +6,13 @@
 
 ## 2026
 
+### 2026-10-05 (pablo, líder) — corrida desatendida (scheduled task, 11 items ingeridos, 6 pendientes)
+
+- `riesgos.md` — actualizado: riesgo "Falla de control de acceso preexistente en el Admin Centralizador" (hotfix DAD-3428 confirmado para el pasaje del 05/10, marcado Resuelto sujeto a confirmación); 2 riesgos nuevos: "Incidente de timeout de paginación en Rendición" y "Cuentas no dadas de alta en Ardid quedan rechazadas desde la V73 de Wallet" (novedad para Nicolás Colón).
+- `gaps_y_preguntas.md` — 2 gaps nuevos: cliente Provincia Net (PNET) sin ficha en `log_clientes.md`; numeración de estados del diagrama interno de Onboarding PF no coincide con el enum de la API pública.
+- **Pendientes de permiso explícito del usuario (régimen D, `procesos/`)** — quedan en `en_cola`, no se tocó `2_areas/procesos/`: decisión de estandarizar el entregable de documentación funcional al cerrar un proyecto; nuevo tipo de incidencia en Jira para separar observaciones de QA de defectos; semáforo de priorización de tickets por complejidad + registro formal de aceptación de riesgo.
+- **Pendiente, sin novedad (mismo criterio que la corrida anterior):** 44 IDEAs en discovery/flujo con IA/estándar documental (nicolas); propuesta de liberaciones quincenales de AD, sin decidir (nicolas); lanzamiento de Contracargos/"Bienes Recurrentes" sin confirmar — el líder ya dejó este último en espera explícitamente el 2026-10-01 ("producto sin identificar"), sin novedad desde entonces, no se revierte esa decisión en una corrida desatendida.
+
 ### 2026-10-02 (pablo, líder) — corrida desatendida (scheduled task, 16 items ingeridos, 4 pendientes)
 
 - `direccion/iniciativas.md` — upsert de filas: PRD-208 (WS-1424/WS-1425 confirmadas en V73, 08/10), getnet_oauth2_resolve (fecha de despliegue 08/10 confirmada + doc WS-1601 entregada), PRD-251 (corrección de la medición de BINs del 30/09 con 3 meses de datos — contradicción sin resolver, ver gap); fila nueva PRD-259 (Nicolás Colón, fechas en webhook Dólar CCL, shaping aprobado).
