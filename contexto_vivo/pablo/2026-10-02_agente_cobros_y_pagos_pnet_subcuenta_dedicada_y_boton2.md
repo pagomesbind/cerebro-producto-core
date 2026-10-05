@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 **Contexto:** Provincia Net (PNET, integración existente de recaudación bancaria con Banco Industrial — proyecto `prd-66_provincianet_creacion_masiva_qr/`) planteó un caso de uso nuevo de uno de sus clientes ("entes"): un cliente corporativo con 250 usuarios finales necesita que esos usuarios le transfieran montos altos por plataformas no convencionales. El circuito actual de Provincia Net (CBU corto / RxT, pensado para asociar una deuda a un monto exacto) no es viable para este caso — los montos variables generan costos de impuestos débito/crédito al tener que devolver diferencias, y el volumen/monto excede lo operable por RxT.

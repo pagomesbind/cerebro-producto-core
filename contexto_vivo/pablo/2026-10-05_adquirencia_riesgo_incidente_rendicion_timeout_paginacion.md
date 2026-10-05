@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — riesgo nuevo, sin entrada previa en el canon sobre este incidente puntual"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 **Mecanismo:** a partir del 23/09/2026, la consulta de Rendición (microservicio `PaymentAcceptor.Rendicion`, que trae las transacciones de a 50 por página) empezó a superar el límite de 30 segundos en sus últimas páginas de consulta. El costo de procesamiento crece sobre la última página de la consulta al histórico de la tabla `Transacción` (a confirmar con el plan de ejecución) — no está relacionado con el volumen diario ni con el despliegue de la versión 73.

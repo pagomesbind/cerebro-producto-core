@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — complementa la sección existente \"Anexo B — Comités...\" y el item en cola `2026-10-02_cumplimiento_bcra_anexo_b_cronograma_auditoria_ciclo_vida_software` (cronograma de auditoría) con el detalle operativo de las planillas B1a-B1h y sus dueños, no capturado en esa reunión"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Hernán Clarich (2/10/2026, "BCRA Anexo B. ver este próximo Lunes") compartió el desglose de trabajo del apartado **B** del Anexo B del BCRA — "Requisitos mínimos para la gestión y control de los riesgos de tecnología y seguridad de la información asociados a los servicios financieros digitales" — con asignación de dueños por planilla, todas en una carpeta de Drive compartida ("Anexo B"):

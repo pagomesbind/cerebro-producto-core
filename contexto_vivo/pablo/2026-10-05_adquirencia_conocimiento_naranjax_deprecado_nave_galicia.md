@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — complementa el listado de aceptadores homologados vía Coelsa con una baja"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Alan Martínez (Bind, Área Técnica) pidió a Naranja X un QR de producción para retomar unas pruebas de homologación pendientes del aceptador **Naranja X** (integración histórica vía Coelsa Pagador, iniciada en 2023 — PSP ID 014/433). Jhon Velasquez (Naranja X) respondió que **esa integración vía Coelsa quedó deprecada**: el aceptador pasó a operar vía una integración distinta, **Nave Galicia**, y que cualquier información o soporte sobre QR aceptador para Naranja X debe solicitarse ahora al mail `qraceptador@navenegocios.com` (en vez del canal histórico de Coelsa/Naranja X).

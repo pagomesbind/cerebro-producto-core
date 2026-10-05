@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "3_recursos/detalle_productos/wallet/cuenta_remunerada_fci.md — el procedimiento operativo de rescate masivo de FCI vía API Broker Poincenot (ingerido 2026-10-02, item `wallet_conocimiento_procedimiento_rescate_masivo_fci_poincenot`) documenta un workaround vía Postman/bastión; la IP de ese bastión cambia a partir del 09/10/2026, ver detalle abajo"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Infraestructura (Fintexa, Emiliano Gonzalez Cortiñas) confirmó la baja definitiva de los bastiones viejos de soporte, efectiva el **09/10/2026 a las 18hs**:

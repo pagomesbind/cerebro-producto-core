@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2_areas/riesgos.md §\"Falla de control de acceso preexistente en el Admin Centralizador\" — actualiza el estado de la corrección: la fecha estimada ahí era \"a mediados de la semana del 28/09\"; el informe semanal de Adquirencia del 02/10 confirma que el hotfix (DAD-3428, corrección del incidente DAD-3412/AD-1821) recién estaba en QA externo (Pentass probando del lado de Bind) a esa fecha, con salida confirmada en el pasaje intermedio del lunes 05/10/2026 (junto con DAD-3512)."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 El informe semanal de Adquirencia (Fintexa, Melisa Belpassi, informe al 02/10/2026) confirma que el hotfix de seguridad DAD-3428 — corrección de la falla de control de acceso preexistente del Admin Centralizador (incidente DAD-3412/AD-1821, CVSS 8.7, ya documentada en `2_areas/riesgos.md`) — se desarrolló y entregó a QA externo, con Pentass realizando las pruebas del lado de Bind. Confirmado para salir en el **pasaje intermedio del lunes 5 de octubre**, junto con el ticket DAD-3512 ("[Botón 2.0] Permitir devolver transferencias mayores a 30 días", que ya estaba en staging en fase de pruebas).

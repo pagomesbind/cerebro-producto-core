@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "no"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Provincia Net (PNET) es cliente de Bind PSP desde al menos 2026-08 (integración de recaudación con Banco Industrial, QR masivo — proyecto `1_proyectos/prd-66_provincianet_creacion_masiva_qr/`, ya con una reunión previa del 2026-09-11 documentada como `en_cola` régimen D por transcripción inaccesible) y sigue activo comercialmente: la reunión del 2026-10-02 ("PNET / Boton 2.0 y RxT a CBU") trae una propuesta nueva de cuenta recaudadora dedicada por ente + evaluación de sinergia con su producto "Net Pagos" (+130 clientes propios integrados). Pese a esto, **Provincia Net no tiene ficha en `wiki/2_areas/clientes/log_clientes.md`** (verificado por búsqueda, sin resultados para "Provincia" ni "PNET").

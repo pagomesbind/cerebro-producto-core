@@ -13,7 +13,7 @@ tipo_destino: actualizar
 contradice: "no — riesgo operativo nuevo, no reemplaza ninguna entrada existente"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 El informe semanal de Wallet (Fintexa, Nicolas Pomponio, informe al 02/10/2026) confirma que, desde la publicación de la versión W73 (pase a producción confirmado jueves 08/10/2026), **todas las operaciones de Wallet van a pasar por Ardid** (motor antifraude). Es clave dar de alta en Ardid, antes del pase, las cuentas que todavía no estén registradas — de lo contrario empiezan a rechazarse sus operaciones apenas se publique la versión.

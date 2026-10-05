@@ -11,7 +11,7 @@ tipo_destino: crear
 contradice: "3_recursos/detalle_productos/onboarding/arquitectura_solicitud_y_flujos.md §1bis — el diagrama PF muestra que, tras agotar reintentos en la consulta a fuentes externas, la solicitud se rechaza (código 99), mientras la wiki dice que en esa etapa la solicitud queda en validación manual; y la numeración de estados del diagrama (3 rechazada, 5 requiere validación manual) difiere del enum de la API pública (4 = Validación Manual, 5 = Pendiente credenciales). Ver 'Puntos a reconciliar'."
 confianza: media
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Documentos que Bind PSP ya tenía armados (los preparó Luciana Rudaz para responder un pedido anterior del BCRA). Son la base descriptiva del proceso de onboarding propio y se usan como referencia del proyecto `1_proyectos/bcra_anexo_b/` (copias en su carpeta `referencias/`). Todavía no son canon.

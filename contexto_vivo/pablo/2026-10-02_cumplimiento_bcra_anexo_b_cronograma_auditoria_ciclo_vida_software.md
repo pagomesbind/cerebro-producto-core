@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "no — complementa el archivo ya existente sobre Anexo B/Com. A7724 (conformación de Comités de TI/Seguridad en curso desde 2026-09-30/10-01) con el cronograma concreto de auditoría y el detalle de qué va a pedir el BCRA sobre ciclo de vida de software"
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 **Contexto (reunión "Revisión Pruebas QA", Bind PSP + Fintexa, 2026-10-02):** Hernán Clarich (Fintexa, gobierno de tecnología/sistemas) confirmó que, a partir de ahora, el **BCRA audita el ciclo de vida completo del software hasta la puesta en producción**, incluyendo segregación de ambientes y trazabilidad de punta a punta — esto es parte del marco de Anexo B ya referenciado en `gestion_riesgo_tecnologia_seguridad_a7724.md` (Com. "A" 7724), no un requisito nuevo separado.

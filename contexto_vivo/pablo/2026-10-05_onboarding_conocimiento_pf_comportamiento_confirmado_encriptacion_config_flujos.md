@@ -11,7 +11,7 @@ tipo_destino: actualizar
 contradice: "2026-10-05_onboarding_conocimiento_flujos_pf_pj_manual_enrolamiento_res200 (item en cola de captura, punto a reconciliar 1) — el diagrama de Luciana rechaza al agotar reintentos en la consulta a fuentes externas; el PM confirma que en ese caso la solicitud queda en revisión manual, coherente con arquitectura_solicitud_y_flujos.md §1bis. El diagrama quedó desactualizado en ese punto."
 confianza: alta
 estado: ingestado
-merge_commit:
+merge_commit: c0d6964
 ---
 
 Definiciones que Pablo Gomes confirmó al revisar el borrador de P-01 (2026-10-05). Reflejan cómo funciona hoy el onboarding de persona humana; ya están en el documento de Drive de P-01.
