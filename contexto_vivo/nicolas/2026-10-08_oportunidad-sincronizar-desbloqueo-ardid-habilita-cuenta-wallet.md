@@ -18,3 +18,5 @@ estado: en_cola
 **Señal de demanda:** COTO opera los bloqueos desde el front de Ardid y se queja de que integrar el endpoint de habilitación de Wallet no está en su flujo y le pone un freno (reportado por el PM el 2026-10-08). PRD-187 ya listaba "Sincronizar automáticamente el bloqueo Ardid<->Wallet" como fuera de alcance para una próxima etapa.
 
 **Producto:** Wallet + Ardid. **Origen:** reclamo de cliente (COTO). **Fecha detectada:** 2026-10-08. **Foco estratégico:** Ardid / experiencia de integración de clientes. Estado: Nueva. Para evaluar: si Ardid (Pentass) puede emitir un evento o callback al desbloquear, o si alcanza una alternativa en Wallet (por ejemplo, revalidar con Ardid al habilitar).
+
+**Actualización 2026-10-15** (reunión "Ardid+BindPSP: Roadmap", 2026-10-14): el tema ya está en la agenda con el proveedor. Quedó pendiente del grupo revisar un **evento web (webhook) de Ardid que avise el desbloqueo de una cuenta** hecho desde su plataforma. Es la primera alternativa que planteaba esta oportunidad. Todavía no tiene versión ni fecha. Ver `2026-10-15_conocimiento-ardid-roadmap-akurtech-120-coelsa-cuit-121-modulo-360-prevent-marzo`.
